@@ -1,8 +1,9 @@
 /** @type {import('next').NextConfig} */
-
-module.exports = {
+const nextConfig = {
   swcMinify: true,
   compiler: {
     styledComponents: true,
   },
 };
+
+module.exports = nextConfig;
