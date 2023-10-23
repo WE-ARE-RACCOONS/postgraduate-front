@@ -1,4 +1,16 @@
 {
   "extends": "next/core-web-vitals",
-  "plugins": ["@tanstack/query"]
+  "plugins": [
+    "@tanstack/query",
+    "airbnb",
+    "airbnb-typescript",
+    "prettier"
+  ],
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "react/no-unescaped-entities": 0,
+    "@next/next/no-page-custom-font": "off"
+  }
 }
