@@ -1,9 +1,9 @@
 'use client';
 import React from 'react'
+export const REST_API_KEY = '600f92747c92f81892156a8f1e40bfea';
+export const REDIRECT_URI = "http://localhost:3000/login/oauth2/code/kakao";
 
 function Login() {
-    const REST_API_KEY = '600f92747c92f81892156a8f1e40bfea';
-    const REDIRECT_URI = 'http://localhost:3000/login/oauth2/code/kakao';
     const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
   
     const loginHandler = () => {
