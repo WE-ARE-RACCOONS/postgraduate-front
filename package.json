@@ -22,6 +22,7 @@
     "next": "13.5.4",
     "prettier": "^3.0.3",
     "react": "^18",
+    "react-cookie": "^6.1.1",
     "react-dom": "^18",
     "styled-components": "^6.1.0"
   },

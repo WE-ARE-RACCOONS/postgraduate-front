@@ -1,22 +1,26 @@
 
 "use client";
 import React from 'react'
-import { useEffect } from 'react';
+import { useEffect ,useState} from 'react';
 import { usePathname, useRouter } from 'next/navigation';
-export const REDIRECT_URI = "http://localhost:3000/login/oauth2/code/kakao";
+import { useAccessToken } from '@/context/context';
+import { useCookies } from 'react-cookie';
 
-export const REST_API_KEY = '600f92747c92f81892156a8f1e40bfea';
+export const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
+export const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
+
 function page() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     
     const pathname = usePathname();
     const router = useRouter();
+    const { provideAccessToken } = useAccessToken();
+    const [cookies, setCookie] = useCookies(['refreshToken']);
+    const [loginSuccess, setLoginSuccess] = useState(false);
+  
     useEffect(() => {
         // console.log(process.env.REACT_APP_URL);
-        console.log(code);
-        console.log(REST_API_KEY);
-        console.log(REDIRECT_URI);
 
         const params = new URLSearchParams();
         params.append("grant_type", "authorization_code");
@@ -35,17 +39,27 @@ function page() {
           })
         .then(response => response.json())
         .then(data => {
-            const accessToken = data.access_token;
             console.log(data)
-            console.log(accessToken);
-            // 이제 액세스 토큰을 사용하여 카카오 API에 요청하여 사용자 정보를 가져올 수 있음
+            const accessToken = data.access_token;
+            const refreshToken = data.refresh_token;
+            console.log('받은 토큰',accessToken);
+            console.log('받은 리프레시 토큰',refreshToken);
+            setCookie('refreshToken', refreshToken, { path: '/' });
+            console.log({cookies})
+
+
+            //리프레시 토큰 쿠키에 저장 -> const { refreshToken } = useCookies(['refreshToken']); 이런식으로 쓰면 됨
+            //provideAccessToken(accessToken);
+
+
+            localStorage.setItem('token', accessToken);
+            router.replace('/');
           })
           .catch(error => {
             console.error('액세스 토큰 요청 실패:', error);
           });
-    
+          
           // 토큰을 받아서 localStorage같은 곳에 저장하는 코드를 여기에 쓴다.
-          router.push('/');
       }, []);
 
   return (
