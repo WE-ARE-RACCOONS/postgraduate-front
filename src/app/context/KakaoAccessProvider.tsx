@@ -1,16 +1,8 @@
 "use client";
 import React, { createContext, useContext, useState, ReactNode } from 'react';
-
-interface KakaoAccessContextType {
-  kakaoAccess: string;
-  setKakaoAccess: React.Dispatch<React.SetStateAction<string>>;
-}
+import { KakaoAccessContextType, KakaoAccessProviderProps } from '../types/context/kakaoAccess';
 
 const KakaoAccessContext = createContext<KakaoAccessContextType | null>(null);
-
-interface KakaoAccessProviderProps {
-  children: ReactNode;
-}
 
 export function KakaoAccessProvider({ children }: KakaoAccessProviderProps) {
   const [kakaoAccess, setKakaoAccess] = useState('');
@@ -25,7 +17,7 @@ export function KakaoAccessProvider({ children }: KakaoAccessProviderProps) {
 export function useKakaoAccess() {
   const context = useContext(KakaoAccessContext);
   if (context === null) {
-    throw new Error('useKakaoAccess must be used within a KakaoAccessProvider');
+    throw new Error('useKakaoAccess는 KakaoAccessProvider 내에서 사용되어야 합니다.');
   }
   return context;
 }
