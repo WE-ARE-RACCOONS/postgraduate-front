@@ -2,13 +2,14 @@
 import Login from '@/app/components/kakao/login'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
+import { KakaoAccessProvider, useKakaoAccess } from './context/KakaoAccessProvider'
 
 export default function Home() {
   const [kakaoToken, setKakaoToken] = useState<string | null>(null)
+  const { kakaoAccess } = useKakaoAccess();
 
   useEffect(() => {
-    const tokenFromLocalStorage = localStorage.getItem('kakao_access_token')
-    setKakaoToken(tokenFromLocalStorage)
+    setKakaoToken(kakaoAccess);
   }, [])
 
   useEffect(() => {
@@ -25,9 +26,9 @@ export default function Home() {
   }, [kakaoToken])
 
   return (
-    <div>
+    <KakaoAccessProvider>
       기본 루트 페이지 입니다
       <Login />
-    </div>
+    </KakaoAccessProvider>
   )
 }
