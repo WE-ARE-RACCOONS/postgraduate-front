@@ -1,11 +1,6 @@
 {
   "extends": "next/core-web-vitals",
-  "plugins": [
-    "@tanstack/query",
-    "airbnb",
-    "airbnb-typescript",
-    "prettier"
-  ],
+  "plugins": ["@tanstack/query", "airbnb", "airbnb-typescript", "prettier"],
   "parserOptions": {
     "project": "./tsconfig.json"
   },

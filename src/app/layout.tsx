@@ -1,8 +1,6 @@
 import './globals.css'
 import type { Metadata } from 'next'
-import { Inter } from 'next/font/google'
-
-// const inter = Inter({ subsets: ['latin'] })
+import { KakaoAccessProvider } from './context/KakaoAccessProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,7 +14,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <body>
+        <KakaoAccessProvider>
+          {children}
+        </KakaoAccessProvider>
+      </body>
     </html>
   )
 }
