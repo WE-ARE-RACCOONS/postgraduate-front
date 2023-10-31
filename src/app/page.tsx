@@ -17,17 +17,17 @@ export default function Home() {
   useEffect(() => {
     if (kakaoToken) {
       axios
-        .post(`http://3.39.42.200/user/login`, {
+        .post(`${process.env.NEXT_PUBLIC_SUVER_URL}/user/login`, {
             accessToken: kakaoToken
         })
         .then((data) => {
           console.log(data)
-          const accessToken = data.accessToken;
-          const refreshToken = data.refreshToken;
+          const code = data.data.code;
+          const accessToken = data.data.data.accessToken;
+          const refreshToken = data.data.data.refreshToken;
           setSeverAccess(accessToken);
         })
         .catch(function (error) {
-          
           console.log(error)
         })
     }
