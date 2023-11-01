@@ -1,10 +1,10 @@
-import { ReactNode } from 'react';
+import { ReactNode } from 'react'
 
 export type SeverAccessContextType = {
-  severAccess: string;
-  setSeverAccess: React.Dispatch<React.SetStateAction<string>>;
+  severAccess: string
+  setSeverAccess: React.Dispatch<React.SetStateAction<string>>
 }
 
 export interface SeverAccessProviderProps {
-  children: ReactNode;
+  children: ReactNode
 }
