@@ -1,6 +1,7 @@
 import './globals.css'
 import type { Metadata } from 'next'
 import { KakaoAccessProvider } from './context/KakaoAccessProvider'
+import { SeverAccessProvider } from './context/SeverAccessProvider'
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -15,9 +16,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <KakaoAccessProvider>
-          {children}
-        </KakaoAccessProvider>
+        <SeverAccessProvider>
+          <KakaoAccessProvider>{children}</KakaoAccessProvider>
+        </SeverAccessProvider>
       </body>
     </html>
   )
