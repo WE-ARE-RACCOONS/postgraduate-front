@@ -1,15 +1,15 @@
 'use client'
-import Login from '@/app/components/kakao/login'
+import Login from '@/components/kakao/login'
 import axios from 'axios'
 import { useEffect, useState } from 'react'
 import {
   KakaoAccessProvider,
   useKakaoAccess,
-} from './context/KakaoAccessProvider'
+} from '../context/KakaoAccessProvider'
 import {
   SeverAccessProvider,
   useSeverAccess,
-} from '@/app/context/SeverAccessProvider'
+} from '@/context/SeverAccessProvider'
 
 export default function Home() {
   const [kakaoToken, setKakaoToken] = useState<string | null>(null)

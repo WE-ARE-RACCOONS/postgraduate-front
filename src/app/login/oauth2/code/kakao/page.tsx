@@ -6,7 +6,7 @@ import { useCookies } from 'react-cookie'
 import {
   KakaoAccessProvider,
   useKakaoAccess,
-} from '@/app/context/KakaoAccessProvider'
+} from '@/context/KakaoAccessProvider'
 
 function page() {
   const pathname = usePathname()
