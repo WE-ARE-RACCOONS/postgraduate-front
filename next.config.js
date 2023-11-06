@@ -5,6 +5,9 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
+  experimental: {
+    swcPlugins: [['@swc-jotai/react-refresh', {}]],
+  }
 }
 
 module.exports = nextConfig
