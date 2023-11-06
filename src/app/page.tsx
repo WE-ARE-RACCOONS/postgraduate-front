@@ -1,24 +1,24 @@
-'use client'
-import Login from '@/components/kakao/login'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+'use client';
+import Login from '@/components/kakao/login';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import {
   KakaoAccessProvider,
   useKakaoAccess,
-} from '../context/KakaoAccessProvider'
+} from '../context/KakaoAccessProvider';
 import {
   SeverAccessProvider,
   useSeverAccess,
-} from '@/context/SeverAccessProvider'
+} from '@/context/SeverAccessProvider';
 
 export default function Home() {
-  const [kakaoToken, setKakaoToken] = useState<string | null>(null)
-  const { kakaoAccess } = useKakaoAccess()
-  const { setSeverAccess } = useSeverAccess()
+  const [kakaoToken, setKakaoToken] = useState<string | null>(null);
+  const { kakaoAccess } = useKakaoAccess();
+  const { setSeverAccess } = useSeverAccess();
 
   useEffect(() => {
-    setKakaoToken(kakaoAccess)
-  }, [])
+    setKakaoToken(kakaoAccess);
+  }, []);
 
   useEffect(() => {
     if (kakaoToken) {
@@ -27,26 +27,26 @@ export default function Home() {
           accessToken: kakaoToken,
         })
         .then((data) => {
-          const code = data.data.code
+          const code = data.data.code;
           if (code === 200) {
-            const accessToken = data.data.data.accessToken
-            const refreshToken = data.data.data.refreshToken
-            setSeverAccess(accessToken)
+            const accessToken = data.data.data.accessToken;
+            const refreshToken = data.data.data.refreshToken;
+            setSeverAccess(accessToken);
           } else if (code === 404) {
-            const socialId = data.data.data.socialId
-            console.log(socialId)
+            const socialId = data.data.data.socialId;
+            console.log(socialId);
           }
         })
         .catch(function (error) {
-          console.log(error)
-        })
+          console.log(error);
+        });
     }
-  }, [kakaoToken])
+  }, [kakaoToken]);
 
   return (
     <SeverAccessProvider>
       기본 루트 페이지 입니다
       <Login />
     </SeverAccessProvider>
-  )
+  );
 }
