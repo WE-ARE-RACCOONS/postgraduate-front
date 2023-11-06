@@ -1,9 +1,10 @@
+'use client';
 import { useAtom } from "jotai";
 import { nickname } from '@/stores/nickname';
 
 function NicknameForm() {
-  // const [userNick, useUserNick] = useAtom(nickname);
-  // console.log('userNick is '+userNick);
+  const [userNick, useUserNick] = useAtom(nickname);
+  console.log('userNick is '+userNick);
 
   return(
     <div>
