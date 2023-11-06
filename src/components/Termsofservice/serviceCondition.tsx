@@ -11,7 +11,7 @@ function ServiceCondition() {
 const Container = styled.div`
     border: 1px solid black;
     width: 50rem;
-    height: 10rem;
+    height: 2.5;
     background-color: #bdc3c7;
 `;
 export default ServiceCondition
