@@ -4,11 +4,13 @@ import { nickname } from '@/stores/nickname';
 import { useEffect } from 'react';
 
 function NicknameForm() {
+  const maxLength = 12;
+  const regex = /^[a-zA-Z가-힣]*$/;
   const [userNick, useUserNick] = useAtom(nickname);
 
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
-    const inputValue = e.currentTarget.value;
-    e.currentTarget.value = filterInputText(inputValue);
+    e.currentTarget.value = filterInputText(e.currentTarget.value);
+    e.currentTarget.value = checkLength(e.currentTarget.value);
     useUserNick(e.currentTarget.value);
   }
 
@@ -17,9 +19,15 @@ function NicknameForm() {
   }, [userNick]);
 
   function filterInputText(inputValue: string) {
-    const regex = /^[a-zA-Z가-힣]*$/;
     if (!regex.test(inputValue)) {
       return inputValue.replace(/[^a-zA-Z가-힣]/g, '');
+    }
+    return inputValue;
+  }
+
+  function checkLength(inputValue: string) {
+    if (inputValue.length > maxLength) {
+      return inputValue.slice(0, maxLength);
     }
     return inputValue;
   }
