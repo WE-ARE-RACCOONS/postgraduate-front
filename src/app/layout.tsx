@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import { KakaoAccessProvider } from '../context/KakaoAccessProvider';
 import { SeverAccessProvider } from '../context/SeverAccessProvider';
+import Providers from '@/components/Provider/providers';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -14,11 +15,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="ko">
       <body>
-        <SeverAccessProvider>
-          <KakaoAccessProvider>{children}</KakaoAccessProvider>
-        </SeverAccessProvider>
+        <Providers>
+          <SeverAccessProvider>
+            <KakaoAccessProvider>{children}</KakaoAccessProvider>
+          </SeverAccessProvider>
+        </Providers>
       </body>
     </html>
   );
