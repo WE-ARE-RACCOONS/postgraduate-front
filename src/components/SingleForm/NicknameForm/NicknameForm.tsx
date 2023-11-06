@@ -1,8 +1,8 @@
 'use client';
-import { useAtom } from "jotai";
+import { useAtom } from 'jotai';
 import { nickname } from '@/stores/nickname';
 import { useEffect } from 'react';
-import axios from "axios";
+import axios from 'axios';
 
 function NicknameForm() {
   const maxLength = 12;
@@ -35,21 +35,34 @@ function NicknameForm() {
 
   function checkDuplicate() {
     const params = { nickName: userNick };
-    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
+    axios
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
       .then((res) => {
         console.log(res);
       })
       .catch((err) => {
         console.error(err);
-      })
+      });
   }
 
-  return(
+  return (
     <div>
-      <input type="text" name="user-nickname" id="user-nickname" placeholder="닉네임을 입력해주세요." onChange={(e) => checkNickname(e)} />
-      <button onClick={() => {checkDuplicate()}}>중복확인</button>
+      <input
+        type="text"
+        name="user-nickname"
+        id="user-nickname"
+        placeholder="닉네임을 입력해주세요."
+        onChange={(e) => checkNickname(e)}
+      />
+      <button
+        onClick={() => {
+          checkDuplicate();
+        }}
+      >
+        중복확인
+      </button>
     </div>
-  )
+  );
 }
 
 export default NicknameForm;

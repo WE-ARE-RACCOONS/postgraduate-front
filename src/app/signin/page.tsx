@@ -1,9 +1,7 @@
-import NicknameForm from "@/components/SingleForm/NicknameForm";
+import NicknameForm from '@/components/SingleForm/NicknameForm';
 
 function SigninPage() {
-  return (
-    <NicknameForm></NicknameForm>
-  )
+  return <NicknameForm></NicknameForm>;
 }
 
 export default SigninPage;
