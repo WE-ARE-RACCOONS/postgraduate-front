@@ -1,8 +1,8 @@
-'use client'
-import Login from '@/components/kakao/login'
-import ServiceCondition from '@/components/Termsofservice/serviceCondition'
-import axios from 'axios'
-import { useEffect, useState } from 'react'
+'use client';
+import Login from '@/components/kakao/login';
+import ServiceCondition from '@/components/Termsofservice/serviceCondition';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
 import {
   KakaoAccessProvider,
   useKakaoAccess,
