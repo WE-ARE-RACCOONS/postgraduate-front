@@ -23,7 +23,7 @@ export default function Home() {
   useEffect(() => {
     if (kakaoToken) {
       axios
-        .post(`${process.env.NEXT_PUBLIC_SUVER_URL}/user/login`, {
+        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`, {
           accessToken: kakaoToken,
         })
         .then((data) => {
