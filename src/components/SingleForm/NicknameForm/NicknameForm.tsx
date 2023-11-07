@@ -3,6 +3,7 @@ import { useAtom } from 'jotai';
 import { nickname, notDuplicate } from '@/stores/nickname';
 import { useEffect } from 'react';
 import axios from 'axios';
+import SingleValidator from '@/components/Validator/SingleValidator';
 
 function NicknameForm() {
   const maxLength = 12;
@@ -49,20 +50,23 @@ function NicknameForm() {
 
   return (
     <div>
-      <input
-        type="text"
-        name="user-nickname"
-        id="user-nickname"
-        placeholder="닉네임을 입력해주세요."
-        onChange={(e) => checkNickname(e)}
-      />
-      <button
-        onClick={() => {
-          checkDuplicate();
-        }}
-      >
-        중복확인
-      </button>
+      <div>
+        <input
+          type="text"
+          name="user-nickname"
+          id="user-nickname"
+          placeholder="닉네임을 입력해주세요."
+          onChange={(e) => checkNickname(e)}
+        />
+        <button
+          onClick={() => {
+            checkDuplicate();
+          }}
+        >
+          중복확인
+        </button>
+      </div>
+      <SingleValidator msg="중복된 닉네임입니다."></SingleValidator>
     </div>
   );
 }
