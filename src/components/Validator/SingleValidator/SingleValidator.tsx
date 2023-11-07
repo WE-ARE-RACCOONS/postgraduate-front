@@ -1,8 +1,9 @@
+import { SingleValidatorProps } from "@/types/Validator/singleValidator";
 import { SingleValidatorContainer } from "./SingleValidator.styled";
 
-function SingleValidator({ msg } : { msg: string }) {
+function SingleValidator(props: SingleValidatorProps) {
   return (
-    <SingleValidatorContainer>{msg}</SingleValidatorContainer>
+    <SingleValidatorContainer color={props.textColor}>{props.msg}</SingleValidatorContainer>
   )
 }
 

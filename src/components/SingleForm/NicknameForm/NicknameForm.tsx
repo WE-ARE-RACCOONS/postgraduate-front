@@ -1,7 +1,7 @@
 'use client';
 import { useAtom } from 'jotai';
 import { nickname, notDuplicate } from '@/stores/nickname';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 
@@ -10,6 +10,7 @@ function NicknameForm() {
   const regex = /^[a-zA-Z가-힣]*$/;
   const [userNick, useUserNick] = useAtom(nickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
+  const [flag, setFlag] = useState(false);
 
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
     e.currentTarget.value = filterInputText(e.currentTarget.value);
@@ -37,6 +38,7 @@ function NicknameForm() {
 
   function checkDuplicate() {
     const params = { nickName: userNick };
+    if(!flag) setFlag(true);
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
       .then((res) => {
@@ -66,7 +68,11 @@ function NicknameForm() {
           중복확인
         </button>
       </div>
-      {!availability && <SingleValidator msg="중복된 닉네임입니다."></SingleValidator>}
+      {flag && 
+        <SingleValidator 
+          textColor={availability ? '#45f77e' : '#FF3347'}
+          msg={availability ? "사용 가능한 닉네임입니다." : "중복된 닉네임입니다."} />
+      }
     </div>
   );
 }
