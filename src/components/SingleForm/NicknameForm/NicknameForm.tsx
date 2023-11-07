@@ -66,7 +66,7 @@ function NicknameForm() {
           중복확인
         </button>
       </div>
-      <SingleValidator msg="중복된 닉네임입니다."></SingleValidator>
+      {!availability && <SingleValidator msg="중복된 닉네임입니다."></SingleValidator>}
     </div>
   );
 }
