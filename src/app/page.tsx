@@ -16,11 +16,6 @@ export default function Home() {
   const [kakaoToken, setKakaoToken] = useState<string | null>(null);
   const { kakaoAccess } = useKakaoAccess();
   const { setSeverAccess } = useSeverAccess();
-  const [serviceChanged, setServiceChanged] = useState(false);
-
-  const handleServiceChange = (newServiceValue:boolean) => {
-    setServiceChanged(newServiceValue);
-  };
 
   useEffect(() => {
     setKakaoToken(kakaoAccess);
@@ -53,8 +48,6 @@ export default function Home() {
     <SeverAccessProvider>
       기본 루트 페이지 입니다
       <Login />
-      <ServiceCondition onServiceChange={handleServiceChange} />
-      {serviceChanged && <button>버튼을 보이게 해줘</button>}
     </SeverAccessProvider>
   );
 }
