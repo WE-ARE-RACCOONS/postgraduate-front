@@ -34,11 +34,11 @@ function NicknameForm() {
 
   function checkDuplicate() {
     const params = { nickName: userNick };
-    if(!flag) setFlag(true);
+    if (!flag) setFlag(true);
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
       .then((res) => {
-        if(res.data.data) useAvailability(true);
+        if (res.data.data) useAvailability(true);
         else useAvailability(false);
       })
       .catch((err) => {
@@ -64,11 +64,14 @@ function NicknameForm() {
           중복확인
         </button>
       </div>
-      {flag && 
-        <SingleValidator 
+      {flag && (
+        <SingleValidator
           textColor={availability ? '#45f77e' : '#FF3347'}
-          msg={availability ? "사용 가능한 닉네임입니다." : "중복된 닉네임입니다."} />
-      }
+          msg={
+            availability ? '사용 가능한 닉네임입니다.' : '중복된 닉네임입니다.'
+          }
+        />
+      )}
     </div>
   );
 }

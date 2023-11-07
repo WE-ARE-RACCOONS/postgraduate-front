@@ -1,4 +1,4 @@
 export interface SingleValidatorProps {
-  textColor: string,
-  msg: string
+  textColor: string;
+  msg: string;
 }

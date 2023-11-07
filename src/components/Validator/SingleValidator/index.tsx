@@ -1,3 +1,3 @@
-import SingleValidator from "./SingleValidator";
+import SingleValidator from './SingleValidator';
 
 export default SingleValidator;
