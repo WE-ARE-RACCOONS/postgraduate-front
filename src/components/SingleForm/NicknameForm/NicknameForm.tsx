@@ -1,6 +1,6 @@
 'use client';
 import { useAtom } from 'jotai';
-import { nickname } from '@/stores/nickname';
+import { nickname, notDuplicate } from '@/stores/nickname';
 import { useEffect } from 'react';
 import axios from 'axios';
 
@@ -8,6 +8,7 @@ function NicknameForm() {
   const maxLength = 12;
   const regex = /^[a-zA-Z가-힣]*$/;
   const [userNick, useUserNick] = useAtom(nickname);
+  const [availability, useAvailability] = useAtom(notDuplicate);
 
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
     e.currentTarget.value = filterInputText(e.currentTarget.value);
@@ -38,7 +39,8 @@ function NicknameForm() {
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
       .then((res) => {
-        console.log(res);
+        if(res.data.data) useAvailability(true);
+        else useAvailability(false);
       })
       .catch((err) => {
         console.error(err);
