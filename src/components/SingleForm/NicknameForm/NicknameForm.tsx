@@ -1,7 +1,7 @@
 'use client';
 import { useAtom } from 'jotai';
 import { nickname, notDuplicate } from '@/stores/nickname';
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 
@@ -17,10 +17,6 @@ function NicknameForm() {
     e.currentTarget.value = checkLength(e.currentTarget.value);
     useUserNick(e.currentTarget.value);
   }
-
-  useEffect(() => {
-    console.log(userNick);
-  }, [userNick]);
 
   function filterInputText(inputValue: string) {
     if (!regex.test(inputValue)) {
