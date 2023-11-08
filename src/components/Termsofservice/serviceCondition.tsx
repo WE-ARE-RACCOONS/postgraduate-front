@@ -1,6 +1,7 @@
+'use client';
 import Checkbox from '@/components/checkbox/Checkbox';
 import React, { useState, useEffect } from 'react';
-import { TermsContainer, Show, Box } from './ServiceCondition.styled';
+import { TermsContainer, TermsShow, TermsBox } from './ServiceCondition.styled';
 import { useAtom } from 'jotai';
 import { essential } from '@/stores/condition';
 import { allchecked } from '@/stores/condition';
@@ -18,26 +19,26 @@ function ServiceCondition() {
     setMarketing(newValue);
   };
 
-  React.useEffect(() => {
+  useEffect(() => {
     setAllAgreed(service && marketing);
     setService(service);
   }, [service, marketing]);
 
   return (
-    <Box>
+    <TermsBox>
       <Checkbox checked={allAgreed} onChange={handleAllAgreedChange} />
       전체동의
       <TermsContainer>
         <Checkbox checked={service} onChange={setService} />
         (필수)이용약관과 개인정보 취급 방침에 동의합니다.
-        <Show>보기</Show>
+        <TermsShow>보기</TermsShow>
       </TermsContainer>
       <TermsContainer>
         <Checkbox checked={marketing} onChange={setMarketing} />
         (선택)마케팅 동의.
-        <Show>보기</Show>
+        <TermsShow>보기</TermsShow>
       </TermsContainer>
-    </Box>
+    </TermsBox>
   );
 }
 export default ServiceCondition;

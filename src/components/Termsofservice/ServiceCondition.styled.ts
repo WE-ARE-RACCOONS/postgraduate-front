@@ -6,11 +6,11 @@ export const TermsContainer = styled.div`
   background-color: #bdc3c7;
   justify-content: space-between;
 `;
-export const Show = styled.div`
+export const TermsShow = styled.div`
   border: 1px solid black;
   text-decoration-line: underline;
   padding: 1rem;
 `;
-export const Box = styled.div`
+export const TermsBox = styled.div`
   border: 1px solid red;
 `;
