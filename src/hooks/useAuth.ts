@@ -15,7 +15,7 @@ function useAuth() {
   function setRefreshToken(props: SetTokenProps) {
     const now = new Date();
     const expires = new Date(now.getTime() + props.expires * 1000);
-    setCookie('refresh_token', props.token, { expires });
+    setCookie('refresh_token', props.token, { path: '/', expires });
   }
 
   return {
