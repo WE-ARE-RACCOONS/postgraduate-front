@@ -7,9 +7,9 @@ function SigninPage() {
     <div>
       <NicknameForm />
       <ServiceCondition />
-      <NextBtn kind='next' url='/matching-info' />
+      <NextBtn kind="next" url="/matching-info" />
     </div>
-  )
+  );
 }
 
 export default SigninPage;

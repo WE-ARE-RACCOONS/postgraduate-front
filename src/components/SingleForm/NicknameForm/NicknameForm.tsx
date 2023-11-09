@@ -20,9 +20,9 @@ function NicknameForm() {
 
   function filterInputText(inputValue: string) {
     const filteredValue = inputValue.replace(/[^a-zA-Zㄱ-힣]/g, '');
-    
+
     return filteredValue;
-  }    
+  }
 
   function checkLength(inputValue: string) {
     if (inputValue.length > maxLength) {

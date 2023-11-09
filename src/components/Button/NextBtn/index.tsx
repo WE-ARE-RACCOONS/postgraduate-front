@@ -1,3 +1,3 @@
-import NextBtn from "./NextBtn";
+import NextBtn from './NextBtn';
 
 export default NextBtn;

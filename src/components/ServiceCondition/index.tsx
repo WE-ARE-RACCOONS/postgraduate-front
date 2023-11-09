@@ -1,3 +1,3 @@
-import ServiceCondition from "./ServiceCondition";
+import ServiceCondition from './ServiceCondition';
 
 export default ServiceCondition;

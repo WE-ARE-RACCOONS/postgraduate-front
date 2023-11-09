@@ -2,9 +2,7 @@
 import Login from '@/components/kakao/login';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import {
-  useKakaoAccess,
-} from '../context/KakaoAccessProvider';
+import { useKakaoAccess } from '../context/KakaoAccessProvider';
 import {
   SeverAccessProvider,
   useSeverAccess,
