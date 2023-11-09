@@ -23,7 +23,7 @@ function page() {
 
       if(response.socialId) {
         setSocialId(response.socialId);
-        router.replace('/signin');
+        router.replace(`/signin/${response.socialId}`);
         return;
       }
 

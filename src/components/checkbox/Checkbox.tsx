@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyledInput } from './CheckBox.styled';
+import { StyledInput } from './Checkbox.styled';
 // import { CheckboxProps } from '@/types/checkbox/checkbox';
 
 type CheckboxProps = {
