@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const ProfileStateChangeBox = styled.div`
-border: 1px solid black;
+  border: 1px solid black;
 `;

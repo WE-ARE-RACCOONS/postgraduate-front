@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProfileBox = styled.div`
   display: flex;
@@ -7,25 +7,24 @@ export const ProfileBox = styled.div`
   justify-content: space-between;
 `;
 export const ProfileImg = styled.div`
-border: 1px solid blue;
-width: 5rem;
+  border: 1px solid blue;
+  width: 5rem;
 `;
 export const ProfileInfo = styled.div`
-border: 1px solid blue;
-width: 30rem;
+  border: 1px solid blue;
+  width: 30rem;
 `;
-
 
 export const ProfileName = styled.div`
-border: 1px solid black;
-display: flex;
+  border: 1px solid black;
+  display: flex;
 `;
 export const Nickname = styled.div`
-border: 1px solid black;
+  border: 1px solid black;
 `;
 export const Button = styled.div`
-border: 1px solid black;
+  border: 1px solid black;
 `;
 export const ProfileWarn = styled.div`
-border: 1px solid black;
+  border: 1px solid black;
 `;
