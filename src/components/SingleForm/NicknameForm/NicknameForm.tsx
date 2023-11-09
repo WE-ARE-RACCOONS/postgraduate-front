@@ -19,11 +19,10 @@ function NicknameForm() {
   }
 
   function filterInputText(inputValue: string) {
-    if (!regex.test(inputValue)) {
-      return inputValue.replace(/[^a-zA-Z가-힣]/g, '');
-    }
-    return inputValue;
-  }
+    const filteredValue = inputValue.replace(/[^a-zA-Zㄱ-힣]/g, '');
+    
+    return filteredValue;
+  }    
 
   function checkLength(inputValue: string) {
     if (inputValue.length > maxLength) {
