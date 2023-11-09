@@ -2,7 +2,7 @@ import NicknameForm from '@/components/SingleForm/NicknameForm';
 import ServiceCondition from '@/components/ServiceCondition';
 import NextBtn from '@/components/Button/NextBtn';
 
-function SigninPage() {
+function SignUpPage() {
   return (
     <div>
       <NicknameForm />
@@ -12,4 +12,4 @@ function SigninPage() {
   );
 }
 
-export default SigninPage;
+export default SignUpPage;

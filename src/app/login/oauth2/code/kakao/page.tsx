@@ -22,7 +22,7 @@ function page() {
         const response = res.data.data;
 
         if (response.socialId) {
-          router.replace(`/signin/${response.socialId}`);
+          router.replace(`/signup/${response.socialId}`);
           return;
         }
 
