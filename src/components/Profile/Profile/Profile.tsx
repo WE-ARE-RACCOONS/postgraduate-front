@@ -4,8 +4,8 @@ import {
   ProfileImg,
   ProfileInfo,
   ProfileName,
-  Nickname,
-  Button,
+  ProfileNickname,
+  ProfileButton,
   ProfileWarn,
 } from './Profile.styled';
 
@@ -15,8 +15,8 @@ function Profile() {
       <ProfileImg>이미지</ProfileImg>
       <ProfileInfo>
         <ProfileName>
-          <Nickname>닉네임</Nickname>
-          <Button>등급버튼</Button>
+          <ProfileNickname>닉네임</ProfileNickname>
+          <ProfileButton>등급버튼</ProfileButton>
         </ProfileName>
         <ProfileWarn>경고문</ProfileWarn>
       </ProfileInfo>

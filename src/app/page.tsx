@@ -1,6 +1,6 @@
 'use client';
 import Login from '@/components/kakao/login';
-import ServiceCondition from '@/components/Termsofservice/serviceCondition';
+import ServiceCondition from '@/components/Termsofservice/ServiceCondition';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {

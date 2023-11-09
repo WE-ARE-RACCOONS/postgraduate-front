@@ -19,10 +19,10 @@ export const ProfileName = styled.div`
   border: 1px solid black;
   display: flex;
 `;
-export const Nickname = styled.div`
+export const ProfileNickname = styled.div`
   border: 1px solid black;
 `;
-export const Button = styled.div`
+export const ProfileButton = styled.div`
   border: 1px solid black;
 `;
 export const ProfileWarn = styled.div`

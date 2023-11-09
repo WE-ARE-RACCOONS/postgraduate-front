@@ -1,6 +1,6 @@
 import React from 'react';
-import TitleComponent from '../TitleBox/TitleCompo';
-import ContentComponent from '../TitleBox/ContentCompo';
+import TitleComponent from '../Box/TitleBox/TitleBox';
+import ContentComponent from '../Box/ContentBox/ContentBox';
 import { ProfileStateChangeBox } from './ProfileStsteChange.styled';
 function ProfileStateChange() {
   return (

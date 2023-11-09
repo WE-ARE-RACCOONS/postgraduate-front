@@ -1,8 +1,8 @@
 import React from 'react';
 import { ProfileManageBox } from './ProfileManage.styled';
 
-import ContentComponent from '../TitleBox/ContentCompo';
-import TitleComponent from '../TitleBox/TitleCompo';
+import ContentComponent from '../Box/ContentBox/ContentBox';
+import TitleComponent from '../Box/TitleBox/TitleBox';
 function ProfileManage() {
   return (
     <ProfileManageBox>
