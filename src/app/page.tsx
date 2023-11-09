@@ -48,7 +48,6 @@ export default function Home() {
     <SeverAccessProvider>
       기본 루트 페이지 입니다
       <Login />
-      <ServiceCondition />
     </SeverAccessProvider>
   );
 }
