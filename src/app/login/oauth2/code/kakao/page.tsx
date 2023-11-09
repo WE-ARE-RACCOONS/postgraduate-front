@@ -5,12 +5,10 @@ import { useRouter } from 'next/navigation';
 import { useCookies } from 'react-cookie';
 import axios from 'axios';
 import { useSetAtom } from 'jotai';
-import { socialId } from '@/stores/user';
 
 function page() {
   const router = useRouter();
   const [cookies, setCookie] = useCookies(['kakao_refreshToken']);
-  const setSocialId = useSetAtom(socialId);
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -22,7 +20,6 @@ function page() {
       const response = res.data.data;
 
       if(response.socialId) {
-        setSocialId(response.socialId);
         router.replace(`/signin/${response.socialId}`);
         return;
       }
