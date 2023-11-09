@@ -1,11 +1,10 @@
-
-@media ( min-width: 375px )and ( max-width: 600px ) {
+@media (min-width: 375px) and (max-width: 600px) {
   /*375이상 600으로 넘어가는 화면*/
   html {
     font-size: 1rem;
   }
 }
-@media ( min-width: 600px ) {
+@media (min-width: 600px) {
   /*600이상으로 넘어가는 화면*/
   html {
     font-size: 1rem;
@@ -65,10 +64,6 @@ a {
     url(../../public/fonts/Pretendard-ExtraLight.woff2) format('woff2');
 }
 
-
-
-@media ( min-width: 600px ) {
+@media (min-width: 600px) {
   /*600이상으로 넘어가는 화면*/
 }
-
-
