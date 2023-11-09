@@ -1,8 +1,8 @@
 'use client';
+import useAuth from "@/hooks/useAuth";
 import { nickname } from "@/stores/nickname";
-import { accessTokenAtom } from "@/stores/user";
 import axios from "axios";
-import { useAtomValue, useSetAtom } from "jotai";
+import { useAtomValue } from "jotai";
 import { useRouter, usePathname } from "next/navigation";
 
 function SignUpBtn() {
@@ -11,7 +11,7 @@ function SignUpBtn() {
   const socialId = pathArr[2];
   const nickName = useAtomValue(nickname);
   const router = useRouter();
-  const setAccessToken = useSetAtom(accessTokenAtom);
+  const { setAccessToken, setRefreshToken } = useAuth();
 
   const handleSignUp = () => {
     if(socialId && nickName) {
@@ -21,8 +21,9 @@ function SignUpBtn() {
       }).then((res) => {
         const response = res.data;
         if(response.code == "AU202") {
+          setAccessToken({ token: response.data.accessToken, expires: response.data.accessExpiration });
+          setRefreshToken({ token: response.data.refreshToken, expires: response.data.refreshExpiration });
           router.replace('/signup/done');
-          setAccessToken(response.data.accessToken);
         }
       }).catch((err) => {
         console.log(err);
