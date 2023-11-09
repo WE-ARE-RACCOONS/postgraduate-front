@@ -1,95 +1,54 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+'use client';
+import Login from '@/components/kakao/login';
+import ServiceCondition from '@/components/Termsofservice/ServiceCondition';
+import axios from 'axios';
+import { useEffect, useState } from 'react';
+import {
+  KakaoAccessProvider,
+  useKakaoAccess,
+} from '../context/KakaoAccessProvider';
+import {
+  SeverAccessProvider,
+  useSeverAccess,
+} from '@/context/SeverAccessProvider';
+import { essential } from '@/stores/condition';
 
 export default function Home() {
+  const [kakaoToken, setKakaoToken] = useState<string | null>(null);
+  const { kakaoAccess } = useKakaoAccess();
+  const { setSeverAccess } = useSeverAccess();
+  useEffect(() => {
+    setKakaoToken(kakaoAccess);
+  }, []);
+
+  useEffect(() => {
+    if (kakaoToken) {
+      axios
+        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`, {
+          accessToken: kakaoToken,
+        })
+        .then((data) => {
+          const code = data.data.code;
+          if (code === 200) {
+            const accessToken = data.data.data.accessToken;
+            const refreshToken = data.data.data.refreshToken;
+            setSeverAccess(accessToken);
+          } else if (code === 404) {
+            const socialId = data.data.data.socialId;
+            console.log(socialId);
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  }, [kakaoToken]);
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    <SeverAccessProvider>
+      기본 루트 페이지 입니다
+      <Login />
+      <ServiceCondition />
+    </SeverAccessProvider>
+  );
 }
