@@ -1,17 +1,14 @@
 'use client';
 import Login from '@/components/kakao/login';
-import ServiceCondition from '@/components/Termsofservice/ServiceCondition';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import {
-  KakaoAccessProvider,
   useKakaoAccess,
 } from '../context/KakaoAccessProvider';
 import {
   SeverAccessProvider,
   useSeverAccess,
 } from '@/context/SeverAccessProvider';
-import { essential } from '@/stores/condition';
 
 export default function Home() {
   const [kakaoToken, setKakaoToken] = useState<string | null>(null);
@@ -48,7 +45,6 @@ export default function Home() {
     <SeverAccessProvider>
       기본 루트 페이지 입니다
       <Login />
-      <ServiceCondition />
     </SeverAccessProvider>
   );
 }
