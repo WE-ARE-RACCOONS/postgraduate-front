@@ -1,3 +1,3 @@
-import SignUpBtn from "./SignUpBtn";
+import SignUpBtn from './SignUpBtn';
 
 export default SignUpBtn;

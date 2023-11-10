@@ -1,9 +1,7 @@
-import SignUpBtn from "@/components/Button/SignUpBtn";
+import SignUpBtn from '@/components/Button/SignUpBtn';
 
 function MatchingInfoPage() {
-  return(
-    <SignUpBtn />
-  )
+  return <SignUpBtn />;
 }
 
 export default MatchingInfoPage;

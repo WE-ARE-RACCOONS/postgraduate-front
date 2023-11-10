@@ -20,14 +20,20 @@ function KakaoPage() {
       .then((res) => {
         const response = res.data;
 
-        if (response.code == "AU205") {
+        if (response.code == 'AU205') {
           router.replace(`/signup/${response.socialId}`);
           return;
         }
 
-        if (response.code == "AU204") {
-          setAccessToken({ token: response.data.accessToken, expires: response.data.accessExpiration });
-          setRefreshToken({ token: response.data.refreshToken, expires: response.data.refreshExpiration });
+        if (response.code == 'AU204') {
+          setAccessToken({
+            token: response.data.accessToken,
+            expires: response.data.accessExpiration,
+          });
+          setRefreshToken({
+            token: response.data.refreshToken,
+            expires: response.data.refreshExpiration,
+          });
 
           router.replace('/');
           return;
