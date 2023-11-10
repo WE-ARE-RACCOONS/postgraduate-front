@@ -9,13 +9,19 @@ function useAuth() {
 
   function setAccessToken(props: SetTokenProps) {
     // 만료시간 세팅하는 로직도 추가
+    const expires = calculateExpires(props.expires);
     setAccessTkn(props.token);
   }
   
   function setRefreshToken(props: SetTokenProps) {
-    const now = new Date();
-    const expires = new Date(now.getTime() + props.expires * 1000);
+    const expires = calculateExpires(props.expires);
     setCookie('refresh_token', props.token, { path: '/', expires });
+  }
+
+  function calculateExpires(expires: number) {
+    const now = new Date();
+    const result = new Date(now.getTime() + expires * 1000);
+    return result;
   }
 
   return {
