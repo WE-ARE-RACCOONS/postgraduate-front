@@ -14,7 +14,7 @@ export default function Home() {
     <SeverAccessProvider>
       기본 루트 페이지 입니다
       <Login />
-      <button onClick={handleButtonClick}>dlkfnsdldf</button>
+      <button onClick={handleButtonClick}>마이페이지</button>
     </SeverAccessProvider>
   );
 }
