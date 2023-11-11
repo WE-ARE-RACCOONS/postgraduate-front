@@ -1,5 +1,5 @@
 'use Client';
-import React,{useEffect,useState} from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Point from '../Point/Point';
 
@@ -13,10 +13,16 @@ import {
   ProfileWarn,
 } from './Profile.styled';
 
-function Profile({profile , nickNamese}:{profile:string , nickNamese:string}) {
+function Profile({
+  profile,
+  nickNamese,
+}: {
+  profile: string;
+  nickNamese: string;
+}) {
   return (
     <ProfileBox>
-      <ProfileImg src={profile} alt="이미지" ></ProfileImg>
+      <ProfileImg src={profile} alt="이미지"></ProfileImg>
       <ProfileInfo>
         <ProfileName>
           <ProfileNickname>{nickNamese}</ProfileNickname>

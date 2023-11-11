@@ -46,7 +46,7 @@ function useAuth() {
         }
       }
 
-      if(!isExpired(accessExp)) return accessTkn;
+      if (!isExpired(accessExp)) return accessTkn;
     }
 
     return '';
