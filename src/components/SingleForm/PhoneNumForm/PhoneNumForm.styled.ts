@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const PhoneNumContainer = styled.div`
   width: 10.6875rem;
@@ -8,4 +8,4 @@ export const PhoneNumContainer = styled.div`
   input {
     width: 3.0625rem;
   }
-`
+`;
