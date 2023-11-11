@@ -19,10 +19,9 @@ function NicknameForm() {
   }
 
   function filterInputText(inputValue: string) {
-    if (!regex.test(inputValue)) {
-      return inputValue.replace(/[^a-zA-Z가-힣]/g, '');
-    }
-    return inputValue;
+    const filteredValue = inputValue.replace(/[^a-zA-Zㄱ-힣]/g, '');
+
+    return filteredValue;
   }
 
   function checkLength(inputValue: string) {
@@ -49,6 +48,7 @@ function NicknameForm() {
   return (
     <div>
       <div>
+        <h3>닉네임을 입력해주세요</h3>
         <input
           type="text"
           name="user-nickname"
@@ -66,7 +66,7 @@ function NicknameForm() {
       </div>
       {flag && (
         <SingleValidator
-          textColor={availability ? '#45f77e' : '#FF3347'}
+          textColor={availability ? '#2dc95f' : '#FF3347'}
           msg={
             availability ? '사용 가능한 닉네임입니다.' : '중복된 닉네임입니다.'
           }

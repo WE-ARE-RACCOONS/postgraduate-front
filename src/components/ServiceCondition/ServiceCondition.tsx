@@ -1,5 +1,5 @@
 'use client';
-import Checkbox from '@/components/checkbox/Checkbox';
+import Checkbox from '@/components/Checkbox/Checkbox';
 import React, { useState, useEffect } from 'react';
 import { TermsContainer, TermsShow, TermsBox } from './ServiceCondition.styled';
 import { useAtom } from 'jotai';
