@@ -2,9 +2,15 @@
 import SingleValidator from "@/components/Validator/SingleValidator";
 import { PhoneNumContainer } from "./PhoneNumForm.styled";
 import { useEffect, useState } from "react";
+import { useSetAtom } from "jotai";
+import { phoneNum } from "@/stores/signup";
 
 function PhoneNumForm() {
   const [flag, setFlag] = useState(false); // 최초 입력 체크하는 flag
+  const [firNum, setFirNum] = useState('');
+  const [secNum, setSecNum] = useState('');
+  const [thiNum, setThiNum] = useState('');
+  const setFullNum = useSetAtom(phoneNum);
   let maxLength = 0;
 
   function checkLength(inputValue: string, maxLength: number) {
@@ -26,10 +32,15 @@ function PhoneNumForm() {
 
   function checkValidation() {
     let isValid = true;
+
     if(typeof document !== undefined) {
       const firInput = document.getElementById('phone-num-input-fir') as HTMLInputElement;
       const secInput = document.getElementById('phone-num-input-sec') as HTMLInputElement;
       const thiInput = document.getElementById('phone-num-input-thi') as HTMLInputElement;
+
+      setFirNum(firInput.value);
+      setSecNum(secInput.value);
+      setThiNum(thiInput.value);
 
       if(firInput.value.length < 3) isValid = false;
       if(secInput.value.length < 4) isValid = false;
@@ -38,6 +49,10 @@ function PhoneNumForm() {
 
     return isValid;
   }
+
+  useEffect(() => {
+    setFullNum(firNum+secNum+thiNum);
+  }, [firNum, secNum, thiNum]);
 
   return (
     <div>
