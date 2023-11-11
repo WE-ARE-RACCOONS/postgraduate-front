@@ -1,12 +1,12 @@
 import React from 'react';
-import { StyledInput } from './Checkbox.styled';
+import { StyledInput } from './CheckBox.styled';
 // import { CheckboxProps } from '@/types/checkbox/checkbox';
 
 type CheckboxProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;
 };
-function Checkbox({ checked, onChange }: CheckboxProps) {
+function CheckBox({ checked, onChange }: CheckboxProps) {
   return (
     <StyledInput
       type="checkbox"
@@ -15,4 +15,4 @@ function Checkbox({ checked, onChange }: CheckboxProps) {
     ></StyledInput>
   );
 }
-export default Checkbox;
+export default CheckBox;
