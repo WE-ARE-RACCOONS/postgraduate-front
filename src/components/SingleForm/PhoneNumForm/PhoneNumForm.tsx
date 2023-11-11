@@ -3,7 +3,7 @@ import SingleValidator from "@/components/Validator/SingleValidator";
 import { PhoneNumContainer } from "./PhoneNumForm.styled";
 import { useEffect, useState } from "react";
 import { useSetAtom } from "jotai";
-import { phoneNum } from "@/stores/signup";
+import { phoneNum, phoneNumValidation } from "@/stores/signup";
 
 function PhoneNumForm() {
   const [flag, setFlag] = useState(false); // 최초 입력 체크하는 flag
@@ -11,6 +11,7 @@ function PhoneNumForm() {
   const [secNum, setSecNum] = useState('');
   const [thiNum, setThiNum] = useState('');
   const setFullNum = useSetAtom(phoneNum);
+  const setValidation = useSetAtom(phoneNumValidation);
   let maxLength = 0;
 
   function checkLength(inputValue: string, maxLength: number) {
@@ -27,7 +28,10 @@ function PhoneNumForm() {
     maxLength = (e.currentTarget.id.includes('fir') ? 3 : 4);
     e.currentTarget.value = filterInputNum(e.currentTarget.value);
     e.currentTarget.value = checkLength(e.currentTarget.value, maxLength);
-    if(checkValidation()) setFlag(false);
+    if(checkValidation()) {
+      setFlag(false);
+      setValidation(true);
+    };
   }
 
   function checkValidation() {
