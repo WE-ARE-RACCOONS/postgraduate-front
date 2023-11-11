@@ -1,50 +1,50 @@
 'use client';
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { usePathname, useRouter } from 'next/navigation';
-import { useCookies } from 'react-cookie';
-import {
-  KakaoAccessProvider,
-  useKakaoAccess,
-} from '@/context/KakaoAccessProvider';
+import { useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import axios from 'axios';
+import useAuth from '@/hooks/useAuth';
 
-function page() {
-  const pathname = usePathname();
+function KakaoPage() {
   const router = useRouter();
-  const [cookies, setCookie] = useCookies(['kakao_refreshToken']);
-  const { setKakaoAccess } = useKakaoAccess();
+  const { setAccessToken, setRefreshToken } = useAuth();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
 
-    const params = new URLSearchParams();
-    params.append('grant_type', 'authorization_code');
-    params.append('client_id', process.env.NEXT_PUBLIC_REST_API_KEY!);
-    params.append('redirect_uri', process.env.NEXT_PUBLIC_REDIRECT_URI!);
-    params.append('code', code ? code : '');
-
-    fetch(`https://kauth.kakao.com/oauth/token`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
-      },
-      body: params,
-    })
-      .then((response) => response.json())
-      .then((data) => {
-        const kakao_accessToken = data.access_token;
-        const kakao_refreshToken = data.refresh_token;
-        setCookie('kakao_refreshToken', kakao_refreshToken, { path: '/' });
-        setKakaoAccess(kakao_accessToken);
-        router.replace('/');
+    axios
+      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`, {
+        code: code,
       })
-      .catch((error) => {
-        console.error('액세스 토큰 요청 실패:', error);
+      .then((res) => {
+        const response = res.data;
+
+        if (response.code == 'AU205') {
+          router.replace(`/signup/${response.socialId}`);
+          return;
+        }
+
+        if (response.code == 'AU204') {
+          setAccessToken({
+            token: response.data.accessToken,
+            expires: response.data.accessExpiration,
+          });
+          setRefreshToken({
+            token: response.data.refreshToken,
+            expires: response.data.refreshExpiration,
+          });
+
+          router.replace('/');
+          return;
+        }
+      })
+      .catch((err) => {
+        console.error(err);
       });
   }, []);
 
-  return <KakaoAccessProvider>로그인 중입니다.</KakaoAccessProvider>;
+  return <div>로그인 중입니다.</div>;
 }
 
-export default page;
+export default KakaoPage;
