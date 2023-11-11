@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
   width: inherit;
@@ -8,7 +8,7 @@ export const MenuContainer = styled.div`
   bottom: 0;
   display: flex;
   justify-content: space-between;
-`
+`;
 
 export const MenuBox = styled.div`
   width: 6.8rem;
@@ -16,4 +16,4 @@ export const MenuBox = styled.div`
   cursor: pointer;
   border: 1px solid blue;
   text-align: center;
-`
+`;

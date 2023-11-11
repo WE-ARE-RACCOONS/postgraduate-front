@@ -1,6 +1,7 @@
 @media (min-width: 360px) and (max-width: 600px) {
   /*375이상 600으로 넘어가는 화면*/
-  html, body {
+  html,
+  body {
     width: 360px;
     height: 100%;
     font-size: 1rem;
@@ -8,7 +9,8 @@
 }
 @media (min-width: 600px) {
   /*600이상으로 넘어가는 화면*/
-  html, body {
+  html,
+  body {
     font-size: 1rem;
     width: 600px;
     height: 100%;
