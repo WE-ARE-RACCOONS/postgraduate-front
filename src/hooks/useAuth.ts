@@ -42,10 +42,14 @@ function useAuth() {
         }
         if (!getRefreshToken()) {
           // refresh token 없을 때
-          return 'required';
+          return '';
         }
       }
+
+      if(!isExpired(accessExp)) return accessTkn;
     }
+
+    return '';
   }
 
   /** refresh token 반환 */
