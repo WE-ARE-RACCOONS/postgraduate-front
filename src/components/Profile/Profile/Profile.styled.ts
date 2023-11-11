@@ -6,7 +6,7 @@ export const ProfileBox = styled.div`
   height: 5rem;
   justify-content: space-between;
 `;
-export const ProfileImg = styled.div`
+export const ProfileImg = styled.img`
   border: 1px solid blue;
   width: 5rem;
 `;

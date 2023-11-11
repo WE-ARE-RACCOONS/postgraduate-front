@@ -12,7 +12,6 @@ function KakaoPage() {
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    console.log(code)
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`, {
         code: code,

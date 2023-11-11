@@ -16,7 +16,7 @@ import {
 function Profile({profile , nickNamese}:{profile:string , nickNamese:string}) {
   return (
     <ProfileBox>
-      <ProfileImg>{profile}</ProfileImg>
+      <ProfileImg src={profile} alt="이미지" ></ProfileImg>
       <ProfileInfo>
         <ProfileName>
           <ProfileNickname>{nickNamese}</ProfileNickname>
