@@ -1,6 +1,6 @@
 'use client';
 import { useAtom } from 'jotai';
-import { nickname, notDuplicate } from '@/stores/nickname';
+import { nickname, notDuplicate } from '@/stores/signup';
 import { useState } from 'react';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';

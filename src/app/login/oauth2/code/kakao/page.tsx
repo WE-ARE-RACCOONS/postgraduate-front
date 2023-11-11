@@ -21,7 +21,7 @@ function KakaoPage() {
         const response = res.data;
 
         if (response.code == 'AU205') {
-          router.replace(`/signup/${response.socialId}`);
+          router.replace(`/signup/${response.data.socialId}`);
           return;
         }
 
