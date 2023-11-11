@@ -1,5 +1,5 @@
 'use client';
-import Checkbox from '@/components/Checkbox/Checkbox';
+import CheckBox from '../CheckBox/CheckBox';
 import React, { useState, useEffect } from 'react';
 import { TermsContainer, TermsShow, TermsBox } from './ServiceCondition.styled';
 import { useAtom } from 'jotai';
@@ -26,15 +26,15 @@ function ServiceCondition() {
 
   return (
     <TermsBox>
-      <Checkbox checked={allAgreed} onChange={handleAllAgreedChange} />
+      <CheckBox checked={allAgreed} onChange={handleAllAgreedChange} />
       전체동의
       <TermsContainer>
-        <Checkbox checked={service} onChange={setService} />
+        <CheckBox checked={service} onChange={setService} />
         (필수)이용약관과 개인정보 취급 방침에 동의합니다.
         <TermsShow>보기</TermsShow>
       </TermsContainer>
       <TermsContainer>
-        <Checkbox checked={marketing} onChange={setMarketing} />
+        <CheckBox checked={marketing} onChange={setMarketing} />
         (선택)마케팅 동의.
         <TermsShow>보기</TermsShow>
       </TermsContainer>
