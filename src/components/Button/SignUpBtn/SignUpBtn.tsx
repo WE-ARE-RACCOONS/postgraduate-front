@@ -1,6 +1,6 @@
 'use client';
 import useAuth from '@/hooks/useAuth';
-import { nickname } from '@/stores/nickname';
+import { nickname } from '@/stores/signup';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';

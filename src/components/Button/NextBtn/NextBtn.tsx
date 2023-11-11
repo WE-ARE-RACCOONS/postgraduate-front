@@ -1,6 +1,6 @@
 'use client';
 import { allchecked } from '@/stores/condition';
-import { nickname, notDuplicate } from '@/stores/nickname';
+import { nickname, notDuplicate } from '@/stores/signup';
 import { NextBtnProps } from '@/types/button/nextBtn';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
