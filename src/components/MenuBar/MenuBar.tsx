@@ -1,6 +1,8 @@
+import { MenuContainer } from "./MenuBar.styled";
+
 function MenuBar() {
   return(
-    <div>Menu</div>
+    <MenuContainer></MenuContainer>
   )
 }
 
