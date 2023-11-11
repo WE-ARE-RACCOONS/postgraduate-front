@@ -1,4 +1,5 @@
 'use client';
+import MenuBar from '@/components/MenuBar';
 import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
 import { useRouter } from 'next/navigation';
@@ -14,7 +15,7 @@ export default function Home() {
     <SeverAccessProvider>
       기본 루트 페이지 입니다
       <Login />
-      <button onClick={handleButtonClick}>마이페이지</button>
+      <MenuBar />
     </SeverAccessProvider>
   );
 }
