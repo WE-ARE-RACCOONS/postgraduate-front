@@ -1,11 +1,9 @@
-'use Client';
+'use client';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
-import Point from '../Point/Point';
+import Image from 'next/image';
 
 import {
   ProfileBox,
-  ProfileImg,
   ProfileInfo,
   ProfileName,
   ProfileNickname,
@@ -15,17 +13,21 @@ import {
 
 function Profile({
   profile,
-  nickNamese,
+  nickName,
 }: {
   profile: string;
-  nickNamese: string;
+  nickName: string;
 }) {
   return (
     <ProfileBox>
-      <ProfileImg src={profile} alt="이미지"></ProfileImg>
+      <Image 
+        src={profile} 
+        alt="image" 
+        width={32}height={32}
+        />
       <ProfileInfo>
         <ProfileName>
-          <ProfileNickname>{nickNamese}</ProfileNickname>
+          <ProfileNickname>{nickName}</ProfileNickname>
           <ProfileButton>등급버튼</ProfileButton>
         </ProfileName>
         <ProfileWarn>경고문</ProfileWarn>
