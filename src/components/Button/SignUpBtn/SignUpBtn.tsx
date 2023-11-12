@@ -41,7 +41,9 @@ function SignUpBtn() {
     }
   };
 
-  return <SignUpBtnContainer onClick={handleSignUp}>가입하기</SignUpBtnContainer>;
+  return (
+    <SignUpBtnContainer onClick={handleSignUp}>가입하기</SignUpBtnContainer>
+  );
 }
 
 export default SignUpBtn;

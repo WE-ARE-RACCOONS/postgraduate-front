@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MatchingFormContainer = styled.div`
   width: 20.5rem;
@@ -6,7 +6,7 @@ export const MatchingFormContainer = styled.div`
   #matching-info-form {
     width: 20.5rem;
   }
-`
+`;
 
 export const MatchingFormHeader = styled.div`
   width: 20.5rem;
@@ -16,7 +16,7 @@ export const MatchingFormHeader = styled.div`
   #matching-form-char-count {
     font-size: 0.94rem;
   }
-`
+`;
 
 export const MatchingFormTitle = styled.div`
   width: max-content;
@@ -26,4 +26,4 @@ export const MatchingFormTitle = styled.div`
   #matching-form-title {
     font-weight: 600;
   }
-`
+`;
