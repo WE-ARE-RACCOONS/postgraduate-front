@@ -28,11 +28,14 @@ function page() {
         });
     } else {
     }
-  },[]);
+  }, []);
 
   return (
     <div>
-      <Profile profile={profile ? profile : '/user.png'} nickName ={nickName ? nickName : ''} />
+      <Profile
+        profile={profile ? profile : '/user.png'}
+        nickName={nickName ? nickName : ''}
+      />
       <Point />
       <ProfileManage />
       <ProfileStateChange />
