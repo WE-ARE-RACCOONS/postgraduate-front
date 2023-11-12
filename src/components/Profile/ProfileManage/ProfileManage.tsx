@@ -6,10 +6,9 @@ import TitleComponent from '../Box/TitleBox/TitleBox';
 function ProfileManage() {
   return (
     <ProfileManageBox>
-      <TitleComponent title="프로필 관리" />
-      <ContentComponent content="내프로필 보기" />
-      <ContentComponent content="내프로필 수정" />
-      <ContentComponent content="대학원생 인증하기" />
+      <TitleComponent title="멘토링" />
+      <ContentComponent content="내 멘토링" />
+      <ContentComponent content="선배멘토로 변경" />
     </ProfileManageBox>
   );
 }
