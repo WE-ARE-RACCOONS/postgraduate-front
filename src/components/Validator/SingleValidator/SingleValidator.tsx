@@ -1,4 +1,4 @@
-import { SingleValidatorProps } from '@/types/Validator/singleValidator';
+import { SingleValidatorProps } from '@/types/validator/singleValidator';
 import { SingleValidatorContainer } from './SingleValidator.styled';
 
 function SingleValidator(props: SingleValidatorProps) {

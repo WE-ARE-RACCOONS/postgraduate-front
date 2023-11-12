@@ -1,7 +1,9 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+
 import {
   ProfileBox,
-  ProfileImg,
   ProfileInfo,
   ProfileName,
   ProfileNickname,
@@ -9,13 +11,13 @@ import {
   ProfileWarn,
 } from './Profile.styled';
 
-function Profile() {
+function Profile({ profile, nickName }: { profile: string; nickName: string }) {
   return (
     <ProfileBox>
-      <ProfileImg>이미지</ProfileImg>
+      <Image src={'/user.png'} alt="profile image" width={32} height={32} />
       <ProfileInfo>
         <ProfileName>
-          <ProfileNickname>닉네임</ProfileNickname>
+          <ProfileNickname>{nickName}</ProfileNickname>
           <ProfileButton>등급버튼</ProfileButton>
         </ProfileName>
         <ProfileWarn>경고문</ProfileWarn>
