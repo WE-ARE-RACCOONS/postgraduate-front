@@ -14,12 +14,7 @@ import {
 function Profile({ profile, nickName }: { profile: string; nickName: string }) {
   return (
     <ProfileBox>
-      <Image
-        src={profile ? profile : '/user.png'}
-        alt="profile image"
-        width={32}
-        height={32}
-      />
+      <Image src={'/user.png'} alt="profile image" width={32} height={32} />
       <ProfileInfo>
         <ProfileName>
           <ProfileNickname>{nickName}</ProfileNickname>
