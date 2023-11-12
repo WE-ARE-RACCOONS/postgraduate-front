@@ -1,14 +1,15 @@
 'use client';
 import SignUpBtn from '@/components/Button/SignUpBtn';
 import MatchingForm from '@/components/SingleForm/MatchingForm';
-import { desiredField, desiredFieldLen, desiredSchool, desiredSchoolLen } from '@/stores/matching';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { desiredField, desiredFieldLen, desiredSchool, desiredSchoolLen, matchingReceiveAtom } from '@/stores/matching';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 function MatchingInfoPage() {
   const setDesiredSchool = useSetAtom(desiredSchool);
   const setDesiredField = useSetAtom(desiredField);
   const schoolCharCount = useAtomValue(desiredSchoolLen);
   const fieldCharCount = useAtomValue(desiredFieldLen);
+  const [matchingReceive, setMatchingReceive] = useAtom(matchingReceiveAtom);
 
   return (
     <div>
@@ -28,7 +29,7 @@ function MatchingInfoPage() {
         placeholder={`예시)\n나노 소재 / 디스플레이 / 반도체소자`}
         handler={setDesiredField}
         charCount={fieldCharCount} />
-      <input type="checkbox" name="agreement" id="msg-agreement" />
+      <input type="checkbox" name="agreement" id="msg-agreement" onChange={() => {setMatchingReceive(!matchingReceive)}} />
       <label htmlFor="msg-agreement">(선택) 나에게 맞는 대학원 선배를 문자로 받아볼래요</label>
       <SignUpBtn />
     </div>
