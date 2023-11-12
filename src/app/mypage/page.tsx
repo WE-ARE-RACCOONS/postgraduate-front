@@ -33,7 +33,7 @@ function page() {
   return (
     <div>
       <Profile
-        profile={profile ? profile : '/user.png'}
+        profile={profile ? profile : ''}
         nickName={nickName ? nickName : ''}
       />
       <Point />
