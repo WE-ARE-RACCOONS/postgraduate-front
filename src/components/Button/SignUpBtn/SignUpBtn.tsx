@@ -4,6 +4,7 @@ import { nickname } from '@/stores/signup';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
+import { SignUpBtnContainer } from './SignUpBtn.styled';
 
 function SignUpBtn() {
   const currentPath = usePathname();
@@ -40,7 +41,9 @@ function SignUpBtn() {
     }
   };
 
-  return <button onClick={handleSignUp}>가입하기</button>;
+  return (
+    <SignUpBtnContainer onClick={handleSignUp}>가입하기</SignUpBtnContainer>
+  );
 }
 
 export default SignUpBtn;
