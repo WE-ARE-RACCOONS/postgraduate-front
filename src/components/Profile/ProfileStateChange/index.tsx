@@ -1,3 +1,3 @@
-import ProfileStateChange from './ProfileStateChange';
+import CustomerCenter from './CustomerCenter';
 
-export default ProfileStateChange;
+export default CustomerCenter;
