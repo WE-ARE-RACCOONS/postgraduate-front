@@ -18,9 +18,8 @@ function Profile({ profile, nickName }: { profile: string; nickName: string }) {
       <ProfileInfo>
         <ProfileName>
           <ProfileNickname>{nickName}</ProfileNickname>
-          <ProfileButton>등급버튼</ProfileButton>
+          <ProfileButton>후배회원</ProfileButton>
         </ProfileName>
-        <ProfileWarn>경고문</ProfileWarn>
       </ProfileInfo>
     </ProfileBox>
   );

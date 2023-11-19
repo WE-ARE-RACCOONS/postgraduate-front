@@ -1,8 +1,7 @@
 'use client';
-import Point from '@/components/Profile/Point/Point';
 import Profile from '@/components/Profile';
 import ProfileManage from '@/components/Profile/ProfileManage';
-import ProfileStateChange from '@/components/Profile/ProfileStateChange/ProfileStateChange';
+import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCenter';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
@@ -36,9 +35,8 @@ function page() {
         profile={profile ? profile : ''}
         nickName={nickName ? nickName : ''}
       />
-      <Point />
       <ProfileManage />
-      <ProfileStateChange />
+      <CustomerCenter />
     </div>
   );
 }
