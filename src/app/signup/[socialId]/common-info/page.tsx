@@ -11,7 +11,7 @@ function CommonInfoPage() {
       <ServiceCondition />
       <NextBtn kind="next" url="/matching-info" />
     </div>
-  )
+  );
 }
 
 export default CommonInfoPage;

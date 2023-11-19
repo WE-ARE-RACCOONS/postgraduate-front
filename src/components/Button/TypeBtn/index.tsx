@@ -1,3 +1,3 @@
-import TypeBtn from "./TypeBtn";
+import TypeBtn from './TypeBtn';
 
 export default TypeBtn;
