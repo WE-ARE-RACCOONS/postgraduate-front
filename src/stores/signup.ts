@@ -1,4 +1,7 @@
+import { userType } from '@/types/user/user';
 import { atom } from 'jotai';
+
+export const userTypeAtom = atom<userType>('junior');
 
 export const nickname = atom<string>('');
 export const notDuplicate = atom<boolean>(true);
