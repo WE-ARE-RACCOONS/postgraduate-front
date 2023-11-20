@@ -1,4 +1,4 @@
-function PhotoForm({
+function Photo({
   handler,
 }: {
   handler: React.Dispatch<React.SetStateAction<string>>;
@@ -18,4 +18,4 @@ function PhotoForm({
   );
 }
 
-export default PhotoForm;
+export default Photo;

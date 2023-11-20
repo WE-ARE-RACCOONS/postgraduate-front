@@ -1,5 +1,5 @@
 'use client';
-import PhotoForm from '@/components/SingleForm/PhotoForm';
+import Photo from '@/components/Photo';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { preSignedUrlAtom } from '@/stores/senior';
 import axios from 'axios';
@@ -53,7 +53,7 @@ function AuthPage() {
         <br />
         e.g. 대학원 학생증, 대학원 합격증, 연구실멤버 확인 캡쳐본
       </div>
-      <PhotoForm handler={setPhotoUrl} />
+      <Photo handler={setPhotoUrl} />
       <div>첨부한 사진은 대학원 선배 회원 승인 후에 폐기됩니다.</div>
       {uploadFlag && (
         <SingleValidator
