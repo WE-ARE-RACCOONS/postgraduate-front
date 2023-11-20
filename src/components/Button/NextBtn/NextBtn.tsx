@@ -21,7 +21,7 @@ function NextBtn(props: NextBtnProps) {
       return;
     }
 
-    if(props.kind == 'route') {
+    if (props.kind == 'route') {
       router.push(props.url);
       return;
     }

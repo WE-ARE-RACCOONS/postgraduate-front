@@ -6,7 +6,11 @@ import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
 import { SignUpBtnContainer } from './SignUpBtn.styled';
 import { option } from '@/stores/condition';
-import { desiredField, desiredSchool, matchingReceiveAtom } from '@/stores/matching';
+import {
+  desiredField,
+  desiredSchool,
+  matchingReceiveAtom,
+} from '@/stores/matching';
 
 function SignUpBtn() {
   const currentPath = usePathname();
@@ -31,7 +35,7 @@ function SignUpBtn() {
           marketingReceive,
           major,
           field,
-          matchingReceive
+          matchingReceive,
         })
         .then((res) => {
           const response = res.data;

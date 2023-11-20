@@ -13,7 +13,7 @@ export default function Home() {
 
   useEffect(() => {
     setPrevPath(currentPath);
-  }, [])
+  }, []);
 
   return (
     <SeverAccessProvider>

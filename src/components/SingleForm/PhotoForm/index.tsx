@@ -1,3 +1,3 @@
-import PhotoForm from "./PhotoForm";
+import PhotoForm from './PhotoForm';
 
 export default PhotoForm;
