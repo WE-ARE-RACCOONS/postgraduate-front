@@ -42,10 +42,14 @@ function useAuth() {
         }
         if (!getRefreshToken()) {
           // refresh token 없을 때
-          return 'required';
+          return '';
         }
       }
+
+      if (!isExpired(accessExp)) return accessTkn;
     }
+
+    return '';
   }
 
   /** refresh token 반환 */
@@ -66,7 +70,7 @@ function useAuth() {
   /** 토큰 재발급 하는 함수 */
   function reissueToken() {
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/refresh`, null, {
+      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
         headers: {
           Authorization: `Bearer ${getRefreshToken()}`,
         },
