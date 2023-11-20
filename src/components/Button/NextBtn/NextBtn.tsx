@@ -18,10 +18,16 @@ function NextBtn(props: NextBtnProps) {
       if (userNick && notDupli && checked && numValidation) {
         router.push(currentPath + props.url);
       }
+      return;
+    }
+
+    if(props.kind == 'route') {
+      router.push(props.url);
+      return;
     }
   };
 
-  return <button onClick={handleClick}>다음으로</button>;
+  return <button onClick={handleClick}>{props.btnText}</button>;
 }
 
 export default NextBtn;

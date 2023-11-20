@@ -14,7 +14,7 @@ function CommonInfoPage() {
       <NicknameForm />
       <PhoneNumForm />
       <ServiceCondition />
-      <NextBtn kind="next" url={userType == 'junior' ? "/matching-info" : "/auth"} />
+      <NextBtn kind="next" url={userType == 'junior' ? "/matching-info" : "/auth"} btnText='다음으로' />
     </div>
   );
 }
