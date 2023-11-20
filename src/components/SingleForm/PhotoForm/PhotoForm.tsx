@@ -1,6 +1,11 @@
-function PhotoForm() {
+function PhotoForm({ handler }: { handler: React.Dispatch<React.SetStateAction<string>> }) {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    handler(e.currentTarget.files ? e.currentTarget.files[0].name : '');
+  }
+  
+
   return(
-    <div>Photo Form</div>
+    <input type="file" accept="image/*" onChange={(e) => {handleChange(e)}} />
   )
 }
 
