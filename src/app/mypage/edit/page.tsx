@@ -1,6 +1,5 @@
 'use client';
 import styled from 'styled-components';
-import ProfileEditPhoto from '@/components/Photo';
 import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import React, { useState } from 'react';
@@ -8,15 +7,16 @@ import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { nickname } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
+import Photo from '@/components/Photo';
 
 function page() {
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   const nickName = useAtomValue(nickname);
   const phoneNumber = useAtomValue(phoneNum);
+  const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
+
   const handleClick = () => {
     if (photoUrl || nickname || phoneNum) {
-      // Perform axios post
-      // Example: You need to replace the URL and data with your actual endpoint and payload
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/junior/me/profile`, {
           photoUrl,
@@ -34,8 +34,8 @@ function page() {
 
   return (
     <div>
-      <ProfileEditPhoto handler={setPhotoUrl} />
-      {photoUrl && <SelectedImage src={photoUrl} alt="Selected" />}
+      <Photo handler={setPhotoUrl} />
+      {photoUrl && <SelectedImage src={selectpPhotoUrl} alt="Selected" />} 
       <NicknameForm />
       <PhoneNumForm />
       <button onClick={handleClick}>수정하기</button>
