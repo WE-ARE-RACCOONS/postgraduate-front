@@ -9,7 +9,7 @@ import { useState } from 'react';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState('');
+  const [photo, setPhoto] = useState<File | null>(null);
   const setPresignedUrl = useSetAtom(preSignedUrlAtom);
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -17,11 +17,11 @@ function AuthPage() {
   const router = useRouter();
 
   const handleClick = () => {
-    if (photoUrl) {
+    if (photo) {
       setUploadFlag(false);
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/image/url/certification`, {
-          fileName: `${socialId}` + `${photoUrl}`,
+          fileName: `${socialId}` + `${photo.name}`,
         })
         .then((response) => {
           const res = response.data;
@@ -37,7 +37,7 @@ function AuthPage() {
       return;
     }
 
-    if (!photoUrl) {
+    if (!photo) {
       setUploadFlag(true);
       return;
     }
@@ -53,7 +53,7 @@ function AuthPage() {
         <br />
         e.g. 대학원 학생증, 대학원 합격증, 연구실멤버 확인 캡쳐본
       </div>
-      <Photo handler={setPhotoUrl} />
+      <Photo handler={setPhoto} />
       <div>첨부한 사진은 대학원 선배 회원 승인 후에 폐기됩니다.</div>
       {uploadFlag && (
         <SingleValidator
