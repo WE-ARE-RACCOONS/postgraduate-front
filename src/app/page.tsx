@@ -2,13 +2,18 @@
 import MenuBar from '@/components/MenuBar';
 import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
-import { useRouter } from 'next/navigation';
-export default function Home() {
-  const router = useRouter();
+import { prevPathAtom } from '@/stores/signup';
+import { useSetAtom } from 'jotai';
+import { usePathname } from 'next/navigation';
+import { useEffect } from 'react';
 
-  const handleButtonClick = () => {
-    router.push('/mypage');
-  };
+export default function Home() {
+  const setPrevPath = useSetAtom(prevPathAtom);
+  const currentPath = usePathname();
+
+  useEffect(() => {
+    setPrevPath(currentPath);
+  }, []);
 
   return (
     <SeverAccessProvider>

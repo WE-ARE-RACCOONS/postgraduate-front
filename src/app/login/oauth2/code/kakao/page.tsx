@@ -13,7 +13,7 @@ function KakaoPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/login`, {
+      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
         code: code,
       })
       .then((res) => {
