@@ -4,9 +4,9 @@ interface ProfileEdiitPhotoProps {
   handler: React.Dispatch<React.SetStateAction<string>>;
 }
 
-const ProfileEditPhoto : React.FC<ProfileEdiitPhotoProps>= ({ handler }) => {
+const ProfileEditPhoto: React.FC<ProfileEdiitPhotoProps> = ({ handler }) => {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = (e.currentTarget.files ? e.currentTarget.files[0]: '');
+    const file = e.currentTarget.files ? e.currentTarget.files[0] : '';
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       handler(imageUrl);
@@ -22,6 +22,6 @@ const ProfileEditPhoto : React.FC<ProfileEdiitPhotoProps>= ({ handler }) => {
       }}
     />
   );
-}
+};
 
 export default ProfileEditPhoto;
