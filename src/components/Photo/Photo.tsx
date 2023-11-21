@@ -4,7 +4,12 @@ function Photo({
   handler: React.Dispatch<React.SetStateAction<string>>;
 }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handler(e.currentTarget.files ? e.currentTarget.files[0].name : '');
+    const file = e.currentTarget.files ? e.currentTarget.files[0] : null;
+
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      handler(imageUrl);
+    }
   };
 
   return (
