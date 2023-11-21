@@ -1,3 +1,3 @@
-import ProfileEdiitPhoto from './Photo';
+import ProfileEdiitPhoto from './ProfileEditPhoto';
 
 export default ProfileEdiitPhoto;
