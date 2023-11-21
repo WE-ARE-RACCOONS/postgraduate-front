@@ -35,7 +35,7 @@ function page() {
   return (
     <div>
       <Photo handler={setPhotoUrl} />
-      {photoUrl && <SelectedImage src={selectpPhotoUrl} alt="Selected" />} 
+      {photoUrl && <SelectedImage src={selectpPhotoUrl} alt="Selected" />}
       <NicknameForm />
       <PhoneNumForm />
       <button onClick={handleClick}>수정하기</button>
