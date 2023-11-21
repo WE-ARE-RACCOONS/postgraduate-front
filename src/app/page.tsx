@@ -3,11 +3,13 @@ import MenuBar from '@/components/MenuBar';
 import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
 import { useEffect } from 'react';
-import { savePrevPath } from '@/utils/prevPath';
+import usePrevPath from '@/hooks/usePrevPath';
 
 export default function Home() {
+  const { setCurrentPath } = usePrevPath();
+
   useEffect(() => {
-    savePrevPath();
+    setCurrentPath();
   }, []);
 
   return (
