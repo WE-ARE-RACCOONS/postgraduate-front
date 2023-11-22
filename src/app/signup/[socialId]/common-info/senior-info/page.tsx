@@ -1,5 +1,6 @@
 'use client';
 import ModalBtn from "@/components/Button/ModalBtn";
+import RiseUpModal from "@/components/Modal/RiseUpModal";
 import styled from "styled-components";
 
 function SeniorInfoPage() {
@@ -15,6 +16,7 @@ function SeniorInfoPage() {
         <ModalBtn btnText="연구분야*" />
         <ModalBtn btnText="연구 주제 키워드*" />
       </BtnContainer>
+      <RiseUpModal />
     </div>
   )
 }
