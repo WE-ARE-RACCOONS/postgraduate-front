@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { uploadToS3 } from '@/utils/uploadToS3';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
@@ -23,11 +24,20 @@ function AuthPage() {
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/image/url/certification`, {
           fileName: `${socialId}` + `${photo.name}`,
         })
-        .then((response) => {
+        .then(async (response) => {
           const res = response.data;
 
           if (res.code == 'IMG202') {
             setPresignedUrl(res.data.preSignedUrl);
+            // axios.put(res.data.preSignedUrl, photo, {
+            //   headers: {
+            //     "Content-Type": photo.type
+            //   }
+            // }).then((res) => {
+            //   console.log(res);
+            // }).catch((err) => {
+            //   console.error(err);
+            // })
             router.push(`/signup/${socialId}/common-info/senior-info`);
           }
         })
