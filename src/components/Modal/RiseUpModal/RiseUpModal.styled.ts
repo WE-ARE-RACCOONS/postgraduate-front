@@ -4,24 +4,22 @@ export const ModalBackground = styled.div`
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  width: inherit;
-  height: 100%;
+  width: 600px; // 반응형 처리 따로 필요
+  height: 100vh;
+  z-index: 2;
+
+  @media (min-width: 360px) and (max-width: 600px) {
+    width: 360px;
+  }
 
   @keyframes modalAppear {
     from {
-      transform: translateY(50%);
+      top: 45rem;
+      opacity: 0;
     }
     to {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes modalDisappear {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(100%);
+      top: 13.25rem;
+      opacity: 1;
     }
   }
 
@@ -31,33 +29,9 @@ export const ModalBackground = styled.div`
     position: absolute;
     top: 13.25rem;
     animation: modalAppear 0.5s ease-out;
-    background-color: yellowgreen;
+    border-radius: 1.9rem 1.9rem 0 0;
+    border: 1px solid #000;
+    z-index: 1;
+    background-color: #fff;
   }
-`
-
-export const ModalContainer = styled.div`
-  @keyframes modalAppear {
-    from {
-      transform: translateY(50%);
-    }
-    to {
-      transform: translateY(0);
-    }
-  }
-
-  @keyframes modalDisappear {
-    from {
-      transform: translateY(0);
-    }
-    to {
-      transform: translateY(100%);
-    }
-  }
-
-  width: 22.5rem;
-  height: 31.75rem;
-  position: fixed;
-  top: 13.25rem;
-  animation: modalAppear 0.5s ease-out;
-  background-color: yellowgreen;
 `

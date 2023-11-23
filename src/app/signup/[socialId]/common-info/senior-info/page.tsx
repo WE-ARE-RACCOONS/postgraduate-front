@@ -21,7 +21,7 @@ function SeniorInfoPage() {
         <ModalBtn btnText="연구 주제 키워드*" modalHandler={modalHandler} />
       </BtnContainer>
       {modal && portalElement
-        ? createPortal(<RiseUpModal />, portalElement)
+        ? createPortal(<RiseUpModal modalHandler={modalHandler} />, portalElement)
         : null}
     </SeniorInfoPageContainer>
   )

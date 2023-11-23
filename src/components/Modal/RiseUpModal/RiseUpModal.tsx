@@ -1,9 +1,10 @@
-import { ModalBackground, ModalContainer } from "./RiseUpModal.styled";
+import { ModalBackground } from "./RiseUpModal.styled";
 
-function RiseUpModal() {
+function RiseUpModal({ modalHandler } : { modalHandler: () => void }) {
+
   return(
-    <ModalBackground>
-      <div className="rise-up-modal">Modal</div>
+    <ModalBackground onClick={modalHandler}>
+      <div className='rise-up-modal'>Modal</div>
     </ModalBackground>
   )
 }
