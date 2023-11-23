@@ -9,8 +9,9 @@ import {
   UserInfo,
   ConfirmShow,
 } from './MentoringApply.styled';
+import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 
-function MentoringApply() {
+function MentoringApply({data} : MentoringApplyProps) {
   return (
     <div>
       <ConfirmBox>
