@@ -3,7 +3,7 @@ import { StyledModalBtn } from "./ModalBtn.styled";
 
 function ModalBtn(props: ModalBtnProps) {
   return(
-    <StyledModalBtn>{props.btnText}</StyledModalBtn>
+    <StyledModalBtn onClick={props.modalHandler} >{props.btnText}</StyledModalBtn>
   )
 }
 
