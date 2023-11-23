@@ -1,10 +1,10 @@
 'use client';
-import MenuBar from '@/components/MenuBar';
+import MenuBar from '@/components/Bar/MenuBar';
 import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
 import { prevPathAtom } from '@/stores/signup';
 import { useSetAtom } from 'jotai';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
 export default function Home() {
