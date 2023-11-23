@@ -7,7 +7,8 @@ function MenuBar() {
   const router = useRouter();
   const userType = useAtomValue(userTypeAtom);
 
-  const mentoringPath = userType === 'junior' ? '/junior/mentoring' : '/senior/mentoring';
+  const mentoringPath =
+    userType === 'junior' ? '/junior/mentoring' : '/senior/mentoring';
 
   return (
     <MenuContainer>
@@ -18,11 +19,7 @@ function MenuBar() {
       >
         홈
       </MenuBox>
-      <MenuBox
-        onClick={() => router.push(mentoringPath)}
-      >
-        내 멘토링
-      </MenuBox>
+      <MenuBox onClick={() => router.push(mentoringPath)}>내 멘토링</MenuBox>
       <MenuBox
         onClick={() => {
           router.push('/mypage');

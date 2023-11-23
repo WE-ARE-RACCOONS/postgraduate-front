@@ -27,9 +27,7 @@ export const ConfirmInfo = styled.div`
 `;
 export const ConfirmState = styled.div`
   border: 1px solid black;
-
 `;
 export const ConfirmShow = styled.div`
   border: 1px solid black;
-
 `;
