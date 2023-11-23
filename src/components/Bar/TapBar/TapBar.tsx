@@ -1,10 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import { TapStyle } from './TapBar.styled';
-import Application from '../../MentoringApply/Application';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
+import MentoringApply from '@/components/MentoringApply/MentoringApply';
 
 function TapBar() {
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -16,7 +16,7 @@ function TapBar() {
   const renderTabContent = () => {
     switch (activeTab) {
       case 'waiting':
-        return <Application />;
+        return <MentoringApply />;
       case 'expected':
         return <div>진행 예정 컴포넌트</div>;
       case 'done':
