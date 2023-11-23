@@ -11,6 +11,8 @@ import{
 } from './Application.styled';
 
 function Application() {
+  
+
   return (
     <div>
       <ConfirmBox>

@@ -2,11 +2,14 @@
 import React, { useState } from 'react';
 import {TapStyle} from './TapBar.styled';
 import Application from '../Application/Application';
+import { useAtom } from 'jotai';
+import { activeTabAtom } from '@/stores/condition';
+import { tapType } from '@/types/tap/tap';
 
 function TapBar() {
-    const [activeTab, setActiveTab] = useState(0);
+    const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
-    const handleTabClick = (tabIndex: number) => {
+    const handleTabClick = (tabIndex: tapType) => {
         setActiveTab(tabIndex);
       };
 
