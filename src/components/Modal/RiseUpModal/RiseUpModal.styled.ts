@@ -26,7 +26,7 @@ export const ModalBackground = styled.div`
   }
 
   .rise-up-modal {
-    width: 22.5rem;
+    width: inherit;
     height: 31.75rem;
     position: absolute;
     top: 13.25rem;

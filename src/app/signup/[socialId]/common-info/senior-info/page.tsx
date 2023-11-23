@@ -5,7 +5,7 @@ import styled from "styled-components";
 
 function SeniorInfoPage() {
   return (
-    <div>
+    <SeniorInfoPageContainer>
       <h3>선배 정보를 입력해주세요</h3>
       <div>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
       <BtnContainer>
@@ -17,11 +17,16 @@ function SeniorInfoPage() {
         <ModalBtn btnText="연구 주제 키워드*" />
       </BtnContainer>
       <RiseUpModal />
-    </div>
+    </SeniorInfoPageContainer>
   )
 }
 
 export default SeniorInfoPage;
+
+const SeniorInfoPageContainer = styled.div`
+  width: inherit;
+  height: 100%;
+`
 
 const BtnContainer = styled.div`
   display: flex;
