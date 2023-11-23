@@ -1,1 +1,1 @@
-export type tapType = 0 | 1 | 2;
+export type tapType = 'waiting' | 'expected' | 'done';

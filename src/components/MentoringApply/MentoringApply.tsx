@@ -8,9 +8,9 @@ import {
   ConfirmTitle,
   UserInfo,
   ConfirmShow,
-} from './Application.styled';
+} from './MentoringApply.styled';
 
-function Application() {
+function MentoringApply() {
   return (
     <div>
       <ConfirmBox>
@@ -28,4 +28,4 @@ function Application() {
   );
 }
 
-export default Application;
+export default MentoringApply;

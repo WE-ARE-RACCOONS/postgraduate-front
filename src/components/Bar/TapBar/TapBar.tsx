@@ -1,9 +1,9 @@
 'use client';
 import React, { useState } from 'react';
 import { TapStyle } from './TapBar.styled';
-import Application from '../Application/Application';
+import Application from '../../MentoringApply/Application';
 import { useAtom } from 'jotai';
-import { activeTabAtom } from '@/stores/condition';
+import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 
 function TapBar() {
@@ -15,11 +15,11 @@ function TapBar() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 0:
+      case 'waiting':
         return <Application />;
-      case 1:
+      case 'expected':
         return <div>진행 예정 컴포넌트</div>;
-      case 2:
+      case 'done':
         return <div>완료 컴포넌트</div>;
       default:
         return null;
@@ -28,9 +28,11 @@ function TapBar() {
   return (
     <div>
       <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick(0)}>확정 대기</TapStyle>
-        <TapStyle onClick={() => handleTabClick(1)}>진행 예정</TapStyle>
-        <TapStyle onClick={() => handleTabClick(2)}>완료</TapStyle>
+        <TapStyle onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
+        <TapStyle onClick={() => handleTabClick('expected')}>
+          진행 예정
+        </TapStyle>
+        <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
       </div>
       <div>{renderTabContent()}</div>
     </div>
