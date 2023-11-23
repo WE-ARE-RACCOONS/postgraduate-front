@@ -1,6 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import {TapStyle} from './TapBar.styled';
+import AwaitingConfirm from '../MyMentoring/AwaitingConfirm/AwaitingConfirm';
 
 function TapBar() {
     const [activeTab, setActiveTab] = useState(0);
@@ -12,7 +13,7 @@ function TapBar() {
       const renderTabContent = () => {
         switch (activeTab) {
           case 0:
-            return <div>확정 대기 컴포넌트</div>;
+            return <AwaitingConfirm/>;
           case 1:
             return <div>진행 예정 컴포넌트</div>;
           case 2:
