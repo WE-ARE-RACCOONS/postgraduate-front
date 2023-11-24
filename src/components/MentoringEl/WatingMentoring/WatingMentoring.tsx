@@ -33,9 +33,6 @@ function WatingMentoring() {
 
   return (
     <div>
-      {/* {data && data.map(data,index) => (
-      <MentoringApply key={index} data={data}/>
-    )} */}
       {data && data.map((el, idx) => <MentoringApply key={idx} data={el} />)}
     </div>
   );
