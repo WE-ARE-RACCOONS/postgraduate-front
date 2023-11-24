@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import WatingMentoring from '@/components/MentoringEl/WatingMentoring/WatingMentoring';
-
+import { TAB } from '@/constant/tab/ctap';
 function TapBar() {
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
@@ -15,11 +15,11 @@ function TapBar() {
 
   const renderTabContent = () => {
     switch (activeTab) {
-      case 'WAITING':
+      case TAB.wating:
         return <WatingMentoring />;
-      case 'EXPECTED':
+      case TAB.expected:
         return <div>진행 예정 컴포넌트</div>;
-      case 'DONE':
+      case TAB.done:
         return <div>완료 컴포넌트</div>;
       default:
         return null;
