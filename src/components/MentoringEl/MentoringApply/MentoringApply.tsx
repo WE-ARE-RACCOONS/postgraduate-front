@@ -11,17 +11,21 @@ import {
 } from './MentoringApply.styled';
 import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 
-function MentoringApply({data} : MentoringApplyProps) {
+function MentoringApply({ data }: MentoringApplyProps) {
   return (
     <div>
       <ConfirmBox>
         <ConfirmContent>
-          <ConfirmProfile></ConfirmProfile>
+          <ConfirmProfile
+            src={data?.profile ? data.profile : '/user.png'}
+          ></ConfirmProfile>
           <ConfirmInfo>
-            <ConfirmTitle>000선배와 멘토링</ConfirmTitle>
-            <UserInfo>대학원 | 학과</UserInfo>
+            <ConfirmTitle>{data?.nickName}선배와 멘토링</ConfirmTitle>
+            <UserInfo>
+              {data?.postgradu} | {data?.major}{' '}
+            </UserInfo>
           </ConfirmInfo>
-          <ConfirmState>40분</ConfirmState>
+          <ConfirmState>{data?.term} 분</ConfirmState>
         </ConfirmContent>
         <ConfirmShow>신청서 보기</ConfirmShow>
       </ConfirmBox>

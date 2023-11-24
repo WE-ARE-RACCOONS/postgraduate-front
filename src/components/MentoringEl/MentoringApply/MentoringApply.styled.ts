@@ -11,7 +11,7 @@ export const ConfirmContent = styled.div`
   height: 7.6rem;
   display: flex;
 `;
-export const ConfirmProfile = styled.div`
+export const ConfirmProfile = styled.img`
   border: 1px solid black;
   width: 4.8rem;
   height: 4.8rem;
