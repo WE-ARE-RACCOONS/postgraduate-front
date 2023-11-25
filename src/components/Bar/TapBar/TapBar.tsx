@@ -29,7 +29,7 @@ function TapBar() {
         headers,
       })
       .then((response) => {
-        setData(response.data.data.MentoringInfos);
+        setData(response.data.data.mentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -37,38 +37,16 @@ function TapBar() {
   }, [activeTab]);
 
   const renderTabContent = () => {
-    switch (activeTab) {
-      case TAB.waiting:
-        return (
-          <div>
-            {data &&
-              data.map((el, idx) => {
-                return <MentoringApply key={idx} data={el} />;
-              })}
-          </div>
-        );
-      case TAB.expected:
-        return (
-          <div>
-            {data &&
-              data.map((el, idx) => {
-                return <MentoringApply key={idx} data={el} />;
-              })}
-          </div>
-        );
-      case TAB.done:
-        return (
-          <div>
-            {data &&
-              data.map((el, idx) => {
-                return <MentoringApply key={idx} data={el} />;
-              })}
-          </div>
-        );
-      default:
-        return null;
-    }
+    return (
+      <div>
+        {data &&
+          data.map((el, idx) => {
+            return <MentoringApply key={idx} data={el} />;
+          })}
+      </div>
+    );
   };
+  
   return (
     <div>
       <div style={{ display: 'flex' }}>
