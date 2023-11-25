@@ -10,7 +10,7 @@ export interface MentoringData {
   dates: string[];
   term: number;
   chatLink: string;
-  date:string;
+  date: string;
 }
 
 export interface MentoringApplyProps {

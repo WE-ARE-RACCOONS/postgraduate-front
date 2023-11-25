@@ -6,8 +6,8 @@ import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
-;import useAuth from '@/hooks/useAuth';
-import { TAB } from '@/constant/tab/ctap'
+import useAuth from '@/hooks/useAuth';
+import { TAB } from '@/constant/tab/ctap';
 import MentoringApply from '@/components/MentoringApply/MentoringApply';
 
 function TapBar() {
@@ -25,18 +25,16 @@ function TapBar() {
       Authorization: `Bearer ${Token}`,
     };
     axios
-      .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`,
-        { headers },
-      )
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
+        headers,
+      })
       .then((response) => {
-        setData(response.data.data.expectedMentoringInfos);
+        setData(response.data.data.MentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
-  console.log(data)
 
   const renderTabContent = () => {
     switch (activeTab) {

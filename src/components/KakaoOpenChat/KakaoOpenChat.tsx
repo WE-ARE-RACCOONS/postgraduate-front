@@ -1,18 +1,17 @@
 import React, { useRef, useState } from 'react';
-import{
+import {
   OpenChatBox,
   OpenChatComent,
   OpenChatBtn,
-  OpenChatCopy
-}from './KakaoOpenChat.styled'
+  OpenChatCopy,
+} from './KakaoOpenChat.styled';
 import { KakaoOpenChatProps } from '@/types/mentoring/mentoring';
-function KakaoOpenChat({ url } : KakaoOpenChatProps) {
+function KakaoOpenChat({ url }: KakaoOpenChatProps) {
   const [isCopied, setIsCopied] = useState(false);
   const handleCopyClick = async () => {
     try {
       await navigator.clipboard.writeText(url);
       setIsCopied(true);
-      console.log('URL copied:', url);
     } catch (err) {
       console.error(err);
     }
@@ -26,7 +25,7 @@ function KakaoOpenChat({ url } : KakaoOpenChatProps) {
         {isCopied && <OpenChatCopy>복사되었습니다</OpenChatCopy>}
       </OpenChatBox>
     </div>
-  )
+  );
 }
 
-export default KakaoOpenChat
+export default KakaoOpenChat;
