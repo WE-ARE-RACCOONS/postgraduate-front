@@ -46,7 +46,7 @@ function TapBar() {
       </div>
     );
   };
-  
+
   return (
     <div>
       <div style={{ display: 'flex' }}>
