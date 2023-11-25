@@ -7,5 +7,3 @@ export const OpenChatBox = styled.div`
 export const OpenChatComent = styled.div`
   color: red;
 `;
-
-\
