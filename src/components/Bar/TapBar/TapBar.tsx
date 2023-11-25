@@ -6,8 +6,8 @@ import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
-import useAuth from '@/hooks/useAuth';
-import { TAB } from '@/constant/tab/ctap';
+;import useAuth from '@/hooks/useAuth';
+import { TAB } from '@/constant/tab/ctap'
 import MentoringApply from '@/components/MentoringApply/MentoringApply';
 
 function TapBar() {
@@ -49,9 +49,23 @@ function TapBar() {
           </div>
         );
       case TAB.expected:
-        return <div>진행 예정 컴포넌트</div>;
+        return (
+          <div>
+            {data &&
+              data.map((el, idx) => {
+                return <MentoringApply key={idx} data={el} />;
+              })}
+          </div>
+        );
       case TAB.done:
-        return <div>완료 컴포넌트</div>;
+        return (
+          <div>
+            {data &&
+              data.map((el, idx) => {
+                return <MentoringApply key={idx} data={el} />;
+              })}
+          </div>
+        );
       default:
         return null;
     }
