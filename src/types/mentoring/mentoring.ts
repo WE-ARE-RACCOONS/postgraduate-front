@@ -9,8 +9,14 @@ export interface MentoringData {
   question: string;
   dates: string[];
   term: number;
+  chatLink: string;
+  date: string;
 }
 
 export interface MentoringApplyProps {
   data: MentoringData | null;
+}
+
+export interface KakaoOpenChatProps {
+  url: string;
 }

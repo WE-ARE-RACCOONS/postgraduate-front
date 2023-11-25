@@ -1,5 +1,5 @@
 export const TAB = {
-  waiting: 'WAITING',
-  expected: 'EXPECTED',
-  done: 'DONE',
+  waiting: 'waiting',
+  expected: 'expected',
+  done: 'done',
 };

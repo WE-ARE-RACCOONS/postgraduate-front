@@ -11,8 +11,13 @@ import {
   ConfirmShow,
 } from './MentoringApply.styled';
 import { MentoringApplyProps } from '@/types/mentoring/mentoring';
+import { useAtomValue } from 'jotai';
+import { activeTabAtom } from '@/stores/tap';
+import { TAB } from '@/constant/tab/ctap';
+import KakaoOpenChat from '../KakaoOpenChat/KakaoOpenChat';
 
 function MentoringApply({ data }: MentoringApplyProps) {
+  const activeTab = useAtomValue(activeTabAtom);
   return (
     <div>
       <ConfirmBox>
@@ -21,13 +26,20 @@ function MentoringApply({ data }: MentoringApplyProps) {
             src={data ? data.profile : '/user.png'}
           ></ConfirmProfile>
           <ConfirmInfo>
-            <ConfirmTitle>{data ? data.nickName : ''}선배와 멘토링</ConfirmTitle>
+            <ConfirmTitle>
+              {data ? data.nickName : ''}선배와 멘토링
+            </ConfirmTitle>
             <UserInfo>
               {data ? data.postgradu : ''} | {data ? data.major : ''}
             </UserInfo>
+            {data ? data.date : ''}
           </ConfirmInfo>
+          {activeTab === TAB.expected && (
+            <KakaoOpenChat url={data ? data.chatLink : ''} />
+          )}
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
+
         <ConfirmShow>신청서 보기</ConfirmShow>
       </ConfirmBox>
     </div>

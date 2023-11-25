@@ -25,12 +25,11 @@ function TapBar() {
       Authorization: `Bearer ${Token}`,
     };
     axios
-      .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me?status=${activeTab}`,
-        { headers },
-      )
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
+        headers,
+      })
       .then((response) => {
-        setData(response.data.data.appliedMentoringInfos);
+        setData(response.data.data.mentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -38,32 +37,24 @@ function TapBar() {
   }, [activeTab]);
 
   const renderTabContent = () => {
-    switch (activeTab) {
-      case TAB.waiting:
-        return (
-          <div>
-            {data &&
-              data.map((el, idx) => {
-                return <MentoringApply key={idx} data={el} />;
-              })}
-          </div>
-        );
-      case TAB.expected:
-        return <div>진행 예정 컴포넌트</div>;
-      case TAB.done:
-        return <div>완료 컴포넌트</div>;
-      default:
-        return null;
-    }
+    return (
+      <div>
+        {data &&
+          data.map((el, idx) => {
+            return <MentoringApply key={idx} data={el} />;
+          })}
+      </div>
+    );
   };
+
   return (
     <div>
       <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick('WAITING')}>확정 대기</TapStyle>
-        <TapStyle onClick={() => handleTabClick('EXPECTED')}>
+        <TapStyle onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
+        <TapStyle onClick={() => handleTabClick('expected')}>
           진행 예정
         </TapStyle>
-        <TapStyle onClick={() => handleTabClick('DONE')}>완료</TapStyle>
+        <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
       </div>
       <div>{renderTabContent()}</div>
     </div>
