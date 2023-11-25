@@ -26,16 +26,17 @@ function TapBar() {
     };
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me?status=${activeTab}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`,
         { headers },
       )
       .then((response) => {
-        setData(response.data.data.appliedMentoringInfos);
+        setData(response.data.data.expectedMentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
+  console.log(data)
 
   const renderTabContent = () => {
     switch (activeTab) {
@@ -73,11 +74,11 @@ function TapBar() {
   return (
     <div>
       <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick('WAITING')}>확정 대기</TapStyle>
-        <TapStyle onClick={() => handleTabClick('EXPECTED')}>
+        <TapStyle onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
+        <TapStyle onClick={() => handleTabClick('expected')}>
           진행 예정
         </TapStyle>
-        <TapStyle onClick={() => handleTabClick('DONE')}>완료</TapStyle>
+        <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
       </div>
       <div>{renderTabContent()}</div>
     </div>
