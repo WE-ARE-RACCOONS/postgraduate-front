@@ -18,15 +18,15 @@ function MentoringApply({ data }: MentoringApplyProps) {
       <ConfirmBox>
         <ConfirmContent>
           <ConfirmProfile
-            src={data?.profile ? data.profile : '/user.png'}
+            src={data ? data.profile : '/user.png'}
           ></ConfirmProfile>
           <ConfirmInfo>
-            <ConfirmTitle>{data?.nickName}선배와 멘토링</ConfirmTitle>
+            <ConfirmTitle>{data ? data.nickName : ''}선배와 멘토링</ConfirmTitle>
             <UserInfo>
-              {data?.postgradu} | {data?.major}{' '}
+              {data ? data.postgradu : ''} | {data ? data.major : ''}
             </UserInfo>
           </ConfirmInfo>
-          <ConfirmState>{data?.term} 분</ConfirmState>
+          <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
         <ConfirmShow>신청서 보기</ConfirmShow>
       </ConfirmBox>
