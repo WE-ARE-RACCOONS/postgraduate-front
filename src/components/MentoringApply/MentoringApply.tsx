@@ -30,6 +30,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
             <UserInfo>
               {data ? data.postgradu : ''} | {data ? data.major : ''}
             </UserInfo>
+            {data ? data.date : ''}
           </ConfirmInfo>
           {activeTab === TAB.expected && <KakaoOpenChat url = {data ? data.chatLink : ''} />}
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
