@@ -14,6 +14,7 @@ import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constant/tab/ctap'
+import KakaoOpenChat from '../KakaoOpenChat/KakaoOpenChat';
 
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
