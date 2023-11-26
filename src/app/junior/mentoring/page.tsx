@@ -6,7 +6,7 @@ function page() {
   return (
     <div>
       <TapBar />
-      <MentoringSpec/>
+      <MentoringSpec />
     </div>
   );
 }
