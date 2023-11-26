@@ -1,5 +1,5 @@
 import SelectedBtn from "@/components/Button/SelectedBtn";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { SelectFormBtnContainer, SelectFormContainer } from "./SelectForm.styled";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import { SelectFormProps } from "@/types/form/selectForm";
@@ -14,10 +14,6 @@ function SelectForm(props: SelectFormProps) {
   const [flag, setFlag] = useState(false);
   const [otherBtn, setOtherBtn] = useState(true);
   const [userInputField, setUserInputField] = useState('');
-
-  useEffect(() => {
-    console.log(selected);
-  }, [selected]);
 
   const handleConfirm = () => {
     if(selected.length == 0) setFlag(true);
