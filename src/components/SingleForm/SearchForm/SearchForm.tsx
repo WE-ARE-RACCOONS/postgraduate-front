@@ -1,12 +1,15 @@
 import { TextField } from "@mui/material";
 import { SearchResult, SearchResultWrapper, TextFieldWrapper } from "./SearchForm.styled";
 import axios from "axios";
-import { useState } from "react";
+import React, { useState } from "react";
 import { SearchFormProps } from "@/types/form/searchForm";
+import { useSetAtom } from "jotai";
+import { sPostGraduAtom } from "@/stores/senior";
 
-function SearchForm(prosp: SearchFormProps) {
+function SearchForm(props: SearchFormProps) {
   const [school, setSchool] = useState('');
   const [result, setResult] = useState<Array<string> | null>(null);
+  const setSPostGradu = useSetAtom(sPostGraduAtom);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setSchool(e.currentTarget.value);
@@ -41,6 +44,11 @@ function SearchForm(prosp: SearchFormProps) {
     }
   }
 
+  const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    props.clickHandler();
+    setSPostGradu(e.currentTarget.innerText);
+  }
+
   return (
     <>
       <TextFieldWrapper>
@@ -56,7 +64,7 @@ function SearchForm(prosp: SearchFormProps) {
       <SearchResultWrapper>
         {result && 
           result.map((el, idx) => (
-            <SearchResult key={idx} >{el}</SearchResult>
+            <SearchResult key={idx} onClick={(e) => {handleClick(e)}} >{el}</SearchResult>
           ))
         }
       </SearchResultWrapper>
