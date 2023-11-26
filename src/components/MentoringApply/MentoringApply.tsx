@@ -20,9 +20,9 @@ import NaverPoint from '../NaverPoint/NaverPoint';
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
   const datasplit = data?.date;
-  const dateParts = (datasplit||'').split("-");
-  const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`
-  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 완료`
+  const dateParts = (datasplit || '').split('-');
+  const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 완료`;
   return (
     <div>
       <ConfirmBox>
@@ -37,19 +37,13 @@ function MentoringApply({ data }: MentoringApplyProps) {
             <UserInfo>
               {data ? data.postgradu : ''} | {data ? data.major : ''}
             </UserInfo>
-            {activeTab === TAB.expected && (
-            dateExpected
-          )}
-            {activeTab === TAB.done && (
-            dateDone
-          )}
+            {activeTab === TAB.expected && dateExpected}
+            {activeTab === TAB.done && dateDone}
           </ConfirmInfo>
           {activeTab === TAB.expected && (
             <KakaoOpenChat url={data ? data.chatLink : ''} />
           )}
-          {activeTab === TAB.done && (
-            <NaverPoint/>
-          )}
+          {activeTab === TAB.done && <NaverPoint />}
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
 

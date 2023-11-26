@@ -31,4 +31,3 @@ export const ConfirmState = styled.div`
 export const ConfirmShow = styled.div`
   border: 1px solid black;
 `;
-
