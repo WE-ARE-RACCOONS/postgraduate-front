@@ -12,7 +12,7 @@ function RiseUpModal(props: RiseUpModalProps) {
           <SearchForm clickHandler={props.modalHandler} formType={props.modalType} />
         )}
         {props.modalType == 'field' && (
-          <SelectForm />
+          <SelectForm clickHandler={props.modalHandler} />
         )}
       </div>
     </ModalBackground>

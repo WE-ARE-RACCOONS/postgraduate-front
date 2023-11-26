@@ -1,15 +1,28 @@
 import SelectedBtn from "@/components/Button/SelectedBtn";
 import { useEffect, useState } from "react";
 import { SelectFormBtnContainer, SelectFormContainer } from "./SelectForm.styled";
+import SingleValidator from "@/components/Validator/SingleValidator";
+import { SelectFormProps } from "@/types/form/selectForm";
+import { selectedFieldAtom, totalFieldAtom } from "@/stores/senior";
+import { useAtom } from "jotai";
 
-function SelectForm() {
+function SelectForm(props: SelectFormProps) {
   // 추후 연구분야 상수 처리
-  const [totalBtns, setTotalBtns] = useState(['인공지능', '반도체', '바이오', '에너지']);
-  const [selected, setSelected] = useState<Array<string>>([]);
+  const [totalBtns, setTotalBtns] = useAtom(totalFieldAtom);
+  const [selected, setSelected] = useAtom(selectedFieldAtom);
+  const [flag, setFlag] = useState(false);
 
   useEffect(() => {
     console.log(selected);
   }, [selected]);
+
+  const handleConfirm = () => {
+    if(selected.length == 0) setFlag(true);
+    else {
+      setFlag(false);
+      props.clickHandler();
+    }
+  }
 
   return(
     <SelectFormContainer>
@@ -25,6 +38,8 @@ function SelectForm() {
           ))
         }
       </SelectFormBtnContainer>
+      {flag && <SingleValidator msg="연구분야를 선택해주세요" textColor="#FF0000" />}
+      <button id="select-form-confirm-btn" onClick={handleConfirm}>확인</button>
     </SelectFormContainer>
   )
 }

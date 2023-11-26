@@ -1,9 +1,13 @@
 import { SelectedBtnProps } from "@/types/button/selectedBtn";
 import { StyledSelectedBtn } from "./SelectedBtn.styled";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function SelectedBtn(props: SelectedBtnProps) {
   const [selected, setSelected] = useState(false);
+
+  useEffect(() => {
+    if(props.selected.includes(props.btnText)) setSelected(true);
+  }, []);
 
   const handleClick = () => {
     if(selected == true) {
