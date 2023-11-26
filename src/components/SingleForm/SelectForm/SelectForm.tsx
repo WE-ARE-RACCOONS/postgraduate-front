@@ -3,13 +3,14 @@ import { useEffect, useState } from "react";
 import { SelectFormBtnContainer, SelectFormContainer } from "./SelectForm.styled";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import { SelectFormProps } from "@/types/form/selectForm";
-import { selectedFieldAtom, totalFieldAtom } from "@/stores/senior";
-import { useAtom } from "jotai";
+import { sFieldAtom, selectedFieldAtom, totalFieldAtom } from "@/stores/senior";
+import { useAtom, useSetAtom } from "jotai";
 
 function SelectForm(props: SelectFormProps) {
   // 추후 연구분야 상수 처리
   const [totalBtns, setTotalBtns] = useAtom(totalFieldAtom);
   const [selected, setSelected] = useAtom(selectedFieldAtom);
+  const setSField = useSetAtom(sFieldAtom);
   const [flag, setFlag] = useState(false);
   const [otherBtn, setOtherBtn] = useState(true);
   const [userInputField, setUserInputField] = useState('');
@@ -22,6 +23,7 @@ function SelectForm(props: SelectFormProps) {
     if(selected.length == 0) setFlag(true);
     else {
       setFlag(false);
+      setSField(selected.join(','));
       props.clickHandler();
     }
   }
