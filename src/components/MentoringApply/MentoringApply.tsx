@@ -15,9 +15,15 @@ import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constant/tab/ctap';
 import KakaoOpenChat from '../KakaoOpenChat/KakaoOpenChat';
+import NaverPoint from '../NaverPoint/NaverPoint';
 
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
+  const datasplit = data?.date;
+  const dateParts = (datasplit||'').split("-");
+
+  const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`
+  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 완료`
   return (
     <div>
       <ConfirmBox>
@@ -32,10 +38,18 @@ function MentoringApply({ data }: MentoringApplyProps) {
             <UserInfo>
               {data ? data.postgradu : ''} | {data ? data.major : ''}
             </UserInfo>
-            {data ? data.date : ''}
+            {activeTab === TAB.expected && (
+            dateExpected
+          )}
+            {activeTab === TAB.done && (
+            dateDone
+          )}
           </ConfirmInfo>
           {activeTab === TAB.expected && (
             <KakaoOpenChat url={data ? data.chatLink : ''} />
+          )}
+          {activeTab === TAB.done && (
+            <NaverPoint/>
           )}
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
