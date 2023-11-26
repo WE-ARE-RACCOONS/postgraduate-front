@@ -1,7 +1,7 @@
-"use client";
-import { useState, useEffect } from "react";
+'use client';
+import { useState, useEffect } from 'react';
 
-function useModal (portalId: string) {
+function useModal(portalId: string) {
   const [modal, setModal] = useState(false);
   const [portalElement, setPortalElement] = useState<Element | null>(null);
 
@@ -14,10 +14,10 @@ function useModal (portalId: string) {
   };
 
   return {
-    modal, 
-    modalHandler, 
-    portalElement
+    modal,
+    modalHandler,
+    portalElement,
   };
-};
+}
 
 export default useModal;

@@ -11,8 +11,8 @@ function usePrevPath() {
   }
 
   return {
-    setCurrentPath
-  }
+    setCurrentPath,
+  };
 }
 
 export default usePrevPath;

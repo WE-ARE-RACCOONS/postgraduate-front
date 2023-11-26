@@ -11,7 +11,7 @@ function SignUpDonePage() {
 
   return (
     <div>
-      {(userType == 'junior') && (
+      {userType == 'junior' && (
         <>
           <h3>회원가입 완료!</h3>
           <div>
@@ -21,7 +21,7 @@ function SignUpDonePage() {
           </div>
         </>
       )}
-      {(userType == 'senior') && (
+      {userType == 'senior' && (
         <>
           <h3>선배 회원가입이 완료됐어요</h3>
           <div>
@@ -37,13 +37,13 @@ function SignUpDonePage() {
         height={156}
         alt="회원가입 축하 이미지"
       />
-      {(userType == 'junior') && (
+      {userType == 'junior' && (
         <div>
           <NextBtn kind="route" url={prevPath} btnText="보던 페이지로 가기" />
           <NextBtn kind="route" url="/" btnText="대학원 선배 둘러보기" />
         </div>
       )}
-      {(userType == 'senior') && (
+      {userType == 'senior' && (
         <>
           <div>
             대학원 선배 프로필을 등록하면 멘토링을 시작할 수 있어요.

@@ -21,20 +21,27 @@ function AuthPage() {
       setUploadFlag(false);
       const formData = new FormData();
       formData.append('certificationFile', photo);
-      axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`, formData, {
-        headers: {
-          "Content-Type": 'multipart/form-data'
-        }
-      }).then((response) => {
-        const res = response.data;
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          },
+        )
+        .then((response) => {
+          const res = response.data;
 
-        if(res.code == "IMG202") {
-          setphotoUrl(res.data.profileUrl);
-          router.push(`/signup/${socialId}/common-info/senior-info`);
-        }
-      }).catch((err) => {
-        console.error(err);
-      })
+          if (res.code == 'IMG202') {
+            setphotoUrl(res.data.profileUrl);
+            router.push(`/signup/${socialId}/common-info/senior-info`);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
 
     if (!photo) {

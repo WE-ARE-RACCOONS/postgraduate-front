@@ -1,10 +1,14 @@
-import { TextField } from "@mui/material";
-import { SearchResult, SearchResultWrapper, TextFieldWrapper } from "./SearchForm.styled";
-import axios from "axios";
-import React, { useState } from "react";
-import { SearchFormProps } from "@/types/form/searchForm";
-import { useSetAtom } from "jotai";
-import { sMajorAtom, sPostGraduAtom } from "@/stores/senior";
+import { TextField } from '@mui/material';
+import {
+  SearchResult,
+  SearchResultWrapper,
+  TextFieldWrapper,
+} from './SearchForm.styled';
+import axios from 'axios';
+import React, { useState } from 'react';
+import { SearchFormProps } from '@/types/form/searchForm';
+import { useSetAtom } from 'jotai';
+import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 
 function SearchForm(props: SearchFormProps) {
   const [keyword, setKeyword] = useState('');
@@ -12,43 +16,49 @@ function SearchForm(props: SearchFormProps) {
   const setSPostGradu = useSetAtom(sPostGraduAtom);
   const setSMajor = useSetAtom(sMajorAtom);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+  ) => {
     setKeyword(e.currentTarget.value);
-    if(result) setResult(null);
-  }
+    if (result) setResult(null);
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if(e.key === 'Enter') {
+    if (e.key === 'Enter') {
       setData();
     }
-  }
+  };
 
   const setData = () => {
-    axios.get(`${process.env.NEXT_PUBLIC_CAREERNET_URL}`, {
-      params: props.formType == 'postgradu' ? {
-        apiKey: process.env.NEXT_PUBLIC_CAREERNET_API_KEY,
-        svcType: 'api',
-        svcCode: 'SCHOOL',
-        contentType: 'json',
-        gubun: 'univ_list',
-        sch1: '100323',
-        searchSchulNm: keyword
-      } : {
-        apiKey: process.env.NEXT_PUBLIC_CAREERNET_API_KEY,
-        svcType: 'api',
-        svcCode: 'MAJOR',
-        contentType: 'json',
-        gubun: 'univ_list',
-        univSe: 'univ',
-        searchTitle: keyword
-      }
-    })
+    axios
+      .get(`${process.env.NEXT_PUBLIC_CAREERNET_URL}`, {
+        params:
+          props.formType == 'postgradu'
+            ? {
+                apiKey: process.env.NEXT_PUBLIC_CAREERNET_API_KEY,
+                svcType: 'api',
+                svcCode: 'SCHOOL',
+                contentType: 'json',
+                gubun: 'univ_list',
+                sch1: '100323',
+                searchSchulNm: keyword,
+              }
+            : {
+                apiKey: process.env.NEXT_PUBLIC_CAREERNET_API_KEY,
+                svcType: 'api',
+                svcCode: 'MAJOR',
+                contentType: 'json',
+                gubun: 'univ_list',
+                univSe: 'univ',
+                searchTitle: keyword,
+              },
+      })
       .then(async (res) => {
-        if(props.formType == 'postgradu') {
+        if (props.formType == 'postgradu') {
           const searchData = res.data.dataSearch.content;
-          if(searchData.length > 0) {
+          if (searchData.length > 0) {
             const tempArr = [];
-            for(let i = 0; i < searchData.length; i++) {
+            for (let i = 0; i < searchData.length; i++) {
               tempArr.push(searchData[i].schoolName);
             }
             setResult(tempArr);
@@ -56,84 +66,97 @@ function SearchForm(props: SearchFormProps) {
           return;
         }
 
-        if(props.formType == 'major') {
-          if(res.data.dataSearch.content.length > 0) {
+        if (props.formType == 'major') {
+          if (res.data.dataSearch.content.length > 0) {
             const dataArr = res.data.dataSearch.content;
             const tempArr = [];
             let pageCnt = Math.floor(Number(dataArr[0].totalCount) / 20);
-            if(Number(dataArr[0].length % 20 !== 0)) pageCnt += 1;
+            if (Number(dataArr[0].length % 20 !== 0)) pageCnt += 1;
 
-            for(let i = 0; i < dataArr.length; i++) {
-              if((dataArr[i].mClass).includes(keyword)) tempArr.push((dataArr[i].mClass));
+            for (let i = 0; i < dataArr.length; i++) {
+              if (dataArr[i].mClass.includes(keyword))
+                tempArr.push(dataArr[i].mClass);
             }
 
-            if(pageCnt > 1) {
-              for(let j = 2; j <= pageCnt; j++) {
-                await axios.get(`${process.env.NEXT_PUBLIC_CAREERNET_URL}`, {
-                  params: {
-                    apiKey: process.env.NEXT_PUBLIC_CAREERNET_API_KEY,
-                    svcType: 'api',
-                    svcCode: 'MAJOR',
-                    contentType: 'json',
-                    gubun: 'univ_list',
-                    univSe: 'univ',
-                    thisPage: j,
-                    searchTitle: keyword
-                  }
-                }).then((res) => {
-                  const pageArr = res.data.dataSearch.content;
-                  for(let k = 0; k < pageArr.length; k++) {
-                    if((pageArr[k].mClass).includes(keyword)) tempArr.push(pageArr[k].mClass);
-                  }
-                }).catch((err) => {
-                  console.error(err);
-                })
+            if (pageCnt > 1) {
+              for (let j = 2; j <= pageCnt; j++) {
+                await axios
+                  .get(`${process.env.NEXT_PUBLIC_CAREERNET_URL}`, {
+                    params: {
+                      apiKey: process.env.NEXT_PUBLIC_CAREERNET_API_KEY,
+                      svcType: 'api',
+                      svcCode: 'MAJOR',
+                      contentType: 'json',
+                      gubun: 'univ_list',
+                      univSe: 'univ',
+                      thisPage: j,
+                      searchTitle: keyword,
+                    },
+                  })
+                  .then((res) => {
+                    const pageArr = res.data.dataSearch.content;
+                    for (let k = 0; k < pageArr.length; k++) {
+                      if (pageArr[k].mClass.includes(keyword))
+                        tempArr.push(pageArr[k].mClass);
+                    }
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
               }
             }
 
             setResult(tempArr);
           }
         }
-      }).catch((err) => {
-        console.error(err);
       })
-  }
+      .catch((err) => {
+        console.error(err);
+      });
+  };
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     props.clickHandler();
-    if(props.formType == 'postgradu') {
+    if (props.formType == 'postgradu') {
       setSPostGradu(e.currentTarget.innerText);
       return;
     }
 
-    if(props.formType == 'major') {
+    if (props.formType == 'major') {
       setSMajor(e.currentTarget.innerText);
       return;
     }
-  }
+  };
 
   return (
     <>
       <TextFieldWrapper>
-        <TextField 
-          id="outlined-basic" 
-          label={props.formType == 'postgradu' ? "대학원명" : "학과"} 
-          variant="outlined" 
-          size="small" 
-          style={{width: '18.5rem'}}
+        <TextField
+          id="outlined-basic"
+          label={props.formType == 'postgradu' ? '대학원명' : '학과'}
+          variant="outlined"
+          size="small"
+          style={{ width: '18.5rem' }}
           onChange={(e) => handleChange(e)}
           onKeyDown={(e) => handleKeyDown(e)}
-          onBlur={setData} />
+          onBlur={setData}
+        />
       </TextFieldWrapper>
       <SearchResultWrapper>
-        {result && 
+        {result &&
           result.map((el, idx) => (
-            <SearchResult key={idx} onClick={(e) => {handleClick(e)}} >{el}</SearchResult>
-          ))
-        }
+            <SearchResult
+              key={idx}
+              onClick={(e) => {
+                handleClick(e);
+              }}
+            >
+              {el}
+            </SearchResult>
+          ))}
       </SearchResultWrapper>
     </>
-  )
+  );
 }
 
 export default SearchForm;

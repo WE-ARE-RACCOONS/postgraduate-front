@@ -16,8 +16,8 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <Providers>
-            {children}
-            <div id='senior-info-portal'></div>
+          {children}
+          <div id="senior-info-portal"></div>
         </Providers>
       </body>
     </html>

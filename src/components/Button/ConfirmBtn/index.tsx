@@ -1,3 +1,3 @@
-import ConfirmBtn from "./ConfirmBtn";
+import ConfirmBtn from './ConfirmBtn';
 
 export default ConfirmBtn;

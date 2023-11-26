@@ -1,3 +1,3 @@
-import RiseUpModal from "./RiseUpModal";
+import RiseUpModal from './RiseUpModal';
 
 export default RiseUpModal;

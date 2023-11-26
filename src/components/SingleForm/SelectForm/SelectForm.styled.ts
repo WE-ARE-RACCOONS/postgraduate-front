@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SelectFormContainer = styled.div`
   width: 20rem;
@@ -13,9 +13,9 @@ export const SelectFormContainer = styled.div`
     height: max-content;
     margin-bottom: 1rem;
   }
-`
+`;
 
 export const SelectFormBtnContainer = styled.div`
   width: 20rem;
   height: max-content;
-`
+`;

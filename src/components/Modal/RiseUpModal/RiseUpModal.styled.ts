@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ModalBackground = styled.div`
   position: fixed;
@@ -34,7 +34,7 @@ export const ModalBackground = styled.div`
     z-index: 1;
     background-color: #fff;
   }
-`
+`;
 
 export const TextFieldWrapper = styled.div`
   width: fit-content;
@@ -43,4 +43,4 @@ export const TextFieldWrapper = styled.div`
   top: 3.75rem;
   left: 50%;
   transform: translateX(-50%);
-`
+`;

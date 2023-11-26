@@ -1,3 +1,3 @@
-import SelectedBtn from "./SelectedBtn";
+import SelectedBtn from './SelectedBtn';
 
 export default SelectedBtn;

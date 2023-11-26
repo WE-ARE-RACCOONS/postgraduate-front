@@ -1,3 +1,3 @@
-import TextForm from "./TextForm";
+import TextForm from './TextForm';
 
 export default TextForm;

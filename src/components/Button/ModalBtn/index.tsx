@@ -1,3 +1,3 @@
-import ModalBtn from "./ModalBtn";
+import ModalBtn from './ModalBtn';
 
 export default ModalBtn;

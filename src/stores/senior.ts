@@ -8,5 +8,10 @@ export const sKeywordAtom = atom<string>('');
 export const sLabAtom = atom<string>('');
 export const sProfessorAtom = atom<string>('');
 
-export const totalFieldAtom = atom<Array<string>>(['인공지능', '반도체', '바이오', '에너지']);
+export const totalFieldAtom = atom<Array<string>>([
+  '인공지능',
+  '반도체',
+  '바이오',
+  '에너지',
+]);
 export const selectedFieldAtom = atom<Array<string>>([]);

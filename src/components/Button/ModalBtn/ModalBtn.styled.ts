@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const StyledModalBtn = styled.button`
   width: 20.5rem;
@@ -8,4 +8,4 @@ export const StyledModalBtn = styled.button`
   border: 0.5px solid black;
   border-radius: 4px;
   cursor: pointer;
-`
+`;

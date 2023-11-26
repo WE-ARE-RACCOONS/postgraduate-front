@@ -1,3 +1,3 @@
-import SelectForm from "./SelectForm";
+import SelectForm from './SelectForm';
 
 export default SelectForm;

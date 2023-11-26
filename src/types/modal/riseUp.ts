@@ -1,4 +1,4 @@
-export type ModalType = 'postgradu' | 'major' | 'field' | 'keyword'
+export type ModalType = 'postgradu' | 'major' | 'field' | 'keyword';
 
 export interface RiseUpModalProps {
   modalHandler: () => void;
