@@ -40,12 +40,12 @@ function MentoringApply({ data }: MentoringApplyProps) {
             {activeTab === TAB.expected && dateExpected}
             {activeTab === TAB.done && dateDone}
           </ConfirmInfo>
-          {activeTab === TAB.expected && (
-            <KakaoOpenChat url={data ? data.chatLink : ''} />
-          )}
-          {activeTab === TAB.done && <NaverPoint />}
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
+        {activeTab === TAB.expected && (
+            <KakaoOpenChat url={data ? data.chatLink : ''} />
+          )}
+        {activeTab === TAB.done && <NaverPoint />}
 
         <ConfirmShow>신청서 보기</ConfirmShow>
       </ConfirmBox>
