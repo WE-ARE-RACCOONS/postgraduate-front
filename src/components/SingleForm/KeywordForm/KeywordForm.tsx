@@ -1,3 +1,4 @@
+import SingleValidator from "@/components/Validator/SingleValidator";
 import TextForm from "../TextForm";
 
 function KeywordForm() {
@@ -14,6 +15,8 @@ function KeywordForm() {
         e.g. 키워드 1, 키워드 2, 키워드 3, 키워드 4
       </div>
       <TextForm placeholder="연구 주제 키워드" targetAtom="keyword" />
+      <SingleValidator textColor="#FF0000" msg="연구 주제 키워드를 입력하세요" />
+      <button>확인</button>
     </div>
   )
 }

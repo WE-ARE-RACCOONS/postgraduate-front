@@ -5,6 +5,7 @@ import SingleValidator from "@/components/Validator/SingleValidator";
 import { SelectFormProps } from "@/types/form/selectForm";
 import { sFieldAtom, selectedFieldAtom, totalFieldAtom } from "@/stores/senior";
 import { useAtom, useSetAtom } from "jotai";
+import ConfirmBtn from "@/components/Button/ConfirmBtn";
 
 function SelectForm(props: SelectFormProps) {
   // 추후 연구분야 상수 처리
@@ -59,7 +60,8 @@ function SelectForm(props: SelectFormProps) {
         )}
       </SelectFormBtnContainer>
       {flag && <SingleValidator msg="연구분야를 선택해주세요" textColor="#FF0000" />}
-      <button id="select-form-confirm-btn" onClick={handleConfirm}>확인</button>
+      {/* <button id="select-form-confirm-btn" onClick={handleConfirm}>확인</button> */}
+      <ConfirmBtn clickHandler={handleConfirm} />
     </SelectFormContainer>
   )
 }
