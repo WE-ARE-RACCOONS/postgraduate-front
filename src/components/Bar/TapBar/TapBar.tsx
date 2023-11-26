@@ -38,10 +38,10 @@ function TapBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data ? (
-          data.map((el, idx) => {
+        {(!data && data!.length == 0) ? (
+          data!.map((el, idx) => {
             return <MentoringApply key={idx} data={el} />;
-          })) : `${TABSTATE[activeTab]}인 멘토링이 없어요`}
+          })) : (`${TABSTATE[activeTab]}인 멘토링이 없어요`)}
       </div>
     );
   };
