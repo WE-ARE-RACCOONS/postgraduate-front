@@ -2,8 +2,14 @@ import { ModalBtnProps } from "@/types/button/modalBtn";
 import { StyledModalBtn } from "./ModalBtn.styled";
 
 function ModalBtn(props: ModalBtnProps) {
+
+  const handleClick = () => {
+    props.modalHandler();
+    if(props.onClick) props.onClick();
+  }
+
   return(
-    <StyledModalBtn onClick={props.modalHandler} >{props.btnText}</StyledModalBtn>
+    <StyledModalBtn onClick={() => {handleClick()}} >{props.btnText}</StyledModalBtn>
   )
 }
 

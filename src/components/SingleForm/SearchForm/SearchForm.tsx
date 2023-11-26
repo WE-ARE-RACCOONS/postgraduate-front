@@ -1,9 +1,10 @@
 import { TextField } from "@mui/material";
-import { TextFieldWrapper } from "./SearchForm.styled";
+import { SearchResult, SearchResultWrapper, TextFieldWrapper } from "./SearchForm.styled";
 import axios from "axios";
 import { useState } from "react";
+import { SearchFormProps } from "@/types/form/searchForm";
 
-function SearchForm() {
+function SearchForm(prosp: SearchFormProps) {
   const [school, setSchool] = useState('');
   const [result, setResult] = useState<Array<string> | null>(null);
 
@@ -52,11 +53,13 @@ function SearchForm() {
           onChange={(e) => handleChange(e)}
           onKeyDown={(e) => handleKeyDown(e)} />
       </TextFieldWrapper>
-      {result && 
-        result.map((el, idx) => (
-          <div key={idx} >{el}</div>
-        ))
-      }
+      <SearchResultWrapper>
+        {result && 
+          result.map((el, idx) => (
+            <SearchResult key={idx} >{el}</SearchResult>
+          ))
+        }
+      </SearchResultWrapper>
     </>
   )
 }
