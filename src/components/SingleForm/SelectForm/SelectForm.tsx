@@ -1,11 +1,15 @@
 import SelectedBtn from "@/components/Button/SelectedBtn";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SelectFormBtnContainer, SelectFormContainer } from "./SelectForm.styled";
 
 function SelectForm() {
   // 추후 연구분야 상수 처리
   const [totalBtns, setTotalBtns] = useState(['인공지능', '반도체', '바이오', '에너지']);
-  const [selected, setSelected] = useState([]);
+  const [selected, setSelected] = useState<Array<string>>([]);
+
+  useEffect(() => {
+    console.log(selected);
+  }, [selected]);
 
   return(
     <SelectFormContainer>
@@ -13,7 +17,11 @@ function SelectForm() {
       <SelectFormBtnContainer>
         {totalBtns && 
           totalBtns.map((el, idx) => (
-            <SelectedBtn btnText={el} key={idx} />
+            <SelectedBtn 
+              btnText={el}
+              selected={selected}
+              selectHandler={setSelected} 
+              key={idx} />
           ))
         }
       </SelectFormBtnContainer>
