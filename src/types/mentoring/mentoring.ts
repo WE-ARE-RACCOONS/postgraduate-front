@@ -14,7 +14,7 @@ export interface MentoringData {
 }
 
 export interface MentoringApplyProps {
-  data: MentoringData | null;
+  data: MentoringData | MentoringSpecData| null;
 }
 
 export interface KakaoOpenChatProps {
@@ -22,20 +22,21 @@ export interface KakaoOpenChatProps {
 }
 
 export interface MentoringSpecData {
-  seniorId: number;
-  profile: string;
+  dates: string[];
+  lab: string;
+  major: string;
   nickName: string;
   postgradu: string;
-  major: string;
-  lab: string;
-  topic: string;
+  profile: string;
   question: string;
-  dates: string[];
-  term: number;
-  date: string;
-  chatLink: string;
+  seniorId: number;
+  topic: string;
+  term:string;
+  chatLink:string;
+  date:string;
 }
 
 export interface TextToggleButtonProps {
-  text: string;
+  text : string;
+
 }

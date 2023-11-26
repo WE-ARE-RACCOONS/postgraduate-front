@@ -18,7 +18,7 @@ import NaverPoint from '../NaverPoint/NaverPoint';
 
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
-  const datasplit = data?.date;
+  const datasplit = data ? data.date : '';
   const dateParts = (datasplit || '').split('-');
   const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
   const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 완료`;
