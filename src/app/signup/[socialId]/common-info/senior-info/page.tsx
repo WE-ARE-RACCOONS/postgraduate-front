@@ -3,7 +3,7 @@ import ModalBtn from "@/components/Button/ModalBtn";
 import NextBtn from "@/components/Button/NextBtn";
 import RiseUpModal from "@/components/Modal/RiseUpModal";
 import useModal from "@/hooks/useModal";
-import { sPostGraduAtom } from "@/stores/senior";
+import { sMajorAtom, sPostGraduAtom } from "@/stores/senior";
 import { ModalType } from "@/types/modal/riseUp";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
@@ -14,6 +14,7 @@ function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const sPostGradu = useAtomValue(sPostGraduAtom);
+  const sMajor = useAtomValue(sMajorAtom);
 
   return (
     <SeniorInfoPageContainer>
@@ -21,7 +22,7 @@ function SeniorInfoPage() {
       <div>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
       <BtnContainer>
         <ModalBtn btnText={sPostGradu ? sPostGradu : '대학원*'} modalHandler={modalHandler} onClick={() => {setModalType('postgradu')}} />
-        <ModalBtn btnText="학과*" modalHandler={modalHandler} onClick={() => {setModalType('major')}} />
+        <ModalBtn btnText={sMajor ? sMajor : '학과*'} modalHandler={modalHandler} onClick={() => {setModalType('major')}} />
         <ModalBtn btnText="연구실명*" modalHandler={modalHandler} />
         <ModalBtn btnText="지도 교수님*" modalHandler={modalHandler} />
         <ModalBtn btnText="연구분야*" modalHandler={modalHandler} onClick={() => {setModalType('field')}} />

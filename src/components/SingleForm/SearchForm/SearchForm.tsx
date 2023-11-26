@@ -4,12 +4,13 @@ import axios from "axios";
 import React, { useState } from "react";
 import { SearchFormProps } from "@/types/form/searchForm";
 import { useSetAtom } from "jotai";
-import { sPostGraduAtom } from "@/stores/senior";
+import { sMajorAtom, sPostGraduAtom } from "@/stores/senior";
 
 function SearchForm(props: SearchFormProps) {
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState<Array<string> | null>(null);
   const setSPostGradu = useSetAtom(sPostGraduAtom);
+  const setSMajor = useSetAtom(sMajorAtom);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setKeyword(e.currentTarget.value);
@@ -96,7 +97,15 @@ function SearchForm(props: SearchFormProps) {
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     props.clickHandler();
-    setSPostGradu(e.currentTarget.innerText);
+    if(props.formType == 'postgradu') {
+      setSPostGradu(e.currentTarget.innerText);
+      return;
+    }
+
+    if(props.formType == 'major') {
+      setSMajor(e.currentTarget.innerText);
+      return;
+    }
   }
 
   return (
