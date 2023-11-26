@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle } from './TapBar.styled';
+import { TapStyle , MentoringShowBtn} from './TapBar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -34,13 +34,17 @@ function TapBar() {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
+  console.log(data)
 
   const renderTabContent = () => {
     return (
       <div>
         {data && data!.length !== 0
           ? data!.map((el, idx) => {
-              return <MentoringApply key={idx} data={el} />;
+              return <div key={idx} >
+                <MentoringApply data={el}/>
+                <MentoringShowBtn >신청서 보기</MentoringShowBtn>
+              </div>
             })
           : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
       </div>

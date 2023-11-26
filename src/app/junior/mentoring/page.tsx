@@ -6,7 +6,6 @@ function JuniorMentoringPage() {
   return (
     <div>
       <TapBar />
-      <MentoringSpec />
     </div>
   );
 }

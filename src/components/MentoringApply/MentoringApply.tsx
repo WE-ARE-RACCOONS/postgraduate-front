@@ -8,7 +8,6 @@ import {
   ConfirmContent,
   ConfirmTitle,
   UserInfo,
-  ConfirmShow,
 } from './MentoringApply.styled';
 import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 import { useAtomValue } from 'jotai';
@@ -46,8 +45,6 @@ function MentoringApply({ data }: MentoringApplyProps) {
           <KakaoOpenChat url={data ? data.chatLink : ''} />
         )}
         {activeTab === TAB.done && <NaverPoint />}
-
-        <ConfirmShow>신청서 보기</ConfirmShow>
       </ConfirmBox>
     </div>
   );
