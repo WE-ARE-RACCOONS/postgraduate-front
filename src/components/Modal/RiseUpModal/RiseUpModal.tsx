@@ -2,6 +2,7 @@ import { RiseUpModalProps } from "@/types/modal/riseUp";
 import { ModalBackground } from "./RiseUpModal.styled";
 import SearchForm from "@/components/SingleForm/SearchForm";
 import SelectForm from "@/components/SingleForm/SelectForm";
+import KeywordForm from "@/components/SingleForm/KeywordForm/KeywordForm";
 
 function RiseUpModal(props: RiseUpModalProps) {
 
@@ -13,6 +14,9 @@ function RiseUpModal(props: RiseUpModalProps) {
         )}
         {props.modalType == 'field' && (
           <SelectForm clickHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'keyword' && (
+          <KeywordForm />
         )}
       </div>
     </ModalBackground>

@@ -25,8 +25,6 @@ function SeniorInfoPage() {
       <BtnContainer>
         <ModalBtn btnText={sPostGradu ? sPostGradu : '대학원*'} modalHandler={modalHandler} onClick={() => {setModalType('postgradu')}} />
         <ModalBtn btnText={sMajor ? sMajor : '학과*'} modalHandler={modalHandler} onClick={() => {setModalType('major')}} />
-        {/* <ModalBtn btnText="연구실명*" modalHandler={modalHandler} />
-        <ModalBtn btnText="지도 교수님*" modalHandler={modalHandler} /> */}
         <TextForm placeholder="연구실명*" targetAtom='lab' />
         <TextForm placeholder="지도 교수님*" targetAtom='professor' />
         <ModalBtn btnText={sField ? sField : '연구분야*'} modalHandler={modalHandler} onClick={() => {setModalType('field')}} />
