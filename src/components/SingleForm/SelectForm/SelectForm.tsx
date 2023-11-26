@@ -11,6 +11,8 @@ function SelectForm(props: SelectFormProps) {
   const [totalBtns, setTotalBtns] = useAtom(totalFieldAtom);
   const [selected, setSelected] = useAtom(selectedFieldAtom);
   const [flag, setFlag] = useState(false);
+  const [otherBtn, setOtherBtn] = useState(true);
+  const [userInputField, setUserInputField] = useState('');
 
   useEffect(() => {
     console.log(selected);
@@ -22,6 +24,19 @@ function SelectForm(props: SelectFormProps) {
       setFlag(false);
       props.clickHandler();
     }
+  }
+
+  const handleAddOtherField = () => {
+    /**
+     * 1. 전체 버튼 목록에 추가
+     * 2. 해당 버튼 selected로 추가
+     * 3. otherBtn true로
+     */
+    if(userInputField) {
+      setTotalBtns([...totalBtns, userInputField]);
+      setSelected([...selected, userInputField]);
+    }
+    setOtherBtn(true);
   }
 
   return(
@@ -37,6 +52,13 @@ function SelectForm(props: SelectFormProps) {
               key={idx} />
           ))
         }
+        {otherBtn && <button id="other-field-add-btn" onClick={() => {setOtherBtn(false)}}>+다른 분야</button>}
+        {!otherBtn && (
+          <div>
+            <input type="text" placeholder="분야를 입력해주세요" onChange={(e) => setUserInputField(e.currentTarget.value)} />
+            <button id="other-field-save-btn" onClick={handleAddOtherField}>저장</button>
+          </div>
+        )}
       </SelectFormBtnContainer>
       {flag && <SingleValidator msg="연구분야를 선택해주세요" textColor="#FF0000" />}
       <button id="select-form-confirm-btn" onClick={handleConfirm}>확인</button>
