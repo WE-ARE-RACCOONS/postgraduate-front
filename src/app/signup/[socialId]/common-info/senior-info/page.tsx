@@ -4,7 +4,7 @@ import NextBtn from "@/components/Button/NextBtn";
 import RiseUpModal from "@/components/Modal/RiseUpModal";
 import TextForm from "@/components/SingleForm/TextForm";
 import useModal from "@/hooks/useModal";
-import { sFieldAtom, sKeywordAtom, sLabAtom, sMajorAtom, sPostGraduAtom } from "@/stores/senior";
+import { sFieldAtom, sKeywordAtom, sLabAtom, sMajorAtom, sPostGraduAtom, sProfessorAtom } from "@/stores/senior";
 import { ModalType } from "@/types/modal/riseUp";
 import { useAtomValue } from "jotai";
 import { useState } from "react";
@@ -13,9 +13,12 @@ import styled from "styled-components";
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
+  const [emptyPart, setEmptyPart] = useState('');
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
+  const sLab = useAtomValue(sLabAtom);
+  const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
 
@@ -31,7 +34,8 @@ function SeniorInfoPage() {
         <ModalBtn btnText={sField ? sField : '연구분야*'} modalHandler={modalHandler} onClick={() => {setModalType('field')}} />
         <ModalBtn btnText={sKeyword ? sKeyword : '연구 주제 키워드*'} modalHandler={modalHandler} onClick={() => {setModalType('keyword')}} />
         {/* 입력 조건 만족했을 때 넘어가는 걸로 NextBtn 클릭 이벤트 추가 */}
-        <NextBtn kind="route" url="/signup/done" btnText="완료" />
+        {/* <NextBtn kind="route" url="/signup/done" btnText="완료" /> */}
+        <button>완료</button>
       </BtnContainer>
       {modal && portalElement
         ? createPortal(<RiseUpModal modalHandler={modalHandler} modalType={modalType} />, portalElement)
