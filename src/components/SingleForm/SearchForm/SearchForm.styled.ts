@@ -11,7 +11,7 @@ export const TextFieldWrapper = styled.div`
 
 export const SearchResultWrapper = styled.div`
   width: 19.8rem;
-  height: 20rem;
+  height: 17rem;
   overflow-y: scroll;
   position: absolute;
   top: 7.6rem;

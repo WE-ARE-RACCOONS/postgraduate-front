@@ -9,7 +9,10 @@ function RiseUpModal(props: RiseUpModalProps) {
       <div className='rise-up-modal' onClick={(e) => e.stopPropagation()}>
         {props.modalType == 'postgradu' && (
           <SearchForm clickHandler={props.modalHandler} formType={props.modalType} />
-        ) }
+        )}
+        {props.modalType == 'major' && (
+          <SearchForm clickHandler={props.modalHandler} formType={props.modalType} />
+        )}
       </div>
     </ModalBackground>
   )
