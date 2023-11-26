@@ -48,7 +48,7 @@ function SignUpBtn() {
               token: response.data.refreshToken,
               expires: response.data.refreshExpiration,
             });
-            router.replace('/signup/done');
+            router.push('/signup/done');
           }
         })
         .catch((err) => {
