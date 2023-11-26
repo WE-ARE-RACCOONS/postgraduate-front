@@ -7,7 +7,7 @@ import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
-import { TABSTATE } from '@/constant/tab/ctap';
+import { TAB_STATE } from '@/constant/tab/ctap';
 import MentoringApply from '@/components/MentoringApply/MentoringApply';
 
 function TapBar() {
@@ -42,7 +42,7 @@ function TapBar() {
           ? data!.map((el, idx) => {
               return <MentoringApply key={idx} data={el} />;
             })
-          : `${TABSTATE[activeTab]}인 멘토링이 없어요`}
+          : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
       </div>
     );
   };
