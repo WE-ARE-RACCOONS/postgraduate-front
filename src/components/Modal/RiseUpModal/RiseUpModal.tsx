@@ -16,7 +16,7 @@ function RiseUpModal(props: RiseUpModalProps) {
           <SelectForm clickHandler={props.modalHandler} />
         )}
         {props.modalType == 'keyword' && (
-          <KeywordForm />
+          <KeywordForm clickHandler={props.modalHandler} />
         )}
       </div>
     </ModalBackground>

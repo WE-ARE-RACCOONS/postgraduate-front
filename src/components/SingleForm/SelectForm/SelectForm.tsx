@@ -60,7 +60,6 @@ function SelectForm(props: SelectFormProps) {
         )}
       </SelectFormBtnContainer>
       {flag && <SingleValidator msg="연구분야를 선택해주세요" textColor="#FF0000" />}
-      {/* <button id="select-form-confirm-btn" onClick={handleConfirm}>확인</button> */}
       <ConfirmBtn clickHandler={handleConfirm} />
     </SelectFormContainer>
   )

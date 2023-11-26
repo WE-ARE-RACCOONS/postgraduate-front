@@ -1,7 +1,22 @@
 import SingleValidator from "@/components/Validator/SingleValidator";
 import TextForm from "../TextForm";
+import ConfirmBtn from "@/components/Button/ConfirmBtn";
+import { useState } from "react";
+import { useAtomValue } from "jotai";
+import { sKeywordAtom } from "@/stores/senior";
 
-function KeywordForm() {
+function KeywordForm({ clickHandler } : { clickHandler: () => void }) {
+  const inputKeyword = useAtomValue(sKeywordAtom);
+  const [flag, setFlag] = useState(false);
+
+  const handleClick = () => {
+    if(!inputKeyword) setFlag(true);
+    else {
+      setFlag(false);
+      clickHandler();
+    }
+  }
+
   return (
     <div>
       <div>
@@ -15,8 +30,8 @@ function KeywordForm() {
         e.g. 키워드 1, 키워드 2, 키워드 3, 키워드 4
       </div>
       <TextForm placeholder="연구 주제 키워드" targetAtom="keyword" />
-      <SingleValidator textColor="#FF0000" msg="연구 주제 키워드를 입력하세요" />
-      <button>확인</button>
+      {flag && <SingleValidator textColor="#FF0000" msg="연구 주제 키워드를 입력하세요" />}
+      <ConfirmBtn clickHandler={handleClick} />
     </div>
   )
 }
