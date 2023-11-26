@@ -1,17 +1,16 @@
 'use client';
 import Photo from '@/components/Photo';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { preSignedUrlAtom } from '@/stores/senior';
+import { photoUrlAtom } from '@/stores/senior';
 import axios from 'axios';
 import { useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { uploadToS3 } from '@/utils/uploadToS3';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
-  const setPresignedUrl = useSetAtom(preSignedUrlAtom);
+  const setphotoUrl = useSetAtom(photoUrlAtom);
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -20,31 +19,22 @@ function AuthPage() {
   const handleClick = () => {
     if (photo) {
       setUploadFlag(false);
-      axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/image/url/certification`, {
-          fileName: `${socialId}` + `${photo.name}`,
-        })
-        .then(async (response) => {
-          const res = response.data;
+      const formData = new FormData();
+      formData.append('certificationFile', photo);
+      axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`, formData, {
+        headers: {
+          "Content-Type": 'multipart/form-data'
+        }
+      }).then((response) => {
+        const res = response.data;
 
-          if (res.code == 'IMG202') {
-            setPresignedUrl(res.data.preSignedUrl);
-            // axios.put(res.data.preSignedUrl, photo, {
-            //   headers: {
-            //     "Content-Type": photo.type
-            //   }
-            // }).then((res) => {
-            //   console.log(res);
-            // }).catch((err) => {
-            //   console.error(err);
-            // })
-            router.push(`/signup/${socialId}/common-info/senior-info`);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-      return;
+        if(res.code == "IMG202") {
+          setphotoUrl(res.data.profileUrl);
+          router.push(`/signup/${socialId}/common-info/senior-info`);
+        }
+      }).catch((err) => {
+        console.error(err);
+      })
     }
 
     if (!photo) {
