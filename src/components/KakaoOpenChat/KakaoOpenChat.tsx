@@ -12,6 +12,9 @@ function KakaoOpenChat({ url }: KakaoOpenChatProps) {
     try {
       await navigator.clipboard.writeText(url);
       setIsCopied(true);
+      setTimeout(() => {
+        setIsCopied(false);
+      }, 1000);
     } catch (err) {
       console.error(err);
     }
