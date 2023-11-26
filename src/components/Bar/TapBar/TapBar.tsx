@@ -7,13 +7,12 @@ import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
-import { TAB } from '@/constant/tab/ctap';
+import { TABSTATE } from '@/constant/tab/ctap';
 import MentoringApply from '@/components/MentoringApply/MentoringApply';
 
 function TapBar() {
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const [data, setData] = useState<MentoringData[] | null>(null);
-
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
@@ -39,14 +38,15 @@ function TapBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data &&
-          data.map((el, idx) => {
-            return <MentoringApply key={idx} data={el} />;
-          })}
+        {data && data!.length !== 0
+          ? data!.map((el, idx) => {
+              return <MentoringApply key={idx} data={el} />;
+            })
+          : `${TABSTATE[activeTab]}인 멘토링이 없어요`}
       </div>
     );
   };
-
+  console.log(data);
   return (
     <div>
       <div style={{ display: 'flex' }}>
