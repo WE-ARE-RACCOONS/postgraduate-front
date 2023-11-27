@@ -1,7 +1,7 @@
 import x_icon from '../../../../public/x.png';
 import Image from 'next/image'
 import { MProfileContainer } from './MProfileContent.styled';
-import ConfirmBtn from '@/components/Button/ConfirmBtn';
+import ConfirmBtn from '@/components/Button/ClickedBtn';
 import { MProfileContentProps } from '@/types/content/mProfileContent';
 import { useRouter } from 'next/navigation';
 

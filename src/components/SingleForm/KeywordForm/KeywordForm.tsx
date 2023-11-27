@@ -1,6 +1,6 @@
 import SingleValidator from '@/components/Validator/SingleValidator';
 import TextForm from '../TextForm';
-import ConfirmBtn from '@/components/Button/ConfirmBtn';
+import ClickedBtn from '@/components/Button/ClickedBtn';
 import { useState } from 'react';
 import { useAtomValue } from 'jotai';
 import { sKeywordAtom } from '@/stores/senior';
@@ -34,7 +34,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           msg="연구 주제 키워드를 입력하세요"
         />
       )}
-      <ConfirmBtn clickHandler={handleClick} />
+      <ClickedBtn clickHandler={handleClick} />
     </div>
   );
 }
