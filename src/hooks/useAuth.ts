@@ -49,19 +49,18 @@ function useAuth() {
       if (!isExpired(accessExp)) return accessTkn;
     }
 
-    if(!accessTkn) {
+    if (!accessTkn) {
       // access token 없을 때
       if (getRefreshToken()) {
         // refresh token 있을 때
         reissueToken();
         return accessTkn;
       }
-      if(!getRefreshToken()) {
+      if (!getRefreshToken()) {
         // refresh token 없을 때
         return '';
       }
     }
-
   }
 
   /** refresh token 반환 */

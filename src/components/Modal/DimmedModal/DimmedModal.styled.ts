@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const DimmedBgContainer = styled.div`
   width: 600px;
@@ -11,7 +11,7 @@ export const DimmedBgContainer = styled.div`
   left: 0;
   z-index: 1;
   background-color: rgba(39, 39, 39, 0.48);
-`
+`;
 
 export const DimmedMdContainer = styled.div`
   width: 19rem;
@@ -21,4 +21,4 @@ export const DimmedMdContainer = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
-`
+`;

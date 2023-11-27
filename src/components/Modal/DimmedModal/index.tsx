@@ -1,3 +1,3 @@
-import DimmedModal from "./DimmedModal";
+import DimmedModal from './DimmedModal';
 
 export default DimmedModal;

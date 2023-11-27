@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MProfileContainer = styled.div`
   width: 16rem;
@@ -34,4 +34,4 @@ export const MProfileContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;

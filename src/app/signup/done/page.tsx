@@ -13,7 +13,9 @@ import { useRouter } from 'next/navigation';
 function SignUpDonePage() {
   const prevPath = useAtomValue(prevPathAtom);
   const userType = useAtomValue(userTypeAtom);
-  const { modal, modalHandler, portalElement } = useModal('senior-profile-portal');
+  const { modal, modalHandler, portalElement } = useModal(
+    'senior-profile-portal',
+  );
   const router = useRouter();
 
   return (
@@ -60,14 +62,22 @@ function SignUpDonePage() {
           <div>
             {/* <button>다음에 할게요</button>
             <button>프로필 등록하기</button> */}
-            <ClickedBtn clickHandler={modalHandler} btnText='다음에 할게요' />
-            <ClickedBtn clickHandler={() => {router.push('/add-profile')}} btnText='프로필 등록하기' />
+            <ClickedBtn clickHandler={modalHandler} btnText="다음에 할게요" />
+            <ClickedBtn
+              clickHandler={() => {
+                router.push('/add-profile');
+              }}
+              btnText="프로필 등록하기"
+            />
           </div>
         </>
       )}
       {modal && portalElement
         ? createPortal(
-            <DimmedModal modalType='postgraduProfile' modalHandler={modalHandler} />,
+            <DimmedModal
+              modalType="postgraduProfile"
+              modalHandler={modalHandler}
+            />,
             portalElement,
           )
         : null}

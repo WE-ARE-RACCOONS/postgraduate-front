@@ -1,3 +1,3 @@
-import MProfileContent from "./MProfileContent";
+import MProfileContent from './MProfileContent';
 
 export default MProfileContent;
