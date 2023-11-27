@@ -1,7 +1,7 @@
 'use client';
 import Photo from '@/components/Photo';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { preSignedUrlAtom } from '@/stores/senior';
+import { photoUrlAtom } from '@/stores/senior';
 import axios from 'axios';
 import { useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
@@ -9,35 +9,42 @@ import { useState } from 'react';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
-  const [photoUrl, setPhotoUrl] = useState('');
-  const setPresignedUrl = useSetAtom(preSignedUrlAtom);
+  const [photo, setPhoto] = useState<File | null>(null);
+  const setphotoUrl = useSetAtom(photoUrlAtom);
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
   const router = useRouter();
 
   const handleClick = () => {
-    if (photoUrl) {
+    if (photo) {
       setUploadFlag(false);
+      const formData = new FormData();
+      formData.append('certificationFile', photo);
       axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/image/url/certification`, {
-          fileName: `${socialId}` + `${photoUrl}`,
-        })
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+            },
+          },
+        )
         .then((response) => {
           const res = response.data;
 
           if (res.code == 'IMG202') {
-            setPresignedUrl(res.data.preSignedUrl);
+            setphotoUrl(res.data.profileUrl);
             router.push(`/signup/${socialId}/common-info/senior-info`);
           }
         })
         .catch((err) => {
           console.error(err);
         });
-      return;
     }
 
-    if (!photoUrl) {
+    if (!photo) {
       setUploadFlag(true);
       return;
     }
@@ -53,7 +60,7 @@ function AuthPage() {
         <br />
         e.g. 대학원 학생증, 대학원 합격증, 연구실멤버 확인 캡쳐본
       </div>
-      <Photo handler={setPhotoUrl} />
+      <Photo handler={setPhoto} />
       <div>첨부한 사진은 대학원 선배 회원 승인 후에 폐기됩니다.</div>
       {uploadFlag && (
         <SingleValidator
