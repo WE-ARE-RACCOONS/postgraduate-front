@@ -2,17 +2,14 @@
 import MenuBar from '@/components/Bar/MenuBar';
 import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
-import { prevPathAtom } from '@/stores/signup';
-import { useSetAtom } from 'jotai';
-import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
+import usePrevPath from '@/hooks/usePrevPath';
 
 export default function Home() {
-  const setPrevPath = useSetAtom(prevPathAtom);
-  const currentPath = usePathname();
+  const { setCurrentPath } = usePrevPath();
 
   useEffect(() => {
-    setPrevPath(currentPath);
+    setCurrentPath();
   }, []);
 
   return (

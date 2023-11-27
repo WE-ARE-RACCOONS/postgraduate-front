@@ -1,7 +1,5 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { KakaoAccessProvider } from '../context/KakaoAccessProvider';
-import { SeverAccessProvider } from '../context/SeverAccessProvider';
 import Providers from '@/components/Provider/providers';
 
 export const metadata: Metadata = {
@@ -18,9 +16,8 @@ export default function RootLayout({
     <html lang="ko">
       <body>
         <Providers>
-          <SeverAccessProvider>
-            <KakaoAccessProvider>{children}</KakaoAccessProvider>
-          </SeverAccessProvider>
+          {children}
+          <div id="senior-info-portal"></div>
         </Providers>
       </body>
     </html>
