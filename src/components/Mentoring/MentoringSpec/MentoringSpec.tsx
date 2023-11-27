@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import { MentoringSpecData } from '@/types/mentoring/mentoring';
-import TextToggleButton from '../TextToggleButton/TextToggleButton';
+import TextToggleButton from '../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import {
   ModalMentoringBackground,
   ModalClose
 } from './MentoringSpec.styled'
+import ApplyCancleBtn from '../../Button/ApplyCancleBtn/ApplyCancleBtn';
 function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
@@ -39,8 +40,14 @@ function MentoringSpec(props: ModalMentoringProps) {
     <MentoringApply data = {data}/>
 
     <div>신청 일정
+    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
       <div>3개의 일정중 하나로 확정 됩니다</div>
-      <button>신청 취소</button>
+      <div>
+      <ApplyCancleBtn btnText={'취소하기'}
+      modalHandler={props.modalHandler}
+      mentoringId = {props.mentoringId}/>
+      </div>
+      </div>
     </div>
     <div>
         <TextToggleButton text = {data ? data.dates.join(', ') : ''}/>

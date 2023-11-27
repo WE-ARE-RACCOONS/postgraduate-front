@@ -8,11 +8,11 @@ import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
 import { TAB_STATE } from '@/constant/tab/ctap';
-import MentoringApply from '@/components/MentoringApply/MentoringApply';
+import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import MentoringSpec from '@/components/MentoringSpec';
+import MentoringSpec from '@/components/Mentoring/MentoringSpec';
 import { createPortal } from 'react-dom';
 function TapBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
