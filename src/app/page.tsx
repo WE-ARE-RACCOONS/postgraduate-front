@@ -18,7 +18,6 @@ export default function Home() {
       기본 루트 페이지 입니다
       <Login />
       <MenuBar />
-      <DimmedModal modalType='postgraduProfile' />
     </div>
   );
 }

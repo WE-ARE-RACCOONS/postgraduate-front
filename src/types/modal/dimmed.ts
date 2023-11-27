@@ -3,4 +3,5 @@ export type DimmedModalType = 'postgraduProfile';
 
 export interface DimmedModalProps {
   modalType: DimmedModalType;
+  modalHandler: () => void;
 }

@@ -7,7 +7,7 @@ function DimmedModal(props: DimmedModalProps) {
     <DimmedBgContainer>
       <DimmedMdContainer>
         {(props.modalType == 'postgraduProfile') && (
-          <MProfileContent modalHandler={() => {}} />
+          <MProfileContent modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>
