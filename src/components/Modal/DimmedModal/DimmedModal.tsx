@@ -1,11 +1,14 @@
+import { DimmedModalProps } from "@/types/modal/dimmed";
 import { DimmedBgContainer, DimmedMdContainer } from "./DimmedModal.styled";
 import MProfileContent from "@/components/Content/MProfileContent";
 
-function DimmedModal() {
+function DimmedModal(props: DimmedModalProps) {
   return(
     <DimmedBgContainer>
       <DimmedMdContainer>
-        <MProfileContent />
+        {(props.modalType == 'postgraduProfile') && (
+          <MProfileContent />
+        )}
       </DimmedMdContainer>
     </DimmedBgContainer>
   )
