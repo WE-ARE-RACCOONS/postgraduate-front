@@ -1,5 +1,7 @@
-function ClickedBtn({ clickHandler }: { clickHandler: () => void }) {
-  return <button onClick={clickHandler}>확인</button>;
+import { ClickedBtnProps } from "@/types/button/clickedBtn";
+
+function ClickedBtn(props: ClickedBtnProps) {
+  return <button onClick={props.clickHandler}>{props.btnText}</button>;
 }
 
 export default ClickedBtn;

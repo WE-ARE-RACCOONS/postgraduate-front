@@ -1,7 +1,7 @@
 import x_icon from '../../../../public/x.png';
 import Image from 'next/image'
 import { MProfileContainer } from './MProfileContent.styled';
-import ConfirmBtn from '@/components/Button/ClickedBtn';
+import ClickedBtn from '@/components/Button/ClickedBtn';
 import { MProfileContentProps } from '@/types/content/mProfileContent';
 import { useRouter } from 'next/navigation';
 
@@ -19,7 +19,7 @@ function MProfileContent(props: MProfileContentProps) {
       <Image id="x-icon" src={x_icon} alt="닫기 버튼" sizes='(max-width: 600px) 3.rem' priority />
       <div id='btn-styled-wrapper'>
         {/* <NextBtn kind="route" url="/add-profile" btnText="프로필 등록하기" /> */}
-        <ConfirmBtn clickHandler={handleClick} />
+        <ClickedBtn clickHandler={handleClick} btnText='프로필 등록하기' />
       </div>
     </MProfileContainer>
   )
