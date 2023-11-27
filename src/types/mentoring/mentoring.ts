@@ -11,6 +11,7 @@ export interface MentoringData {
   term: number;
   date: string;
   chatLink: string;
+  mentoringId:number;
 }
 
 export interface MentoringApplyProps {

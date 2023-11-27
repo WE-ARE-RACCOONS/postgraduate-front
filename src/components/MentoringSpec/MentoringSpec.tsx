@@ -5,8 +5,12 @@ import axios from 'axios';
 import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../TextToggleButton/TextToggleButton';
 import MentoringApply from '../MentoringApply/MentoringApply';
-
-function MentoringSpec({mentoringId}:{mentoringId :number}) {
+import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
+import {
+  ModalMentoringBackground,
+  ModalClose
+} from './MentoringSpec.styled'
+function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
 
@@ -17,7 +21,7 @@ function MentoringSpec({mentoringId}:{mentoringId :number}) {
     };
     axios
       .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}`,
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}`,
         {
           headers,
         },
@@ -30,7 +34,7 @@ function MentoringSpec({mentoringId}:{mentoringId :number}) {
       });
   }, []);
   console.log(data)
-  return <div>
+  return <ModalMentoringBackground>
     <div>{data ? data.nickName : ''} 에게 보낸 신청서</div>
     <MentoringApply data = {data}/>
 
@@ -49,7 +53,8 @@ function MentoringSpec({mentoringId}:{mentoringId :number}) {
     <div>
         <TextToggleButton text = {data ? data.question : ''}/>
       </div>
-  </div>
+      <ModalClose onClick={props.modalHandler}>확인 했어요</ModalClose>
+  </ModalMentoringBackground>
 }
 
 export default MentoringSpec;

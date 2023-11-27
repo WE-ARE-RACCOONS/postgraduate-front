@@ -9,15 +9,21 @@ import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
 import { TAB_STATE } from '@/constant/tab/ctap';
 import MentoringApply from '@/components/MentoringApply/MentoringApply';
-
+import ModalBtn from '@/components/Button/ModalBtn';
+import useModal from '@/hooks/useModal';
+import { ModalMentoringType } from '@/types/modal/mentoringDetail';
+import MentoringSpec from '@/components/MentoringSpec';
+import { createPortal } from 'react-dom';
 function TapBar() {
+  const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const [data, setData] = useState<MentoringData[] | null>(null);
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
   const { getAccessToken } = useAuth();
-
+  const { modal, modalHandler, portalElement } = useModal('junior-mentoring-detail');
+  const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(null);
   useEffect(() => {
     const Token = getAccessToken();
     const headers = {
@@ -43,7 +49,13 @@ function TapBar() {
           ? data!.map((el, idx) => {
               return <div key={idx} >
                 <MentoringApply data={el}/>
-                <MentoringShowBtn >신청서 보기</MentoringShowBtn>
+                <ModalBtn 
+                btnText={'신청서 보기'}
+                modalHandler={modalHandler}
+                onClick={() => {
+                  setModalType('junior');
+                  setSelectedMentoringId(el.mentoringId);}}
+                  />
               </div>
             })
           : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
@@ -61,6 +73,12 @@ function TapBar() {
         <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
       </div>
       <div>{renderTabContent()}</div>
+      {modal && portalElement
+        ? createPortal(
+            <MentoringSpec  modalHandler={modalHandler} mentoringId  = {selectedMentoringId || 0}/>,
+            portalElement,
+          )
+        : null}
     </div>
   );
 }
