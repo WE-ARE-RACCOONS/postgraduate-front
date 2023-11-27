@@ -4,6 +4,7 @@ import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
 import { useEffect } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
+import DimmedModal from '@/components/Modal/DimmedModal';
 
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
@@ -13,10 +14,11 @@ export default function Home() {
   }, []);
 
   return (
-    <SeverAccessProvider>
+    <div>
       기본 루트 페이지 입니다
       <Login />
       <MenuBar />
-    </SeverAccessProvider>
+      <DimmedModal />
+    </div>
   );
 }
