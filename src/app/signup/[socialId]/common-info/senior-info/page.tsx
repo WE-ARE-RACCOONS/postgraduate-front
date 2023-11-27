@@ -173,8 +173,6 @@ function SeniorInfoPage() {
             setModalType('keyword');
           }}
         />
-        {/* 입력 조건 만족했을 때 넘어가는 걸로 NextBtn 클릭 이벤트 추가 */}
-        {/* <NextBtn kind="route" url="/signup/done" btnText="완료" /> */}
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
