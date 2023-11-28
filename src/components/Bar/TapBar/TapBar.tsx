@@ -74,7 +74,6 @@ function TapBar() {
       </div>
     );
   };
-  console.log(data);
   return (
     <div>
       <div style={{ display: 'flex' }}>
@@ -104,12 +103,6 @@ function TapBar() {
             cancelPortalElement,
           )
         : null}
-      {/* {cancelCfModal && cancelCfPortalElement
-        ? createPortal(
-            <MentoringCancelConfirm />,
-            cancelPortalElement,
-          )
-        : null} */}
     </div>
   );
 }
