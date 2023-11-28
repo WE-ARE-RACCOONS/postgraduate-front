@@ -42,7 +42,6 @@ function TapBar() {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
-  console.log(data)
 
   const renderTabContent = () => {
     return (
@@ -83,10 +82,16 @@ function TapBar() {
         : null}
         {cancelModal && cancelPortalElement
         ? createPortal(
-            <MentoringCancel  mentoringId  = {selectedMentoringId || 0}/>,
+            <MentoringCancel cancelModalHandler={cancelModalHandler} mentoringId  = {selectedMentoringId || 0}/>,
             cancelPortalElement,
           )
         : null}
+        {/* {cancelCfModal && cancelCfPortalElement
+        ? createPortal(
+            <MentoringCancelConfirm />,
+            cancelPortalElement,
+          )
+        : null} */}
     </div>
   );
 }
