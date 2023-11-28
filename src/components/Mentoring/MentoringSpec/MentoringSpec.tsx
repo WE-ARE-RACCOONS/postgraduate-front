@@ -14,7 +14,7 @@ function MentoringSpec(props: ModalMentoringProps) {
   const [data, setData] = useState<MentoringSpecData | null>(null);
 
   useEffect(() => {
-    if (props.mentoringId!== null) {
+    if (props.mentoringId!== 0) {
     const Token = getAccessToken();
     const headers = {
       Authorization: `Bearer ${Token}`,

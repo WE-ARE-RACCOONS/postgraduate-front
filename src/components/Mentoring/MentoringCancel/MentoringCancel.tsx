@@ -22,7 +22,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
   };
 
   useEffect(() => {
-    if (props.mentoringId!== null) {
+    if (props.mentoringId!== 0) {
     cancelMentoring();}
   }, []);
 
