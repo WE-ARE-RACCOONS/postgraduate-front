@@ -21,6 +21,11 @@ function MentoringCancel(props: ModalMentoringclProps) {
     if (props.onClick) props.onClick();
   };
 
+  useEffect(() => {
+    if (props.mentoringId!== null) {
+    cancelMentoring();}
+  }, []);
+
   const cancelMentoring = async () => {
     try {
       const Token = getAccessToken();
@@ -48,10 +53,6 @@ function MentoringCancel(props: ModalMentoringclProps) {
       console.error('Error cancelling mentoring:', error);
     }
   };
-
-  useEffect(() => {
-    cancelMentoring();
-  }, []);
   return (
     <MentoringCancelBox>
       {cancelStatus || '멘토링 신청을 취소하시겠어요?'}
