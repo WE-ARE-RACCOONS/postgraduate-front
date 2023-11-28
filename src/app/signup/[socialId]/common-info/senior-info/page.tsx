@@ -31,7 +31,7 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { setAccessToken, setRefreshToken } = useAuth();
+  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
 
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -48,8 +48,6 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-
-  const setUserType = useSetAtom(userTypeAtom);
 
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
@@ -101,7 +99,6 @@ function SeniorInfoPage() {
     }
 
     setFlag(false);
-    setUserType('senior');
 
     if (socialId && phoneNumber && nickName && certification) {
       axios
@@ -129,6 +126,7 @@ function SeniorInfoPage() {
               token: response.data.refreshToken,
               expires: response.data.refreshExpiration,
             });
+            setUserType(response.data.role);
             router.push('/signup/done');
           }
         })
