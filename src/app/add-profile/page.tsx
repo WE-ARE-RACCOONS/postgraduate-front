@@ -10,8 +10,8 @@ function AddProfilePage() {
     <AddProfilePageContainer>
       <ProgressBar activeTab={0} />
       <ProfileForm lineType="single" title={PROFILE_TITLE.single_introduce} placeholder={PROFILE_PLACEHOLDER.single_introduce} />
-      <ProfileForm lineType="multi" title={PROFILE_TITLE.multi_introduce} placeholder={PROFILE_PLACEHOLDER.multi_introduce} />
-      <ProfileForm lineType="multi" title={PROFILE_TITLE.recommended_for} placeholder={PROFILE_PLACEHOLDER.recommended_for} />
+      <ProfileForm lineType="multi" title={PROFILE_TITLE.multi_introduce} placeholder={PROFILE_PLACEHOLDER.multi_introduce} maxLength={1000} />
+      <ProfileForm lineType="multi" title={PROFILE_TITLE.recommended_for} placeholder={PROFILE_PLACEHOLDER.recommended_for} maxLength={1000} />
     </AddProfilePageContainer>
   );
 }
