@@ -1,12 +1,14 @@
 'use client';
 import ProgressBar from "@/components/Bar/ProgressBar";
+import ProfileForm from "@/components/SingleForm/ProfileForm";
 import styled from "styled-components";
 
 function AddProfilePage() {
 
   return (
     <AddProfilePageContainer>
-      <ProgressBar activeTab={1} />
+      <ProgressBar activeTab={0} />
+      <ProfileForm lineType="single" title="한줄 소개" placeholder="본인을 한 줄로 소개해주세요" />
     </AddProfilePageContainer>
   );
 }
