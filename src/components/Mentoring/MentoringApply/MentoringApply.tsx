@@ -8,18 +8,17 @@ import {
   ConfirmContent,
   ConfirmTitle,
   UserInfo,
-  ConfirmShow,
 } from './MentoringApply.styled';
 import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constant/tab/ctap';
-import KakaoOpenChat from '../KakaoOpenChat/KakaoOpenChat';
-import NaverPoint from '../NaverPoint/NaverPoint';
+import KakaoOpenChat from '../../KakaoOpenChat/KakaoOpenChat';
+import NaverPoint from '../../NaverPoint/NaverPoint';
 
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
-  const datasplit = data?.date;
+  const datasplit = data ? data.date : '';
   const dateParts = (datasplit || '').split('-');
   const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
   const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 완료`;
@@ -46,8 +45,6 @@ function MentoringApply({ data }: MentoringApplyProps) {
           <KakaoOpenChat url={data ? data.chatLink : ''} />
         )}
         {activeTab === TAB.done && <NaverPoint />}
-
-        <ConfirmShow>신청서 보기</ConfirmShow>
       </ConfirmBox>
     </div>
   );

@@ -1,23 +1,39 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle } from './TapBar.styled';
+import { TapStyle, MentoringShowBtn } from './TapBar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
 import { TAB_STATE } from '@/constant/tab/ctap';
-import MentoringApply from '@/components/MentoringApply/MentoringApply';
-
+import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
+import ModalBtn from '@/components/Button/ModalBtn';
+import useModal from '@/hooks/useModal';
+import { ModalMentoringType } from '@/types/modal/mentoringDetail';
+import MentoringSpec from '@/components/Mentoring/MentoringSpec';
+import { createPortal } from 'react-dom';
+import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 function TapBar() {
+  const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const [data, setData] = useState<MentoringData[] | null>(null);
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
   const { getAccessToken } = useAuth();
-
+  const { modal, modalHandler, portalElement } = useModal(
+    'junior-mentoring-detail',
+  );
+  const {
+    modal: cancelModal,
+    modalHandler: cancelModalHandler,
+    portalElement: cancelPortalElement,
+  } = useModal('junior-mentoring-cancel');
+  const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
+    null,
+  );
   useEffect(() => {
     const Token = getAccessToken();
     const headers = {
@@ -40,13 +56,24 @@ function TapBar() {
       <div>
         {data && data!.length !== 0
           ? data!.map((el, idx) => {
-              return <MentoringApply key={idx} data={el} />;
+              return (
+                <div key={idx}>
+                  <MentoringApply data={el} />
+                  <ModalBtn
+                    btnText={'신청서 보기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                </div>
+              );
             })
           : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
       </div>
     );
   };
-  console.log(data);
   return (
     <div>
       <div style={{ display: 'flex' }}>
@@ -57,6 +84,25 @@ function TapBar() {
         <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
       </div>
       <div>{renderTabContent()}</div>
+      {modal && portalElement
+        ? createPortal(
+            <MentoringSpec
+              modalHandler={modalHandler}
+              cancelModalHandler={cancelModalHandler}
+              mentoringId={selectedMentoringId || 0}
+            />,
+            portalElement,
+          )
+        : null}
+      {cancelModal && cancelPortalElement
+        ? createPortal(
+            <MentoringCancel
+              cancelModalHandler={cancelModalHandler}
+              mentoringId={selectedMentoringId || 0}
+            />,
+            cancelPortalElement,
+          )
+        : null}
     </div>
   );
 }

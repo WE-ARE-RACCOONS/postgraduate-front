@@ -3,7 +3,6 @@ import styled from 'styled-components';
 export const ConfirmBox = styled.div`
   border: 1px solid black;
   width: 100%;
-  height: 12rem;
 `;
 export const ConfirmContent = styled.div`
   border: 1px solid black;

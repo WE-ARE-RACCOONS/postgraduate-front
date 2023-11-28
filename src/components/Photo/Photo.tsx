@@ -1,10 +1,10 @@
 function Photo({
   handler,
 }: {
-  handler: React.Dispatch<React.SetStateAction<string>>;
+  handler: React.Dispatch<React.SetStateAction<File | null>>;
 }) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    handler(e.currentTarget.files ? e.currentTarget.files[0].name : '');
+    handler(e.currentTarget.files ? e.currentTarget.files[0] : null);
   };
 
   return (
