@@ -7,10 +7,7 @@ import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
-import {
-  ModalMentoringBackground,
-  ModalClose
-} from './MentoringSpec.styled'
+import { ModalMentoringBackground, ModalClose } from './MentoringSpec.styled';
 import ApplyCancleBtn from '../../Button/ApplyCancleBtn/ApplyCancleBtn';
 function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
@@ -35,35 +32,39 @@ function MentoringSpec(props: ModalMentoringProps) {
         console.error('Error fetching data:', error);
       });
   }, []);
-  return <ModalMentoringBackground>
-    <div>{data ? data.nickName : ''} 에게 보낸 신청서</div>
-    <MentoringApply data = {data}/>
+  return (
+    <ModalMentoringBackground>
+      <div>{data ? data.nickName : ''} 에게 보낸 신청서</div>
+      <MentoringApply data={data} />
 
-    <div>신청 일정
-    <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-      <div>3개의 일정중 하나로 확정 됩니다</div>
       <div>
-      <ApplyCancleBtn btnText={'취소하기'}
-      cancelModalHandler={props.cancelModalHandler}
-      modalHandler={props.modalHandler}
-      mentoringId = {props.mentoringId}/>
+        신청 일정
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <div>3개의 일정중 하나로 확정 됩니다</div>
+          <div>
+            <ApplyCancleBtn
+              btnText={'취소하기'}
+              cancelModalHandler={props.cancelModalHandler}
+              modalHandler={props.modalHandler}
+              mentoringId={props.mentoringId}
+            />
+          </div>
+        </div>
       </div>
+      <div>
+        <TextToggleButton text={data ? data.dates.join(', ') : ''} />
       </div>
-    </div>
-    <div>
-        <TextToggleButton text = {data ? data.dates.join(', ') : ''}/>
+      <div>멘토링 주제</div>
+      <div>
+        <TextToggleButton text={data ? data.topic : ''} />
       </div>
-    <div>멘토링 주제</div>
-    <div>
-        <TextToggleButton text = {data ? data.topic : ''}/>
-      </div>
-    <div>사전 질문</div>
-    <div>
-        <TextToggleButton text = {data ? data.question : ''}/>
+      <div>사전 질문</div>
+      <div>
+        <TextToggleButton text={data ? data.question : ''} />
       </div>
       <ModalClose onClick={props.modalHandler}>확인 했어요</ModalClose>
-  </ModalMentoringBackground>
-  
+    </ModalMentoringBackground>
+  );
 }
 
 export default MentoringSpec;

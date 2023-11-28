@@ -4,4 +4,3 @@ export interface ModalBtnProps {
   cancelModalHandler?: () => void;
   onClick?: () => void;
 }
-

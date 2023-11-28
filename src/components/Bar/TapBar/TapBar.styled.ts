@@ -9,6 +9,4 @@ export const MentoringMapBox = styled.div`
   width: 100%;
 `;
 
-export const MentoringShowBtn = styled.button`
-  
-`;
+export const MentoringShowBtn = styled.button``;

@@ -11,11 +11,11 @@ export interface MentoringData {
   term: number;
   date: string;
   chatLink: string;
-  mentoringId:number;
+  mentoringId: number;
 }
 
 export interface MentoringApplyProps {
-  data: MentoringData | MentoringSpecData| null;
+  data: MentoringData | MentoringSpecData | null;
 }
 
 export interface KakaoOpenChatProps {
@@ -32,12 +32,11 @@ export interface MentoringSpecData {
   question: string;
   seniorId: number;
   topic: string;
-  term:string;
-  chatLink:string;
-  date:string;
+  term: string;
+  chatLink: string;
+  date: string;
 }
 
 export interface TextToggleButtonProps {
-  text : string;
-
+  text: string;
 }

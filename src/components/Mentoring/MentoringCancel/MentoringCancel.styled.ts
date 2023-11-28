@@ -13,10 +13,6 @@ export const MentoringCancelBox = styled.div`
   @media (min-width: 360px) and (max-width: 600px) {
     width: 360px;
   }
-`
-export const CancelBtn = styled.button`
-
-`
-export const NoCancelBtn = styled.button`
-
-`
+`;
+export const CancelBtn = styled.button``;
+export const NoCancelBtn = styled.button``;
