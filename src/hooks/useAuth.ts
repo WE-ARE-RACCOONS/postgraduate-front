@@ -32,16 +32,12 @@ function useAuth() {
   /** access token 또는 재로그인 필요 여부 반환 */
   function getAccessToken() {
     if (accessTkn) {
-      // access token 있을 때
       if (isExpired(accessExp)) {
-        // 만료됨
         if (getRefreshToken()) {
-          // refresh token 있을 때
           reissueToken();
           return accessTkn;
         }
         if (!getRefreshToken()) {
-          // refresh token 없을 때
           return '';
         }
       }
@@ -49,7 +45,15 @@ function useAuth() {
       if (!isExpired(accessExp)) return accessTkn;
     }
 
-    return '';
+    if (!accessTkn) {
+      if (getRefreshToken()) {
+        reissueToken();
+        return accessTkn;
+      }
+      if (!getRefreshToken()) {
+        return '';
+      }
+    }
   }
 
   /** refresh token 반환 */

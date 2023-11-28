@@ -4,10 +4,19 @@ import { prevPathAtom, userTypeAtom } from '@/stores/signup';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import party_popper from '../../../../public/party_popper.png';
+import ClickedBtn from '@/components/Button/ClickedBtn';
+import useModal from '@/hooks/useModal';
+import { createPortal } from 'react-dom';
+import DimmedModal from '@/components/Modal/DimmedModal';
+import { useRouter } from 'next/navigation';
 
 function SignUpDonePage() {
   const prevPath = useAtomValue(prevPathAtom);
   const userType = useAtomValue(userTypeAtom);
+  const { modal, modalHandler, portalElement } = useModal(
+    'senior-profile-portal',
+  );
+  const router = useRouter();
 
   return (
     <div>
@@ -51,11 +60,27 @@ function SignUpDonePage() {
             지금 프로필을 작성하러 가볼까요?
           </div>
           <div>
-            <button>다음에 할게요</button>
-            <button>프로필 등록하기</button>
+            {/* <button>다음에 할게요</button>
+            <button>프로필 등록하기</button> */}
+            <ClickedBtn clickHandler={modalHandler} btnText="다음에 할게요" />
+            <ClickedBtn
+              clickHandler={() => {
+                router.push('/add-profile');
+              }}
+              btnText="프로필 등록하기"
+            />
           </div>
         </>
       )}
+      {modal && portalElement
+        ? createPortal(
+            <DimmedModal
+              modalType="postgraduProfile"
+              modalHandler={modalHandler}
+            />,
+            portalElement,
+          )
+        : null}
     </div>
   );
 }
