@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
 export const MentoringCancelBox = styled.div`
+  border: 1px solid black;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);

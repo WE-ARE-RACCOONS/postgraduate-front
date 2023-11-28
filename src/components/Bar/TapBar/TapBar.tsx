@@ -14,6 +14,7 @@ import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 import MentoringSpec from '@/components/Mentoring/MentoringSpec';
 import { createPortal } from 'react-dom';
+import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 function TapBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -23,6 +24,7 @@ function TapBar() {
   };
   const { getAccessToken } = useAuth();
   const { modal, modalHandler, portalElement } = useModal('junior-mentoring-detail');
+  const { modal: cancelModal, modalHandler: cancelModalHandler, portalElement: cancelPortalElement} = useModal('junior-mentoring-cancel');
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(null);
   useEffect(() => {
     const Token = getAccessToken();
@@ -49,7 +51,7 @@ function TapBar() {
           ? data!.map((el, idx) => {
               return <div key={idx} >
                 <MentoringApply data={el}/>
-                <ModalBtn 
+                <ModalBtn
                 btnText={'신청서 보기'}
                 modalHandler={modalHandler}
                 onClick={() => {
@@ -75,8 +77,14 @@ function TapBar() {
       <div>{renderTabContent()}</div>
       {modal && portalElement
         ? createPortal(
-            <MentoringSpec  modalHandler={modalHandler} mentoringId  = {selectedMentoringId || 0}/>,
+            <MentoringSpec  modalHandler={modalHandler} cancelModalHandler={cancelModalHandler} mentoringId  = {selectedMentoringId || 0}/>,
             portalElement,
+          )
+        : null}
+        {cancelModal && cancelPortalElement
+        ? createPortal(
+            <MentoringCancel  mentoringId  = {selectedMentoringId || 0}/>,
+            cancelPortalElement,
           )
         : null}
     </div>

@@ -1,6 +1,7 @@
 export interface CancleBtnProps {
     btnText: string;
     mentoringId:number;
-    modalHandler: () => void;
+    cancelModalHandler: () => void;
+    modalHandler:() => void;
     onClick?: () => void;
   }

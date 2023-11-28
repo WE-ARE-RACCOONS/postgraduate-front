@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
+import useModal from '@/hooks/useModal';
 import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../MentoringApply/MentoringApply';
@@ -34,7 +35,6 @@ function MentoringSpec(props: ModalMentoringProps) {
         console.error('Error fetching data:', error);
       });
   }, []);
-  console.log(data)
   return <ModalMentoringBackground>
     <div>{data ? data.nickName : ''} 에게 보낸 신청서</div>
     <MentoringApply data = {data}/>
@@ -44,6 +44,7 @@ function MentoringSpec(props: ModalMentoringProps) {
       <div>3개의 일정중 하나로 확정 됩니다</div>
       <div>
       <ApplyCancleBtn btnText={'취소하기'}
+      cancelModalHandler={props.cancelModalHandler}
       modalHandler={props.modalHandler}
       mentoringId = {props.mentoringId}/>
       </div>
@@ -62,6 +63,7 @@ function MentoringSpec(props: ModalMentoringProps) {
       </div>
       <ModalClose onClick={props.modalHandler}>확인 했어요</ModalClose>
   </ModalMentoringBackground>
+  
 }
 
 export default MentoringSpec;
