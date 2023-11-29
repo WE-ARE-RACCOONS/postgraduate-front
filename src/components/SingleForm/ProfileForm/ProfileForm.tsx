@@ -19,7 +19,7 @@ function ProfileForm(props: ProfileFormProps) {
         )}
       </ProfileTitleContainer>
       {props.lineType == 'single' && (
-        <input type="text" id="single-profile-form" placeholder={props.placeholder} />
+        <input type="text" id="single-profile-form" placeholder={props.placeholder} onChange={(e) => props.changeHandler(e.currentTarget.value)} />
       )}
       {props.lineType == 'multi' && (
         <textarea name="profile-form" id="multi-profile-form" placeholder={props.placeholder} onChange={(e) => handleChange(e)}></textarea>
