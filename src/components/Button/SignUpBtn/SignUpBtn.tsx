@@ -49,7 +49,7 @@ function SignUpBtn() {
               expires: response.data.refreshExpiration,
             });
             setUserType(response.data.role);
-            
+
             router.push('/signup/done');
           }
         })

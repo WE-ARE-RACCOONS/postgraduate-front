@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const AuthLabeledContainer = styled.div`
   width: max-content;
@@ -21,4 +21,4 @@ export const AuthLabeledContainer = styled.div`
     right: 0;
     transform: translateY(-50%);
   }
-`
+`;

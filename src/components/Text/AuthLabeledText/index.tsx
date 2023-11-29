@@ -1,3 +1,3 @@
-import AuthLabeledText from "./AuthLabeledText";
+import AuthLabeledText from './AuthLabeledText';
 
 export default AuthLabeledText;

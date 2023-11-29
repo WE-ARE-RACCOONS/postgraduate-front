@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const FullModalContainer = styled.div`
   width: 600px;
@@ -12,4 +12,4 @@ export const FullModalContainer = styled.div`
   @media (max-width: 600px) {
     width: 360px;
   }
-`
+`;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const TextFieldContainer = styled.div`
   width: 20.5rem;
@@ -12,4 +12,4 @@ export const TextFieldContainer = styled.div`
     width: 18.5rem;
     height: max-content;
   }
-`
+`;

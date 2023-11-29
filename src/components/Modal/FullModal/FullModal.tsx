@@ -1,15 +1,15 @@
-import { FullModalProps } from "@/types/modal/full";
-import { FullModalContainer } from "./FullModal.styled";
-import MBestCaseContent from "@/components/Content/MBestCaseContent";
+import { FullModalProps } from '@/types/modal/full';
+import { FullModalContainer } from './FullModal.styled';
+import MBestCaseContent from '@/components/Content/MBestCaseContent';
 
 function FullModal(props: FullModalProps) {
-  return(
+  return (
     <FullModalContainer>
       {props.modalType == 'best-case' && (
         <MBestCaseContent modalHandler={props.modalHandler} />
       )}
     </FullModalContainer>
-  )
+  );
 }
 
 export default FullModal;

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const RoundedImgContainer = styled.div`
   width: 4.5rem;
@@ -10,4 +10,4 @@ export const RoundedImgContainer = styled.div`
     border: 0;
     border-radius: 50%;
   }
-`
+`;

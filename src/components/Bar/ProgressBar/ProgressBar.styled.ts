@@ -1,4 +1,4 @@
-import styled from "styled-components"
+import styled from 'styled-components';
 
 export const StepperContainer = styled.div`
   width: 21rem;
@@ -16,9 +16,9 @@ export const StepperContainer = styled.div`
   .active {
     width: 7rem;
   }
-`
+`;
 
 export const StepperTab = styled.div`
   width: 7rem;
   height: 0.5rem;
-`
+`;

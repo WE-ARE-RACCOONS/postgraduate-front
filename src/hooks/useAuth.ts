@@ -121,7 +121,7 @@ function useAuth() {
     setRefreshToken,
     getAccessToken,
     getRefreshToken,
-    setUserType
+    setUserType,
   };
 }
 

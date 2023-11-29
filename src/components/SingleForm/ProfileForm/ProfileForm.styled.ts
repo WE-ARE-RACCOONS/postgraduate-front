@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProfileFormContainer = styled.div`
   width: 21rem;
@@ -13,7 +13,7 @@ export const ProfileFormContainer = styled.div`
     height: 4.7rem;
     resize: none;
   }
-`
+`;
 
 export const ProfileTitleContainer = styled.div`
   width: 21rem;
@@ -21,4 +21,4 @@ export const ProfileTitleContainer = styled.div`
   background-color: #d9d9d9;
   display: flex;
   justify-content: space-between;
-`
+`;

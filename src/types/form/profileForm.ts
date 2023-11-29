@@ -1,4 +1,4 @@
-import { SetStateAction } from "jotai";
+import { SetStateAction } from 'jotai';
 
 type SetAtom<Args extends any[], Result> = (...args: Args) => Result;
 

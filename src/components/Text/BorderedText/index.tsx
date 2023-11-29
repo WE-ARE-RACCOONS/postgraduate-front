@@ -1,3 +1,3 @@
-import BorderedText from "./BorderedText";
+import BorderedText from './BorderedText';
 
 export default BorderedText;

@@ -1,3 +1,3 @@
-import FullModal from "./FullModal";
+import FullModal from './FullModal';
 
 export default FullModal;

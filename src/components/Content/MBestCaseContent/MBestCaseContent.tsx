@@ -1,15 +1,15 @@
-import { MBestCaseContainer } from "./MBestCaseContent.styled";
+import { MBestCaseContainer } from './MBestCaseContent.styled';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import user_img from '../../../../public/user.png';
-import RoundedImage from "@/components/Image/RoundedImage";
-import DividedText from "@/components/Text/DividedText";
-import AuthLabeledText from "@/components/Text/AuthLabeledText";
-import BorderedText from "@/components/Text/BorderedText";
-import TextField from "@/components/Text/TextField";
+import RoundedImage from '@/components/Image/RoundedImage';
+import DividedText from '@/components/Text/DividedText';
+import AuthLabeledText from '@/components/Text/AuthLabeledText';
+import BorderedText from '@/components/Text/BorderedText';
+import TextField from '@/components/Text/TextField';
 
-function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
-  return(
+function MBestCaseContent({ modalHandler }: { modalHandler: () => void }) {
+  return (
     <MBestCaseContainer>
       <Image
         id="x-icon"
@@ -42,7 +42,7 @@ function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
         <TextField content="추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다" />
       </div>
     </MBestCaseContainer>
-  )
+  );
 }
 
 export default MBestCaseContent;

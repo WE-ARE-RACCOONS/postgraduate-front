@@ -1,3 +1,3 @@
-import DividedText from "./DividedText";
+import DividedText from './DividedText';
 
 export default DividedText;

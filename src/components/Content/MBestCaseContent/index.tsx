@@ -1,3 +1,3 @@
-import MBestCaseContent from "./MBestCaseContent";
+import MBestCaseContent from './MBestCaseContent';
 
 export default MBestCaseContent;

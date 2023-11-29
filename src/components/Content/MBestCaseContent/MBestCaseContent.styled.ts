@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const MBestCaseContainer = styled.div`
   width: 100%;
@@ -46,4 +46,4 @@ export const MBestCaseContainer = styled.div`
     font-size: 13px;
     font-weight: 600;
   }
-`
+`;

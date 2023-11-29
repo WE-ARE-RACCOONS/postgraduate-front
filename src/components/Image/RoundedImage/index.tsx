@@ -1,3 +1,3 @@
-import RoundedImage from "./RoundedImage";
+import RoundedImage from './RoundedImage';
 
 export default RoundedImage;
