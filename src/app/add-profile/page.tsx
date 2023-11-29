@@ -1,13 +1,16 @@
 'use client';
 import ProgressBar from "@/components/Bar/ProgressBar";
 import ClickedBtn from "@/components/Button/ClickedBtn";
+import FullModal from "@/components/Modal/FullModal";
 import ProfileForm from "@/components/SingleForm/ProfileForm";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import { PROFILE_PLACEHOLDER, PROFILE_TITLE } from "@/constants/form/cProfileForm";
+import useModal from "@/hooks/useModal";
 import { sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from "@/stores/senior";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import styled from "styled-components";
 
 function AddProfilePage() {
@@ -17,6 +20,7 @@ function AddProfilePage() {
   const [flag, setFlag] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
   const router = useRouter();
+  const { modal, modalHandler, portalElement } = useModal('senior-best-case-portal');
 
   const handleClick = () => {
     if(!singleIntro) {
@@ -74,12 +78,13 @@ function AddProfilePage() {
         placeholder={PROFILE_PLACEHOLDER.recommended_for} 
         maxLength={1000}
         changeHandler={setRecommended} />
-      <ClickedBtn btnText="우수 대학원 선배 프로필 보기" clickHandler={() => {/** 모달 핸들러 */}} />
+      <ClickedBtn btnText="우수 대학원 선배 프로필 보기" clickHandler={() => {modalHandler()}} />
       {flag && <SingleValidator msg={alertMsg} textColor="#FF0000" />}
       <div>
         <button onClick={() => {router.push('/mypage')}}>이전</button>
         <button onClick={handleClick}>다음</button>
       </div>
+      {modal && portalElement ? createPortal(<FullModal />, portalElement) : null}
     </AddProfilePageContainer>
   );
 }

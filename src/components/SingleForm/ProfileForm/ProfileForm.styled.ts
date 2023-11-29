@@ -11,6 +11,7 @@ export const ProfileFormContainer = styled.div`
   #multi-profile-form {
     width: 21rem;
     height: 4.7rem;
+    resize: none;
   }
 `
 
