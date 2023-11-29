@@ -6,6 +6,7 @@ import RoundedImage from "@/components/Image/RoundedImage";
 import DividedText from "@/components/Text/DividedText";
 import AuthLabeledText from "@/components/Text/AuthLabeledText";
 import BorderedText from "@/components/Text/BorderedText";
+import TextField from "@/components/Text/TextField";
 
 function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
   return(
@@ -31,6 +32,14 @@ function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
         <div className="profile-tag">#멘토링 1회</div>
         <div className="profile-tag">#리뷰 1회</div>
         <div className="profile-tag">#멘토링 1회당 40분</div>
+      </div>
+      <div className="profile-field">
+        <div className="profile-field-title">한줄 소개</div>
+        <TextField content="한줄 소개 예시입니다 한줄 소개 예시입니다 한줄 소개 예시입니다 한줄 소개 예시입니다" />
+      </div>
+      <div className="profile-field">
+        <div className="profile-field-title">이런 분들께 추천드려요</div>
+        <TextField content="추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다 추천 대상 예시입니다" />
       </div>
     </MBestCaseContainer>
   )

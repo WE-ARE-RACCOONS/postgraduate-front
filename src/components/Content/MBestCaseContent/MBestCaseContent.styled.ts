@@ -34,4 +34,16 @@ export const MBestCaseContainer = styled.div`
     height: 0.75rem;
     margin: 0 0.125rem;
   }
+
+  .profile-field {
+    width: 20.5rem;
+    height: max-content;
+  }
+
+  .profile-field-title {
+    width: 20.5rem;
+    height: 0.875rem;
+    font-size: 13px;
+    font-weight: 600;
+  }
 `
