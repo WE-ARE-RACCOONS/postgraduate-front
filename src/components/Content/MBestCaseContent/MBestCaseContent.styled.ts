@@ -13,4 +13,12 @@ export const MBestCaseContainer = styled.div`
     right: 1rem;
     cursor: pointer;
   }
+
+  #keyword-container {
+    width: 20.5rem;
+    height: max-content;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 `
