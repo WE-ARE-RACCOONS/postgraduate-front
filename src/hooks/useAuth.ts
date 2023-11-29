@@ -1,3 +1,4 @@
+import { USER_TYPE } from '@/constants/user/cUser';
 import { userTypeAtom } from '@/stores/signup';
 import { accessExpireAtom, accessTokenAtom } from '@/stores/user';
 import { SetTokenProps } from '@/types/user/user';
@@ -34,13 +35,13 @@ function useAuth() {
   /** ADMIN | USER | SENIOR 값에 맞춰 user type 세팅 */
   function setUserType(serverType: string) {
     switch (serverType) {
-      case 'ADMIN':
+      case USER_TYPE.admin:
         setType('admin');
         break;
-      case 'USER':
+      case USER_TYPE.junior:
         setType('junior');
         break;
-      case 'SENIOR':
+      case USER_TYPE.senior:
         setType('senior');
         break;
       default:
