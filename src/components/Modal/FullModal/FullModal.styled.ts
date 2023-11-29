@@ -7,7 +7,7 @@ export const FullModalContainer = styled.div`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  background-color: lemonchiffon;
+  background-color: #fff;
 
   @media (max-width: 600px) {
     width: 360px;
