@@ -70,7 +70,7 @@ function AddProfilePage() {
 
   return (
     <AddProfilePageContainer>
-      <ProgressBar activeTab={0} />
+      <ProgressBar activeNum={0} />
       <ProfileForm
         lineType="single"
         title={PROFILE_TITLE.single_introduce}
