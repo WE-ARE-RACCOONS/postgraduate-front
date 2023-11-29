@@ -27,6 +27,11 @@ function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
         <BorderedText str="김선배 카이스트 연구실" />
         <BorderedText str="김선배 교수님" />
       </div>
+      <div id="tag-container">
+        <div className="profile-tag">#멘토링 1회</div>
+        <div className="profile-tag">#리뷰 1회</div>
+        <div className="profile-tag">#멘토링 1회당 40분</div>
+      </div>
     </MBestCaseContainer>
   )
 }
