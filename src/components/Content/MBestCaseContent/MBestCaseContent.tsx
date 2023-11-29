@@ -4,6 +4,7 @@ import x_icon from '../../../../public/x.png';
 import user_img from '../../../../public/user.png';
 import RoundedImage from "@/components/Image/RoundedImage";
 import DividedText from "@/components/Text/DividedText";
+import AuthLabeledText from "@/components/Text/AuthLabeledText";
 
 function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
   return(
@@ -18,6 +19,7 @@ function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
       />
       <RoundedImage imgSrc={user_img} altMsg="선배 프로필 이미지" />
       <DividedText firStr="대학원" secStr="학과" />
+      <AuthLabeledText str="닉네임" />
     </MBestCaseContainer>
   )
 }
