@@ -23,7 +23,7 @@ function SignUpBtn() {
   const field = useAtomValue(desiredField);
   const matchingReceive = useAtomValue(matchingReceiveAtom);
   const router = useRouter();
-  const { setAccessToken, setRefreshToken } = useAuth();
+  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
 
   const handleSignUp = () => {
     if (socialId && nickName) {
@@ -48,6 +48,8 @@ function SignUpBtn() {
               token: response.data.refreshToken,
               expires: response.data.refreshExpiration,
             });
+            setUserType(response.data.role);
+
             router.push('/signup/done');
           }
         })

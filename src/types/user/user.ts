@@ -3,4 +3,4 @@ export interface SetTokenProps {
   expires: number;
 }
 
-export type userType = 'senior' | 'junior';
+export type userType = 'senior' | 'junior' | 'admin';

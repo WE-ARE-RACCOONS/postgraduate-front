@@ -7,19 +7,17 @@ import useAuth from '@/hooks/useAuth';
 
 function KakaoPage() {
   const router = useRouter();
-  const { setAccessToken, setRefreshToken } = useAuth();
+  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-
     axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login`, {
         code: code,
       })
       .then((res) => {
         const response = res.data;
-
         if (response.code == 'AU205') {
           router.replace(`/signup/${response.data.socialId}`);
           return;
@@ -34,6 +32,7 @@ function KakaoPage() {
             token: response.data.refreshToken,
             expires: response.data.refreshExpiration,
           });
+          setUserType(response.data.role);
 
           router.replace('/');
           return;

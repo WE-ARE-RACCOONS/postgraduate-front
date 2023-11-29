@@ -15,3 +15,7 @@ export const totalFieldAtom = atom<Array<string>>([
   '에너지',
 ]);
 export const selectedFieldAtom = atom<Array<string>>([]);
+
+export const sSingleIntroduce = atom<string>('');
+export const sMultiIntroduce = atom<string>('');
+export const sRecommendedFor = atom<string>('');
