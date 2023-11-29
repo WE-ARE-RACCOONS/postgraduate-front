@@ -1,6 +1,7 @@
+import { FullModalProps } from "@/types/modal/full";
 import { FullModalContainer } from "./FullModal.styled";
 
-function FullModal() {
+function FullModal(props: FullModalProps) {
   return(
     <FullModalContainer></FullModalContainer>
   )

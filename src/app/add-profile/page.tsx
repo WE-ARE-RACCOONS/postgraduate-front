@@ -84,7 +84,7 @@ function AddProfilePage() {
         <button onClick={() => {router.push('/mypage')}}>이전</button>
         <button onClick={handleClick}>다음</button>
       </div>
-      {modal && portalElement ? createPortal(<FullModal />, portalElement) : null}
+      {modal && portalElement ? createPortal(<FullModal modalType="best-case" modalHandler={modalHandler} />, portalElement) : null}
     </AddProfilePageContainer>
   );
 }
