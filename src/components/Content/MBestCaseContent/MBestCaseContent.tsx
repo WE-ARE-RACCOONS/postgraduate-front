@@ -1,6 +1,8 @@
 import { MBestCaseContainer } from "./MBestCaseContent.styled";
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
+import user_img from '../../../../public/user.png';
+import RoundedImage from "@/components/Image/RoundedImage";
 
 function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
   return(
@@ -13,6 +15,7 @@ function MBestCaseContent({ modalHandler } : { modalHandler: () => void }) {
         priority
         onClick={modalHandler}
       />
+      <RoundedImage imgSrc={user_img} altMsg="선배 프로필 이미지" />
     </MBestCaseContainer>
   )
 }
