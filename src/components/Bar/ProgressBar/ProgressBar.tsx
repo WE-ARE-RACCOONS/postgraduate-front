@@ -1,9 +1,9 @@
 import { useEffect } from 'react';
 import { StepperContainer, StepperTab } from './ProgressBar.styled';
 
-function ProgressBar({ activeTab }: { activeTab: number }) {
+function ProgressBar({ activeNum }: { activeNum: number }) {
   useEffect(() => {
-    const activeStep = document.getElementById(`stepper-tab-${activeTab}`);
+    const activeStep = document.getElementById(`stepper-tab-${activeNum}`);
     activeStep?.classList.add('active');
   }, []);
 
