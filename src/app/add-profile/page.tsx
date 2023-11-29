@@ -1,6 +1,7 @@
 'use client';
 import ProgressBar from "@/components/Bar/ProgressBar";
 import ClickedBtn from "@/components/Button/ClickedBtn";
+import DimmedModal from "@/components/Modal/DimmedModal";
 import FullModal from "@/components/Modal/FullModal";
 import ProfileForm from "@/components/SingleForm/ProfileForm";
 import SingleValidator from "@/components/Validator/SingleValidator";
@@ -84,7 +85,8 @@ function AddProfilePage() {
         <button onClick={() => {router.push('/mypage')}}>이전</button>
         <button onClick={handleClick}>다음</button>
       </div>
-      {modal && portalElement ? createPortal(<FullModal modalType="best-case" modalHandler={modalHandler} />, portalElement) : null}
+      {/* {modal && portalElement ? createPortal(<FullModal modalType="best-case" modalHandler={modalHandler} />, portalElement) : null} */}
+      {modal && portalElement ? createPortal(<DimmedModal modalType="postgraduProfile" modalHandler={modalHandler} />, portalElement) : null}
     </AddProfilePageContainer>
   );
 }
