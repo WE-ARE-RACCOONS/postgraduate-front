@@ -1,12 +1,12 @@
 'use client';
 import MenuBar from '@/components/Bar/MenuBar';
 import Login from '@/components/kakao/login';
-import { SeverAccessProvider } from '@/context/SeverAccessProvider';
 import { useEffect } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
-import FieldTapBar from '@/components/FieldTapBar/FieldTapBar';
+import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
+import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
 
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
@@ -24,13 +24,16 @@ export default function Home() {
       <HomeFieldLayer>
         <FieldTapBar/>
       </HomeFieldLayer>
-      <HomeUnivLayer>대학생 탭</HomeUnivLayer>
+      <HomeUnivLayer>
+        <UnivTapBar/>
+      </HomeUnivLayer>
       <HomeProfileLayer>
       {/* {data && data!.length !== 0
           ? data!.map((el, idx) => {
               return <SeniorProfile key={idx} data={el} />;
             })
           : '해당하는 선배가 없어요'} */}
+           <SeniorProfile/>
       </HomeProfileLayer>
     <MenuBar />
     </HomeLayer>
