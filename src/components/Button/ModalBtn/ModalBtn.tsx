@@ -4,6 +4,9 @@ import { StyledModalBtn } from './ModalBtn.styled';
 function ModalBtn(props: ModalBtnProps) {
   const handleClick = () => {
     props.modalHandler();
+    if (props.cancelModalHandler) {
+      props.cancelModalHandler();
+    }
     if (props.onClick) props.onClick();
   };
 
