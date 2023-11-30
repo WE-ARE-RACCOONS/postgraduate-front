@@ -5,13 +5,21 @@ import { PROFILE_DIRECTION, PROFILE_PLACEHOLDER, PROFILE_SUB_DIRECTION } from "@
 import { sAbleTime } from "@/stores/senior";
 import { useAtom } from "jotai";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function AddTimePage() {
   const [ableTime, setAbleTime] = useAtom(sAbleTime);
   const [flag, setFlag] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if(ableTime) {
+      const targetForm = document.querySelector('#add-time-textarea') as HTMLTextAreaElement;
+      targetForm.value = ableTime;
+      return;
+    }
+  }, []);
 
   const handleClick = () => {
     if(!ableTime) {
