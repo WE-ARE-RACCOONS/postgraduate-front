@@ -12,7 +12,6 @@ function Login() {
 
   return (
     <div>
-      카카오 로그인 입니다
       <button type="button" onClick={loginHandler}>
         로그인 하기
       </button>
