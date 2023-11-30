@@ -1,16 +1,17 @@
 import React from 'react';
 import 'swiper/css/bundle'; 
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Scrollbar, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import { Img } from './Swiper.styled';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/autoplay';
 
 
 const SwiperComponent = () => {
-    SwiperCore.use([Navigation, Scrollbar, Autoplay]);
+    SwiperCore.use([Navigation, Pagination, Autoplay]);
   return (
     <Swiper
       navigation
@@ -18,8 +19,8 @@ const SwiperComponent = () => {
       spaceBetween={50}
       slidesPerView={1}
       loop={true}
-      autoplay={false}
-      style={{ height: '100%'}}
+      autoplay={{ delay: 5000, disableOnInteraction: false }} 
+      style={{ height: '6.7rem'}}
     >
       <SwiperSlide>
         <Img src="/racoon1.png" alt="Image 1" />
