@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
-
+import SwiperComponent from '@/components/Swiper/Swiper';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
 
@@ -20,7 +20,9 @@ export default function Home() {
       <HomeTopLayer>
       <Login />
       </HomeTopLayer>
-      <HomeBannerLayer>배너 넣기</HomeBannerLayer>
+      <HomeBannerLayer>
+        <SwiperComponent/>
+      </HomeBannerLayer>
       <HomeFieldLayer>
         <FieldTapBar/>
       </HomeFieldLayer>
