@@ -20,3 +20,4 @@ export const sSingleIntroduce = atom<string>('');
 export const sMultiIntroduce = atom<string>('');
 export const sRecommendedFor = atom<string>('');
 export const sAbleTime = atom<string>('');
+export const sChatLink = atom<string>('');
