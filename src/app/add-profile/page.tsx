@@ -77,21 +77,21 @@ function AddProfilePage() {
       <div>{PROFILE_SUB_DIRECTION.addProfile}</div>
       <ProfileForm
         lineType="single"
-        title={PROFILE_TITLE.single_introduce}
-        placeholder={PROFILE_PLACEHOLDER.single_introduce}
+        title={PROFILE_TITLE.singleIntroduce}
+        placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
         changeHandler={setSingleIntro}
       />
       <ProfileForm
         lineType="multi"
-        title={PROFILE_TITLE.multi_introduce}
-        placeholder={PROFILE_PLACEHOLDER.multi_introduce}
+        title={PROFILE_TITLE.multiIntroduce}
+        placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
         maxLength={1000}
         changeHandler={setMultiIntro}
       />
       <ProfileForm
         lineType="multi"
-        title={PROFILE_TITLE.recommended_for}
-        placeholder={PROFILE_PLACEHOLDER.recommended_for}
+        title={PROFILE_TITLE.recommendedFor}
+        placeholder={PROFILE_PLACEHOLDER.recommendedFor}
         maxLength={1000}
         changeHandler={setRecommended}
       />
