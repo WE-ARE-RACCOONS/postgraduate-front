@@ -6,7 +6,9 @@ import FullModal from '@/components/Modal/FullModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
+  PROFILE_DIRECTION,
   PROFILE_PLACEHOLDER,
+  PROFILE_SUB_DIRECTION,
   PROFILE_TITLE,
 } from '@/constants/form/cProfileForm';
 import useModal from '@/hooks/useModal';
@@ -71,8 +73,8 @@ function AddProfilePage() {
   return (
     <AddProfilePageContainer>
       <ProgressBar activeNum={0} />
-      <h3>진행하실 멘토링을 소개해주세요</h3>
-      <div>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
+      <h3>{PROFILE_DIRECTION.addProfile}</h3>
+      <div>{PROFILE_SUB_DIRECTION.addProfile}</div>
       <ProfileForm
         lineType="single"
         title={PROFILE_TITLE.single_introduce}

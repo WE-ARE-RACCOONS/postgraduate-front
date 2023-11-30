@@ -12,10 +12,10 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <>
       기본 루트 페이지 입니다
       <Login />
       <MenuBar />
-    </div>
+    </>
   );
 }
