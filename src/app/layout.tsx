@@ -27,6 +27,8 @@ export default function RootLayout({
         <Providers>
           {children}
           <div id="senior-info-portal"></div>
+          <div id="junior-mentoring-detail"></div>
+          <div id="junior-mentoring-cancel"></div>
           <div id="senior-profile-portal"></div>
         </Providers>
       </body>

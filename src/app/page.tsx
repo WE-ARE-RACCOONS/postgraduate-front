@@ -1,5 +1,5 @@
 'use client';
-import MenuBar from '@/components/MenuBar';
+import MenuBar from '@/components/Bar/MenuBar';
 import Login from '@/components/kakao/login';
 import { SeverAccessProvider } from '@/context/SeverAccessProvider';
 import { useEffect } from 'react';
