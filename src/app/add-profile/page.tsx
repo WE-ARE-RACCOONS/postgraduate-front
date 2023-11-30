@@ -71,6 +71,8 @@ function AddProfilePage() {
   return (
     <AddProfilePageContainer>
       <ProgressBar activeNum={0} />
+      <h3>진행하실 멘토링을 소개해주세요</h3>
+      <div>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
       <ProfileForm
         lineType="single"
         title={PROFILE_TITLE.single_introduce}
