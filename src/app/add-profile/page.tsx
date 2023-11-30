@@ -19,7 +19,7 @@ import {
 } from '@/stores/senior';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -79,6 +79,8 @@ function AddProfilePage() {
         lineType="single"
         title={PROFILE_TITLE.singleIntroduce}
         placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
+        formType='singleIntro'
+        loadStr={singleIntro}
         changeHandler={setSingleIntro}
       />
       <ProfileForm
@@ -86,6 +88,8 @@ function AddProfilePage() {
         title={PROFILE_TITLE.multiIntroduce}
         placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
         maxLength={1000}
+        formType='multiIntro'
+        loadStr={multiIntro}
         changeHandler={setMultiIntro}
       />
       <ProfileForm
@@ -93,6 +97,8 @@ function AddProfilePage() {
         title={PROFILE_TITLE.recommendedFor}
         placeholder={PROFILE_PLACEHOLDER.recommendedFor}
         maxLength={1000}
+        formType='recommendedFor'
+        loadStr={recommended}
         changeHandler={setRecommended}
       />
       <ClickedBtn
