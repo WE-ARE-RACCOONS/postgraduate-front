@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const SeniorProfileBox = styled.div`
-  width: 30.5rem;
   height: 7.1rem;
   border: 1px solid red;
 `;

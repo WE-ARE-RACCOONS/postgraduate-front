@@ -44,6 +44,7 @@ export default function Home() {
 
 const HomeLayer = styled.div`
   width: inherit;
+  height: inherit;
   border: 1px solid blue;
 `;
 const HomeTopLayer = styled.div`
