@@ -2,16 +2,23 @@
 import ProgressBar from "@/components/Bar/ProgressBar";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import { PROFILE_DIRECTION, PROFILE_PLACEHOLDER, PROFILE_SUB_DIRECTION } from "@/constants/form/cProfileForm";
-import { sChatLink } from "@/stores/senior";
-import { useAtom } from "jotai";
+import useAuth from "@/hooks/useAuth";
+import { sAbleTime, sChatLink, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from "@/stores/senior";
+import axios from "axios";
+import { useAtom, useAtomValue } from "jotai";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function AddChatLinkPage() {
+  const oneLiner = useAtomValue(sSingleIntroduce);
+  const info = useAtomValue(sMultiIntroduce);
+  const target = useAtomValue(sRecommendedFor);
+  const time = useAtomValue(sAbleTime);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [flag, setFlag] = useState(false);
   const router = useRouter();
+  const { getAccessToken } = useAuth();
 
   useEffect(() => {
     if(chatLink) {
@@ -27,8 +34,30 @@ function AddChatLinkPage() {
       return;
     }
 
-    if(chatLink) {
-      router.push('/profile/done');
+    if(chatLink && info && oneLiner && target && time) {
+      const accessTkn = getAccessToken();
+
+      if(accessTkn) {
+        axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`, {
+          info: info,
+          target: target,
+          chatLink: chatLink,
+          time: time,
+          oneLiner: oneLiner
+        }, {
+          headers: {
+            Authorization: `Bearer ${accessTkn}`
+          }
+        }).then((response) => {
+          const res = response.data;
+          if(res.code == 'SNR201') {
+            router.push('/profile/done');
+          }
+        }).catch((err) => {
+          console.error(err);
+        })
+      }
+      
       return;
     }
   }
