@@ -16,32 +16,31 @@ export default function Home() {
   }, []);
 
   return (
-      <HomeLayer>
+    <HomeLayer>
       <HomeTopLayer>
-      <Login />
+        <Login />
       </HomeTopLayer>
       <HomeBannerLayer>
-        <SwiperComponent/>
+        <SwiperComponent />
       </HomeBannerLayer>
       <HomeFieldLayer>
-        <FieldTapBar/>
+        <FieldTapBar />
       </HomeFieldLayer>
       <HomeUnivLayer>
-        <UnivTapBar/>
+        <UnivTapBar />
       </HomeUnivLayer>
       <HomeProfileLayer>
-      {/* {data && data!.length !== 0
+        {/* {data && data!.length !== 0
           ? data!.map((el, idx) => {
               return <SeniorProfile key={idx} data={el} />;
             })
           : '해당하는 선배가 없어요'} */}
-           <SeniorProfile/>
+        <SeniorProfile />
       </HomeProfileLayer>
-    <MenuBar />
+      <MenuBar />
     </HomeLayer>
   );
 }
-
 
 const HomeLayer = styled.div`
   width: inherit;
@@ -65,5 +64,4 @@ const HomeUnivLayer = styled.div`
 `;
 const HomeProfileLayer = styled.div`
   border: 1px solid black;
-
 `;

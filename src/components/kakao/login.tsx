@@ -6,7 +6,7 @@ const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
 function Login() {
   const { getAccessToken } = useAuth();
-    const Token = getAccessToken();
+  const Token = getAccessToken();
   const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
 
   const loginHandler = () => {
@@ -15,10 +15,13 @@ function Login() {
 
   return (
     <div>
-      {Token ? '' : (
+      {Token ? (
+        ''
+      ) : (
         <button type="button" onClick={loginHandler}>
-        로그인 하기
-      </button>)}
+          로그인 하기
+        </button>
+      )}
     </div>
   );
 }
