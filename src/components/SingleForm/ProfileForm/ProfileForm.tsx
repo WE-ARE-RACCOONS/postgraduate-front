@@ -9,8 +9,10 @@ function ProfileForm(props: ProfileFormProps) {
   const [charCount, setCharCount] = useState(0);
 
   useEffect(() => {
-    if(props.loadStr) {
-      const targetForm = document.querySelector(`.profile-form-${props.formType}`) as HTMLInputElement | HTMLTextAreaElement;
+    if (props.loadStr) {
+      const targetForm = document.querySelector(
+        `.profile-form-${props.formType}`,
+      ) as HTMLInputElement | HTMLTextAreaElement;
       targetForm.value = props.loadStr;
       return;
     }

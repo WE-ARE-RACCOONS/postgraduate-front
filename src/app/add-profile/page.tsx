@@ -79,7 +79,7 @@ function AddProfilePage() {
         lineType="single"
         title={PROFILE_TITLE.singleIntroduce}
         placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
-        formType='singleIntro'
+        formType="singleIntro"
         loadStr={singleIntro}
         changeHandler={setSingleIntro}
       />
@@ -88,7 +88,7 @@ function AddProfilePage() {
         title={PROFILE_TITLE.multiIntroduce}
         placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
         maxLength={1000}
-        formType='multiIntro'
+        formType="multiIntro"
         loadStr={multiIntro}
         changeHandler={setMultiIntro}
       />
@@ -97,7 +97,7 @@ function AddProfilePage() {
         title={PROFILE_TITLE.recommendedFor}
         placeholder={PROFILE_PLACEHOLDER.recommendedFor}
         maxLength={1000}
-        formType='recommendedFor'
+        formType="recommendedFor"
         loadStr={recommended}
         changeHandler={setRecommended}
       />

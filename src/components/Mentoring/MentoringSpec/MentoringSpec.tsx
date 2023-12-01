@@ -14,24 +14,24 @@ function MentoringSpec(props: ModalMentoringProps) {
   const [data, setData] = useState<MentoringSpecData | null>(null);
 
   useEffect(() => {
-    if (props.mentoringId!== 0) {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
-    axios
-      .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}`,
-        {
-          headers,
-        },
-      )
-      .then((response) => {
-        setData(response.data.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    if (props.mentoringId !== 0) {
+      const Token = getAccessToken();
+      const headers = {
+        Authorization: `Bearer ${Token}`,
+      };
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}`,
+          {
+            headers,
+          },
+        )
+        .then((response) => {
+          setData(response.data.data);
+        })
+        .catch((error) => {
+          console.error('Error fetching data:', error);
+        });
     }
   }, []);
   return (

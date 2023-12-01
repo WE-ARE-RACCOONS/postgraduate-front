@@ -1,6 +1,6 @@
 'use client';
-import useAuth from "@/hooks/useAuth";
-import { useEffect } from "react";
+import useAuth from '@/hooks/useAuth';
+import { useEffect } from 'react';
 
 function Token() {
   const { getAccessToken } = useAuth();
@@ -9,9 +9,7 @@ function Token() {
     getAccessToken();
   }, []);
 
-  return (
-    <></>
-  )
+  return <></>;
 }
 
 export default Token;

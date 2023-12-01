@@ -1,14 +1,24 @@
 'use client';
-import ProgressBar from "@/components/Bar/ProgressBar";
-import SingleValidator from "@/components/Validator/SingleValidator";
-import { PROFILE_DIRECTION, PROFILE_PLACEHOLDER, PROFILE_SUB_DIRECTION } from "@/constants/form/cProfileForm";
-import useAuth from "@/hooks/useAuth";
-import { sAbleTime, sChatLink, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from "@/stores/senior";
-import axios from "axios";
-import { useAtom, useAtomValue } from "jotai";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
-import styled from "styled-components";
+import ProgressBar from '@/components/Bar/ProgressBar';
+import SingleValidator from '@/components/Validator/SingleValidator';
+import {
+  PROFILE_DIRECTION,
+  PROFILE_PLACEHOLDER,
+  PROFILE_SUB_DIRECTION,
+} from '@/constants/form/cProfileForm';
+import useAuth from '@/hooks/useAuth';
+import {
+  sAbleTime,
+  sChatLink,
+  sMultiIntroduce,
+  sRecommendedFor,
+  sSingleIntroduce,
+} from '@/stores/senior';
+import axios from 'axios';
+import { useAtom, useAtomValue } from 'jotai';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import styled from 'styled-components';
 
 function AddChatLinkPage() {
   const oneLiner = useAtomValue(sSingleIntroduce);
@@ -21,63 +31,92 @@ function AddChatLinkPage() {
   const { getAccessToken } = useAuth();
 
   useEffect(() => {
-    if(chatLink) {
-      const targetForm = document.querySelector('#add-chat-link-form') as HTMLInputElement;
+    if (chatLink) {
+      const targetForm = document.querySelector(
+        '#add-chat-link-form',
+      ) as HTMLInputElement;
       targetForm.value = chatLink;
       return;
     }
   }, []);
 
   const handleClick = () => {
-    if(!chatLink) {
+    if (!chatLink) {
       setFlag(true);
       return;
     }
 
-    if(chatLink && info && oneLiner && target && time) {
+    if (chatLink && info && oneLiner && target && time) {
       const accessTkn = getAccessToken();
 
-      if(accessTkn) {
-        axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`, {
-          info: info,
-          target: target,
-          chatLink: chatLink,
-          time: time,
-          oneLiner: oneLiner
-        }, {
-          headers: {
-            Authorization: `Bearer ${accessTkn}`
-          }
-        }).then((response) => {
-          const res = response.data;
-          if(res.code == 'SNR201') {
-            router.push('/profile/done');
-          }
-        }).catch((err) => {
-          console.error(err);
-        })
+      if (accessTkn) {
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`,
+            {
+              info: info,
+              target: target,
+              chatLink: chatLink,
+              time: time,
+              oneLiner: oneLiner,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR201') {
+              router.push('/profile/done');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
-      
+
       return;
     }
-  }
+  };
 
-  return(
+  return (
     <AddChatLinkContainer>
       <ProgressBar activeNum={2} />
       <h3 id="add-chat-link-direction">{PROFILE_DIRECTION.addChatLink}</h3>
-      <div id="add-chat-link-sub-direction">{PROFILE_SUB_DIRECTION.addChatLink}</div>
+      <div id="add-chat-link-sub-direction">
+        {PROFILE_SUB_DIRECTION.addChatLink}
+      </div>
       <div>
         <div id="add-chat-link-kakao">카카오톡 오픈채팅방 링크</div>
-        <input type="text" id="add-chat-link-form" placeholder={PROFILE_PLACEHOLDER.addChatLink} onChange={(e) => {setChatLink(e.currentTarget.value)}} />
+        <input
+          type="text"
+          id="add-chat-link-form"
+          placeholder={PROFILE_PLACEHOLDER.addChatLink}
+          onChange={(e) => {
+            setChatLink(e.currentTarget.value);
+          }}
+        />
       </div>
-      {flag && <SingleValidator textColor="#FF0000" msg="오픈채팅방 링크를 입력해주세요" />}
+      {flag && (
+        <SingleValidator
+          textColor="#FF0000"
+          msg="오픈채팅방 링크를 입력해주세요"
+        />
+      )}
       <div id="add-chat-link-btn-container">
-        <button onClick={() => {router.back()}}>이전</button>
+        <button
+          onClick={() => {
+            router.back();
+          }}
+        >
+          이전
+        </button>
         <button onClick={handleClick}>가입 완료하기</button>
       </div>
     </AddChatLinkContainer>
-  )
+  );
 }
 
 export default AddChatLinkPage;
@@ -106,4 +145,4 @@ const AddChatLinkContainer = styled.div`
     width: 20.5rem;
     height: 1.75rem;
   }
-`
+`;
