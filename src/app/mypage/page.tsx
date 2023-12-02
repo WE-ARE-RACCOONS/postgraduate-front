@@ -46,7 +46,6 @@ function page() {
       </div>
     ) : (
       <div>
-          {/* Render other components related to authenticated users */}
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
