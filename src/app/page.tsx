@@ -19,9 +19,11 @@ export default function Home() {
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',
   );
-  const { modal : searchModal, modalHandler: searchModalHandler, portalElement:searchPortalElement } = useModal(
-    'search-portal',
-  );
+  const {
+    modal: searchModal,
+    modalHandler: searchModalHandler,
+    portalElement: searchPortalElement,
+  } = useModal('search-portal');
   useEffect(() => {
     setCurrentPath();
   }, []);
@@ -29,7 +31,7 @@ export default function Home() {
   return (
     <HomeLayer>
       <HomeTopLayer>
-      <Image
+        <Image
           id="search"
           src={search}
           alt="검색"
@@ -63,7 +65,7 @@ export default function Home() {
             portalElement,
           )
         : ''}
-        {searchModal && searchPortalElement
+      {searchModal && searchPortalElement
         ? createPortal(
             <SearchModal modalHandler={searchModalHandler} />,
             searchPortalElement,

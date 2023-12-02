@@ -1,3 +1,3 @@
 export interface SearchModalProps {
-    modalHandler: () => void;
-  }
+  modalHandler: () => void;
+}

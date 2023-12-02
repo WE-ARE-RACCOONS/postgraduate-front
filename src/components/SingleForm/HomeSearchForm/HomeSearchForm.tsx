@@ -1,6 +1,8 @@
-import React from 'react'
-import {HomeSearchFormBox,
-    HomeSearchFormInput} from './HomeSearchForm.styled'
+import React from 'react';
+import {
+  HomeSearchFormBox,
+  HomeSearchFormInput,
+} from './HomeSearchForm.styled';
 function HomeSearchForm() {
   return (
     <HomeSearchFormBox>
@@ -9,7 +11,7 @@ function HomeSearchForm() {
         placeholder="대학원, 연구실명, 연구분야로 검색하기"
       />
     </HomeSearchFormBox>
-  )
+  );
 }
 
-export default HomeSearchForm
+export default HomeSearchForm;
