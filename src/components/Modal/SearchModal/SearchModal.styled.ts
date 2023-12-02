@@ -14,10 +14,13 @@ width: 100%;
   `
   export const SearchModalInput = styled.div`
   width: 37.3rem;
+    @media (min-width: 360px) and (max-width: 600px) {
+    width: 360px;
+  }
   height: 8rem;
   top: 0;
 left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+   background-color: #fff;
   position: absolute;
   `
