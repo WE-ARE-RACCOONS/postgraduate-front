@@ -7,7 +7,7 @@ import useAuth from '@/hooks/useAuth';
 
 function KakaoPage() {
   const router = useRouter();
-  const { setAccessToken, setRefreshToken } = useAuth();
+  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
@@ -32,6 +32,7 @@ function KakaoPage() {
             token: response.data.refreshToken,
             expires: response.data.refreshExpiration,
           });
+          setUserType(response.data.role);
 
           router.replace('/');
           return;
