@@ -30,7 +30,13 @@ function MenuBar(props: MenubarProps) {
         홈
       </MenuBox>
       {Token ? (
-        <MenuBox onClick={() => router.push(mentoringPath)}>내 멘토링</MenuBox>
+        <MenuBox
+        onClick={() => {
+          handleClick();
+        }}
+      >
+        내 멘토링
+      </MenuBox>
       ) : (
         <MenuBox
           onClick={() => {
