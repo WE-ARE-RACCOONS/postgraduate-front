@@ -1,3 +1,5 @@
+import { USER_TYPE } from '@/constants/user/cUser';
+import { userTypeAtom } from '@/stores/signup';
 import { accessExpireAtom, accessTokenAtom } from '@/stores/user';
 import { SetTokenProps } from '@/types/user/user';
 import axios from 'axios';
@@ -8,6 +10,7 @@ function useAuth() {
   const [cookies, setCookie] = useCookies(['refresh_token']);
   const [accessTkn, setAccessTkn] = useAtom(accessTokenAtom);
   const [accessExp, setAccessExp] = useAtom(accessExpireAtom);
+  const [type, setType] = useAtom(userTypeAtom);
 
   /** 초 단위 만료 시간 Date 객체로 반환 */
   function calculateExpires(expires: number) {
@@ -27,6 +30,23 @@ function useAuth() {
   function setRefreshToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
     setCookie('refresh_token', props.token, { path: '/', expires });
+  }
+
+  /** ADMIN | USER | SENIOR 값에 맞춰 user type 세팅 */
+  function setUserType(serverType: string) {
+    switch (serverType) {
+      case USER_TYPE.admin:
+        setType('admin');
+        break;
+      case USER_TYPE.junior:
+        setType('junior');
+        break;
+      case USER_TYPE.senior:
+        setType('senior');
+        break;
+      default:
+        break;
+    }
   }
 
   /** access token 또는 재로그인 필요 여부 반환 */
@@ -90,6 +110,7 @@ function useAuth() {
           token: response.data.refreshToken,
           expires: response.data.refreshExpiration,
         });
+        setUserType(response.data.role);
       })
       .catch((err) => {
         console.error(err);
@@ -101,6 +122,7 @@ function useAuth() {
     setRefreshToken,
     getAccessToken,
     getRefreshToken,
+    setUserType,
   };
 }
 
