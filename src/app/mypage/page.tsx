@@ -40,15 +40,15 @@ function page() {
     <div>
       {Token ? (
         <div>
-          <NotLmypage modalHandler={modalHandler}></NotLmypage>
-        </div>
-      ) : (
-        <div>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
           />
           <ProfileManage />
+        </div>
+      ) : (
+        <div>
+          <NotLmypage modalHandler={modalHandler}></NotLmypage>
         </div>
       )}
       <CustomerCenter />
