@@ -5,6 +5,7 @@ import {SearchModalBgBox,
 import { SearchModalProps } from '@/types/modal/search'
 import Image from 'next/image';
 import search from '../../../../public/search.png';
+import HomeSearchForm from '@/components/SingleForm/HomeSearchForm/HomeSearchForm';
 export default function SearchModal(props : SearchModalProps) {
   return (
    <SearchModalBgBox>
@@ -22,6 +23,7 @@ export default function SearchModal(props : SearchModalProps) {
           }}
           
         />
+        <HomeSearchForm/>
 
     </SearchModalInput>
    </SearchModalBgBox>
