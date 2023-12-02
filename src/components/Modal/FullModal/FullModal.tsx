@@ -8,6 +8,9 @@ function FullModal(props: FullModalProps) {
       {props.modalType == 'best-case' && (
         <MBestCaseContent modalHandler={props.modalHandler} />
       )}
+      {props.modalType == 'login-request'&& (
+        <MBestCaseContent modalHandler={props.modalHandler} />
+      )}
     </FullModalContainer>
   );
 }

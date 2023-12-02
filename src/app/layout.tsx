@@ -25,6 +25,7 @@ export default function RootLayout({
           <div id="senior-profile-portal"></div>
           <div id="login-request-portal"></div>
           <div id="senior-best-case-portal"></div>
+          <div id="login-request-full-portal"></div>
         </Providers>
       </body>
     </html>

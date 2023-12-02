@@ -32,7 +32,7 @@ function MenuBar(props: MenubarProps) {
       {Token ? (
         <MenuBox
         onClick={() => {
-          handleClick();
+          router.push(mentoringPath);
         }}
       >
         내 멘토링
@@ -48,7 +48,7 @@ function MenuBar(props: MenubarProps) {
       )}
       <MenuBox
         onClick={() => {
-          handleClick();
+          router.push('/mypage');
         }}
       >
         My
