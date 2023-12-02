@@ -1,3 +1,3 @@
 export interface MenubarProps {
-    modalHandler: () => void;
-  }
+  modalHandler: () => void;
+}

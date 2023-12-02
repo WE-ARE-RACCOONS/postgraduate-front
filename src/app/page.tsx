@@ -45,15 +45,12 @@ export default function Home() {
         {/* <SeniorProfile /> */}
       </HomeProfileLayer>
       <MenuBar modalHandler={modalHandler} />
-      {modal && portalElement ? (
-      createPortal(
-        <DimmedModal
-          modalType="notuser"
-          modalHandler={modalHandler}
-        />,
-        portalElement,
-      )
-    ) : ""}
+      {modal && portalElement
+        ? createPortal(
+            <DimmedModal modalType="notuser" modalHandler={modalHandler} />,
+            portalElement,
+          )
+        : ''}
     </HomeLayer>
   );
 }

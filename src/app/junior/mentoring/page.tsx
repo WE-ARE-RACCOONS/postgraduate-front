@@ -1,17 +1,14 @@
 'use client';
 import TapBar from '@/components/Bar/TapBar/TapBar';
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import { createPortal } from 'react-dom';
 import useModal from '@/hooks/useModal';
 function JuniorMentoringPage() {
-
   return (
     <div>
-
-        <TapBar />
-
+      <TapBar />
     </div>
   );
 }
