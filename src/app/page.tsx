@@ -17,7 +17,6 @@ export default function Home() {
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',
   );
-  const { getAccessToken } = useAuth();
   useEffect(() => {
     setCurrentPath();
   }, []);

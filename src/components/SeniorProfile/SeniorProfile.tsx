@@ -10,21 +10,21 @@ import {
 } from './SeniorProfile.styled';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-
+const { getAccessToken } = useAuth();
 function SeniorProfile() {
-  const { getAccessToken } = useAuth();
-  const Token = getAccessToken();
-  const headers = {
-    Authorization: `Bearer ${Token}`,
-  };
   useEffect(() => {
+    const Token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${Token}`,
+    };
+
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, { headers })
       .then((res) => {})
       .catch((err) => {
         console.error(err);
       });
-  });
+  }, []);
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
