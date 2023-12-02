@@ -25,7 +25,7 @@ function SeniorProfile() {
       .catch((err) => {
         console.error(err);
       });
-  },[]);
+  }, []);
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>

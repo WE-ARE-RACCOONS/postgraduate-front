@@ -1,14 +1,15 @@
-import React from 'react'
+import React from 'react';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import LoginReq from '../../../../public/LoginReq.png';
 import kakao from '../../../../public/kakao.png';
-import {MyLoginRequestBox,
-    Logo,
-    MLBoxTop,
-    MLBoxMiddle,
-    MLBoxBottom
-} from './MyLoginRequest.styled'
+import {
+  MyLoginRequestBox,
+  Logo,
+  MLBoxTop,
+  MLBoxMiddle,
+  MLBoxBottom,
+} from './MyLoginRequest.styled';
 const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
 function MyLoginRequest({ modalHandler }: { modalHandler: () => void }) {
@@ -19,26 +20,26 @@ function MyLoginRequest({ modalHandler }: { modalHandler: () => void }) {
   };
   return (
     <MyLoginRequestBox>
-        <MLBoxTop>
+      <MLBoxTop>
         <Logo>로고자리</Logo>
         <Image
-            id="x-icon"
-            src={x_icon}
-            alt="닫기 버튼"
-            sizes="(max-width: 600px) 3.rem"
-            priority
-            onClick={modalHandler}
-      />
+          id="x-icon"
+          src={x_icon}
+          alt="닫기 버튼"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          onClick={modalHandler}
+        />
       </MLBoxTop>
       <MLBoxMiddle>
-      <Image
-            id="LoginReq"
-            src={LoginReq}
-            alt="로그인 중간 사진"
-            sizes="(max-width: 600px) 18.3.rem"
-            priority
-            onClick={modalHandler}
-      />
+        <Image
+          id="LoginReq"
+          src={LoginReq}
+          alt="로그인 중간 사진"
+          sizes="(max-width: 600px) 18.3.rem"
+          priority
+          onClick={modalHandler}
+        />
       </MLBoxMiddle>
       <MLBoxBottom>
         <div>안녕하세요, </div>
@@ -49,16 +50,15 @@ function MyLoginRequest({ modalHandler }: { modalHandler: () => void }) {
         <div>당신의 고민을 해결해드릴 멘토를 찾아드릴게요!</div>
       </MLBoxBottom>
       <Image
-            id="kakao"
-            src={kakao}
-            alt="카카오톡"
-            sizes="(max-width: 600px) 18.3.rem"
-            priority
-            onClick={handleClick}
+        id="kakao"
+        src={kakao}
+        alt="카카오톡"
+        sizes="(max-width: 600px) 18.3.rem"
+        priority
+        onClick={handleClick}
       />
-
     </MyLoginRequestBox>
-  )
+  );
 }
 
-export default MyLoginRequest
+export default MyLoginRequest;

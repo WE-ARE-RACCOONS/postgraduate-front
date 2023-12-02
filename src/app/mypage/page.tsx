@@ -17,7 +17,7 @@ function page() {
   );
   const { getAccessToken } = useAuth();
   const Token = getAccessToken();
-  
+
   useEffect(() => {
     if (Token) {
       const headers = {
@@ -39,20 +39,18 @@ function page() {
   return (
     <div>
       {Token ? (
-      <div>
-        <NotLmypage 
-        modalHandler={modalHandler}
-        ></NotLmypage>
-      </div>
-    ) : (
-      <div>
+        <div>
+          <NotLmypage modalHandler={modalHandler}></NotLmypage>
+        </div>
+      ) : (
+        <div>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
           />
           <ProfileManage />
         </div>
-    )}
+      )}
       <CustomerCenter />
       {modal && portalElement
         ? createPortal(

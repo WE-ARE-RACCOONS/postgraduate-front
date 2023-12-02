@@ -1,6 +1,6 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const MyLoginRequestBox = styled.div`
-width: 100%;
+  width: 100%;
   height: 100%;
   position: relative;
 
@@ -12,17 +12,14 @@ width: 100%;
     right: 1rem;
     cursor: pointer;
   }
-`
+`;
 export const MLBoxTop = styled.div`
-display: flex;
-`
+  display: flex;
+`;
 export const MLBoxMiddle = styled.div`
-margin-top: 5rem;
-
-`
+  margin-top: 5rem;
+`;
 export const Logo = styled.div`
-border: 1px solid blue;
-`
-export const MLBoxBottom = styled.div`
-
-`
+  border: 1px solid blue;
+`;
+export const MLBoxBottom = styled.div``;
