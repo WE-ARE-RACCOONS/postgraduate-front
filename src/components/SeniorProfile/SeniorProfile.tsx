@@ -10,10 +10,9 @@ import {
 } from './SeniorProfile.styled';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-
+const { getAccessToken } = useAuth();
 function SeniorProfile() {
   useEffect(() => {
-    const { getAccessToken } = useAuth();
     const Token = getAccessToken();
     const headers = {
       Authorization: `Bearer ${Token}`,
