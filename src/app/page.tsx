@@ -8,9 +8,16 @@ import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '@/components/Swiper/Swiper';
+import { createPortal } from 'react-dom';
+import useModal from '@/hooks/useModal';
+import DimmedModal from '@/components/Modal/DimmedModal';
+import useAuth from '@/hooks/useAuth';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-
+  const { modal, modalHandler, portalElement } = useModal(
+    'login-request-portal',
+  );
+  const { getAccessToken } = useAuth();
   useEffect(() => {
     setCurrentPath();
   }, []);
@@ -35,9 +42,18 @@ export default function Home() {
               return <SeniorProfile key={idx} data={el} />;
             })
           : '해당하는 선배가 없어요'} */}
-        <SeniorProfile />
+        {/* <SeniorProfile /> */}
       </HomeProfileLayer>
-      <MenuBar />
+      <MenuBar modalHandler={modalHandler} />
+      {modal && portalElement ? (
+      createPortal(
+        <DimmedModal
+          modalType="notuser"
+          modalHandler={modalHandler}
+        />,
+        portalElement,
+      )
+    ) : ""}
     </HomeLayer>
   );
 }

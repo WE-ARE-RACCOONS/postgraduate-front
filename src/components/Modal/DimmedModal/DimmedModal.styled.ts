@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const DimmedBgContainer = styled.div`
-  width: 600px;
+  width: 100%;
   @media (min-width: 360px) and (max-width: 600px) {
     width: 360px;
   }
