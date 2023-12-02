@@ -11,11 +11,16 @@ import SwiperComponent from '@/components/Swiper/Swiper';
 import { createPortal } from 'react-dom';
 import useModal from '@/hooks/useModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
-import useAuth from '@/hooks/useAuth';
+import Image from 'next/image';
+import search from '../../public/search.png';
+import SearchModal from '@/components/Modal/SearchModal';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',
+  );
+  const { modal : searchModal, modalHandler: searchModalHandler, portalElement:searchPortalElement } = useModal(
+    'search-portal',
   );
   useEffect(() => {
     setCurrentPath();
@@ -24,6 +29,14 @@ export default function Home() {
   return (
     <HomeLayer>
       <HomeTopLayer>
+      <Image
+          id="search"
+          src={search}
+          alt="검색"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          onClick={searchModalHandler}
+        />
         <Login />
       </HomeTopLayer>
       <HomeBannerLayer>
@@ -48,6 +61,12 @@ export default function Home() {
         ? createPortal(
             <DimmedModal modalType="notuser" modalHandler={modalHandler} />,
             portalElement,
+          )
+        : ''}
+        {searchModal && searchPortalElement
+        ? createPortal(
+            <SearchModal modalHandler={searchModalHandler} />,
+            searchPortalElement,
           )
         : ''}
     </HomeLayer>
