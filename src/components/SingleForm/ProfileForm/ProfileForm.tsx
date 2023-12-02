@@ -3,10 +3,20 @@ import {
   ProfileFormContainer,
   ProfileTitleContainer,
 } from './ProfileForm.styled';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 function ProfileForm(props: ProfileFormProps) {
   const [charCount, setCharCount] = useState(0);
+
+  useEffect(() => {
+    if (props.loadStr) {
+      const targetForm = document.querySelector(
+        `.profile-form-${props.formType}`,
+      ) as HTMLInputElement | HTMLTextAreaElement;
+      targetForm.value = props.loadStr;
+      return;
+    }
+  }, []);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -29,6 +39,7 @@ function ProfileForm(props: ProfileFormProps) {
         <input
           type="text"
           id="single-profile-form"
+          className={`profile-form-${props.formType}`}
           placeholder={props.placeholder}
           onChange={(e) => props.changeHandler(e.currentTarget.value)}
         />
@@ -37,6 +48,7 @@ function ProfileForm(props: ProfileFormProps) {
         <textarea
           name="profile-form"
           id="multi-profile-form"
+          className={`profile-form-${props.formType}`}
           placeholder={props.placeholder}
           onChange={(e) => handleChange(e)}
         ></textarea>

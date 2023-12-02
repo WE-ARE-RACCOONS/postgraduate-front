@@ -6,7 +6,9 @@ import FullModal from '@/components/Modal/FullModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
+  PROFILE_DIRECTION,
   PROFILE_PLACEHOLDER,
+  PROFILE_SUB_DIRECTION,
   PROFILE_TITLE,
 } from '@/constants/form/cProfileForm';
 import useModal from '@/hooks/useModal';
@@ -17,7 +19,7 @@ import {
 } from '@/stores/senior';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -71,24 +73,32 @@ function AddProfilePage() {
   return (
     <AddProfilePageContainer>
       <ProgressBar activeNum={0} />
+      <h3>{PROFILE_DIRECTION.addProfile}</h3>
+      <div>{PROFILE_SUB_DIRECTION.addProfile}</div>
       <ProfileForm
         lineType="single"
-        title={PROFILE_TITLE.single_introduce}
-        placeholder={PROFILE_PLACEHOLDER.single_introduce}
+        title={PROFILE_TITLE.singleIntroduce}
+        placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
+        formType="singleIntro"
+        loadStr={singleIntro}
         changeHandler={setSingleIntro}
       />
       <ProfileForm
         lineType="multi"
-        title={PROFILE_TITLE.multi_introduce}
-        placeholder={PROFILE_PLACEHOLDER.multi_introduce}
+        title={PROFILE_TITLE.multiIntroduce}
+        placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
         maxLength={1000}
+        formType="multiIntro"
+        loadStr={multiIntro}
         changeHandler={setMultiIntro}
       />
       <ProfileForm
         lineType="multi"
-        title={PROFILE_TITLE.recommended_for}
-        placeholder={PROFILE_PLACEHOLDER.recommended_for}
+        title={PROFILE_TITLE.recommendedFor}
+        placeholder={PROFILE_PLACEHOLDER.recommendedFor}
         maxLength={1000}
+        formType="recommendedFor"
+        loadStr={recommended}
         changeHandler={setRecommended}
       />
       <ClickedBtn
