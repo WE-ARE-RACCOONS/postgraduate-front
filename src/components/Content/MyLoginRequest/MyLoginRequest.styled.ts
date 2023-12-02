@@ -23,3 +23,6 @@ margin-top: 5rem;
 export const Logo = styled.div`
 border: 1px solid blue;
 `
+export const MLBoxBottom = styled.div`
+
+`
