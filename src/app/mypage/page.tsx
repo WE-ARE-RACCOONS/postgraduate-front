@@ -17,10 +17,6 @@ function page() {
   );
   const { getAccessToken } = useAuth();
   const Token = getAccessToken();
-
-  const handleClick = () => {
-    modalHandler();
-  };
   
   useEffect(() => {
     if (Token) {
@@ -45,9 +41,7 @@ function page() {
       {Token ? (
       <div>
         <NotLmypage 
-        onClick={() => {
-          handleClick();
-        }}
+        modalHandler={modalHandler}
         ></NotLmypage>
       </div>
     ) : (

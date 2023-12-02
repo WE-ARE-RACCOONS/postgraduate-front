@@ -2,8 +2,13 @@ import { NotLoginProps } from '@/types/modal/menubar'
 import React from 'react'
 
 function NotLmypage(props : NotLoginProps) {
+  const handleClick = () => {
+    props.modalHandler();
+  };
   return (
-    <div>
+    <div onClick={() => {
+      handleClick();
+    }}>
         <div id="NLogin-guide-msg">
             로그인 및 회원가입
         </div>
