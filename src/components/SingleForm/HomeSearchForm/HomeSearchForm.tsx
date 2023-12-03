@@ -1,6 +1,6 @@
 'use client';
-import React, { useState,KeyboardEvent } from 'react';
-import { useRouter,usePathname } from 'next/navigation';
+import React, { useState, KeyboardEvent } from 'react';
+import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import {
   HomeSearchFormBox,
@@ -8,18 +8,18 @@ import {
 } from './HomeSearchForm.styled';
 
 function HomeSearchForm() {
-    const [searchTerm, setSearchTerm] = useState('');
-    const router = useRouter();
-    const handleInputChange = (e: React.ChangeEvent<any>) => {
-        setSearchTerm(e.target.value);
-      };
-    const pathname = usePathname();
+  const [searchTerm, setSearchTerm] = useState('');
+  const router = useRouter();
+  const handleInputChange = (e: React.ChangeEvent<any>) => {
+    setSearchTerm(e.target.value);
+  };
+  const pathname = usePathname();
 
-    const keyPressDown = (e: KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter') {
-            router.push(`/search-results?searchTerm=${searchTerm}`);
-      };
+  const keyPressDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      router.push(`/search-results?searchTerm=${searchTerm}`);
     }
+  };
   return (
     <HomeSearchFormBox>
       <HomeSearchFormInput
@@ -29,7 +29,7 @@ function HomeSearchForm() {
         onChange={handleInputChange}
         onKeyDown={keyPressDown}
       />
-    <Link
+      <Link
         href={{
           pathname: '/search-results',
           query: { searchTerm: searchTerm },
