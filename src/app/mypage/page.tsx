@@ -9,11 +9,15 @@ import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
+import DimmedModal from '@/components/Modal/DimmedModal';
 function page() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
+  );
+  const { modal: seniorChangemodal, modalHandler: seiorChangemodalHandler, portalElement: seniorChangePortalElement } = useModal(
+    'senior-request-portal',
   );
   const { getAccessToken } = useAuth();
   const Token = getAccessToken();
@@ -44,7 +48,7 @@ function page() {
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
           />
-          <ProfileManage />
+          <ProfileManage modalHandler={seiorChangemodalHandler} />
         </div>
       ) : (
         <div>
@@ -56,6 +60,12 @@ function page() {
         ? createPortal(
             <FullModal modalType="login-request" modalHandler={modalHandler} />,
             portalElement,
+          )
+        : ''}
+        {seniorChangemodal && seniorChangePortalElement
+        ? createPortal(
+            <DimmedModal  modalType="notSenior"modalHandler={seiorChangemodalHandler} />,
+            seniorChangePortalElement,
           )
         : ''}
     </div>
