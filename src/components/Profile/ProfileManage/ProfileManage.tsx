@@ -1,22 +1,19 @@
 import React from 'react';
 import { ProfileManageBox } from './ProfileManage.styled';
-import { useRouter } from 'next/navigation';
+import JuniorManage from './JuniorManage';
+import SeniorManage from './SeniorManage';
+import { ProfileManageProps } from '@/types/profile/profile';
 
-import ContentComponent from '../Box/ContentBox/ContentBox';
-import TitleComponent from '../Box/TitleBox/TitleBox';
-function ProfileManage() {
-  const router = useRouter();
-  const handleProfileEditClick = () => {
-    router.push('/mypage/edit');
-  };
+function ProfileManage(props: ProfileManageProps) {
   return (
     <ProfileManageBox>
-      <TitleComponent title="회원 상태 변경" />
-      <ContentComponent
-        content="내 정보 수정"
-        onClick={handleProfileEditClick}
-      />
-      <ContentComponent content="대학원선배 회원으로 변경" />
+      {props.userType == 'junior' && <JuniorManage />}
+      {props.userType == 'senior' && (
+        <SeniorManage
+          certifiReg={props.certifiReg}
+          profileReg={props.profileReg}
+        />
+      )}
     </ProfileManageBox>
   );
 }
