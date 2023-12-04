@@ -1,18 +1,42 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { ProfileManageBox } from './ProfileManage.styled';
 import { useRouter } from 'next/navigation';
-
+import axios from 'axios';
 import ContentComponent from '../Box/ContentBox/ContentBox';
 import TitleComponent from '../Box/TitleBox/TitleBox';
 import { NotSeniorProps } from '@/types/modal/mypage';
+import useAuth from '@/hooks/useAuth';
 function ProfileManage(props : NotSeniorProps) {
   const router = useRouter();
+  const [code, setCode] = useState();
   const handleProfileEditClick = () => {
     router.push('/mypage/edit');
   };
-  const handleClick = () => {
-    props.modalHandler();
+
+  const { getAccessToken } = useAuth();
+
+  const handleClick = async () => {
+    try {
+      const Token = getAccessToken();
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/role`, { headers });
+        console.log(response.data.data);
+        if (response.data.data === true) {
+          props.modalHandler();
+        }
+        if (response.data.data === false) {
+          props.modalHandler();
+        }
+
+      }
+    } catch (error) {
+      console.error('Error fetching data from the server:', error);
+    }
   };
+
   return (
     <ProfileManageBox>
       <TitleComponent title="회원 상태 변경" />
