@@ -1,18 +1,18 @@
 import React from 'react';
 import { ProfileManageBox } from './ProfileManage.styled';
-import { userType } from '@/types/user/user';
 import JuniorManage from './JuniorManage';
 import SeniorManage from './SeniorManage';
+import { ProfileManageProps } from '@/types/profile/profile';
 
-function ProfileManage({ userType } : { userType: userType }) {
+function ProfileManage(props: ProfileManageProps) {
 
   return (
     <ProfileManageBox>
-      {userType == 'junior' && (
+      {props.userType == 'junior' && (
         <JuniorManage />
       )}
-      {userType == 'senior' && (
-        <SeniorManage />
+      {props.userType == 'senior' && (
+        <SeniorManage certifiReg={props.certifiReg} profileReg={props.profileReg} />
       )}
     </ProfileManageBox>
   );
