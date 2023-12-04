@@ -1,6 +1,5 @@
 import styled from 'styled-components';
-
-export const DimmedBgContainer = styled.div`
+export const SearchModalBgBox = styled.div`
   width: 100%;
   @media (min-width: 360px) and (max-width: 600px) {
     width: 360px;
@@ -13,13 +12,15 @@ export const DimmedBgContainer = styled.div`
   z-index: 1;
   background-color: rgba(39, 39, 39, 0.48);
 `;
-
-export const DimmedMdContainer = styled.div`
-  width: 19rem;
-  height: 17rem;
-  position: absolute;
-  top: 50%;
+export const SearchModalInput = styled.div`
+  width: 37.3rem;
+  @media (min-width: 360px) and (max-width: 600px) {
+    width: 360px;
+  }
+  height: 8rem;
+  top: 0;
   left: 50%;
   transform: translate(-50%, -50%);
   background-color: #fff;
+  position: absolute;
 `;

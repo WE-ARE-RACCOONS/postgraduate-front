@@ -7,12 +7,19 @@ import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
 import { useAtomValue } from 'jotai';
 import { accessTokenAtom } from '@/stores/user';
+import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
+import useModal from '@/hooks/useModal';
+import { createPortal } from 'react-dom';
+import FullModal from '@/components/Modal/FullModal';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
-  const Token = useAtomValue(accessTokenAtom);
+  const { modal, modalHandler, portalElement } = useModal(
+    'login-request-full-portal',
+  );
   const { getAccessToken } = useAuth();
+  const Token = useAtomValue(accessTokenAtom);
 
   useEffect(() => {
     async function getMyPage() {
@@ -40,12 +47,26 @@ function MyPage() {
 
   return (
     <div>
-      <Profile
-        profile={profile ? profile : ''}
-        nickName={nickName ? nickName : ''}
-      />
-      <ProfileManage />
+      {Token ? (
+        <div>
+          <Profile
+            profile={profile ? profile : ''}
+            nickName={nickName ? nickName : ''}
+          />
+          <ProfileManage />
+        </div>
+      ) : (
+        <div>
+          <NotLmypage modalHandler={modalHandler}></NotLmypage>
+        </div>
+      )}
       <CustomerCenter />
+      {modal && portalElement
+        ? createPortal(
+            <FullModal modalType="login-request" modalHandler={modalHandler} />,
+            portalElement,
+          )
+        : ''}
     </div>
   );
 }
