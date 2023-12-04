@@ -114,7 +114,6 @@ function MyPage() {
             profileReg={profileReg}
             modalHandler={seiorChangemodalHandler}
           />
-
         </div>
       ) : (
         <div>

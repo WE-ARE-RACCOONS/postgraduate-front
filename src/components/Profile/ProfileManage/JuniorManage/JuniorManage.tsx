@@ -44,7 +44,10 @@ function JuniorManage(props: NotSeniorProps) {
         content="내 정보 수정"
         onClick={handleProfileEditClick}
       />
-      <ContentComponent content="대학원선배 회원으로 변경" onClick={handleClick} />
+      <ContentComponent
+        content="대학원선배 회원으로 변경"
+        onClick={handleClick}
+      />
     </JuniorManageContainer>
   );
 }

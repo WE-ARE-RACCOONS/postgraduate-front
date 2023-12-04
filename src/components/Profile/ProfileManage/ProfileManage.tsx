@@ -12,17 +12,18 @@ import JuniorManage from './JuniorManage';
 import SeniorManage from './SeniorManage';
 import { ProfileManageProps } from '@/types/profile/profile';
 function ProfileManage(props: ProfileManageProps) {
-
   return (
     <ProfileManageBox>
-    {props.userType == 'junior' && <JuniorManage modalHandler={props.modalHandler} />}
-    {props.userType == 'senior' && (
-      <SeniorManage
-        certifiReg={props.certifiReg}
-        profileReg={props.profileReg}
-      />
-    )}
-  </ProfileManageBox>
+      {props.userType == 'junior' && (
+        <JuniorManage modalHandler={props.modalHandler} />
+      )}
+      {props.userType == 'senior' && (
+        <SeniorManage
+          certifiReg={props.certifiReg}
+          profileReg={props.profileReg}
+        />
+      )}
+    </ProfileManageBox>
   );
 }
 export default ProfileManage;
