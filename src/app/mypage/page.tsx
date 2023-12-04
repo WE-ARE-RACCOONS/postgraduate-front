@@ -5,29 +5,38 @@ import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCent
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
+import { useAtomValue } from 'jotai';
+import { accessTokenAtom } from '@/stores/user';
 
-function page() {
+function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
+  const Token = useAtomValue(accessTokenAtom);
   const { getAccessToken } = useAuth();
+
   useEffect(() => {
-    if (getAccessToken()) {
-      const Token = getAccessToken();
-      const headers = {
-        Authorization: `Bearer ${Token}`,
-      };
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-        .then((data) => {
-          setnickName(data.data.data.nickName);
-          setprofile(data.data.data.profile);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
+    async function getMyPage() {
+      await getAccessToken();
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+          .then((data) => {
+            setnickName(data.data.data.nickName);
+            setprofile(data.data.data.profile);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+      }
     }
-  }, []);
+
+    getMyPage();
+    
+  }, [Token]);
 
   return (
     <div>
@@ -41,4 +50,4 @@ function page() {
   );
 }
 
-export default page;
+export default MyPage;
