@@ -3,9 +3,7 @@ import React from 'react';
 import x_icon from '../../../../public/x.png';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/navigation';
-import {
-  SENIOR_MODAL
-} from '@/constants/form/notSeniorForm';
+import { SENIOR_MODAL } from '@/constants/form/notSeniorForm';
 import { sAbleTime } from '@/stores/senior';
 import {
   NotSeniorBoxTop,
