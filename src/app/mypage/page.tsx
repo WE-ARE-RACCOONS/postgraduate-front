@@ -12,9 +12,19 @@ import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
+
+import { userType } from '@/types/user/user';
+import SalaryBox from '@/components/Box/SalaryBox';
+import { useRouter } from 'next/navigation';
+import { certiRegType } from '@/types/profile/profile';
+
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
+  const [salaryDate, setSalaryDate] = useState('');
+  const [salaryAmount, setSalaryAmount] = useState(0);
+  const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
+  const [profileReg, setProfileReg] = useState(true);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
@@ -23,24 +33,55 @@ function MyPage() {
     modalHandler: seiorChangemodalHandler,
     portalElement: seniorChangePortalElement,
   } = useModal('senior-request-portal');
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
+  const userType = getUserType();
+  const router = useRouter();
 
   useEffect(() => {
     if (Token) {
       const headers = {
         Authorization: `Bearer ${Token}`,
       };
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-        .then((data) => {
-          setnickName(data.data.data.nickName);
-          setprofile(data.data.data.profile);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
+
+      if (userType == 'junior') {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+          .then((res) => {
+            setnickName(res.data.data.nickName);
+            setprofile(res.data.data.profile);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+        return;
+      }
+
+      if (userType == 'senior') {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
+          .then((res) => {
+            setnickName(res.data.data.nickName);
+            setprofile(res.data.data.profile);
+            setCertifiReg(res.data.data.certificationRegister);
+            setProfileReg(res.data.data.profileRegister);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
+          .then((res) => {
+            if (res.data.code == 'SLR200') {
+              setSalaryDate(res.data.data.salaryDate);
+              setSalaryAmount(res.data.data.salaryAmount);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     }
   }, [Token]);
 
@@ -51,8 +92,29 @@ function MyPage() {
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
+            userType={userType ? (userType as userType) : 'junior'}
+            profileReg={profileReg}
+            certifiReg={certifiReg}
           />
-          <ProfileManage modalHandler={seiorChangemodalHandler} />
+          {userType == 'senior' && (
+            <>
+              <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
+              <button
+                onClick={() => {
+                  router.push('/mypage/salary');
+                }}
+              >
+                정산 내역 보기
+              </button>
+            </>
+          )}
+          <ProfileManage
+            userType={userType ? (userType as userType) : 'junior'}
+            certifiReg={certifiReg}
+            profileReg={profileReg}
+            modalHandler={seiorChangemodalHandler}
+          />
+
         </div>
       ) : (
         <div>

@@ -8,51 +8,21 @@ import { NotSeniorProps } from '@/types/modal/mypage';
 import useAuth from '@/hooks/useAuth';
 import { useAtom } from 'jotai';
 import { socialIdAtom } from '@/stores/signup';
-function ProfileManage(props: NotSeniorProps) {
-  const router = useRouter();
-  const [socialId, setSocialId] = useAtom(socialIdAtom);
-  const handleProfileEditClick = () => {
-    router.push('/mypage/edit');
-  };
-
-  const { getAccessToken } = useAuth();
-
-  const handleClick = async () => {
-    try {
-      const Token = getAccessToken();
-      if (Token) {
-        const headers = {
-          Authorization: `Bearer ${Token}`,
-        };
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/role`,
-          { headers },
-        );
-        if (response.data.data === true) {
-          setSocialId(response.data.socialId);
-        }
-        if (response.data.data === false) {
-          props.modalHandler();
-        }
-      }
-    } catch (error) {
-      console.error('Error fetching data from the server:', error);
-    }
-  };
+import JuniorManage from './JuniorManage';
+import SeniorManage from './SeniorManage';
+import { ProfileManageProps } from '@/types/profile/profile';
+function ProfileManage(props: ProfileManageProps) {
 
   return (
     <ProfileManageBox>
-      <TitleComponent title="회원 상태 변경" />
-      <ContentComponent
-        content="내 정보 수정"
-        onClick={handleProfileEditClick}
+    {props.userType == 'junior' && <JuniorManage modalHandler={props.modalHandler} />}
+    {props.userType == 'senior' && (
+      <SeniorManage
+        certifiReg={props.certifiReg}
+        profileReg={props.profileReg}
       />
-      <ContentComponent
-        content="대학원선배 회원으로 변경"
-        onClick={handleClick}
-      />
-    </ProfileManageBox>
+    )}
+  </ProfileManageBox>
   );
 }
-
 export default ProfileManage;
