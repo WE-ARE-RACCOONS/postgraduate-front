@@ -7,7 +7,6 @@ import useAuth from '@/hooks/useAuth';
 import { useAtom } from 'jotai';
 import { socialIdAtom } from '@/stores/signup';
 
-
 function KakaoPage() {
   const router = useRouter();
   const { setAccessToken, setRefreshToken, setUserType } = useAuth();

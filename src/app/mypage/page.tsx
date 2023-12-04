@@ -42,7 +42,6 @@ function MyPage() {
         });
     } else {
     }
-    
   }, [Token]);
 
   return (

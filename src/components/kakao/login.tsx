@@ -19,8 +19,12 @@ function Login() {
 
   return (
     <div>
-      {Token ? (<></>) : (
-        <button type="button" onClick={loginHandler}>로그인 하기</button>
+      {Token ? (
+        <></>
+      ) : (
+        <button type="button" onClick={loginHandler}>
+          로그인 하기
+        </button>
       )}
     </div>
   );
