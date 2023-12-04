@@ -8,7 +8,7 @@ import { useCookies } from 'react-cookie';
 
 function useAuth() {
   const [cookies, setCookie] = useCookies(['refresh_token']);
-  const [accessTkn, setAccessTkn] = useAtom(accessTokenAtom);
+  // const [accessTkn, setAccessTkn] = useAtom(accessTokenAtom);
   const [accessExp, setAccessExp] = useAtom(accessExpireAtom);
   const [type, setType] = useAtom(userTypeAtom);
 
@@ -19,11 +19,11 @@ function useAuth() {
     return result;
   }
 
-  /** Jotai에 access token 값 및 만료 시간 저장 */
+  /** localStorage에 access token 값 및 만료 시간 저장 */
   function setAccessToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
-    setAccessTkn(props.token);
-    setAccessExp(expires);
+    localStorage.setItem('accessToken',props.token);
+    localStorage.setItem('accessExpire', expires.toString());
   }
 
   /** cookie에 refresh token 값 및 만료 시간 저장 */
@@ -36,13 +36,13 @@ function useAuth() {
   function setUserType(serverType: string) {
     switch (serverType) {
       case USER_TYPE.admin:
-        setType('admin');
+        localStorage.setItem('useType', 'admin');
         break;
       case USER_TYPE.junior:
-        setType('junior');
+        localStorage.setItem('userType', 'junior');
         break;
       case USER_TYPE.senior:
-        setType('senior');
+        localStorage.setItem('useType', 'senior');
         break;
       default:
         break;
@@ -51,13 +51,16 @@ function useAuth() {
 
   /** access token 또는 재로그인 필요 여부 반환 */
   function getAccessToken() {
-    if (accessTkn) {
+    if(typeof window !== 'undefined' && localStorage.hasOwnProperty('accessToken') && localStorage.hasOwnProperty('accessExpire')) {
+      const accessTkn = localStorage.getItem('accessToken');
+      const accessExp = new Date(localStorage.getItem('accessExpire')!);
+
       if (isExpired(accessExp)) {
         if (getRefreshToken()) {
           reissueToken();
           return accessTkn;
         }
-        if (!getRefreshToken()) {
+        else {
           return '';
         }
       }
@@ -65,12 +68,13 @@ function useAuth() {
       if (!isExpired(accessExp)) return accessTkn;
     }
 
-    if (!accessTkn) {
+    else {
       if (getRefreshToken()) {
         reissueToken();
+        const accessTkn = localStorage.getItem('accessToken');
         return accessTkn;
       }
-      if (!getRefreshToken()) {
+      else {
         return '';
       }
     }
@@ -93,28 +97,34 @@ function useAuth() {
 
   /** 토큰 재발급 하는 함수 */
   function reissueToken() {
-    axios
+    try {
+      axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
         headers: {
           Authorization: `Bearer ${getRefreshToken()}`,
         },
       })
-      .then((res) => {
+      .then(async (res) => {
         const response = res.data;
         // code 값에 따라 세팅하는 조건문 추가
-        setAccessToken({
-          token: response.data.accessToken,
-          expires: response.data.accessExpiration,
-        });
-        setRefreshToken({
-          token: response.data.refreshToken,
-          expires: response.data.refreshExpiration,
-        });
-        setUserType(response.data.role);
+        if(response.code && response.code == "AU201") {
+          await setAccessToken({
+            token: response.data.accessToken,
+            expires: response.data.accessExpiration,
+          });
+          await setRefreshToken({
+            token: response.data.refreshToken,
+            expires: response.data.refreshExpiration,
+          });
+          setUserType(response.data.role);
+        }
       })
       .catch((err) => {
         console.error(err);
       });
+    } catch {
+
+    }
   }
 
   return {

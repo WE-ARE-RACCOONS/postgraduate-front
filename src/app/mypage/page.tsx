@@ -5,12 +5,14 @@ import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCent
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
+import { useAtomValue } from 'jotai';
+import { accessTokenAtom } from '@/stores/user';
 import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
-function page() {
+function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
   const { modal, modalHandler, portalElement } = useModal(
@@ -40,7 +42,8 @@ function page() {
         });
     } else {
     }
-  }, []);
+    
+  }, [Token]);
 
   return (
     <div>
@@ -77,4 +80,4 @@ function page() {
   );
 }
 
-export default page;
+export default MyPage;

@@ -7,7 +7,7 @@ import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
-import { TAB_STATE } from '@/constant/tab/ctap';
+import { TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';

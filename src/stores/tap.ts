@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 import { tapType, sftapType } from '@/types/tap/tap';
-import { TAB, SFTAB, SMTAB } from '@/constant/tab/ctap';
+import { TAB, SFTAB, SMTAB } from '@/constants/tab/ctap';
 
 export const activeTabAtom = atom<tapType>(TAB.waiting);
 
