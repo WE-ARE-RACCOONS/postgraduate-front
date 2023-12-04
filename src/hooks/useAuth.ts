@@ -88,6 +88,18 @@ function useAuth() {
     return '';
   }
 
+  /** user type 반환 */
+  function getUserType() {
+    if (
+      typeof window !== undefined &&
+      localStorage.hasOwnProperty('userType')
+    ) {
+      return localStorage.getItem('userType');
+    } else {
+      return '';
+    }
+  }
+
   /** 토큰 만료되었는지 검사하는 함수 */
   function isExpired(expires: Date) {
     const now = new Date();
@@ -108,11 +120,11 @@ function useAuth() {
           const response = res.data;
           // code 값에 따라 세팅하는 조건문 추가
           if (response.code && response.code == 'AU201') {
-            await setAccessToken({
+            setAccessToken({
               token: response.data.accessToken,
               expires: response.data.accessExpiration,
             });
-            await setRefreshToken({
+            setRefreshToken({
               token: response.data.refreshToken,
               expires: response.data.refreshExpiration,
             });
@@ -131,6 +143,7 @@ function useAuth() {
     getAccessToken,
     getRefreshToken,
     setUserType,
+    getUserType,
   };
 }
 

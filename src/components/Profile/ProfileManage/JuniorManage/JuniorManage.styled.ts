@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-export const ProfileManageBox = styled.div`
-  border: 1px solid black;
+
+export const JuniorManageContainer = styled.div`
   width: 20rem;
   height: max-content;
 `;
