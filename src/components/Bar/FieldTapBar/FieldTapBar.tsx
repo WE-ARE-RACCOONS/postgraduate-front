@@ -10,7 +10,6 @@ function FieldTapBar() {
     setFpActiveTab(tabIndex);
   };
 
-  console.log(fpActiveTab);
   return (
     <div>
       <div style={{ display: 'flex' }}>
