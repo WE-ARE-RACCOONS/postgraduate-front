@@ -1,3 +1,4 @@
+import { certiRegType } from "@/types/profile/profile";
 import styled from "styled-components";
 
 export const SeniorManageContainer = styled.div`
@@ -19,7 +20,17 @@ export const SeniorManageAuthBox = styled.div`
   justify-content: space-between;
 `
 
-export const SeniorManageAuthValue = styled.div`
+export const SeniorManageAuthValue = styled.div<{ $certifiReg?: certiRegType }>`
   width: max-content;
   height: 1.75rem;
+
+  color: ${(props) => {
+    if (props.$certifiReg === 'APPROVE' || props.$certifiReg === 'WAITING') {
+      return '#3bf';
+    } else if (props.$certifiReg === 'NOT_APPROVE') {
+      return '#ff0000';
+    } else {
+      return '#000';
+    }
+  }};
 `
