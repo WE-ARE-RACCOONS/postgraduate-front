@@ -10,7 +10,6 @@ function UnivTapBar() {
     setFuActiveTab(tabIndex);
   };
 
-  console.log(fuActiveTab);
   return (
     <div>
       <div style={{ display: 'flex' }}>
