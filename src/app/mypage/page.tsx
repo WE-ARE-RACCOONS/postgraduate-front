@@ -5,14 +5,21 @@ import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCent
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-
+import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
+import useModal from '@/hooks/useModal';
+import { createPortal } from 'react-dom';
+import FullModal from '@/components/Modal/FullModal';
 function page() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
+  const { modal, modalHandler, portalElement } = useModal(
+    'login-request-full-portal',
+  );
   const { getAccessToken } = useAuth();
+  const Token = getAccessToken();
+
   useEffect(() => {
-    if (getAccessToken()) {
-      const Token = getAccessToken();
+    if (Token) {
       const headers = {
         Authorization: `Bearer ${Token}`,
       };
@@ -31,12 +38,26 @@ function page() {
 
   return (
     <div>
-      <Profile
-        profile={profile ? profile : ''}
-        nickName={nickName ? nickName : ''}
-      />
-      <ProfileManage />
+      {Token ? (
+        <div>
+          <Profile
+            profile={profile ? profile : ''}
+            nickName={nickName ? nickName : ''}
+          />
+          <ProfileManage />
+        </div>
+      ) : (
+        <div>
+          <NotLmypage modalHandler={modalHandler}></NotLmypage>
+        </div>
+      )}
       <CustomerCenter />
+      {modal && portalElement
+        ? createPortal(
+            <FullModal modalType="login-request" modalHandler={modalHandler} />,
+            portalElement,
+          )
+        : ''}
     </div>
   );
 }
