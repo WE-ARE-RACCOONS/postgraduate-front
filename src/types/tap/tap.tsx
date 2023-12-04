@@ -1,4 +1,4 @@
-import { TAB, SFTAB, SMTAB } from '@/constant/tab/ctap';
+import { TAB, SFTAB, @/constants/tab/ctapstant/tab/ctap';
 
 export type tapType =
   | typeof TAB.waiting

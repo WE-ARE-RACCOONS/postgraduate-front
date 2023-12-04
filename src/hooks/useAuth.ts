@@ -20,20 +20,20 @@ function useAuth() {
   }
 
   /** Jotai에 access token 값 및 만료 시간 저장 */
-  function setAccessToken(props: SetTokenProps) {
+  async function setAccessToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
     setAccessTkn(props.token);
     setAccessExp(expires);
   }
 
   /** cookie에 refresh token 값 및 만료 시간 저장 */
-  function setRefreshToken(props: SetTokenProps) {
+  async function setRefreshToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
     setCookie('refresh_token', props.token, { path: '/', expires });
   }
 
   /** ADMIN | USER | SENIOR 값에 맞춰 user type 세팅 */
-  function setUserType(serverType: string) {
+  async function setUserType(serverType: string) {
     switch (serverType) {
       case USER_TYPE.admin:
         setType('admin');
@@ -50,14 +50,14 @@ function useAuth() {
   }
 
   /** access token 또는 재로그인 필요 여부 반환 */
-  function getAccessToken() {
+  async function getAccessToken() {
     if (accessTkn) {
       if (isExpired(accessExp)) {
-        if (getRefreshToken()) {
-          reissueToken();
+        if (await getRefreshToken()) {
+          await reissueToken();
           return accessTkn;
         }
-        if (!getRefreshToken()) {
+        else {
           return '';
         }
       }
@@ -66,18 +66,18 @@ function useAuth() {
     }
 
     if (!accessTkn) {
-      if (getRefreshToken()) {
-        reissueToken();
+      if (await getRefreshToken()) {
+        await reissueToken();
         return accessTkn;
       }
-      if (!getRefreshToken()) {
+      else {
         return '';
       }
     }
   }
 
   /** refresh token 반환 */
-  function getRefreshToken() {
+  async function getRefreshToken() {
     if (cookies.refresh_token) {
       return cookies.refresh_token;
     }
@@ -92,29 +92,35 @@ function useAuth() {
   }
 
   /** 토큰 재발급 하는 함수 */
-  function reissueToken() {
-    axios
+  async function reissueToken() {
+    try {
+      await axios
       .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
         headers: {
-          Authorization: `Bearer ${getRefreshToken()}`,
+          Authorization: `Bearer ${await getRefreshToken()}`,
         },
       })
-      .then((res) => {
+      .then(async (res) => {
         const response = res.data;
         // code 값에 따라 세팅하는 조건문 추가
-        setAccessToken({
-          token: response.data.accessToken,
-          expires: response.data.accessExpiration,
-        });
-        setRefreshToken({
-          token: response.data.refreshToken,
-          expires: response.data.refreshExpiration,
-        });
-        setUserType(response.data.role);
+        if(response.code && response.code == "AU201") {
+          await setAccessToken({
+            token: response.data.accessToken,
+            expires: response.data.accessExpiration,
+          });
+          await setRefreshToken({
+            token: response.data.refreshToken,
+            expires: response.data.refreshExpiration,
+          });
+          setUserType(response.data.role);
+        }
       })
       .catch((err) => {
         console.error(err);
       });
+    } catch {
+
+    }
   }
 
   return {

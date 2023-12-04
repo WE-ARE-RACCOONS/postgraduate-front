@@ -5,36 +5,45 @@ import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCent
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
+import { useAtomValue } from 'jotai';
+import { accessTokenAtom } from '@/stores/user';
 import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
-function page() {
+
+function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
   const { getAccessToken } = useAuth();
-  const Token = getAccessToken();
+  const Token = useAtomValue(accessTokenAtom);
 
   useEffect(() => {
-    if (Token) {
-      const headers = {
-        Authorization: `Bearer ${Token}`,
-      };
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-        .then((data) => {
-          setnickName(data.data.data.nickName);
-          setprofile(data.data.data.profile);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    } else {
+    async function getMyPage() {
+      await getAccessToken();
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+          .then((data) => {
+            setnickName(data.data.data.nickName);
+            setprofile(data.data.data.profile);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      } else {
+      }
     }
-  }, []);
+
+    getMyPage();
+    
+  }, [Token]);
 
   return (
     <div>
@@ -62,4 +71,4 @@ function page() {
   );
 }
 
-export default page;
+export default MyPage;

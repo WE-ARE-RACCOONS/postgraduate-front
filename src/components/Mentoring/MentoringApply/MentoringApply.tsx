@@ -12,7 +12,7 @@ import {
 import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
-import { TAB } from '@/constant/tab/ctap';
+import { TAB } from '@/constants/tab/ctap';
 import KakaoOpenChat from '../../KakaoOpenChat/KakaoOpenChat';
 import NaverPoint from '../../NaverPoint/NaverPoint';
 
