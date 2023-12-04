@@ -13,6 +13,7 @@ import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import { userType } from '@/types/user/user';
 import SalaryBox from '@/components/Box/SalaryBox';
+import { useRouter } from 'next/navigation';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -25,6 +26,7 @@ function MyPage() {
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
+  const router = useRouter();
 
   useEffect(() => {
     if (Token) {
@@ -67,7 +69,10 @@ function MyPage() {
             userType={userType ? userType as userType : 'junior'}
           />
           {userType == 'senior' && (
-            <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
+            <>
+              <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
+              <button onClick={() => {router.push('/mypage/salary')}}>정산 내역 보기</button>
+            </>
           )}
           <ProfileManage />
         </div>
