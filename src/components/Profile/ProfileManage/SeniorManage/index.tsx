@@ -1,3 +1,3 @@
-import SeniorManage from "./SeniorManage";
+import SeniorManage from './SeniorManage';
 
 export default SeniorManage;

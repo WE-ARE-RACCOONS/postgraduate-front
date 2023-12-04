@@ -1,4 +1,4 @@
-import { userType } from "../user/user";
+import { userType } from '../user/user';
 
 export type certiRegType = 'NOT_APPROVE' | 'WAITING' | 'APPROVE';
 

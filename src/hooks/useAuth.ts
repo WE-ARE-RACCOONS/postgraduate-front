@@ -22,7 +22,7 @@ function useAuth() {
   /** localStorage에 access token 값 및 만료 시간 저장 */
   function setAccessToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
-    localStorage.setItem('accessToken',props.token);
+    localStorage.setItem('accessToken', props.token);
     localStorage.setItem('accessExpire', expires.toString());
   }
 
@@ -51,7 +51,11 @@ function useAuth() {
 
   /** access token 또는 재로그인 필요 여부 반환 */
   function getAccessToken() {
-    if(typeof window !== 'undefined' && localStorage.hasOwnProperty('accessToken') && localStorage.hasOwnProperty('accessExpire')) {
+    if (
+      typeof window !== 'undefined' &&
+      localStorage.hasOwnProperty('accessToken') &&
+      localStorage.hasOwnProperty('accessExpire')
+    ) {
       const accessTkn = localStorage.getItem('accessToken');
       const accessExp = new Date(localStorage.getItem('accessExpire')!);
 
@@ -59,22 +63,18 @@ function useAuth() {
         if (getRefreshToken()) {
           reissueToken();
           return accessTkn;
-        }
-        else {
+        } else {
           return '';
         }
       }
 
       if (!isExpired(accessExp)) return accessTkn;
-    }
-
-    else {
+    } else {
       if (getRefreshToken()) {
         reissueToken();
         const accessTkn = localStorage.getItem('accessToken');
         return accessTkn;
-      }
-      else {
+      } else {
         return '';
       }
     }
@@ -90,10 +90,12 @@ function useAuth() {
 
   /** user type 반환 */
   function getUserType() {
-    if(typeof window !== undefined && localStorage.hasOwnProperty('userType')) {
+    if (
+      typeof window !== undefined &&
+      localStorage.hasOwnProperty('userType')
+    ) {
       return localStorage.getItem('userType');
-    }
-    else {
+    } else {
       return '';
     }
   }
@@ -109,32 +111,30 @@ function useAuth() {
   function reissueToken() {
     try {
       axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
-        headers: {
-          Authorization: `Bearer ${getRefreshToken()}`,
-        },
-      })
-      .then(async (res) => {
-        const response = res.data;
-        // code 값에 따라 세팅하는 조건문 추가
-        if(response.code && response.code == "AU201") {
-          setAccessToken({
-            token: response.data.accessToken,
-            expires: response.data.accessExpiration,
-          });
-          setRefreshToken({
-            token: response.data.refreshToken,
-            expires: response.data.refreshExpiration,
-          });
-          setUserType(response.data.role);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-    } catch {
-
-    }
+        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
+          headers: {
+            Authorization: `Bearer ${getRefreshToken()}`,
+          },
+        })
+        .then(async (res) => {
+          const response = res.data;
+          // code 값에 따라 세팅하는 조건문 추가
+          if (response.code && response.code == 'AU201') {
+            setAccessToken({
+              token: response.data.accessToken,
+              expires: response.data.accessExpiration,
+            });
+            setRefreshToken({
+              token: response.data.refreshToken,
+              expires: response.data.refreshExpiration,
+            });
+            setUserType(response.data.role);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    } catch {}
   }
 
   return {
@@ -143,7 +143,7 @@ function useAuth() {
     getAccessToken,
     getRefreshToken,
     setUserType,
-    getUserType
+    getUserType,
   };
 }
 

@@ -1,15 +1,19 @@
-import { SalaryBoxProps } from "@/types/box/salaryBox";
-import { SalaryBlock, SalaryBoxContainer, SalaryDesc, SalaryValue } from "./SalaryBox.styled";
+import { SalaryBoxProps } from '@/types/box/salaryBox';
+import {
+  SalaryBlock,
+  SalaryBoxContainer,
+  SalaryDesc,
+  SalaryValue,
+} from './SalaryBox.styled';
 
 function SalaryBox(props: SalaryBoxProps) {
-  
   function addCommas(amount: number) {
     return amount.toLocaleString('ko-KR');
   }
 
   function formatDate(dateStr: string) {
-    if(!dateStr) return '';
-    
+    if (!dateStr) return '';
+
     const splitDate = dateStr.split('-');
     const month = parseInt(splitDate[1]);
     const date = splitDate[2];
@@ -17,7 +21,7 @@ function SalaryBox(props: SalaryBoxProps) {
     return `${month}월 ${date}일`;
   }
 
-  return(
+  return (
     <SalaryBoxContainer>
       <SalaryBlock>
         <SalaryDesc>정산 예정액</SalaryDesc>
@@ -28,7 +32,7 @@ function SalaryBox(props: SalaryBoxProps) {
         <SalaryValue>{formatDate(props.salaryDate)}</SalaryValue>
       </SalaryBlock>
     </SalaryBoxContainer>
-  )
+  );
 }
 
 export default SalaryBox;

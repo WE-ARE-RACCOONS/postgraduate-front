@@ -1,7 +1,7 @@
-import { JuniorManageContainer } from "./JuniorManage.styled";
+import { JuniorManageContainer } from './JuniorManage.styled';
 import ContentComponent from '../../Box/ContentBox';
 import TitleComponent from '../../Box/TitleBox';
-import { useRouter } from "next/navigation";
+import { useRouter } from 'next/navigation';
 
 function JuniorManage() {
   const router = useRouter();
@@ -9,7 +9,7 @@ function JuniorManage() {
     router.push('/mypage/edit');
   };
 
-  return(
+  return (
     <JuniorManageContainer>
       <TitleComponent title="회원 상태 변경" />
       <ContentComponent
@@ -18,7 +18,7 @@ function JuniorManage() {
       />
       <ContentComponent content="대학원선배 회원으로 변경" />
     </JuniorManageContainer>
-  )
+  );
 }
 
 export default JuniorManage;

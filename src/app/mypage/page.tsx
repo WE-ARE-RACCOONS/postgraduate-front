@@ -37,45 +37,45 @@ function MyPage() {
         Authorization: `Bearer ${Token}`,
       };
 
-      if(userType == 'junior') {
+      if (userType == 'junior') {
         axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-        .then((res) => {
-          setnickName(res.data.data.nickName);
-          setprofile(res.data.data.profile);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+          .then((res) => {
+            setnickName(res.data.data.nickName);
+            setprofile(res.data.data.profile);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
         return;
       }
 
-      if(userType == 'senior') {
+      if (userType == 'senior') {
         axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
-        .then((res) => {
-          setnickName(res.data.data.nickName);
-          setprofile(res.data.data.profile);
-          setCertifiReg(res.data.data.certificationRegister);
-          setProfileReg(res.data.data.profileRegister);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
+          .then((res) => {
+            setnickName(res.data.data.nickName);
+            setprofile(res.data.data.profile);
+            setCertifiReg(res.data.data.certificationRegister);
+            setProfileReg(res.data.data.profileRegister);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
 
-        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
-        .then((res) => {
-          if(res.data.code == 'SLR200') {
-            setSalaryDate(res.data.data.salaryDate);
-            setSalaryAmount(res.data.data.salaryAmount);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        })
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
+          .then((res) => {
+            if (res.data.code == 'SLR200') {
+              setSalaryDate(res.data.data.salaryDate);
+              setSalaryAmount(res.data.data.salaryAmount);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
     }
-    
   }, [Token]);
 
   return (
@@ -85,20 +85,27 @@ function MyPage() {
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
-            userType={userType ? userType as userType : 'junior'}
+            userType={userType ? (userType as userType) : 'junior'}
             profileReg={profileReg}
             certifiReg={certifiReg}
           />
           {userType == 'senior' && (
             <>
               <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
-              <button onClick={() => {router.push('/mypage/salary')}}>정산 내역 보기</button>
+              <button
+                onClick={() => {
+                  router.push('/mypage/salary');
+                }}
+              >
+                정산 내역 보기
+              </button>
             </>
           )}
-          <ProfileManage 
-            userType={userType ? userType as userType : 'junior'}
+          <ProfileManage
+            userType={userType ? (userType as userType) : 'junior'}
             certifiReg={certifiReg}
-            profileReg={profileReg} />
+            profileReg={profileReg}
+          />
         </div>
       ) : (
         <div>

@@ -1,4 +1,4 @@
-import { certiRegType } from "./profile";
+import { certiRegType } from './profile';
 
 export interface SeniorManageProps {
   certifiReg: certiRegType;

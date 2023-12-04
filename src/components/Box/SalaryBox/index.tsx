@@ -1,3 +1,3 @@
-import SalaryBox from "./SalaryBox";
+import SalaryBox from './SalaryBox';
 
 export default SalaryBox;

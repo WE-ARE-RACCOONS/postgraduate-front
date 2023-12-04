@@ -20,11 +20,17 @@ function Profile(props: ProfileProps) {
       <ProfileInfo>
         <ProfileName>
           <ProfileNickname>{props.nickName}</ProfileNickname>
-          <ProfileButton>{props.userType == 'junior' ? '후배 회원' : '선배 회원'}</ProfileButton>
+          <ProfileButton>
+            {props.userType == 'junior' ? '후배 회원' : '선배 회원'}
+          </ProfileButton>
         </ProfileName>
-        {!props.profileReg || (props.certifiReg !== 'APPROVE') && (
-          <SingleValidator textColor='#FF0000' msg='아직 멘토링을 진행할 수 없어요' />
-        )}
+        {!props.profileReg ||
+          (props.certifiReg !== 'APPROVE' && (
+            <SingleValidator
+              textColor="#FF0000"
+              msg="아직 멘토링을 진행할 수 없어요"
+            />
+          ))}
       </ProfileInfo>
     </ProfileBox>
   );
