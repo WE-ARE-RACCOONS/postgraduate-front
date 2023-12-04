@@ -19,29 +19,24 @@ function MyPage() {
     'login-request-full-portal',
   );
   const { getAccessToken } = useAuth();
-  const Token = useAtomValue(accessTokenAtom);
+  const Token = getAccessToken();
 
   useEffect(() => {
-    async function getMyPage() {
-      await getAccessToken();
-      if (Token) {
-        const headers = {
-          Authorization: `Bearer ${Token}`,
-        };
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-          .then((data) => {
-            setnickName(data.data.data.nickName);
-            setprofile(data.data.data.profile);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-      } else {
-      }
+    if (Token) {
+      const headers = {
+        Authorization: `Bearer ${Token}`,
+      };
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+        .then((data) => {
+          setnickName(data.data.data.nickName);
+          setprofile(data.data.data.profile);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    } else {
     }
-
-    getMyPage();
     
   }, [Token]);
 
