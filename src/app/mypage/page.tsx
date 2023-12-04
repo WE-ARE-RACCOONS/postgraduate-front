@@ -12,10 +12,13 @@ import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import { userType } from '@/types/user/user';
+import SalaryBox from '@/components/Box/SalaryBox';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
+  const [salaryDate, setSalaryDate] = useState('');
+  const [salaryAmount, setSalaryAmount] = useState(0);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
@@ -24,7 +27,6 @@ function MyPage() {
   const userType = getUserType();
 
   useEffect(() => {
-    console.log(userType);
     if (Token) {
       const headers = {
         Authorization: `Bearer ${Token}`,
@@ -38,7 +40,19 @@ function MyPage() {
         .catch(function (error) {
           console.log(error);
         });
-    } else {
+
+      if(userType == 'senior') {
+        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
+        .then((res) => {
+          if(res.data.code == 'SLR200') {
+            setSalaryDate(res.data.data.salaryDate);
+            setSalaryAmount(res.data.data.salaryAmount);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+      }
     }
     
   }, [Token]);
@@ -52,6 +66,9 @@ function MyPage() {
             nickName={nickName ? nickName : ''}
             userType={userType ? userType as userType : 'junior'}
           />
+          {userType == 'senior' && (
+            <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
+          )}
           <ProfileManage />
         </div>
       ) : (
