@@ -6,9 +6,11 @@ import ContentComponent from '../Box/ContentBox/ContentBox';
 import TitleComponent from '../Box/TitleBox/TitleBox';
 import { NotSeniorProps } from '@/types/modal/mypage';
 import useAuth from '@/hooks/useAuth';
+import { useAtom } from 'jotai';
+import { socialIdAtom } from '@/stores/signup';
 function ProfileManage(props: NotSeniorProps) {
   const router = useRouter();
-  const [code, setCode] = useState();
+  const [socialId, setSocialId] = useAtom(socialIdAtom);
   const handleProfileEditClick = () => {
     router.push('/mypage/edit');
   };
@@ -27,7 +29,7 @@ function ProfileManage(props: NotSeniorProps) {
           { headers },
         );
         if (response.data.data === true) {
-          //여기 대학원다시 마이페이지 로드
+          setSocialId(response.data.socialId);
         }
         if (response.data.data === false) {
           props.modalHandler();
