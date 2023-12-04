@@ -11,6 +11,7 @@ import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
+import { userType } from '@/types/user/user';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -18,10 +19,12 @@ function MyPage() {
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
+  const userType = getUserType();
 
   useEffect(() => {
+    console.log(userType);
     if (Token) {
       const headers = {
         Authorization: `Bearer ${Token}`,
@@ -47,6 +50,7 @@ function MyPage() {
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
+            userType={userType ? userType as userType : 'junior'}
           />
           <ProfileManage />
         </div>

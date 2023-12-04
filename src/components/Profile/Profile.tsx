@@ -10,15 +10,16 @@ import {
   ProfileButton,
   ProfileWarn,
 } from './Profile.styled';
+import { ProfileProps } from '@/types/profile/profile';
 
-function Profile({ profile, nickName }: { profile: string; nickName: string }) {
+function Profile(props: ProfileProps) {
   return (
     <ProfileBox>
       <Image src={'/user.png'} alt="profile image" width={32} height={32} />
       <ProfileInfo>
         <ProfileName>
-          <ProfileNickname>{nickName}</ProfileNickname>
-          <ProfileButton>후배회원</ProfileButton>
+          <ProfileNickname>{props.nickName}</ProfileNickname>
+          <ProfileButton>{props.userType == 'junior' ? '후배 회원' : '선배 회원'}</ProfileButton>
         </ProfileName>
       </ProfileInfo>
     </ProfileBox>
