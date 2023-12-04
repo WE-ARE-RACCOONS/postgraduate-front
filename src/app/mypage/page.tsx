@@ -74,7 +74,7 @@ function MyPage() {
               <button onClick={() => {router.push('/mypage/salary')}}>정산 내역 보기</button>
             </>
           )}
-          <ProfileManage />
+          <ProfileManage userType={userType ? userType as userType : 'junior'} />
         </div>
       ) : (
         <div>
