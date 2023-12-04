@@ -36,13 +36,13 @@ function useAuth() {
   function setUserType(serverType: string) {
     switch (serverType) {
       case USER_TYPE.admin:
-        localStorage.setItem('useType', 'admin');
+        localStorage.setItem('userType', 'admin');
         break;
       case USER_TYPE.junior:
         localStorage.setItem('userType', 'junior');
         break;
       case USER_TYPE.senior:
-        localStorage.setItem('useType', 'senior');
+        localStorage.setItem('userType', 'senior');
         break;
       default:
         break;
