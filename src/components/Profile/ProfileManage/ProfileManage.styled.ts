@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 export const ProfileManageBox = styled.div`
   border: 1px solid black;
-  height: 12rem;
+  width: 20rem;
+  height: max-content;
 `;
