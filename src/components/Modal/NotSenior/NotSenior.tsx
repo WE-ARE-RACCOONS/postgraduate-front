@@ -4,6 +4,10 @@ import x_icon from '../../../../public/x.png';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/navigation';
 import {
+  SENIOR_MODAL
+} from '@/constants/form/notSeniorForm';
+import { sAbleTime } from '@/stores/senior';
+import {
   NotSeniorBoxTop,
   NotSeniorMid,
   NotSeniorBottom,
@@ -16,8 +20,8 @@ function NotSenior(props: NotSeniorProps) {
     props.modalHandler();
   };
   const router = useRouter();
-  const SeniorJoin = () => {
-    router.push(`/signup${socialId}`);
+  const seniorJoin = () => {
+    router.push(`/signup/${socialId}`);
   };
   console.log(socialId);
   return (
@@ -34,12 +38,12 @@ function NotSenior(props: NotSeniorProps) {
         />
       </NotSeniorBoxTop>
       <NotSeniorMid>
-        <div>아직 대학원 선배 회원이 아니에요</div>
-        <p>대학원 선배로 가입이 필요해요</p>
-        <p>가입 후, 멘토링을 진행 할 수 있어요</p>
+        <div>{SENIOR_MODAL.notSeniorUser}</div>
+        <p>{SENIOR_MODAL.needSeniorUserJoin}</p>
+        <p>{SENIOR_MODAL.recommendJoin}</p>
       </NotSeniorMid>
       <NotSeniorBottom>
-        <button onClick={SeniorJoin}>대학원 선배로 가입하기</button>
+        <button onClick={seniorJoin}>대학원 선배로 가입하기</button>
       </NotSeniorBottom>
     </div>
   );
