@@ -16,9 +16,11 @@ function page() {
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
-  const { modal: seniorChangemodal, modalHandler: seiorChangemodalHandler, portalElement: seniorChangePortalElement } = useModal(
-    'senior-request-portal',
-  );
+  const {
+    modal: seniorChangemodal,
+    modalHandler: seiorChangemodalHandler,
+    portalElement: seniorChangePortalElement,
+  } = useModal('senior-request-portal');
   const { getAccessToken } = useAuth();
   const Token = getAccessToken();
 
@@ -62,9 +64,12 @@ function page() {
             portalElement,
           )
         : ''}
-        {seniorChangemodal && seniorChangePortalElement
+      {seniorChangemodal && seniorChangePortalElement
         ? createPortal(
-            <DimmedModal  modalType="notSenior"modalHandler={seiorChangemodalHandler} />,
+            <DimmedModal
+              modalType="notSenior"
+              modalHandler={seiorChangemodalHandler}
+            />,
             seniorChangePortalElement,
           )
         : ''}

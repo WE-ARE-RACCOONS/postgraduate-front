@@ -1,3 +1,3 @@
 export interface NotSeniorProps {
-    modalHandler: () => void;
-  }
+  modalHandler: () => void;
+}
