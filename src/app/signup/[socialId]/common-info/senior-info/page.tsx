@@ -52,7 +52,6 @@ function SeniorInfoPage() {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
-
   const handleSubmit = () => {
     /**
      * 1. 값 다 들어 있나 확인
@@ -96,9 +95,10 @@ function SeniorInfoPage() {
       setEmptyPart('연구 주제 키워드');
       return;
     }
-
+    const headers = {
+      Authorization: `Bearer ${Token}`,
+    };
     setFlag(false);
-
     if (socialId && phoneNumber && nickName && certification) {
       if (Token) {
         axios
@@ -110,6 +110,8 @@ function SeniorInfoPage() {
           field: sField,
           keyword: sKeyword,
           certification: certification,
+        },{
+          headers
         })
         .then((res) => {
           const response = res.data;
