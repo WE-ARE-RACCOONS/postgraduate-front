@@ -6,7 +6,9 @@ import { NotSeniorProps } from '@/types/modal/mypage';
 import useAuth from '@/hooks/useAuth';
 import { useAtom } from 'jotai';
 import { socialIdAtom } from '@/stores/signup';
+import { userType } from '@/types/user/user';
 import axios from 'axios';
+import { USER_TYPE } from '@/constants/user/cUser';
 function JuniorManage(props: NotSeniorProps) {
   const router = useRouter();
   const handleProfileEditClick = () => {
@@ -26,9 +28,9 @@ function JuniorManage(props: NotSeniorProps) {
           { headers },
         );
         if (response.data.data === true) {
-          setSocialId(response.data.socialId);
         }
         if (response.data.data === false) {
+          setSocialId(response.data.socialId);
           props.modalHandler();
         }
       }

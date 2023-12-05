@@ -1,5 +1,6 @@
+'use client';
 import { NotSeniorProps } from '@/types/modal/mypage';
-import React from 'react';
+import React,{useState} from 'react';
 import x_icon from '../../../../public/x.png';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/navigation';
@@ -10,18 +11,21 @@ import {
   NotSeniorMid,
   NotSeniorBottom,
 } from './NotSenior.styled';
-import { useAtomValue } from 'jotai';
-import { socialIdAtom } from '@/stores/signup';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { socialIdAtom, userTypeAtom } from '@/stores/signup';
+import { userType } from '@/types/user/user';
 function NotSenior(props: NotSeniorProps) {
   const socialId = useAtomValue(socialIdAtom);
+  const [userType, setUserType] = useAtom(userTypeAtom);
+
   const xClick = () => {
     props.modalHandler();
   };
   const router = useRouter();
   const seniorJoin = () => {
-    router.push(`/signup/${socialId}`);
+    setUserType("senior");
+    router.push(`/signup/${socialId}/common-info`);
   };
-  console.log(socialId);
   return (
     <div>
       <NotSeniorBoxTop>
