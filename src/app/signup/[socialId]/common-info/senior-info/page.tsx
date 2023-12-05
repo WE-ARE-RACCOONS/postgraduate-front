@@ -31,8 +31,8 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
-
+  const { getAccessToken, setAccessToken, setRefreshToken, setUserType } = useAuth();
+  const Token = getAccessToken();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -48,7 +48,6 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
@@ -101,7 +100,38 @@ function SeniorInfoPage() {
     setFlag(false);
 
     if (socialId && phoneNumber && nickName && certification) {
-      axios
+      if (Token) {
+        axios
+        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`, {
+          major: sMajor,
+          postgradu: sPostGradu,
+          professor: sProfessor,
+          lab: sLab,
+          field: sField,
+          keyword: sKeyword,
+          certification: certification,
+        })
+        .then((res) => {
+          const response = res.data;
+          if (response.code == 'SNR201') {
+            setAccessToken({
+              token: response.data.accessToken,
+              expires: response.data.accessExpiration,
+            });
+            setRefreshToken({
+              token: response.data.refreshToken,
+              expires: response.data.refreshExpiration,
+            });
+            setUserType(response.data.role);
+            router.push('/signup/done');
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+        
+      } else {
+        axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
           socialId: socialId,
           phoneNumber: phoneNumber,
@@ -133,6 +163,8 @@ function SeniorInfoPage() {
         .catch((err) => {
           console.error(err);
         });
+
+      }
     }
   };
 
