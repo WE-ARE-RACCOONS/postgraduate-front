@@ -2,19 +2,19 @@ import { certiRegType } from '@/types/profile/profile';
 import styled from 'styled-components';
 
 export const SeniorManageContainer = styled.div`
-  width: 20rem;
+  width: inherit;
   height: max-content;
 `;
 
 export const SeniorManageContentContainer = styled.div`
-  width: 20rem;
+  width: inherit;
   height: max-content;
   display: flex;
   flex-direction: column;
 `;
 
 export const SeniorManageAuthBox = styled.div`
-  width: 20rem;
+  width: inherit;
   height: 1.875rem;
   display: flex;
   justify-content: space-between;
