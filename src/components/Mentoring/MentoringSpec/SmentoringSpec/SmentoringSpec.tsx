@@ -7,7 +7,7 @@ import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
-import { ModalMentoringBackground, ModalClose } from './SmentoringSpec.styled';
+import { ModalMentoringBackground, ModalClose ,ModalBottomBtn} from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 function SmentoringSpec(props: ModalMentoringProps) {
@@ -62,13 +62,15 @@ function SmentoringSpec(props: ModalMentoringProps) {
     </div>
   ))}
       </div>
+      <ModalBottomBtn>
       <ApplyCancleBtn
               btnText={'거절'}
               cancelModalHandler={props.cancelModalHandler}
               modalHandler={props.modalHandler}
               mentoringId={props.mentoringId}
             />
-      <ModalClose onClick={props.modalHandler}>확인 했어요</ModalClose>
+      <ModalClose onClick={props.modalHandler}>멘토링 수락</ModalClose>
+      </ModalBottomBtn>
     </ModalMentoringBackground>
   );
 }
