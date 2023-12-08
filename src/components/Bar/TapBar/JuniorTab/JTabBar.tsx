@@ -12,7 +12,7 @@ import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import MentoringSpec from '@/components/Mentoring/MentoringSpec';
+import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 function TabBar() {

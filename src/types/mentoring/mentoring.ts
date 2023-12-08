@@ -1,4 +1,5 @@
 export interface MentoringData {
+  remainTime:number;
   seniorId: number;
   profile: string;
   nickName: string;
@@ -23,6 +24,7 @@ export interface KakaoOpenChatProps {
 }
 
 export interface MentoringSpecData {
+  remainTime:number;
   dates: string[];
   lab: string;
   major: string;

@@ -12,9 +12,10 @@ import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import MentoringSpec from '@/components/Mentoring/MentoringSpec';
+import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
+import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
 function STabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -36,6 +37,7 @@ function STabBar() {
   );
   useEffect(() => {
     const Token = getAccessToken();
+    console.log(Token)
     const headers = {
       Authorization: `Bearer ${Token}`,
     };
@@ -60,7 +62,7 @@ function STabBar() {
                 <div key={idx}>
                   <MentoringApply data={el} />
                   <ModalBtn
-                    btnText={'신청서 보기'}
+                    btnText={'신청서 보고 수락하기'}
                     modalHandler={modalHandler}
                     onClick={() => {
                       setModalType('senior');
@@ -86,7 +88,7 @@ function STabBar() {
       <div>{renderTabContent()}</div>
       {modal && portalElement
         ? createPortal(
-            <MentoringSpec
+            <SmentoringSpec
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}
