@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringShowBtn } from './TapBar.styled';
+import { TapStyle, MentoringMapBox } from './STabBrar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -15,7 +15,7 @@ import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 import MentoringSpec from '@/components/Mentoring/MentoringSpec';
 import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
-function TapBar() {
+function STabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const [data, setData] = useState<MentoringData[] | null>(null);
@@ -24,13 +24,13 @@ function TapBar() {
   };
   const { getAccessToken } = useAuth();
   const { modal, modalHandler, portalElement } = useModal(
-    'junior-mentoring-detail',
+    'senior-mentoring-detail',
   );
   const {
     modal: cancelModal,
     modalHandler: cancelModalHandler,
     portalElement: cancelPortalElement,
-  } = useModal('junior-mentoring-cancel');
+  } = useModal('senior-mentoring-cancel');
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
@@ -40,17 +40,17 @@ function TapBar() {
       Authorization: `Bearer ${Token}`,
     };
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${activeTab}`, {
         headers,
       })
       .then((response) => {
-        setData(response.data.data.mentoringInfos);
+        console.log(response.data.data.seniorMentoringInfos)
+        setData(response.data.data.seniorMentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
-
   const renderTabContent = () => {
     return (
       <div>
@@ -63,7 +63,7 @@ function TapBar() {
                     btnText={'신청서 보기'}
                     modalHandler={modalHandler}
                     onClick={() => {
-                      setModalType('junior');
+                      setModalType('senior');
                       setSelectedMentoringId(el.mentoringId);
                     }}
                   />
@@ -107,4 +107,4 @@ function TapBar() {
   );
 }
 
-export default TapBar;
+export default STabBar;

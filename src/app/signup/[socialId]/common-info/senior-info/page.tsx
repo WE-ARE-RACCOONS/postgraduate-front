@@ -116,7 +116,6 @@ function SeniorInfoPage() {
               })
               .then((res) => {
                 const response = res.data;
-                console.log(response)
                 if (response.code == 'SNR202') {
                   setAccessToken({
                     token: response.data.accessToken,
