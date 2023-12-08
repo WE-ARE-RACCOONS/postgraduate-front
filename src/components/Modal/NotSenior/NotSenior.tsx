@@ -23,8 +23,7 @@ function NotSenior(props: NotSeniorProps) {
   };
   const router = useRouter();
   const seniorJoin = () => {
-    setUserType("senior");
-    router.push(`/signup/${socialId}/common-info`);
+    router.push(`/signup/${socialId}/common-info/auth`);
   };
   return (
     <div>

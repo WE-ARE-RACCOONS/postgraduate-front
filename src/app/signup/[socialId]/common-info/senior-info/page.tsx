@@ -48,6 +48,9 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
+  const headers = {
+    Authorization: `Bearer ${Token}`,
+  };
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
@@ -95,44 +98,45 @@ function SeniorInfoPage() {
       setEmptyPart('연구 주제 키워드');
       return;
     }
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
     setFlag(false);
+    if(Token && certification){
+        console.log(Token)
+              console.log('token condition met');
+              axios
+              .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`, {
+                major: sMajor,
+                postgradu: sPostGradu,
+                professor: sProfessor,
+                lab: sLab,
+                field: sField,
+                keyword: sKeyword,
+                certification: certification,
+              },{
+                headers
+              })
+              .then((res) => {
+                const response = res.data;
+                console.log(response)
+                if (response.code == 'SNR202') {
+                  setAccessToken({
+                    token: response.data.accessToken,
+                    expires: response.data.accessExpiration,
+                  });
+                  setRefreshToken({
+                    token: response.data.refreshToken,
+                    expires: response.data.refreshExpiration,
+                  });
+                  setUserType(response.data.role);
+                  router.push('/signup/done');
+                }
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+              
+            
+    }
     if (socialId && phoneNumber && nickName && certification) {
-      if (Token) {
-        axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`, {
-          major: sMajor,
-          postgradu: sPostGradu,
-          professor: sProfessor,
-          lab: sLab,
-          field: sField,
-          keyword: sKeyword,
-          certification: certification,
-        },{
-          headers
-        })
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR201') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-        
-      } else {
         axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
           socialId: socialId,
@@ -166,7 +170,7 @@ function SeniorInfoPage() {
           console.error(err);
         });
 
-      }
+      
     }
   };
 
