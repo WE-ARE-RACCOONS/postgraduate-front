@@ -22,6 +22,7 @@ function SmentoringCancel(props : ModalMentoringProps) {
         try {
           const Token = getAccessToken();
           const headers = {
+            'Content-Type': 'application/json',
             Authorization: `Bearer ${Token}`,
           };
     
@@ -31,7 +32,6 @@ function SmentoringCancel(props : ModalMentoringProps) {
               method: 'PATCH',
               headers,
               body: JSON.stringify({
-                mentoringId: props.mentoringId,
                 reason:reason,
               }),
             },
