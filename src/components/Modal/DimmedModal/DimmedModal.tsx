@@ -4,6 +4,7 @@ import MProfileContent from '@/components/Content/MProfileContent';
 import LoginRequest from '@/components/Content/LoginRequest/LoginRequest';
 import NotSenior from '../NotSenior/NotSenior';
 import { userType } from '@/types/user/user';
+import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer>
@@ -16,6 +17,9 @@ function DimmedModal(props: DimmedModalProps) {
         )}
         {props.modalType == 'notSenior' && (
           <NotSenior modalHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'cancelMent' && (
+          <SmentoringCancel mentoringId={props.mentoringId || 0} modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

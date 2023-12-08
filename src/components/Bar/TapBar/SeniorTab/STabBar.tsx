@@ -16,6 +16,7 @@ import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
+import DimmedModal from '@/components/Modal/DimmedModal';
 function STabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -98,8 +99,9 @@ function STabBar() {
         : null}
       {cancelModal && cancelPortalElement
         ? createPortal(
-            <MentoringCancel
-              cancelModalHandler={cancelModalHandler}
+            <DimmedModal
+              modalType = 'cancelMent' 
+              modalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}
             />,
             cancelPortalElement,
