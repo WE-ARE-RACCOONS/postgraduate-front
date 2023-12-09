@@ -3,6 +3,7 @@ import { FullModalContainer } from './FullModal.styled';
 import MBestCaseContent from '@/components/Content/MBestCaseContent';
 import MyLoginRequest from '@/components/Content/MyLoginRequest/MyLoginRequest';
 import SeniorMyProfile from '@/components/Content/SeniorMyProfile';
+import ProfileModify from '@/components/Content/ProfileModify';
 
 function FullModal(props: FullModalProps) {
   return (
@@ -15,6 +16,9 @@ function FullModal(props: FullModalProps) {
       )}
       {props.modalType == 'senior-my-profile' && (
         <SeniorMyProfile modalHandler={props.modalHandler} />
+      )}
+      {props.modalType == 'profile-modify' && (
+        <ProfileModify />
       )}
     </FullModalContainer>
   );
