@@ -1,18 +1,26 @@
-import { SMPContainer, SMPInfoBox, SMPInfoTextBox, SMPIntroDesc, SMPIntroduceBox, SMPLabBox, SMPLabKeywordBox } from "./SeniorMyProfile.styled";
-import Image from "next/image";
+import {
+  SMPContainer,
+  SMPInfoBox,
+  SMPInfoTextBox,
+  SMPIntroDesc,
+  SMPIntroduceBox,
+  SMPLabBox,
+  SMPLabKeywordBox,
+} from './SeniorMyProfile.styled';
+import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import user_icon from '../../../../public/user.png';
-import RoundedImage from "@/components/Image/RoundedImage";
-import AuthLabeledText from "@/components/Text/AuthLabeledText";
-import DividedText from "@/components/Text/DividedText";
-import BorderedText from "@/components/Text/BorderedText";
-import TextField from "@/components/Text/TextField";
-import { useAtomValue } from "jotai";
-import { mySeniorId } from "@/stores/senior";
-import { useEffect, useState } from "react";
-import axios from "axios";
+import RoundedImage from '@/components/Image/RoundedImage';
+import AuthLabeledText from '@/components/Text/AuthLabeledText';
+import DividedText from '@/components/Text/DividedText';
+import BorderedText from '@/components/Text/BorderedText';
+import TextField from '@/components/Text/TextField';
+import { useAtomValue } from 'jotai';
+import { mySeniorId } from '@/stores/senior';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
-function SeniorMyProfile({ modalHandler } : { modalHandler: () => void }) {
+function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false); // 예외처리용 flag
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState<Array<string>>([]);
@@ -28,16 +36,17 @@ function SeniorMyProfile({ modalHandler } : { modalHandler: () => void }) {
   const seniorId = useAtomValue(mySeniorId);
 
   useEffect(() => {
-    if(seniorId !== 0) {
-      axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
+    if (seniorId !== 0) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
         .then((response) => {
           const res = response.data;
-          if(res.errorCode && res.errorCode == 'EX400') {
+          if (res.errorCode && res.errorCode == 'EX400') {
             setFlag(true);
             return;
           }
 
-          if(res.code == 'SNR200') {
+          if (res.code == 'SNR200') {
             setInfo(res.data.info);
             setKeyword(res.data.keyword);
             setLab(res.data.lab);
@@ -55,15 +64,25 @@ function SeniorMyProfile({ modalHandler } : { modalHandler: () => void }) {
         })
         .catch((err) => {
           console.error(err);
-        })
+        });
     }
   }, [seniorId]);
 
-  const keywords = ['연구실 주제 키워드1', '연구실 주제 키워드2', '연구실 주제', '연구실 임시 주제 키워드입니다.'];
+  const keywords = [
+    '연구실 주제 키워드1',
+    '연구실 주제 키워드2',
+    '연구실 주제',
+    '연구실 임시 주제 키워드입니다.',
+  ];
 
-  return(
+  return (
     <SMPContainer>
-      <Image id="x-icon" src={x_icon} alt="모달 닫기 버튼" onClick={modalHandler} />
+      <Image
+        id="x-icon"
+        src={x_icon}
+        alt="모달 닫기 버튼"
+        onClick={modalHandler}
+      />
       {!flag && (
         <div>
           인증이 완료되지 않은 사용자는 프로필을 볼 수 없습니다!
@@ -90,7 +109,8 @@ function SeniorMyProfile({ modalHandler } : { modalHandler: () => void }) {
           <SMPLabBox>
             <div id="lab-name-text">{lab}</div>
             <SMPLabKeywordBox>
-              {(keyword.length > 0) && keyword.map((el, idx) => (<BorderedText key={idx} str={el} />))}
+              {keyword.length > 0 &&
+                keyword.map((el, idx) => <BorderedText key={idx} str={el} />)}
             </SMPLabKeywordBox>
           </SMPLabBox>
           <hr id="profile-line" />
@@ -110,7 +130,7 @@ function SeniorMyProfile({ modalHandler } : { modalHandler: () => void }) {
         </>
       )}
     </SMPContainer>
-  )
+  );
 }
 
 export default SeniorMyProfile;

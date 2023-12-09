@@ -1,6 +1,6 @@
 'use client';
 import { NotSeniorProps } from '@/types/modal/mypage';
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import x_icon from '../../../../public/x.png';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/navigation';

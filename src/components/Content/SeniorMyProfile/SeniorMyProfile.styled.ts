@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SMPContainer = styled.div`
   width: inherit;
@@ -32,7 +32,7 @@ export const SMPContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;
 
 export const SMPInfoBox = styled.div`
   width: 20.5rem;
@@ -42,8 +42,8 @@ export const SMPInfoBox = styled.div`
   top: 3rem;
   left: 50%;
   transform: translateX(-50%);
-  display: flex;  
-`
+  display: flex;
+`;
 
 export const SMPInfoTextBox = styled.div`
   width: max-content;
@@ -59,13 +59,13 @@ export const SMPInfoTextBox = styled.div`
     font-weight: 500;
     display: flex;
     border-radius: 4px;
-    border: 0.5px solid var(--_7, #969FA3);
+    border: 0.5px solid var(--_7, #969fa3);
   }
 
   #time-text {
     color: #3bf;
   }
-`
+`;
 
 export const SMPLabBox = styled.div`
   width: 20.5rem;
@@ -79,7 +79,7 @@ export const SMPLabBox = styled.div`
   #lab-name-text {
     font-weight: 700;
   }
-`
+`;
 
 export const SMPLabKeywordBox = styled.div`
   width: 20.5rem;
@@ -87,7 +87,7 @@ export const SMPLabKeywordBox = styled.div`
   border: 1px solid #000;
   display: flex;
   flex-wrap: wrap;
-`
+`;
 
 export const SMPIntroduceBox = styled.div`
   width: 20.5rem;
@@ -103,10 +103,9 @@ export const SMPIntroduceBox = styled.div`
     font-weight: 700;
     margin-bottom: 1.375rem;
   }
-`
+`;
 
 export const SMPIntroDesc = styled.div`
   width: 20.5rem;
   height: 1.4rem;
-  
-`
+`;

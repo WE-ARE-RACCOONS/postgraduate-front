@@ -13,7 +13,9 @@ import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 
 function SeniorManage(props: SeniorManageProps) {
-  const { modal, modalHandler, portalElement } = useModal('senior-my-profile-portal');
+  const { modal, modalHandler, portalElement } = useModal(
+    'senior-my-profile-portal',
+  );
 
   function setAuthText(auth: certiRegType) {
     switch (auth) {
@@ -51,8 +53,15 @@ function SeniorManage(props: SeniorManageProps) {
         <TitleComponent title="회원 상태 변경" />
         <ContentComponent content="후배 회원으로 상태 변경" />
       </SeniorManageContentContainer>
-      {modal && portalElement ? 
-      createPortal(<FullModal modalType='senior-my-profile' modalHandler={modalHandler} />, portalElement) : null}
+      {modal && portalElement
+        ? createPortal(
+            <FullModal
+              modalType="senior-my-profile"
+              modalHandler={modalHandler}
+            />,
+            portalElement,
+          )
+        : null}
     </SeniorManageContainer>
   );
 }

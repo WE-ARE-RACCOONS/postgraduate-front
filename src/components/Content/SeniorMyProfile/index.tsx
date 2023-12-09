@@ -1,3 +1,3 @@
-import SeniorMyProfile from "./SeniorMyProfile";
+import SeniorMyProfile from './SeniorMyProfile';
 
 export default SeniorMyProfile;
