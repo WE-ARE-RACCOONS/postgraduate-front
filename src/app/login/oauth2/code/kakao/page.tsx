@@ -4,11 +4,12 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
+import { useAtom } from 'jotai';
+import { socialIdAtom } from '@/stores/signup';
 
 function KakaoPage() {
   const router = useRouter();
   const { setAccessToken, setRefreshToken, setUserType } = useAuth();
-
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');

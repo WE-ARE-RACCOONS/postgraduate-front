@@ -11,6 +11,8 @@ import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
+import DimmedModal from '@/components/Modal/DimmedModal';
+
 import { userType } from '@/types/user/user';
 import SalaryBox from '@/components/Box/SalaryBox';
 import { useRouter } from 'next/navigation';
@@ -26,6 +28,11 @@ function MyPage() {
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
+  const {
+    modal: seniorChangemodal,
+    modalHandler: seiorChangemodalHandler,
+    portalElement: seniorChangePortalElement,
+  } = useModal('senior-request-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
@@ -105,6 +112,7 @@ function MyPage() {
             userType={userType ? (userType as userType) : 'junior'}
             certifiReg={certifiReg}
             profileReg={profileReg}
+            modalHandler={seiorChangemodalHandler}
           />
         </div>
       ) : (
@@ -117,6 +125,15 @@ function MyPage() {
         ? createPortal(
             <FullModal modalType="login-request" modalHandler={modalHandler} />,
             portalElement,
+          )
+        : ''}
+      {seniorChangemodal && seniorChangePortalElement
+        ? createPortal(
+            <DimmedModal
+              modalType="notSenior"
+              modalHandler={seiorChangemodalHandler}
+            />,
+            seniorChangePortalElement,
           )
         : ''}
     </div>
