@@ -5,16 +5,18 @@ import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCent
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-import { useAtomValue } from 'jotai';
-import { accessTokenAtom } from '@/stores/user';
+import { useSetAtom } from 'jotai';
 import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
+import DimmedModal from '@/components/Modal/DimmedModal';
+
 import { userType } from '@/types/user/user';
 import SalaryBox from '@/components/Box/SalaryBox';
 import { useRouter } from 'next/navigation';
 import { certiRegType } from '@/types/profile/profile';
+import { mySeniorId } from '@/stores/senior';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -23,9 +25,15 @@ function MyPage() {
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
   const [profileReg, setProfileReg] = useState(true);
+  const setSeniorId = useSetAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
+  const {
+    modal: seniorChangemodal,
+    modalHandler: seiorChangemodalHandler,
+    portalElement: seniorChangePortalElement,
+  } = useModal('senior-request-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
@@ -58,6 +66,7 @@ function MyPage() {
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
+            setSeniorId(res.data.data.seniorId);
           })
           .catch(function (error) {
             console.log(error);
@@ -105,6 +114,7 @@ function MyPage() {
             userType={userType ? (userType as userType) : 'junior'}
             certifiReg={certifiReg}
             profileReg={profileReg}
+            modalHandler={seiorChangemodalHandler}
           />
         </div>
       ) : (
@@ -117,6 +127,15 @@ function MyPage() {
         ? createPortal(
             <FullModal modalType="login-request" modalHandler={modalHandler} />,
             portalElement,
+          )
+        : ''}
+      {seniorChangemodal && seniorChangePortalElement
+        ? createPortal(
+            <DimmedModal
+              modalType="notSenior"
+              modalHandler={seiorChangemodalHandler}
+            />,
+            seniorChangePortalElement,
           )
         : ''}
     </div>

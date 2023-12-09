@@ -11,6 +11,7 @@ export interface ProfileProps {
 }
 
 export interface ProfileManageProps {
+  modalHandler: () => void;
   userType: userType;
   certifiReg: certiRegType; // only senior
   profileReg: boolean; // only senior

@@ -4,6 +4,5 @@ export interface MenubarProps {
 }
 
 export interface NotLoginProps {
-  // onClick: () => void;
   modalHandler: () => void;
 }

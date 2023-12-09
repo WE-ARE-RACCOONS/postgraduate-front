@@ -8,8 +8,15 @@ import ContentComponent from '../../Box/ContentBox';
 import TitleComponent from '../../Box/TitleBox';
 import { SeniorManageProps } from '@/types/profile/seniorManage';
 import { certiRegType } from '@/types/profile/profile';
+import useModal from '@/hooks/useModal';
+import { createPortal } from 'react-dom';
+import FullModal from '@/components/Modal/FullModal';
 
 function SeniorManage(props: SeniorManageProps) {
+  const { modal, modalHandler, portalElement } = useModal(
+    'senior-my-profile-portal',
+  );
+
   function setAuthText(auth: certiRegType) {
     switch (auth) {
       case 'APPROVE':
@@ -29,7 +36,7 @@ function SeniorManage(props: SeniorManageProps) {
         <TitleComponent title="계정 설정" />
         <ContentComponent content="내 정보 수정" />
         <SeniorManageAuthBox>
-          <button>내 프로필 보기</button>
+          <button onClick={modalHandler}>내 프로필 보기</button>
           {!props.profileReg && (
             <SeniorManageAuthValue>미완성</SeniorManageAuthValue>
           )}
@@ -46,6 +53,15 @@ function SeniorManage(props: SeniorManageProps) {
         <TitleComponent title="회원 상태 변경" />
         <ContentComponent content="후배 회원으로 상태 변경" />
       </SeniorManageContentContainer>
+      {modal && portalElement
+        ? createPortal(
+            <FullModal
+              modalType="senior-my-profile"
+              modalHandler={modalHandler}
+            />,
+            portalElement,
+          )
+        : null}
     </SeniorManageContainer>
   );
 }
