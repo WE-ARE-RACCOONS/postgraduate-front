@@ -17,6 +17,7 @@ import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
 import DimmedModal from '@/components/Modal/DimmedModal';
+import FullModal from '@/components/Modal/FullModal';
 function STabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -33,6 +34,11 @@ function STabBar() {
     modalHandler: cancelModalHandler,
     portalElement: cancelPortalElement,
   } = useModal('senior-mentoring-cancel');
+  const {
+    modal: acceptModal,
+    modalHandler: acceptModalHandler,
+    portalElement: acceptPortalElement,
+  } = useModal('senior-mentoring-accept');
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
@@ -92,6 +98,7 @@ function STabBar() {
             <SmentoringSpec
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
+              acceptModalHandler = {acceptModalHandler}
               mentoringId={selectedMentoringId || 0}
             />,
             portalElement,
@@ -105,6 +112,15 @@ function STabBar() {
               mentoringId={selectedMentoringId || 0}
             />,
             cancelPortalElement,
+          )
+        : null}
+        {acceptModal && acceptPortalElement
+        ? createPortal(
+            <FullModal
+              modalType = 'accept-mentoring' 
+              modalHandler={acceptModalHandler}
+            />,
+            acceptPortalElement,
           )
         : null}
     </div>

@@ -6,13 +6,14 @@ import useModal from '@/hooks/useModal';
 import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
-import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
+import { ModalMentoringSProps } from '@/types/modal/mentoringDetail';
 import { ModalMentoringBackground, ModalClose ,ModalBottomBtn} from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
-function SmentoringSpec(props: ModalMentoringProps) {
+function SmentoringSpec(props: ModalMentoringSProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
+  const [date, setDate] = useState('');
 
   useEffect(() => {
     if (props.mentoringId !== 0) {
@@ -36,6 +37,38 @@ function SmentoringSpec(props: ModalMentoringProps) {
         });
     }
   }, []);
+  useEffect(() => {
+    if (props.mentoringId !== 0) {
+        acceptMentoring();
+    }
+  }, []);
+
+  const acceptMentoring = async () => {
+    try {
+      const Token = getAccessToken();
+      const headers = {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${Token}`,
+      };
+
+      const response = await fetch(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
+        {
+          method: 'PATCH',
+          headers,
+          body: JSON.stringify({
+            date:date,
+          }),
+        },
+      );
+      const responseData = await response.json();
+      console.log(responseData)
+      props.acceptModalHandler();
+      props.modalHandler();
+    } catch (error) {
+      console.error('Error cancelling mentoring:', error);
+    }
+  };
   return (
     <ModalMentoringBackground>
       <MentoringApply data={data} />
@@ -58,7 +91,7 @@ function SmentoringSpec(props: ModalMentoringProps) {
       <div>
       {data && data.dates.map((date, index) => (
         <div>
-    <button key={index}>{date}</button>
+    <button key={index} onClick={(e) => setDate(e.currentTarget.textContent??'')}>{date}</button>
     </div>
   ))}
       </div>
@@ -69,7 +102,7 @@ function SmentoringSpec(props: ModalMentoringProps) {
               modalHandler={props.modalHandler}
               mentoringId={props.mentoringId}
             />
-      <ModalClose onClick={props.modalHandler}>멘토링 수락</ModalClose>
+      <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
       </ModalBottomBtn>
     </ModalMentoringBackground>
   );

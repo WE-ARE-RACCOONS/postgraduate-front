@@ -12,6 +12,9 @@ function FullModal(props: FullModalProps) {
       {props.modalType == 'login-request' && (
         <MyLoginRequest modalHandler={props.modalHandler} />
       )}
+      {props.modalType == 'accept-mentoring' && (
+        <MyLoginRequest modalHandler={props.modalHandler} />
+      )}
     </FullModalContainer>
   );
 }
