@@ -18,7 +18,7 @@ function FullModal(props: FullModalProps) {
         <SeniorMyProfile modalHandler={props.modalHandler} />
       )}
       {props.modalType == 'profile-modify' && (
-        <ProfileModify />
+        <ProfileModify modalHandler={props.modalHandler} />
       )}
     </FullModalContainer>
   );
