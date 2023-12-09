@@ -5,8 +5,7 @@ import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCent
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-import { useAtomValue } from 'jotai';
-import { accessTokenAtom } from '@/stores/user';
+import { useSetAtom } from 'jotai';
 import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
@@ -17,6 +16,7 @@ import { userType } from '@/types/user/user';
 import SalaryBox from '@/components/Box/SalaryBox';
 import { useRouter } from 'next/navigation';
 import { certiRegType } from '@/types/profile/profile';
+import { mySeniorId } from '@/stores/senior';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -25,6 +25,7 @@ function MyPage() {
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
   const [profileReg, setProfileReg] = useState(true);
+  const setSeniorId = useSetAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
@@ -65,6 +66,7 @@ function MyPage() {
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
+            setSeniorId(res.data.data.seniorId);
           })
           .catch(function (error) {
             console.log(error);
