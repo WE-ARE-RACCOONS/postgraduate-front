@@ -2,9 +2,11 @@ import Image from "next/image";
 import { FieldBox, FieldContainer, PMContainer, FieldTitle, FieldForm, ValidatorBox, SaveBtnBox } from "./ProfileModify.styled";
 import x_icon from '../../../../public/x.png';
 import { MODIFY_DIRECTION } from "@/constants/form/cProfileModifyForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import ClickedBtn from "@/components/Button/ClickedBtn";
+import useAuth from "@/hooks/useAuth";
+import axios from "axios";
 
 function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false);
@@ -16,6 +18,33 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
   const [field, setField] = useState([]);
   const [oneLiner, setOneLiner] = useState('');
   const [time, setTime] = useState('');
+  const { getAccessToken } = useAuth();
+
+  useEffect(() => {
+    const accessTkn = getAccessToken();
+
+    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+      headers: {
+        Authorization: `Bearer ${accessTkn}`
+      }
+    }).then((response) => {
+      const res = response.data;
+
+      if(res.code == "SNR200") {
+        setChatLink(res.data.chatLink);
+        setField(res.data.field);
+        setInfo(res.data.info);
+        setKeyword(res.data.keyword);
+        setLab(res.data.lab);
+        setOneLiner(res.data.oneLiner);
+        setTarget(res.data.target);
+        setTime(res.data.time);
+      }
+    }).catch((err) => {
+      console.error(err);
+    })
+    
+  }, []);
 
   return(
     <PMContainer>
