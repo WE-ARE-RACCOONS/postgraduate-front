@@ -4,5 +4,7 @@ export const MODIFY_DIRECTION = {
   field: '연구 분야',
   introduce: '자기소개',
   target: '이런 후배에게 추천해요',
-  chatLink: '카카오톡 오픈채팅방 링크'
+  chatLink: '카카오톡 오픈채팅방 링크',
+  oneLiner: '한줄 소개',
+  time: '멘토링 가능 시간'
 };

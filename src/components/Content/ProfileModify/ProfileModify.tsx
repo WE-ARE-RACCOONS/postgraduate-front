@@ -8,6 +8,14 @@ import ClickedBtn from "@/components/Button/ClickedBtn";
 
 function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false);
+  const [lab, setLab] = useState('');
+  const [keyword, setKeyword] = useState([]);
+  const [info, setInfo] = useState('');
+  const [target, setTarget] = useState('');
+  const [chatLink, setChatLink] = useState('');
+  const [field, setField] = useState([]);
+  const [oneLiner, setOneLiner] = useState('');
+  const [time, setTime] = useState('');
 
   return(
     <PMContainer>
@@ -15,30 +23,38 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
       <FieldContainer>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.lab}</FieldTitle>
-          <FieldForm type="text" />
+          <FieldForm defaultValue={lab} type="text" />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.keywords}</FieldTitle>
-          <FieldForm as="button"></FieldForm>
+          <FieldForm as="button">{keyword.join()}</FieldForm>
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.field}</FieldTitle>
-          <FieldForm as="button"></FieldForm>
+          <FieldForm as="button">{field.join()}</FieldForm>
+        </FieldBox>
+        <FieldBox>
+          <FieldTitle>{MODIFY_DIRECTION.oneLiner}</FieldTitle>
+          <FieldForm defaultValue={oneLiner} type="text" />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.introduce}</FieldTitle>
-          <FieldForm type="text" />
+          <FieldForm defaultValue={info} type="text" />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.target}</FieldTitle>
-          <FieldForm type="text" />
+          <FieldForm defaultValue={target} type="text" />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.chatLink}</FieldTitle>
-          <FieldForm type="text" />
+          <FieldForm defaultValue={chatLink} type="text" />
+        </FieldBox>
+        <FieldBox>
+          <FieldTitle>{MODIFY_DIRECTION.time}</FieldTitle>
+          <FieldForm defaultValue={time} type="text" />
         </FieldBox>
       </FieldContainer>
-      {!flag && (
+      {flag && (
         <ValidatorBox>
           <SingleValidator textColor="#ff0000" msg="입력하지 않은 내용이 있습니다." />
         </ValidatorBox>
