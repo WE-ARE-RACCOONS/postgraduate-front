@@ -7,8 +7,13 @@ import SingleValidator from "@/components/Validator/SingleValidator";
 import ClickedBtn from "@/components/Button/ClickedBtn";
 import useAuth from "@/hooks/useAuth";
 import axios from "axios";
+import useModal from "@/hooks/useModal";
+import { createPortal } from "react-dom";
+import RiseUpModal from "@/components/Modal/RiseUpModal";
+import { ModalType } from '@/types/modal/riseUp';
 
 function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
+  const [modalType, setModalType] = useState<ModalType>('keyword');
   const [flag, setFlag] = useState(false);
   const [lab, setLab] = useState('');
   const [keyword, setKeyword] = useState([]);
@@ -19,6 +24,7 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
   const [oneLiner, setOneLiner] = useState('');
   const [time, setTime] = useState('');
   const { getAccessToken } = useAuth();
+  const { modal, modalHandler: infoHandler, portalElement } = useModal('senior-info-portal');
 
   useEffect(() => {
     const accessTkn = getAccessToken();
@@ -46,6 +52,16 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
     
   }, []);
 
+  const clickKeyword = () => {
+    setModalType('keyword');
+    infoHandler();
+  }
+
+  const clickField = () => {
+    setModalType('field');
+    infoHandler();
+  }
+
   return(
     <PMContainer>
       <Image id="x-icon" src={x_icon} alt="프로필 변경 모달 닫기 버튼" onClick={modalHandler} />
@@ -56,11 +72,11 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.keywords}</FieldTitle>
-          <FieldForm as="button">{keyword.join()}</FieldForm>
+          <FieldForm as="button" onClick={clickKeyword}>{keyword.join()}</FieldForm>
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.field}</FieldTitle>
-          <FieldForm as="button">{field.join()}</FieldForm>
+          <FieldForm as="button" onClick={clickField}>{field.join()}</FieldForm>
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.oneLiner}</FieldTitle>
@@ -91,6 +107,12 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
       <SaveBtnBox>
         <ClickedBtn btnText="저장" clickHandler={() => {}} />
       </SaveBtnBox>
+      {modal && portalElement
+        ? createPortal(
+            <RiseUpModal modalHandler={infoHandler} modalType={modalType} />,
+            portalElement,
+          )
+        : null}
     </PMContainer>
   )
 }
