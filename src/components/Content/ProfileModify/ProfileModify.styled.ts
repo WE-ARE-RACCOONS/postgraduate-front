@@ -46,3 +46,21 @@ export const FieldForm = styled.input`
   border: 1px solid #000;
   cursor: pointer;
 `
+
+export const ValidatorBox = styled.div`
+  width: 9.5rem;
+  height: 1.375rem;
+  position: absolute;
+  top: 46.375rem;
+  left: 50%;
+  transform: translateX(-50%);
+`
+
+export const SaveBtnBox = styled.div`
+  width: 20.5rem;
+  height: 3.875rem;
+  position: absolute;
+  top: 48.69rem;
+  left: 50%;
+  transform: translateX(-50%);
+`
