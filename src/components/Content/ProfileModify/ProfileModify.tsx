@@ -52,7 +52,7 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
       <FieldContainer>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.lab}</FieldTitle>
-          <FieldForm defaultValue={lab} type="text" />
+          <FieldForm defaultValue={lab} type="text" onChange={(e) => setLab(e.currentTarget.value)} />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.keywords}</FieldTitle>
@@ -64,23 +64,23 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.oneLiner}</FieldTitle>
-          <FieldForm defaultValue={oneLiner} type="text" />
+          <FieldForm defaultValue={oneLiner} type="text" onChange={(e) => setOneLiner(e.currentTarget.value)} />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.introduce}</FieldTitle>
-          <FieldForm defaultValue={info} type="text" />
+          <FieldForm defaultValue={info} type="text" onChange={(e) => setInfo(e.currentTarget.value)} />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.target}</FieldTitle>
-          <FieldForm defaultValue={target} type="text" />
+          <FieldForm defaultValue={target} type="text" onChange={(e) => setTarget(e.currentTarget.value)} />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.chatLink}</FieldTitle>
-          <FieldForm defaultValue={chatLink} type="text" />
+          <FieldForm defaultValue={chatLink} type="text" onChange={(e) => setChatLink(e.currentTarget.value)} />
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.time}</FieldTitle>
-          <FieldForm defaultValue={time} type="text" />
+          <FieldForm defaultValue={time} type="text" onChange={(e) => setTime(e.currentTarget.value)} />
         </FieldBox>
       </FieldContainer>
       {flag && (
