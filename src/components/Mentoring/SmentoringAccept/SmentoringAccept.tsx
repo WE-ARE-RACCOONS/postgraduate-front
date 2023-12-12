@@ -4,13 +4,14 @@ import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import { useRouter } from 'next/navigation';
 import party_popper from '../../../../public/party_popper.png';
+import {SmentoringAccBox} from './SmentoringAccept.styled'
 function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
   const router = useRouter();
   const setAccount = () => {
     router.push('/senior/account');
   };
   return (
-    <div>
+    <SmentoringAccBox>
       <Image
           id="x-icon"
           src={x_icon}
@@ -31,7 +32,7 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
     <div>내멘토링 진행예정 탭에서 확인할 수 있어요</div>
     <div>지금 바로 계좌를 등록하러 가볼까요?</div>
     <button onClick={setAccount}>정산계좌 입력하기</button>
-    </div>
+    </SmentoringAccBox>
   )
 }
 
