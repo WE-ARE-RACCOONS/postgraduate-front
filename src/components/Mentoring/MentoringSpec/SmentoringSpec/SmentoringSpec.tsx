@@ -7,7 +7,11 @@ import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringSProps } from '@/types/modal/mentoringDetail';
-import { ModalMentoringBackground, ModalClose ,ModalBottomBtn} from './SmentoringSpec.styled';
+import {
+  ModalMentoringBackground,
+  ModalClose,
+  ModalBottomBtn,
+} from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 import { activeTabAtom } from '@/stores/tap';
@@ -54,7 +58,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           method: 'PATCH',
           headers,
           body: JSON.stringify({
-            date:date,
+            date: date,
           }),
         },
       );
@@ -80,27 +84,42 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       </div>
       <div>
         멘토링 시간
-        {activeTab === 'waiting' ? (<div>아래의 세가지 중{data ? data.nickName : ''}님이 선택한 시간대에 멘토링이 진행돼요</div>):''}
+        {activeTab === 'waiting' ? (
+          <div>
+            아래의 세가지 중{data ? data.nickName : ''}님이 선택한 시간대에
+            멘토링이 진행돼요
+          </div>
+        ) : (
+          ''
+        )}
       </div>
-      {activeTab ==='waiting' ? (<div>
-      {data && data.dates.map((date, index) => (
-        <div>
-    <button key={index} onClick={(e) => setDate(e.currentTarget.textContent??'')}>{date}</button>
-    </div>
-  ))}
-      </div>)
-      :
-      (data && data.dates)}
-      <ModalBottomBtn>
       {activeTab === 'waiting' ? (
-        <>
-          <ApplyCancleBtn
-            btnText={'거절'}
-            cancelModalHandler={props.cancelModalHandler}
-            modalHandler={props.modalHandler}
-            mentoringId={props.mentoringId}
-          />
-          <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
+        <div>
+          {data &&
+            data.dates.map((date, index) => (
+              <div>
+                <button
+                  key={index}
+                  onClick={(e) => setDate(e.currentTarget.textContent ?? '')}
+                >
+                  {date}
+                </button>
+              </div>
+            ))}
+        </div>
+      ) : (
+        data && data.dates
+      )}
+      <ModalBottomBtn>
+        {activeTab === 'waiting' ? (
+          <>
+            <ApplyCancleBtn
+              btnText={'거절'}
+              cancelModalHandler={props.cancelModalHandler}
+              modalHandler={props.modalHandler}
+              mentoringId={props.mentoringId}
+            />
+            <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
           </>
         ) : (
           <div>멘토링 취소는 고객센터로 문의해주세요</div>

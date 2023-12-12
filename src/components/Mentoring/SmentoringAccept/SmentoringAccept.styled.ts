@@ -13,4 +13,4 @@ export const SmentoringAccBox = styled.div`
     right: 1rem;
     cursor: pointer;
   }
-  `
+`;

@@ -19,7 +19,10 @@ function DimmedModal(props: DimmedModalProps) {
           <NotSenior modalHandler={props.modalHandler} />
         )}
         {props.modalType == 'cancelMent' && (
-          <SmentoringCancel mentoringId={props.mentoringId || 0} modalHandler={props.modalHandler} />
+          <SmentoringCancel
+            mentoringId={props.mentoringId || 0}
+            modalHandler={props.modalHandler}
+          />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

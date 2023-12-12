@@ -15,6 +15,6 @@ export const ModalMentoringBackground = styled.div`
 `;
 export const ModalClose = styled.button``;
 export const ModalBottomBtn = styled.div`
-justify-content: center;
-display: flex
+  justify-content: center;
+  display: flex;
 `;

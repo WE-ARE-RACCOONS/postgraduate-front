@@ -7,12 +7,9 @@ function NaverPoint() {
 
   return (
     <div>
-      {userType === 'junior' && (
-        <div>리뷰쓰고, 1000네이버 포인트 받기</div>
-      )}
+      {userType === 'junior' && <div>리뷰쓰고, 1000네이버 포인트 받기</div>}
     </div>
   );
 }
-
 
 export default NaverPoint;

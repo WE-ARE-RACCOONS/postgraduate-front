@@ -1,5 +1,5 @@
 export interface MentoringData {
-  remainTime:number;
+  remainTime: number;
   seniorId: number;
   profile: string;
   nickName: string;
@@ -13,7 +13,7 @@ export interface MentoringData {
   date: string;
   chatLink: string;
   mentoringId: number;
-salaryDate:number;
+  salaryDate: number;
 }
 
 export interface MentoringApplyProps {
@@ -25,7 +25,7 @@ export interface KakaoOpenChatProps {
 }
 
 export interface MentoringSpecData {
-  remainTime:number;
+  remainTime: number;
   dates: string[];
   lab: string;
   major: string;
@@ -38,7 +38,7 @@ export interface MentoringSpecData {
   term: string;
   chatLink: string;
   date: string;
-  salaryDate:number;
+  salaryDate: number;
 }
 
 export interface TextToggleButtonProps {

@@ -45,14 +45,17 @@ function STabBar() {
   );
   useEffect(() => {
     const Token = getAccessToken();
-    console.log(Token)
+    console.log(Token);
     const headers = {
       Authorization: `Bearer ${Token}`,
     };
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${activeTab}`, {
-        headers,
-      })
+      .get(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${activeTab}`,
+        {
+          headers,
+        },
+      )
       .then((response) => {
         setData(response.data.data.seniorMentoringInfos);
       })
@@ -64,27 +67,41 @@ function STabBar() {
     return (
       <div>
         {data && data!.length !== 0 ? (
-  <div>
-    {data!.map((el, idx) => (
-      <div key={idx}>
-        <MentoringApply data={el} />
-        <ModalBtn
-          btnText={
-            activeTab === TAB.waiting
-              ? '신청서 보고 수락하기'
-              : '신청서 보기'
-          }
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('senior');
-            setSelectedMentoringId(el.mentoringId);
-          }}
-        />
-      </div>
-    ))}
-    {activeTab === TAB.done ? <div style={{ position: 'sticky', bottom: 2, backgroundColor: '#FFFFFF' }}><AccountShowBtn/></div>:''}
-  </div>
-) : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
+          <div>
+            {data!.map((el, idx) => (
+              <div key={idx}>
+                <MentoringApply data={el} />
+                <ModalBtn
+                  btnText={
+                    activeTab === TAB.waiting
+                      ? '신청서 보고 수락하기'
+                      : '신청서 보기'
+                  }
+                  modalHandler={modalHandler}
+                  onClick={() => {
+                    setModalType('senior');
+                    setSelectedMentoringId(el.mentoringId);
+                  }}
+                />
+              </div>
+            ))}
+            {activeTab === TAB.done ? (
+              <div
+                style={{
+                  position: 'sticky',
+                  bottom: 2,
+                  backgroundColor: '#FFFFFF',
+                }}
+              >
+                <AccountShowBtn />
+              </div>
+            ) : (
+              ''
+            )}
+          </div>
+        ) : (
+          `${TAB_STATE[activeTab]}인 멘토링이 없어요`
+        )}
       </div>
     );
   };
@@ -103,7 +120,7 @@ function STabBar() {
             <SmentoringSpec
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
-              acceptModalHandler = {acceptModalHandler}
+              acceptModalHandler={acceptModalHandler}
               mentoringId={selectedMentoringId || 0}
             />,
             portalElement,
@@ -112,17 +129,17 @@ function STabBar() {
       {cancelModal && cancelPortalElement
         ? createPortal(
             <DimmedModal
-              modalType = 'cancelMent' 
+              modalType="cancelMent"
               modalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}
             />,
             cancelPortalElement,
           )
         : null}
-        {acceptModal && acceptPortalElement
+      {acceptModal && acceptPortalElement
         ? createPortal(
             <FullModal
-              modalType = 'accept-mentoring' 
+              modalType="accept-mentoring"
               modalHandler={acceptModalHandler}
             />,
             acceptPortalElement,

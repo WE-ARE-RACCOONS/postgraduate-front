@@ -17,7 +17,6 @@ import KakaoOpenChat from '../../KakaoOpenChat/KakaoOpenChat';
 import NaverPoint from '../../NaverPoint/NaverPoint';
 import useAuth from '@/hooks/useAuth';
 function MentoringApply({ data }: MentoringApplyProps) {
-
   const activeTab = useAtomValue(activeTabAtom);
   const datasplit = data ? data.date : '';
   const dateParts = (datasplit || '').split('-');
@@ -34,42 +33,48 @@ function MentoringApply({ data }: MentoringApplyProps) {
           ></ConfirmProfile>
           <ConfirmInfo>
             <ConfirmTitle>
-              {data ? data.nickName : ''}{data ? data.nickName : ''}{userType === 'senior' ? '후배와 진행' : '선배와 진행'}
+              {data ? data.nickName : ''}
+              {data ? data.nickName : ''}
+              {userType === 'senior' ? '후배와 진행' : '선배와 진행'}
             </ConfirmTitle>
             {userType === 'junior' && (
-                <>
-                  <UserInfo>
-                    {data ? data.postgradu : ''} | {data ? data.major : ''}
-                  </UserInfo>
-                  {activeTab === TAB.expected && dateExpected}
-                  {activeTab === TAB.done && dateDone}
-                </>
+              <>
+                <UserInfo>
+                  {data ? data.postgradu : ''} | {data ? data.major : ''}
+                </UserInfo>
+                {activeTab === TAB.expected && dateExpected}
+                {activeTab === TAB.done && dateDone}
+              </>
             )}
             {userType === 'senior' && (
-                <>
-                  {activeTab === TAB.expected && dateExpected}
-                  {activeTab === TAB.done && dateDone}
-                </>
+              <>
+                {activeTab === TAB.expected && dateExpected}
+                {activeTab === TAB.done && dateDone}
+              </>
             )}
           </ConfirmInfo>
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
         {userType === 'junior' && (
-              <>
-                {activeTab === TAB.expected && (
-                  <KakaoOpenChat url={data ? data.chatLink : ''} />
-                )}
-                {activeTab === TAB.done && <NaverPoint />}
-              </>
-          )}
-          {userType ==='senior' &&(
-            <>
+          <>
+            {activeTab === TAB.expected && (
+              <KakaoOpenChat url={data ? data.chatLink : ''} />
+            )}
+            {activeTab === TAB.done && <NaverPoint />}
+          </>
+        )}
+        {userType === 'senior' && (
+          <>
             {activeTab === TAB.waiting && (
-                  <div>{data ? data.remainTime: ''}후에 자동취소, 지금 수락하세요!</div> 
-                )}
-            {activeTab === TAB.done && (<div>{data ? data.salaryDate:''} 정산예정</div>)}
-            </>
-          )}
+              <div>
+                {data ? data.remainTime : ''}후에 자동취소, 지금 수락하세요!
+              </div>
+            )}
+            {activeTab === TAB.done && (
+              <div>{data ? data.salaryDate : ''} 정산예정</div>
+            )}
+          </>
+        )}
       </ConfirmBox>
     </div>
   );
