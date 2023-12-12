@@ -10,10 +10,13 @@ import { ModalMentoringSProps } from '@/types/modal/mentoringDetail';
 import { ModalMentoringBackground, ModalClose ,ModalBottomBtn} from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
+import { activeTabAtom } from '@/stores/tap';
+import { useAtomValue } from 'jotai';
 function SmentoringSpec(props: ModalMentoringSProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
   const [date, setDate] = useState('');
+  const activeTab = useAtomValue(activeTabAtom);
 
   useEffect(() => {
     if (props.mentoringId !== 0) {
@@ -80,27 +83,31 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       </div>
       <div>
         멘토링 시간
-
-        <div>
-        <div>아래의 세가지 중{data ? data.nickName : ''}님이 선택한 시간대에 멘토링이 진행돼요</div>
-          
-        </div>
+        {activeTab === 'waiting' ? (<div>아래의 세가지 중{data ? data.nickName : ''}님이 선택한 시간대에 멘토링이 진행돼요</div>):''}
       </div>
-      <div>
+      {activeTab ==='waiting' ? (<div>
       {data && data.dates.map((date, index) => (
         <div>
     <button key={index} onClick={(e) => setDate(e.currentTarget.textContent??'')}>{date}</button>
     </div>
   ))}
-      </div>
+      </div>)
+      :
+      (data && data.dates)}
       <ModalBottomBtn>
-      <ApplyCancleBtn
-              btnText={'거절'}
-              cancelModalHandler={props.cancelModalHandler}
-              modalHandler={props.modalHandler}
-              mentoringId={props.mentoringId}
-            />
-      <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
+      {activeTab === 'waiting' ? (
+        <>
+          <ApplyCancleBtn
+            btnText={'거절'}
+            cancelModalHandler={props.cancelModalHandler}
+            modalHandler={props.modalHandler}
+            mentoringId={props.mentoringId}
+          />
+          <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
+          </>
+        ) : (
+          <div>멘토링 취소는 고객센터로 문의해주세요</div>
+        )}
       </ModalBottomBtn>
     </ModalMentoringBackground>
   );
