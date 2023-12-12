@@ -18,6 +18,7 @@ import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCan
 import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
+import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 function STabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -63,26 +64,28 @@ function STabBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data && data!.length !== 0
-          ? data!.map((el, idx) => {
-              return (
-                <div key={idx}>
-                  <MentoringApply data={el} />
-                  <ModalBtn
-                    btnText={
-                      activeTab === TAB.waiting
-                    ? '신청서 보고 수락하기'
-                    : '신청서 보기'}
-                    modalHandler={modalHandler}
-                    onClick={() => {
-                      setModalType('senior');
-                      setSelectedMentoringId(el.mentoringId);
-                    }}
-                  />
-                </div>
-              );
-            })
-          : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
+        {data && data!.length !== 0 ? (
+  <div>
+    {data!.map((el, idx) => (
+      <div key={idx}>
+        <MentoringApply data={el} />
+        <ModalBtn
+          btnText={
+            activeTab === TAB.waiting
+              ? '신청서 보고 수락하기'
+              : '신청서 보기'
+          }
+          modalHandler={modalHandler}
+          onClick={() => {
+            setModalType('senior');
+            setSelectedMentoringId(el.mentoringId);
+          }}
+        />
+      </div>
+    ))}
+    <div style={{ position: 'sticky', bottom: 2, backgroundColor: '#FFFFFF' }}><AccountShowBtn/></div>
+  </div>
+) : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
       </div>
     );
   };
