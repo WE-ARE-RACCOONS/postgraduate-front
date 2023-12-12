@@ -12,12 +12,6 @@ function SmentoringCancel(props : ModalMentoringProps) {
     const xClick = () => {
         props.modalHandler();
       };
-      useEffect(() => {
-        if (props.mentoringId !== 0) {
-          cancelMentoring();
-        }
-      }, []);
-
       const cancelMentoring = async () => {
         try {
           const Token = getAccessToken();
@@ -38,6 +32,7 @@ function SmentoringCancel(props : ModalMentoringProps) {
           );
           const responseData = await response.json();
           console.log(responseData)
+          props.modalHandler();
         } catch (error) {
           console.error('Error cancelling mentoring:', error);
         }

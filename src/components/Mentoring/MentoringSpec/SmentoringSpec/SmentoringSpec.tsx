@@ -29,17 +29,12 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           },
         )
         .then((response) => {
-        console.log(response.data.data)
+        console.log("anjd",response.data.data)
           setData(response.data.data);
         })
         .catch((error) => {
           console.error('Error fetching data:', error);
         });
-    }
-  }, []);
-  useEffect(() => {
-    if (props.mentoringId !== 0) {
-        acceptMentoring();
     }
   }, []);
 

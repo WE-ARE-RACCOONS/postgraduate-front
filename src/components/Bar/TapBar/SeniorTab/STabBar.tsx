@@ -7,7 +7,7 @@ import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
-import { TAB_STATE } from '@/constants/tab/ctap';
+import { TAB, TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
@@ -69,7 +69,10 @@ function STabBar() {
                 <div key={idx}>
                   <MentoringApply data={el} />
                   <ModalBtn
-                    btnText={'신청서 보고 수락하기'}
+                    btnText={
+                      activeTab === TAB.waiting
+                    ? '신청서 보고 수락하기'
+                    : '신청서 보기'}
                     modalHandler={modalHandler}
                     onClick={() => {
                       setModalType('senior');
