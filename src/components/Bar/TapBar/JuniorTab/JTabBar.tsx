@@ -40,7 +40,7 @@ function TabBar() {
       Authorization: `Bearer ${Token}`,
     };
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/done`, {
         headers,
       })
       .then((response) => {

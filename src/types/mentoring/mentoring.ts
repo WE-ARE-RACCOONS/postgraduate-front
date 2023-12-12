@@ -13,6 +13,7 @@ export interface MentoringData {
   date: string;
   chatLink: string;
   mentoringId: number;
+salaryDate:number;
 }
 
 export interface MentoringApplyProps {
@@ -37,6 +38,7 @@ export interface MentoringSpecData {
   term: string;
   chatLink: string;
   date: string;
+  salaryDate:number;
 }
 
 export interface TextToggleButtonProps {

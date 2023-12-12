@@ -45,6 +45,12 @@ function MentoringApply({ data }: MentoringApplyProps) {
                   {activeTab === TAB.done && dateDone}
                 </>
             )}
+            {userType === 'senior' && (
+                <>
+                  {activeTab === TAB.expected && dateExpected}
+                  {activeTab === TAB.done && dateDone}
+                </>
+            )}
           </ConfirmInfo>
           <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
         </ConfirmContent>
@@ -61,6 +67,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
             {activeTab === TAB.waiting && (
                   <div>{data ? data.remainTime: ''}후에 자동취소, 지금 수락하세요!</div> 
                 )}
+            {activeTab === TAB.done && (<div>{data ? data.salaryDate:''} 정산예정</div>)}
             </>
           )}
       </ConfirmBox>
