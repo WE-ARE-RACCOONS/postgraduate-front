@@ -1,8 +1,13 @@
 import React from 'react'
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
+import { useRouter } from 'next/navigation';
 import party_popper from '../../../../public/party_popper.png';
 function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
+  const router = useRouter();
+  const setAccount = () => {
+    router.push('/senior/account');
+  };
   return (
     <div>
       <Image
@@ -24,7 +29,7 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
       <div>멘토링 정산을 받으려면 정산 계좌를 등록해야 해요</div>
     <div>내멘토링 진행예정 탭에서 확인할 수 있어요</div>
     <div>지금 바로 계좌를 등록하러 가볼까요?</div>
-    <button>정산계좌 입력하기</button>
+    <button onClick={setAccount}>정산계좌 입력하기</button>
     </div>
   )
 }
