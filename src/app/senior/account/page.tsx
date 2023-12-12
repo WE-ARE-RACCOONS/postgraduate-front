@@ -1,11 +1,13 @@
 'use client';
 import InputForm from '@/components/SingleForm/InputForm/InputForm';
 import React, {useState} from 'react'
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 function AccountPage() {
+const router = useRouter();
 const [flag, setFlag] = useState(false);
 const [accountNumber, setAccountNumber] = useState('');
   const [bank, setBank] = useState('');
@@ -52,6 +54,7 @@ const accountHandler=()=> {
 const handleComplete = () => {
     if (validateInputs()) {
       accountHandler();
+      router.push('/senior/account/done');
     }
   };
   return (

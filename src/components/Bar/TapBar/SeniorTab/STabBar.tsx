@@ -53,7 +53,7 @@ function STabBar() {
         headers,
       })
       .then((response) => {
-        console.log(response.data.data.seniorMentoringInfos)
+        console.log(response.data)
         setData(response.data.data.seniorMentoringInfos);
       })
       .catch((error) => {
