@@ -58,7 +58,10 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       );
       const responseData = await response.json();
       console.log(responseData)
-      props.acceptModalHandler();
+      if (props.acceptModalHandler) {
+        props.acceptModalHandler();
+        console.log("성공")
+      }
       props.modalHandler();
     } catch (error) {
       console.error('Error cancelling mentoring:', error);

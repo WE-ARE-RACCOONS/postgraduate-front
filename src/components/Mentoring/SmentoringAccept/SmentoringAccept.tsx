@@ -1,9 +1,18 @@
 import React from 'react'
 import Image from 'next/image';
+import x_icon from '../../../../public/x.png';
 import party_popper from '../../../../public/party_popper.png';
-function SmentoringAccept() {
+function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
   return (
     <div>
+      <Image
+          id="x-icon"
+          src={x_icon}
+          alt="닫기 버튼"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          onClick={modalHandler}
+        />
         <div>후배와의 멘토링이 확정됐어요</div>
         <div>내멘토링 진행예정 탭에서 확인할 수 있어요</div>
         <Image
