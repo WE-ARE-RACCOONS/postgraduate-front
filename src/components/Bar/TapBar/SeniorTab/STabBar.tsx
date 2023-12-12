@@ -54,7 +54,6 @@ function STabBar() {
         headers,
       })
       .then((response) => {
-        console.log(response.data)
         setData(response.data.data.seniorMentoringInfos);
       })
       .catch((error) => {
@@ -83,7 +82,7 @@ function STabBar() {
         />
       </div>
     ))}
-    <div style={{ position: 'sticky', bottom: 2, backgroundColor: '#FFFFFF' }}><AccountShowBtn/></div>
+    {activeTab === TAB.done ? <div style={{ position: 'sticky', bottom: 2, backgroundColor: '#FFFFFF' }}><AccountShowBtn/></div>:''}
   </div>
 ) : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
       </div>

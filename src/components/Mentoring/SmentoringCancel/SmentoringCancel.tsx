@@ -31,7 +31,6 @@ function SmentoringCancel(props : ModalMentoringProps) {
             },
           );
           const responseData = await response.json();
-          console.log(responseData)
           props.modalHandler();
         } catch (error) {
           console.error('Error cancelling mentoring:', error);

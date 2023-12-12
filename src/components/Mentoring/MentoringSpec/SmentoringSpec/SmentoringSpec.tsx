@@ -32,7 +32,6 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           },
         )
         .then((response) => {
-        console.log("anjd",response.data.data)
           setData(response.data.data);
         })
         .catch((error) => {
@@ -60,10 +59,8 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         },
       );
       const responseData = await response.json();
-      console.log(responseData)
       if (props.acceptModalHandler) {
         props.acceptModalHandler();
-        console.log("성공")
       }
       props.modalHandler();
     } catch (error) {
