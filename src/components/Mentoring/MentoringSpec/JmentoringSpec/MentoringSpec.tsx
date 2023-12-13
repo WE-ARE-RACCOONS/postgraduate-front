@@ -4,11 +4,11 @@ import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import useModal from '@/hooks/useModal';
 import { MentoringSpecData } from '@/types/mentoring/mentoring';
-import TextToggleButton from '../../TextToggleButton/TextToggleButton';
-import MentoringApply from '../MentoringApply/MentoringApply';
+import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
+import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import { ModalMentoringBackground, ModalClose } from './MentoringSpec.styled';
-import ApplyCancleBtn from '../../Button/ApplyCancleBtn/ApplyCancleBtn';
+import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);

@@ -27,7 +27,7 @@ function JuniorManage(props: NotSeniorProps) {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/role`,
           { headers },
         );
-        console.log(response.data)
+        console.log(response.data);
         if (response.data.data.possible === true) {
         }
         if (response.data.data.possible === false) {
@@ -39,7 +39,7 @@ function JuniorManage(props: NotSeniorProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
-  console.log(socialId)
+  console.log(socialId);
   return (
     <JuniorManageContainer>
       <TitleComponent title="회원 상태 변경" />
