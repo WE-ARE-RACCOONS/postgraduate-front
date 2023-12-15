@@ -21,9 +21,11 @@ import { useAtomValue } from 'jotai';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
   const { getAccessToken } = useAuth();
-  const [data, setData] = useState('');
+  const [data, setData] = useState([]);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
+  console.log(field)
+  console.log(postgradu)
   useEffect(() => {
     setCurrentPath();
   }, []);
@@ -77,14 +79,15 @@ export default function Home() {
         <UnivTapBar />
       </HomeUnivLayer>
       <HomeProfileLayer>
-        {data && data
-          ? data.map((el, idx) => {
-            <div key={idx}>
-             <SeniorProfile data={el} />
-             </div>
-            })
-          : '해당하는 선배가 없어요'}
-        {/* <SeniorProfile /> */}
+      {data && data.length > 0
+  ? data.map((el, idx) => {
+      return (
+        <div key={idx}>
+          <SeniorProfile data={el} />
+        </div>
+      );
+    })
+  : '해당하는 선배가 없어요'}
       </HomeProfileLayer>
       <MenuBar modalHandler={modalHandler} />
       {modal && portalElement
