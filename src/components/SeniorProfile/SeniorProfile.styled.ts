@@ -26,3 +26,4 @@ export const SeniorProfileInfo = styled.div`
 export const SPmajor = styled.div``;
 export const SPnickname = styled.div``;
 export const SPField = styled.div``;
+export const Skeyword = styled.div``;
