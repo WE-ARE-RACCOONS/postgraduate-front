@@ -134,11 +134,11 @@ const HomeUnivLayer = styled.div`
 `;
 const HomeProfileLayer = styled.div`
   border: 1px solid red;
+  height: inherit;
 `;
 const MenuBarWrapper = styled.div`
-position: fixed;
+  position: fixed;
   bottom: 0;
-  width: 100%;
-  z-index: 1000;
-
+  width: inherit;
+  z-index: 1;
 `;

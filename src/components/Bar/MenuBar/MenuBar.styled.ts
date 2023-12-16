@@ -8,7 +8,7 @@ export const MenuContainer = styled.div`
   bottom: 0;
   display: flex;
   justify-content: space-between;
-   background-color: white;
+  background-color: white;
 `;
 
 export const MenuBox = styled.div`

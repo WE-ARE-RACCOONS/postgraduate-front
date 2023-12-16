@@ -3,12 +3,12 @@ export interface SeniorProfileProps {
 }
 
 export interface SeniorProfileData {
-    profile:string;
-    keyword:string[];
-    lab:string;
-    major:string;
-    nickName:string;
-    oneLiner:string;
-    postgradu:string;
-    seniorId:number;
+  profile: string;
+  keyword: string[];
+  lab: string;
+  major: string;
+  nickName: string;
+  oneLiner: string;
+  postgradu: string;
+  seniorId: number;
 }

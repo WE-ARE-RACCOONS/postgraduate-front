@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import {
@@ -17,8 +16,13 @@ function SeniorProfile({ data }: SeniorProfileProps) {
     <SeniorProfileBox>
       <SeniorProfileContent>
         <SeniorProfileImg>
-        {data.profile !== 'default' ? (
-            <Image src={data.profile} alt="profile image" width={32} height={32} />
+          {data.profile !== 'default' ? (
+            <Image
+              src={data.profile}
+              alt="profile image"
+              width={72}
+              height={72}
+            />
           ) : (
             <span>이미지가 없습니다</span>
           )}
@@ -28,8 +32,8 @@ function SeniorProfile({ data }: SeniorProfileProps) {
           <SPnickname>{data.nickName}</SPnickname>
           <SPField>{data.lab}</SPField>
         </SeniorProfileInfo>
-        <Skeyword>{data.keyword}</Skeyword>
       </SeniorProfileContent>
+      <Skeyword>{data.keyword}</Skeyword>
     </SeniorProfileBox>
   );
 }
