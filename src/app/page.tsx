@@ -92,7 +92,9 @@ export default function Home() {
           <div>해당하는 선배가 없어요</div>
         )}
       </HomeProfileLayer>
-      <MenuBar modalHandler={modalHandler} />
+      <MenuBarWrapper>
+        <MenuBar modalHandler={modalHandler} />
+      </MenuBarWrapper>
       {modal && portalElement
         ? createPortal(
             <DimmedModal modalType="notuser" modalHandler={modalHandler} />,
@@ -132,4 +134,11 @@ const HomeUnivLayer = styled.div`
 `;
 const HomeProfileLayer = styled.div`
   border: 1px solid red;
+`;
+const MenuBarWrapper = styled.div`
+position: fixed;
+  bottom: 0;
+  width: 100%;
+  z-index: 1000;
+
 `;
