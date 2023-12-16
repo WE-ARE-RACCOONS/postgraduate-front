@@ -24,8 +24,8 @@ export default function Home() {
   const [data, setData] = useState([]);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
-  console.log(field)
-  console.log(postgradu)
+  console.log(field);
+  console.log(postgradu);
   useEffect(() => {
     setCurrentPath();
   }, []);
@@ -37,7 +37,10 @@ export default function Home() {
 
     if (field && postgradu) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`, { headers })
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
+          { headers },
+        )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
           console.log(res.data.data.seniorSearchResponses);
@@ -79,15 +82,15 @@ export default function Home() {
         <UnivTapBar />
       </HomeUnivLayer>
       <HomeProfileLayer>
-      {data && data.length > 0
-  ? data.map((el, idx) => {
-      return (
-        <div key={idx}>
-          <SeniorProfile data={el} />
-        </div>
-      );
-    })
-  : '해당하는 선배가 없어요'}
+        {data && data.length > 0 ? (
+          data.map((el, idx) => (
+            <div key={idx}>
+              <SeniorProfile data={el} />
+            </div>
+          ))
+        ) : (
+          <div>해당하는 선배가 없어요</div>
+        )}
       </HomeProfileLayer>
       <MenuBar modalHandler={modalHandler} />
       {modal && portalElement
@@ -128,5 +131,5 @@ const HomeUnivLayer = styled.div`
   height: 4.1rem;
 `;
 const HomeProfileLayer = styled.div`
-  border: 1px solid black;
+  border: 1px solid red;
 `;

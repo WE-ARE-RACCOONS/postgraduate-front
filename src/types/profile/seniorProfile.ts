@@ -1,7 +1,5 @@
 export interface SeniorProfileProps {
-    data: SeniorProfileData;
-  }
-
-export interface SeniorProfileData{
-    
+  data: SeniorProfileData;
 }
+
+export interface SeniorProfileData {}
