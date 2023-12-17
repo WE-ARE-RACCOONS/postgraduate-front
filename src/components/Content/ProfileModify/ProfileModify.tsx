@@ -11,16 +11,19 @@ import useModal from "@/hooks/useModal";
 import { createPortal } from "react-dom";
 import RiseUpModal from "@/components/Modal/RiseUpModal";
 import { ModalType } from '@/types/modal/riseUp';
+import { useAtom } from "jotai";
+import { sKeywordAtom, selectedFieldAtom, totalFieldAtom } from "@/stores/senior";
 
 function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
   const [modalType, setModalType] = useState<ModalType>('keyword');
   const [flag, setFlag] = useState(false);
   const [lab, setLab] = useState('');
-  const [keyword, setKeyword] = useState([]);
+  const [keyword, setKeyword] = useAtom(sKeywordAtom);
   const [info, setInfo] = useState('');
   const [target, setTarget] = useState('');
   const [chatLink, setChatLink] = useState('');
-  const [field, setField] = useState([]);
+  const [totalField, setTotalField] = useAtom(totalFieldAtom);
+  const [field, setField] = useAtom(selectedFieldAtom);
   const [oneLiner, setOneLiner] = useState('');
   const [time, setTime] = useState('');
   const { getAccessToken } = useAuth();
@@ -39,8 +42,10 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
       if(res.code == "SNR200") {
         setChatLink(res.data.chatLink);
         setField(res.data.field);
+        const totalArr = dedupeInTotalField(res.data.field);
+        setTotalField(totalArr);
         setInfo(res.data.info);
-        setKeyword(res.data.keyword);
+        setKeyword(res.data.keyword.join(','));
         setLab(res.data.lab);
         setOneLiner(res.data.oneLiner);
         setTarget(res.data.target);
@@ -62,6 +67,16 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
     infoHandler();
   }
 
+  const dedupeInTotalField = (fields: Array<string>) => {
+    const newArr = [...totalField];
+    fields.forEach((el) => {
+      newArr.push(el);
+    })
+    
+    const tempSet = new Set(newArr);
+    return [...tempSet];
+  }
+
   return(
     <PMContainer>
       <Image id="x-icon" src={x_icon} alt="프로필 변경 모달 닫기 버튼" onClick={modalHandler} />
@@ -72,7 +87,7 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.keywords}</FieldTitle>
-          <FieldForm as="button" onClick={clickKeyword}>{keyword.join()}</FieldForm>
+          <FieldForm as="button" onClick={clickKeyword}>{keyword}</FieldForm>
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.field}</FieldTitle>
