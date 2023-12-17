@@ -1,7 +1,7 @@
 'use client';
 import MenuBar from '@/components/Bar/MenuBar';
 import Login from '@/components/kakao/login';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
@@ -14,8 +14,39 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import Image from 'next/image';
 import search from '../../public/search.png';
 import SearchModal from '@/components/Modal/SearchModal';
+import useAuth from '@/hooks/useAuth';
+import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
+import axios from 'axios';
+import { useAtomValue } from 'jotai';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
+  const { getAccessToken } = useAuth();
+  const [data, setData] = useState([]);
+  const field = useAtomValue(sfactiveTabAtom);
+  const postgradu = useAtomValue(suactiveTabAtom);
+  useEffect(() => {
+    setCurrentPath();
+  }, []);
+  useEffect(() => {
+    const Token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${Token}`,
+    };
+
+    if (field && postgradu) {
+      axios
+        .get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
+          { headers },
+        )
+        .then((res) => {
+          setData(res.data.data.seniorSearchResponses);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, [field, postgradu]);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',
   );
@@ -24,9 +55,6 @@ export default function Home() {
     modalHandler: searchModalHandler,
     portalElement: searchPortalElement,
   } = useModal('search-portal');
-  useEffect(() => {
-    setCurrentPath();
-  }, []);
 
   return (
     <HomeLayer>
@@ -51,14 +79,19 @@ export default function Home() {
         <UnivTapBar />
       </HomeUnivLayer>
       <HomeProfileLayer>
-        {/* {data && data!.length !== 0
-          ? data!.map((el, idx) => {
-              return <SeniorProfile key={idx} data={el} />;
-            })
-          : '해당하는 선배가 없어요'} */}
-        {/* <SeniorProfile /> */}
+        {data && data.length > 0 ? (
+          data.map((el, idx) => (
+            <div key={idx}>
+              <SeniorProfile data={el} />
+            </div>
+          ))
+        ) : (
+          <div>해당하는 선배가 없어요</div>
+        )}
       </HomeProfileLayer>
-      <MenuBar modalHandler={modalHandler} />
+      <MenuBarWrapper>
+        <MenuBar modalHandler={modalHandler} />
+      </MenuBarWrapper>
       {modal && portalElement
         ? createPortal(
             <DimmedModal modalType="notuser" modalHandler={modalHandler} />,
@@ -97,5 +130,12 @@ const HomeUnivLayer = styled.div`
   height: 4.1rem;
 `;
 const HomeProfileLayer = styled.div`
-  border: 1px solid black;
+  border: 1px solid red;
+  height: inherit;
+`;
+const MenuBarWrapper = styled.div`
+  position: fixed;
+  bottom: 0;
+  width: inherit;
+  z-index: 1;
 `;

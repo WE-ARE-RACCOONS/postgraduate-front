@@ -14,12 +14,12 @@ export const SFTAB = {
   CD: '반도체',
   BI: '바이오',
   AG: '에너지',
-  OT: '다른분야',
+  OT: 'others',
 };
 
 export const SMTAB = {
-  ALL: '전체선택',
+  ALL: 'all',
   SEO: '서울대',
   YEO: '연세대',
-  OT: '다른학교',
+  OT: 'others',
 };

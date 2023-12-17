@@ -1,4 +1,5 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import {
   SeniorProfileBox,
   SeniorProfileContent,
@@ -7,34 +8,32 @@ import {
   SPmajor,
   SPnickname,
   SPField,
+  Skeyword,
 } from './SeniorProfile.styled';
-import axios from 'axios';
-import useAuth from '@/hooks/useAuth';
-const { getAccessToken } = useAuth();
-function SeniorProfile() {
-  useEffect(() => {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
-
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/`, { headers })
-      .then((res) => {})
-      .catch((err) => {
-        console.error(err);
-      });
-  }, []);
+import { SeniorProfileProps } from '@/types/profile/seniorProfile';
+function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
-        <SeniorProfileImg>프로필</SeniorProfileImg>
+        <SeniorProfileImg>
+          {data.profile !== 'default' ? (
+            <Image
+              src={data.profile}
+              alt="profile image"
+              width={72}
+              height={72}
+            />
+          ) : (
+            <span>이미지가 없습니다</span>
+          )}
+        </SeniorProfileImg>
         <SeniorProfileInfo>
-          <SPmajor>전공</SPmajor>
-          <SPnickname>이름</SPnickname>
-          <SPField>연구 분야</SPField>
+          <SPmajor>{data.major}</SPmajor>
+          <SPnickname>{data.nickName}</SPnickname>
+          <SPField>{data.lab}</SPField>
         </SeniorProfileInfo>
       </SeniorProfileContent>
+      <Skeyword>{data.keyword}</Skeyword>
     </SeniorProfileBox>
   );
 }

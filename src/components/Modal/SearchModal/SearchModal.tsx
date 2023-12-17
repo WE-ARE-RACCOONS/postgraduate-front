@@ -5,8 +5,11 @@ import Image from 'next/image';
 import search from '../../../../public/search.png';
 import HomeSearchForm from '@/components/SingleForm/HomeSearchForm/HomeSearchForm';
 export default function SearchModal(props: SearchModalProps) {
+  const ModalClick = () => {
+    props.modalHandler();
+  };
   return (
-    <SearchModalBgBox>
+    <SearchModalBgBox onClick={ModalClick}>
       <SearchModalInput>
         <Image
           id="search"

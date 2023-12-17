@@ -9,7 +9,7 @@ export const SearchModalBgBox = styled.div`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 2;
   background-color: rgba(39, 39, 39, 0.48);
 `;
 export const SearchModalInput = styled.div`
