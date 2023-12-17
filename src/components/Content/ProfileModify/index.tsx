@@ -1,3 +1,3 @@
-import ProfileModify from "./ProfileModify";
+import ProfileModify from './ProfileModify';
 
 export default ProfileModify;
