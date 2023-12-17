@@ -24,8 +24,6 @@ export default function Home() {
   const [data, setData] = useState([]);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
-  console.log(field);
-  console.log(postgradu);
   useEffect(() => {
     setCurrentPath();
   }, []);
@@ -43,7 +41,6 @@ export default function Home() {
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
-          console.log(res.data.data.seniorSearchResponses);
         })
         .catch((err) => {
           console.error(err);
