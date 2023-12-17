@@ -4,6 +4,7 @@ import MBestCaseContent from '@/components/Content/MBestCaseContent';
 import MyLoginRequest from '@/components/Content/MyLoginRequest/MyLoginRequest';
 import SeniorMyProfile from '@/components/Content/SeniorMyProfile';
 import ProfileModify from '@/components/Content/ProfileModify';
+import SmentoringAccept from '@/components/Mentoring/SmentoringAccept/SmentoringAccept';
 
 function FullModal(props: FullModalProps) {
   return (
@@ -19,6 +20,9 @@ function FullModal(props: FullModalProps) {
       )}
       {props.modalType == 'profile-modify' && (
         <ProfileModify modalHandler={props.modalHandler} />
+      )}
+      {props.modalType == 'accept-mentoring' && (
+        <SmentoringAccept modalHandler={props.modalHandler} />
       )}
     </FullModalContainer>
   );

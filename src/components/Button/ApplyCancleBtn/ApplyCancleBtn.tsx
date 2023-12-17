@@ -5,7 +5,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 export default function ApplyCancleBtn(props: CancleBtnProps) {
   const handleClick = () => {
-    props.cancelModalHandler();
+    if (props.cancelModalHandler) props.cancelModalHandler();
     props.modalHandler();
     if (props.onClick) props.onClick();
   };
