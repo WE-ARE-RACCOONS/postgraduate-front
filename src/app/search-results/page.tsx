@@ -30,8 +30,6 @@ function SearchResultPage() {
       axios
         .get(url, { headers })
         .then((res) => {
-          console.log(res.data.data.seniorSearchResponses);
-          console.log(res.data);
           setData(res.data.data.seniorSearchResponses);
           setLength(res.data.data.seniorSearchResponses.length);
         })
