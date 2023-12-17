@@ -59,7 +59,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         },
         {
           headers: headers,
-        }
+        },
       );
       const responseData = response.data;
       if (props.acceptModalHandler) {

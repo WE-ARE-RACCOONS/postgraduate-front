@@ -12,7 +12,7 @@ function AccountPage() {
   const [accountNumber, setAccountNumber] = useState('');
   const [bank, setBank] = useState('');
   const [accountHolder, setAccountHolder] = useState('');
-  const [data, setData] = useState('');
+  const [data, setData] = useState({});
   const { getAccessToken } = useAuth();
   const validateInputs = () => {
     const isAccountNumberValid = /^[0-9]+$/.test(accountNumber);
