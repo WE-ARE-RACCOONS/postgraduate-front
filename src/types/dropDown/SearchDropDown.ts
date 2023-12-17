@@ -1,3 +1,3 @@
 export type SearchDropDownProps = {
-    onChange: (value: string) => void;
-  };
+  onChange: (value: string) => void;
+};
