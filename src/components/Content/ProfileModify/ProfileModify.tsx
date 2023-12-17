@@ -26,6 +26,7 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
   const [field, setField] = useAtom(selectedFieldAtom);
   const [oneLiner, setOneLiner] = useState('');
   const [time, setTime] = useState('');
+  const [submitFlag, setSubmitFlag] = useState(false);
   const { getAccessToken } = useAuth();
   const { modal, modalHandler: infoHandler, portalElement } = useModal('senior-info-portal');
 
@@ -55,7 +56,7 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
       console.error(err);
     })
     
-  }, []);
+  }, [submitFlag]);
 
   const clickKeyword = () => {
     setModalType('keyword');
@@ -75,6 +76,49 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
     
     const tempSet = new Set(newArr);
     return [...tempSet];
+  }
+
+  const submitHandler = () => {
+    const accessTkn = getAccessToken();
+    const emptyCheck = checkEmpty();
+
+    if(accessTkn && !emptyCheck) {
+      axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, 
+      {
+        lab: lab,
+        keyword: keyword,
+        info: info,
+        target: target,
+        chatLink: chatLink,
+        field: field.join(','),
+        oneLiner: oneLiner,
+        time: time
+      }, 
+      {
+        headers: {
+          Authorization: `Bearer ${accessTkn}`
+        }
+      }).then((response) => {
+        const res = response.data;
+        if(res.code == "SNR201") {
+          setFlag(false);
+          modalHandler();
+          setSubmitFlag(!submitFlag);
+        }
+      }).catch((err) => {
+        console.error(err);
+      })
+    }
+  }
+
+  const checkEmpty = () => {
+    if(lab && keyword && info && target && chatLink && oneLiner && time && (field.length > 0)) {
+      setFlag(false);
+      return false;
+    }
+
+    setFlag(true);
+    return true;
   }
 
   return(
@@ -120,7 +164,7 @@ function ProfileModify({ modalHandler } : { modalHandler: () => void }) {
         </ValidatorBox>
       )}
       <SaveBtnBox>
-        <ClickedBtn btnText="저장" clickHandler={() => {}} />
+        <ClickedBtn btnText="저장" clickHandler={submitHandler} />
       </SaveBtnBox>
       {modal && portalElement
         ? createPortal(
