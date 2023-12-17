@@ -52,17 +52,16 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         Authorization: `Bearer ${Token}`,
       };
 
-      const response = await fetch(
+      const response = await axios.patch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
         {
-          method: 'PATCH',
-          headers,
-          body: JSON.stringify({
-            date: date,
-          }),
+          date: date,
         },
+        {
+          headers: headers,
+        }
       );
-      const responseData = await response.json();
+      const responseData = response.data;
       if (props.acceptModalHandler) {
         props.acceptModalHandler();
       }

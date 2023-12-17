@@ -28,7 +28,6 @@ function AccountPage() {
   const accountHandler = () => {
     if (!flag) {
       const Token = getAccessToken();
-      console.log(Token);
       const headers = {
         Authorization: `Bearer ${Token}`,
       };

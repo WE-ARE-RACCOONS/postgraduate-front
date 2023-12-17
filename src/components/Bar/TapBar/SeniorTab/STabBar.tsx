@@ -45,7 +45,6 @@ function STabBar() {
   );
   useEffect(() => {
     const Token = getAccessToken();
-    console.log(Token);
     const headers = {
       Authorization: `Bearer ${Token}`,
     };

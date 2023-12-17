@@ -101,8 +101,6 @@ function SeniorInfoPage() {
     }
     setFlag(false);
     if (Token && certification) {
-      console.log(Token);
-      console.log('token condition met');
       axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
