@@ -101,8 +101,6 @@ function SeniorInfoPage() {
     }
     setFlag(false);
     if (Token && certification) {
-      console.log(Token);
-      console.log('token condition met');
       axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
@@ -121,7 +119,6 @@ function SeniorInfoPage() {
         )
         .then((res) => {
           const response = res.data;
-          console.log(response);
           if (response.code == 'SNR202') {
             setAccessToken({
               token: response.data.accessToken,

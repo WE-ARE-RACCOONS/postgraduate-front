@@ -1,13 +1,13 @@
 import { TextFormProps } from '@/types/form/textForm';
 import { TextFormEl } from './TextForm.styled';
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { sKeywordAtom, sLabAtom, sProfessorAtom } from '@/stores/senior';
 import { PrimitiveAtom } from 'jotai';
 import { useEffect, useState } from 'react';
 
 function TextForm(props: TextFormProps) {
   const [targetAtom, setTargetAtom] = useState<PrimitiveAtom<string>>(sLabAtom);
-  const setTarget = useSetAtom(targetAtom);
+  const [target, setTarget] = useAtom(targetAtom);
 
   useEffect(() => {
     switch (props.targetAtom) {
@@ -30,6 +30,7 @@ function TextForm(props: TextFormProps) {
       type="text"
       placeholder={props.placeholder}
       onChange={(e) => setTarget(e.currentTarget.value)}
+      defaultValue={target}
     />
   );
 }

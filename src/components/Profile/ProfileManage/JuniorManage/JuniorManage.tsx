@@ -27,7 +27,6 @@ function JuniorManage(props: NotSeniorProps) {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/role`,
           { headers },
         );
-        console.log(response.data);
         if (response.data.data.possible === true) {
         }
         if (response.data.data.possible === false) {

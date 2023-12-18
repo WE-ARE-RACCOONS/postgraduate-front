@@ -16,6 +16,11 @@ function SeniorManage(props: SeniorManageProps) {
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
+  const {
+    modal: modifyModal,
+    modalHandler: modifyHandler,
+    portalElement: modifyPortal,
+  } = useModal('profile-modify-portal');
 
   function setAuthText(auth: certiRegType) {
     switch (auth) {
@@ -41,7 +46,7 @@ function SeniorManage(props: SeniorManageProps) {
             <SeniorManageAuthValue>미완성</SeniorManageAuthValue>
           )}
         </SeniorManageAuthBox>
-        <ContentComponent content="내 프로필 수정" />
+        <ContentComponent content="내 프로필 수정" onClick={modifyHandler} />
         <SeniorManageAuthBox>
           <button>대학원 인증</button>
           <SeniorManageAuthValue $certifiReg={props.certifiReg}>
@@ -60,6 +65,15 @@ function SeniorManage(props: SeniorManageProps) {
               modalHandler={modalHandler}
             />,
             portalElement,
+          )
+        : null}
+      {modifyModal && modifyPortal
+        ? createPortal(
+            <FullModal
+              modalType="profile-modify"
+              modalHandler={modifyHandler}
+            />,
+            modifyPortal,
           )
         : null}
     </SeniorManageContainer>
