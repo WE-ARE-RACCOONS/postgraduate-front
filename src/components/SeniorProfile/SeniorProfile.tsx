@@ -11,12 +11,13 @@ import {
   Skeyword,
 } from './SeniorProfile.styled';
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
+import user_icon from '../../../public/user.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
         <SeniorProfileImg>
-          {data.profile !== 'default' ? (
+          {/* {data.profile !== 'default.png' ? (
             <Image
               src={data.profile}
               alt="profile image"
@@ -25,7 +26,13 @@ function SeniorProfile({ data }: SeniorProfileProps) {
             />
           ) : (
             <span>이미지가 없습니다</span>
-          )}
+          )} */}
+            <Image
+              src={user_icon}
+              alt="profile image"
+              width={72}
+              height={72}
+            />
         </SeniorProfileImg>
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>
