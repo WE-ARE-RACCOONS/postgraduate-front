@@ -26,12 +26,10 @@ function PhoneNumForm() {
       return false;
     }
 
-    // 전화번호가 11자리인지 확인
     if (fullNum.length !== 11) {
       return false;
     }
 
-    // 010으로 시작하는지 확인
     if (fullNum.substring(0, 3) !== '010') {
       return false;
     }
