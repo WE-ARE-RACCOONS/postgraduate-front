@@ -64,10 +64,10 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
         onClick={modalHandler}
       />
       <div id="nickname-form-wrapper">
-        <NicknameForm />
+        <NicknameForm defaultValue={nickname} />
       </div>
       <div id="phonenum-form-wrapper">
-        <PhoneNumForm />
+        <PhoneNumForm defaultValue={phoneNum} />
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>

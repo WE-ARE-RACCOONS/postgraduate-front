@@ -6,7 +6,7 @@ import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { NicknameContainer, NicknameTotalContainer } from './NicknameForm.styled';
 
-function NicknameForm() {
+function NicknameForm({ defaultValue } : { defaultValue?: string }) {
   const maxLength = 12;
   const [userNick, useUserNick] = useAtom(nickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
@@ -55,6 +55,7 @@ function NicknameForm() {
           id="user-nickname"
           placeholder="닉네임을 입력해주세요."
           onChange={(e) => checkNickname(e)}
+          defaultValue={defaultValue || ''}
         />
         <button
           onClick={() => {
