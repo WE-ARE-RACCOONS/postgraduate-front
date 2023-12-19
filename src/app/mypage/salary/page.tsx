@@ -29,8 +29,8 @@ function SalaryPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary/${activeTab}`, { headers })
           .then((res) => {
-            console.log(res.data)
-            setData(res.data);
+            console.log(res.data.data.salaryDetails)
+            setData(res.data.data.salaryDetails);
             setSalaryDate(res.data.data.salaryDate);
             setSalaryAmount(res.data.data.salaryAmount);
            
@@ -44,15 +44,18 @@ function SalaryPage() {
   const renderTabContent = () => {
     return(
       <div>
-        {data && data!.length !== 0 ? (
-          <div>
-        {data.map((el, idx) => (
-              <div key={idx}>
-                <SalaryProfile data={el} />
-              </div>
-            ))}
-            </div>): (`${STAB_STATE[activeTab]}인 멘토링이 없어요`)}
-      </div>
+      {data && data.length > 0 ? (
+        <div>
+          {data.map((el, idx) => (
+            <div key={idx}>
+              <SalaryProfile data={el} />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div>{`${STAB_STATE[activeTab]}인 멘토링이 없어요`}</div>
+      )}
+    </div>
     )
       
   };

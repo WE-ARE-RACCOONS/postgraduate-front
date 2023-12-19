@@ -15,8 +15,8 @@ function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
-        <SeniorProfileImg>
-          {data.profile !== 'default' ? (
+        <SeniorProfileImg src={data ? data.profile : ''}>
+          {/* {data.profile.length > 0 ? (
             <Image
               src={data.profile}
               alt="profile image"
@@ -25,7 +25,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
             />
           ) : (
             <span>이미지가 없습니다</span>
-          )}
+          )} */}
         </SeniorProfileImg>
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>

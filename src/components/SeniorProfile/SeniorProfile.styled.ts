@@ -11,9 +11,9 @@ export const SeniorProfileContent = styled.div`
   border: 1px solid green;
   display: flex;
 `;
-export const SeniorProfileImg = styled.div`
-  width: 4.9rem;
-  height: 4.9rem;
+export const SeniorProfileImg = styled.img`
+  width: 4rem;
+  height: 4rem;
 `;
 
 export const SeniorProfileInfo = styled.div`
