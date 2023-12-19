@@ -66,7 +66,7 @@ function PhoneNumForm() {
 
   return (
     <div>
-      <h3>휴대번호를 입력해주세요</h3>
+      <div>휴대폰 번호</div>
       <PhoneNumContainer>
         <input
           type="text"

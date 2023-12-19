@@ -4,10 +4,10 @@ import { nickname, notDuplicate } from '@/stores/signup';
 import { useState } from 'react';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
+import { NicknameContainer, NicknameTotalContainer } from './NicknameForm.styled';
 
 function NicknameForm() {
   const maxLength = 12;
-  const regex = /^[a-zA-Z가-힣]*$/;
   const [userNick, useUserNick] = useAtom(nickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
   const [flag, setFlag] = useState(false);
@@ -46,9 +46,9 @@ function NicknameForm() {
   }
 
   return (
-    <div>
-      <div>
-        <h3>닉네임을 입력해주세요</h3>
+    <NicknameTotalContainer>
+      <NicknameContainer>
+        <div>닉네임</div>
         <input
           type="text"
           name="user-nickname"
@@ -63,7 +63,7 @@ function NicknameForm() {
         >
           중복확인
         </button>
-      </div>
+      </NicknameContainer>
       {flag && (
         <SingleValidator
           textColor={availability ? '#2dc95f' : '#FF3347'}
@@ -72,7 +72,7 @@ function NicknameForm() {
           }
         />
       )}
-    </div>
+    </NicknameTotalContainer>
   );
 }
 
