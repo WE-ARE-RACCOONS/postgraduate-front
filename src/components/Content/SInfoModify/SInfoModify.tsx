@@ -6,12 +6,50 @@ import Image from "next/image";
 import RoundedImage from "@/components/Image/RoundedImage";
 import NicknameForm from "@/components/SingleForm/NicknameForm";
 import PhoneNumForm from "@/components/SingleForm/PhoneNumForm";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import ClickedBtn from "@/components/Button/ClickedBtn";
+import useAuth from "@/hooks/useAuth";
+import axios from "axios";
 
 function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false);
+  const [accHolder, setAccHolder] = useState('');
+  const [accNumber, setAccNumber] = useState('');
+  const [bank, setBank] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [phoneNum, setPhoneNum] = useState('');
+  const [profileUrl, setProfileUrl] = useState('');
+  
+  const { getAccessToken } = useAuth();
+
+  useEffect(() => {
+    const accessTkn = getAccessToken();
+    
+    if(accessTkn) {
+      axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`, {
+        headers: {
+          Authorization: `Bearer ${accessTkn}`
+        }
+      })
+      .then((response) => {
+        const res = response.data;
+
+        if(res.code == "SNR200") {
+          setAccHolder(res.data.accountHolder || '');
+          setAccNumber(res.data.accountNumber || '');
+          setBank(res.data.bank || '');
+          setNickname(res.data.nickName || '');
+          setPhoneNum(res.data.phoneNumber || '');
+          // setProfileUrl(res.data.profile || '');
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      })
+    }
+    
+  }, []);
 
   return(
     <SInfoContainer>
@@ -33,16 +71,16 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
-        <InfoFieldForm $width="20.5rem" />
+        <InfoFieldForm $width="20.5rem" type="text" defaultValue={accNumber} />
       </div>
       <div id="bank-and-name-wrapper">
         <div id="bank-form-wrapper">
           <InfoFieldTitle>은행명</InfoFieldTitle>
-          <InfoFieldForm $width="11.56rem" />
+          <InfoFieldForm $width="11.56rem" type="text" defaultValue={bank} />
         </div>
         <div id="name-form-wrapper">
           <InfoFieldTitle>예금주</InfoFieldTitle>
-          <InfoFieldForm $width="8.2rem" />
+          <InfoFieldForm $width="8.2rem" type="text" defaultValue={accHolder} />
         </div>
       </div>
       {flag && (
