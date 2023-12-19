@@ -28,16 +28,11 @@ export default function Home() {
     setCurrentPath();
   }, []);
   useEffect(() => {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
 
     if (field && postgradu) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
-          { headers },
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
