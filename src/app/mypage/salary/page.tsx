@@ -19,7 +19,6 @@ function SalaryPage() {
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
-
   useEffect(() => {
     if (Token) {
       const headers = {
@@ -29,18 +28,29 @@ function SalaryPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary/${activeTab}`, { headers })
           .then((res) => {
-            console.log(res.data.data.salaryDetails)
-            setData(res.data.data.salaryDetails);
-            setSalaryDate(res.data.data.salaryDate);
-            setSalaryAmount(res.data.data.salaryAmount);
+            console.log(res.data)
+            if (res.data.code == 'SLR200') {
+              setData(res.data.data.salaryDetails);
+            }
            
           })
           .catch(function (error) {
             console.log(error);
           });
+          axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
+          .then((res) => {
+            if (res.data.code == 'SLR200') {
+              setSalaryDate(res.data.data.salaryDate);
+              setSalaryAmount(res.data.data.salaryAmount);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
     }
-  }, [Token]);
+  }, [Token,activeTab]);
   const renderTabContent = () => {
     return(
       <div>
@@ -59,6 +69,7 @@ function SalaryPage() {
     )
       
   };
+  console.log(salaryDate)
   return (
     <>
   <div> 

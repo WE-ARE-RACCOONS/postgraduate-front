@@ -7,9 +7,10 @@ function SalaryProfile({ data }: SalaryProps) {
   return (
   
       <SalaryBox>
-        <SalaryImg>
-            src={data ? data.profile : '/user.png'}
-        </SalaryImg>
+        <SalaryImg
+  src={data ? data.profile : '/user.png'}
+  alt="Profile"
+/>
         <SalaryContent>
             <SalaryTitle>{data ? data.nickName : ''}후배와 맨토링</SalaryTitle>
             <SalaryDetail>

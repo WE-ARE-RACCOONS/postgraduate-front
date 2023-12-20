@@ -20,7 +20,6 @@ import axios from 'axios';
 import { useAtomValue } from 'jotai';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-  const { getAccessToken } = useAuth();
   const [data, setData] = useState([]);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
