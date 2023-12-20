@@ -1,4 +1,4 @@
-import { InfoFieldForm, InfoFieldTitle, SInfoContainer, SInfoImgBox, ValidatorBox } from "./SInfoModify.styled";
+import { InfoFieldForm, InfoFieldTitle, SInfoContainer, SInfoImgBox, SInfoImgInputBox, ValidatorBox } from "./SInfoModify.styled";
 import x_icon from '../../../../public/x.png';
 import user_icon from '../../../../public/user.png';
 import camera_icon from '../../../../public/camera.png';
@@ -6,11 +6,12 @@ import Image from "next/image";
 import RoundedImage from "@/components/Image/RoundedImage";
 import NicknameForm from "@/components/SingleForm/NicknameForm";
 import PhoneNumForm from "@/components/SingleForm/PhoneNumForm";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import SingleValidator from "@/components/Validator/SingleValidator";
 import ClickedBtn from "@/components/Button/ClickedBtn";
 import useAuth from "@/hooks/useAuth";
 import axios from "axios";
+import { StaticImageData, StaticImport } from "next/dist/shared/lib/get-img-props";
 
 function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false);
@@ -19,7 +20,9 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
   const [bank, setBank] = useState('');
   const [nickname, setNickname] = useState('');
   const [phoneNum, setPhoneNum] = useState('');
-  const [profileUrl, setProfileUrl] = useState('');
+  const [profileUrl, setProfileUrl] = useState(''); // api 제출용 s3 이미지 링크
+  const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
+  const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
   
   const { getAccessToken } = useAuth();
 
@@ -51,11 +54,26 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
     
   }, []);
 
+  useEffect(() => {
+    if(inputImg) {
+      setImgUrl(URL.createObjectURL(inputImg));
+    }
+  }, [inputImg]);
+
   return(
     <SInfoContainer>
       <SInfoImgBox>
-        <RoundedImage imgSrc={user_icon} altMsg="계정 프로필 사진" />
+        <RoundedImage imgSrc={imgUrl ? imgUrl : user_icon} altMsg="계정 프로필 사진" />
         <Image id="camera-icon" src={camera_icon} alt="카메라 아이콘" />
+        <SInfoImgInputBox>
+          <label id="profile-img-label" htmlFor="profile-img">이미지라벨이미지라벨이미지라벨이미지라벨</label>
+          <input
+            type="file"
+            accept="image/*"
+            id="profile-img"
+            onChange={(e) => {setInputImg(e.currentTarget.files ? e.currentTarget.files[0] : null)}}
+          />
+        </SInfoImgInputBox>
       </SInfoImgBox>
       <Image
         id="x-icon"

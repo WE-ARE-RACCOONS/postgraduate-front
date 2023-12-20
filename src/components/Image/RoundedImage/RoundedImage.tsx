@@ -6,12 +6,12 @@ function RoundedImage({
   imgSrc,
   altMsg,
 }: {
-  imgSrc: StaticImport;
+  imgSrc: StaticImport | string;
   altMsg: string;
 }) {
   return (
     <RoundedImgContainer>
-      <Image id="rounded-img" src={imgSrc} alt={altMsg} />
+      <Image id="rounded-img" src={imgSrc} alt={altMsg} width={72} height={72} />
     </RoundedImgContainer>
   );
 }

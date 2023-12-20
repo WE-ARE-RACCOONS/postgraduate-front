@@ -73,6 +73,25 @@ export const SInfoImgBox = styled.div`
   }
 `
 
+export const SInfoImgInputBox = styled.div`
+  width: 4.5rem;
+  height: 4.5rem;
+  position: absolute;
+  top: 0;
+  opacity: 0;
+
+  #profile-img {
+    display: none;
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+
+  #profile-img-label {
+    width: 4.5rem;
+    height: 4.5rem;
+  }
+`
+
 export const InfoFieldTitle = styled.div`
   width: max-content;
   height: 1.375rem;
