@@ -27,11 +27,10 @@ export default function Home() {
     setCurrentPath();
   }, []);
   useEffect(() => {
-
     if (field && postgradu) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
