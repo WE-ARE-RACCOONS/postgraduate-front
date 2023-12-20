@@ -21,7 +21,11 @@ function SeniorManage(props: SeniorManageProps) {
     modalHandler: modifyHandler,
     portalElement: modifyPortal,
   } = useModal('profile-modify-portal');
-  const { modal: infoModal, modalHandler: infoHandler, portalElement: infoPortal } = useModal('senior-info-modify-portal');
+  const {
+    modal: infoModal,
+    modalHandler: infoHandler,
+    portalElement: infoPortal,
+  } = useModal('senior-info-modify-portal');
 
   function setAuthText(auth: certiRegType) {
     switch (auth) {
@@ -77,15 +81,15 @@ function SeniorManage(props: SeniorManageProps) {
             modifyPortal,
           )
         : null}
-      {infoModal && infoPortal 
+      {infoModal && infoPortal
         ? createPortal(
-          <FullModal 
-            modalType='senior-info-modify' 
-            modalHandler={infoHandler} 
-          />, 
-          infoPortal
-        ) 
-      : null}
+            <FullModal
+              modalType="senior-info-modify"
+              modalHandler={infoHandler}
+            />,
+            infoPortal,
+          )
+        : null}
     </SeniorManageContainer>
   );
 }

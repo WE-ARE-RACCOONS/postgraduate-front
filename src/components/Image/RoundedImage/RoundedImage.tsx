@@ -11,7 +11,13 @@ function RoundedImage({
 }) {
   return (
     <RoundedImgContainer>
-      <Image id="rounded-img" src={imgSrc} alt={altMsg} width={72} height={72} />
+      <Image
+        id="rounded-img"
+        src={imgSrc}
+        alt={altMsg}
+        width={72}
+        height={72}
+      />
     </RoundedImgContainer>
   );
 }

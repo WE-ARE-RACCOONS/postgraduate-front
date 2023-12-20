@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SInfoContainer = styled.div`
   width: inherit;
@@ -53,7 +53,7 @@ export const SInfoContainer = styled.div`
     position: absolute;
     top: 43.5rem;
   }
-`
+`;
 
 export const SInfoImgBox = styled.div`
   width: 4.875rem;
@@ -71,7 +71,7 @@ export const SInfoImgBox = styled.div`
     bottom: 0;
     right: 0;
   }
-`
+`;
 
 export const SInfoImgInputBox = styled.div`
   width: 4.5rem;
@@ -90,17 +90,17 @@ export const SInfoImgInputBox = styled.div`
     width: 4.5rem;
     height: 4.5rem;
   }
-`
+`;
 
 export const InfoFieldTitle = styled.div`
   width: max-content;
   height: 1.375rem;
-`
+`;
 
 export const InfoFieldForm = styled.input<{ $width: string }>`
-  width: ${prop => prop.$width};
+  width: ${(prop) => prop.$width};
   height: 3.875rem;
-`
+`;
 
 export const ValidatorBox = styled.div`
   width: 9.5rem;

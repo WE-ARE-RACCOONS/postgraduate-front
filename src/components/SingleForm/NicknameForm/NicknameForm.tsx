@@ -4,9 +4,12 @@ import { nickname, notDuplicate } from '@/stores/signup';
 import { useState } from 'react';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { NicknameContainer, NicknameTotalContainer } from './NicknameForm.styled';
+import {
+  NicknameContainer,
+  NicknameTotalContainer,
+} from './NicknameForm.styled';
 
-function NicknameForm({ defaultValue } : { defaultValue?: string }) {
+function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   const maxLength = 12;
   const [userNick, useUserNick] = useAtom(nickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
