@@ -12,15 +12,17 @@ import ClickedBtn from "@/components/Button/ClickedBtn";
 import useAuth from "@/hooks/useAuth";
 import axios from "axios";
 import { StaticImageData, StaticImport } from "next/dist/shared/lib/get-img-props";
+import { useAtom } from "jotai";
+import { nickname, phoneNum } from "@/stores/signup";
 
 function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false);
+  const [submitFlag, setSubmitFlag] = useState(false);
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
   const [bank, setBank] = useState('');
-  const [nickname, setNickname] = useState('');
-  const [phoneNum, setPhoneNum] = useState('');
-  const [profileUrl, setProfileUrl] = useState(''); // api 제출용 s3 이미지 링크
+  const [nickName, setNickname] = useAtom(nickname);
+  const [fullNum, setPhoneNum] = useAtom(phoneNum);
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
   const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
   
@@ -52,13 +54,75 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
       })
     }
     
-  }, []);
+  }, [submitFlag]);
 
   useEffect(() => {
     if(inputImg) {
       setImgUrl(URL.createObjectURL(inputImg));
     }
   }, [inputImg]);
+
+  const submitHandler = async () => {
+    const accessTkn = getAccessToken();
+    let profileUrl = '';
+
+    if(inputImg) {
+      const formData = new FormData();
+      formData.append('profileFile', inputImg);
+
+      if(accessTkn) {
+        await axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              Authorization: `Bearer ${accessTkn}`
+            },
+          },
+        )
+        .then((response) => {
+          const res = response.data;
+  
+          if (res.code == 'IMG202') {
+            profileUrl = res.data.profileUrl;
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+      }
+    }
+
+    if(nickName && fullNum && accessTkn) {
+      setFlag(false);
+      axios.patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`, {
+        nickName: nickName,
+        phoneNumber: fullNum,
+        profile: profileUrl,
+        accountNumber: accNumber,
+        bank: bank,
+        accountHolder: accHolder
+      }, {
+        headers: {
+          Authorization: `Bearer ${accessTkn}`
+        }
+      }).then((response) => {
+        const res = response.data;
+
+        if(res.code == 'SNR201') {
+          modalHandler();
+          setSubmitFlag(!submitFlag);
+        }
+      }).catch((err) => {
+        console.error(err);
+      })
+    } else {
+      setFlag(true);
+      return;
+    }
+  }
 
   return(
     <SInfoContainer>
@@ -82,10 +146,10 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
         onClick={modalHandler}
       />
       <div id="nickname-form-wrapper">
-        <NicknameForm defaultValue={nickname} />
+        <NicknameForm defaultValue={nickName} />
       </div>
       <div id="phonenum-form-wrapper">
-        <PhoneNumForm defaultValue={phoneNum} />
+        <PhoneNumForm defaultValue={fullNum} />
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
@@ -110,7 +174,7 @@ function SInfoModify({ modalHandler } : { modalHandler: () => void }) {
         </ValidatorBox>      
       )}
       <div id="submit-btn-box">
-        <ClickedBtn btnText="저장" clickHandler={() => {}} />
+        <ClickedBtn btnText="저장" clickHandler={submitHandler} />
       </div>
     </SInfoContainer>
   )
