@@ -30,7 +30,6 @@ function SalaryPage() {
             headers,
           })
           .then((res) => {
-            console.log(res.data);
             if (res.data.code == 'SLR200') {
               setData(res.data.data.salaryDetails);
             }
@@ -69,7 +68,6 @@ function SalaryPage() {
       </div>
     );
   };
-  console.log(salaryDate);
   return (
     <>
       <div>
