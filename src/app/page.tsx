@@ -67,7 +67,7 @@ export default function Home() {
         <div className='none-name'>대학원</div>
         <div className='bold-name'>김선배</div>
         </Logo>
-        <div style={{display:'flex'}}>
+        <div style={{display:'flex',alignItems: 'center' }}>
         <Image
           id="search"
           src={search}
