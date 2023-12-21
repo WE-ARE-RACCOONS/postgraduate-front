@@ -1,4 +1,4 @@
-import { AddTimeAbleBottom, AddTimeAbleBox, AddTimeContainer, AddTimeDropdown, AddTimeDropdownBox, AddTimeDropdownSet, AddTimeWeekBox } from "./AddTime.styled";
+import { AddTimeAbleBottom, AddTimeAbleBox, AddTimeContainer, AddTimeDropdown, AddTimeDropdownBox, AddTimeDropdownSet, AddTimeWeekBox, ValidatorBox } from "./AddTime.styled";
 import Image from "next/image";
 import x_icon from '../../../../public/x.png';
 import { WEEK_ARRAY } from "@/constants/form/cProfileForm";
@@ -39,10 +39,16 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
     /** 요일 선택하지 않은 경우 */
     if(!inputWeek) {
       setAlertMsg('요일을 선택해주세요');
+      setFlag(true);
       return;
     }
 
     /** 유효한 시간이 아닐 경우 */
+    if(!validateTimeRange()){
+      setAlertMsg('가능 시간을 정확히 입력해주세요');
+      setFlag(true);
+      return;
+    }
 
     /** 이미 등록된 시간일 경우 */
 
@@ -59,8 +65,15 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
       }
     }
 
+    setFlag(false);
     setAbleTime([...ableTime, timeObj]);
     modalHandler();
+  }
+
+  const validateTimeRange = () => {
+    const endTimeNum = Number(endHour+endMin);
+    const startTimeNum = Number(startHour+startMin);
+    return (endTimeNum - startTimeNum) > 0;
   }
 
   return(
@@ -125,7 +138,11 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
           </AddTimeDropdownBox>
         </AddTimeAbleBottom>
       </AddTimeAbleBox>
-      {flag && (<SingleValidator msg={alertMsg} textColor="#ff0000" />)}
+      {flag && (
+        <ValidatorBox>
+          <SingleValidator msg={alertMsg} textColor="#ff0000" />
+        </ValidatorBox>
+      )}
       <button id="add-time-submit-btn" onClick={submitHandler}>등록하기</button>
     </AddTimeContainer>
   )

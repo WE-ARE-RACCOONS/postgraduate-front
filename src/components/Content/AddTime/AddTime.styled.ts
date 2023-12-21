@@ -74,3 +74,12 @@ export const AddTimeDropdown = styled.select`
   width: 3.375rem;
   height: 2.125rem;
 `
+
+export const ValidatorBox = styled.div`
+  width: max-content;
+  height: 0.8rem;
+  position: absolute;
+  top: 37.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+`

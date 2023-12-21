@@ -9,7 +9,7 @@ import { useAtom } from "jotai";
 import { sAbleTime } from "@/stores/senior";
 
 function Scheduler() {
-  const [timeData, setTimeData] = useAtom(sAbleTime); // store의 sAbleTime으로 교체 필요
+  const [timeData, setTimeData] = useAtom(sAbleTime);
   const { modal, modalHandler, portalElement } = useModal('senior-mentoring-time-portal');
 
   const clickHandler = (removeIdx: number) => {
