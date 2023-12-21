@@ -52,16 +52,16 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
             <div>시작 시간</div>
             <AddTimeDropdownSet>
               <AddTimeDropdown onChange={(e) => setStartHour(e.currentTarget.value)}>
-                {hourOptions.map((value) => (
-                  <option key={value} value={value}>
+                {hourOptions.map((value, idx) => (
+                  <option key={idx} value={value}>
                     {value}
                   </option>
                 ))}
               </AddTimeDropdown>
               <div>시</div>
               <AddTimeDropdown onChange={(e) => setStartMin(e.currentTarget.value)}>
-                {minOptions.map((value) => (
-                  <option key={value} value={value}>
+                {minOptions.map((value, idx) => (
+                  <option key={idx} value={value}>
                     {value}
                   </option>
                 ))}
@@ -74,16 +74,16 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
             <div>끝 시간</div>
             <AddTimeDropdownSet>
               <AddTimeDropdown onChange={(e) => setEndHour(e.currentTarget.value)}>
-                {hourOptions.map((value) => (
-                  <option key={value} value={value}>
+                {hourOptions.map((value, idx) => (
+                  <option key={idx} value={value}>
                     {value}
                   </option>
                 ))}
               </AddTimeDropdown>
               <div>시</div>
               <AddTimeDropdown onChange={(e) => setEndMin(e.currentTarget.value)}>
-                {minOptions.map((value) => (
-                  <option key={value} value={value}>
+                {minOptions.map((value, idx) => (
+                  <option key={idx} value={value}>
                     {value}
                   </option>
                 ))}
