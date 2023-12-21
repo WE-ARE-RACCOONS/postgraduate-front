@@ -4,15 +4,21 @@ import x_icon from '../../../../public/x.png';
 import { WEEK_ARRAY } from "@/constants/form/cProfileForm";
 import React, { useState } from "react";
 import SingleValidator from "@/components/Validator/SingleValidator";
+import { useAtom } from "jotai";
+import { sAbleTime } from "@/stores/senior";
+import { TimeObj } from "@/types/scheduler/scheduler";
 
 function AddTime({ modalHandler } : { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 24 }, (_, index) => index);
-  const minOptions = [0, 30];
+  const minOptions = ['00', '30'];
   const [inputWeek, setInputWeek] = useState('');
   const [startHour, setStartHour] = useState('0');
   const [startMin, setStartMin] = useState('0');
   const [endHour, setEndHour] = useState('0');
   const [endMin, setEndMin] = useState('0');
+  const [flag, setFlag] = useState(false);
+  const [alertMsg, setAlertMsg] = useState('');
+  const [ableTime, setAbleTime] = useAtom(sAbleTime);
 
   const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     const weekBtns = document.querySelectorAll('.add-time-week-btn');
@@ -24,11 +30,37 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
   }
 
   const submitHandler = () => {
-    console.log(inputWeek);
-    console.log(startHour);
-    console.log(startMin);
-    console.log(endHour);
-    console.log(endMin);
+    /**
+     * 1. 요일 선택했는지
+     * 2. 유효한 시간인지
+     * 3. 이미 등록된 시간인지
+     */
+
+    /** 요일 선택하지 않은 경우 */
+    if(!inputWeek) {
+      setAlertMsg('요일을 선택해주세요');
+      return;
+    }
+
+    /** 유효한 시간이 아닐 경우 */
+
+    /** 이미 등록된 시간일 경우 */
+
+    const timeObj: TimeObj = {
+      day: `${inputWeek}`,
+      startTime: `${startHour}:${startMin}`,
+      endTime: `${endHour}:${endMin}`
+    }
+
+    for(let i = 0; i < ableTime.length; i++) {
+      if((ableTime[i].day == timeObj.day) && (ableTime[i].startTime == timeObj.startTime) && (ableTime[i].endTime == timeObj.endTime)){
+        setAlertMsg('이미 등록되어 있는 시간입니다.');
+        return;
+      }
+    }
+
+    setAbleTime([...ableTime, timeObj]);
+    modalHandler();
   }
 
   return(
@@ -93,6 +125,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
           </AddTimeDropdownBox>
         </AddTimeAbleBottom>
       </AddTimeAbleBox>
+      {flag && (<SingleValidator msg={alertMsg} textColor="#ff0000" />)}
       <button id="add-time-submit-btn" onClick={submitHandler}>등록하기</button>
     </AddTimeContainer>
   )
