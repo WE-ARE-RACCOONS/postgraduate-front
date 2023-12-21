@@ -16,6 +16,6 @@ export const HomeSearchFormInput = styled.input`
   padding: 0.5rem;
   left: 50%;
   ::placeholder {
-    color: #ADB5BD; 
+    color: #adb5bd;
   }
 `;

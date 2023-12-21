@@ -7,7 +7,7 @@ import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import Image from 'next/image';
-import arrow from '../../../public/arrow.png'
+import arrow from '../../../public/arrow.png';
 import SearchDropDown from '@/components/dropDown/searchDropDown/searchDropDown';
 function SearchResultPage() {
   const router = useRouter();
@@ -50,16 +50,17 @@ function SearchResultPage() {
       <SearchReasult>
         <SearchReasultOut onClick={pageBack}>
           <Image
-          id="arrow"
-          src={arrow}
-          alt="뒤로가기"
-          sizes="(max-width: 600px) 1.rem"
-          priority
-          style={{
-            width:'1.5rem',
-            height:'1.5rem'
-          }}
-        /></SearchReasultOut>
+            id="arrow"
+            src={arrow}
+            alt="뒤로가기"
+            sizes="(max-width: 600px) 1.rem"
+            priority
+            style={{
+              width: '1.5rem',
+              height: '1.5rem',
+            }}
+          />
+        </SearchReasultOut>
         <SearchReasultTerm>{searchTerm}</SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
@@ -91,14 +92,14 @@ const SearchReasult = styled.div`
 `;
 const SearchReasultTerm = styled.div`
   margin-left: 1rem;
-font-weight: 500;
+  font-weight: 500;
 `;
 const Searchfilter = styled.div`
   width: 100%;
   height: 3rem;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #DEE2E6;
+  border-top: 1px solid #dee2e6;
   align-items: center;
   padding: 0 1rem;
 `;
@@ -106,10 +107,10 @@ const SearchFcount = styled.div``;
 const SearchFilter = styled.div``;
 const SearchReasultOut = styled.div``;
 const SearchReasultProfile = styled.div`
-padding: 1rem;
+  padding: 1rem;
   width: 100%;
   height: 100%;
-  background-color: #DEE2E6;
+  background-color: #dee2e6;
 `;
 
 export default SearchResultPage;

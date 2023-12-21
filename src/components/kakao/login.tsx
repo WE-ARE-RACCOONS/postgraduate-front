@@ -26,17 +26,20 @@ function Login() {
         로그인 하기
       </button>
        )} */}
-      <button type="button" onClick={loginHandler}
-      style={{
-        padding: '10px 16px',
-        fontSize: '0.9rem',
-        backgroundColor: '#2FC4B2',
-        color: '#fff',
-        borderRadius: '0.5rem',
-        cursor: 'pointer',
-        border: 'none',
-        marginLeft:'0.75rem',
-      }}>
+      <button
+        type="button"
+        onClick={loginHandler}
+        style={{
+          padding: '10px 16px',
+          fontSize: '0.9rem',
+          backgroundColor: '#2FC4B2',
+          color: '#fff',
+          borderRadius: '0.5rem',
+          cursor: 'pointer',
+          border: 'none',
+          marginLeft: '0.75rem',
+        }}
+      >
         로그인
       </button>
     </div>

@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const SeniorProfileBox = styled.div`
   height: 10rem;
   padding: 0 1rem;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   border-radius: 1rem;
   margin-bottom: 0.75rem;
 `;
@@ -26,24 +26,24 @@ export const SeniorProfileInfo = styled.div`
 `;
 
 export const SPmajor = styled.div`
-color: #868E96;
-font-size: 0.75rem;
+  color: #868e96;
+  font-size: 0.75rem;
 `;
 export const SPnickname = styled.div`
-font-weight: 700;
-color: #212529;
-padding: 0.18rem 0;
+  font-weight: 700;
+  color: #212529;
+  padding: 0.18rem 0;
 `;
 export const SPField = styled.div`
-font-size: 0.75rem;
+  font-size: 0.75rem;
 `;
 export const Skeyword = styled.div`
-display:flex;
+  display: flex;
 `;
 export const Keyword = styled.div`
-padding: 0.31rem 0.63rem;
-border-radius: 0.25rem;
-background-color: rgba(47, 196, 178, 0.1);
-margin-left: 0.25rem;
-font-size: 0.75rem;
+  padding: 0.31rem 0.63rem;
+  border-radius: 0.25rem;
+  background-color: rgba(47, 196, 178, 0.1);
+  margin-left: 0.25rem;
+  font-size: 0.75rem;
 `;

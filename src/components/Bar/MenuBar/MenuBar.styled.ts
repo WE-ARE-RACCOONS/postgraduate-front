@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
-border-radius: 0.75rem 0.75rem 0rem 0rem; 
+  border-radius: 0.75rem 0.75rem 0rem 0rem;
   width: inherit;
   height: 3.75rem;
   position: absolute;
@@ -9,8 +9,7 @@ border-radius: 0.75rem 0.75rem 0rem 0rem;
   display: flex;
   justify-content: space-between;
   background-color: white;
-  box-shadow: 0px -4px 12px 0px rgba(75, 75, 75, 0.10);
-
+  box-shadow: 0px -4px 12px 0px rgba(75, 75, 75, 0.1);
 `;
 
 export const MenuBox = styled.div`
@@ -21,7 +20,7 @@ export const MenuBox = styled.div`
   text-align: center;
 `;
 export const MenuWord = styled.div`
-font-size: 0.75rem;
-font-weight: 400;
-color: #CBCFDB;
-`
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: #cbcfdb;
+`;

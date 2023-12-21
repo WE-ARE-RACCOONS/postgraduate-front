@@ -9,7 +9,7 @@ import {
   SPnickname,
   SPField,
   Skeyword,
-  Keyword
+  Keyword,
 } from './SeniorProfile.styled';
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import auth from '../../../public/auth_mark.png';
@@ -17,16 +17,12 @@ function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
-         <SeniorProfileImg src={data ? data.profile : ''}/>
+        <SeniorProfileImg src={data ? data.profile : ''} />
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>
-          <SPnickname>{data.nickName}
-          <Image
-              src={auth}
-              alt="auth"
-              width={16}
-              height={16}
-            />
+          <SPnickname>
+            {data.nickName}
+            <Image src={auth} alt="auth" width={16} height={16} />
           </SPnickname>
           <SPField>{data.lab}</SPField>
         </SeniorProfileInfo>
@@ -35,7 +31,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
         {data.keyword.map((keyword, index) => (
           <Keyword key={index}>{keyword}</Keyword>
         ))}
-        </Skeyword>
+      </Skeyword>
     </SeniorProfileBox>
   );
 }

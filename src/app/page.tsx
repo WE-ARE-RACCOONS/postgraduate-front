@@ -12,8 +12,8 @@ import { createPortal } from 'react-dom';
 import useModal from '../hooks/useModal';
 import DimmedModal from '../components/Modal/DimmedModal';
 import Image from 'next/image';
-import search from '../../public/search.png'
-import logo from '../../public/logo.png'
+import search from '../../public/search.png';
+import logo from '../../public/logo.png';
 import SearchModal from '../components/Modal/SearchModal';
 import useAuth from '../hooks/useAuth';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
@@ -54,29 +54,29 @@ export default function Home() {
     <HomeLayer>
       <HomeTopLayer>
         <Logo>
-        <Image
-          id="logo"
-          src={logo}
-          alt="로고"
-          width={36}
-          height={24}
-          priority
-          onClick={searchModalHandler}
-          style={{marginRight:'0.13rem'}}
-        />
-        <div className='none-name'>대학원</div>
-        <div className='bold-name'>김선배</div>
+          <Image
+            id="logo"
+            src={logo}
+            alt="로고"
+            width={36}
+            height={24}
+            priority
+            onClick={searchModalHandler}
+            style={{ marginRight: '0.13rem' }}
+          />
+          <div className="none-name">대학원</div>
+          <div className="bold-name">김선배</div>
         </Logo>
-        <div style={{display:'flex',alignItems: 'center' }}>
-        <Image
-          id="search"
-          src={search}
-          alt="검색"
-          sizes="(max-width: 600px) 2.rem"
-          priority
-          onClick={searchModalHandler}
-        />
-        <Login />
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <Image
+            id="search"
+            src={search}
+            alt="검색"
+            sizes="(max-width: 600px) 2.rem"
+            priority
+            onClick={searchModalHandler}
+          />
+          <Login />
         </div>
       </HomeTopLayer>
       <HomeBannerLayer>
@@ -124,10 +124,10 @@ const HomeLayer = styled.div`
 `;
 const Logo = styled.div`
   display: flex;
-  .none-name{
+  .none-name {
     font-size: 1.3rem;
   }
-  .bold-name{
+  .bold-name {
     font-size: 1.3rem;
     font-weight: 700;
   }
@@ -144,7 +144,7 @@ const HomeBannerLayer = styled.div`
   padding: 0 1rem;
 `;
 const HomeFieldLayer = styled.div`
-overflow-x: auto;
+  overflow-x: auto;
   white-space: nowrap;
 `;
 const HomeUnivLayer = styled.div`
