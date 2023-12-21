@@ -18,16 +18,6 @@ function SeniorProfile({ data }: SeniorProfileProps) {
     <SeniorProfileBox>
       <SeniorProfileContent>
          <SeniorProfileImg src={data ? data.profile : ''}/>
-          {/* {data.profile.length > 0 ? (
-            <Image
-              src={data.profile}
-              alt="profile image"
-              width={72}
-              height={72}
-            />
-          ) : (
-            <span>이미지가 없습니다</span>
-          )} */}
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>
           <SPnickname>{data.nickName}

@@ -35,7 +35,6 @@ export default function Home() {
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
-          console.log(res.data.data.seniorSearchResponses)
         })
         .catch((err) => {
           console.error(err);
@@ -155,6 +154,7 @@ const HomeUnivLayer = styled.div`
 `;
 const HomeProfileLayer = styled.div`
   height: inherit;
+  padding: 1rem;
 `;
 const MenuBarWrapper = styled.div`
   position: fixed;
