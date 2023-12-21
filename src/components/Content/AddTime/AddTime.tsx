@@ -51,7 +51,6 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
     }
 
     /** 이미 등록된 시간일 경우 */
-
     const timeObj: TimeObj = {
       day: `${inputWeek}`,
       startTime: `${startHour}:${startMin}`,
@@ -61,6 +60,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
     for(let i = 0; i < ableTime.length; i++) {
       if((ableTime[i].day == timeObj.day) && (ableTime[i].startTime == timeObj.startTime) && (ableTime[i].endTime == timeObj.endTime)){
         setAlertMsg('이미 등록되어 있는 시간입니다.');
+        setFlag(true);
         return;
       }
     }
