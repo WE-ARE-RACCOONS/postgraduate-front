@@ -1,3 +1,4 @@
+import { TimeObj } from '@/types/scheduler/scheduler';
 import { atom } from 'jotai';
 
 export const photoUrlAtom = atom<string>('');
@@ -19,7 +20,7 @@ export const selectedFieldAtom = atom<Array<string>>([]);
 export const sSingleIntroduce = atom<string>('');
 export const sMultiIntroduce = atom<string>('');
 export const sRecommendedFor = atom<string>('');
-export const sAbleTime = atom<string>('');
+export const sAbleTime = atom<Array<TimeObj>>([]);
 export const sChatLink = atom<string>('');
 
 export const mySeniorId = atom<number>(0);

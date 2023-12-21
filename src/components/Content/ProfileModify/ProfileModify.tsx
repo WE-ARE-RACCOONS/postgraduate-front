@@ -225,7 +225,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
             type="text"
             onChange={(e) => setTime(e.currentTarget.value)}
           /> */}
-          <Scheduler times={[]} />
+          <Scheduler />
         </FieldBox>
       </FieldContainer>
       {flag && (

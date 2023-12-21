@@ -5,14 +5,12 @@ import { useEffect, useState } from "react";
 import useModal from "@/hooks/useModal";
 import { createPortal } from "react-dom";
 import FullModal from "../Modal/FullModal";
+import { useAtom } from "jotai";
+import { sAbleTime } from "@/stores/senior";
 
-function Scheduler(props: SchedulerProps) {
-  const [timeData, setTimeData] = useState<Array<TimeObj>>([]); // store의 sAbleTime으로 교체 필요
+function Scheduler() {
+  const [timeData, setTimeData] = useAtom(sAbleTime); // store의 sAbleTime으로 교체 필요
   const { modal, modalHandler, portalElement } = useModal('senior-mentoring-time-portal');
-
-  useEffect(() => {
-    setTimeData(props.times);
-  }, []);
 
   return(
     <SchedulerContainer>
