@@ -1,5 +1,5 @@
 import { SchedulerProps, TimeObj } from "@/types/scheduler/scheduler";
-import { SchedulerContainer, SchedulerEmptyBox } from "./Scheduler.styled";
+import { SchedulerContainer, SchedulerEl, SchedulerEmptyBox } from "./Scheduler.styled";
 import { PROFILE_SUB_DIRECTION } from "@/constants/form/cProfileForm";
 import { useEffect, useState } from "react";
 import useModal from "@/hooks/useModal";
@@ -14,19 +14,23 @@ function Scheduler() {
 
   return(
     <SchedulerContainer>
-      {(timeData.length <= 0) && (
+      {(timeData.length <= 0) ? (
         <SchedulerEmptyBox>
           <div>{PROFILE_SUB_DIRECTION.addTimeEmpty}</div>
           <button onClick={modalHandler}>+추가하기</button>
         </SchedulerEmptyBox>
-      )}
+      ) : (timeData.map((el, idx) => (
+        <SchedulerEl key={idx}>
+          <div id="scheduler-el-time">{el.startTime} ~ {el.endTime} ({el.day})</div>
+          <button id="scheduler-el-remove-btn">삭제</button>
+        </SchedulerEl>
+      )))}
       {modal && portalElement
         ? createPortal(
             <FullModal modalType="senior-mentoring-time" modalHandler={modalHandler} />,
             portalElement,
           )
         : ''}
-      
     </SchedulerContainer>
   )
 }
