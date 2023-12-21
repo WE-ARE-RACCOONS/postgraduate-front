@@ -10,8 +10,6 @@ import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
 
 function SalaryPage() {
   const { getAccessToken, getUserType } = useAuth();
-  const Token = getAccessToken();
-  const userType = getUserType();
   const [data, setData] = useState([]);
   const [salaryDate, setSalaryDate] = useState('');
   const [salaryAmount, setSalaryAmount] = useState(0);
@@ -20,9 +18,11 @@ function SalaryPage() {
     setActiveTab(tabIndex);
   };
   useEffect(() => {
-    if (Token) {
+    const token = getAccessToken();
+    const userType = getUserType();
+    if (token) {
       const headers = {
-        Authorization: `Bearer ${Token}`,
+        Authorization: `Bearer ${token}`,
       };
       if (userType == 'senior') {
         axios
@@ -50,7 +50,7 @@ function SalaryPage() {
           });
       }
     }
-  }, [Token, activeTab]);
+  }, [activeTab]);
   const renderTabContent = () => {
     return (
       <div>
