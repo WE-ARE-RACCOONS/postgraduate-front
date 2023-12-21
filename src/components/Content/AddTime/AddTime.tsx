@@ -3,15 +3,16 @@ import Image from "next/image";
 import x_icon from '../../../../public/x.png';
 import { WEEK_ARRAY } from "@/constants/form/cProfileForm";
 import React, { useState } from "react";
+import SingleValidator from "@/components/Validator/SingleValidator";
 
 function AddTime({ modalHandler } : { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 24 }, (_, index) => index);
   const minOptions = [0, 30];
   const [inputWeek, setInputWeek] = useState('');
-  const [startHour, setStartHour] = useState(0);
-  const [startMin, setStartMin] = useState(0);
-  const [endHour, setEndHour] = useState(0);
-  const [endMin, setEndMin] = useState(0);
+  const [startHour, setStartHour] = useState('0');
+  const [startMin, setStartMin] = useState('0');
+  const [endHour, setEndHour] = useState('0');
+  const [endMin, setEndMin] = useState('0');
 
   const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
     const weekBtns = document.querySelectorAll('.add-time-week-btn');
@@ -20,6 +21,14 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
     });
     e.currentTarget.classList.add('active');
     setInputWeek(e.currentTarget.innerText);
+  }
+
+  const submitHandler = () => {
+    console.log(inputWeek);
+    console.log(startHour);
+    console.log(startMin);
+    console.log(endHour);
+    console.log(endMin);
   }
 
   return(
@@ -42,7 +51,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
           <AddTimeDropdownBox>
             <div>시작 시간</div>
             <AddTimeDropdownSet>
-              <AddTimeDropdown>
+              <AddTimeDropdown onChange={(e) => setStartHour(e.currentTarget.value)}>
                 {hourOptions.map((value) => (
                   <option key={value} value={value}>
                     {value}
@@ -50,7 +59,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
                 ))}
               </AddTimeDropdown>
               <div>시</div>
-              <AddTimeDropdown>
+              <AddTimeDropdown onChange={(e) => setStartMin(e.currentTarget.value)}>
                 {minOptions.map((value) => (
                   <option key={value} value={value}>
                     {value}
@@ -64,7 +73,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
           <AddTimeDropdownBox>
             <div>끝 시간</div>
             <AddTimeDropdownSet>
-              <AddTimeDropdown>
+              <AddTimeDropdown onChange={(e) => setEndHour(e.currentTarget.value)}>
                 {hourOptions.map((value) => (
                   <option key={value} value={value}>
                     {value}
@@ -72,7 +81,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
                 ))}
               </AddTimeDropdown>
               <div>시</div>
-              <AddTimeDropdown>
+              <AddTimeDropdown onChange={(e) => setEndMin(e.currentTarget.value)}>
                 {minOptions.map((value) => (
                   <option key={value} value={value}>
                     {value}
@@ -84,6 +93,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
           </AddTimeDropdownBox>
         </AddTimeAbleBottom>
       </AddTimeAbleBox>
+      <button id="add-time-submit-btn" onClick={submitHandler}>등록하기</button>
     </AddTimeContainer>
   )
 }

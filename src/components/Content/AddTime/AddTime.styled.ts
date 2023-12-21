@@ -4,7 +4,6 @@ export const AddTimeContainer = styled.div`
   width: inherit;
   height: 100%;
   position: relative;
-  overflow-y: scroll;
 
   #x-icon {
     width: 2rem;
@@ -13,6 +12,15 @@ export const AddTimeContainer = styled.div`
     position: absolute;
     top: 0.5rem;
     right: 0.5rem;
+  }
+
+  #add-time-submit-btn {
+    width: 10rem;
+    height: 3.875rem;
+    position: absolute;
+    top: 39rem;
+    left: 50%;
+    transform: translateX(-50%);
   }
 `
 
@@ -43,7 +51,6 @@ export const AddTimeAbleBox = styled.div`
   top: 16.375rem;
   left: 50%;
   transform: translateX(-50%);
-  border: 1px solid #000;
 `
 
 export const AddTimeAbleBottom = styled.div`
