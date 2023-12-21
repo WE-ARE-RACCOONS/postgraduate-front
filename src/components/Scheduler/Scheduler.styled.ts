@@ -20,6 +20,11 @@ export const SchedulerEmptyBox = styled.div`
   text-align: center;
 `
 
+export const SchedulerElContainer = styled.div`
+  width: 18.875rem;
+  height: max-content;
+`
+
 export const SchedulerEl = styled.div`
   width: 18.875rem;
   height: 3.375rem;
@@ -28,6 +33,7 @@ export const SchedulerEl = styled.div`
   display: flex;
   justify-content: space-between;
   padding: 1rem 0.5rem 1rem 1.4rem;
+  margin-bottom: 1rem;
 
   #scheduler-el-time {
     width: max-content;
