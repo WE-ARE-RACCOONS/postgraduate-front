@@ -55,7 +55,7 @@ function AddTimePage() {
           setAbleTime(e.currentTarget.value);
         }}
       ></textarea> */}
-      <Scheduler />
+      <Scheduler times={[]} />
       {flag && (
         <SingleValidator textColor="#FF0000" msg="가능한 시간을 알려주세요" />
       )}
