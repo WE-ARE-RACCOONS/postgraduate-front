@@ -5,6 +5,7 @@ import MyLoginRequest from '@/components/Content/MyLoginRequest/MyLoginRequest';
 import SeniorMyProfile from '@/components/Content/SeniorMyProfile';
 import ProfileModify from '@/components/Content/ProfileModify';
 import SmentoringAccept from '@/components/Mentoring/SmentoringAccept/SmentoringAccept';
+import SInfoModify from '@/components/Content/SInfoModify';
 
 function FullModal(props: FullModalProps) {
   return (
@@ -23,6 +24,9 @@ function FullModal(props: FullModalProps) {
       )}
       {props.modalType == 'accept-mentoring' && (
         <SmentoringAccept modalHandler={props.modalHandler} />
+      )}
+      {props.modalType == 'senior-info-modify' && (
+        <SInfoModify modalHandler={props.modalHandler} />
       )}
     </FullModalContainer>
   );
