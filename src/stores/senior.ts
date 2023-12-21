@@ -21,3 +21,5 @@ export const sMultiIntroduce = atom<string>('');
 export const sRecommendedFor = atom<string>('');
 export const sAbleTime = atom<string>('');
 export const sChatLink = atom<string>('');
+
+export const mySeniorId = atom<number>(0);

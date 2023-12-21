@@ -11,11 +11,12 @@ import {
   Skeyword,
 } from './SeniorProfile.styled';
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
+import user_icon from '../../../public/user.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
-        <SeniorProfileImg src={data ? data.profile : ''}>
+         <SeniorProfileImg src={data ? data.profile : ''}>
           {/* {data.profile.length > 0 ? (
             <Image
               src={data.profile}

@@ -7,6 +7,7 @@ export const TextFieldContainer = styled.div`
   position: relative;
   padding: 1rem;
   font-size: 13px;
+  word-break: break-all;
 
   #text-field-content {
     width: 18.5rem;
