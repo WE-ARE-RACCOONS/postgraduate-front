@@ -30,12 +30,6 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
   }
 
   const submitHandler = () => {
-    /**
-     * 1. 요일 선택했는지
-     * 2. 유효한 시간인지
-     * 3. 이미 등록된 시간인지
-     */
-
     /** 요일 선택하지 않은 경우 */
     if(!inputWeek) {
       setAlertMsg('요일을 선택해주세요');
