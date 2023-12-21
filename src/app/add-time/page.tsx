@@ -35,12 +35,13 @@ function AddTimePage() {
     <AddTimePageContainer>
       <ProgressBar activeNum={1} />
       <h3 id="add-time-direction">{PROFILE_DIRECTION.addTime}</h3>
-      <div id="add-time-sub-direction-ex">
-        {PROFILE_SUB_DIRECTION.addTime}
-      </div>
+      <div id="add-time-sub-direction-ex">{PROFILE_SUB_DIRECTION.addTime}</div>
       <Scheduler />
       {flag && (
-        <SingleValidator textColor="#FF0000" msg="가능한 시간을 3개 이상 입력해주세요" />
+        <SingleValidator
+          textColor="#FF0000"
+          msg="가능한 시간을 3개 이상 입력해주세요"
+        />
       )}
       <div id="add-time-btn-container">
         <button

@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const SchedulerContainer = styled.div`
   width: 20.5rem;
@@ -8,7 +8,7 @@ export const SchedulerContainer = styled.div`
   border-radius: 10px;
   position: relative;
   padding: 0.75rem;
-`
+`;
 
 export const SchedulerEmptyBox = styled.div`
   width: 10.3rem;
@@ -18,12 +18,12 @@ export const SchedulerEmptyBox = styled.div`
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-`
+`;
 
 export const SchedulerElContainer = styled.div`
   width: 18.875rem;
   height: max-content;
-`
+`;
 
 export const SchedulerEl = styled.div`
   width: 18.875rem;
@@ -44,4 +44,4 @@ export const SchedulerEl = styled.div`
     width: 2.625rem;
     height: 2.125rem;
   }
-`
+`;

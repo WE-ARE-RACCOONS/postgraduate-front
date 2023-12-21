@@ -51,34 +51,33 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   useEffect(() => {
     const accessTkn = getAccessToken();
 
-    if(accessTkn) {
+    if (accessTkn) {
       axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
-        headers: {
-          Authorization: `Bearer ${accessTkn}`,
-        },
-      })
-      .then((response) => {
-        const res = response.data;
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+          headers: {
+            Authorization: `Bearer ${accessTkn}`,
+          },
+        })
+        .then((response) => {
+          const res = response.data;
 
-        if (res.code == 'SNR200') {
-          setChatLink(res.data.chatLink);
-          setField(res.data.field);
-          const totalArr = dedupeInTotalField(res.data.field);
-          setTotalField(totalArr);
-          setInfo(res.data.info);
-          setKeyword(res.data.keyword.join(','));
-          setLab(res.data.lab);
-          setOneLiner(res.data.oneLiner);
-          setTarget(res.data.target);
-          setTimes(res.data.times);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+          if (res.code == 'SNR200') {
+            setChatLink(res.data.chatLink);
+            setField(res.data.field);
+            const totalArr = dedupeInTotalField(res.data.field);
+            setTotalField(totalArr);
+            setInfo(res.data.info);
+            setKeyword(res.data.keyword.join(','));
+            setLab(res.data.lab);
+            setOneLiner(res.data.oneLiner);
+            setTarget(res.data.target);
+            setTimes(res.data.times);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
-
   }, [submitFlag]);
 
   const clickKeyword = () => {

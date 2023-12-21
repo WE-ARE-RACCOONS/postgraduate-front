@@ -16,7 +16,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
-         <SeniorProfileImg src={data ? data.profile : ''}>
+        <SeniorProfileImg src={data ? data.profile : ''}>
           {/* {data.profile.length > 0 ? (
             <Image
               src={data.profile}

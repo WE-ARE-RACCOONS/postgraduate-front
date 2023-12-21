@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const AddTimeContainer = styled.div`
   width: inherit;
@@ -22,7 +22,7 @@ export const AddTimeContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;
 
 export const AddTimeWeekBox = styled.div`
   width: 85%;
@@ -42,7 +42,7 @@ export const AddTimeWeekBox = styled.div`
     background-color: #000;
     color: #fff;
   }
-`
+`;
 
 export const AddTimeAbleBox = styled.div`
   width: 85%;
@@ -51,29 +51,29 @@ export const AddTimeAbleBox = styled.div`
   top: 16.375rem;
   left: 50%;
   transform: translateX(-50%);
-`
+`;
 
 export const AddTimeAbleBottom = styled.div`
   width: 85%;
   height: 3.875rem;
   display: flex;
-`
+`;
 
 export const AddTimeDropdownBox = styled.div`
   width: 9.6rem;
   height: 3.875rem;
-`
+`;
 
 export const AddTimeDropdownSet = styled.div`
   width: 9rem;
   height: 2.125rem;
   display: flex;
-`
+`;
 
 export const AddTimeDropdown = styled.select`
   width: 3.375rem;
   height: 2.125rem;
-`
+`;
 
 export const ValidatorBox = styled.div`
   width: max-content;
@@ -82,4 +82,4 @@ export const ValidatorBox = styled.div`
   top: 37.5rem;
   left: 50%;
   transform: translateX(-50%);
-`
+`;

@@ -1,3 +1,3 @@
-import AddTime from "./AddTime";
+import AddTime from './AddTime';
 
 export default AddTime;

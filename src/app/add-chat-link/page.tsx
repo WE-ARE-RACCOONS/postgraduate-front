@@ -46,7 +46,7 @@ function AddChatLinkPage() {
       return;
     }
 
-    if (chatLink && info && oneLiner && target && (times.length >= 3)) {
+    if (chatLink && info && oneLiner && target && times.length >= 3) {
       const accessTkn = getAccessToken();
 
       if (accessTkn) {
