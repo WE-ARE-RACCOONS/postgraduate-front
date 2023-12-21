@@ -18,23 +18,14 @@ function AddTimePage() {
   const [flag, setFlag] = useState(false);
   const router = useRouter();
 
-  // useEffect(() => {
-  //   if (ableTime) {
-  //     const targetForm = document.querySelector(
-  //       '#add-time-textarea',
-  //     ) as HTMLTextAreaElement;
-  //     targetForm.value = ableTime;
-  //     return;
-  //   }
-  // }, []);
-
   const handleClick = () => {
-    if (!ableTime) {
+    if (ableTime.length < 3) {
       setFlag(true);
       return;
     }
 
-    if (ableTime) {
+    if (ableTime.length >= 3) {
+      setFlag(false);
       router.push('add-chat-link');
       return;
     }
@@ -47,17 +38,9 @@ function AddTimePage() {
       <div id="add-time-sub-direction-ex">
         {PROFILE_SUB_DIRECTION.addTime}
       </div>
-      {/* <textarea
-        name="add-time-textarea"
-        id="add-time-textarea"
-        placeholder={PROFILE_PLACEHOLDER.addTime}
-        onChange={(e) => {
-          setAbleTime(e.currentTarget.value);
-        }}
-      ></textarea> */}
       <Scheduler />
       {flag && (
-        <SingleValidator textColor="#FF0000" msg="가능한 시간을 알려주세요" />
+        <SingleValidator textColor="#FF0000" msg="가능한 시간을 3개 이상 입력해주세요" />
       )}
       <div id="add-time-btn-container">
         <button

@@ -21,6 +21,7 @@ import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtom } from 'jotai';
 import {
+  sAbleTime,
   sKeywordAtom,
   selectedFieldAtom,
   totalFieldAtom,
@@ -38,7 +39,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const [totalField, setTotalField] = useAtom(totalFieldAtom);
   const [field, setField] = useAtom(selectedFieldAtom);
   const [oneLiner, setOneLiner] = useState('');
-  const [time, setTime] = useState('');
+  const [times, setTimes] = useAtom(sAbleTime);
   const [submitFlag, setSubmitFlag] = useState(false);
   const { getAccessToken } = useAuth();
   const {
@@ -70,7 +71,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
           setLab(res.data.lab);
           setOneLiner(res.data.oneLiner);
           setTarget(res.data.target);
-          setTime(res.data.time);
+          setTimes(res.data.times);
         }
       })
       .catch((err) => {
@@ -116,7 +117,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
             chatLink: chatLink,
             field: field.join(','),
             oneLiner: oneLiner,
-            time: time,
+            times: times,
           },
           {
             headers: {
@@ -146,7 +147,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
       target &&
       chatLink &&
       oneLiner &&
-      time &&
+      times &&
       field.length > 0
     ) {
       setFlag(false);
