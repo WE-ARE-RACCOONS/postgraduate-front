@@ -9,14 +9,15 @@ import {
   SPnickname,
   SPField,
   Skeyword,
+  Keyword
 } from './SeniorProfile.styled';
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
-import user_icon from '../../../public/user.png';
+import auth from '../../../public/auth_mark.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   return (
     <SeniorProfileBox>
       <SeniorProfileContent>
-         <SeniorProfileImg src={data ? data.profile : ''}>
+         <SeniorProfileImg src={data ? data.profile : ''}/>
           {/* {data.profile.length > 0 ? (
             <Image
               src={data.profile}
@@ -27,14 +28,24 @@ function SeniorProfile({ data }: SeniorProfileProps) {
           ) : (
             <span>이미지가 없습니다</span>
           )} */}
-        </SeniorProfileImg>
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>
-          <SPnickname>{data.nickName}</SPnickname>
+          <SPnickname>{data.nickName}
+          <Image
+              src={auth}
+              alt="auth"
+              width={16}
+              height={16}
+            />
+          </SPnickname>
           <SPField>{data.lab}</SPField>
         </SeniorProfileInfo>
       </SeniorProfileContent>
-      <Skeyword>{data.keyword}</Skeyword>
+      <Skeyword>
+        {data.keyword.map((keyword, index) => (
+          <Keyword key={index}>{keyword}</Keyword>
+        ))}
+        </Skeyword>
     </SeniorProfileBox>
   );
 }

@@ -35,6 +35,7 @@ export default function Home() {
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
+          console.log(res.data.data.seniorSearchResponses)
         })
         .catch((err) => {
           console.error(err);
@@ -121,7 +122,6 @@ export default function Home() {
 const HomeLayer = styled.div`
   width: inherit;
   height: inherit;
-  border: 1px solid blue;
 `;
 const Logo = styled.div`
   display: flex;
@@ -138,6 +138,7 @@ const HomeTopLayer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 0 1rem;
 `;
 const HomeBannerLayer = styled.div`
   height: 6.7rem;
@@ -153,7 +154,6 @@ const HomeUnivLayer = styled.div`
   padding: 1rem 0.9rem;
 `;
 const HomeProfileLayer = styled.div`
-  border: 1px solid red;
   height: inherit;
 `;
 const MenuBarWrapper = styled.div`
