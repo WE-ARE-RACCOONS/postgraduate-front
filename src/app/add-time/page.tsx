@@ -1,5 +1,6 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
+import Scheduler from '@/components/Scheduler';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
   PROFILE_DIRECTION,
@@ -17,15 +18,15 @@ function AddTimePage() {
   const [flag, setFlag] = useState(false);
   const router = useRouter();
 
-  useEffect(() => {
-    if (ableTime) {
-      const targetForm = document.querySelector(
-        '#add-time-textarea',
-      ) as HTMLTextAreaElement;
-      targetForm.value = ableTime;
-      return;
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (ableTime) {
+  //     const targetForm = document.querySelector(
+  //       '#add-time-textarea',
+  //     ) as HTMLTextAreaElement;
+  //     targetForm.value = ableTime;
+  //     return;
+  //   }
+  // }, []);
 
   const handleClick = () => {
     if (!ableTime) {
@@ -43,18 +44,18 @@ function AddTimePage() {
     <AddTimePageContainer>
       <ProgressBar activeNum={1} />
       <h3 id="add-time-direction">{PROFILE_DIRECTION.addTime}</h3>
-      <div id="add-time-sub-direction">{PROFILE_SUB_DIRECTION.addTime}</div>
       <div id="add-time-sub-direction-ex">
-        {PROFILE_SUB_DIRECTION.addTimeEx}
+        {PROFILE_SUB_DIRECTION.addTime}
       </div>
-      <textarea
+      {/* <textarea
         name="add-time-textarea"
         id="add-time-textarea"
         placeholder={PROFILE_PLACEHOLDER.addTime}
         onChange={(e) => {
           setAbleTime(e.currentTarget.value);
         }}
-      ></textarea>
+      ></textarea> */}
+      <Scheduler />
       {flag && (
         <SingleValidator textColor="#FF0000" msg="가능한 시간을 알려주세요" />
       )}
