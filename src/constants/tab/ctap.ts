@@ -9,6 +9,11 @@ export const TAB_STATE: { [key: string]: string } = {
   done: '완료',
 };
 
+export const STAB_STATE: { [key: string]: string } = {
+  waiting: '정산예정',
+  done: '정산완료',
+};
+
 export const SFTAB = {
   AI: '인공지능',
   CD: '반도체',
