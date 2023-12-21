@@ -140,16 +140,17 @@ const HomeTopLayer = styled.div`
   align-items: center;
 `;
 const HomeBannerLayer = styled.div`
-  border: 1px solid black;
   height: 6.7rem;
+  padding: 0 1rem;
 `;
 const HomeFieldLayer = styled.div`
-  border: 1px solid black;
-  height: 4.9rem;
+overflow-x: auto;
+  white-space: nowrap;
 `;
 const HomeUnivLayer = styled.div`
-  border: 1px solid black;
-  height: 4.1rem;
+  overflow-x: auto;
+  white-space: nowrap;
+  padding: 1rem 0.9rem;
 `;
 const HomeProfileLayer = styled.div`
   border: 1px solid red;

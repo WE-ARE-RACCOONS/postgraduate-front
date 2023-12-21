@@ -3,7 +3,7 @@ import 'swiper/css/bundle';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
-import { Img } from './Swiper.styled';
+import { Img} from './Swiper.styled';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -17,7 +17,9 @@ const SwiperComponent = () => {
       slidesPerView={1}
       loop={true}
       autoplay={{ delay: 3000, disableOnInteraction: false }}
-      style={{ height: '6.7rem' }}
+      style={{ 
+        height: '6.7rem',
+        borderRadius:'1rem',}}
     >
       <SwiperSlide>
         <Img src="/racoon1.png" alt="Image 1" />
