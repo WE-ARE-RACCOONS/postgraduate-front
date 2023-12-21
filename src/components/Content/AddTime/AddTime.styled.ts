@@ -23,12 +23,17 @@ export const AddTimeWeekBox = styled.div`
   top: 5.375rem;
   left: 50%;
   transform: translateX(-50%);
-`
 
-export const AddTimeWeekBtn = styled.button`
-  width: 3.4rem;
-  height: 2.2rem;
-  margin-right: 1rem;
+  .add-time-week-btn {
+    width: 3.4rem;
+    height: 2.2rem;
+    margin-right: 1rem;
+  }
+
+  .active {
+    background-color: #000;
+    color: #fff;
+  }
 `
 
 export const AddTimeAbleBox = styled.div`

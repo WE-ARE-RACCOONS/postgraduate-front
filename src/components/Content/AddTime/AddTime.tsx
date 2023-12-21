@@ -1,11 +1,26 @@
-import { AddTimeAbleBottom, AddTimeAbleBox, AddTimeContainer, AddTimeDropdown, AddTimeDropdownBox, AddTimeDropdownSet, AddTimeWeekBox, AddTimeWeekBtn } from "./AddTime.styled";
+import { AddTimeAbleBottom, AddTimeAbleBox, AddTimeContainer, AddTimeDropdown, AddTimeDropdownBox, AddTimeDropdownSet, AddTimeWeekBox } from "./AddTime.styled";
 import Image from "next/image";
 import x_icon from '../../../../public/x.png';
 import { WEEK_ARRAY } from "@/constants/form/cProfileForm";
+import React, { useState } from "react";
 
 function AddTime({ modalHandler } : { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 24 }, (_, index) => index);
   const minOptions = [0, 30];
+  const [inputWeek, setInputWeek] = useState('');
+  const [startHour, setStartHour] = useState(0);
+  const [startMin, setStartMin] = useState(0);
+  const [endHour, setEndHour] = useState(0);
+  const [endMin, setEndMin] = useState(0);
+
+  const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const weekBtns = document.querySelectorAll('.add-time-week-btn');
+    weekBtns.forEach((el) => {
+      el.className = 'add-time-week-btn';
+    });
+    e.currentTarget.classList.add('active');
+    setInputWeek(e.currentTarget.innerText);
+  }
 
   return(
     <AddTimeContainer>
@@ -18,7 +33,7 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
       <AddTimeWeekBox>
         <h3>요일 선택</h3>
         {WEEK_ARRAY.map((el, idx) => (
-          <AddTimeWeekBtn key={idx}>{el}</AddTimeWeekBtn>
+          <button className="add-time-week-btn" key={idx} onClick={(e) => {clickWeekHandler(e)}}>{el}</button>
         ))}
       </AddTimeWeekBox>
       <AddTimeAbleBox>
