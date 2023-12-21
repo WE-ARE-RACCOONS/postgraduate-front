@@ -47,8 +47,8 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
     /** 이미 등록된 시간일 경우 */
     const timeObj: TimeObj = {
       day: `${inputWeek}`,
-      startTime: `${startHour}:${startMin}`,
-      endTime: `${endHour}:${endMin}`
+      startTime: `${formatDigit(startHour)}:${startMin}`,
+      endTime: `${formatDigit(endHour)}:${endMin}`
     }
 
     for(let i = 0; i < ableTime.length; i++) {
@@ -68,6 +68,11 @@ function AddTime({ modalHandler } : { modalHandler: () => void }) {
     const endTimeNum = Number(endHour+endMin);
     const startTimeNum = Number(startHour+startMin);
     return (endTimeNum - startTimeNum) > 0;
+  }
+
+  const formatDigit = (hour: string) => {
+    if(Number(hour) < 10) return `0${hour}`;
+    if(Number(hour) >= 10) return `${hour}`;
   }
 
   return(
