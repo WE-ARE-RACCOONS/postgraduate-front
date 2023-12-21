@@ -25,6 +25,7 @@ import {
   selectedFieldAtom,
   totalFieldAtom,
 } from '@/stores/senior';
+import Scheduler from '@/components/Scheduler';
 
 function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const [modalType, setModalType] = useState<ModalType>('keyword');
@@ -49,7 +50,8 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   useEffect(() => {
     const accessTkn = getAccessToken();
 
-    axios
+    if(accessTkn) {
+      axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
         headers: {
           Authorization: `Bearer ${accessTkn}`,
@@ -74,6 +76,8 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
       .catch((err) => {
         console.error(err);
       });
+    }
+
   }, [submitFlag]);
 
   const clickKeyword = () => {
@@ -216,11 +220,12 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.time}</FieldTitle>
-          <FieldForm
+          {/* <FieldForm
             defaultValue={time}
             type="text"
             onChange={(e) => setTime(e.currentTarget.value)}
-          />
+          /> */}
+          <Scheduler times={[]} />
         </FieldBox>
       </FieldContainer>
       {flag && (

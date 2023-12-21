@@ -32,3 +32,5 @@ export const PROFILE_PLACEHOLDER = {
     '예시)\n월요일 오후 03:00 ~ 오후 04:20\n화요일 오전 11:00 ~ 오후 02:20',
   addChatLink: '카카오톡 오픈채팅방 링크를 복사해 붙여넣어 주세요.',
 };
+
+export const WEEK_ARRAY = ['일', '월', '화', '수', '목', '금', '토'];

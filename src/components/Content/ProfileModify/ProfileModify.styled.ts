@@ -60,7 +60,7 @@ export const SaveBtnBox = styled.div`
   width: 20.5rem;
   height: 3.875rem;
   position: absolute;
-  top: 60.69rem;
+  top: 73rem;
   left: 50%;
   transform: translateX(-50%);
 `;
