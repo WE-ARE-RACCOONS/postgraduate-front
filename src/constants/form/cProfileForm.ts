@@ -9,6 +9,7 @@ export const PROFILE_SUB_DIRECTION = {
   addProfile: '입력한 정보는 멘토링 매칭에 이용됩니다.',
   addTime:
     '가능한 정기 일정이 많을수록 매칭확률이 올라갑니다.',
+  addTimeEmpty: '현재 등록된 일정이 없어요',
   addChatLink:
     '매칭된 후배와 대화할 오픈채팅 방이에요.\n비대면 회의 링크를 전달하고 급한 공지를 전달해요.',
   profileDone:
