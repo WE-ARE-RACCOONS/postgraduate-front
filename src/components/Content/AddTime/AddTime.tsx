@@ -18,7 +18,7 @@ import { sAbleTime } from '@/stores/senior';
 import { TimeObj } from '@/types/scheduler/scheduler';
 
 function AddTime({ modalHandler }: { modalHandler: () => void }) {
-  const hourOptions = Array.from({ length: 24 }, (_, index) => index);
+  const hourOptions = Array.from({ length: 15 }, (_, index) => index + 9);
   const minOptions = ['00', '30'];
   const [inputWeek, setInputWeek] = useState('');
   const [startHour, setStartHour] = useState('0');
