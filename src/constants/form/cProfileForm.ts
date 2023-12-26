@@ -7,10 +7,8 @@ export const PROFILE_DIRECTION = {
 
 export const PROFILE_SUB_DIRECTION = {
   addProfile: '입력한 정보는 멘토링 매칭에 이용됩니다.',
-  addTime:
-    '멘토링 시작 시각을 기준으로 알려주세요.\n멘토링은 40분간 진행됩니다.',
-  addTimeEx:
-    'e.g. 매주 월요일 오후 03:00 ~ 오후 05:00 멘토링 가능하다면,\n월요일 오후 03:00 ~ 오후 04:20 으로 입력',
+  addTime: '가능한 정기 일정이 많을수록 매칭확률이 올라갑니다.',
+  addTimeEmpty: '현재 등록된 일정이 없어요',
   addChatLink:
     '매칭된 후배와 대화할 오픈채팅 방이에요.\n비대면 회의 링크를 전달하고 급한 공지를 전달해요.',
   profileDone:
@@ -33,3 +31,5 @@ export const PROFILE_PLACEHOLDER = {
     '예시)\n월요일 오후 03:00 ~ 오후 04:20\n화요일 오전 11:00 ~ 오후 02:20',
   addChatLink: '카카오톡 오픈채팅방 링크를 복사해 붙여넣어 주세요.',
 };
+
+export const WEEK_ARRAY = ['일', '월', '화', '수', '목', '금', '토'];
