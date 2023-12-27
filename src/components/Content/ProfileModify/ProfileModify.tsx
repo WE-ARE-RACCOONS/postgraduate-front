@@ -21,10 +21,12 @@ import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtom } from 'jotai';
 import {
+  sAbleTime,
   sKeywordAtom,
   selectedFieldAtom,
   totalFieldAtom,
 } from '@/stores/senior';
+import Scheduler from '@/components/Scheduler';
 
 function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const [modalType, setModalType] = useState<ModalType>('keyword');
@@ -37,7 +39,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const [totalField, setTotalField] = useAtom(totalFieldAtom);
   const [field, setField] = useAtom(selectedFieldAtom);
   const [oneLiner, setOneLiner] = useState('');
-  const [time, setTime] = useState('');
+  const [times, setTimes] = useAtom(sAbleTime);
   const [submitFlag, setSubmitFlag] = useState(false);
   const { getAccessToken } = useAuth();
   const {
@@ -49,31 +51,33 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   useEffect(() => {
     const accessTkn = getAccessToken();
 
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
-        headers: {
-          Authorization: `Bearer ${accessTkn}`,
-        },
-      })
-      .then((response) => {
-        const res = response.data;
+    if (accessTkn) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+          headers: {
+            Authorization: `Bearer ${accessTkn}`,
+          },
+        })
+        .then((response) => {
+          const res = response.data;
 
-        if (res.code == 'SNR200') {
-          setChatLink(res.data.chatLink);
-          setField(res.data.field);
-          const totalArr = dedupeInTotalField(res.data.field);
-          setTotalField(totalArr);
-          setInfo(res.data.info);
-          setKeyword(res.data.keyword.join(','));
-          setLab(res.data.lab);
-          setOneLiner(res.data.oneLiner);
-          setTarget(res.data.target);
-          setTime(res.data.time);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+          if (res.code == 'SNR200') {
+            setChatLink(res.data.chatLink);
+            setField(res.data.field);
+            const totalArr = dedupeInTotalField(res.data.field);
+            setTotalField(totalArr);
+            setInfo(res.data.info);
+            setKeyword(res.data.keyword.join(','));
+            setLab(res.data.lab);
+            setOneLiner(res.data.oneLiner);
+            setTarget(res.data.target);
+            setTimes(res.data.times);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, [submitFlag]);
 
   const clickKeyword = () => {
@@ -112,7 +116,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
             chatLink: chatLink,
             field: field.join(','),
             oneLiner: oneLiner,
-            time: time,
+            times: times,
           },
           {
             headers: {
@@ -142,7 +146,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
       target &&
       chatLink &&
       oneLiner &&
-      time &&
+      times &&
       field.length > 0
     ) {
       setFlag(false);
@@ -216,11 +220,12 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
         </FieldBox>
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.time}</FieldTitle>
-          <FieldForm
+          {/* <FieldForm
             defaultValue={time}
             type="text"
             onChange={(e) => setTime(e.currentTarget.value)}
-          />
+          /> */}
+          <Scheduler />
         </FieldBox>
       </FieldContainer>
       {flag && (

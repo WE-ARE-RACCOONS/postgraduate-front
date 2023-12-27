@@ -24,7 +24,7 @@ function AddChatLinkPage() {
   const oneLiner = useAtomValue(sSingleIntroduce);
   const info = useAtomValue(sMultiIntroduce);
   const target = useAtomValue(sRecommendedFor);
-  const time = useAtomValue(sAbleTime);
+  const times = useAtomValue(sAbleTime);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [flag, setFlag] = useState(false);
   const router = useRouter();
@@ -46,7 +46,7 @@ function AddChatLinkPage() {
       return;
     }
 
-    if (chatLink && info && oneLiner && target && time) {
+    if (chatLink && info && oneLiner && target && times.length >= 3) {
       const accessTkn = getAccessToken();
 
       if (accessTkn) {
@@ -57,7 +57,7 @@ function AddChatLinkPage() {
               info: info,
               target: target,
               chatLink: chatLink,
-              time: time,
+              times: times,
               oneLiner: oneLiner,
             },
             {

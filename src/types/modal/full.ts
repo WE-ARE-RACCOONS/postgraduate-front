@@ -5,7 +5,8 @@ export type FullModalType =
   | 'senior-my-profile'
   | 'profile-modify'
   | 'accept-mentoring'
-  | 'senior-info-modify';
+  | 'senior-info-modify'
+  | 'senior-mentoring-time';
 
 export interface FullModalProps {
   modalType: FullModalType;
