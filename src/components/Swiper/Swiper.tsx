@@ -17,7 +17,10 @@ const SwiperComponent = () => {
       slidesPerView={1}
       loop={true}
       autoplay={{ delay: 3000, disableOnInteraction: false }}
-      style={{ height: '6.7rem' }}
+      style={{
+        height: '6.7rem',
+        borderRadius: '1rem',
+      }}
     >
       <SwiperSlide>
         <Img src="/racoon1.png" alt="Image 1" />
