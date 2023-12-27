@@ -7,7 +7,7 @@ function SearchDropDown({ onChange }: SearchDropDownProps) {
   };
 
   return (
-    <div>
+    <div style={{}}>
       <select onChange={handleSortChange}>
         <option value="high">조회수 높은순</option>
         <option value="low">조회수 낮은순</option>
