@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 export const HomeSearchFormBox = styled.div`
-  border: 1px solid red;
-  margin-top: 5.5rem;
+  margin-top: 5.9rem;
   transform: translateY(-50%);
   margin-left: 3rem;
   height: 2.6rem;
@@ -16,4 +15,7 @@ export const HomeSearchFormInput = styled.input`
   outline: none;
   padding: 0.5rem;
   left: 50%;
+  ::placeholder {
+    color: #adb5bd;
+  }
 `;

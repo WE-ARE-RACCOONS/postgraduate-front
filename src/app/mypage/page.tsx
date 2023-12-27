@@ -1,22 +1,22 @@
 'use client';
-import Profile from '@/components/Profile';
-import ProfileManage from '@/components/Profile/ProfileManage';
-import CustomerCenter from '@/components/Profile/ProfileStateChange/CustomerCenter';
+import Profile from '../../components/Profile';
+import ProfileManage from '../../components/Profile/ProfileManage';
+import CustomerCenter from '../../components/Profile/ProfileStateChange/CustomerCenter';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import useAuth from '@/hooks/useAuth';
+import useAuth from '../../hooks/useAuth';
 import { useSetAtom } from 'jotai';
-import NotLmypage from '@/components/NotLogin/NotLmypage/NotLmypage';
-import useModal from '@/hooks/useModal';
+import NotLmypage from '../../components/NotLogin/NotLmypage/NotLmypage';
+import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
-import FullModal from '@/components/Modal/FullModal';
-import DimmedModal from '@/components/Modal/DimmedModal';
+import FullModal from '../../components/Modal/FullModal';
+import DimmedModal from '../../components/Modal/DimmedModal';
 
-import { userType } from '@/types/user/user';
-import SalaryBox from '@/components/Box/SalaryBox';
+import { userType } from '../../types/user/user';
+import SalaryBox from '../../components/Box/SalaryBox';
 import { useRouter } from 'next/navigation';
-import { certiRegType } from '@/types/profile/profile';
-import { mySeniorId } from '@/stores/senior';
+import { certiRegType } from '../../types/profile/profile';
+import { mySeniorId } from '../../stores/senior';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
