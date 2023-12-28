@@ -1,4 +1,5 @@
 'use client';
+import ProfileCard from "@/components/Card/ProfileCard";
 import BackHeader from "@/components/Header/BackHeader";
 import axios from "axios";
 import { usePathname, useRouter } from "next/navigation";
@@ -50,7 +51,17 @@ function SeniorInfoPage() {
   return(
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
-      <SeniorInfoContent></SeniorInfoContent>
+      <SeniorInfoContent>
+        <div id="profile-card-wrapper">
+          <ProfileCard 
+            profile={profile} 
+            nickname={nickName}
+            term={term} 
+            postgradu={postgardu} 
+            major={major} 
+            professor={professor} />
+        </div>
+      </SeniorInfoContent>
     </SeniorInfoPageContainer>
   )
 }
@@ -58,12 +69,23 @@ function SeniorInfoPage() {
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
+  position: relative;
 `
 
 const SeniorInfoContent = styled.div`
   width: inherit;
   height: 100%;
   background-color: #f1f3f5;
+  position: relative;
+
+  #profile-card-wrapper {
+    position: absolute;
+    width: 95%;
+    height: 7.25rem;
+    top: 1.56rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `
 
 export default SeniorInfoPage;
