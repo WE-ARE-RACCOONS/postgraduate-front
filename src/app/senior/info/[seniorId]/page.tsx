@@ -1,11 +1,56 @@
 'use client';
 import BackHeader from "@/components/Header/BackHeader";
+import axios from "axios";
+import { usePathname, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function SeniorInfoPage() {
+  const currentPath = usePathname();
+  const pathArr = currentPath.split('/');
+  const [info, setInfo] = useState('');
+  const [keyword, setKeyword] = useState([]);
+  const [lab, setLab] = useState('');
+  const [major, setMajor] = useState('');
+  const [nickName, setNickName] = useState('');
+  const [oneLiner, setOneLiner] = useState('');
+  const [postgardu, setPostgradu] = useState('');
+  const [professor, setProfessor] = useState('');
+  const [profile, setProfile] = useState('');
+  const [target, setTarget] = useState('');
+  const [term, setTerm] = useState(40);
+  const [times, setTimes] = useState([]);
+
+  useEffect(() => {
+    const seniorId = pathArr[pathArr.length - 1];
+    axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
+    .then((response) => {
+      const res = response.data;
+
+      if(res.code == "SNR200") {
+        setInfo(res.data.info);
+        setKeyword(res.data.keyword);
+        setLab(res.data.lab);
+        setMajor(res.data.major);
+        setNickName(res.data.nickName);
+        setOneLiner(res.data.oneLiner);
+        setPostgradu(res.data.postgradu);
+        setProfessor(res.data.professor);
+        setProfile(res.data.profile);
+        setTarget(res.data.target);
+        setTerm(res.data.target);
+        setTimes(res.data.times);
+      }
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+  }, []);
+
   return(
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
+      <SeniorInfoContent></SeniorInfoContent>
     </SeniorInfoPageContainer>
   )
 }
@@ -13,6 +58,12 @@ function SeniorInfoPage() {
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
+`
+
+const SeniorInfoContent = styled.div`
+  width: inherit;
+  height: 100%;
+  background-color: #f1f3f5;
 `
 
 export default SeniorInfoPage;
