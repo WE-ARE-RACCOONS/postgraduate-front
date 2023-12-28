@@ -1,13 +1,13 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringShowBtn } from './JTabBar.styled';
+import { TapStyle, MentoringShowBtn, TabWrap,TabResult ,TabResultContainer} from './JTabBar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
 import useAuth from '@/hooks/useAuth';
-import { TAB_STATE } from '@/constants/tab/ctap';
+import { TAB, TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
@@ -75,15 +75,17 @@ function TabBar() {
     );
   };
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
-        <TapStyle onClick={() => handleTabClick('expected')}>
+    <div style={{height:'100%'}}>
+      <TabWrap>
+        <TapStyle selected ={activeTab === TAB.waiting} onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
+        <TapStyle selected ={activeTab === TAB.expected} onClick={() => handleTabClick('expected')}>
           진행 예정
         </TapStyle>
-        <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
-      </div>
-      <div>{renderTabContent()}</div>
+        <TapStyle selected ={activeTab === TAB.done} onClick={() => handleTabClick('done')}>완료</TapStyle>
+      </TabWrap>
+      <TabResultContainer>
+      <TabResult>{renderTabContent()}</TabResult>
+    </TabResultContainer>
       {modal && portalElement
         ? createPortal(
             <MentoringSpec
