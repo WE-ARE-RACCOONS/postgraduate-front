@@ -39,7 +39,7 @@ function SeniorInfoPage() {
         setProfessor(res.data.professor);
         setProfile(res.data.profile);
         setTarget(res.data.target);
-        setTerm(res.data.target);
+        setTerm(res.data.term);
         setTimes(res.data.times);
       }
     })
