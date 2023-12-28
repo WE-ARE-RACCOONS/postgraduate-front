@@ -1,4 +1,5 @@
 'use client';
+import IntroCard from "@/components/Card/IntroCard";
 import KeywordCard from "@/components/Card/KeywordCard";
 import ProfileCard from "@/components/Card/ProfileCard";
 import BackHeader from "@/components/Header/BackHeader";
@@ -52,20 +53,25 @@ function SeniorInfoPage() {
   return(
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
-      <SeniorInfoContent>
-        <div id="profile-card-wrapper">
-          <ProfileCard 
-            profile={profile} 
-            nickname={nickName}
-            term={term} 
-            postgradu={postgardu} 
-            major={major} 
-            professor={professor} />
-        </div>
-        <div id="keyword-card-wrapper">
-          <KeywordCard lab={lab} keyword={keyword} />
-        </div>
-      </SeniorInfoContent>
+      <SeniorInfoContentWrapper>
+        <SeniorInfoContent>
+          <div id="profile-card-wrapper">
+            <ProfileCard 
+              profile={profile} 
+              nickname={nickName}
+              term={term} 
+              postgradu={postgardu} 
+              major={major} 
+              professor={professor} />
+          </div>
+          <div id="keyword-card-wrapper">
+            <KeywordCard lab={lab} keyword={keyword} />
+          </div>
+          <div id="intro-card-wrapper">
+            <IntroCard />
+          </div>
+        </SeniorInfoContent>
+      </SeniorInfoContentWrapper>
     </SeniorInfoPageContainer>
   )
 }
@@ -76,28 +82,43 @@ const SeniorInfoPageContainer = styled.div`
   position: relative;
 `
 
-const SeniorInfoContent = styled.div`
+const SeniorInfoContentWrapper = styled.div`
   width: inherit;
   height: 100%;
   background-color: #f1f3f5;
   position: relative;
+`
+
+const SeniorInfoContent = styled.div`
+  width: 95%;
+  height: max-content;
+  position: absolute;
+  top: 1.56rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  flex-direction: column;
 
   #profile-card-wrapper {
-    position: absolute;
-    width: 95%;
+    /* position: absolute; */
+    width: 100%;
     height: 7.25rem;
-    top: 1.56rem;
-    left: 50%;
-    transform: translateX(-50%);
+    margin-bottom: 0.625rem;
+    
   }
 
   #keyword-card-wrapper {
-    position: absolute;
-    width: 95%;
+    /* position: absolute; */
+    width: 100%;
     height: max-content;
-    top: 9.44rem;
+    margin-bottom: 0.625rem;
+    /* top: 9.44rem;
     left: 50%;
-    transform: translateX(-50%);
+    transform: translateX(-50%); */
+  }
+
+  #intro-card-wrapper {
+
   }
 `
 
