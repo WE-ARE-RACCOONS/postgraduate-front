@@ -21,7 +21,7 @@ export const KeywordCardContainer = styled.div`
 `
 
 export const KeywordCardArrayBox = styled.div`
-  width: 10.72rem;
+  width: 90%;
   height: max-content;
   display: flex;
   gap: 0.625rem;

@@ -78,32 +78,29 @@ function SeniorInfoPage() {
 
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
-  height: 100%;
+  height: auto;
   position: relative;
 `
 
 const SeniorInfoContentWrapper = styled.div`
   width: inherit;
-  height: 100%;
+  height: auto;
   background-color: #f1f3f5;
   position: relative;
 `
 
 const SeniorInfoContent = styled.div`
   width: 95%;
-  height: max-content;
-  position: absolute;
-  top: 1.56rem;
-  left: 50%;
-  transform: translateX(-50%);
+  height: auto;
+  position: relative;
   display: flex;
   flex-direction: column;
+  margin: 0 auto;
 
   #profile-card-wrapper {
     width: 100%;
     height: 7.25rem;
-    margin-bottom: 0.625rem;
-    
+    margin: 1.5rem 0 0.625rem 0;
   }
 
   #keyword-card-wrapper {
