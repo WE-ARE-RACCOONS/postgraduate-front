@@ -100,7 +100,6 @@ const SeniorInfoContent = styled.div`
   flex-direction: column;
 
   #profile-card-wrapper {
-    /* position: absolute; */
     width: 100%;
     height: 7.25rem;
     margin-bottom: 0.625rem;
@@ -108,17 +107,15 @@ const SeniorInfoContent = styled.div`
   }
 
   #keyword-card-wrapper {
-    /* position: absolute; */
     width: 100%;
     height: max-content;
     margin-bottom: 0.625rem;
-    /* top: 9.44rem;
-    left: 50%;
-    transform: translateX(-50%); */
   }
 
   #intro-card-wrapper {
-
+    width: 100%;
+    height: max-content;
+    margin-bottom: 0.625rem;
   }
 `
 
