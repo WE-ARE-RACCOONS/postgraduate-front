@@ -34,13 +34,13 @@ function MentoringApply({ data }: MentoringApplyProps) {
           <ConfirmInfo>
             <ConfirmTitle>
               {data ? data.nickName : ''}
-              {data ? data.nickName : ''}
-              {userType === 'senior' ? '후배와 진행' : '선배와 진행'}
+              {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
             </ConfirmTitle>
             {userType === 'junior' && (
               <>
                 <UserInfo>
-                  {data ? data.postgradu : ''} | {data ? data.major : ''}
+                  {data ? data.postgradu : ''} {data ? data.major : ''}<br/>
+                  {data ? data.lab : ''}
                 </UserInfo>
                 {activeTab === TAB.expected && dateExpected}
                 {activeTab === TAB.done && dateDone}
@@ -53,7 +53,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
               </>
             )}
           </ConfirmInfo>
-          <ConfirmState>{data ? data.term : ''} 분</ConfirmState>
+          <ConfirmState>{data ? data.term : ''}분</ConfirmState>
         </ConfirmContent>
         {userType === 'junior' && (
           <>

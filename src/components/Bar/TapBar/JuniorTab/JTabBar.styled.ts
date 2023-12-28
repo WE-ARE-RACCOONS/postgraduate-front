@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-
+import ModalBtn from '@/components/Button/ModalBtn';
 interface TapStyleProps {
   selected: boolean;
 }
@@ -17,6 +17,15 @@ height: 100%;
 export const TabResultContainer = styled.div`
 height: 100vh;
 background-color: #F8F9FA;
+`
+export const MentoringBox =  styled.div`
+width: 95%;
+  height: 9.25rem;
+  border-radius: 1rem;
+background: #FFF;
+box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.20);
+margin: 2.3%;
+border: 1px solid red;
 `
 export const TapStyle = styled.div<TapStyleProps>`
   width: 4.9rem;

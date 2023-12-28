@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringShowBtn, TabWrap,TabResult ,TabResultContainer} from './JTabBar.styled';
+import { TapStyle, MentoringShowBtn, TabWrap,TabResult ,TabResultContainer,MentoringBox} from './JTabBar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -40,11 +40,12 @@ function TabBar() {
       Authorization: `Bearer ${Token}`,
     };
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/done`, {
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
         headers,
       })
       .then((response) => {
         setData(response.data.data.mentoringInfos);
+        console.log(response.data.data.mentoringInfos)
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -57,9 +58,10 @@ function TabBar() {
         {data && data!.length !== 0
           ? data!.map((el, idx) => {
               return (
-                <div key={idx}>
+                <MentoringBox key={idx}>
                   <MentoringApply data={el} />
                   <ModalBtn
+                    type={'show'}
                     btnText={'신청서 보기'}
                     modalHandler={modalHandler}
                     onClick={() => {
@@ -67,7 +69,7 @@ function TabBar() {
                       setSelectedMentoringId(el.mentoringId);
                     }}
                   />
-                </div>
+                </MentoringBox>
               );
             })
           : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
