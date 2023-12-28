@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const IntroCardContainer = styled.div`
   width: 100%;
@@ -6,17 +6,17 @@ export const IntroCardContainer = styled.div`
   min-height: 7.25rem;
   border-radius: 16px;
   background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.20);
+  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   position: relative;
   padding: 1.5rem 0 3rem 1.25rem;
-`
+`;
 
 export const IntroCardOneLiner = styled.div`
   width: 88%;
   height: max-content;
   font-weight: 700;
   margin-bottom: 1.25rem;
-`
+`;
 
 export const IntroCardTextBox = styled.div`
   width: 90%;
@@ -27,7 +27,7 @@ export const IntroCardTextBox = styled.div`
   font-size: 15px;
   padding: 0.75rem;
   margin-bottom: 2.5rem;
-`
+`;
 
 export const IntroCardTextDesc = styled.div`
   width: max-content;
@@ -36,7 +36,7 @@ export const IntroCardTextDesc = styled.div`
   font-size: 14px;
   font-weight: 700;
   margin-bottom: 0.375rem;
-`
+`;
 
 export const IntroCardTimeBox = styled.div`
   width: 90%;
@@ -46,4 +46,4 @@ export const IntroCardTimeBox = styled.div`
   font-size: 15px;
   padding: 0.75rem;
   margin-bottom: 0.5rem;
-`
+`;

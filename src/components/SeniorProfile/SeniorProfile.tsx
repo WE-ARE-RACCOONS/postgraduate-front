@@ -20,7 +20,11 @@ function SeniorProfile({ data }: SeniorProfileProps) {
 
   return (
     <SeniorProfileBox>
-      <SeniorProfileContent onClick={() => {router.push(`/senior/info/${data.seniorId}`)}}>
+      <SeniorProfileContent
+        onClick={() => {
+          router.push(`/senior/info/${data.seniorId}`);
+        }}
+      >
         <SeniorProfileImg src={data ? data.profile : ''} />
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>

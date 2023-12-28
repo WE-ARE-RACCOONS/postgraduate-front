@@ -1,3 +1,3 @@
-import IntroCard from "./IntroCard";
+import IntroCard from './IntroCard';
 
 export default IntroCard;

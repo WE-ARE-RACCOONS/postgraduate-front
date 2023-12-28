@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const BackHeaderContainer = styled.div`
   width: inherit;
@@ -25,4 +25,4 @@ export const BackHeaderContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
-`
+`;

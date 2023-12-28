@@ -1,11 +1,11 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const ProfileCardContainer = styled.div`
   width: 100%;
   height: 7.25rem;
   border-radius: 16px;
   background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.20);
+  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   position: relative;
 
   #profile-img-wrapper {
@@ -14,7 +14,7 @@ export const ProfileCardContainer = styled.div`
     left: 1rem;
     transform: translateY(-50%);
   }
-`
+`;
 
 export const ProfileCardInfo = styled.div`
   width: 12.4rem;
@@ -27,7 +27,7 @@ export const ProfileCardInfo = styled.div`
   #profile-card-professor {
     font-size: 14px;
   }
-`
+`;
 
 export const ProfileCardInfoTop = styled.div`
   width: 12.4rem;
@@ -46,13 +46,13 @@ export const ProfileCardInfoTop = styled.div`
   }
 
   #mentoring-time-desc {
-    color: #868E96;
+    color: #868e96;
   }
 
   #mentoring-time-term {
-    color: #2FC4B2;
+    color: #2fc4b2;
   }
-`
+`;
 
 export const ProfileCardInfoMid = styled.div`
   width: max-content;
@@ -60,5 +60,5 @@ export const ProfileCardInfoMid = styled.div`
   max-width: 12.4rem;
   font-size: 14px;
   display: flex;
-  color: #868E96;
-`
+  color: #868e96;
+`;

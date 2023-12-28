@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const KeywordCardContainer = styled.div`
   width: 100%;
@@ -6,7 +6,7 @@ export const KeywordCardContainer = styled.div`
   min-height: 7.25rem;
   border-radius: 16px;
   background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.20);
+  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   position: relative;
 
   #keyword-card-lab-name {
@@ -18,7 +18,7 @@ export const KeywordCardContainer = styled.div`
     top: 1.2rem;
     left: 1rem;
   }
-`
+`;
 
 export const KeywordCardArrayBox = styled.div`
   width: 90%;
@@ -28,7 +28,7 @@ export const KeywordCardArrayBox = styled.div`
   position: absolute;
   top: 3rem;
   left: 1rem;
-`
+`;
 
 export const KeywordCardEl = styled.div`
   width: max-content;
@@ -39,5 +39,5 @@ export const KeywordCardEl = styled.div`
   font-size: 12px;
   white-space: nowrap;
   border-radius: 4px;
-  background-color: rgba(47, 196, 178, 0.10);
-`
+  background-color: rgba(47, 196, 178, 0.1);
+`;
