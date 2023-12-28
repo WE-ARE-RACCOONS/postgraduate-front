@@ -144,10 +144,12 @@ const HomeBannerLayer = styled.div`
   padding: 0 1rem;
 `;
 const HomeFieldLayer = styled.div`
+  margin: 0 0.5rem;
   overflow-x: auto;
   white-space: nowrap;
 `;
 const HomeUnivLayer = styled.div`
+border-top: 1px solid #C2CEDE;
   overflow-x: auto;
   white-space: nowrap;
   padding: 1rem 0.9rem;
