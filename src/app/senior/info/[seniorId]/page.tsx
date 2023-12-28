@@ -72,6 +72,7 @@ function SeniorInfoPage() {
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
+      <MentoringApplyBtn>멘토링 신청</MentoringApplyBtn>
     </SeniorInfoPageContainer>
   )
 }
@@ -87,6 +88,7 @@ const SeniorInfoContentWrapper = styled.div`
   height: auto;
   background-color: #f1f3f5;
   position: relative;
+  padding-bottom: 4.5rem;
 `
 
 const SeniorInfoContent = styled.div`
@@ -113,6 +115,27 @@ const SeniorInfoContent = styled.div`
     width: 100%;
     height: max-content;
     margin-bottom: 0.625rem;
+  }
+`
+
+const MentoringApplyBtn = styled.button`
+  width: 19.44rem;
+  height: 3.375rem;
+  position: fixed;
+  left: 50%;
+  bottom: 1rem;
+  transform: translateX(-50%);
+  border-radius: 12px;
+  border: 0;
+  background-color: #2FC4B2;
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  font-family: Pretendard;
+  cursor: pointer;
+
+  @media (min-width: 600px) {
+    width: 34rem;
   }
 `
 

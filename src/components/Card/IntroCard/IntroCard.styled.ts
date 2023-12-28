@@ -8,7 +8,7 @@ export const IntroCardContainer = styled.div`
   background-color: #fff;
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.20);
   position: relative;
-  padding: 1.5rem 0 2.5rem 1.25rem;
+  padding: 1.5rem 0 3rem 1.25rem;
 `
 
 export const IntroCardOneLiner = styled.div`
