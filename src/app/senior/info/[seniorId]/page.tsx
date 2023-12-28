@@ -1,4 +1,5 @@
 'use client';
+import KeywordCard from "@/components/Card/KeywordCard";
 import ProfileCard from "@/components/Card/ProfileCard";
 import BackHeader from "@/components/Header/BackHeader";
 import axios from "axios";
@@ -61,6 +62,9 @@ function SeniorInfoPage() {
             major={major} 
             professor={professor} />
         </div>
+        <div id="keyword-card-wrapper">
+          <KeywordCard lab={lab} keyword={keyword} />
+        </div>
       </SeniorInfoContent>
     </SeniorInfoPageContainer>
   )
@@ -83,6 +87,15 @@ const SeniorInfoContent = styled.div`
     width: 95%;
     height: 7.25rem;
     top: 1.56rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  #keyword-card-wrapper {
+    position: absolute;
+    width: 95%;
+    height: max-content;
+    top: 9.44rem;
     left: 50%;
     transform: translateX(-50%);
   }
