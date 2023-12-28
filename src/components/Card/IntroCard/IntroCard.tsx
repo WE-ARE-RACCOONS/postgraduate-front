@@ -1,6 +1,9 @@
-function IntroCard() {
+import { IntroCardProps } from "@/types/card/introCard";
+import { IntroCardContainer } from "./IntroCard.styled";
+
+function IntroCard(props: IntroCardProps) {
   return(
-    <div>Intro</div>
+    <IntroCardContainer>Intro</IntroCardContainer>
   )
 }
 

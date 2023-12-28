@@ -68,7 +68,7 @@ function SeniorInfoPage() {
             <KeywordCard lab={lab} keyword={keyword} />
           </div>
           <div id="intro-card-wrapper">
-            <IntroCard />
+            <IntroCard oneLiner={oneLiner} info={info} target={target} times={times} />
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
