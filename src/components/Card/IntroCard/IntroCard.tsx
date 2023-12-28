@@ -6,13 +6,8 @@ import {
   IntroCardTextDesc,
   IntroCardTimeBox,
 } from './IntroCard.styled';
-import { useEffect } from 'react';
 
 function IntroCard(props: IntroCardProps) {
-  useEffect(() => {
-    console.log(props.times);
-  }, []);
-
   const setAmOrPm = (time: number) => {
     return time < 12 ? '오전' : '오후';
   };
