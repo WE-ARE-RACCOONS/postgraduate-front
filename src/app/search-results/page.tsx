@@ -6,6 +6,8 @@ import { useRouter } from 'next/navigation';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
+import Image from 'next/image';
+import arrow from '../../../public/arrow.png';
 import SearchDropDown from '@/components/dropDown/searchDropDown/searchDropDown';
 function SearchResultPage() {
   const router = useRouter();
@@ -46,8 +48,19 @@ function SearchResultPage() {
   return (
     <>
       <SearchReasult>
-        <SearchReasultOut onClick={pageBack}>&gt;</SearchReasultOut>
-
+        <SearchReasultOut onClick={pageBack}>
+          <Image
+            id="arrow"
+            src={arrow}
+            alt="뒤로가기"
+            sizes="(max-width: 600px) 1.rem"
+            priority
+            style={{
+              width: '1.5rem',
+              height: '1.5rem',
+            }}
+          />
+        </SearchReasultOut>
         <SearchReasultTerm>{searchTerm}</SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
@@ -75,25 +88,29 @@ const SearchReasult = styled.div`
   display: flex;
   width: 100%;
   height: 3rem;
-  border: 1px solid blue;
+  align-items: center;
 `;
 const SearchReasultTerm = styled.div`
   margin-left: 1rem;
+  font-weight: 500;
 `;
 const Searchfilter = styled.div`
   width: 100%;
   height: 3rem;
-  border: 1px solid blue;
   display: flex;
   justify-content: space-between;
+  border-top: 1px solid #dee2e6;
+  align-items: center;
+  padding: 0 1rem;
 `;
 const SearchFcount = styled.div``;
 const SearchFilter = styled.div``;
 const SearchReasultOut = styled.div``;
 const SearchReasultProfile = styled.div`
-  border: 1px solid red;
+  padding: 1rem;
   width: 100%;
   height: 100%;
+  background-color: #dee2e6;
 `;
 
 export default SearchResultPage;

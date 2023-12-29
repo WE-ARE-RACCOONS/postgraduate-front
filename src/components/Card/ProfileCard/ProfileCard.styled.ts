@@ -1,0 +1,64 @@
+import styled from 'styled-components';
+
+export const ProfileCardContainer = styled.div`
+  width: 100%;
+  height: 7.25rem;
+  border-radius: 16px;
+  background-color: #fff;
+  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
+  position: relative;
+
+  #profile-img-wrapper {
+    position: absolute;
+    top: 50%;
+    left: 1rem;
+    transform: translateY(-50%);
+  }
+`;
+
+export const ProfileCardInfo = styled.div`
+  width: 12.4rem;
+  height: 4.7rem;
+  position: absolute;
+  top: 50%;
+  right: 1rem;
+  transform: translateY(-50%);
+
+  #profile-card-professor {
+    font-size: 14px;
+  }
+`;
+
+export const ProfileCardInfoTop = styled.div`
+  width: 12.4rem;
+  height: 1.57rem;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+
+  #profile-card-mentoring-time {
+    width: max-content;
+    height: 1.125rem;
+    font-size: 12px;
+    font-weight: 700;
+    display: flex;
+    line-height: 1.125rem;
+  }
+
+  #mentoring-time-desc {
+    color: #868e96;
+  }
+
+  #mentoring-time-term {
+    color: #2fc4b2;
+  }
+`;
+
+export const ProfileCardInfoMid = styled.div`
+  width: max-content;
+  height: 1.25rem;
+  max-width: 12.4rem;
+  font-size: 14px;
+  display: flex;
+  color: #868e96;
+`;

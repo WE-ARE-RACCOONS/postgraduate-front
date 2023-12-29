@@ -9,13 +9,13 @@ import {
   ConfirmTitle,
   UserInfo,
 } from './MentoringApply.styled';
-import { MentoringApplyProps } from '@/types/mentoring/mentoring';
 import { useAtomValue } from 'jotai';
-import { activeTabAtom } from '@/stores/tap';
-import { TAB } from '@/constants/tab/ctap';
+import { activeTabAtom } from '../../../stores/tap';
+import { TAB } from '../../../constants/tab/ctap';
 import KakaoOpenChat from '../../KakaoOpenChat/KakaoOpenChat';
 import NaverPoint from '../../NaverPoint/NaverPoint';
-import useAuth from '@/hooks/useAuth';
+import useAuth from '../../../hooks/useAuth';
+import { MentoringApplyProps } from '../../../types/mentoring/mentoring';
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
   const datasplit = data ? data.date : '';
