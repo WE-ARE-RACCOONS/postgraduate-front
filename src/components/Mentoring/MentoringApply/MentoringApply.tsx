@@ -8,6 +8,9 @@ import {
   ConfirmContent,
   ConfirmTitle,
   UserInfo,
+  DateExpect,
+  Color,
+  DateDone
 } from './MentoringApply.styled';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '../../../stores/tap';
@@ -21,7 +24,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
   const datasplit = data ? data.date : '';
   const dateParts = (datasplit || '').split('-');
   const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
-  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 완료`;
+  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
   const { getUserType } = useAuth();
   const userType = getUserType();
   return (
@@ -42,8 +45,6 @@ function MentoringApply({ data }: MentoringApplyProps) {
                   {data ? data.postgradu : ''} {data ? data.major : ''}<br/>
                   {data ? data.lab : ''}
                 </UserInfo>
-                {activeTab === TAB.expected && dateExpected}
-                {activeTab === TAB.done && dateDone}
               </>
             )}
             {userType === 'senior' && (
@@ -56,12 +57,20 @@ function MentoringApply({ data }: MentoringApplyProps) {
           <ConfirmState>{data ? data.term : ''}분</ConfirmState>
         </ConfirmContent>
         {userType === 'junior' && (
-          <>
-            {activeTab === TAB.expected && (
+          <div style={{margin:'1rem'}}>
+          {activeTab === TAB.expected && (
+            <>
+              <DateExpect>{dateExpected}<Color> 멘토링 예정</Color></DateExpect>
               <KakaoOpenChat url={data ? data.chatLink : ''} />
-            )}
-            {activeTab === TAB.done && <NaverPoint />}
-          </>
+            </>
+          )}
+          {activeTab === TAB.done && (
+            <>
+              <DateDone>{dateDone}<Color> 멘토링 예정</Color></DateDone>
+              {/* <NaverPoint /> */}
+            </>
+          )}
+          </div>
         )}
         {userType === 'senior' && (
           <>

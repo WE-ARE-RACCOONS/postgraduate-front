@@ -1,7 +1,14 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringShowBtn, TabWrap,TabResult ,TabResultContainer,MentoringBox} from './JTabBar.styled';
+import {
+  TapStyle,
+  MentoringShowBtn,
+  TabWrap,
+  TabResult,
+  TabResultContainer,
+  MentoringBox,
+} from './JTabBar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -45,7 +52,7 @@ function TabBar() {
       })
       .then((response) => {
         setData(response.data.data.mentoringInfos);
-        console.log(response.data.data.mentoringInfos)
+        console.log(response.data.data.mentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);
@@ -60,15 +67,40 @@ function TabBar() {
               return (
                 <MentoringBox key={idx}>
                   <MentoringApply data={el} />
-                  <ModalBtn
+                  {activeTab === TAB.waiting &&(
+                    <ModalBtn
                     type={'show'}
-                    btnText={'신청서 보기'}
+                    btnText={'내 신청서 보기'}
                     modalHandler={modalHandler}
                     onClick={() => {
                       setModalType('junior');
                       setSelectedMentoringId(el.mentoringId);
                     }}
                   />
+          )}
+          {activeTab === TAB.expected &&(
+                    <ModalBtn
+                    type={'show'}
+                    btnText={'내 신청서 보기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+          )}
+          {activeTab === TAB.done &&(
+                    <ModalBtn
+                    type={'show'}
+                    btnText={'리뷰 작성하기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+          )}
+                  
                 </MentoringBox>
               );
             })
@@ -77,17 +109,30 @@ function TabBar() {
     );
   };
   return (
-    <div style={{height:'100%'}}>
+    <div style={{ height: '100%' }}>
       <TabWrap>
-        <TapStyle selected ={activeTab === TAB.waiting} onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
-        <TapStyle selected ={activeTab === TAB.expected} onClick={() => handleTabClick('expected')}>
+        <TapStyle
+          selected={activeTab === TAB.waiting}
+          onClick={() => handleTabClick('waiting')}
+        >
+          확정 대기
+        </TapStyle>
+        <TapStyle
+          selected={activeTab === TAB.expected}
+          onClick={() => handleTabClick('expected')}
+        >
           진행 예정
         </TapStyle>
-        <TapStyle selected ={activeTab === TAB.done} onClick={() => handleTabClick('done')}>완료</TapStyle>
+        <TapStyle
+          selected={activeTab === TAB.done}
+          onClick={() => handleTabClick('done')}
+        >
+          완료
+        </TapStyle>
       </TabWrap>
       <TabResultContainer>
-      <TabResult>{renderTabContent()}</TabResult>
-    </TabResultContainer>
+        <TabResult>{renderTabContent()}</TabResult>
+      </TabResultContainer>
       {modal && portalElement
         ? createPortal(
             <MentoringSpec

@@ -18,8 +18,7 @@ function JuniorMentoringPage() {
     portalElement: searchPortalElement,
   } = useModal('search-portal');
   return (
-    <div style={{width:'inherit',
-    height: 'inherit'}}>
+    <div style={{ width: 'inherit', height: 'inherit' }}>
       <HomeTopLayer>
         <Logo>
           <Image

@@ -149,7 +149,7 @@ const HomeFieldLayer = styled.div`
   white-space: nowrap;
 `;
 const HomeUnivLayer = styled.div`
-border-top: 1px solid #C2CEDE;
+  border-top: 1px solid #c2cede;
   overflow-x: auto;
   white-space: nowrap;
   padding: 1rem 0.9rem;

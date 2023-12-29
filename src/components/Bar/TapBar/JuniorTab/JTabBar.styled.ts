@@ -5,28 +5,27 @@ interface TapStyleProps {
 }
 
 export const TabWrap = styled.div`
-display: flex;
-justify-content: space-between;
-margin: 0 1.7rem;
-`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.7rem;
+`;
 export const TabResult = styled.div`
-border-top:1px solid #C2CEDE;
-height: 100%;
-
-`
+  border-top: 1px solid #c2cede;
+  height: 100%;
+`;
 export const TabResultContainer = styled.div`
-height: 100vh;
-background-color: #F8F9FA;
-`
-export const MentoringBox =  styled.div`
-width: 95%;
-  height: 9.25rem;
+  height: 100vh;
+  background-color: #f8f9fa;
+`;
+export const MentoringBox = styled.div`
+  width: 95%;
+  /* height: 9.25rem; */
   border-radius: 1rem;
-background: #FFF;
-box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.20);
-margin: 2.3%;
-border: 1px solid red;
-`
+  background: #fff;
+  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
+  margin: 2.3%;
+  border: 1px solid red;
+`;
 export const TapStyle = styled.div<TapStyleProps>`
   width: 4.9rem;
   height: 3.37rem;
@@ -45,6 +44,5 @@ export const MentoringMapBox = styled.div`
   border: 1px solid blue;
   width: 100%;
 `;
-
 
 export const MentoringShowBtn = styled.button``;

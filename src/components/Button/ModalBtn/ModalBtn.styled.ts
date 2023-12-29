@@ -10,21 +10,22 @@ export const StyledModalBtn = styled.button`
   cursor: pointer;
 `;
 export const StyledSModalBtn = styled.button`
-display: flex;
-margin-left: 4%;
+margin: 0.8rem 0 ;
+  display: flex;
+  margin-left: 4%;
   align-items: center;
   justify-content: center;
   width: 19.4375rem;
-height: 2.375rem;
+  height: 2.375rem;
   cursor: pointer;
   border-radius: 0.5rem;
-background: #2FC4B2;
-border: none;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.4rem */
+  background: #2fc4b2;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
 `;

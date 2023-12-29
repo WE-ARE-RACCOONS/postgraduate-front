@@ -12,26 +12,26 @@ function ModalBtn(props: ModalBtnProps) {
 
   return (
     <>
-    {props.type === 'show' && (
-      <StyledSModalBtn
-        onClick={() => {
-          handleClick();
-        }}
-      >
-        {props.btnText}
-      </StyledSModalBtn>
-    )}
-  </>
-    
-  //   <StyledModalBtn
-  //     onClick={() => {
-  //       handleClick();
-  //     }}
-  //   >
-  //     {props.btnText}
-  //   </StyledModalBtn>
-  // );
-  )
+      {props.type === 'show' && (
+        <StyledSModalBtn
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </StyledSModalBtn>
+      )}
+    </>
+
+    //   <StyledModalBtn
+    //     onClick={() => {
+    //       handleClick();
+    //     }}
+    //   >
+    //     {props.btnText}
+    //   </StyledModalBtn>
+    // );
+  );
 }
 
 export default ModalBtn;

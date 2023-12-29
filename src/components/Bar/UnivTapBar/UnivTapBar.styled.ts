@@ -10,7 +10,8 @@ export const TapStyle = styled.div<TapStyleProps>`
   margin-right: 0.6rem;
   font-weight: 700;
   font-size: 0.87rem;
-  box-shadow: 0px 0px 4px 0px rgba(73, 85, 101, 0.20);
-  border: ${({ selected }) => (selected ? '1px solid #2FC4B2': '1px solid #DEE2E6')};
+  box-shadow: 0px 0px 4px 0px rgba(73, 85, 101, 0.2);
+  border: ${({ selected }) =>
+    selected ? '1px solid #2FC4B2' : '1px solid #DEE2E6'};
   color: ${({ selected }) => (selected ? '#2fc4b2' : '#DEE2E6')};
 `;
