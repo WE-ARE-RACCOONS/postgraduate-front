@@ -10,7 +10,7 @@ import {
   UserInfo,
   DateExpect,
   Color,
-  DateDone
+  DateDone,
 } from './MentoringApply.styled';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '../../../stores/tap';
@@ -31,49 +31,56 @@ function MentoringApply({ data }: MentoringApplyProps) {
     <div>
       <ConfirmBox>
         <ConfirmContent>
-        <div style={{display:'flex'}}>
-          <ConfirmProfile
-            src={data ? data.profile : '/user.png'}
-          ></ConfirmProfile>
-          
-          <ConfirmInfo>
-            <ConfirmTitle>
-              {data ? data.nickName : ''}
-              {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
-            </ConfirmTitle>
-            {userType === 'junior' && (
-              <>
-                <UserInfo>
-                  {data ? data.postgradu : ''} {data ? data.major : ''}<br/>
-                  {data ? data.lab : ''}
-                </UserInfo>
-              </>
-            )}
-            {userType === 'senior' && (
-              <>
-                {activeTab === TAB.expected && dateExpected}
-                {activeTab === TAB.done && dateDone}
-              </>
-            )}
-          </ConfirmInfo>
+          <div style={{ display: 'flex' }}>
+            <ConfirmProfile
+              src={data ? data.profile : '/user.png'}
+            ></ConfirmProfile>
+
+            <ConfirmInfo>
+              <ConfirmTitle>
+                {data ? data.nickName : ''}
+                {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
+              </ConfirmTitle>
+              {userType === 'junior' && (
+                <>
+                  <UserInfo>
+                    {data ? data.postgradu : ''} {data ? data.major : ''}
+                    <br />
+                    {data ? data.lab : ''}
+                  </UserInfo>
+                </>
+              )}
+              {userType === 'senior' && (
+                <>
+                  {activeTab === TAB.expected && dateExpected}
+                  {activeTab === TAB.done && dateDone}
+                </>
+              )}
+            </ConfirmInfo>
           </div>
           <ConfirmState>{data ? data.term : ''}분</ConfirmState>
         </ConfirmContent>
-        
+
         {userType === 'junior' && (
-          <div style={{margin:'1rem'}}>
-          {activeTab === TAB.expected && (
-            <>
-              <DateExpect>{dateExpected}<Color> 멘토링 예정</Color></DateExpect>
-              <KakaoOpenChat url={data ? data.chatLink : ''} />
-            </>
-          )}
-          {activeTab === TAB.done && (
-            <>
-              <DateDone>{dateDone}<Color> 멘토링 예정</Color></DateDone>
-              {/* <NaverPoint /> */}
-            </>
-          )}
+          <div style={{ margin: '1rem' }}>
+            {activeTab === TAB.expected && (
+              <>
+                <DateExpect>
+                  {dateExpected}
+                  <Color> 멘토링 예정</Color>
+                </DateExpect>
+                <KakaoOpenChat url={data ? data.chatLink : ''} />
+              </>
+            )}
+            {activeTab === TAB.done && (
+              <>
+                <DateDone>
+                  {dateDone}
+                  <Color> 멘토링 예정</Color>
+                </DateDone>
+                {/* <NaverPoint /> */}
+              </>
+            )}
           </div>
         )}
         {userType === 'senior' && (

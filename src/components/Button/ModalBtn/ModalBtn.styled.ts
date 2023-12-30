@@ -10,7 +10,7 @@ export const StyledModalBtn = styled.button`
   cursor: pointer;
 `;
 export const StyledSModalBtn = styled.button`
-margin: 0.8rem;
+  margin: 0.8rem;
   display: flex;
   margin-left: 4%;
   align-items: center;

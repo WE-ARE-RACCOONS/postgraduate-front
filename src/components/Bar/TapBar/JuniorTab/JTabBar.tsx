@@ -8,7 +8,7 @@ import {
   TabResult,
   TabResultContainer,
   MentoringBox,
-  DateDoneBtn
+  DateDoneBtn,
 } from './JTabBar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
@@ -68,48 +68,45 @@ function TabBar() {
               return (
                 <MentoringBox key={idx}>
                   <MentoringApply data={el} />
-                  {activeTab === TAB.waiting &&(
+                  {activeTab === TAB.waiting && (
                     <ModalBtn
-                    type={'show'}
-                    btnText={'내 신청서 보기'}
-                    modalHandler={modalHandler}
-                    onClick={() => {
-                      setModalType('junior');
-                      setSelectedMentoringId(el.mentoringId);
-                    }}
-                  />
-          )}
-          {activeTab === TAB.expected &&(
+                      type={'show'}
+                      btnText={'내 신청서 보기'}
+                      modalHandler={modalHandler}
+                      onClick={() => {
+                        setModalType('junior');
+                        setSelectedMentoringId(el.mentoringId);
+                      }}
+                    />
+                  )}
+                  {activeTab === TAB.expected && (
                     <div>
-                    {new Date() >= new Date(el.date) ? (
-                      <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
-                    ) : (
-                      <ModalBtn
-                        type={'show'}
-                        btnText={'리뷰 작성하기'}
-                        modalHandler={modalHandler}
-                        onClick={() => {
-                          setModalType('junior');
-                          setSelectedMentoringId(el.mentoringId);
-                        }}
-                      />
-                    )}
-                  </div>
-                
-          )}
-          {activeTab === TAB.done &&(
+                      {new Date() >= new Date(el.date) ? (
+                        <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
+                      ) : (
+                        <ModalBtn
+                          type={'show'}
+                          btnText={'리뷰 작성하기'}
+                          modalHandler={modalHandler}
+                          onClick={() => {
+                            setModalType('junior');
+                            setSelectedMentoringId(el.mentoringId);
+                          }}
+                        />
+                      )}
+                    </div>
+                  )}
+                  {activeTab === TAB.done && (
                     <ModalBtn
-                    type={'show'}
-                    btnText={'리뷰 작성하기'}
-                    modalHandler={modalHandler}
-                    onClick={() => {
-                      setModalType('junior');
-                      setSelectedMentoringId(el.mentoringId);
-                    }}
-                  />
-                  
-          )}
-                  
+                      type={'show'}
+                      btnText={'리뷰 작성하기'}
+                      modalHandler={modalHandler}
+                      onClick={() => {
+                        setModalType('junior');
+                        setSelectedMentoringId(el.mentoringId);
+                      }}
+                    />
+                  )}
                 </MentoringBox>
               );
             })

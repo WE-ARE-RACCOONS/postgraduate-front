@@ -23,5 +23,5 @@ export const DimmedMdContainer = styled.div`
   transform: translate(-50%, -50%);
   background-color: #fff;
   border-radius: 1rem;
-background: #FFF;
+  background: #fff;
 `;

@@ -1,43 +1,42 @@
 import styled from 'styled-components';
 
-export const ConfirmBox = styled.div`
-`;
+export const ConfirmBox = styled.div``;
 export const DateDone = styled.div`
-display: flex;
- color: #495565;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
+  display: flex;
+  color: #495565;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
+  letter-spacing: -0.03125rem;
 `;
 export const ConfirmContent = styled.div`
   width: 100%;
   height: 5.8rem;
-  border-bottom: 1px solid #DEE2E6;
+  border-bottom: 1px solid #dee2e6;
   padding: 1.2rem;
   display: flex;
   justify-content: space-between;
 `;
 export const DateExpect = styled.div`
-display: flex;
-  color: #2FC4B2;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
+  display: flex;
+  color: #2fc4b2;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
+  letter-spacing: -0.03125rem;
 `;
 export const Color = styled.div`
   color: #495565;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%;
-letter-spacing: -0.03125rem;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+  letter-spacing: -0.03125rem;
 `;
 export const ConfirmProfile = styled.img`
   border: 1px solid black;
@@ -63,7 +62,6 @@ export const UserInfo = styled.div`
 `;
 export const ConfirmInfo = styled.div`
   margin-left: 0.94rem;
-
 `;
 export const ConfirmState = styled.div`
   height: 1.375rem;

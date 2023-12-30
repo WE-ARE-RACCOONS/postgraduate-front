@@ -8,14 +8,21 @@ import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 
-import { ModalMentoringBackground, ModalClose
-, Color, MNick ,MApplyBox,MMainFont,MsubFont,Mmargin,
-ConfirmContent,
-ConfirmProfile,
-ConfirmInfo,
-ConfirmTitle,
-UserInfo,
-ConfirmState
+import {
+  ModalMentoringBackground,
+  ModalClose,
+  Color,
+  MNick,
+  MApplyBox,
+  MMainFont,
+  MsubFont,
+  Mmargin,
+  ConfirmContent,
+  ConfirmProfile,
+  ConfirmInfo,
+  ConfirmTitle,
+  UserInfo,
+  ConfirmState,
 } from './MentoringSpec.styled';
 
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
@@ -47,17 +54,26 @@ function MentoringSpec(props: ModalMentoringProps) {
   }, []);
   return (
     <ModalMentoringBackground>
-      <div style={{display:'flex',justifyContent:'space-between',padding:'1rem'}}>
-      <MNick>{data ? data.nickName : ''}<Color>에게 보낸 신청서</Color></MNick>
-      <ApplyCancleBtn
-              btnText={'취소하기'}
-              cancelModalHandler={props.cancelModalHandler}
-              modalHandler={props.modalHandler}
-              mentoringId={props.mentoringId}
-            />
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'space-between',
+          padding: '1rem',
+        }}
+      >
+        <MNick>
+          {data ? data.nickName : ''}
+          <Color>에게 보낸 신청서</Color>
+        </MNick>
+        <ApplyCancleBtn
+          btnText={'취소하기'}
+          cancelModalHandler={props.cancelModalHandler}
+          modalHandler={props.modalHandler}
+          mentoringId={props.mentoringId}
+        />
       </div>
       <MApplyBox>
-      <ConfirmContent>
+        <ConfirmContent>
           <ConfirmProfile
             src={data ? data.profile : '/user.png'}
           ></ConfirmProfile>
@@ -69,37 +85,37 @@ function MentoringSpec(props: ModalMentoringProps) {
             {userType === 'junior' && (
               <>
                 <UserInfo>
-                  {data ? data.postgradu : ''} {data ? data.major : ''}<br/>
+                  {data ? data.postgradu : ''} {data ? data.major : ''}
+                  <br />
                   {data ? data.lab : ''}
                 </UserInfo>
               </>
             )}
-            
           </ConfirmInfo>
         </ConfirmContent>
       </MApplyBox>
-      <div style={{display:'flex',padding:'1.56rem 1rem'}}>
+      <div style={{ display: 'flex', padding: '1.56rem 1rem' }}>
         <MMainFont>신청 일정</MMainFont>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
           <MsubFont>3개의 일정중 하나로 확정 됩니다</MsubFont>
         </div>
       </div>
       <div>
-      {data && data.dates && data.dates.length > 0 && (
-  data.dates.map((date, index) => (
-    <TextToggleButton key={index} text={date} />
-  ))
-)}
-
+        {data &&
+          data.dates &&
+          data.dates.length > 0 &&
+          data.dates.map((date, index) => (
+            <TextToggleButton key={index} text={date} />
+          ))}
       </div>
       <Mmargin>
-      <MMainFont>멘토링 주제</MMainFont>
+        <MMainFont>멘토링 주제</MMainFont>
       </Mmargin>
       <div>
         <TextToggleButton text={data ? data.topic : ''} />
       </div>
       <Mmargin>
-      <MMainFont>사전 질문</MMainFont>
+        <MMainFont>사전 질문</MMainFont>
       </Mmargin>
       <div>
         <TextToggleButton text={data ? data.question : ''} />
