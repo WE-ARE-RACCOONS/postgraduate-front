@@ -25,6 +25,22 @@ border: 1px solid #DEE2E6;
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   margin: 2.3%;
 `;
+export const DateDoneBtn = styled.button`
+width: 19.4375rem;
+height: 2.375rem;
+margin-left: 4%;
+flex-shrink: 0;
+border-radius: 0.5rem;
+background: #00A0E1;
+cursor: pointer;
+color: #FFF;
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.4rem */
+`;
 export const TapStyle = styled.div<TapStyleProps>`
   width: 4.9rem;
   height: 3.37rem;

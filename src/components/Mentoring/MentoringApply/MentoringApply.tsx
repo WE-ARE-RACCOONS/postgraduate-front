@@ -31,9 +31,11 @@ function MentoringApply({ data }: MentoringApplyProps) {
     <div>
       <ConfirmBox>
         <ConfirmContent>
+        <div style={{display:'flex'}}>
           <ConfirmProfile
             src={data ? data.profile : '/user.png'}
           ></ConfirmProfile>
+          
           <ConfirmInfo>
             <ConfirmTitle>
               {data ? data.nickName : ''}
@@ -54,6 +56,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
               </>
             )}
           </ConfirmInfo>
+          </div>
           <ConfirmState>{data ? data.term : ''}분</ConfirmState>
         </ConfirmContent>
         

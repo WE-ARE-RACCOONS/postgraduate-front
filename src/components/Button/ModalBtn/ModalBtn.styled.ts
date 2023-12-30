@@ -15,7 +15,7 @@ margin: 0.8rem;
   margin-left: 4%;
   align-items: center;
   justify-content: center;
-  width: 19.4375rem;
+  width: 92%;
   height: 2.375rem;
   cursor: pointer;
   border-radius: 0.5rem;

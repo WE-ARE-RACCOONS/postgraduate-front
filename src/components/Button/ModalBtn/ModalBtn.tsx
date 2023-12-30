@@ -22,15 +22,6 @@ function ModalBtn(props: ModalBtnProps) {
         </StyledSModalBtn>
       )}
     </>
-
-    //   <StyledModalBtn
-    //     onClick={() => {
-    //       handleClick();
-    //     }}
-    //   >
-    //     {props.btnText}
-    //   </StyledModalBtn>
-    // );
   );
 }
 

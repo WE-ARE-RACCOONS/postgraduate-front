@@ -9,13 +9,21 @@ import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 
 import { ModalMentoringBackground, ModalClose
-, Color, MNick ,MApplyBox,MMainFont,MsubFont,Mmargin} from './MentoringSpec.styled';
+, Color, MNick ,MApplyBox,MMainFont,MsubFont,Mmargin,
+ConfirmContent,
+ConfirmProfile,
+ConfirmInfo,
+ConfirmTitle,
+UserInfo,
+ConfirmState
+} from './MentoringSpec.styled';
 
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
-
+  const { getUserType } = useAuth();
+  const userType = getUserType();
   useEffect(() => {
     if (props.mentoringId !== 0) {
       const Token = getAccessToken();
@@ -50,7 +58,26 @@ function MentoringSpec(props: ModalMentoringProps) {
             />
       </div>
       <MApplyBox>
-      <MentoringApply data={data} />
+      <ConfirmContent>
+          <ConfirmProfile
+            src={data ? data.profile : '/user.png'}
+          ></ConfirmProfile>
+          <ConfirmInfo>
+            <ConfirmTitle>
+              {data ? data.nickName : ''}
+              {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
+            </ConfirmTitle>
+            {userType === 'junior' && (
+              <>
+                <UserInfo>
+                  {data ? data.postgradu : ''} {data ? data.major : ''}<br/>
+                  {data ? data.lab : ''}
+                </UserInfo>
+              </>
+            )}
+            
+          </ConfirmInfo>
+        </ConfirmContent>
       </MApplyBox>
       <div style={{display:'flex',padding:'1.56rem 1rem'}}>
         <MMainFont>신청 일정</MMainFont>
@@ -59,9 +86,12 @@ function MentoringSpec(props: ModalMentoringProps) {
         </div>
       </div>
       <div>
-        <TextToggleButton text={data ? data.dates[0] : ''} />
-        <TextToggleButton text={data ? data.dates[1] : ''} />
-        <TextToggleButton text={data ? data.dates[2] : ''} />
+      {data && data.dates && data.dates.length > 0 && (
+  data.dates.map((date, index) => (
+    <TextToggleButton key={index} text={date} />
+  ))
+)}
+
       </div>
       <Mmargin>
       <MMainFont>멘토링 주제</MMainFont>

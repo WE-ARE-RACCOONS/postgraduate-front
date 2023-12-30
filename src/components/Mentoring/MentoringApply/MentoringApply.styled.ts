@@ -18,6 +18,7 @@ export const ConfirmContent = styled.div`
   border-bottom: 1px solid #DEE2E6;
   padding: 1.2rem;
   display: flex;
+  justify-content: space-between;
 `;
 export const DateExpect = styled.div`
 display: flex;
@@ -61,8 +62,8 @@ export const UserInfo = styled.div`
   line-height: 140%; /* 1.05rem */
 `;
 export const ConfirmInfo = styled.div`
-  width: 63%;
   margin-left: 0.94rem;
+
 `;
 export const ConfirmState = styled.div`
   height: 1.375rem;

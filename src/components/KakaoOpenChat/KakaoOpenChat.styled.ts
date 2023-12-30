@@ -22,4 +22,6 @@ border-radius: 0.5rem;
 background: #F8F9FA;
 border: none;
 `;
-export const OpenChatCopy = styled.button``;
+export const OpenChatCopy = styled.div`
+z-index: 100;
+`;

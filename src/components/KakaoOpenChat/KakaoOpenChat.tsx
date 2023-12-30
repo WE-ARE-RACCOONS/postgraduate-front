@@ -15,6 +15,7 @@ function KakaoOpenChat({ url }: KakaoOpenChatProps) {
       await navigator.clipboard.writeText(url);
       setIsCopied(true);
       setTimeout(() => {
+        // window.alert('클립보드에 링크가 복사되었습니다.');
         setIsCopied(false);
       }, 1000);
     } catch (err) {
