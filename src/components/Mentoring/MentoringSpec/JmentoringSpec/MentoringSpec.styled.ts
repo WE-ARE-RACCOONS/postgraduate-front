@@ -43,7 +43,6 @@ export const MNick = styled.div`
   letter-spacing: -0.03125rem;
 `;
 export const ConfirmProfile = styled.img`
-  border: 1px solid black;
   width: 3.375rem;
   height: 3.375rem;
   border-radius: 90%;
