@@ -54,7 +54,6 @@ function TabBar() {
       })
       .then((response) => {
         setData(response.data.data.mentoringInfos);
-        console.log(response.data.data.mentoringInfos);
       })
       .catch((error) => {
         console.error('Error fetching data:', error);

@@ -38,7 +38,6 @@ function MentoringSpec(props: ModalMentoringProps) {
           },
         )
         .then((response) => {
-          console.log(response.data.data)
           setData(response.data.data);
         })
         .catch((error) => {
