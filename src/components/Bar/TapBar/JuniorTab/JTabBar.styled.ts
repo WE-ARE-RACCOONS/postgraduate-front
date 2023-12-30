@@ -19,12 +19,11 @@ export const TabResultContainer = styled.div`
 `;
 export const MentoringBox = styled.div`
   width: 95%;
-  /* height: 9.25rem; */
+border: 1px solid #DEE2E6;
   border-radius: 1rem;
   background: #fff;
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   margin: 2.3%;
-  border: 1px solid red;
 `;
 export const TapStyle = styled.div<TapStyleProps>`
   width: 4.9rem;

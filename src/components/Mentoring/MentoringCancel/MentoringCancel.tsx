@@ -17,7 +17,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
   const [noCancelText, setNoCancelText] = useState<string>('아니요');
   const [showCancelButton, setShowCancelButton] = useState<boolean>(true);
   const handleClick = () => {
-    props.cancelModalHandler();
+    props.modalHandler();
     if (props.onClick) props.onClick();
   };
 

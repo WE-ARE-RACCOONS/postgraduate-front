@@ -1,12 +1,11 @@
 import styled from 'styled-components';
 
 export const MentoringCancelBox = styled.div`
-  border: 1px solid black;
   position: fixed;
   top: 50%;
   transform: translateY(-50%);
-  width: 255px; // 반응형 처리 따로 필요
-  height: 200px;
+  width: 19rem;
+height: 17.6875rem;
   z-index: 2;
   background-color: white;
 
@@ -15,4 +14,21 @@ export const MentoringCancelBox = styled.div`
   }
 `;
 export const CancelBtn = styled.button``;
-export const NoCancelBtn = styled.button``;
+export const NoCancelBtn = styled.button`
+display: flex;
+width: 18.4375rem;
+padding: 1rem 5.8125rem;
+justify-content: center;
+align-items: center;
+gap: 0.625rem;
+border-radius: 0.75rem;
+background: #2FC4B2;
+border: none;
+color: #FFF;
+text-align: center;
+font-family: Pretendard;
+font-size: 1.125rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+`;

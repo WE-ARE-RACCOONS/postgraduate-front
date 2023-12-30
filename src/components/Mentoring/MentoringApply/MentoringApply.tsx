@@ -56,6 +56,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
           </ConfirmInfo>
           <ConfirmState>{data ? data.term : ''}분</ConfirmState>
         </ConfirmContent>
+        
         {userType === 'junior' && (
           <div style={{margin:'1rem'}}>
           {activeTab === TAB.expected && (

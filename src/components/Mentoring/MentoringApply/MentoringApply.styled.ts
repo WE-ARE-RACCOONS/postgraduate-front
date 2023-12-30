@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const ConfirmBox = styled.div`
- 
 `;
 export const DateDone = styled.div`
 display: flex;
@@ -16,7 +15,7 @@ letter-spacing: -0.03125rem;
 export const ConfirmContent = styled.div`
   width: 100%;
   height: 5.8rem;
-  border: 1px solid black;
+  border-bottom: 1px solid #DEE2E6;
   padding: 1.2rem;
   display: flex;
 `;
