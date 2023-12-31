@@ -1,6 +1,7 @@
 'use client';
 import ProgressBar from "@/components/Bar/ProgressBar";
 import BackHeader from "@/components/Header/BackHeader";
+import TextareaForm from "@/components/SingleForm/TextareaForm";
 import { MENTORING_NOTICE } from "@/constants/form/cMentoringApply";
 import styled from "styled-components";
 
@@ -16,6 +17,7 @@ function MentoringApplyQuestionPage() {
           <div id="mentoring-alert-text" className="mentoring-notice">{MENTORING_NOTICE.alertText}</div>
         </div>
       </MQANoticeBox>
+      <div id="mentoring-subject-form-wrapper"></div>
     </MAQContainer>
   )
 }
