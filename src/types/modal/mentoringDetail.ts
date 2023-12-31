@@ -16,7 +16,7 @@ export interface ModalMentoringSProps {
 }
 
 export interface ModalMentoringclProps {
-  cancelModalHandler: () => void;
+  modalHandler: () => void;
   mentoringId: number;
   onClick?: () => void;
 }

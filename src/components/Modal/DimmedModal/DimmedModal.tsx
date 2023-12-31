@@ -5,6 +5,7 @@ import LoginRequest from '@/components/Content/LoginRequest/LoginRequest';
 import NotSenior from '../NotSenior/NotSenior';
 import { userType } from '@/types/user/user';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
+import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer>
@@ -20,6 +21,12 @@ function DimmedModal(props: DimmedModalProps) {
         )}
         {props.modalType == 'cancelMent' && (
           <SmentoringCancel
+            mentoringId={props.mentoringId || 0}
+            modalHandler={props.modalHandler}
+          />
+        )}
+        {props.modalType == 'juniorCancelMent' && (
+          <MentoringCancel
             mentoringId={props.mentoringId || 0}
             modalHandler={props.modalHandler}
           />
