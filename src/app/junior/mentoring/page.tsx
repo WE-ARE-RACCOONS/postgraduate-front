@@ -11,6 +11,8 @@ import Login from '@/components/kakao/login';
 import search from '../../../../public/search.png';
 import logo from '../../../../public/logo.png';
 import MenuBar from '@/components/Bar/MenuBar';
+import LogoLayer from '@/components/LogoLayer/LogoLayer';
+import SearchModal from '@/components/Modal/SearchModal';
 function JuniorMentoringPage() {
   const {
     modal: searchModal,
@@ -19,62 +21,26 @@ function JuniorMentoringPage() {
   } = useModal('search-portal');
   return (
     <div style={{ width: 'inherit', height: 'inherit' }}>
-      <HomeTopLayer>
-        <Logo>
-          <Image
-            id="logo"
-            src={logo}
-            alt="로고"
-            width={36}
-            height={24}
-            priority
-            onClick={searchModalHandler}
-            style={{ marginRight: '0.13rem' }}
-          />
-          <div className="none-name">대학원</div>
-          <div className="bold-name">김선배</div>
-        </Logo>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Image
-            id="search"
-            src={search}
-            alt="검색"
-            sizes="(max-width: 600px) 2.rem"
-            priority
-            onClick={searchModalHandler}
-          />
-          <Login />
-        </div>
-      </HomeTopLayer>
+      <LogoLayer modalHandler={searchModalHandler}/>
       <TapBar />
       <MenuBarWrapper>
         <MenuBar />
       </MenuBarWrapper>
+      {searchModal && searchPortalElement
+        ? createPortal(
+            <SearchModal modalHandler={searchModalHandler} />,
+            searchPortalElement,
+          )
+        : ''}
     </div>
   );
+  
 }
 const MenuBarWrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: inherit;
   z-index: 1;
-`;
-const HomeTopLayer = styled.div`
-  height: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-`;
-const Logo = styled.div`
-  display: flex;
-  .none-name {
-    font-size: 1.3rem;
-  }
-  .bold-name {
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
 `;
 
 export default JuniorMentoringPage;
