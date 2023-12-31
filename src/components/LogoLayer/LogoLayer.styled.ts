@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const HomeTopLayer = styled.div`
   height: 4rem;
   display: flex;

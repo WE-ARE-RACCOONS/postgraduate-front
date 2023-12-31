@@ -53,7 +53,7 @@ export default function Home() {
 
   return (
     <HomeLayer>
-      <LogoLayer modalHandler={searchModalHandler}/>
+      <LogoLayer modalHandler={searchModalHandler} />
       <HomeBannerLayer>
         <SwiperComponent />
       </HomeBannerLayer>

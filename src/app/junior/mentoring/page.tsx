@@ -21,7 +21,7 @@ function JuniorMentoringPage() {
   } = useModal('search-portal');
   return (
     <div style={{ width: 'inherit', height: 'inherit' }}>
-      <LogoLayer modalHandler={searchModalHandler}/>
+      <LogoLayer modalHandler={searchModalHandler} />
       <TapBar />
       <MenuBarWrapper>
         <MenuBar />
@@ -34,7 +34,6 @@ function JuniorMentoringPage() {
         : ''}
     </div>
   );
-  
 }
 const MenuBarWrapper = styled.div`
   position: fixed;

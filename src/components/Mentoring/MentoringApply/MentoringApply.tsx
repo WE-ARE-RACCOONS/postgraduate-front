@@ -38,7 +38,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
 
             <ConfirmInfo>
               <ConfirmTitle>
-                {data ? data.nickName: ''}&nbsp;
+                {data ? data.nickName : ''}&nbsp;
                 {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
               </ConfirmTitle>
               {userType === 'junior' && (
