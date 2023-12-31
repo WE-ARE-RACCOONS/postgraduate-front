@@ -3,14 +3,19 @@ import IntroCard from '@/components/Card/IntroCard';
 import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
+import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function SeniorInfoPage() {
+  const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
+
+  const { getAccessToken } = useAuth();
+
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState([]);
   const [lab, setLab] = useState('');
@@ -51,6 +56,15 @@ function SeniorInfoPage() {
       });
   }, []);
 
+  const applyHandler = () => {
+    const accessTkn = getAccessToken();
+    const seniorId = pathArr[pathArr.length - 1];
+    /** user type 확인하는 부분 추가 */
+    if(accessTkn) {
+      router.push(`/mentoring-apply/${seniorId}/question`);
+    }
+  }
+
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
@@ -79,7 +93,7 @@ function SeniorInfoPage() {
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
-      <MentoringApplyBtn>멘토링 신청</MentoringApplyBtn>
+      <MentoringApplyBtn onClick={applyHandler}>멘토링 신청</MentoringApplyBtn>
     </SeniorInfoPageContainer>
   );
 }
