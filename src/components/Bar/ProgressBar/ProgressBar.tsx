@@ -4,7 +4,7 @@ import { StepperContainer, StepperTab } from './ProgressBar.styled';
 function ProgressBar({ activeNum }: { activeNum: number }) {
   useEffect(() => {
     const activeStepArr = [];
-    for(let i = 0; i < activeNum; i++) {
+    for(let i = 0; i <= activeNum; i++) {
       const activeStep = document.getElementById(`stepper-tab-${activeNum}`);
       activeStepArr.push(activeStep);
     }
