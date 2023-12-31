@@ -62,7 +62,7 @@ function MentoringSpec(props: ModalMentoringProps) {
       >
         <MNick>
           {data ? data.nickName : ''}
-          <Color>에게 보낸 신청서</Color>
+          <Color>&nbsp;에게 보낸 신청서</Color>
         </MNick>
         <ApplyCancleBtn
           btnText={'취소하기'}
@@ -78,7 +78,7 @@ function MentoringSpec(props: ModalMentoringProps) {
           ></ConfirmProfile>
           <ConfirmInfo>
             <ConfirmTitle>
-              {data ? data.nickName : ''}
+              {data ? data.nickName : ''}&nbsp;
               {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
             </ConfirmTitle>
             {userType === 'junior' && (

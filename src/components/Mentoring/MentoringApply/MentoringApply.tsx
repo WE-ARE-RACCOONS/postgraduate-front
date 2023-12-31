@@ -38,7 +38,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
 
             <ConfirmInfo>
               <ConfirmTitle>
-                {data ? data.nickName : ''}
+                {data ? data.nickName: ''}&nbsp;
                 {userType === 'senior' ? '후배와 멘토링' : '선배와 멘토링'}
               </ConfirmTitle>
               {userType === 'junior' && (
@@ -67,7 +67,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
               <>
                 <DateExpect>
                   {dateExpected}
-                  <Color> 멘토링 예정</Color>
+                  <Color>&nbsp;멘토링 예정</Color>
                 </DateExpect>
                 <KakaoOpenChat url={data ? data.chatLink : ''} />
               </>

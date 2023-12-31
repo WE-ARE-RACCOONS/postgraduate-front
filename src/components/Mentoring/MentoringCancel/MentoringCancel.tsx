@@ -42,7 +42,6 @@ function MentoringCancel(props: ModalMentoringclProps) {
         { headers },
       );
       setData(response.data);
-      console.log(response.data);
       setShowCancelButton(true);
       if (response.data.code === 'MT201') {
         setCancelStatus('취소되었습니다');
