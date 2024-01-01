@@ -60,10 +60,10 @@ function SeniorInfoPage() {
     const accessTkn = getAccessToken();
     const seniorId = pathArr[pathArr.length - 1];
     /** user type 확인하는 부분 추가 */
-    if(accessTkn) {
+    if (accessTkn) {
       router.push(`/mentoring-apply/${seniorId}/question`);
     }
-  }
+  };
 
   return (
     <SeniorInfoPageContainer>

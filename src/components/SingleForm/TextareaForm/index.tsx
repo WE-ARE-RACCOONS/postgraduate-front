@@ -1,3 +1,3 @@
-import TextareaForm from "./TextareaForm";
+import TextareaForm from './TextareaForm';
 
 export default TextareaForm;

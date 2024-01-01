@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const TextareaFormContainer = styled.div`
   width: 100%;
@@ -10,7 +10,7 @@ export const TextareaFormContainer = styled.div`
     resize: none;
     padding: 0.5rem 0.75rem;
     border-radius: 4px;
-    border: 1px solid #DFDFDF;
+    border: 1px solid #dfdfdf;
     letter-spacing: -0.6px;
     font-family: Pretendard;
   }
@@ -18,7 +18,7 @@ export const TextareaFormContainer = styled.div`
   textarea::placeholder {
     font-family: Pretendard;
     line-height: 150%;
-    color: #ADB5BD;
+    color: #adb5bd;
   }
 
   textarea:focus {
@@ -28,7 +28,7 @@ export const TextareaFormContainer = styled.div`
   .alert {
     border: 1px solid #ff5757;
   }
-`
+`;
 
 export const TextareaFormTop = styled.div`
   width: 100%;
@@ -45,6 +45,6 @@ export const TextareaFormTop = styled.div`
 
   #textarea-form-top-char-count {
     font-size: 12px;
-    color: #868E96;
+    color: #868e96;
   }
-`
+`;
