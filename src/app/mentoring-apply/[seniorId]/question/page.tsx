@@ -30,10 +30,10 @@ function MentoringApplyQuestionPage() {
         </div>
       </MQANoticeBox>
       <div id="mentoring-subject-form-wrapper">
-        <TextareaForm title={MENTORING_QUESTION.subjectTitle} placeholder={MENTORING_QUESTION.subjectPlaceholder} maxCount={500} targetAtom={subjectAtom} />
+        <TextareaForm title={MENTORING_QUESTION.subjectTitle} placeholder={MENTORING_QUESTION.subjectPlaceholder} minCount={10} maxCount={500} targetAtom={subjectAtom} alertMsg={MENTORING_QUESTION.subjectAlert} />
       </div>
       <div id="mentoring-question-form-wrapper">
-        <TextareaForm title={MENTORING_QUESTION.questionTitle} placeholder={MENTORING_QUESTION.questionPlaceholder} maxCount={500} targetAtom={questionAtom} />
+        <TextareaForm title={MENTORING_QUESTION.questionTitle} placeholder={MENTORING_QUESTION.questionPlaceholder} minCount={10} maxCount={500} targetAtom={questionAtom} alertMsg={MENTORING_QUESTION.questionAlert} />
       </div>
       <MAQNextBtn className={active ? 'active' : ''}>다음으로</MAQNextBtn>
     </MAQContainer>

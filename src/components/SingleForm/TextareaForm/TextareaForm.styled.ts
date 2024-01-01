@@ -20,6 +20,14 @@ export const TextareaFormContainer = styled.div`
     line-height: 150%;
     color: #ADB5BD;
   }
+
+  textarea:focus {
+    outline: none;
+  }
+
+  .alert {
+    border: 1px solid #ff5757;
+  }
 `
 
 export const TextareaFormTop = styled.div`

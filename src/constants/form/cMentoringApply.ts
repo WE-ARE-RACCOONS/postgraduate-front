@@ -7,6 +7,8 @@ export const MENTORING_NOTICE = {
 export const MENTORING_QUESTION = {
   subjectTitle: '원하시는 멘토링 주제를 알려주세요.',
   subjectPlaceholder: `예시)\n · 대학원 입시\n · 연구실 및 교수님에 대한 솔직 리뷰\n · 연구 분야의 전망과 석사 졸업 후 커리어패스 상담`,
+  subjectAlert: '원하시는 주제를 최소 10자 이상 적어주세요!',
   questionTitle: '주제에 대한 사전 질문을 적어주세요.',
-  questionPlaceholder: `예시)\n · 서울대학원에서 면접시 중점적으로 보는 역량이 궁금해요.\n · OOO 교수님에 대해 알고 싶어요!\n · 연구실 분위기와 석사생들의 스펙이 궁금해요.`
+  questionPlaceholder: `예시)\n · 서울대학원에서 면접시 중점적으로 보는 역량이 궁금해요.\n · OOO 교수님에 대해 알고 싶어요!\n · 연구실 분위기와 석사생들의 스펙이 궁금해요.`,
+  questionAlert: '주제에 대한 사전 질문을 최소 10자 이상 적어주세요!'
 }
