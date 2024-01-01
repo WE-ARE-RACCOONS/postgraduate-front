@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 export const HomeTopLayer = styled.div`
+background-color: white;
   height: 4rem;
   display: flex;
   justify-content: space-between;

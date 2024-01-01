@@ -41,9 +41,9 @@ function JuniorManage(props: NotSeniorProps) {
   console.log(socialId);
   return (
     <JuniorManageContainer>
-      <TitleComponent title="회원 상태 변경" />
+      <TitleComponent title="계정 관리" />
       <ContentComponent
-        content="내 정보 수정"
+        content="계정 설정"
         onClick={handleProfileEditClick}
       />
       <ContentComponent

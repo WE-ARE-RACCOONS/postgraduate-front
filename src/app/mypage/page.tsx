@@ -17,6 +17,8 @@ import SalaryBox from '../../components/Box/SalaryBox';
 import { useRouter } from 'next/navigation';
 import { certiRegType } from '../../types/profile/profile';
 import { mySeniorId } from '../../stores/senior';
+import LogoLayer from '@/components/LogoLayer/LogoLayer';
+import SearchModal from '@/components/Modal/SearchModal';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -34,6 +36,11 @@ function MyPage() {
     modalHandler: seiorChangemodalHandler,
     portalElement: seniorChangePortalElement,
   } = useModal('senior-request-portal');
+  const {
+    modal: searchModal,
+    modalHandler: searchModalHandler,
+    portalElement: searchPortalElement,
+  } = useModal('search-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
@@ -88,9 +95,10 @@ function MyPage() {
   }, [Token]);
 
   return (
-    <div>
+    <div style={{backgroundColor:'#F8F9FA'}}>
+      <LogoLayer modalHandler={searchModalHandler}/>
       {Token ? (
-        <div>
+        <div >
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
@@ -136,6 +144,12 @@ function MyPage() {
               modalHandler={seiorChangemodalHandler}
             />,
             seniorChangePortalElement,
+          )
+        : ''}
+        {searchModal && searchPortalElement
+        ? createPortal(
+            <SearchModal modalHandler={searchModalHandler} />,
+            searchPortalElement,
           )
         : ''}
     </div>
