@@ -2,7 +2,8 @@
 import ProgressBar from "@/components/Bar/ProgressBar";
 import BackHeader from "@/components/Header/BackHeader";
 import TextareaForm from "@/components/SingleForm/TextareaForm";
-import { MENTORING_NOTICE } from "@/constants/form/cMentoringApply";
+import { MENTORING_NOTICE, MENTORING_QUESTION } from "@/constants/form/cMentoringApply";
+import { questionAtom, subjectAtom } from "@/stores/mentoring";
 import styled from "styled-components";
 
 function MentoringApplyQuestionPage() {
@@ -17,7 +18,12 @@ function MentoringApplyQuestionPage() {
           <div id="mentoring-alert-text" className="mentoring-notice">{MENTORING_NOTICE.alertText}</div>
         </div>
       </MQANoticeBox>
-      <div id="mentoring-subject-form-wrapper"></div>
+      <div id="mentoring-subject-form-wrapper">
+        <TextareaForm title={MENTORING_QUESTION.subjectTitle} placeholder={MENTORING_QUESTION.subjectPlaceholder} maxCount={500} targetAtom={subjectAtom} />
+      </div>
+      <div id="mentoring-question-form-wrapper">
+        <TextareaForm title={MENTORING_QUESTION.questionTitle} placeholder={MENTORING_QUESTION.questionPlaceholder} maxCount={500} targetAtom={questionAtom} />
+      </div>
     </MAQContainer>
   )
 }
@@ -26,6 +32,26 @@ const MAQContainer = styled.div`
   width: inherit;
   height: auto;
   position: relative;
+
+  #mentoring-subject-form-wrapper {
+    width: 100%;
+    height: 13.2rem;
+    position: absolute;
+    top: 13.3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
+
+  #mentoring-question-form-wrapper {
+    width: 100%;
+    height: 13.2rem;
+    position: absolute;
+    top: 28.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
 `
 
 const MQANoticeBox = styled.div`
