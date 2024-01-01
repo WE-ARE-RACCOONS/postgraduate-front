@@ -34,23 +34,21 @@ const MAQContainer = styled.div`
   position: relative;
 
   #mentoring-subject-form-wrapper {
-    width: 100%;
+    width: 95%;
     height: 13.2rem;
     position: absolute;
     top: 13.3rem;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
   }
 
   #mentoring-question-form-wrapper {
-    width: 100%;
+    width: 95%;
     height: 13.2rem;
     position: absolute;
     top: 28.5rem;
     left: 50%;
     transform: translateX(-50%);
-    text-align: center;
   }
 `
 

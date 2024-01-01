@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const TextareaFormContainer = styled.div`
-  width: 95%;
+  width: 100%;
   height: 13.2rem;
 
   textarea {
@@ -12,6 +12,7 @@ export const TextareaFormContainer = styled.div`
     border-radius: 4px;
     border: 1px solid #DFDFDF;
     letter-spacing: -0.6px;
+    font-family: Pretendard;
   }
 
   textarea::placeholder {
