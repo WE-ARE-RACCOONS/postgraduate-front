@@ -19,6 +19,7 @@ import useAuth from '../hooks/useAuth';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
+import LogoLayer from '@/components/LogoLayer/LogoLayer';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
   const [data, setData] = useState([]);
@@ -52,33 +53,7 @@ export default function Home() {
 
   return (
     <HomeLayer>
-      <HomeTopLayer>
-        <Logo>
-          <Image
-            id="logo"
-            src={logo}
-            alt="로고"
-            width={36}
-            height={24}
-            priority
-            onClick={searchModalHandler}
-            style={{ marginRight: '0.13rem' }}
-          />
-          <div className="none-name">대학원</div>
-          <div className="bold-name">김선배</div>
-        </Logo>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <Image
-            id="search"
-            src={search}
-            alt="검색"
-            sizes="(max-width: 600px) 2.rem"
-            priority
-            onClick={searchModalHandler}
-          />
-          <Login />
-        </div>
-      </HomeTopLayer>
+      <LogoLayer modalHandler={searchModalHandler} />
       <HomeBannerLayer>
         <SwiperComponent />
       </HomeBannerLayer>
@@ -144,10 +119,12 @@ const HomeBannerLayer = styled.div`
   padding: 0 1rem;
 `;
 const HomeFieldLayer = styled.div`
+  margin: 0 0.5rem;
   overflow-x: auto;
   white-space: nowrap;
 `;
 const HomeUnivLayer = styled.div`
+  border-top: 1px solid #c2cede;
   overflow-x: auto;
   white-space: nowrap;
   padding: 1rem 0.9rem;

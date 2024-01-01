@@ -3,7 +3,8 @@ export type DimmedModalType =
   | 'postgraduProfile'
   | 'notuser'
   | 'notSenior'
-  | 'cancelMent';
+  | 'cancelMent'
+  | 'juniorCancelMent';
 
 export interface DimmedModalProps {
   modalType: DimmedModalType;

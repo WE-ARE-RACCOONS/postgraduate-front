@@ -1,5 +1,5 @@
 import { ModalBtnProps } from '@/types/button/modalBtn';
-import { StyledModalBtn } from './ModalBtn.styled';
+import { StyledModalBtn, StyledSModalBtn } from './ModalBtn.styled';
 
 function ModalBtn(props: ModalBtnProps) {
   const handleClick = () => {
@@ -11,13 +11,17 @@ function ModalBtn(props: ModalBtnProps) {
   };
 
   return (
-    <StyledModalBtn
-      onClick={() => {
-        handleClick();
-      }}
-    >
-      {props.btnText}
-    </StyledModalBtn>
+    <>
+      {props.type === 'show' && (
+        <StyledSModalBtn
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </StyledSModalBtn>
+      )}
+    </>
   );
 }
 

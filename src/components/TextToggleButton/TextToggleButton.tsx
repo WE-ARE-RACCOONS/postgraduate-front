@@ -1,3 +1,4 @@
+'use client';
 import React, { useState } from 'react';
 import { TextToggleButtonProps } from '@/types/mentoring/mentoring';
 import { TextToggleBtnBox } from './TextToggleButton.styled';
