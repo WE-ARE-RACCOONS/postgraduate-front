@@ -4,9 +4,20 @@ import BackHeader from "@/components/Header/BackHeader";
 import TextareaForm from "@/components/SingleForm/TextareaForm";
 import { MENTORING_NOTICE, MENTORING_QUESTION } from "@/constants/form/cMentoringApply";
 import { questionAtom, subjectAtom } from "@/stores/mentoring";
+import { useAtomValue } from "jotai";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function MentoringApplyQuestionPage() {
+  const [active, setActive] = useState(false);
+  const subject = useAtomValue(subjectAtom);
+  const question = useAtomValue(questionAtom);
+
+  useEffect(() => {
+    if(subject && question) setActive(true);
+    else setActive(false);
+  }, [subject, question]);
+
   return(
     <MAQContainer>
       <BackHeader headerText="신청서 작성" />
@@ -24,13 +35,14 @@ function MentoringApplyQuestionPage() {
       <div id="mentoring-question-form-wrapper">
         <TextareaForm title={MENTORING_QUESTION.questionTitle} placeholder={MENTORING_QUESTION.questionPlaceholder} maxCount={500} targetAtom={questionAtom} />
       </div>
+      <MAQNextBtn className={active ? 'active' : ''}>다음으로</MAQNextBtn>
     </MAQContainer>
   )
 }
 
 const MAQContainer = styled.div`
   width: inherit;
-  height: auto;
+  height: 100%;
   position: relative;
 
   #mentoring-subject-form-wrapper {
@@ -49,6 +61,10 @@ const MAQContainer = styled.div`
     top: 28.5rem;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  .active {
+    background-color: #2FC4B2;
   }
 `
 
@@ -84,6 +100,22 @@ const MQANoticeBox = styled.div`
   #mentoring-alert-text {
     color: #2FC4B2;
   }
+`
+
+const MAQNextBtn = styled.button`
+  width: 95%;
+  height: 3.375rem;
+  background-color: #DEE2E6;
+  color: #fff;
+  position: absolute;
+  top: 44.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  border: none;
+  border-radius: 12px;
+  margin-bottom: 3.5rem;
+  font-weight: 700;
+  font-family: Pretendard;
 `
 
 export default MentoringApplyQuestionPage;
