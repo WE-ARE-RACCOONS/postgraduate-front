@@ -10,6 +10,9 @@ import {
   NotSeniorBoxTop,
   NotSeniorMid,
   NotSeniorBottom,
+  NSMain,
+  NSSub,
+  NSBtn
 } from './NotSenior.styled';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
@@ -35,16 +38,16 @@ function NotSenior(props: NotSeniorProps) {
           sizes="(max-width: 600px) 2.rem"
           priority
           onClick={xClick}
-          style={{ width: '2rem', height: '2rem' }}
+          style={{ width: '2.3rem', height: '2.3rem' ,margin:'1rem',color:'#CBCFDB'}}
         />
       </NotSeniorBoxTop>
       <NotSeniorMid>
-        <div>{SENIOR_MODAL.notSeniorUser}</div>
-        <p>{SENIOR_MODAL.needSeniorUserJoin}</p>
-        <p>{SENIOR_MODAL.recommendJoin}</p>
+        <NSMain>{SENIOR_MODAL.notSeniorUser}</NSMain>
+        <NSSub>{SENIOR_MODAL.needSeniorUserJoin}</NSSub>
+        <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
       </NotSeniorMid>
       <NotSeniorBottom>
-        <button onClick={seniorJoin}>대학원 선배로 가입하기</button>
+        <NSBtn onClick={seniorJoin}>대학원 선배로 가입하기</NSBtn>
       </NotSeniorBottom>
     </div>
   );
