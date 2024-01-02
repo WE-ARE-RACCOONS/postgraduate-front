@@ -9,7 +9,7 @@ import { nickname } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
-
+import { useRouter } from 'next/navigation';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
@@ -19,6 +19,7 @@ function page() {
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken } = useAuth();
   const token = getAccessToken();
+  const router = useRouter();
   console.log(photoUrl);
   console.log(token);
   useEffect(() => {
@@ -82,6 +83,10 @@ function page() {
         )
         .then((response) => {
           const res = response.data;
+          console.log(res)
+          if (res.code == 'UR201') {
+            router.push('/mypage');
+          }
         })
         .catch((err) => {
           console.error(err);
