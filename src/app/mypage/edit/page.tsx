@@ -12,6 +12,7 @@ import useAuth from '@/hooks/useAuth';
 
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
+  const [editPhotoUrl, setEditPhotoUrl] = useState<File | null>(null);
   const nickName = useAtomValue(nickname);
   const phoneNumber = useAtomValue(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
@@ -33,22 +34,48 @@ function page() {
           });
         }})
 
-  const handleClick = () => {
-    if (photoUrl || nickname || phoneNum) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/junior/me/profile`, {
-          photoUrl,
-          nickName,
-          phoneNumber,
-        })
-        .then((response) => {
-          console.log(response.data);
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-    }
-  };
+        const handleClick = async () => {
+          if (photoUrl) {
+            try {
+              const formData = new FormData();
+              formData.append('profileFile', photoUrl);
+              const uploadResponse = await axios.post(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
+                formData,
+                {
+                  headers: {
+                    'Content-Type': 'multipart/form-data',
+                  },
+                }
+              );
+        
+              const uploadResult = uploadResponse.data;
+        
+              if (uploadResult.code === 'IMG202') {
+                const newProfileUrl = uploadResult.data.profileUrl;
+                setEditPhotoUrl(newProfileUrl);
+        
+                const headers = {
+                  Authorization: `Bearer ${Token}`,
+                };
+                await axios.patch(
+                  `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
+                  {
+                    profile: newProfileUrl,
+                    nickName: nickName,
+                    phoneNumber: phoneNumber,
+                  },
+                  { headers }
+                );
+        
+                console.log('User information updated successfully.');
+              }
+            } catch (error) {
+              console.error('Error occurred:', error);
+            }
+          }
+        };
+        
 
   return (
     <div>
@@ -64,7 +91,7 @@ function page() {
           <div style={{ marginLeft: '8rem' }}>
             <Photo handler={setPhotoUrl} />
           </div>
-          <PhotoBox src={profile ? profile : ''} />
+          <PhotoBox src={profile ? profile : ''} alt="userImage"/>
         </>
       )}
       <NicknameForm />
