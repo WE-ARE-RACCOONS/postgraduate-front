@@ -15,8 +15,8 @@ export const DimmedBgContainer = styled.div`
 `;
 
 export const DimmedMdContainer = styled.div`
-  width: 19rem;
-  height: 17rem;
+  width: 21.44rem;
+  height: 16.125rem;
   position: absolute;
   top: 50%;
   left: 50%;

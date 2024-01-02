@@ -4,7 +4,8 @@ export type DimmedModalType =
   | 'notuser'
   | 'notSenior'
   | 'cancelMent'
-  | 'juniorCancelMent';
+  | 'juniorCancelMent'
+  | 'notRegistered';
 
 export interface DimmedModalProps {
   modalType: DimmedModalType;
