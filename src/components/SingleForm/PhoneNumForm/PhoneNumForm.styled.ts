@@ -7,11 +7,11 @@ export const PhoneNumContainer = styled.div`
 
   input {
     width: 21.4375rem;
-height: 3.1875rem;
-flex-shrink: 0;
-border-radius: 0.5rem;
-border: 1px solid #C2CEDE;
-background: #FFF;
+    height: 3.1875rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    border: 1px solid #c2cede;
+    background: #fff;
   }
   #phone-num-input {
     padding: 0.3rem;
@@ -20,10 +20,10 @@ background: #FFF;
 
 export const NumFont = styled.div`
   color: #212529;
-font-family: Noto Sans JP;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom: 0.5rem;
+  font-family: Noto Sans JP;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0.5rem;
 `;

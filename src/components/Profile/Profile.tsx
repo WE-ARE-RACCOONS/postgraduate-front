@@ -9,7 +9,7 @@ import {
   ProfileNickname,
   ProfileButton,
   ProfileWarn,
-  ImageBox
+  ImageBox,
 } from './Profile.styled';
 import { ProfileProps } from '@/types/profile/profile';
 import SingleValidator from '../Validator/SingleValidator';
@@ -19,7 +19,13 @@ function Profile(props: ProfileProps) {
   return (
     <ProfileBox>
       <ImageBox>
-      <Image src={profile} alt="profile image" width={52} height={52} style={{borderRadius:'90%'}} />
+        <Image
+          src={profile}
+          alt="profile image"
+          width={52}
+          height={52}
+          style={{ borderRadius: '90%' }}
+        />
       </ImageBox>
       <ProfileInfo>
         <ProfileName>

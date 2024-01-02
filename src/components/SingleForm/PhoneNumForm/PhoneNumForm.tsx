@@ -1,6 +1,6 @@
 'use client';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { PhoneNumContainer,NumFont } from './PhoneNumForm.styled';
+import { PhoneNumContainer, NumFont } from './PhoneNumForm.styled';
 import { useState } from 'react';
 import { useSetAtom, useAtom } from 'jotai';
 import { phoneNum, phoneNumValidation } from '@/stores/signup';
@@ -38,15 +38,15 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
   }
 
   return (
-    <div style={{ marginLeft:'0.75rem', marginTop:'1.5rem'}}>
-      <div style={{display:'flex',justifyContent:'space-between'}}>
-      <NumFont>휴대폰 번호</NumFont>
-      {flag && (
-        <SingleValidator
-          textColor="#FF3347"
-          msg="01012345678 형식으로 입력해주세요"
-        />
-      )}
+    <div style={{ marginLeft: '0.75rem', marginTop: '1.5rem' }}>
+      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+        <NumFont>휴대폰 번호</NumFont>
+        {flag && (
+          <SingleValidator
+            textColor="#FF3347"
+            msg="01012345678 형식으로 입력해주세요"
+          />
+        )}
       </div>
       <PhoneNumContainer>
         <input

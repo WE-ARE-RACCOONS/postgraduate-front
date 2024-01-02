@@ -95,10 +95,10 @@ function MyPage() {
   }, [Token]);
 
   return (
-    <div style={{backgroundColor:'#F8F9FA'}}>
-      <LogoLayer modalHandler={searchModalHandler}/>
+    <div style={{ backgroundColor: '#F8F9FA' }}>
+      <LogoLayer modalHandler={searchModalHandler} />
       {Token ? (
-        <div >
+        <div>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
@@ -146,7 +146,7 @@ function MyPage() {
             seniorChangePortalElement,
           )
         : ''}
-        {searchModal && searchPortalElement
+      {searchModal && searchPortalElement
         ? createPortal(
             <SearchModal modalHandler={searchModalHandler} />,
             searchPortalElement,

@@ -6,8 +6,10 @@ import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
   NicknameContainer,
-  NicknameTotalContainer,NameFont,
-  InputBox,InputBtn
+  NicknameTotalContainer,
+  NameFont,
+  InputBox,
+  InputBtn,
 } from './NicknameForm.styled';
 
 function NicknameForm({ defaultValue }: { defaultValue?: string }) {
@@ -52,33 +54,35 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   return (
     <NicknameTotalContainer>
       <NicknameContainer>
-        <div style={{display:'flex',justifyContent:'space-between'}}>
-        <NameFont>닉네임</NameFont>
-        {flag && (
-        <SingleValidator
-          textColor={availability ? '#00A0E1' : '#FF3347'}
-          msg={
-            availability ? '사용 가능한 닉네임입니다.' : '중복된 닉네임입니다.'
-          }
-        />
-      )}
-      </div>
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <NameFont>닉네임</NameFont>
+          {flag && (
+            <SingleValidator
+              textColor={availability ? '#00A0E1' : '#FF3347'}
+              msg={
+                availability
+                  ? '사용 가능한 닉네임입니다.'
+                  : '중복된 닉네임입니다.'
+              }
+            />
+          )}
+        </div>
         <InputBox>
-        <input
-          type="text"
-          name="user-nickname"
-          id="user-nickname"
-          placeholder="영어, 한글로 6글자까지 입력"
-          onChange={(e) => checkNickname(e)}
-          defaultValue={defaultValue || ''}
-        />
-        <InputBtn
-          onClick={() => {
-            checkDuplicate();
-          }}
-        >
-          중복확인
-        </InputBtn>
+          <input
+            type="text"
+            name="user-nickname"
+            id="user-nickname"
+            placeholder="영어, 한글로 6글자까지 입력"
+            onChange={(e) => checkNickname(e)}
+            defaultValue={defaultValue || ''}
+          />
+          <InputBtn
+            onClick={() => {
+              checkDuplicate();
+            }}
+          >
+            중복확인
+          </InputBtn>
         </InputBox>
       </NicknameContainer>
     </NicknameTotalContainer>

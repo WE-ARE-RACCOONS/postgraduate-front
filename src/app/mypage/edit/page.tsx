@@ -17,96 +17,94 @@ function page() {
   const phoneNumber = useAtomValue(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
-  const { getAccessToken} = useAuth();
+  const { getAccessToken } = useAuth();
   const token = getAccessToken();
-  console.log(photoUrl)
-  console.log(token)
+  console.log(photoUrl);
+  console.log(token);
   useEffect(() => {
     if (token) {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
       axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-          .then((res) => {
-            setprofile(res.data.data.profile);
-          })
-          .catch(function (error) {
-            console.log(error);
-          });
-        }})
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+        .then((res) => {
+          setprofile(res.data.data.profile);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
+  });
 
-        const handleClick = async () => {
+  const handleClick = async () => {
+    if (photoUrl) {
+      const formData = new FormData();
+      formData.append('profileFile', photoUrl);
 
-          if (photoUrl) {
-            const formData = new FormData();
-            formData.append('profileFile', photoUrl);
-      
-            if (token) {
-              await axios
-                .post(
-                  `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
-                  formData,
-                  {
-                    headers: {
-                      'Content-Type': 'multipart/form-data',
-                      Authorization: `Bearer ${token}`,
-                    },
-                  },
-                )
-                .then((response) => {
-                  const res = response.data;
-                  if (res.code == 'IMG202') {
-                    editProfileUrl=res.data.profileUrl;
-                  }
-                })
-                .catch((err) => {
-                  console.error(err);
-                });
+      if (token) {
+        await axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'IMG202') {
+              editProfileUrl = res.data.profileUrl;
             }
-          }
-          if (editProfileUrl || nickName || phoneNumber) {
-            axios
-              .patch(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
-                {
-                  profile: editProfileUrl,
-                    nickName: nickName,
-                    phoneNumber: phoneNumber,
-                },
-                {
-                  headers: {
-                    Authorization: `Bearer ${token}`,
-                  },
-                },
-              )
-              .then((response) => {
-                const res = response.data;
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          }
-
-        };
-        
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    }
+    if (editProfileUrl || nickName || phoneNumber) {
+      axios
+        .patch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
+          {
+            profile: editProfileUrl,
+            nickName: nickName,
+            phoneNumber: phoneNumber,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },
+        )
+        .then((response) => {
+          const res = response.data;
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
 
   return (
-    <div>
+    <div style={{ justifyContent: 'center', alignItems: 'center' }}>
       {photoUrl ? (
-        <>
-        <div style={{ marginLeft: '8rem' }}>
+        <div style={{ display: 'flex' }}>
+          <SelectedImage src={selectpPhotoUrl} alt="Selected" />
+          <div style={{ marginTop: '7rem', overflow: 'visible' }}>
             <Photo handler={setPhotoUrl} />
           </div>
-        <SelectedImage src={selectpPhotoUrl} alt="Selected" />
-        </>
+        </div>
       ) : (
-        <>
-          <div style={{ marginLeft: '8rem' }}>
+        <div style={{ display: 'flex' }}>
+          <PhotoBox src={profile ? profile : ''} alt="userImage" />
+          <div style={{ marginTop: '7rem', overflow: 'visible' }}>
             <Photo handler={setPhotoUrl} />
           </div>
-          <PhotoBox src={profile ? profile : ''} alt="userImage"/>
-        </>
+        </div>
       )}
       <NicknameForm />
       <PhoneNumForm />
@@ -115,38 +113,38 @@ function page() {
   );
 }
 const SelectedImage = styled.img`
-margin: 1.3rem 7.5rem;
- width: 7.5rem;
-height: 7.5rem;
-border: 1px solid rebeccapurple;
+  margin: 1.3rem 0;
+  margin-left: 7.5rem;
+  width: 7.5rem;
+  height: 7.5rem;
   border-radius: 90%;
 `;
 const PhotoBox = styled.img`
-margin: 1.3rem 7.5rem;
-  border: 1px solid red;
+  margin: 1.3rem 0;
+  margin-left: 7.5rem;
   width: 7.5rem;
-height: 7.5rem;
-flex-shrink: 0;
-border-radius: 90%;
+  height: 7.5rem;
+  flex-shrink: 0;
+  border-radius: 90%;
 `;
 const ProfileSetBtn = styled.button`
-display: flex;
-width: 21.4375rem;
-padding: 1rem 0rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-border-radius: 0.75rem;
-background: #2FC4B2;
-border: none;
-margin-top: 58%;
-margin-left: 0.5rem;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  display: flex;
+  width: 21.4375rem;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: #2fc4b2;
+  border: none;
+  margin-top: 50%;
+  margin-left: 0.5rem;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 export default page;

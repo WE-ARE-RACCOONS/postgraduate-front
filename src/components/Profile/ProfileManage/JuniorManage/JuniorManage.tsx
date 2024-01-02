@@ -42,10 +42,7 @@ function JuniorManage(props: NotSeniorProps) {
   return (
     <JuniorManageContainer>
       <TitleComponent title="계정 관리" />
-      <ContentComponent
-        content="계정 설정"
-        onClick={handleProfileEditClick}
-      />
+      <ContentComponent content="계정 설정" onClick={handleProfileEditClick} />
       <ContentComponent
         content="대학원선배 회원으로 변경"
         onClick={handleClick}
