@@ -1,6 +1,8 @@
 import styled from 'styled-components';
-
-export const PhoneNumContainer = styled.div`
+interface PhoneNumContainerProps {
+  flag: boolean;
+}
+export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
   width: 20.5rem;
   height: 1.625rem;
   display: flex;
@@ -12,6 +14,8 @@ export const PhoneNumContainer = styled.div`
     border-radius: 0.5rem;
     border: 1px solid #c2cede;
     background: #fff;
+    border: ${(props) =>
+      props.flag ? '1px solid #FF3347' : '1px solid initial'};
   }
   #phone-num-input {
     padding: 0.3rem;

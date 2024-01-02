@@ -44,11 +44,11 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
         {flag && (
           <SingleValidator
             textColor="#FF3347"
-            msg="01012345678 형식으로 입력해주세요"
+            msg="올바르지 않은 휴대폰 번호입니다"
           />
         )}
       </div>
-      <PhoneNumContainer>
+      <PhoneNumContainer flag={flag}>
         <input
           type="text"
           id="phone-num-input"

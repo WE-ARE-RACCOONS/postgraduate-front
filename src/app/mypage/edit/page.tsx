@@ -18,11 +18,9 @@ function page() {
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken } = useAuth();
-  const token = getAccessToken();
   const router = useRouter();
-  console.log(photoUrl);
-  console.log(token);
   useEffect(() => {
+    const token = getAccessToken();
     if (token) {
       const headers = {
         Authorization: `Bearer ${token}`,
@@ -39,6 +37,7 @@ function page() {
   });
 
   const handleClick = async () => {
+    const token = getAccessToken();
     if (photoUrl) {
       const formData = new FormData();
       formData.append('profileFile', photoUrl);
@@ -83,7 +82,6 @@ function page() {
         )
         .then((response) => {
           const res = response.data;
-          console.log(res);
           if (res.code == 'UR201') {
             router.push('/mypage');
           }

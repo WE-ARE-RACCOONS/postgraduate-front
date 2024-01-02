@@ -12,7 +12,7 @@ import {
   NotSeniorBottom,
   NSMain,
   NSSub,
-  NSBtn
+  NSBtn,
 } from './NotSenior.styled';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
@@ -38,7 +38,12 @@ function NotSenior(props: NotSeniorProps) {
           sizes="(max-width: 600px) 2.rem"
           priority
           onClick={xClick}
-          style={{ width: '2.3rem', height: '2.3rem' ,margin:'1rem',color:'#CBCFDB'}}
+          style={{
+            width: '2.3rem',
+            height: '2.3rem',
+            margin: '1rem',
+            color: '#CBCFDB',
+          }}
         />
       </NotSeniorBoxTop>
       <NotSeniorMid>
