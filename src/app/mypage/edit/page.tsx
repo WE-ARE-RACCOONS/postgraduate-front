@@ -12,17 +12,19 @@ import useAuth from '@/hooks/useAuth';
 
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
-  const [editPhotoUrl, setEditPhotoUrl] = useState<File | null>(null);
+  let editProfileUrl = '';
   const nickName = useAtomValue(nickname);
   const phoneNumber = useAtomValue(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
-  const { getAccessToken, getUserType } = useAuth();
-  const Token = getAccessToken();
+  const { getAccessToken} = useAuth();
+  const token = getAccessToken();
+  console.log(photoUrl)
+  console.log(token)
   useEffect(() => {
-    if (Token) {
+    if (token) {
       const headers = {
-        Authorization: `Bearer ${Token}`,
+        Authorization: `Bearer ${token}`,
       };
       axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
@@ -35,45 +37,57 @@ function page() {
         }})
 
         const handleClick = async () => {
+
           if (photoUrl) {
-            try {
-              const formData = new FormData();
-              formData.append('profileFile', photoUrl);
-              const uploadResponse = await axios.post(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
-                formData,
-                {
-                  headers: {
-                    'Content-Type': 'multipart/form-data',
-                  },
-                }
-              );
-        
-              const uploadResult = uploadResponse.data;
-        
-              if (uploadResult.code === 'IMG202') {
-                const newProfileUrl = uploadResult.data.profileUrl;
-                setEditPhotoUrl(newProfileUrl);
-        
-                const headers = {
-                  Authorization: `Bearer ${Token}`,
-                };
-                await axios.patch(
-                  `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
+            const formData = new FormData();
+            formData.append('profileFile', photoUrl);
+      
+            if (token) {
+              await axios
+                .post(
+                  `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
+                  formData,
                   {
-                    profile: newProfileUrl,
-                    nickName: nickName,
-                    phoneNumber: phoneNumber,
+                    headers: {
+                      'Content-Type': 'multipart/form-data',
+                      Authorization: `Bearer ${token}`,
+                    },
                   },
-                  { headers }
-                );
-        
-                console.log('User information updated successfully.');
-              }
-            } catch (error) {
-              console.error('Error occurred:', error);
+                )
+                .then((response) => {
+                  const res = response.data;
+                  if (res.code == 'IMG202') {
+                    editProfileUrl=res.data.profileUrl;
+                  }
+                })
+                .catch((err) => {
+                  console.error(err);
+                });
             }
           }
+          if (editProfileUrl || nickName || phoneNumber) {
+            axios
+              .patch(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
+                {
+                  profile: editProfileUrl,
+                    nickName: nickName,
+                    phoneNumber: phoneNumber,
+                },
+                {
+                  headers: {
+                    Authorization: `Bearer ${token}`,
+                  },
+                },
+              )
+              .then((response) => {
+                const res = response.data;
+              })
+              .catch((err) => {
+                console.error(err);
+              });
+          }
+
         };
         
 
