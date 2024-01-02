@@ -13,12 +13,13 @@ export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
     flex-shrink: 0;
     border-radius: 0.5rem;
     border: 1px solid #c2cede;
+    padding: 0.5rem 1rem;
     background: #fff;
     border: ${(props) =>
       props.flag ? '1px solid #FF3347' : '1px solid initial'};
   }
   #phone-num-input {
-    padding: 0.3rem;
+    
   }
 `;
 

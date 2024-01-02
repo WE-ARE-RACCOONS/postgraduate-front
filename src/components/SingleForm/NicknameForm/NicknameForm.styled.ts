@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+interface NicknameContainerProps {
+  flag: boolean;
+}
 export const NicknameTotalContainer = styled.div`
   margin-left: 0.75rem;
   justify-content: center;
@@ -9,12 +11,6 @@ export const NicknameTotalContainer = styled.div`
 
 export const NicknameContainer = styled.div`
   width: 20.5rem;
-  #user-nickname {
-    width: 15.5rem;
-    margin: 0.4rem;
-    border: none;
-    height: 2rem;
-  }
 `;
 export const NameFont = styled.div`
   color: #212529;
@@ -25,7 +21,7 @@ export const NameFont = styled.div`
   line-height: normal;
   margin-bottom: 0.5rem;
 `;
-export const InputBox = styled.div`
+export const InputBox = styled.div<NicknameContainerProps>`
   display: flex;
   width: 21.2rem;
   height: 3.1875rem;
@@ -33,6 +29,15 @@ export const InputBox = styled.div`
   border-radius: 0.5rem;
   border: 1px solid #c2cede;
   background: #fff;
+  border: ${(props) =>
+      props.flag ? '1px solid #FF3347' : '1px solid initial'};
+
+#user-nickname {
+    width: 14rem;
+    margin: 0.55rem 1rem;
+    border: none;
+    height: 2rem;
+  }
 `;
 
 export const InputBtn = styled.button`
