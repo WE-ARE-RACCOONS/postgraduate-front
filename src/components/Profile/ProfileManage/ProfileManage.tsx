@@ -1,13 +1,5 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import { ProfileManageBox } from './ProfileManage.styled';
-import { useRouter } from 'next/navigation';
-import axios from 'axios';
-import ContentComponent from '../Box/ContentBox/ContentBox';
-import TitleComponent from '../Box/TitleBox/TitleBox';
-import { NotSeniorProps } from '@/types/modal/mypage';
-import useAuth from '@/hooks/useAuth';
-import { useAtom } from 'jotai';
-import { socialIdAtom } from '@/stores/signup';
 import JuniorManage from './JuniorManage';
 import SeniorManage from './SeniorManage';
 import { ProfileManageProps } from '@/types/profile/profile';

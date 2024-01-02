@@ -6,10 +6,11 @@ import NotSenior from '../NotSenior/NotSenior';
 import { userType } from '@/types/user/user';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
+import SNotRegistered from '@/components/Content/SNotRegistered';
 function DimmedModal(props: DimmedModalProps) {
   return (
-    <DimmedBgContainer>
-      <DimmedMdContainer>
+    <DimmedBgContainer onClick={props.modalHandler}>
+      <DimmedMdContainer onClick={(e) => e.stopPropagation()}>
         {props.modalType == 'postgraduProfile' && (
           <MProfileContent modalHandler={props.modalHandler} />
         )}
@@ -30,6 +31,9 @@ function DimmedModal(props: DimmedModalProps) {
             mentoringId={props.mentoringId || 0}
             modalHandler={props.modalHandler}
           />
+        )}
+        {props.modalType == 'notRegistered' && (
+          <SNotRegistered modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>
