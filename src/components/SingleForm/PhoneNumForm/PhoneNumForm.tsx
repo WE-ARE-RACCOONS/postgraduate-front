@@ -38,7 +38,8 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
   }
 
   return (
-    <div style={{ marginLeft: '0.75rem', marginTop: '1.5rem' }}>
+    <div>
+    <div style={{ marginLeft: '0.75rem', marginTop: '1.5rem' ,width: '20.5rem'}}>
       <div style={{ display: 'flex', justifyContent: 'space-between' }}>
         <NumFont>휴대폰 번호</NumFont>
         {flag && (
@@ -63,6 +64,7 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
           }}
         />
       </PhoneNumContainer>
+    </div>
     </div>
   );
 }
