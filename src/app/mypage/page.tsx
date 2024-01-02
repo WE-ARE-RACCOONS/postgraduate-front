@@ -65,7 +65,8 @@ function MyPage() {
             setnickName(res.data.data.nickName);
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
-            setProfileReg(res.data.data.profileRegister);
+            // setProfileReg(res.data.data.profileRegister);
+            setProfileReg(false);
             setSeniorId(res.data.data.seniorId);
           })
           .catch(function (error) {
