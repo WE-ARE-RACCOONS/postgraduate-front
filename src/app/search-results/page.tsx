@@ -8,7 +8,7 @@ import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
-import SearchDropDown from '@/components/dropDown/searchDropDown/searchDropDown';
+import SearchDropDown from '@/components/DropDown/SearchDropDown/SearchDropDown';
 function SearchResultPage() {
   const router = useRouter();
   const { getAccessToken } = useAuth();
