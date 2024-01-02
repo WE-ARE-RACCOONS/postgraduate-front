@@ -83,7 +83,7 @@ function page() {
         )
         .then((response) => {
           const res = response.data;
-          console.log(res)
+          console.log(res);
           if (res.code == 'UR201') {
             router.push('/mypage');
           }
