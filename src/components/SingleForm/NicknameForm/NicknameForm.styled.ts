@@ -30,9 +30,9 @@ export const InputBox = styled.div<NicknameContainerProps>`
   border: 1px solid #c2cede;
   background: #fff;
   border: ${(props) =>
-      props.flag ? '1px solid #FF3347' : '1px solid initial'};
+    props.flag ? '1px solid #FF3347' : '1px solid initial'};
 
-#user-nickname {
+  #user-nickname {
     width: 14rem;
     margin: 0.55rem 1rem;
     border: none;

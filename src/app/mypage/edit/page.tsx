@@ -95,7 +95,7 @@ function page() {
 
   return (
     <div style={{ justifyContent: 'center', alignItems: 'center' }}>
-      <BackHeader headerText='계정 설정'/>
+      <BackHeader headerText="계정 설정" />
       {photoUrl ? (
         <div style={{ display: 'flex' }}>
           <SelectedImage src={selectpPhotoUrl} alt="Selected" />
