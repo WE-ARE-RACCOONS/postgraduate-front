@@ -3,8 +3,16 @@ import { StepperContainer, StepperTab } from './ProgressBar.styled';
 
 function ProgressBar({ activeNum }: { activeNum: number }) {
   useEffect(() => {
-    const activeStep = document.getElementById(`stepper-tab-${activeNum}`);
-    activeStep?.classList.add('active');
+    const activeStepArr = [];
+    for (let i = 0; i <= activeNum; i++) {
+      const activeStep = document.getElementById(`stepper-tab-${activeNum}`);
+      activeStepArr.push(activeStep);
+    }
+    if (activeStepArr.length > 0) {
+      activeStepArr.forEach((el) => {
+        el?.classList.add('active');
+      });
+    }
   }, []);
 
   return (

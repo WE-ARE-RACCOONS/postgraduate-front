@@ -12,11 +12,19 @@ import {
   Keyword,
 } from './SeniorProfile.styled';
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
+import user_icon from '../../../public/user.png';
+import { useRouter } from 'next/navigation';
 import auth from '../../../public/auth_mark.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
+  const router = useRouter();
+
   return (
     <SeniorProfileBox>
-      <SeniorProfileContent>
+      <SeniorProfileContent
+        onClick={() => {
+          router.push(`/senior/info/${data.seniorId}`);
+        }}
+      >
         <SeniorProfileImg src={data ? data.profile : ''} />
         <SeniorProfileInfo>
           <SPmajor>{data.major}</SPmajor>
