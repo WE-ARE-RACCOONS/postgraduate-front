@@ -39,32 +39,34 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
 
   return (
     <div>
-    <div style={{ marginLeft: '0.75rem', marginTop: '1.5rem' ,width: '20.5rem'}}>
-      <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-        <NumFont>휴대폰 번호</NumFont>
-        {flag && (
-          <SingleValidator
-            textColor="#FF3347"
-            msg="올바르지 않은 휴대폰 번호입니다"
+      <div
+        style={{ marginLeft: '0.75rem', marginTop: '1.5rem', width: '20.5rem' }}
+      >
+        <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+          <NumFont>휴대폰 번호</NumFont>
+          {flag && (
+            <SingleValidator
+              textColor="#FF3347"
+              msg="올바르지 않은 휴대폰 번호입니다"
+            />
+          )}
+        </div>
+        <PhoneNumContainer flag={flag}>
+          <input
+            type="text"
+            id="phone-num-input"
+            className="phone-num-input"
+            placeholder="숫자만 입력"
+            defaultValue={defaultValue || ''}
+            onChange={(e) => {
+              setFullNum(e.currentTarget.value);
+            }}
+            onBlur={(e) => {
+              checkPhoneNum(e);
+            }}
           />
-        )}
+        </PhoneNumContainer>
       </div>
-      <PhoneNumContainer flag={flag}>
-        <input
-          type="text"
-          id="phone-num-input"
-          className="phone-num-input"
-          placeholder="숫자만 입력"
-          defaultValue={defaultValue || ''}
-          onChange={(e) => {
-            setFullNum(e.currentTarget.value);
-          }}
-          onBlur={(e) => {
-            checkPhoneNum(e);
-          }}
-        />
-      </PhoneNumContainer>
-    </div>
     </div>
   );
 }
