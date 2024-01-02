@@ -1,3 +1,3 @@
-import SNotRegistered from "./SNotRegistered";
+import SNotRegistered from './SNotRegistered';
 
 export default SNotRegistered;

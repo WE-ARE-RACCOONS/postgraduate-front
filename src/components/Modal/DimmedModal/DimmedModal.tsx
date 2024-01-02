@@ -33,9 +33,7 @@ function DimmedModal(props: DimmedModalProps) {
           />
         )}
         {props.modalType == 'notRegistered' && (
-          <SNotRegistered 
-            modalHandler={props.modalHandler}
-          />
+          <SNotRegistered modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

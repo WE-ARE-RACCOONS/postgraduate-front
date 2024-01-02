@@ -30,7 +30,7 @@ function SeniorManage(props: SeniorManageProps) {
   const {
     modal: registerModal,
     modalHandler: registerHandler,
-    portalElement: registerPortal
+    portalElement: registerPortal,
   } = useModal('senior-profile-not-registered');
 
   function setAuthText(auth: certiRegType) {
@@ -47,12 +47,12 @@ function SeniorManage(props: SeniorManageProps) {
   }
 
   const checkRegister = () => {
-    if(props.profileReg) return true;
-    if(!props.profileReg) {
+    if (props.profileReg) return true;
+    if (!props.profileReg) {
       registerHandler();
       return false;
     }
-  }
+  };
 
   return (
     <SeniorManageContainer>
@@ -60,12 +60,23 @@ function SeniorManage(props: SeniorManageProps) {
         <TitleComponent title="계정 설정" />
         <ContentComponent content="계정 수정" onClick={infoHandler} />
         <SeniorManageAuthBox>
-          <button onClick={() => {if(checkRegister()) modalHandler();}}>내 프로필 보기</button>
+          <button
+            onClick={() => {
+              if (checkRegister()) modalHandler();
+            }}
+          >
+            내 프로필 보기
+          </button>
           {!props.profileReg && (
             <SeniorManageAuthValue>미완성</SeniorManageAuthValue>
           )}
         </SeniorManageAuthBox>
-        <ContentComponent content="내 프로필 수정" onClick={() => {if(checkRegister()) modifyHandler();}} />
+        <ContentComponent
+          content="내 프로필 수정"
+          onClick={() => {
+            if (checkRegister()) modifyHandler();
+          }}
+        />
         <SeniorManageAuthBox>
           <button>대학원 인증</button>
           <SeniorManageAuthValue $certifiReg={props.certifiReg}>
@@ -104,14 +115,15 @@ function SeniorManage(props: SeniorManageProps) {
             infoPortal,
           )
         : null}
-      {registerModal && registerPortal 
+      {registerModal && registerPortal
         ? createPortal(
-          <DimmedModal
-            modalType='notRegistered'
-            modalHandler={registerHandler}
-          />,
-          registerPortal
-        ) : null}
+            <DimmedModal
+              modalType="notRegistered"
+              modalHandler={registerHandler}
+            />,
+            registerPortal,
+          )
+        : null}
     </SeniorManageContainer>
   );
 }
