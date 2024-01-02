@@ -10,6 +10,7 @@ import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
+import BackHeader from '@/components/Header/BackHeader';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
@@ -94,6 +95,7 @@ function page() {
 
   return (
     <div style={{ justifyContent: 'center', alignItems: 'center' }}>
+      <BackHeader headerText='계정 설정'/>
       {photoUrl ? (
         <div style={{ display: 'flex' }}>
           <SelectedImage src={selectpPhotoUrl} alt="Selected" />
@@ -140,7 +142,7 @@ const ProfileSetBtn = styled.button`
   border-radius: 0.75rem;
   background: #2fc4b2;
   border: none;
-  margin-top: 50%;
+  margin-top: 38%;
   margin-left: 0.5rem;
   color: #fff;
   text-align: center;
