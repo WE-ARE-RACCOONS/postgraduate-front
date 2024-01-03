@@ -6,12 +6,9 @@ export const StyledInput = styled.input`
   border-radius: 0.35rem;
   width: 1.5rem;
   height: 1.5rem;
+  margin-right: 0.56rem;
 
   &:checked {
-    border-color: transparent;
-    background-size: 100% 100%;
-    background-position: 50%;
-    background-repeat: no-repeat;
-    background-color: #333a3d;
+  
   }
 `;
