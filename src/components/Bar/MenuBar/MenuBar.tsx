@@ -12,7 +12,7 @@ function MenuBar(props: MenubarProps) {
   const router = useRouter();
   const { getAccessToken, getUserType } = useAuth();
   const token = getAccessToken();
-  console.log(token)
+  console.log(token);
   const userType = getUserType();
   const handleClick = () => {
     props.modalHandler();
@@ -77,7 +77,7 @@ function MenuBar(props: MenubarProps) {
               height: '1.5rem',
             }}
           />
-                    <MenuWord>내 멘토링</MenuWord>
+          <MenuWord>내 멘토링</MenuWord>
         </MenuBox>
       )}
       <MenuBox

@@ -1,6 +1,6 @@
 import { NotLoginProps } from '@/types/modal/menubar';
 import React from 'react';
-import {NotLoginMp} from './NotLmypage.styled'
+import { NotLoginMp } from './NotLmypage.styled';
 function NotLmypage(props: NotLoginProps) {
   const handleClick = () => {
     props.modalHandler();

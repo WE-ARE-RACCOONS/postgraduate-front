@@ -1,9 +1,13 @@
 import React from 'react';
 import { loginRequestProps } from '@/types/content/loginRequest';
 import ClickedBtn from '@/components/Button/ClickedBtn';
-import { LoginRequestBox ,LoginRequestBoxTop,LoginRequestBtn} from './LoginRequest.styled';
+import {
+  LoginRequestBox,
+  LoginRequestBoxTop,
+  LoginRequestBtn,
+} from './LoginRequest.styled';
 import Image from 'next/image';
-import x_icon from '../../../../public/x.png'
+import x_icon from '../../../../public/x.png';
 const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
 const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
 
@@ -34,21 +38,19 @@ function LoginRequest(props: loginRequestProps) {
           }}
         />
       </LoginRequestBoxTop>
-    <LoginRequestBox>
-      <div id="Login-guide-msg">
-        내 멘토링은 로그인 후
-        <br />
-        이용가능합니다.
-      </div>
-      <div id="Login-guide-suggest">
-        3초만에 로그인하고
-        <br />
-        나에게 맞는 멘토를 만나볼까요?
-      </div>
-      <LoginRequestBtn onClick={handleClick}>
-  로그인하러가기
-</LoginRequestBtn>
-    </LoginRequestBox>
+      <LoginRequestBox>
+        <div id="Login-guide-msg">
+          내 멘토링은 로그인 후
+          <br />
+          이용가능합니다.
+        </div>
+        <div id="Login-guide-suggest">
+          3초만에 로그인하고
+          <br />
+          나에게 맞는 멘토를 만나볼까요?
+        </div>
+        <LoginRequestBtn onClick={handleClick}>로그인하러가기</LoginRequestBtn>
+      </LoginRequestBox>
     </div>
   );
 }
