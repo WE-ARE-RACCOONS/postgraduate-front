@@ -8,6 +8,7 @@ import {
 } from '@/constants/form/cMentoringApply';
 import { questionAtom, subjectAtom } from '@/stores/mentoring';
 import { useAtomValue } from 'jotai';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
@@ -15,11 +16,19 @@ function MentoringApplyQuestionPage() {
   const [active, setActive] = useState(false);
   const subject = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
+  const router = useRouter();
+  const currentPath = usePathname();
+  const pathArr = currentPath.split('/');
+  const seniorId = pathArr[2];
 
   useEffect(() => {
     if (subject && question) setActive(true);
     else setActive(false);
   }, [subject, question]);
+
+  const clickHandler = () => {
+    if (subject && question) router.push(`/mentoring-apply/${seniorId}/schedule`);
+  }
 
   return (
     <MAQContainer>
@@ -58,7 +67,7 @@ function MentoringApplyQuestionPage() {
           alertMsg={MENTORING_QUESTION.questionAlert}
         />
       </div>
-      <MAQNextBtn className={active ? 'active' : ''}>다음으로</MAQNextBtn>
+      <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>다음으로</MAQNextBtn>
     </MAQContainer>
   );
 }
@@ -88,6 +97,7 @@ const MAQContainer = styled.div`
 
   .active {
     background-color: #2fc4b2;
+    cursor: pointer;
   }
 `;
 
