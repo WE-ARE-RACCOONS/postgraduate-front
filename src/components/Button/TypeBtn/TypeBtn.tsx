@@ -1,5 +1,5 @@
 import { TypeBtnProps } from '@/types/button/typeBtn';
-import { TypeBtnIcon } from './TypeBtn.styled';
+import { TypeBtnIcon,TypeBtnIconBox,TypeBtnFont } from './TypeBtn.styled';
 import { useAtom } from 'jotai';
 import { userTypeAtom } from '@/stores/signup';
 
@@ -11,22 +11,21 @@ function TypeBtn(props: TypeBtnProps) {
   };
 
   return (
-    <div>
-      <TypeBtnIcon
-        $choice={userType == props.userType ? true : false}
-        onClick={handleClick}
-      >
-        {props.iconText}
+    <TypeBtnIconBox $choice={userType == props.userType ? true : false}
+    onClick={handleClick} >
+      <TypeBtnIcon>
+        <img src={props.iconSrc} alt={props.iconAlt} style={{width:'8rem',height:'8rem'}}/>
       </TypeBtnIcon>
-      <div>
-        {props.typeDesc.split('\n').map((txt, idx) => (
-          <div key={idx}>
-            {txt}
-            <br />
-          </div>
-        ))}
-      </div>
-    </div>
+      <TypeBtnFont>
+        {props.typeDesc}
+        <div style={{display:'flex'}}>
+        <div id = 'tb-color'>
+        {props.typeDescColor}
+        </div>
+        {props.typeDescS}
+        </div>
+      </TypeBtnFont>
+    </TypeBtnIconBox>
   );
 }
 
