@@ -1,5 +1,5 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TypeBtn from '@/components/Button/TypeBtn';
 import BackHeader from '@/components/Header/BackHeader';
 import { useRouter, usePathname } from 'next/navigation';
@@ -9,16 +9,11 @@ import senior from '../../../../public/senior.png'
 function SignUpPage() {
   const router = useRouter();
   const currentPath = usePathname();
-  const [typeSelected, setTypeSelected] = useState(false);
-  const handleTypeSelection = () => {
-    setTypeSelected(true);
-  };
   const handleNextButtonClick = () => {
-    if (typeSelected) {
+    
       router.push(currentPath + '/common-info');
-    }
+    
   };
-
   return (
     <div>
       <div style={{boxShadow:'0px 4px 8px 0px rgba(0, 0, 0, 0.10)'}}>
@@ -39,7 +34,6 @@ function SignUpPage() {
           typeDescColor={`대학생 후배`}
           typeDescS={`회원가입`}
           userType="junior"
-          onTypeSelect={handleTypeSelection}
         />
         <TypeBtn
         iconAlt='senior-icon'
@@ -49,11 +43,12 @@ function SignUpPage() {
           typeDescColor={`대학원생 선배`}
           typeDescS={`회원가입`}
           userType="senior"
+         
         />
       </TypeBtnWrapper>
       </div>
       <TypeBtnB
-        onClick={handleNextButtonClick} $isSelected={typeSelected}
+        onClick={handleNextButtonClick}
       >
         다음으로
       </TypeBtnB>
@@ -81,8 +76,8 @@ font-weight: 400;
 line-height: 140%; /* 1.4rem */
 letter-spacing: -0.03125rem;
 `;
-const TypeBtnB = styled.div<{ $isSelected: boolean }>`
-background: ${(props) => (props.$isSelected ? '#DEE2E6' : '#2FC4B2')};
+const TypeBtnB = styled.div`
+background: #2FC4B2;
 display: flex;
 width: inherit;
 margin: 1rem;
