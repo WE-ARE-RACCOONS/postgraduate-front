@@ -27,7 +27,9 @@ function NextBtn(props: NextBtnProps) {
     }
   };
 
-  return <BtnStyle onClick={handleClick}>{props.btnText}</BtnStyle>;
+  return (
+  <BtnStyle onClick={handleClick}>{props.btnText}</BtnStyle>
+  );
 }
 
 export default NextBtn;

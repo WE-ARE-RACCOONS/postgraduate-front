@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const BtnStyle = styled.button`
 display: flex;
-width: 91.5%;
+width: 95%;
 padding: 1rem 0rem;
 justify-content: center;
 align-items: center;
@@ -17,5 +17,5 @@ font-style: normal;
 font-weight: 700;
 line-height: normal;
 border: none;
-margin-left: 0.9rem;
+margin: 0 0.5rem;
 `

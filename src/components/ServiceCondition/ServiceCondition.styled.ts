@@ -19,17 +19,18 @@ font-size: 0.875rem;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-text-decoration-line: underline;
-`;
-export const TermsShow = styled.div`
-  border: 1px solid black;
+#container-color{
+  color: #00A0E1;
+}
+#container-line{
   text-decoration-line: underline;
-  padding: 1rem;
+}
 `;
 export const TermsBox = styled.div`
 margin: 0 1rem;
 margin-top: 20%;
 align-items: center;
+margin-bottom: 1.6rem;
 `;
 export const CheckBoxLayout = styled.div`
 margin-bottom: 0.25rem;
