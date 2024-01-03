@@ -9,18 +9,18 @@ function MentoringApplySchedulePage() {
   const timeArr = [
     {
       "day": "월",
-      "startTime": "18:00",
-      "endTime": "12:00"
+      "startTime": "18:30",
+      "endTime": "23:30"
     },
     {
       "day": "화",
       "startTime": "18:00",
-      "endTime": "12:00"
+      "endTime": "22:00"
     },
     {
       "day": "수",
       "startTime": "18:00",
-      "endTime": "12:00"
+      "endTime": "24:00"
     }
   ]
 
@@ -65,7 +65,8 @@ const MASContainer = styled.div`
   #time-list-box-wrapper {
     position: absolute;
     width: 95%;
-    height: 11rem;
+    height: max-content;
+    min-height: 9.5rem;
     top: 8.625rem;
     left: 50%;
     transform: translateX(-50%);
