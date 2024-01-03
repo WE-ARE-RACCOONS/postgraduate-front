@@ -231,7 +231,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
       {flag && (
         <ValidatorBox>
           <SingleValidator
-            textColor="#ff0000"
+            textColor="#FF3347"
             msg="입력하지 않은 내용이 있습니다."
           />
         </ValidatorBox>

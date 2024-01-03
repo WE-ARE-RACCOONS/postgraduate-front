@@ -34,7 +34,7 @@ function TextareaForm(props: TextareaFormProps) {
           changeHandler(e);
         }}
       />
-      {flag && <SingleValidator msg={props.alertMsg} textColor="#ff0000" />}
+      {flag && <SingleValidator msg={props.alertMsg} textColor="#FF3347" />}
     </TextareaFormContainer>
   );
 }

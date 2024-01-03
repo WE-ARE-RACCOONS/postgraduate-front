@@ -28,7 +28,7 @@ export const SeniorManageAuthValue = styled.div<{ $certifiReg?: certiRegType }>`
     if (props.$certifiReg === 'APPROVE' || props.$certifiReg === 'WAITING') {
       return '#3bf';
     } else if (props.$certifiReg === 'NOT_APPROVE') {
-      return '#ff0000';
+      return '#FF3347';
     } else {
       return '#000';
     }

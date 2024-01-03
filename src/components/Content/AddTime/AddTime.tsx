@@ -168,7 +168,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
       </AddTimeAbleBox>
       {flag && (
         <ValidatorBox>
-          <SingleValidator msg={alertMsg} textColor="#ff0000" />
+          <SingleValidator msg={alertMsg} textColor="#FF3347" />
         </ValidatorBox>
       )}
       <button id="add-time-submit-btn" onClick={submitHandler}>
