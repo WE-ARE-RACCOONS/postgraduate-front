@@ -13,8 +13,6 @@ export const MENTORING_QUESTION = {
   questionAlert: '주제에 대한 사전 질문을 최소 10자 이상 적어주세요!',
 };
 
-export const WEEK_ARRAY = ['월', '화', '수', '목', '금', '토', '일'];
-
 export const MENTORING_SCHEDULE = {
   sScheduleTitle: '의 멘토링 가능 일정',
   sScheduleSubtitle: '대학원 선배가 제시한 일정이에요. 이 시간 안에서  제시해주세요!',
