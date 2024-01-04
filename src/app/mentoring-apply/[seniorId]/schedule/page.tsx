@@ -2,6 +2,7 @@
 import ProgressBar from "@/components/Bar/ProgressBar";
 import TimeListBox from "@/components/Box/TimeListBox";
 import BackHeader from "@/components/Header/BackHeader";
+import SelectTime from "@/components/SelectTime";
 import { MENTORING_SCHEDULE } from "@/constants/form/cMentoringApply";
 import useAuth from "@/hooks/useAuth";
 import { TimeObj } from "@/types/scheduler/scheduler";
@@ -57,6 +58,11 @@ function MentoringApplySchedulePage() {
       <div id="senior-select-subtitle-wrapper">
         <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
       </div>
+      <div id="select-time-container">
+        <SelectTime placeholder={`첫${MENTORING_SCHEDULE.selectPlaceholder}`} />
+        <SelectTime placeholder={`두${MENTORING_SCHEDULE.selectPlaceholder}`} />
+        <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} />
+      </div>
     </MASContainer>
   )
 }
@@ -101,6 +107,17 @@ const MASContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
   #senior-select-subtitle-wrapper {
     position: absolute;
     top: calc(${props => props.$timeArr ? `${props.$timeArr.length} * 1.5rem + 17.625rem` : '22.125rem'});
+    left: 0.5rem;
+  }
+
+  #select-time-container {
+    width: 95%;
+    height: 10.57rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: absolute;
+    top: calc(${props => props.$timeArr ? `${props.$timeArr.length} * 1.5rem + 19.875rem` : '24.375rem'});
     left: 0.5rem;
   }
 `
