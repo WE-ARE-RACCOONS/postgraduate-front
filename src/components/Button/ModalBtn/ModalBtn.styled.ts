@@ -29,3 +29,10 @@ export const StyledSModalBtn = styled.button`
   font-weight: 700;
   line-height: 140%; /* 1.4rem */
 `;
+export const SInfoBtn = styled.button`
+ height: 3.1875rem;
+flex-shrink: 0;
+border-radius: 0.5rem;
+border: 1px solid #C2CEDE;
+background: #FFF;
+`;

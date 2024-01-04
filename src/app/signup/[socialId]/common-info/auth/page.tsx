@@ -40,7 +40,7 @@ const fileName = photo?.name;
 
           if (res.code == 'IMG202') {
             setphotoUrl(res.data.profileUrl);
-            router.push(`/signup/${socialId}/common-info/senior-info`);
+            router.push(`/signup/${socialId}/common-info/senior-info/major`);
           }
         })
         .catch((err) => {

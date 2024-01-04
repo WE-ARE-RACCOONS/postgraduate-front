@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import BackHeader from '@/components/Header/BackHeader';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -75,136 +76,36 @@ function SeniorInfoPage() {
       setEmptyPart('학과');
       return;
     }
-
-    if (!sLab) {
-      setFlag(true);
-      setEmptyPart('연구실명');
-      return;
-    }
-
-    if (!sProfessor) {
-      setFlag(true);
-      setEmptyPart('지도 교수님');
-      return;
-    }
-
-    if (!sField) {
-      setFlag(true);
-      setEmptyPart('연구분야');
-      return;
-    }
-
-    if (!sKeyword) {
-      setFlag(true);
-      setEmptyPart('연구 주제 키워드');
-      return;
-    }
     setFlag(false);
-    if (Token && certification) {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
-          {
-            major: sMajor,
-            postgradu: sPostGradu,
-            professor: sProfessor,
-            lab: sLab,
-            field: sField,
-            keyword: sKeyword,
-            certification: certification,
-          },
-          {
-            headers,
-          },
-        )
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR202') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+    
     }
-    if (socialId && phoneNumber && nickName && certification) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
-          socialId: socialId,
-          phoneNumber: phoneNumber,
-          nickName: nickName,
-          marketingReceive: marketingReceive,
-          major: sMajor,
-          postgradu: sPostGradu,
-          professor: sProfessor,
-          lab: sLab,
-          field: sField,
-          keyword: sKeyword,
-          certification: certification,
-        })
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR202') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  };
 
   return (
+    <>
+    <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+      <BackHeader headerText='정보입력'/>
+    </div>
     <SeniorInfoPageContainer>
+      <SICBox>
       <h3>선배 정보를 입력해주세요</h3>
-      <div>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
+      <div id ='info-content-msg'>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
+      </SICBox>
+      <h3>대학원 정보를 알려주세요.</h3>
       <BtnContainer>
         <ModalBtn
-          btnText={sPostGradu ? sPostGradu : '대학원*'}
+        type='seniorInfo'
+          btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
           modalHandler={modalHandler}
           onClick={() => {
             setModalType('postgradu');
           }}
         />
         <ModalBtn
-          btnText={sMajor ? sMajor : '학과*'}
+        type='seniorInfo'
+          btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
           modalHandler={modalHandler}
           onClick={() => {
             setModalType('major');
-          }}
-        />
-        <TextForm placeholder="연구실명*" targetAtom="lab" />
-        <TextForm placeholder="지도 교수님*" targetAtom="professor" />
-        <ModalBtn
-          btnText={sField ? sField : '연구분야*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('field');
-          }}
-        />
-        <ModalBtn
-          btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('keyword');
           }}
         />
         {flag && (
@@ -213,7 +114,7 @@ function SeniorInfoPage() {
             textColor="#FF0000"
           />
         )}
-        <button onClick={handleSubmit}>완료</button>
+        <button onClick={handleSubmit}>다음</button>
       </BtnContainer>
       {modal && portalElement
         ? createPortal(
@@ -222,6 +123,7 @@ function SeniorInfoPage() {
           )
         : null}
     </SeniorInfoPageContainer>
+    </>
   );
 }
 
@@ -230,6 +132,25 @@ export default SeniorInfoPage;
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
+`;
+const SICBox = styled.div`
+margin-top: 1rem;
+  width: 95%;
+height: 5.9375rem;
+flex-shrink: 0;
+border-radius: 1rem;
+background: #F8F9FA;
+padding: 1.56rem 1rem;
+margin-left: 0.56rem;
+#info-content-msg{
+  color: #868E96;
+font-family: Pretendard;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 1.225rem */
+letter-spacing: -0.03125rem;
+}
 `;
 
 const BtnContainer = styled.div`
