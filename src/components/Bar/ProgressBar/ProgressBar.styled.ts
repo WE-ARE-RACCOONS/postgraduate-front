@@ -10,7 +10,7 @@ export const StepperContainer = styled.div`
     width: 0rem;
     height: 0.5rem;
     background-color: #2fc4b2;
-    transition: width 1s ease;
+    // transition: width 1s ease;
   }
 
   .active {

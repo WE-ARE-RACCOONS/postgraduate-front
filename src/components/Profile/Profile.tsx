@@ -9,14 +9,24 @@ import {
   ProfileNickname,
   ProfileButton,
   ProfileWarn,
+  ImageBox,
 } from './Profile.styled';
 import { ProfileProps } from '@/types/profile/profile';
 import SingleValidator from '../Validator/SingleValidator';
 
 function Profile(props: ProfileProps) {
+  const profile = props.profile;
   return (
     <ProfileBox>
-      <Image src={'/user.png'} alt="profile image" width={32} height={32} />
+      <ImageBox>
+        <Image
+          src={profile}
+          alt="profile image"
+          width={52}
+          height={52}
+          style={{ borderRadius: '90%' }}
+        />
+      </ImageBox>
       <ProfileInfo>
         <ProfileName>
           <ProfileNickname>{props.nickName}</ProfileNickname>
