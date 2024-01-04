@@ -165,14 +165,15 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
   }
 
   #prev-btn {
-    width: 7.25rem;
+    width: 34%;
     height: 3.375rem;
     background-color: #ADB5BD;
   }
 
   #next-btn {
-    width: 13.19rem;
+    width: 62%;
     height: 3.375rem;
+    background-color: #F1F3F5;
   }
 `
 
