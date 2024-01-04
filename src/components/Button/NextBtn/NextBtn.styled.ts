@@ -20,6 +20,7 @@ border: none;
 margin: 0 0.5rem;
 `
 export const BtnStylePrev = styled.button`
+margin-top: 0.75rem;
 color: #868E96;
 text-align: center;
 font-family: Pretendard;

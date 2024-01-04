@@ -22,11 +22,11 @@ function SignUpDonePage() {
   return (
     <div>
       <BackHeader headerText='회원가입'/>
-      <div style={{textAlign:'center',marginTop:'7.5rem'}}>
+      <div style={{textAlign:'center',marginTop:'6.5rem'}}>
       <Image
         src={party_popper}
         width={172}
-        height={172}
+        height={164}
         style={{marginBottom:'0.46rem'}}
         alt="회원가입 축하 이미지"
       />
@@ -52,7 +52,7 @@ function SignUpDonePage() {
       )}
       </div>
       {userType == 'junior' && (
-        <div>
+        <div style={{marginTop:'21%',textAlign:'center'}}>
           <NextBtn kind="route" url="/" btnText="대학원 선배 둘러보기" />
           <NextBtn kind="prev" url={prevPath} btnText="이전 페이지로 가기" />
         </div>
