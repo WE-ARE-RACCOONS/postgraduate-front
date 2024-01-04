@@ -11,7 +11,7 @@ import {
   matchingReceiveAtom,
 } from '@/stores/matching';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import CheckBox from '@/components/checkbox';
+import CheckBox from '@/components/Checkbox';
 
 function MatchingInfoPage() {
   const setDesiredSchool = useSetAtom(desiredSchool);

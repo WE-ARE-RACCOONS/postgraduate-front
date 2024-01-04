@@ -1,5 +1,5 @@
 'use client';
-import CheckBox from '../checkbox/Checkbox';
+import CheckBox from '../Checkbox/Checkbox';
 import React, { useState, useEffect } from 'react';
 import {
   TermsContainer,
