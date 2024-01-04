@@ -4,6 +4,7 @@ import TimeListBox from "@/components/Box/TimeListBox";
 import BackHeader from "@/components/Header/BackHeader";
 import { MENTORING_SCHEDULE } from "@/constants/form/cMentoringApply";
 import useAuth from "@/hooks/useAuth";
+import { TimeObj } from "@/types/scheduler/scheduler";
 import axios from "axios";
 import { usePathname } from "next/navigation";
 import { useEffect, useState } from "react";
@@ -38,7 +39,7 @@ function MentoringApplySchedulePage() {
   }, []);
 
   return(
-    <MASContainer>
+    <MASContainer $timeArr={timeArr}>
       <BackHeader headerText="멘토링 일정 제안" />
       <ProgressBar activeNum={1} />
       <div id="senior-schedule-title-wrapper">
@@ -50,11 +51,17 @@ function MentoringApplySchedulePage() {
       <div id="time-list-box-wrapper">
         <TimeListBox timeArr={timeArr} />
       </div>
+      <div id="senior-select-title-wrapper">
+        <MASTitle>{MENTORING_SCHEDULE.selectTitle}</MASTitle>
+      </div>
+      <div id="senior-select-subtitle-wrapper">
+        <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
+      </div>
     </MASContainer>
   )
 }
 
-const MASContainer = styled.div`
+const MASContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
   width: inherit;
   height: 100%;
   position: relative;
@@ -83,6 +90,18 @@ const MASContainer = styled.div`
     top: 8.625rem;
     left: 50%;
     transform: translateX(-50%);
+  }
+
+  #senior-select-title-wrapper {
+    position: absolute;
+    top: calc(${props => props.$timeArr ? `${props.$timeArr.length} * 1.5rem + 16.125rem` : '20.625rem'});
+    left: 0.5rem;
+  }
+
+  #senior-select-subtitle-wrapper {
+    position: absolute;
+    top: calc(${props => props.$timeArr ? `${props.$timeArr.length} * 1.5rem + 17.625rem` : '22.125rem'});
+    left: 0.5rem;
   }
 `
 
