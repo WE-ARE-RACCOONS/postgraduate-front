@@ -1,11 +1,15 @@
-import BackHeader from "@/components/Header/BackHeader";
 import { SelectCalendarContainer, SelectCalendarHeader } from "./SelectCalendar.styled";
 import Image from "next/image";
 import back_arrow from '../../../../public/arrow.png';
+import Calendar from 'react-calendar';
+import { useState } from "react";
+import { SelectedDate } from "@/types/content/selectCalendar";
 
 function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
+  const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
+
   return(
-    <SelectCalendarContainer>
+    <SelectCalendarContainer onClick={(e) => e.stopPropagation()}>
       <SelectCalendarHeader>
         <Image
           id="back-arrow-img"
@@ -15,6 +19,7 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
         />
         <div id="header-text">일정 선택</div>
       </SelectCalendarHeader>
+      <Calendar onChange={setSelectedDate} value={selectedDate} />
     </SelectCalendarContainer>
   )
 }
