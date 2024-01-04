@@ -28,4 +28,5 @@ function CommonInfoPage() {
   );
 }
 
+
 export default CommonInfoPage;
