@@ -12,7 +12,6 @@ function MenuBar(props: MenubarProps) {
   const router = useRouter();
   const { getAccessToken, getUserType } = useAuth();
   const token = getAccessToken();
-  console.log(token);
   const userType = getUserType();
   const handleClick = () => {
     props.modalHandler();
