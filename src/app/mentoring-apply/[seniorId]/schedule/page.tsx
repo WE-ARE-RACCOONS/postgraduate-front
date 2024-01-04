@@ -7,7 +7,7 @@ import { MENTORING_SCHEDULE } from "@/constants/form/cMentoringApply";
 import useAuth from "@/hooks/useAuth";
 import { TimeObj } from "@/types/scheduler/scheduler";
 import axios from "axios";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 
@@ -18,6 +18,7 @@ function MentoringApplySchedulePage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
+  const router = useRouter();
 
   useEffect(() => {
     const accessTkn = getAccessToken();
@@ -64,7 +65,7 @@ function MentoringApplySchedulePage() {
         <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} />
       </div>
       <MASBtnContainer $timeArr={timeArr}>
-        <button id="prev-btn" className="mas-btn">이전</button>
+        <button id="prev-btn" className="mas-btn" onClick={() => {router.back()}}>이전</button>
         <button id="next-btn" className="mas-btn">다음</button>
       </MASBtnContainer>
     </MASContainer>
