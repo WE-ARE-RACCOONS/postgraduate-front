@@ -18,7 +18,7 @@ import { sAbleTime } from '@/stores/senior';
 import { TimeObj } from '@/types/scheduler/scheduler';
 
 function AddTime({ modalHandler }: { modalHandler: () => void }) {
-  const hourOptions = Array.from({ length: 15 }, (_, index) => index + 9);
+  const hourOptions = Array.from({ length: 16 }, (_, index) => index + 9);
   const minOptions = ['00', '30'];
   const [inputWeek, setInputWeek] = useState('');
   const [startHour, setStartHour] = useState('0');
@@ -168,7 +168,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
       </AddTimeAbleBox>
       {flag && (
         <ValidatorBox>
-          <SingleValidator msg={alertMsg} textColor="#ff0000" />
+          <SingleValidator msg={alertMsg} textColor="#FF3347" />
         </ValidatorBox>
       )}
       <button id="add-time-submit-btn" onClick={submitHandler}>

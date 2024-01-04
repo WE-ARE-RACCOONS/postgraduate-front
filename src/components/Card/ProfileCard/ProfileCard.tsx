@@ -14,7 +14,7 @@ function ProfileCard(props: ProfileCardProps) {
     <ProfileCardContainer>
       <div id="profile-img-wrapper">
         <RoundedImage
-          imgSrc={props.profile ? props.profile : user_icon}
+          imgSrc={props.profile.includes('http') ? props.profile : user_icon}
           altMsg="대학원 선배 프로필 이미지"
         />
       </div>

@@ -9,7 +9,7 @@ const nextConfig = {
     swcPlugins: [['@swc-jotai/react-refresh', {}]],
   },
   images: {
-    domains: ['post-graduate.s3.ap-northeast-2.amazonaws.com'],
+    domains: [`${process.env.NEXT_PUBLIC_S3_URL}`],
   },
 };
 
