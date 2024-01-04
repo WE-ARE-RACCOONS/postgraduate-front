@@ -17,15 +17,13 @@ function MatchingForm(props: MatchingFormProps) {
       <MatchingFormHeader>
         <MatchingFormTitle>
           <div id="matching-form-title">{props.title}</div>
-          <div id="matching-form-isrequired">
-            {props.isRequired ? '(필수)' : '(선택)'}
-          </div>
         </MatchingFormTitle>
         <div id="matching-form-char-count">
-          {props.charCount}/{props.maxLength}자
+          {props.charCount}/{props.maxLength}
         </div>
       </MatchingFormHeader>
       <textarea
+        style={{ resize: 'none' }}
         name="matching-info"
         id="matching-info-form"
         placeholder={`${props.placeholder}`}

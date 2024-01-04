@@ -60,7 +60,9 @@ function SignUpBtn() {
   };
 
   return (
-    <SignUpBtnContainer onClick={handleSignUp}>가입하기</SignUpBtnContainer>
+    <SignUpBtnContainer onClick={handleSignUp}>
+      가입완료 하기
+    </SignUpBtnContainer>
   );
 }
 
