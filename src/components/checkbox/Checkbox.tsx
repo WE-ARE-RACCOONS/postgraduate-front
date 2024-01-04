@@ -10,11 +10,22 @@ type CheckboxProps = {
 
 function CheckBox({ checked, onChange }: CheckboxProps) {
   return (
-    <div onClick={() => onChange(!checked)} style={{ cursor: 'pointer',marginRight:'0.56rem' }}>
+    <div
+      onClick={() => onChange(!checked)}
+      style={{ cursor: 'pointer', marginRight: '0.56rem' }}
+    >
       {checked ? (
-        <img src={checkedIcon.src} style={{ width: '1.5rem', height: '1.5rem' }} alt="Checked Icon" />
+        <img
+          src={checkedIcon.src}
+          style={{ width: '1.5rem', height: '1.5rem' }}
+          alt="Checked Icon"
+        />
       ) : (
-        <img src={uncheckedIcon.src} style={{ width: '1.5rem', height: '1.5rem' }} alt="Unchecked Icon" />
+        <img
+          src={uncheckedIcon.src}
+          style={{ width: '1.5rem', height: '1.5rem' }}
+          alt="Unchecked Icon"
+        />
       )}
     </div>
   );

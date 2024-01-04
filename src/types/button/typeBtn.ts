@@ -5,8 +5,8 @@ export interface TypeBtnProps {
   iconText: string;
   typeDesc: string;
   typeDescS?: string;
-  typeDescColor?:string;
+  typeDescColor?: string;
   userType: userType;
   iconSrc?: string;
-  iconAlt?:string;
+  iconAlt?: string;
 }

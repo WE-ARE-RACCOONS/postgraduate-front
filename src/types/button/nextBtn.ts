@@ -1,4 +1,4 @@
-export type btnKind = 'next' | 'route'|'prev';
+export type btnKind = 'next' | 'route' | 'prev';
 
 export interface NextBtnProps {
   kind: btnKind;

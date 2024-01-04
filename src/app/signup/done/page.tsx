@@ -21,38 +21,38 @@ function SignUpDonePage() {
 
   return (
     <div>
-      <BackHeader headerText='회원가입'/>
-      <div style={{textAlign:'center',marginTop:'6.5rem'}}>
-      <Image
-        src={party_popper}
-        width={172}
-        height={164}
-        style={{marginBottom:'0.46rem'}}
-        alt="회원가입 축하 이미지"
-      />
-      {userType == 'junior' && (
-        <>
-          <h3>회원가입 완료!</h3>
-          <DoneFont>
-            대학원, 연구실 입학을 도와줄
-            <br />
-            선배들을 찾아 볼까요?
-          </DoneFont>
-        </>
-      )}
-      {userType == 'senior' && (
-        <>
-          <h3>선배 회원가입이 완료됐어요</h3>
-          <DoneFont>
-            영업일 기준 48시간 안에 선배 회원으로 승인돼요
-            <br />
-            승인되면 카카오 알림톡으로 알려드릴게요!
-          </DoneFont>
-        </>
-      )}
+      <BackHeader headerText="회원가입" />
+      <div style={{ textAlign: 'center', marginTop: '6.5rem' }}>
+        <Image
+          src={party_popper}
+          width={172}
+          height={164}
+          style={{ marginBottom: '0.46rem' }}
+          alt="회원가입 축하 이미지"
+        />
+        {userType == 'junior' && (
+          <>
+            <h3>회원가입 완료!</h3>
+            <DoneFont>
+              대학원, 연구실 입학을 도와줄
+              <br />
+              선배들을 찾아 볼까요?
+            </DoneFont>
+          </>
+        )}
+        {userType == 'senior' && (
+          <>
+            <h3>선배 회원가입이 완료됐어요</h3>
+            <DoneFont>
+              영업일 기준 48시간 안에 선배 회원으로 승인돼요
+              <br />
+              승인되면 카카오 알림톡으로 알려드릴게요!
+            </DoneFont>
+          </>
+        )}
       </div>
       {userType == 'junior' && (
-        <div style={{marginTop:'21%',textAlign:'center'}}>
+        <div style={{ marginTop: '21%', textAlign: 'center' }}>
           <NextBtn kind="route" url="/" btnText="대학원 선배 둘러보기" />
           <NextBtn kind="prev" url={prevPath} btnText="이전 페이지로 가기" />
         </div>
@@ -91,15 +91,15 @@ function SignUpDonePage() {
 }
 
 const DoneFont = styled.div`
-color: #868E96;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
-margin-top: 0.88rem;
+  color: #868e96;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.4rem */
+  letter-spacing: -0.03125rem;
+  margin-top: 0.88rem;
 `;
 
 export default SignUpDonePage;

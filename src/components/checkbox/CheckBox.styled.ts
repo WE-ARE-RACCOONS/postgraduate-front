@@ -9,6 +9,5 @@ export const StyledInput = styled.input`
   margin-right: 0.56rem;
 
   &:checked {
-  
   }
 `;

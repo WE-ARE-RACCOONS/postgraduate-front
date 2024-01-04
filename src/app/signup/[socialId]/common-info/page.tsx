@@ -12,10 +12,10 @@ function CommonInfoPage() {
 
   return (
     <div>
-      <div style={{boxShadow:'0px 4px 8px 0px rgba(0, 0, 0, 0.10)'}}>
-      <BackHeader headerText='회원가입'/>
+      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+        <BackHeader headerText="회원가입" />
       </div>
-      <h3 style={{margin:'1.5rem 1rem'}}>회원 정보를 입력해 주세요.</h3>
+      <h3 style={{ margin: '1.5rem 1rem' }}>회원 정보를 입력해 주세요.</h3>
       <NicknameForm />
       <PhoneNumForm />
       <ServiceCondition />
@@ -27,6 +27,5 @@ function CommonInfoPage() {
     </div>
   );
 }
-
 
 export default CommonInfoPage;
