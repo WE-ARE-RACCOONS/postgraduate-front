@@ -27,8 +27,9 @@ function MentoringApplyQuestionPage() {
   }, [subject, question]);
 
   const clickHandler = () => {
-    if (subject && question) router.push(`/mentoring-apply/${seniorId}/schedule`);
-  }
+    if (subject && question)
+      router.push(`/mentoring-apply/${seniorId}/schedule`);
+  };
 
   return (
     <MAQContainer>
@@ -67,7 +68,9 @@ function MentoringApplyQuestionPage() {
           alertMsg={MENTORING_QUESTION.questionAlert}
         />
       </div>
-      <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>다음으로</MAQNextBtn>
+      <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>
+        다음으로
+      </MAQNextBtn>
     </MAQContainer>
   );
 }

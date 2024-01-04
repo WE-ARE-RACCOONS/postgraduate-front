@@ -1,3 +1,3 @@
-import TimeListBox from "./TimeListBox";
+import TimeListBox from './TimeListBox';
 
 export default TimeListBox;

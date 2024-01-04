@@ -1,19 +1,36 @@
-import { WEEK_ARRAY } from "@/constants/form/cProfileForm";
-import { TimeDay, TimeEl, TimeListArray, TimeListContainer, TimeTerm, WeekEl, WeekListContainer } from "./TimeListBox.styled";
-import { TimeListBoxProps } from "@/types/box/timeListBox";
+import { WEEK_ARRAY } from '@/constants/form/cProfileForm';
+import {
+  TimeDay,
+  TimeEl,
+  TimeListArray,
+  TimeListContainer,
+  TimeTerm,
+  WeekEl,
+  WeekListContainer,
+} from './TimeListBox.styled';
+import { TimeListBoxProps } from '@/types/box/timeListBox';
 
 function TimeListBox(props: TimeListBoxProps) {
   const formatTime = (start: string, end: string) => {
     const startArr = start.split(':');
     const endArr = end.split(':');
-    return `${startArr[0]}시${startArr[1] == '00' ? '' : ` ${startArr[1]}분`} ~ ${endArr[0]}시${endArr[1] == '00' ? '' : ` ${endArr[1]}분`}`;
-  }
+    return `${startArr[0]}시${
+      startArr[1] == '00' ? '' : ` ${startArr[1]}분`
+    } ~ ${endArr[0]}시${endArr[1] == '00' ? '' : ` ${endArr[1]}분`}`;
+  };
 
-  return(
+  return (
     <TimeListContainer>
       <WeekListContainer>
         {WEEK_ARRAY.map((el, idx) => (
-          <WeekEl key={idx} className={(props.timeArr.map(item => item.day)).includes(el) ? 'active' : ''}>{el}</WeekEl>
+          <WeekEl
+            key={idx}
+            className={
+              props.timeArr.map((item) => item.day).includes(el) ? 'active' : ''
+            }
+          >
+            {el}
+          </WeekEl>
         ))}
       </WeekListContainer>
       <TimeListArray>
@@ -25,7 +42,7 @@ function TimeListBox(props: TimeListBoxProps) {
         ))}
       </TimeListArray>
     </TimeListContainer>
-  )
+  );
 }
 
 export default TimeListBox;
