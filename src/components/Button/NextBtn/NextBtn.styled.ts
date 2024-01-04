@@ -19,3 +19,17 @@ line-height: normal;
 border: none;
 margin: 0 0.5rem;
 `
+export const BtnStylePrev = styled.button`
+color: #868E96;
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 1.4rem */
+letter-spacing: -0.03125rem;
+text-decoration-line: underline;
+border: none;
+background: none;
+
+`
