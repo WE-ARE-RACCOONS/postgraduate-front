@@ -7,6 +7,7 @@ import ProfileModify from '@/components/Content/ProfileModify';
 import SmentoringAccept from '@/components/Mentoring/SmentoringAccept/SmentoringAccept';
 import SInfoModify from '@/components/Content/SInfoModify';
 import AddTime from '@/components/Content/AddTime';
+import SelectCalendar from '@/components/Content/SelectCalendar';
 
 function FullModal(props: FullModalProps) {
   return (
@@ -31,6 +32,9 @@ function FullModal(props: FullModalProps) {
       )}
       {props.modalType == 'senior-mentoring-time' && (
         <AddTime modalHandler={props.modalHandler} />
+      )}
+      {props.modalType == 'select-date-calendar' && (
+        <SelectCalendar modalHandler={props.modalHandler} />
       )}
     </FullModalContainer>
   );

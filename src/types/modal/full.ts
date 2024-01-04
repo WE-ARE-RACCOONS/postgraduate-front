@@ -6,7 +6,8 @@ export type FullModalType =
   | 'profile-modify'
   | 'accept-mentoring'
   | 'senior-info-modify'
-  | 'senior-mentoring-time';
+  | 'senior-mentoring-time'
+  | 'select-date-calendar';
 
 export interface FullModalProps {
   modalType: FullModalType;
