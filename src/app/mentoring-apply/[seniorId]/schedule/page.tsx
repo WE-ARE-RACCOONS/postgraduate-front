@@ -63,6 +63,10 @@ function MentoringApplySchedulePage() {
         <SelectTime placeholder={`두${MENTORING_SCHEDULE.selectPlaceholder}`} />
         <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} />
       </div>
+      <MASBtnContainer $timeArr={timeArr}>
+        <button id="prev-btn" className="mas-btn">이전</button>
+        <button id="next-btn" className="mas-btn">다음</button>
+      </MASBtnContainer>
     </MASContainer>
   )
 }
@@ -137,6 +141,38 @@ const MASSubtitle = styled.div`
   line-height: 140%;
   letter-spacing: -0.5px;
   color: #868E96;
+`
+
+const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
+  width: 93%;
+  height: 3.375rem;
+  position: relative;
+  margin-top: calc(${props => props.$timeArr ? `${props.$timeArr.length} * 1.5rem + 34.875rem` : '39.375rem'});
+  margin-left: 1rem;
+  margin-bottom: 1.375rem;
+  display: flex;
+  justify-content: space-between;
+
+  .mas-btn {
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    font-family: Pretendard;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+  }
+
+  #prev-btn {
+    width: 7.25rem;
+    height: 3.375rem;
+    background-color: #ADB5BD;
+  }
+
+  #next-btn {
+    width: 13.19rem;
+    height: 3.375rem;
+  }
 `
 
 export default MentoringApplySchedulePage;

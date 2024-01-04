@@ -15,7 +15,7 @@ export const SelectTimeContainer = styled.div`
 `
 
 export const SelectTimeContent = styled.div`
-  width: 19.44rem;
+  width: 90%;
   height: 1.5rem;
   display: flex;
   justify-content: space-between;
