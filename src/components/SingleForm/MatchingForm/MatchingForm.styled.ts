@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
 export const MatchingFormContainer = styled.div`
-  width: 20.5rem;
   margin-bottom: 1rem;
 
   #matching-info-form {
-    width: 20.5rem;
+    width: 97%;
     display: flex;
     height: 5rem;
     padding: 0.5rem 0.75rem;
@@ -34,7 +33,7 @@ export const MatchingFormContainer = styled.div`
 `;
 
 export const MatchingFormHeader = styled.div`
-  width: 20.5rem;
+  width: 97%;
   display: flex;
   justify-content: space-between;
 
