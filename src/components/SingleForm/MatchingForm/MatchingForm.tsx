@@ -23,6 +23,7 @@ function MatchingForm(props: MatchingFormProps) {
         </div>
       </MatchingFormHeader>
       <textarea
+       style={{resize: 'none'}}
         name="matching-info"
         id="matching-info-form"
         placeholder={`${props.placeholder}`}

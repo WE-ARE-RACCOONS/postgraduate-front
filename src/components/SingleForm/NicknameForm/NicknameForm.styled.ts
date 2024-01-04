@@ -10,7 +10,6 @@ export const NicknameTotalContainer = styled.div`
 `;
 
 export const NicknameContainer = styled.div`
-  width: 20.5rem;
 `;
 export const NameFont = styled.div`
   color: #212529;
@@ -23,7 +22,8 @@ export const NameFont = styled.div`
 `;
 export const InputBox = styled.div<NicknameContainerProps>`
   display: flex;
-  width: 21.2rem;
+  justify-content: space-between;
+  width: 97%;
   height: 3.1875rem;
   flex-shrink: 0;
   border-radius: 0.5rem;
@@ -55,5 +55,6 @@ export const InputBtn = styled.button`
   font-weight: 700;
   line-height: 1.125rem; /* 150% */
   letter-spacing: -0.0375rem;
-  margin: 0.7rem 0.3rem;
+  margin: 0.6rem 0.3rem;
+  margin-right: 1rem;
 `;

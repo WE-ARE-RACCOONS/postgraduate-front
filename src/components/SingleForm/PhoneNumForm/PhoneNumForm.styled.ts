@@ -3,22 +3,21 @@ interface PhoneNumContainerProps {
   flag: boolean;
 }
 export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
-  width: 20.5rem;
-  height: 1.625rem;
   display: flex;
 
   input {
-    width: 21.4375rem;
+    border: 1px solid #C2CEDE;
+    width: 97%;
     height: 3.1875rem;
     flex-shrink: 0;
     border-radius: 0.5rem;
-    border: 1px solid #c2cede;
     padding: 0.5rem 1rem;
     background: #fff;
     border: ${(props) =>
       props.flag ? '1px solid #FF3347' : '1px solid initial'};
   }
   #phone-num-input {
+    
   }
 `;
 
