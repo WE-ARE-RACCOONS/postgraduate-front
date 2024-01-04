@@ -3,33 +3,46 @@ import ProgressBar from "@/components/Bar/ProgressBar";
 import TimeListBox from "@/components/Box/TimeListBox";
 import BackHeader from "@/components/Header/BackHeader";
 import { MENTORING_SCHEDULE } from "@/constants/form/cMentoringApply";
+import useAuth from "@/hooks/useAuth";
+import axios from "axios";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 
 function MentoringApplySchedulePage() {
-  const timeArr = [
-    {
-      "day": "월",
-      "startTime": "18:30",
-      "endTime": "23:30"
-    },
-    {
-      "day": "화",
-      "startTime": "18:00",
-      "endTime": "22:00"
-    },
-    {
-      "day": "수",
-      "startTime": "18:00",
-      "endTime": "24:00"
+  const [sNickname, setSNickname] = useState('');
+  const [timeArr, setTimeArr] = useState([]);
+  const { getAccessToken } = useAuth();
+  const currentPath = usePathname();
+  const pathArr = currentPath.split('/');
+  const seniorId = pathArr[2];
+
+  useEffect(() => {
+    const accessTkn = getAccessToken();
+    if(accessTkn) {
+      axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, {
+        headers: {
+          Authorization: `Bearer ${accessTkn}`
+        }
+      }).then((response) => {
+        const res = response.data;
+
+        if(res.code == "SNR200") {
+          setSNickname(res.data.nickName);
+          setTimeArr(res.data.times);
+        }
+      }).catch((err) => {
+        console.error(err);
+      })
     }
-  ]
+  }, []);
 
   return(
     <MASContainer>
       <BackHeader headerText="멘토링 일정 제안" />
       <ProgressBar activeNum={1} />
       <div id="senior-schedule-title-wrapper">
-        <MASTitle>{MENTORING_SCHEDULE.sScheduleTitle}</MASTitle>
+        <MASTitle>{sNickname}{MENTORING_SCHEDULE.sScheduleTitle}</MASTitle>
       </div>
       <div id="senior-schedule-subtitle-wrapper">
         <MASSubtitle>{MENTORING_SCHEDULE.sScheduleSubtitle}</MASSubtitle>
