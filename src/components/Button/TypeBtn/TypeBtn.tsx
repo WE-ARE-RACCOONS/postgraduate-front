@@ -26,6 +26,7 @@ function TypeBtn(props: TypeBtnProps) {
         {props.typeDesc}
         <div style={{ display: 'flex' }}>
           <div id="tb-color">{props.typeDescColor}</div>
+          &nbsp;
           {props.typeDescS}
         </div>
       </TypeBtnFont>
