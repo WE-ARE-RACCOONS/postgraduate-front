@@ -6,7 +6,7 @@ export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
   display: flex;
 
   input {
-    border: 1px solid #C2CEDE;
+    border: 1px solid #c2cede;
     width: 97%;
     height: 3.1875rem;
     flex-shrink: 0;
@@ -17,7 +17,6 @@ export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
       props.flag ? '1px solid #FF3347' : '1px solid initial'};
   }
   #phone-num-input {
-    
   }
 `;
 

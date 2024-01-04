@@ -24,7 +24,13 @@ function TypeBtn(props: TypeBtnProps) {
       </TypeBtnIcon>
       <TypeBtnFont>
         {props.typeDesc}
-        <div style={{ display: 'flex',textAlign:'center',justifyContent:'center' }}>
+        <div
+          style={{
+            display: 'flex',
+            textAlign: 'center',
+            justifyContent: 'center',
+          }}
+        >
           <div id="tb-color">{props.typeDescColor}</div>
           &nbsp;
           {props.typeDescS}

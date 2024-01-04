@@ -9,8 +9,7 @@ export const NicknameTotalContainer = styled.div`
   margin-top: 2rem;
 `;
 
-export const NicknameContainer = styled.div`
-`;
+export const NicknameContainer = styled.div``;
 export const NameFont = styled.div`
   color: #212529;
   font-family: Noto Sans JP;

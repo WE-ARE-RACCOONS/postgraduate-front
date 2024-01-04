@@ -14,11 +14,11 @@ export const TypeBtnIconBox = styled.div<{ $choice: boolean }>`
   border: ${(props) => (props.$choice ? ' 2px solid #9F6DF0' : '0')};
   justify-content: center;
   text-align: center;
-  align-items:'center';
+  align-items: 'center';
 `;
 
 export const TypeBtnFont = styled.div`
-padding: 0.4rem;
+  padding: 0.4rem;
   color: #212529;
   text-align: center;
   font-family: Pretendard;
