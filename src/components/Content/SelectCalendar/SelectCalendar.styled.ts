@@ -39,14 +39,6 @@ export const SelectCalendarContainer = styled.div`
       background-color: #fff;
       cursor: pointer;
     }
-
-    .react-calendar__navigation__prev2-button {
-      display: none;
-    }
-
-    .react-calendar__navigation__next2-button {
-      display: none;
-    }
   }
 
   .react-calendar__viewContainer {
