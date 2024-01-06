@@ -5,15 +5,17 @@ import BackHeader from '@/components/Header/BackHeader';
 import SelectTime from '@/components/SelectTime';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 import useAuth from '@/hooks/useAuth';
+import { sAbleMentoringTimeArr } from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
 import axios from 'axios';
+import { useAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function MentoringApplySchedulePage() {
   const [sNickname, setSNickname] = useState('');
-  const [timeArr, setTimeArr] = useState([]);
+  const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
   const { getAccessToken } = useAuth();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
