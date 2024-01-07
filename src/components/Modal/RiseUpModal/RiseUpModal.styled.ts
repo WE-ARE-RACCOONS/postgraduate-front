@@ -5,7 +5,7 @@ export const ModalBackground = styled.div`
   top: 50%;
   background: rgba(0, 0, 0, 0.70);
   transform: translateY(-50%);
-  width: 600px; // 반응형 처리 따로 필요
+  width: 600px;
   height: 100vh;
   z-index: 2;
 
@@ -19,7 +19,7 @@ export const ModalBackground = styled.div`
       opacity: 0;
     }
     to {
-      top: 13.25rem;
+      top: 7.25rem;
       opacity: 1;
     }
   }
