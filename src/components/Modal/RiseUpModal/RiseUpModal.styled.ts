@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const ModalBackground = styled.div`
   position: fixed;
   top: 50%;
+  background: rgba(0, 0, 0, 0.70);
   transform: translateY(-50%);
   width: 600px; // 반응형 처리 따로 필요
   height: 100vh;
@@ -25,12 +26,11 @@ export const ModalBackground = styled.div`
 
   .rise-up-modal {
     width: inherit;
-    height: 31.75rem;
+   height: 37.25rem;
     position: absolute;
-    top: 13.25rem;
+    top: 7.75rem;
     animation: modalAppear 0.5s ease-out;
     border-radius: 1.9rem 1.9rem 0 0;
-    border: 1px solid #000;
     z-index: 1;
     background-color: #fff;
   }

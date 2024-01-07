@@ -1,10 +1,15 @@
 import styled from 'styled-components';
 
 export const TextFieldWrapper = styled.div`
-  width: fit-content;
-  height: fit-content;
+display: flex;
+  width: 90%;
+  height: 3.25rem;
   position: absolute;
-  top: 3.75rem;
+  border-radius: 0.5rem;
+  padding: 0.3rem 1rem;
+  align-items: center;
+background: #F8F9FA;
+  top: 1rem;
   left: 50%;
   transform: translateX(-50%);
 `;
