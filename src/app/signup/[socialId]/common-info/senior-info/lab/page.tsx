@@ -65,17 +65,6 @@ function SeniorInfoPage() {
      * 4. api 호출 성공하면 signup/done 으로 이동
      */
 
-    if (!sPostGradu) {
-      setFlag(true);
-      setEmptyPart('대학원');
-      return;
-    }
-
-    if (!sMajor) {
-      setFlag(true);
-      setEmptyPart('학과');
-      return;
-    }
 
     if (!sLab) {
       setFlag(true);
@@ -88,90 +77,10 @@ function SeniorInfoPage() {
       setEmptyPart('지도 교수님');
       return;
     }
-
-    if (!sField) {
-      setFlag(true);
-      setEmptyPart('연구분야');
-      return;
-    }
-
-    if (!sKeyword) {
-      setFlag(true);
-      setEmptyPart('연구 주제 키워드');
-      return;
-    }
     setFlag(false);
-    if (Token && certification) {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
-          {
-            major: sMajor,
-            postgradu: sPostGradu,
-            professor: sProfessor,
-            lab: sLab,
-            field: sField,
-            keyword: sKeyword,
-            certification: certification,
-          },
-          {
-            headers,
-          },
-        )
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR202') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+    router.push(`/signup/${socialId}/common-info/senior-info/field`)
     }
-    if (socialId && phoneNumber && nickName && certification) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
-          socialId: socialId,
-          phoneNumber: phoneNumber,
-          nickName: nickName,
-          marketingReceive: marketingReceive,
-          major: sMajor,
-          postgradu: sPostGradu,
-          professor: sProfessor,
-          lab: sLab,
-          field: sField,
-          keyword: sKeyword,
-          certification: certification,
-        })
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR202') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  };
+    
 
   return (
     <>
@@ -179,45 +88,10 @@ function SeniorInfoPage() {
       <BackHeader headerText='정보입력'/>
     </div>
     <SeniorInfoPageContainer>
-      <SICBox>
-      <h3>선배 정보를 입력해주세요</h3>
-      <div id ='info-content-msg'>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
-      </SICBox>
+    <h3>연구실 정보를 알려주세요.</h3>
       <BtnContainer>
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('postgradu');
-          }}
-        />
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('major');
-          }}
-        />
-        <TextForm placeholder="연구실명*" targetAtom="lab" />
-        <TextForm placeholder="지도 교수님*" targetAtom="professor" />
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sField ? sField : '연구분야*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('field');
-          }}
-        />
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('keyword');
-          }}
-        />
+        <TextForm placeholder="연구실 이름을 입력해주세요." targetAtom="lab" />
+        <TextForm placeholder="지도교수님 성함을 입력해주세요." targetAtom="professor" />
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
@@ -226,12 +100,6 @@ function SeniorInfoPage() {
         )}
         <button onClick={handleSubmit}>다음</button>
       </BtnContainer>
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
     </SeniorInfoPageContainer>
     </>
   );
