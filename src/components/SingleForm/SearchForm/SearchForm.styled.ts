@@ -22,14 +22,12 @@ export const SearchResultWrapper = styled.div`
   top: 4.6rem;
   left: 50%;
   transform: translateX(-50%);
-  border: 1px solid red;
 `;
 
 export const SearchResult = styled.div`
   width: 19.8rem;
   height: 3.9rem;
   line-height: 3.9rem;
-  border: 1px solid blue;
   display: flex;
   align-items: center;
   margin-left: 3.15rem;
