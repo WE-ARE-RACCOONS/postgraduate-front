@@ -179,29 +179,8 @@ function SeniorInfoPage() {
       <BackHeader headerText='정보입력'/>
     </div>
     <SeniorInfoPageContainer>
-      <SICBox>
-      <h3>선배 정보를 입력해주세요</h3>
-      <div id ='info-content-msg'>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
-      </SICBox>
+      <h3>연구 주제에 대해 알려주세요.</h3>
       <BtnContainer>
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('postgradu');
-          }}
-        />
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('major');
-          }}
-        />
-        <TextForm placeholder="연구실명*" targetAtom="lab" />
-        <TextForm placeholder="지도 교수님*" targetAtom="professor" />
         <ModalBtn
         type='seniorInfo'
           btnText={sField ? sField : '연구분야*'}
