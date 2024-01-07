@@ -45,13 +45,6 @@ function SeniorInfoPage() {
       setFlag(false);
   }, [sPostGradu, sMajor]);
   const handleSubmit = () => {
-    /**
-     * 1. 값 다 들어 있나 확인
-     * 2. 없으면 최초로 없는 값 SingleValidator 띄우고(flag true)
-     * 3. 있으면 회원가입 api 호출 후(flag false로 설정, userType senior로 설정)
-     * 4. api 호출 성공하면 signup/done 으로 이동
-     */
-
     if (!sPostGradu) {
       setFlag(true);
       setEmptyPart('대학원');
@@ -80,7 +73,7 @@ function SeniorInfoPage() {
       <BtnContainer>
       <h3>대학원 정보를 알려주세요.</h3>
       <BtnBox>
-      <div>대학원 *</div>
+      <MBtnFont>대학원&nbsp;<div id = 'font-color'>*</div></MBtnFont>
         <ModalBtn
         type='seniorInfo'
           btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
@@ -91,7 +84,7 @@ function SeniorInfoPage() {
         />
         </BtnBox>
         <BtnBox>
-        <div>학과 *</div>
+        <MBtnFont>학과&nbsp;<div id = 'font-color'>*</div></MBtnFont>
         <ModalBtn
         type='seniorInfo'
           btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
@@ -107,8 +100,8 @@ function SeniorInfoPage() {
             textColor="#FF0000"
           />
         )}
-        <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
       </BtnContainer>
+      <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
       {modal && portalElement
         ? createPortal(
             <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
@@ -126,6 +119,24 @@ const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
 `;
+const MBtnFont = styled.div`
+  display: flex;
+  color: #212529;
+font-family: Noto Sans JP;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  #font-color{
+    color: #00A0E1;
+font-family: Noto Sans JP;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+
+  }
+`
 const BtnBox = styled.div`
   margin-top: 1rem;
 `
@@ -154,4 +165,5 @@ const BtnContainer = styled.div`
 margin-left: 1rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 8rem;
 `;
