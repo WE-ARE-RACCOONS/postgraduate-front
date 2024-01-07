@@ -77,8 +77,10 @@ function SeniorInfoPage() {
       <h3>선배 정보를 입력해주세요</h3>
       <div id ='info-content-msg'>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
       </SICBox>
-      <h3>대학원 정보를 알려주세요.</h3>
       <BtnContainer>
+      <h3>대학원 정보를 알려주세요.</h3>
+      <BtnBox>
+      <div>대학원 *</div>
         <ModalBtn
         type='seniorInfo'
           btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
@@ -87,6 +89,9 @@ function SeniorInfoPage() {
             setModalType('postgradu');
           }}
         />
+        </BtnBox>
+        <BtnBox>
+        <div>학과 *</div>
         <ModalBtn
         type='seniorInfo'
           btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
@@ -95,13 +100,14 @@ function SeniorInfoPage() {
             setModalType('major');
           }}
         />
+        </BtnBox>
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
             textColor="#FF0000"
           />
         )}
-        <button onClick={handleSubmit}>다음</button>
+        <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
       </BtnContainer>
       {modal && portalElement
         ? createPortal(
@@ -120,7 +126,11 @@ const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
 `;
+const BtnBox = styled.div`
+  margin-top: 1rem;
+`
 const SICBox = styled.div`
+margin-bottom: 1.5rem;
 margin-top: 1rem;
   width: 95%;
 height: 5.9375rem;
@@ -141,6 +151,7 @@ letter-spacing: -0.03125rem;
 `;
 
 const BtnContainer = styled.div`
+margin-left: 1rem;
   display: flex;
   flex-direction: column;
 `;

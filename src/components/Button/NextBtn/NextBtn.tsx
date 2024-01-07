@@ -22,11 +22,11 @@ function NextBtn(props: NextBtnProps) {
     }
 
     if (props.kind == 'route') {
-      router.push(props.url);
+      router.push(props.url ? props.url :'');
       return;
     }
     if (props.kind == 'prev') {
-      router.push(props.url);
+      router.push(props.url ? props.url :'');
       return;
     }
   };
