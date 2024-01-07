@@ -88,25 +88,51 @@ function SeniorInfoPage() {
       <BackHeader headerText='정보입력'/>
     </div>
     <SeniorInfoPageContainer>
-    <h3>연구실 정보를 알려주세요.</h3>
       <BtnContainer>
+      <h3>연구실 정보를 알려주세요.</h3>
+      <BtnBox>
+      <MBtnFont>지도교수님&nbsp;<div id = 'font-color'>*</div></MBtnFont>
         <TextForm placeholder="연구실 이름을 입력해주세요." targetAtom="lab" />
+        </BtnBox>
+        <BtnBox>
+        <MBtnFont>연구실명&nbsp;<div id = 'font-color'>*</div></MBtnFont>
         <TextForm placeholder="지도교수님 성함을 입력해주세요." targetAtom="professor" />
+        </BtnBox>
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
             textColor="#FF0000"
           />
         )}
-        <button onClick={handleSubmit}>다음</button>
       </BtnContainer>
+      <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
     </SeniorInfoPageContainer>
     </>
   );
 }
 
 export default SeniorInfoPage;
+const MBtnFont = styled.div`
+  display: flex;
+  color: #212529;
+font-family: Noto Sans JP;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+  #font-color{
+    color: #00A0E1;
+font-family: Noto Sans JP;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
 
+  }
+`
+const BtnBox = styled.div`
+  margin-top: 1rem;
+`
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
@@ -132,6 +158,9 @@ letter-spacing: -0.03125rem;
 `;
 
 const BtnContainer = styled.div`
+margin-bottom: 15rem;
+margin-top:1.25rem;
+margin-left: 1rem;
   display: flex;
   flex-direction: column;
 `;
