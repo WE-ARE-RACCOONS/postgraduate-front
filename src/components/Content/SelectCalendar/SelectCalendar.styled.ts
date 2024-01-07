@@ -7,7 +7,6 @@ export const SelectCalendarContainer = styled.div`
 
   .react-calendar {
     width: inherit;
-    height: 18.5rem;
     font-family: Pretendard;
   }
 
@@ -99,5 +98,31 @@ export const SelectCalendarHeader = styled.div`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+`
+
+export const SelectCalendarTimeContainer = styled.div`
+  width: 95%;
+  margin: 0 auto;
+  margin-top: 3.75rem;
+  
+  #select-calendar-time-text {
+    width: max-content;
+    height: 1.375rem;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: -0.5px;
+  }
+`
+
+export const SelectCalendarTimeList = styled.div`
+  width: 95%;
+
+  .able-time {
+
+  }
+
+  .selected-time {
+
   }
 `

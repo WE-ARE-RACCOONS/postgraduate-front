@@ -7,3 +7,7 @@ export const WEEK_DAY_TO_NUM = {
   '금': 5,
   '토': 6,
 }
+
+export const SELECT_CALENDAR_TEXT = {
+  selectTimeText: '가능한 시간을 선택해주세요.'
+}

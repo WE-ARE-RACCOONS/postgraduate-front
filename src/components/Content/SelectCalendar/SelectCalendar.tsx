@@ -1,4 +1,4 @@
-import { SelectCalendarContainer, SelectCalendarHeader } from "./SelectCalendar.styled";
+import { SelectCalendarContainer, SelectCalendarHeader, SelectCalendarTimeContainer } from "./SelectCalendar.styled";
 import Image from "next/image";
 import back_arrow from '../../../../public/arrow.png';
 import Calendar from 'react-calendar';
@@ -6,11 +6,12 @@ import { useEffect, useState } from "react";
 import { SelectedDate } from "@/types/content/selectCalendar";
 import { useAtom } from "jotai";
 import { sAbleMentoringTimeArr } from "@/stores/mentoring";
-import { WEEK_DAY_TO_NUM } from "@/constants/calendar/calendar";
+import { SELECT_CALENDAR_TEXT, WEEK_DAY_TO_NUM } from "@/constants/calendar/calendar";
 
 function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
   const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
+  const [ableTimeList, setAbleTimeList] = useState<Array<{start: string, end: string}>>([]);
   const weekObj = WEEK_DAY_TO_NUM;
 
   /** 30분 단위로 시간 간격을 끊어서 리턴해주는 함수 */
@@ -57,7 +58,7 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
       const weekDay = getKeyByValue(weekObj, selectedDate.getDay());
       timeArr.forEach((el) => {
         if(el.day == weekDay) {
-          console.log(splitTimeRange(el.startTime, el.endTime));
+          setAbleTimeList(splitTimeRange(el.startTime, el.endTime));
         }
       })
     }
@@ -81,6 +82,12 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
         view="month"
         prev2Label={null}
         next2Label={null} />
+      <SelectCalendarTimeContainer>
+        <div id="select-calendar-time-text">{SELECT_CALENDAR_TEXT.selectTimeText}</div>
+        {ableTimeList.map((el, idx) => (
+          <div className="able-time" key={idx}>{el.start} ~ {el.end}</div>
+        ))}
+      </SelectCalendarTimeContainer>
     </SelectCalendarContainer>
   )
 }
