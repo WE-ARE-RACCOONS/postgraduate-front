@@ -38,25 +38,12 @@ function SeniorInfoPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
-
-  const phoneNumber = useAtomValue(phoneNum);
-  const nickName = useAtomValue(nickname);
-  const marketingReceive = useAtomValue(option);
-
-  const certification = useAtomValue(photoUrlAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
-  const sLab = useAtomValue(sLabAtom);
-  const sProfessor = useAtomValue(sProfessorAtom);
-  const sField = useAtomValue(sFieldAtom);
-  const sKeyword = useAtomValue(sKeywordAtom);
-  const headers = {
-    Authorization: `Bearer ${Token}`,
-  };
   useEffect(() => {
-    if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
+    if (sPostGradu && sMajor)
       setFlag(false);
-  }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
+  }, [sPostGradu, sMajor]);
   const handleSubmit = () => {
     /**
      * 1. 값 다 들어 있나 확인
@@ -77,7 +64,7 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    
+    router.push(`/signup/${socialId}/common-info/senior-info/lab`)
     }
 
   return (
