@@ -9,6 +9,7 @@ export const SelectCalendarContainer = styled.div`
 
   .react-calendar {
     width: inherit;
+    border: none;
     font-family: Pretendard;
   }
 
