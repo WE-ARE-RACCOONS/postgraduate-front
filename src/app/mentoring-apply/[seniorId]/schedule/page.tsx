@@ -55,10 +55,16 @@ function MentoringApplySchedulePage() {
 
   useEffect(() => {
     if (firstTime && secondTime && thirdTime) {
-      const nextBtn = document.getElementById('next-btn');
+      const nextBtn = document.querySelector('.next-btn');
       if (nextBtn) nextBtn.classList.add('active');
     }
   }, [firstTime, secondTime, thirdTime]);
+
+  const nextBtnClickHandler = () => {
+    if (firstTime && secondTime && thirdTime) {
+      router.push(`/mentoring-apply/${seniorId}/pay`);
+    }
+  }
 
   return (
     <MASContainer $timeArr={timeArr}>
@@ -96,7 +102,7 @@ function MentoringApplySchedulePage() {
         >
           이전
         </button>
-        <button className="mas-btn next-btn">다음</button>
+        <button className="mas-btn next-btn" onClick={nextBtnClickHandler}>다음</button>
       </MASBtnContainer>
     </MASContainer>
   );
