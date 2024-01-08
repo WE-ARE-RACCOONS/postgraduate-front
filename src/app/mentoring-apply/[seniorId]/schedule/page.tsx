@@ -64,7 +64,7 @@ function MentoringApplySchedulePage() {
     if (firstTime && secondTime && thirdTime) {
       router.push(`/mentoring-apply/${seniorId}/pay`);
     }
-  }
+  };
 
   return (
     <MASContainer $timeArr={timeArr}>
@@ -102,7 +102,9 @@ function MentoringApplySchedulePage() {
         >
           이전
         </button>
-        <button className="mas-btn next-btn" onClick={nextBtnClickHandler}>다음</button>
+        <button className="mas-btn next-btn" onClick={nextBtnClickHandler}>
+          다음
+        </button>
       </MASBtnContainer>
     </MASContainer>
   );
