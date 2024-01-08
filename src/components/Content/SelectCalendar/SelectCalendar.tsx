@@ -42,13 +42,29 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
   }
 
   /** (HH:MM, HH:MM) 형태의 시간을 받아서 "HH시 MM분 ~ HH시 MM분" 형태로 바꿔주는 함수 */
-  function formatTime(start: string, end: string) {
+  function formatTimeKor(start: string, end: string) {
     let formattedStart = start.replace(':', '시 ');
     formattedStart += '분';
     let formattedEnd = end.replace(':', '시 ');
     formattedEnd += '분';
     
     return `${formattedStart} ~ ${formattedEnd}`;
+  }
+
+  /** 날짜 데이터를 YYYY-MM-DD 형태로 만드는 함수 */
+  function formatDateHyphen(date: Date) {
+    const year = date.getFullYear();
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
+  }
+
+  /** 시간 데이터를 HH-MM 형태로 만드는 함수 */
+  function formatTimeHyphen(time: string) {
+    let formattedTime = time.replace('시 ', '-');
+    formattedTime = formattedTime.replace('분', '');
+    return formattedTime;
   }
 
   useEffect(() => {
@@ -91,6 +107,14 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
      * 2. 시간 선택되어 있는지 확인
      * 3. 저장하고 모달 닫기
      */
+    if(selectedDate) {
+      const selectedTime = document.querySelector('.selected-time');
+      if(selectedTime) {
+        const formattedDate = formatDateHyphen(selectedDate as Date);
+        const formattedTime = formatTimeHyphen(selectedTime.innerHTML.slice(0, 8));
+        // console.log(`${formattedDate}-${formattedTime}`);
+      }
+    }
   }
 
   return(
@@ -119,7 +143,7 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
               className={idx == 0 ? 'able-time selected-time' : 'able-time'} 
               key={idx}
               onClick={e => timeClickHandler(e)}
-            >{formatTime(el.start, el.end)}</div>
+            >{formatTimeKor(el.start, el.end)}</div>
           )) : (<div>해당 요일에 가능한 시간이 없습니다.</div>)}
         </SelectCalendarTimeList>
       </SelectCalendarTimeContainer>
