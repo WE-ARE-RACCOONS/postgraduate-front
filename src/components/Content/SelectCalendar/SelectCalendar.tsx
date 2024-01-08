@@ -41,6 +41,16 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
     return Object.keys(object).find(key => object[key] === valueToFind);
   }
 
+  /** (HH:MM, HH:MM) 형태의 시간을 받아서 "HH시 MM분 ~ HH시 MM분" 형태로 바꿔주는 함수 */
+  function formatTime(start: string, end: string) {
+    let formattedStart = start.replace(':', '시 ');
+    formattedStart += '분';
+    let formattedEnd = end.replace(':', '시 ');
+    formattedEnd += '분';
+    
+    return `${formattedStart} ~ ${formattedEnd}`;
+  }
+
   useEffect(() => {
     const prevBtn = document.querySelector('.react-calendar__navigation__prev-button');
     const nextBtn = document.querySelector('.react-calendar__navigation__next-button');
@@ -101,7 +111,7 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
               className={idx == 0 ? 'able-time selected-time' : 'able-time'} 
               key={idx}
               onClick={e => timeClickHandler(e)}
-            >{el.start} ~ {el.end}</div>
+            >{formatTime(el.start, el.end)}</div>
           )) : (<div>해당 요일에 가능한 시간이 없습니다.</div>)}
         </SelectCalendarTimeList>
       </SelectCalendarTimeContainer>
