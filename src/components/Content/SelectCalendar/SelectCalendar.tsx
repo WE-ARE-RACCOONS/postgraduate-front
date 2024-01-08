@@ -1,8 +1,8 @@
-import { SelectCalendarContainer, SelectCalendarHeader, SelectCalendarTimeContainer } from "./SelectCalendar.styled";
+import { SelectCalendarContainer, SelectCalendarHeader, SelectCalendarTimeContainer, SelectCalendarTimeList } from "./SelectCalendar.styled";
 import Image from "next/image";
 import back_arrow from '../../../../public/arrow.png';
 import Calendar from 'react-calendar';
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { SelectedDate } from "@/types/content/selectCalendar";
 import { useAtom } from "jotai";
 import { sAbleMentoringTimeArr } from "@/stores/mentoring";
@@ -56,13 +56,24 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
     if(selectedDate) {
       // @ts-ignore
       const weekDay = getKeyByValue(weekObj, selectedDate.getDay());
+      let ableDay = false;
       timeArr.forEach((el) => {
         if(el.day == weekDay) {
           setAbleTimeList(splitTimeRange(el.startTime, el.endTime));
+          ableDay = true;
         }
       })
+      if(!ableDay) setAbleTimeList([]);
     }
   }, [selectedDate]);
+
+  const timeClickHandler = (e: React.MouseEvent<HTMLDivElement>) => {
+    const timeList = document.querySelectorAll('.able-time');
+    timeList.forEach((el) => {
+      el.className = 'able-time';
+    })
+    e.currentTarget.classList.add('selected-time');
+  }
 
   return(
     <SelectCalendarContainer onClick={(e) => e.stopPropagation()}>
@@ -84,9 +95,15 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
         next2Label={null} />
       <SelectCalendarTimeContainer>
         <div id="select-calendar-time-text">{SELECT_CALENDAR_TEXT.selectTimeText}</div>
-        {ableTimeList.map((el, idx) => (
-          <div className="able-time" key={idx}>{el.start} ~ {el.end}</div>
-        ))}
+        <SelectCalendarTimeList>
+          {(ableTimeList.length > 0) ? ableTimeList.map((el, idx) => (
+            <div 
+              className={idx == 0 ? 'able-time selected-time' : 'able-time'} 
+              key={idx}
+              onClick={e => timeClickHandler(e)}
+            >{el.start} ~ {el.end}</div>
+          )) : (<div>해당 요일에 가능한 시간이 없습니다.</div>)}
+        </SelectCalendarTimeList>
       </SelectCalendarTimeContainer>
     </SelectCalendarContainer>
   )

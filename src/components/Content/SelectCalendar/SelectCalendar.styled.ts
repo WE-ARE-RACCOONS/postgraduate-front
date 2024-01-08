@@ -4,6 +4,8 @@ import 'react-calendar/dist/Calendar.css';
 export const SelectCalendarContainer = styled.div`
   width: inherit;
   height: 100%;
+  overflow-y: scroll;
+  overflow-x: hidden;
 
   .react-calendar {
     width: inherit;
@@ -116,13 +118,24 @@ export const SelectCalendarTimeContainer = styled.div`
 `
 
 export const SelectCalendarTimeList = styled.div`
-  width: 95%;
+  width: 100%;
+  height: max-content;
+  margin-top: 0.625rem;
 
   .able-time {
-
+    width: 100%;
+    height: 3.2rem;
+    border-radius: 8px;
+    background-color: #F8F9FA;
+    margin-bottom: 0.5rem;
+    padding-left: 1rem;
+    line-height: 3.2rem;
+    letter-spacing: -0.5px;
   }
 
   .selected-time {
-
+    color: #fff;
+    font-weight: 700;
+    background-color: #2FC4B2;
   }
 `
