@@ -41,8 +41,7 @@ function SeniorInfoPage() {
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
   useEffect(() => {
-    if (sPostGradu && sMajor)
-      setFlag(false);
+    if (sPostGradu && sMajor) setFlag(false);
   }, [sPostGradu, sMajor]);
   const handleSubmit = () => {
     if (!sPostGradu) {
@@ -57,60 +56,66 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    router.push(`/signup/${socialId}/common-info/senior-info/lab`)
-    }
+    router.push(`/signup/${socialId}/common-info/senior-info/lab`);
+  };
 
   return (
     <>
-    <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
-      <BackHeader headerText='정보입력'/>
-    </div>
-    <SeniorInfoPageContainer>
-      <SICBox>
-      <h3>선배 정보를 입력해주세요</h3>
-      <div id ='info-content-msg'>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
-      </SICBox>
-      <BtnContainer>
-      <h3>대학원 정보를 알려주세요.</h3>
-      <BtnBox>
-      <MBtnFont>대학원&nbsp;<div id = 'font-color'>*</div></MBtnFont>
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('postgradu');
-          }}
-        />
-        </BtnBox>
-        <BtnBox>
-        <MBtnFont>학과&nbsp;<div id = 'font-color'>*</div></MBtnFont>
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('major');
-          }}
-        />
-        </BtnBox>
-        <div style={{marginTop:'0.5rem'}}>
-        {flag && (
-          <SingleValidator
-            msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF3347"
-          />
-        )}
-        </div>
-      </BtnContainer>
-      <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
-    </SeniorInfoPageContainer>
+      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+        <BackHeader headerText="정보입력" />
+      </div>
+      <SeniorInfoPageContainer>
+        <SICBox>
+          <h3>선배 정보를 입력해주세요</h3>
+          <div id="info-content-msg">
+            입력한 정보는 멘토링 매칭에 이용됩니다.
+          </div>
+        </SICBox>
+        <BtnContainer>
+          <h3>대학원 정보를 알려주세요.</h3>
+          <BtnBox>
+            <MBtnFont>
+              대학원&nbsp;<div id="font-color">*</div>
+            </MBtnFont>
+            <ModalBtn
+              type="seniorInfo"
+              btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
+              modalHandler={modalHandler}
+              onClick={() => {
+                setModalType('postgradu');
+              }}
+            />
+          </BtnBox>
+          <BtnBox>
+            <MBtnFont>
+              학과&nbsp;<div id="font-color">*</div>
+            </MBtnFont>
+            <ModalBtn
+              type="seniorInfo"
+              btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
+              modalHandler={modalHandler}
+              onClick={() => {
+                setModalType('major');
+              }}
+            />
+          </BtnBox>
+          <div style={{ marginTop: '0.5rem' }}>
+            {flag && (
+              <SingleValidator
+                msg={`${emptyPart}을 입력해주세요`}
+                textColor="#FF3347"
+              />
+            )}
+          </div>
+        </BtnContainer>
+        <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+        {modal && portalElement
+          ? createPortal(
+              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
+              portalElement,
+            )
+          : null}
+      </SeniorInfoPageContainer>
     </>
   );
 }
@@ -124,47 +129,46 @@ const SeniorInfoPageContainer = styled.div`
 const MBtnFont = styled.div`
   display: flex;
   color: #212529;
-font-family: Noto Sans JP;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-  #font-color{
-    color: #00A0E1;
-font-family: Noto Sans JP;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-
+  font-family: Noto Sans JP;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  #font-color {
+    color: #00a0e1;
+    font-family: Noto Sans JP;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
-`
+`;
 const BtnBox = styled.div`
   margin-top: 1rem;
-`
+`;
 const SICBox = styled.div`
-margin-bottom: 1.5rem;
-margin-top: 1rem;
+  margin-bottom: 1.5rem;
+  margin-top: 1rem;
   width: 95%;
-height: 5.9375rem;
-flex-shrink: 0;
-border-radius: 1rem;
-background: #F8F9FA;
-padding: 1.56rem 1rem;
-margin-left: 0.56rem;
-#info-content-msg{
-  color: #868E96;
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.225rem */
-letter-spacing: -0.03125rem;
-}
+  height: 5.9375rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  background: #f8f9fa;
+  padding: 1.56rem 1rem;
+  margin-left: 0.56rem;
+  #info-content-msg {
+    color: #868e96;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.225rem */
+    letter-spacing: -0.03125rem;
+  }
 `;
 
 const BtnContainer = styled.div`
-margin-left: 1rem;
+  margin-left: 1rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 8rem;

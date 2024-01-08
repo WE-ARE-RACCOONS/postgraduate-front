@@ -17,13 +17,13 @@ export const MProfileContainer = styled.div`
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: #868E96;
-text-align: center;
-font-family: Noto Sans JP;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
+    color: #868e96;
+    text-align: center;
+    font-family: Noto Sans JP;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
   }
 
   #x-icon {
@@ -34,5 +34,4 @@ line-height: 140%; /* 1.4rem */
     right: 0.875rem;
     cursor: pointer;
   }
-
 `;

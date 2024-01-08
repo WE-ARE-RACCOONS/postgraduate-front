@@ -19,27 +19,31 @@ function MProfileContent(props: MProfileContentProps) {
   };
 
   return (
-    <>      
-    <Image
+    <>
+      <Image
         id="x-icon"
         src={x_icon}
         alt="닫기 버튼"
         sizes="(max-width: 600px) 3.rem"
         width={36}
         height={36}
-        style={{marginLeft:'18.25rem',marginTop:'1rem'}}
+        style={{ marginLeft: '18.25rem', marginTop: '1rem' }}
         priority
         onClick={xClick}
       />
-    <MProfileContainer>
-      <h3>프로필 등록을 취소하시겠어요?</h3>
-      <div id="profile-guide-msg">
-        프로필을 작성하지 않으면
-        <br />
-        멘토링을 진행할 수 없어요
-      </div>
-    </MProfileContainer>
-    <ClickedBtn kind='modal' clickHandler={handleClick} btnText='프로필 등록하기'/>
+      <MProfileContainer>
+        <h3>프로필 등록을 취소하시겠어요?</h3>
+        <div id="profile-guide-msg">
+          프로필을 작성하지 않으면
+          <br />
+          멘토링을 진행할 수 없어요
+        </div>
+      </MProfileContainer>
+      <ClickedBtn
+        kind="modal"
+        clickHandler={handleClick}
+        btnText="프로필 등록하기"
+      />
     </>
   );
 }

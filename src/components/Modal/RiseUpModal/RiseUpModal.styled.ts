@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ModalBackground = styled.div`
   position: fixed;
   top: 50%;
-  background: rgba(0, 0, 0, 0.70);
+  background: rgba(0, 0, 0, 0.7);
   transform: translateY(-50%);
   width: 600px;
   height: 100vh;
@@ -26,7 +26,7 @@ export const ModalBackground = styled.div`
 
   .rise-up-modal {
     width: inherit;
-   height: 37.25rem;
+    height: 37.25rem;
     position: absolute;
     top: 7.75rem;
     animation: modalAppear 0.5s ease-out;

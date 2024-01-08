@@ -58,7 +58,6 @@ function SeniorInfoPage() {
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
-  
     if (!sPostGradu) {
       setFlag(true);
       setEmptyPart('대학원');
@@ -114,7 +113,7 @@ function SeniorInfoPage() {
         )
         .then((res) => {
           const response = res.data;
-          console.log(response)
+          console.log(response);
           if (response.code == 'SNR202') {
             setAccessToken({
               token: response.data.accessToken,
@@ -149,7 +148,7 @@ function SeniorInfoPage() {
         })
         .then((res) => {
           const response = res.data;
-          console.log(response)
+          console.log(response);
           if (response.code == 'SNR202') {
             setAccessToken({
               token: response.data.accessToken,
@@ -171,45 +170,45 @@ function SeniorInfoPage() {
 
   return (
     <>
-    <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
-      <BackHeader headerText='정보입력'/>
-    </div>
-    <SeniorInfoPageContainer>
-      <h3>연구 주제에 대해 알려주세요.</h3>
-      <BtnContainer>
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sField ? sField : '연구분야*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('field');
-          }}
-        />
-        <ModalBtn
-        type='seniorInfo'
-          btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('keyword');
-          }}
-        />
-        <div style={{marginTop:'0.5rem'}}>
-        {flag && (
-          <SingleValidator
-            msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF3347"
+      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+        <BackHeader headerText="정보입력" />
+      </div>
+      <SeniorInfoPageContainer>
+        <h3>연구 주제에 대해 알려주세요.</h3>
+        <BtnContainer>
+          <ModalBtn
+            type="seniorInfo"
+            btnText={sField ? sField : '연구분야*'}
+            modalHandler={modalHandler}
+            onClick={() => {
+              setModalType('field');
+            }}
           />
-        )}
-        </div>
-        <button onClick={handleSubmit}>다음</button>
-      </BtnContainer>
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
-    </SeniorInfoPageContainer>
+          <ModalBtn
+            type="seniorInfo"
+            btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
+            modalHandler={modalHandler}
+            onClick={() => {
+              setModalType('keyword');
+            }}
+          />
+          <div style={{ marginTop: '0.5rem' }}>
+            {flag && (
+              <SingleValidator
+                msg={`${emptyPart}을 입력해주세요`}
+                textColor="#FF3347"
+              />
+            )}
+          </div>
+          <button onClick={handleSubmit}>다음</button>
+        </BtnContainer>
+        {modal && portalElement
+          ? createPortal(
+              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
+              portalElement,
+            )
+          : null}
+      </SeniorInfoPageContainer>
     </>
   );
 }
@@ -221,27 +220,26 @@ const SeniorInfoPageContainer = styled.div`
   height: 100%;
 `;
 const SICBox = styled.div`
-margin-top: 1rem;
+  margin-top: 1rem;
   width: 95%;
-height: 5.9375rem;
-flex-shrink: 0;
-border-radius: 1rem;
-background: #F8F9FA;
-padding: 1.56rem 1rem;
-margin-left: 0.56rem;
-#info-content-msg{
-  color: #868E96;
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.225rem */
-letter-spacing: -0.03125rem;
-}
+  height: 5.9375rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  background: #f8f9fa;
+  padding: 1.56rem 1rem;
+  margin-left: 0.56rem;
+  #info-content-msg {
+    color: #868e96;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.225rem */
+    letter-spacing: -0.03125rem;
+  }
 `;
 
 const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
- 

@@ -60,19 +60,31 @@ function SignUpDonePage() {
       {userType == 'senior' && (
         <>
           <SDoneBottomMsg>
-            <div style={{display:'flex'}}>
-              
-                <div>
-            대학원 선배 프로필을 등록해야<br/>
-            <div style={{display:'flex',marginLeft:'0.5rem'}}>
-<div id = 'sdone-msg-color'>멘토링을 시작</div>할 수 있어요.</div>
-</div>
-
+            <div style={{ display: 'flex' }}>
+              <div>
+                대학원 선배 프로필을 등록해야
+                <br />
+                <div style={{ display: 'flex', marginLeft: '0.5rem' }}>
+                  <div id="sdone-msg-color">멘토링을 시작</div>할 수 있어요.
+                </div>
+              </div>
             </div>
           </SDoneBottomMsg>
-          <div style={{display:'flex',margin:'0 1rem',marginTop:'0.3rem',justifyContent:'center'}}>
-            <ClickedBtn kind='out' clickHandler={modalHandler} btnText="다음에 할게요" />
-            <ClickedBtn kind='profileAdd'
+          <div
+            style={{
+              display: 'flex',
+              margin: '0 1rem',
+              marginTop: '0.3rem',
+              justifyContent: 'center',
+            }}
+          >
+            <ClickedBtn
+              kind="out"
+              clickHandler={modalHandler}
+              btnText="다음에 할게요"
+            />
+            <ClickedBtn
+              kind="profileAdd"
               clickHandler={() => {
                 router.push('/add-profile');
               }}
@@ -106,34 +118,34 @@ const DoneFont = styled.div`
   margin-top: 0.88rem;
 `;
 const SDoneBottomMsg = styled.div`
-padding:0.75rem 4rem;
-justify-content: center;
-align-items: center;
-display: flex;
-margin-top: 2.8rem;
-margin-left: 1rem;
-width: 93%;
-height: 4.25rem;
-flex-shrink: 0;
-border-radius: 1rem;
-background: #F8F9FA;
-color: #212529;
-text-align: center;
-font-family: Pretendard;
-font-size: 0.95rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
-#sdone-msg-color{
-  color: #2FC4B2;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%;
-letter-spacing: -0.03125rem;
-}
+  padding: 0.75rem 4rem;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin-top: 2.8rem;
+  margin-left: 1rem;
+  width: 93%;
+  height: 4.25rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  background: #f8f9fa;
+  color: #212529;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.95rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.4rem */
+  letter-spacing: -0.03125rem;
+  #sdone-msg-color {
+    color: #2fc4b2;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%;
+    letter-spacing: -0.03125rem;
+  }
 `;
 
 export default SignUpDonePage;

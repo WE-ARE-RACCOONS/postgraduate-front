@@ -65,7 +65,6 @@ function SeniorInfoPage() {
      * 4. api 호출 성공하면 signup/done 으로 이동
      */
 
-
     if (!sLab) {
       setFlag(true);
       setEmptyPart('연구실명');
@@ -78,37 +77,46 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    router.push(`/signup/${socialId}/common-info/senior-info/field`)
-    }
-    
+    router.push(`/signup/${socialId}/common-info/senior-info/field`);
+  };
 
   return (
     <>
-    <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
-      <BackHeader headerText='정보입력'/>
-    </div>
-    <SeniorInfoPageContainer>
-      <BtnContainer>
-      <h3>연구실 정보를 알려주세요.</h3>
-      <BtnBox>
-      <MBtnFont>지도교수님&nbsp;<div id = 'font-color'>*</div></MBtnFont>
-        <TextForm placeholder="연구실 이름을 입력해주세요." targetAtom="lab" />
-        </BtnBox>
-        <BtnBox>
-        <MBtnFont>연구실명&nbsp;<div id = 'font-color'>*</div></MBtnFont>
-        <TextForm placeholder="지도교수님 성함을 입력해주세요." targetAtom="professor" />
-        </BtnBox>
-        <div style={{marginTop:'0.5rem'}}>
-        {flag && (
-          <SingleValidator
-            msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF3347"
-          />
-        )}
-        </div>
-      </BtnContainer>
-      <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
-    </SeniorInfoPageContainer>
+      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+        <BackHeader headerText="정보입력" />
+      </div>
+      <SeniorInfoPageContainer>
+        <BtnContainer>
+          <h3>연구실 정보를 알려주세요.</h3>
+          <BtnBox>
+            <MBtnFont>
+              지도교수님&nbsp;<div id="font-color">*</div>
+            </MBtnFont>
+            <TextForm
+              placeholder="연구실 이름을 입력해주세요."
+              targetAtom="lab"
+            />
+          </BtnBox>
+          <BtnBox>
+            <MBtnFont>
+              연구실명&nbsp;<div id="font-color">*</div>
+            </MBtnFont>
+            <TextForm
+              placeholder="지도교수님 성함을 입력해주세요."
+              targetAtom="professor"
+            />
+          </BtnBox>
+          <div style={{ marginTop: '0.5rem' }}>
+            {flag && (
+              <SingleValidator
+                msg={`${emptyPart}을 입력해주세요`}
+                textColor="#FF3347"
+              />
+            )}
+          </div>
+        </BtnContainer>
+        <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+      </SeniorInfoPageContainer>
     </>
   );
 }
@@ -117,52 +125,51 @@ export default SeniorInfoPage;
 const MBtnFont = styled.div`
   display: flex;
   color: #212529;
-font-family: Noto Sans JP;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-  #font-color{
-    color: #00A0E1;
-font-family: Noto Sans JP;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-
+  font-family: Noto Sans JP;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  #font-color {
+    color: #00a0e1;
+    font-family: Noto Sans JP;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
   }
-`
+`;
 const BtnBox = styled.div`
   margin-top: 1rem;
-`
+`;
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
 `;
 const SICBox = styled.div`
-margin-top: 1rem;
+  margin-top: 1rem;
   width: 95%;
-height: 5.9375rem;
-flex-shrink: 0;
-border-radius: 1rem;
-background: #F8F9FA;
-padding: 1.56rem 1rem;
-margin-left: 0.56rem;
-#info-content-msg{
-  color: #868E96;
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.225rem */
-letter-spacing: -0.03125rem;
-}
+  height: 5.9375rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  background: #f8f9fa;
+  padding: 1.56rem 1rem;
+  margin-left: 0.56rem;
+  #info-content-msg {
+    color: #868e96;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.225rem */
+    letter-spacing: -0.03125rem;
+  }
 `;
 
 const BtnContainer = styled.div`
-margin-bottom: 15rem;
-margin-top:1.25rem;
-margin-left: 1rem;
+  margin-bottom: 15rem;
+  margin-top: 1.25rem;
+  margin-left: 1rem;
   display: flex;
   flex-direction: column;
 `;

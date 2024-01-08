@@ -24,7 +24,7 @@ function NextBtn(props: NextBtnProps) {
     if (props.kind == 'route') {
       if (props.onClick) {
         props.onClick();
-        console.log('tfj')
+        console.log('tfj');
       }
       if (props.url) {
         router.push(props.url);
