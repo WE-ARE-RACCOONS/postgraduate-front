@@ -5,7 +5,7 @@ import BackHeader from '@/components/Header/BackHeader';
 import SelectTime from '@/components/SelectTime';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 import useAuth from '@/hooks/useAuth';
-import { sAbleMentoringTimeArr } from '@/stores/mentoring';
+import { firAbleTimeAtom, sAbleMentoringTimeArr, secAbleTimeAtom, thiAbleTimeAtom } from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
 import axios from 'axios';
 import { useAtom } from 'jotai';
@@ -68,9 +68,9 @@ function MentoringApplySchedulePage() {
         <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
       </div>
       <div id="select-time-container">
-        <SelectTime placeholder={`첫${MENTORING_SCHEDULE.selectPlaceholder}`} />
-        <SelectTime placeholder={`두${MENTORING_SCHEDULE.selectPlaceholder}`} />
-        <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} />
+        <SelectTime placeholder={`첫${MENTORING_SCHEDULE.selectPlaceholder}`} targetAtom={firAbleTimeAtom} />
+        <SelectTime placeholder={`두${MENTORING_SCHEDULE.selectPlaceholder}`} targetAtom={secAbleTimeAtom} />
+        <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} targetAtom={thiAbleTimeAtom} />
       </div>
       <MASBtnContainer $timeArr={timeArr}>
         <button

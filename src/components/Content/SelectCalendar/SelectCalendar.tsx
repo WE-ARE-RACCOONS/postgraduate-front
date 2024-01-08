@@ -7,11 +7,13 @@ import { SelectedDate } from "@/types/content/selectCalendar";
 import { useAtom } from "jotai";
 import { sAbleMentoringTimeArr } from "@/stores/mentoring";
 import { SELECT_CALENDAR_TEXT, WEEK_DAY_TO_NUM } from "@/constants/calendar/calendar";
+import { SelectCalendarProps } from "@/types/selectTime/selectTime";
 
-function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
+function SelectCalendar(props: SelectCalendarProps) {
   const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
   const [ableTimeList, setAbleTimeList] = useState<Array<{start: string, end: string}>>([]);
+  const [finalTime, setFinalTime] = useAtom(props.targetAtom);
   const weekObj = WEEK_DAY_TO_NUM;
 
   /** 30분 단위로 시간 간격을 끊어서 리턴해주는 함수 */
@@ -102,17 +104,14 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
   }
 
   const nextBtnHandler = () => {
-    /**
-     * 1. 날짜 선택되어 있는지 확인
-     * 2. 시간 선택되어 있는지 확인
-     * 3. 저장하고 모달 닫기
-     */
+    // 날짜/시간 제대로 선택하지 않고 "입력" 눌렀을 때 스낵바 등 처리 필요할듯
     if(selectedDate) {
       const selectedTime = document.querySelector('.selected-time');
       if(selectedTime) {
         const formattedDate = formatDateHyphen(selectedDate as Date);
         const formattedTime = formatTimeHyphen(selectedTime.innerHTML.slice(0, 8));
-        // console.log(`${formattedDate}-${formattedTime}`);
+        setFinalTime(`${formattedDate}-${formattedTime}`);
+        props.modalHandler();
       }
     }
   }
@@ -124,7 +123,7 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
           id="back-arrow-img"
           src={back_arrow}
           alt="뒤로가기 화살표"
-          onClick={modalHandler}
+          onClick={props.modalHandler}
         />
         <div id="header-text">일정 선택</div>
       </SelectCalendarHeader>
@@ -148,8 +147,8 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
         </SelectCalendarTimeList>
       </SelectCalendarTimeContainer>
       <SelectCalendarBtnContainer>
-        <button id="select-calendar-prev-btn" onClick={modalHandler}>이전</button>
-        <button id="select-calendar-next-btn" onClick={nextBtnHandler}>다음</button>
+        <button id="select-calendar-prev-btn" onClick={props.modalHandler}>이전</button>
+        <button id="select-calendar-next-btn" onClick={nextBtnHandler}>입력</button>
       </SelectCalendarBtnContainer>
     </SelectCalendarContainer>
   )

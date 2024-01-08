@@ -21,7 +21,7 @@ function SelectTime(props: SelectTimeProps) {
       </SelectTimeContent>
       {modal && portalElement
         ? createPortal(
-            <FullModal modalType="select-date-calendar" modalHandler={modalHandler} />,
+            <FullModal modalType="select-date-calendar" modalHandler={modalHandler} targetAtom={props.targetAtom} />,
             portalElement,
           )
         : null}

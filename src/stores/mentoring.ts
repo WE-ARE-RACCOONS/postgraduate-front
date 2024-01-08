@@ -5,3 +5,6 @@ export const subjectAtom = atom<string>('');
 export const questionAtom = atom<string>('');
 
 export const sAbleMentoringTimeArr = atom<Array<TimeObj>>([]);
+export const firAbleTimeAtom = atom<string>('');
+export const secAbleTimeAtom = atom<string>('');
+export const thiAbleTimeAtom = atom<string>('');

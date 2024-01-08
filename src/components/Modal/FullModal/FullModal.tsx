@@ -8,6 +8,7 @@ import SmentoringAccept from '@/components/Mentoring/SmentoringAccept/Smentoring
 import SInfoModify from '@/components/Content/SInfoModify';
 import AddTime from '@/components/Content/AddTime';
 import SelectCalendar from '@/components/Content/SelectCalendar';
+import { firAbleTimeAtom } from '@/stores/mentoring';
 
 function FullModal(props: FullModalProps) {
   return (
@@ -34,7 +35,7 @@ function FullModal(props: FullModalProps) {
         <AddTime modalHandler={props.modalHandler} />
       )}
       {props.modalType == 'select-date-calendar' && (
-        <SelectCalendar modalHandler={props.modalHandler} />
+        <SelectCalendar modalHandler={props.modalHandler} targetAtom={props.targetAtom || firAbleTimeAtom} />
       )}
     </FullModalContainer>
   );
