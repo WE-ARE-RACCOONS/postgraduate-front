@@ -1,7 +1,7 @@
 import { PrimitiveAtom } from "jotai";
 
 export interface SelectTimeProps {
-  placeholder: string;
+  numStr: string;
   targetAtom: PrimitiveAtom<string>
 }
 

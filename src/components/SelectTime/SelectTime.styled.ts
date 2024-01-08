@@ -23,6 +23,10 @@ export const SelectTimeContent = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+
+  .abled {
+    color: #000;
+  }
 `;
 
 export const SelectTimeText = styled.div`
@@ -30,4 +34,5 @@ export const SelectTimeText = styled.div`
   max-width: 17.125rem;
   height: 1.5rem;
   color: #adb5bd;
+  display: flex;
 `;

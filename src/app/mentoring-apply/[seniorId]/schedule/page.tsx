@@ -68,9 +68,9 @@ function MentoringApplySchedulePage() {
         <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
       </div>
       <div id="select-time-container">
-        <SelectTime placeholder={`첫${MENTORING_SCHEDULE.selectPlaceholder}`} targetAtom={firAbleTimeAtom} />
-        <SelectTime placeholder={`두${MENTORING_SCHEDULE.selectPlaceholder}`} targetAtom={secAbleTimeAtom} />
-        <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} targetAtom={thiAbleTimeAtom} />
+        <SelectTime numStr="첫" targetAtom={firAbleTimeAtom} />
+        <SelectTime numStr="두" targetAtom={secAbleTimeAtom} />
+        <SelectTime numStr="세" targetAtom={thiAbleTimeAtom} />
       </div>
       <MASBtnContainer $timeArr={timeArr}>
         <button
