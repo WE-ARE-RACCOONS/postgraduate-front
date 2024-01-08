@@ -4,16 +4,16 @@ import back_arrow from '../../../../public/arrow.png';
 import Calendar from 'react-calendar';
 import React, { useEffect, useState } from "react";
 import { SelectedDate } from "@/types/content/selectCalendar";
-import { useAtom } from "jotai";
+import { useSetAtom, useAtomValue } from "jotai";
 import { sAbleMentoringTimeArr } from "@/stores/mentoring";
 import { SELECT_CALENDAR_TEXT, WEEK_DAY_TO_NUM } from "@/constants/calendar/calendar";
 import { SelectCalendarProps } from "@/types/selectTime/selectTime";
 
 function SelectCalendar(props: SelectCalendarProps) {
-  const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
+  const timeArr = useAtomValue(sAbleMentoringTimeArr);
   const [selectedDate, setSelectedDate] = useState<SelectedDate>(new Date());
   const [ableTimeList, setAbleTimeList] = useState<Array<{start: string, end: string}>>([]);
-  const [finalTime, setFinalTime] = useAtom(props.targetAtom);
+  const setFinalTime = useSetAtom(props.targetAtom);
   const weekObj = WEEK_DAY_TO_NUM;
 
   /** 30분 단위로 시간 간격을 끊어서 리턴해주는 함수 */
