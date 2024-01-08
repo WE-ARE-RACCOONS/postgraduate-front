@@ -8,7 +8,7 @@ import useAuth from '@/hooks/useAuth';
 import { firAbleTimeAtom, sAbleMentoringTimeArr, secAbleTimeAtom, thiAbleTimeAtom } from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
 import axios from 'axios';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -16,6 +16,9 @@ import styled from 'styled-components';
 function MentoringApplySchedulePage() {
   const [sNickname, setSNickname] = useState('');
   const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
+  const firstTime = useAtomValue(firAbleTimeAtom);
+  const secondTime = useAtomValue(secAbleTimeAtom);
+  const thirdTime = useAtomValue(thiAbleTimeAtom);
   const { getAccessToken } = useAuth();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -44,6 +47,13 @@ function MentoringApplySchedulePage() {
         });
     }
   }, []);
+
+  useEffect(() => {
+    if(firstTime && secondTime && thirdTime) {
+      const nextBtn = document.getElementById('next-btn');
+      if(nextBtn) nextBtn.classList.add('active');
+    }
+  }, [firstTime, secondTime, thirdTime]);
 
   return (
     <MASContainer $timeArr={timeArr}>
@@ -74,15 +84,14 @@ function MentoringApplySchedulePage() {
       </div>
       <MASBtnContainer $timeArr={timeArr}>
         <button
-          id="prev-btn"
-          className="mas-btn"
+          className="mas-btn prev-btn"
           onClick={() => {
             router.back();
           }}
         >
           이전
         </button>
-        <button id="next-btn" className="mas-btn">
+        <button className="mas-btn next-btn">
           다음
         </button>
       </MASBtnContainer>
@@ -202,16 +211,20 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
     cursor: pointer;
   }
 
-  #prev-btn {
+  .prev-btn {
     width: 34%;
     height: 3.375rem;
     background-color: #adb5bd;
   }
 
-  #next-btn {
+  .next-btn {
     width: 62%;
     height: 3.375rem;
     background-color: #f1f3f5;
+  }
+
+  .active {
+    background-color: #2FC4B2;
   }
 `;
 
