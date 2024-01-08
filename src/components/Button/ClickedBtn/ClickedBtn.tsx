@@ -1,6 +1,8 @@
 import { ClickedBtnProps } from '@/types/button/clickedBtn';
 import {BtnAdd,BtnOut,BtnModal} from './ClickedBtn.styled'
 function ClickedBtn(props: ClickedBtnProps) {
+ 
+
   return(
   <div>
   {props.kind == 'out' && (

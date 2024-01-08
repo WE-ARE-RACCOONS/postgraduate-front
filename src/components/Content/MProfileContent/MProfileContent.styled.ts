@@ -2,19 +2,28 @@ import styled from 'styled-components';
 
 export const MProfileContainer = styled.div`
   width: 16rem;
-  height: 16rem;
+  height: 12rem;
   position: absolute;
-  top: 50%;
+  top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
+  justify-content: center;
+  text-align: center;
 
   #profile-guide-msg {
     width: 12.5rem;
-    height: 3.7rem;
+    height: 3rem;
     position: absolute;
-    top: 50%;
+    top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: #868E96;
+text-align: center;
+font-family: Noto Sans JP;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 1.4rem */
   }
 
   #x-icon {
@@ -26,12 +35,4 @@ export const MProfileContainer = styled.div`
     cursor: pointer;
   }
 
-  #btn-styled-wrapper {
-    width: 6.4rem;
-    height: 1.4rem;
-    position: absolute;
-    bottom: 2rem;
-    left: 50%;
-    transform: translateX(-50%);
-  }
 `;

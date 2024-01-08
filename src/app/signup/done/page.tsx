@@ -61,11 +61,16 @@ function SignUpDonePage() {
         <>
           <SDoneBottomMsg>
             <div style={{display:'flex'}}>
+              
+                <div>
             대학원 선배 프로필을 등록해야<br/>
-<div id = 'sdone-msg-color'>멘토링을 시작</div>할 수 있어요.
+            <div style={{display:'flex',marginLeft:'0.5rem'}}>
+<div id = 'sdone-msg-color'>멘토링을 시작</div>할 수 있어요.</div>
+</div>
+
             </div>
           </SDoneBottomMsg>
-          <div style={{display:'flex',margin:'0 1rem',marginTop:'0.3rem',alignItems:'center'}}>
+          <div style={{display:'flex',margin:'0 1rem',marginTop:'0.3rem',justifyContent:'center'}}>
             <ClickedBtn kind='out' clickHandler={modalHandler} btnText="다음에 할게요" />
             <ClickedBtn kind='profileAdd'
               clickHandler={() => {
@@ -101,6 +106,7 @@ const DoneFont = styled.div`
   margin-top: 0.88rem;
 `;
 const SDoneBottomMsg = styled.div`
+padding:0.75rem 4rem;
 justify-content: center;
 align-items: center;
 display: flex;
