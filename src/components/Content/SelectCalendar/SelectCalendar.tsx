@@ -1,4 +1,4 @@
-import { SelectCalendarContainer, SelectCalendarHeader, SelectCalendarTimeContainer, SelectCalendarTimeList } from "./SelectCalendar.styled";
+import { SelectCalendarBtnContainer, SelectCalendarContainer, SelectCalendarHeader, SelectCalendarTimeContainer, SelectCalendarTimeList } from "./SelectCalendar.styled";
 import Image from "next/image";
 import back_arrow from '../../../../public/arrow.png';
 import Calendar from 'react-calendar';
@@ -85,6 +85,14 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
     e.currentTarget.classList.add('selected-time');
   }
 
+  const nextBtnHandler = () => {
+    /**
+     * 1. 날짜 선택되어 있는지 확인
+     * 2. 시간 선택되어 있는지 확인
+     * 3. 저장하고 모달 닫기
+     */
+  }
+
   return(
     <SelectCalendarContainer onClick={(e) => e.stopPropagation()}>
       <SelectCalendarHeader>
@@ -115,6 +123,10 @@ function SelectCalendar({ modalHandler } : { modalHandler: () => void }) {
           )) : (<div>해당 요일에 가능한 시간이 없습니다.</div>)}
         </SelectCalendarTimeList>
       </SelectCalendarTimeContainer>
+      <SelectCalendarBtnContainer>
+        <button id="select-calendar-prev-btn" onClick={modalHandler}>이전</button>
+        <button id="select-calendar-next-btn" onClick={nextBtnHandler}>다음</button>
+      </SelectCalendarBtnContainer>
     </SelectCalendarContainer>
   )
 }

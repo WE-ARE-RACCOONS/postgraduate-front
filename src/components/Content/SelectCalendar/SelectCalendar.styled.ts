@@ -131,11 +131,46 @@ export const SelectCalendarTimeList = styled.div`
     padding-left: 1rem;
     line-height: 3.2rem;
     letter-spacing: -0.5px;
+    cursor: pointer;
   }
 
   .selected-time {
     color: #fff;
     font-weight: 700;
     background-color: #2FC4B2;
+  }
+`
+
+export const SelectCalendarBtnContainer = styled.div`
+  width: 95%;
+  height: 3.375rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 7.69rem;
+  margin-bottom: 1.375rem;
+
+  #select-calendar-prev-btn {
+    width: 33%;
+    height: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+    background-color: #ADB5BD;
+    border: none;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  #select-calendar-next-btn {
+    width: 61%;
+    height: inherit;
+    font-size: 18px;
+    font-weight: 700;
+    border-radius: 12px;
+    background-color: #2FC4B2;
+    border: none;
+    color: #fff;
+    cursor: pointer;
   }
 `
