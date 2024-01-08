@@ -70,16 +70,26 @@ function SelectCalendar(props: SelectCalendarProps) {
   }
 
   useEffect(() => {
-    const prevBtn = document.querySelector('.react-calendar__navigation__prev-button');
-    const nextBtn = document.querySelector('.react-calendar__navigation__next-button');
+    const prevBtn = document.querySelector('.react-calendar__navigation__prev-button') as HTMLElement;
+    const nextBtn = document.querySelector('.react-calendar__navigation__next-button') as HTMLElement;
     
-    // if(prevBtn) {
-    //   prevBtn.addEventListener('click', () => {console.log('prev')});
-    // }
+    if(prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        prevBtn.style.opacity = '0';
+        prevBtn.style.cursor = 'none';
+        nextBtn.style.opacity = '1';
+        nextBtn.style.cursor = 'pointer';
+      });
+    }
 
-    // if(nextBtn) {
-    //   nextBtn.addEventListener('click', () => {console.log('next')});
-    // }
+    if(nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        prevBtn.style.opacity = '1';
+        prevBtn.style.cursor = 'pointer';
+        nextBtn.style.opacity = '0';
+        nextBtn.style.cursor = 'none';
+      });
+    }
 
     if(selectedDate) {
       // @ts-ignore

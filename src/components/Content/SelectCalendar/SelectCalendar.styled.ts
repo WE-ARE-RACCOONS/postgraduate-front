@@ -33,6 +33,7 @@ export const SelectCalendarContainer = styled.div`
       border: none;
       background-color: #fff;
       cursor: pointer;
+      opacity: 0;
     }
 
     .react-calendar__navigation__next-button {
