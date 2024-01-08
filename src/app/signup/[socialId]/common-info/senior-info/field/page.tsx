@@ -34,7 +34,7 @@ function SeniorInfoPage() {
   const router = useRouter();
   const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
     useAuth();
-  const Token = getAccessToken();
+  const token = getAccessToken();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -51,20 +51,14 @@ function SeniorInfoPage() {
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
   const headers = {
-    Authorization: `Bearer ${Token}`,
+    Authorization: `Bearer ${token}`,
   };
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
-    /**
-     * 1. 값 다 들어 있나 확인
-     * 2. 없으면 최초로 없는 값 SingleValidator 띄우고(flag true)
-     * 3. 있으면 회원가입 api 호출 후(flag false로 설정, userType senior로 설정)
-     * 4. api 호출 성공하면 signup/done 으로 이동
-     */
-
+  
     if (!sPostGradu) {
       setFlag(true);
       setEmptyPart('대학원');
@@ -101,7 +95,7 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    if (Token && certification) {
+    if (token && certification) {
       axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
@@ -120,6 +114,7 @@ function SeniorInfoPage() {
         )
         .then((res) => {
           const response = res.data;
+          console.log(response)
           if (response.code == 'SNR202') {
             setAccessToken({
               token: response.data.accessToken,
@@ -154,6 +149,7 @@ function SeniorInfoPage() {
         })
         .then((res) => {
           const response = res.data;
+          console.log(response)
           if (response.code == 'SNR202') {
             setAccessToken({
               token: response.data.accessToken,
@@ -197,12 +193,14 @@ function SeniorInfoPage() {
             setModalType('keyword');
           }}
         />
+        <div style={{marginTop:'0.5rem'}}>
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF0000"
+            textColor="#FF3347"
           />
         )}
+        </div>
         <button onClick={handleSubmit}>다음</button>
       </BtnContainer>
       {modal && portalElement

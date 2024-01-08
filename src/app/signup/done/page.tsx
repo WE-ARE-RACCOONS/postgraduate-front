@@ -42,7 +42,7 @@ function SignUpDonePage() {
         )}
         {userType == 'senior' && (
           <>
-            <h3>선배 회원가입이 완료됐어요</h3>
+            <h3>회원 등록 완료!</h3>
             <DoneFont>
               영업일 기준 48시간 안에 선배 회원으로 승인돼요
               <br />
@@ -59,16 +59,15 @@ function SignUpDonePage() {
       )}
       {userType == 'senior' && (
         <>
-          <div>
-            대학원 선배 프로필을 등록하면 멘토링을 시작할 수 있어요.
-            <br />
-            지금 프로필을 작성하러 가볼까요?
-          </div>
-          <div>
-            {/* <button>다음에 할게요</button>
-            <button>프로필 등록하기</button> */}
-            <ClickedBtn clickHandler={modalHandler} btnText="다음에 할게요" />
-            <ClickedBtn
+          <SDoneBottomMsg>
+            <div style={{display:'flex'}}>
+            대학원 선배 프로필을 등록해야<br/>
+<div id = 'sdone-msg-color'>멘토링을 시작</div>할 수 있어요.
+            </div>
+          </SDoneBottomMsg>
+          <div style={{display:'flex',margin:'0 1rem',marginTop:'0.3rem',alignItems:'center'}}>
+            <ClickedBtn kind='out' clickHandler={modalHandler} btnText="다음에 할게요" />
+            <ClickedBtn kind='profileAdd'
               clickHandler={() => {
                 router.push('/add-profile');
               }}
@@ -100,6 +99,35 @@ const DoneFont = styled.div`
   line-height: 140%; /* 1.4rem */
   letter-spacing: -0.03125rem;
   margin-top: 0.88rem;
+`;
+const SDoneBottomMsg = styled.div`
+justify-content: center;
+align-items: center;
+display: flex;
+margin-top: 2.8rem;
+margin-left: 1rem;
+width: 93%;
+height: 4.25rem;
+flex-shrink: 0;
+border-radius: 1rem;
+background: #F8F9FA;
+color: #212529;
+text-align: center;
+font-family: Pretendard;
+font-size: 0.95rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 1.4rem */
+letter-spacing: -0.03125rem;
+#sdone-msg-color{
+  color: #2FC4B2;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%;
+letter-spacing: -0.03125rem;
+}
 `;
 
 export default SignUpDonePage;

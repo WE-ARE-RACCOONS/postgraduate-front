@@ -98,12 +98,14 @@ function SeniorInfoPage() {
         <MBtnFont>연구실명&nbsp;<div id = 'font-color'>*</div></MBtnFont>
         <TextForm placeholder="지도교수님 성함을 입력해주세요." targetAtom="professor" />
         </BtnBox>
+        <div style={{marginTop:'0.5rem'}}>
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF0000"
+            textColor="#FF3347"
           />
         )}
+        </div>
       </BtnContainer>
       <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
     </SeniorInfoPageContainer>

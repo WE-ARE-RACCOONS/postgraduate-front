@@ -94,12 +94,14 @@ function SeniorInfoPage() {
           }}
         />
         </BtnBox>
+        <div style={{marginTop:'0.5rem'}}>
         {flag && (
           <SingleValidator
             msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF0000"
+            textColor="#FF3347"
           />
         )}
+        </div>
       </BtnContainer>
       <NextBtn  kind='route' btnText='다음' onClick={handleSubmit}/>
       {modal && portalElement
