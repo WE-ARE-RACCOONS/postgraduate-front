@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 import 'react-calendar/dist/Calendar.css';
 
 export const SelectCalendarContainer = styled.div`
@@ -49,18 +49,18 @@ export const SelectCalendarContainer = styled.div`
       .react-calendar__month-view__weekdays {
         font-size: 14px;
         font-weight: 400;
-        color: #868E96;
+        color: #868e96;
 
         abbr[title] {
           text-decoration: none;
         }
 
-        abbr[title="토요일"] {
-          color: #00A0E1;
+        abbr[title='토요일'] {
+          color: #00a0e1;
         }
 
-        abbr[title="일요일"] {
-          color: #FF5757;
+        abbr[title='일요일'] {
+          color: #ff5757;
         }
       }
 
@@ -70,13 +70,13 @@ export const SelectCalendarContainer = styled.div`
         }
 
         .react-calendar__tile--active {
-          background-color: #2FC4B2;
+          background-color: #2fc4b2;
           border-radius: 4px;
         }
       }
     }
   }
-`
+`;
 
 export const SelectCalendarHeader = styled.div`
   width: inherit;
@@ -103,13 +103,13 @@ export const SelectCalendarHeader = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
   }
-`
+`;
 
 export const SelectCalendarTimeContainer = styled.div`
   width: 95%;
   margin: 0 auto;
   margin-top: 3.75rem;
-  
+
   #select-calendar-time-text {
     width: max-content;
     height: 1.375rem;
@@ -117,7 +117,7 @@ export const SelectCalendarTimeContainer = styled.div`
     line-height: 140%;
     letter-spacing: -0.5px;
   }
-`
+`;
 
 export const SelectCalendarTimeList = styled.div`
   width: 100%;
@@ -128,7 +128,7 @@ export const SelectCalendarTimeList = styled.div`
     width: 100%;
     height: 3.2rem;
     border-radius: 8px;
-    background-color: #F8F9FA;
+    background-color: #f8f9fa;
     margin-bottom: 0.5rem;
     padding-left: 1rem;
     line-height: 3.2rem;
@@ -139,9 +139,9 @@ export const SelectCalendarTimeList = styled.div`
   .selected-time {
     color: #fff;
     font-weight: 700;
-    background-color: #2FC4B2;
+    background-color: #2fc4b2;
   }
-`
+`;
 
 export const SelectCalendarBtnContainer = styled.div`
   width: 95%;
@@ -158,7 +158,7 @@ export const SelectCalendarBtnContainer = styled.div`
     font-size: 18px;
     font-weight: 700;
     border-radius: 12px;
-    background-color: #ADB5BD;
+    background-color: #adb5bd;
     border: none;
     color: #fff;
     cursor: pointer;
@@ -170,9 +170,9 @@ export const SelectCalendarBtnContainer = styled.div`
     font-size: 18px;
     font-weight: 700;
     border-radius: 12px;
-    background-color: #2FC4B2;
+    background-color: #2fc4b2;
     border: none;
     color: #fff;
     cursor: pointer;
   }
-`
+`;

@@ -39,7 +39,7 @@ export default function RootLayout({
           <div id="senior-info-modify-portal"></div>
           <div id="senior-mentoring-time-portal"></div>
           <div id="senior-profile-not-registered"></div>
-          <div id='select-date-calendar'></div>
+          <div id="select-date-calendar"></div>
         </Providers>
       </body>
     </html>

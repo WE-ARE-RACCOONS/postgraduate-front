@@ -35,7 +35,10 @@ function FullModal(props: FullModalProps) {
         <AddTime modalHandler={props.modalHandler} />
       )}
       {props.modalType == 'select-date-calendar' && (
-        <SelectCalendar modalHandler={props.modalHandler} targetAtom={props.targetAtom || firAbleTimeAtom} />
+        <SelectCalendar
+          modalHandler={props.modalHandler}
+          targetAtom={props.targetAtom || firAbleTimeAtom}
+        />
       )}
     </FullModalContainer>
   );

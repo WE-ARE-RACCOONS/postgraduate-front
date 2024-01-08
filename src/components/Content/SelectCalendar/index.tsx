@@ -1,3 +1,3 @@
-import SelectCalendar from "./SelectCalendar";
+import SelectCalendar from './SelectCalendar';
 
 export default SelectCalendar;

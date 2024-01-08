@@ -1,4 +1,4 @@
-import { PrimitiveAtom } from "jotai";
+import { PrimitiveAtom } from 'jotai';
 
 /** FullModal로 띄울 컨텐츠 새로 구현할 때마다 타입으로 추가 */
 export type FullModalType =
@@ -14,5 +14,5 @@ export type FullModalType =
 export interface FullModalProps {
   modalType: FullModalType;
   modalHandler: () => void;
-  targetAtom?: PrimitiveAtom<string> // 'select-date-calendar'의 경우에만 추가
+  targetAtom?: PrimitiveAtom<string>; // 'select-date-calendar'의 경우에만 추가
 }

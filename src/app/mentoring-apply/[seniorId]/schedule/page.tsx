@@ -5,7 +5,12 @@ import BackHeader from '@/components/Header/BackHeader';
 import SelectTime from '@/components/SelectTime';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 import useAuth from '@/hooks/useAuth';
-import { firAbleTimeAtom, sAbleMentoringTimeArr, secAbleTimeAtom, thiAbleTimeAtom } from '@/stores/mentoring';
+import {
+  firAbleTimeAtom,
+  sAbleMentoringTimeArr,
+  secAbleTimeAtom,
+  thiAbleTimeAtom,
+} from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
@@ -49,9 +54,9 @@ function MentoringApplySchedulePage() {
   }, []);
 
   useEffect(() => {
-    if(firstTime && secondTime && thirdTime) {
+    if (firstTime && secondTime && thirdTime) {
       const nextBtn = document.getElementById('next-btn');
-      if(nextBtn) nextBtn.classList.add('active');
+      if (nextBtn) nextBtn.classList.add('active');
     }
   }, [firstTime, secondTime, thirdTime]);
 
@@ -91,9 +96,7 @@ function MentoringApplySchedulePage() {
         >
           이전
         </button>
-        <button className="mas-btn next-btn">
-          다음
-        </button>
+        <button className="mas-btn next-btn">다음</button>
       </MASBtnContainer>
     </MASContainer>
   );
@@ -224,7 +227,7 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
   }
 
   .active {
-    background-color: #2FC4B2;
+    background-color: #2fc4b2;
   }
 `;
 
