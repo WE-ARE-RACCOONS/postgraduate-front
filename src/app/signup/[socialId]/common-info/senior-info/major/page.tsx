@@ -15,9 +15,7 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { nickname, phoneNum, userTypeAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
-import axios from 'axios';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -32,9 +30,9 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
+  const { getAccessToken} =
     useAuth();
-  const Token = getAccessToken();
+  const token = getAccessToken();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];

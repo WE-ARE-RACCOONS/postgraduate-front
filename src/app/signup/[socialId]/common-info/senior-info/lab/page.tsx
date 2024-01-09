@@ -32,9 +32,9 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
+  const { getAccessToken } =
     useAuth();
-  const Token = getAccessToken();
+  const token = getAccessToken();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -51,19 +51,14 @@ function SeniorInfoPage() {
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
   const headers = {
-    Authorization: `Bearer ${Token}`,
+    Authorization: `Bearer ${token}`,
   };
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
-    /**
-     * 1. 값 다 들어 있나 확인
-     * 2. 없으면 최초로 없는 값 SingleValidator 띄우고(flag true)
-     * 3. 있으면 회원가입 api 호출 후(flag false로 설정, userType senior로 설정)
-     * 4. api 호출 성공하면 signup/done 으로 이동
-     */
+   
 
     if (!sLab) {
       setFlag(true);

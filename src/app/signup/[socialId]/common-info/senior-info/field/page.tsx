@@ -34,7 +34,6 @@ function SeniorInfoPage() {
   const router = useRouter();
   const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
     useAuth();
-  const token = getAccessToken();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -50,9 +49,7 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
+  const token = getAccessToken();
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
@@ -94,6 +91,9 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     if (token && certification) {
       axios
         .post(
@@ -130,6 +130,7 @@ function SeniorInfoPage() {
           console.error(err);
         });
     }
+    
     if (socialId && phoneNumber && nickName && certification) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
