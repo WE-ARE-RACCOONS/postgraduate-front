@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+interface SInfoBtnProps {
+  isGet?: boolean;
+}
 export const StyledModalBtn = styled.button`
   width: 20.5rem;
   height: 3.875rem;
@@ -29,7 +31,8 @@ export const StyledSModalBtn = styled.button`
   font-weight: 700;
   line-height: 140%; /* 1.4rem */
 `;
-export const SInfoBtn = styled.button`
+export const SInfoBtn = styled.button<SInfoBtnProps>`
+color: ${(props) => (props.isGet ? '#ADB5BD' : '#212529')};
   margin-top: 0.5rem;
   height: 3.1875rem;
   width: 97%;

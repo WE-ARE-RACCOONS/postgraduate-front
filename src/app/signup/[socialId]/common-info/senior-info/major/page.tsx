@@ -88,6 +88,7 @@ function SeniorInfoPage() {
               학과&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <ModalBtn
+            isGet={!sMajor}
               type="seniorInfo"
               btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
               modalHandler={modalHandler}
