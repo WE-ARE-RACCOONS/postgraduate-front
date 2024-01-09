@@ -1,4 +1,4 @@
-export type btnKindClicked = 'out' | 'profileAdd' | 'modal';
+export type btnKindClicked = 'out' | 'profileAdd' | 'modal'|'click';
 
 export interface ClickedBtnProps {
   clickHandler: () => void;

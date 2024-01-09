@@ -34,7 +34,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           msg="연구 주제 키워드를 입력하세요"
         />
       )}
-      <ClickedBtn clickHandler={handleClick} btnText="확인" />
+      <ClickedBtn kind='click' clickHandler={handleClick} btnText="확인" />
     </div>
   );
 }

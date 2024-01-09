@@ -12,6 +12,9 @@ function ClickedBtn(props: ClickedBtnProps) {
       {props.kind == 'modal' && (
         <BtnModal onClick={props.clickHandler}>{props.btnText}</BtnModal>
       )}
+      {props.kind == 'click' && (
+        <button onClick={props.clickHandler}>{props.btnText}</button>
+      )}
     </div>
   );
 }

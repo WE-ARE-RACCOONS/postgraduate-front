@@ -102,6 +102,7 @@ function AddProfilePage() {
         changeHandler={setRecommended}
       />
       <ClickedBtn
+      kind='click'
         btnText="우수 대학원 선배 프로필 보기"
         clickHandler={() => {
           modalHandler();
