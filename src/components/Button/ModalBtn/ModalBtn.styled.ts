@@ -42,7 +42,6 @@ export const SInfoBtn = styled.button`
   justify-content: left;
   align-items: center;
   text-align: center;
-  color: #adb5bd;
   font-family: Noto Sans JP;
   font-size: 1rem;
   font-style: normal;
