@@ -11,13 +11,10 @@ import my from '@/../../public/my.png';
 function MenuBar(props: MenubarProps) {
   const router = useRouter();
   const { getAccessToken, getUserType } = useAuth();
-  const Token = getAccessToken();
+  const token = getAccessToken();
   const userType = getUserType();
   const handleClick = () => {
-    // props.modalHandler();
-    if (props.modalHandler) {
-      props.modalHandler;
-    }
+    props.modalHandler();
   };
 
   const mentoringPath =
@@ -43,7 +40,7 @@ function MenuBar(props: MenubarProps) {
         />
         <MenuWord>홈</MenuWord>
       </MenuBox>
-      {Token ? (
+      {token ? (
         <MenuBox
           onClick={() => {
             router.push(mentoringPath);
@@ -79,6 +76,7 @@ function MenuBar(props: MenubarProps) {
               height: '1.5rem',
             }}
           />
+          <MenuWord>내 멘토링</MenuWord>
         </MenuBox>
       )}
       <MenuBox

@@ -24,7 +24,7 @@ function JuniorMentoringPage() {
       <LogoLayer modalHandler={searchModalHandler} />
       <TapBar />
       <MenuBarWrapper>
-        <MenuBar />
+        <MenuBar modalHandler={searchModalHandler} />
       </MenuBarWrapper>
       {searchModal && searchPortalElement
         ? createPortal(
