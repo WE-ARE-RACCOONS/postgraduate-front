@@ -84,7 +84,7 @@ function SelectForm(props: SelectFormProps) {
       {flag && (
         <SingleValidator msg="연구분야를 선택해주세요" textColor="#FF0000" />
       )}
-      <ClickedBtn clickHandler={handleConfirm} btnText="확인" />
+      <ClickedBtn kind="modal" clickHandler={handleConfirm} btnText="확인" />
     </SelectFormContainer>
   );
 }

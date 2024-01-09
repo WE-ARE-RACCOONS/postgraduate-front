@@ -9,7 +9,8 @@ import React, { useState } from 'react';
 import { SearchFormProps } from '@/types/form/searchForm';
 import { useSetAtom } from 'jotai';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
-
+import Image from 'next/image';
+import search_color from '../../../../public/search2.png';
 function SearchForm(props: SearchFormProps) {
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState<Array<string> | null>(null);
@@ -131,12 +132,19 @@ function SearchForm(props: SearchFormProps) {
   return (
     <>
       <TextFieldWrapper>
+        <Image
+          src={search_color}
+          alt="search"
+          width={24}
+          height={24}
+          style={{ marginRight: '0.75rem' }}
+        />
         <TextField
           id="outlined-basic"
           label={props.formType == 'postgradu' ? '대학원명' : '학과'}
           variant="outlined"
           size="small"
-          style={{ width: '18.5rem' }}
+          style={{ width: '90%', height: '2.25rem', border: 'none' }}
           onChange={(e) => handleChange(e)}
           onKeyDown={(e) => handleKeyDown(e)}
           onBlur={setData}
