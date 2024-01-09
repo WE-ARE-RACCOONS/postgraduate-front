@@ -2,10 +2,7 @@ import Image from 'next/image';
 import camera from '@../../../public/check.png';
 import { AuthImgBtn } from './Photo.styled';
 import upload from '@../../../public/upload.png';
-type PhotoProps = {
-  handler: React.Dispatch<React.SetStateAction<File | null>>;
-  type: 'camera' | 'auth'; // 타입 추가
-};
+import { PhotoProps } from '@/types/photo/photo';
 function Photo({ handler, type }: PhotoProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     handler(e.currentTarget.files ? e.currentTarget.files[0] : null);
