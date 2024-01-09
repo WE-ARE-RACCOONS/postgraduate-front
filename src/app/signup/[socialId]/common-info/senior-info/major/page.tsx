@@ -30,8 +30,7 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { getAccessToken} =
-    useAuth();
+  const { getAccessToken } = useAuth();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -88,7 +87,7 @@ function SeniorInfoPage() {
               학과&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <ModalBtn
-            isGet={!sMajor}
+              isGet={!sMajor}
               type="seniorInfo"
               btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
               modalHandler={modalHandler}

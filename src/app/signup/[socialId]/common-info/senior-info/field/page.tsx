@@ -130,7 +130,7 @@ function SeniorInfoPage() {
           console.error(err);
         });
     }
-    
+
     if (socialId && phoneNumber && nickName && certification) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {

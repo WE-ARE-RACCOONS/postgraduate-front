@@ -200,7 +200,7 @@ function SInfoModify({ modalHandler }: { modalHandler: () => void }) {
         </ValidatorBox>
       )}
       <div id="submit-btn-box">
-        <ClickedBtn kind='click' btnText="저장" clickHandler={submitHandler} />
+        <ClickedBtn kind="click" btnText="저장" clickHandler={submitHandler} />
       </div>
     </SInfoContainer>
   );
