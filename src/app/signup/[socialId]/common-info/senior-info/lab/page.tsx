@@ -50,15 +50,15 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-  const headers = {
-    Authorization: `Bearer ${token}`,
-  };
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
-   
+    const token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
     if (!sLab) {
       setFlag(true);

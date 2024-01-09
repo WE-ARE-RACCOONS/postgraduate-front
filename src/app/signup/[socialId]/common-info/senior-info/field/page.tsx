@@ -49,12 +49,15 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-  const token = getAccessToken();
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
+    const token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     if (!sPostGradu) {
       setFlag(true);
       setEmptyPart('대학원');
@@ -91,9 +94,6 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
     if (token && certification) {
       axios
         .post(
