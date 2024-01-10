@@ -1,7 +1,8 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringMapBox } from './STabBrar.styled';
+import { TapStyle, MentoringMapBox,TabWrap,
+  TabResultContainer, TabResult} from './STabBrar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -105,15 +106,30 @@ function STabBar() {
     );
   };
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
-        <TapStyle onClick={() => handleTabClick('expected')}>
+    <div style={{ height: '100%' }}>
+      <TabWrap>
+        <TapStyle
+          selected={activeTab === TAB.waiting}
+          onClick={() => handleTabClick('waiting')}
+        >
+          확정 대기
+        </TapStyle>
+        <TapStyle
+          selected={activeTab === TAB.expected}
+          onClick={() => handleTabClick('expected')}
+        >
           진행 예정
         </TapStyle>
-        <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
-      </div>
-      <div>{renderTabContent()}</div>
+        <TapStyle
+          selected={activeTab === TAB.done}
+          onClick={() => handleTabClick('done')}
+        >
+          완료
+        </TapStyle>
+      </TabWrap>
+      <TabResultContainer>
+        <TabResult>{renderTabContent()}</TabResult>
+      </TabResultContainer>
       {modal && portalElement
         ? createPortal(
             <SmentoringSpec

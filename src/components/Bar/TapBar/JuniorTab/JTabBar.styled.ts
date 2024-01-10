@@ -4,11 +4,6 @@ interface TapStyleProps {
   selected: boolean;
 }
 
-export const TabWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  margin: 0 1.7rem;
-`;
 export const TabResult = styled.div`
   border-top: 1px solid #c2cede;
   height: 100%;
@@ -24,6 +19,11 @@ export const MentoringBox = styled.div`
   background: #fff;
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   margin: 2.3%;
+`;
+export const TabWrap = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: 0 1.7rem;
 `;
 export const DateDoneBtn = styled.button`
   width: 19.4375rem;
