@@ -1,5 +1,5 @@
 import { ModalBtnProps } from '@/types/button/modalBtn';
-import { StyledModalBtn, StyledSModalBtn, SInfoBtn } from './ModalBtn.styled';
+import { StyledModalBtn, StyledSModalBtn, SInfoBtn,StyledMSBtn } from './ModalBtn.styled';
 
 function ModalBtn(props: ModalBtnProps) {
   const handleClick = () => {
@@ -20,6 +20,15 @@ function ModalBtn(props: ModalBtnProps) {
         >
           {props.btnText}
         </StyledSModalBtn>
+      )}
+      {props.type === 'seniorShow' && (
+        <StyledMSBtn
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </StyledMSBtn>
       )}
       {props.type === 'seniorInfo' && (
         <SInfoBtn

@@ -11,10 +11,10 @@ export const DateDone = styled.div`
   line-height: 140%; /* 1.4rem */
   letter-spacing: -0.03125rem;
 `;
-export const ConfirmContent = styled.div`
+export const ConfirmContent = styled.div<{ isJunior: boolean }>`
   width: 100%;
   height: 5.8rem;
-  border-bottom: 1px solid #dee2e6;
+  ${(props) => props.isJunior && 'border-bottom: 1px solid #dee2e6;'}
   padding: 1.2rem;
   display: flex;
   justify-content: space-between;
@@ -43,6 +43,22 @@ export const ConfirmProfile = styled.img`
   height: 3.375rem;
   border-radius: 90%;
 `;
+export const MRFont =styled.div`
+color: #495565;
+font-family: Pretendard;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%;
+`
+export const RemainFont = styled.div`
+color: #FF5757;
+font-family: Pretendard;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.05rem */
+`
 export const ConfirmTitle = styled.div`
   color: #212529;
   font-family: Pretendard;

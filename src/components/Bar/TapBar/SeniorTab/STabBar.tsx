@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { TapStyle, MentoringMapBox,TabWrap,
-  TabResultContainer, TabResult} from './STabBrar.styled';
+  TabResultContainer, TabResult,MentoringBox} from './STabBrar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -69,9 +69,10 @@ function STabBar() {
         {data && data!.length !== 0 ? (
           <div>
             {data!.map((el, idx) => (
-              <div key={idx}>
+              <MentoringBox key={idx}>
                 <MentoringApply data={el} />
                 <ModalBtn
+                type='seniorShow'
                   btnText={
                     activeTab === TAB.waiting
                       ? '신청서 보고 수락하기'
@@ -83,7 +84,7 @@ function STabBar() {
                     setSelectedMentoringId(el.mentoringId);
                   }}
                 />
-              </div>
+              </MentoringBox>
             ))}
             {activeTab === TAB.done ? (
               <div

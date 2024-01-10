@@ -7,6 +7,14 @@ export const MentoringMapBox = styled.div`
   border: 1px solid blue;
   width: 100%;
 `;
+export const MentoringBox = styled.div`
+  width: 95%;
+  border: 1px solid #dee2e6;
+  border-radius: 1rem;
+  background: #fff;
+  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
+  margin: 2.3%;
+`;
 export const TabWrap = styled.div`
   display: flex;
   justify-content: space-between;
