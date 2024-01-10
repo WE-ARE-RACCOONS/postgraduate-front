@@ -11,11 +11,14 @@ import {
   ModalMentoringBackground,
   ModalClose,
   ModalBottomBtn,
+  MMTop
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 import { activeTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
+import Image from 'next/image';
+import x_icon from '../../../../../public/x.png';
 function SmentoringSpec(props: ModalMentoringSProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
@@ -73,7 +76,21 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   };
   return (
     <ModalMentoringBackground>
+      <MMTop>
+      <div id="header-text">멘토링 신청서</div>
+      <Image
+        id="x-icon"
+        src={x_icon}
+        alt="계정 수정 모달 닫기 버튼"
+        width={24}
+        height={24}
+        style={{marginLeft:'25%'}}
+        onClick={props.modalHandler}
+      />
+      </MMTop>
+      <div id ='mentoring-back'>
       <MentoringApply data={data} />
+      </div>
       <div>원하는 멘토링 주제</div>
       <div>
         <TextToggleButton text={data ? data.topic : ''} />

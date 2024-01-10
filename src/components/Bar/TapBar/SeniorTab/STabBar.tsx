@@ -131,9 +131,10 @@ function STabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-      {modal && portalElement
+        {modal && portalElement
         ? createPortal(
-            <SmentoringSpec
+            <FullModal
+            modalType='senior-mentoring-spec'
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               acceptModalHandler={acceptModalHandler}

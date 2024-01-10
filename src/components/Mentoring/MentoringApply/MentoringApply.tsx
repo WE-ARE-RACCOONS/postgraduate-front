@@ -56,7 +56,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
                 <>
                 <MRFont>
                   <div style={{display:'flex'}}>
-                <RemainFont>{activeTab === TAB.waiting && data!.remainTime}</RemainFont>후에 자동취소!</div><div>지금 수락하세요</div>
+                <RemainFont>{activeTab === TAB.waiting && (data && data.remainTime)}</RemainFont>후에 자동취소!</div><div>지금 수락하세요</div>
                 </MRFont>
                   {activeTab === TAB.expected && dateExpected}
                   {activeTab === TAB.done && dateDone}
