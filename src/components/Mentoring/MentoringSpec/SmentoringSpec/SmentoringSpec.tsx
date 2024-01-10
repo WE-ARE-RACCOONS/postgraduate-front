@@ -11,7 +11,8 @@ import {
   ModalMentoringBackground,
   ModalClose,
   ModalBottomBtn,
-  MMTop
+  MMTop,
+  SMCBtn
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
@@ -24,6 +25,12 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   const [data, setData] = useState<MentoringSpecData | null>(null);
   const [date, setDate] = useState('');
   const activeTab = useAtomValue(activeTabAtom);
+  const [isActive, setIsActive] = useState(false);
+  const handleButtonClick = (e:React.MouseEvent<HTMLButtonElement>) => {
+    const buttonContent = e.currentTarget.textContent;
+  setDate(buttonContent ?buttonContent:'');
+  setIsActive(!isActive);
+  };
 
   useEffect(() => {
     if (props.mentoringId !== 0) {
@@ -91,18 +98,18 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       <div id ='mentoring-back'>
       <MentoringApply data={data} />
       </div>
-      <div>원하는 멘토링 주제</div>
-      <div>
+      <div id = 'mentoring-topic'>원하는 멘토링 주제</div>
+      <div style={{marginBottom:'1.5rem'}}>
         <TextToggleButton text={data ? data.topic : ''} />
       </div>
-      <div>사전 질문</div>
-      <div>
+      <div id = 'mentoring-topic'>사전 질문</div>
+      <div style={{marginBottom:'1.5rem'}}>
         <TextToggleButton text={data ? data.question : ''} />
       </div>
-      <div>
+      <div id = 'mentoring-topic'>
         멘토링 시간
         {activeTab === 'waiting' ? (
-          <div>
+          <div id = 'mentoring-time-msg'>
             아래의 세가지 중{data ? data.nickName : ''}님이 선택한 시간대에
             멘토링이 진행돼요
           </div>
@@ -115,12 +122,13 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           {data &&
             data.dates.map((date, index) => (
               <div>
-                <button
+                <SMCBtn
+                isActive={!isActive}
                   key={index}
-                  onClick={(e) => setDate(e.currentTarget.textContent ?? '')}
+                  onClick={handleButtonClick}
                 >
                   {date}
-                </button>
+                </SMCBtn>
               </div>
             ))}
         </div>
@@ -140,6 +148,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           </>
         ) : (
           <div>멘토링 취소는 고객센터로 문의해주세요</div>
+
         )}
       </ModalBottomBtn>
     </ModalMentoringBackground>

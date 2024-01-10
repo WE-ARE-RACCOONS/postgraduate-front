@@ -1,17 +1,16 @@
 import styled from 'styled-components';
+interface SMCBtnProps {
+  isActive?: boolean;
+}
 
 export const ModalMentoringBackground = styled.div`
-  position: fixed;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 600px; // 반응형 처리 따로 필요
+  top: 0;
+  left: 0;
+  width: 100%;
   height: 100vh;
+  overflow: auto; 
   z-index: 2;
   background-color: white;
-
-  @media (min-width: 360px) and (max-width: 600px) {
-    width: 360px;
-  }
   #mmtop{
     color: #212529;
 text-align: center;
@@ -26,6 +25,27 @@ letter-spacing: -0.03125rem;
     border-radius: 1rem;
 background: #F8F9FA;
 margin: 1rem;
+  }
+  #mentoring-topic{
+    color: #212529;
+font-family: Pretendard;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 700;
+line-height: 1rem; /* 114.286% */
+letter-spacing: -0.0375rem;
+margin-left: 1rem;
+margin-bottom: 0.38rem;
+  }
+  #mentoring-time-msg{
+    color: #868E96;
+font-family: Pretendard;
+font-size: 0.875rem;
+font-style: normal;
+font-weight: 400;
+line-height: 1rem; /* 114.286% */
+letter-spacing: -0.0375rem;
+margin-bottom: 0.38rem;
   }
 `;
 export const ModalClose = styled.button``;
@@ -50,4 +70,19 @@ line-height: 140%; /* 1.75rem */
 letter-spacing: -0.03125rem;
 margin-left: 35%;
 }
+`
+export const SMCBtn = styled.button<SMCBtnProps>`
+background-color: ${(props) => (props.isActive ? '#2FC4B2' : '#F8F9FA')};
+border-radius: 0.25rem;
+display: flex;
+height: 2.5rem;
+width: 91%;
+margin-left: 1rem;
+padding: 0.5rem 0.75rem;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+align-self: stretch;
+border: none;
+margin-bottom: 0.37rem;
 `
