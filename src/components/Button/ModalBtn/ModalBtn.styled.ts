@@ -1,5 +1,7 @@
 import styled from 'styled-components';
-
+interface SInfoBtnProps {
+  isGet?: boolean;
+}
 export const StyledModalBtn = styled.button`
   width: 20.5rem;
   height: 3.875rem;
@@ -28,4 +30,24 @@ export const StyledSModalBtn = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: 140%; /* 1.4rem */
+`;
+export const SInfoBtn = styled.button<SInfoBtnProps>`
+  color: ${(props) => (props.isGet ? '#ADB5BD' : '#212529')};
+  margin-top: 0.5rem;
+  height: 3.1875rem;
+  width: 97%;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #c2cede;
+  background: #fff;
+  padding: 0.8rem;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  text-align: center;
+  font-family: Noto Sans JP;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;
