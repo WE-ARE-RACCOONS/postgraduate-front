@@ -5,15 +5,25 @@ import BackHeader from '@/components/Header/BackHeader';
 import SelectTime from '@/components/SelectTime';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 import useAuth from '@/hooks/useAuth';
+import {
+  firAbleTimeAtom,
+  sAbleMentoringTimeArr,
+  secAbleTimeAtom,
+  thiAbleTimeAtom,
+} from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
 import axios from 'axios';
+import { useAtom, useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function MentoringApplySchedulePage() {
   const [sNickname, setSNickname] = useState('');
-  const [timeArr, setTimeArr] = useState([]);
+  const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
+  const firstTime = useAtomValue(firAbleTimeAtom);
+  const secondTime = useAtomValue(secAbleTimeAtom);
+  const thirdTime = useAtomValue(thiAbleTimeAtom);
   const { getAccessToken } = useAuth();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -43,6 +53,19 @@ function MentoringApplySchedulePage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (firstTime && secondTime && thirdTime) {
+      const nextBtn = document.querySelector('.next-btn');
+      if (nextBtn) nextBtn.classList.add('active');
+    }
+  }, [firstTime, secondTime, thirdTime]);
+
+  const nextBtnClickHandler = () => {
+    if (firstTime && secondTime && thirdTime) {
+      router.push(`/mentoring-apply/${seniorId}/pay`);
+    }
+  };
+
   return (
     <MASContainer $timeArr={timeArr}>
       <BackHeader headerText="멘토링 일정 제안" />
@@ -66,21 +89,20 @@ function MentoringApplySchedulePage() {
         <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
       </div>
       <div id="select-time-container">
-        <SelectTime placeholder={`첫${MENTORING_SCHEDULE.selectPlaceholder}`} />
-        <SelectTime placeholder={`두${MENTORING_SCHEDULE.selectPlaceholder}`} />
-        <SelectTime placeholder={`세${MENTORING_SCHEDULE.selectPlaceholder}`} />
+        <SelectTime numStr="첫" targetAtom={firAbleTimeAtom} />
+        <SelectTime numStr="두" targetAtom={secAbleTimeAtom} />
+        <SelectTime numStr="세" targetAtom={thiAbleTimeAtom} />
       </div>
       <MASBtnContainer $timeArr={timeArr}>
         <button
-          id="prev-btn"
-          className="mas-btn"
+          className="mas-btn prev-btn"
           onClick={() => {
             router.back();
           }}
         >
           이전
         </button>
-        <button id="next-btn" className="mas-btn">
+        <button className="mas-btn next-btn" onClick={nextBtnClickHandler}>
           다음
         </button>
       </MASBtnContainer>
@@ -200,16 +222,20 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
     cursor: pointer;
   }
 
-  #prev-btn {
+  .prev-btn {
     width: 34%;
     height: 3.375rem;
     background-color: #adb5bd;
   }
 
-  #next-btn {
+  .next-btn {
     width: 62%;
     height: 3.375rem;
     background-color: #f1f3f5;
+  }
+
+  .active {
+    background-color: #2fc4b2;
   }
 `;
 
