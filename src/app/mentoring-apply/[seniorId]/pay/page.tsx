@@ -8,6 +8,7 @@ import AuthLabeledText from "@/components/Text/AuthLabeledText";
 import { useAtomValue } from "jotai";
 import { firAbleTimeAtom, secAbleTimeAtom, thiAbleTimeAtom } from "@/stores/mentoring";
 import { useEffect } from "react";
+import { MENTORING_PAY_ETC_TEXT, MENTORING_PAY_PAYMENT_TEXT, MENTORING_PAY_TITLE } from "@/constants/pay/pay";
 
 function MentoringApplyPayPage() {
   const firstTime = useAtomValue(firAbleTimeAtom);
@@ -37,7 +38,7 @@ function MentoringApplyPayPage() {
       <BackHeader headerText="멘토링 결제 정보" />
       <ProgressBar activeNum={2} />
       <MAPContent>
-        <MAPTitle id="map-title-senior-info">대학원 선배 정보</MAPTitle>
+        <MAPTitle id="map-title-senior-info">{MENTORING_PAY_TITLE.seniorInfo}</MAPTitle>
         <MAPBox>
           <MAPInfoWrapper>
             <RoundedImage imgSrc={user_icon} altMsg="대학원생 프로필 이미지" />
@@ -53,24 +54,35 @@ function MentoringApplyPayPage() {
         </MAPBox>
         <MAPBox>
           <MAPTimeWrapper>
-            <MAPTitle>선택일정</MAPTitle>
+            <MAPTitle>{MENTORING_PAY_TITLE.schedule}</MAPTitle>
             <div id="map-time-list">
               <ol>
                 <li>
-                  <div className="map-time-text">첫번째 일정 :</div>
+                  <div className="map-time-text">첫{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
                   <div className="map-time-value">{formatTime(firstTime)}</div>
                 </li>
                 <li>
-                  <div className="map-time-text">두번째 일정 :</div>
+                  <div className="map-time-text">두{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
                   <div className="map-time-value">{formatTime(secondTime)}</div>
                 </li>
                 <li>
-                  <div className="map-time-text">세번째 일정 :</div>
+                  <div className="map-time-text">세{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
                   <div className="map-time-value">{formatTime(thirdTime)}</div>
                 </li>
               </ol>
             </div>
           </MAPTimeWrapper>
+        </MAPBox>
+        <MAPBox>
+          <MAPTitle>{MENTORING_PAY_TITLE.payAmount}</MAPTitle>
+          <div>
+            <div>{MENTORING_PAY_PAYMENT_TEXT.timeText}</div>
+            <div>{MENTORING_PAY_PAYMENT_TEXT.timeValue}</div>
+          </div>
+          <div>
+            <div>{MENTORING_PAY_PAYMENT_TEXT.amountText}</div>
+            <div>{MENTORING_PAY_PAYMENT_TEXT.amountValue}</div>
+          </div>
         </MAPBox>
       </MAPContent>
     </MAPContainer>
