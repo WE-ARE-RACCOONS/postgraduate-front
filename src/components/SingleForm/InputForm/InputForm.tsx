@@ -1,9 +1,9 @@
 import { InputFormProps } from '@/types/form/inputForm';
 import React from 'react';
-
+import {InputFormStyle} from './InputForm.styled'
 function InputForm(props: InputFormProps) {
   return (
-    <input
+    <InputFormStyle
       type={props.type}
       value={props.value}
       onChange={props.onChange}
