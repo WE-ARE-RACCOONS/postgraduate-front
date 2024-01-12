@@ -7,8 +7,15 @@ import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import BackHeader from '@/components/Header/BackHeader';
+import ModalBtn from '@/components/Button/ModalBtn';
+import useModal from '@/hooks/useModal';
+import { ModalType } from '@/types/modal/riseUp';
+import RiseUpModal from '@/components/Modal/RiseUpModal';
+import { createPortal } from 'react-dom';
 function AccountPage() {
   const router = useRouter();
+  const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
+  const [modalType, setModalType] = useState<ModalType>('bank');
   const [flag, setFlag] = useState(false);
   const [accountNumber, setAccountNumber] = useState('');
   const [bank, setBank] = useState('');
@@ -84,12 +91,15 @@ function AccountPage() {
          <MBtnFont>
          입금은행&nbsp;<div id="font-color">*</div>
             </MBtnFont>
-        <InputForm
-          placeholder="은행 명"
-          type="text"
-          value={bank}
-          onChange={(e) => setBank(e.target.value)}
-        />
+        <ModalBtn
+        isGet={!bank}
+              type="bankInfo"
+              btnText={bank ? bank : '은행을 선택해주세요.'}
+              modalHandler={modalHandler}
+              onClick={() => {
+                setModalType('bank');
+              }}
+            />
         </BtnBox>
         <BtnBox>
         <MBtnFont>
@@ -108,6 +118,12 @@ function AccountPage() {
       </AccontInput>
       <div id='msg-bottom'>정확한 정보를 입력했는지 다시 한 번 확인해주세요</div>
       {isInputsFilled ? <SABtnT onClick={handleComplete}>완료</SABtnT>:<SABtnF onClick={handleComplete}>완료</SABtnF>}
+      {modal && portalElement
+          ? createPortal(
+              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
+              portalElement,
+            )
+          : null}
     </SAContent>
   );
 }

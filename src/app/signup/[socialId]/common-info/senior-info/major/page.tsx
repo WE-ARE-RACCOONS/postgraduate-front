@@ -74,6 +74,7 @@ function SeniorInfoPage() {
               대학원&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <ModalBtn
+            isGet={!sPostGradu}
               type="seniorInfo"
               btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
               modalHandler={modalHandler}

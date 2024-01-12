@@ -40,6 +40,16 @@ function ModalBtn(props: ModalBtnProps) {
           {props.btnText}
         </SInfoBtn>
       )}
+      {props.type === 'bankInfo' && (
+        <SInfoBtn
+          isGet={props.isGet}
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </SInfoBtn>
+      )}
     </>
   );
 }

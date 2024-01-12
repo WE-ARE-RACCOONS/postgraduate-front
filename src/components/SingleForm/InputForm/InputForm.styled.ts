@@ -7,6 +7,7 @@ export const InputFormStyle = styled.input`
   border: 1px solid #c2cede;
   background: #fff;
   padding: 0.88rem;
+  color: #212529;
   ::placeholder {
     color: #ADB5BD;
 font-family: Noto Sans JP;

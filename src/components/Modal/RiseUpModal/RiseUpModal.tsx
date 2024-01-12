@@ -3,6 +3,7 @@ import { ModalBackground } from './RiseUpModal.styled';
 import SearchForm from '@/components/SingleForm/SearchForm';
 import SelectForm from '@/components/SingleForm/SelectForm';
 import KeywordForm from '@/components/SingleForm/KeywordForm/KeywordForm';
+import BankForm from '@/components/SingleForm/BankForm';
 
 function RiseUpModal(props: RiseUpModalProps) {
   return (
@@ -19,6 +20,9 @@ function RiseUpModal(props: RiseUpModalProps) {
         )}
         {props.modalType == 'keyword' && (
           <KeywordForm clickHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'bank' && (
+          <BankForm clickHandler={props.modalHandler} />
         )}
       </div>
     </ModalBackground>
