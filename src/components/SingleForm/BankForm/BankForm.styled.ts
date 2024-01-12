@@ -15,7 +15,8 @@ border: 1px solid red;
 export const BankLeft = styled.div`
 border: 1px solid red;
 `
-export const BankColumn = styled.div`
+export const BankColumn = styled.button`
+border: none;
 display: flex;
 justify-content: center;
 text-align: center;

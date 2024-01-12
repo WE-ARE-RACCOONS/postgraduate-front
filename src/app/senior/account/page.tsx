@@ -12,13 +12,15 @@ import useModal from '@/hooks/useModal';
 import { ModalType } from '@/types/modal/riseUp';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { createPortal } from 'react-dom';
+import { useAtomValue } from 'jotai';
+import { bankNameAtom } from '@/stores/bankName';
 function AccountPage() {
   const router = useRouter();
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const [modalType, setModalType] = useState<ModalType>('bank');
   const [flag, setFlag] = useState(false);
   const [accountNumber, setAccountNumber] = useState('');
-  const [bank, setBank] = useState('');
+  const bank = useAtomValue(bankNameAtom)
   const [accountHolder, setAccountHolder] = useState('');
   const [data, setData] = useState('');
   const { getAccessToken } = useAuth();
