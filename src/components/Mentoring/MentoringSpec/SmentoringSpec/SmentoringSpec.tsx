@@ -139,6 +139,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         {activeTab === 'waiting' ? (
           <>
             <ApplyCancleBtn
+            kind='spec'
               btnText={'거절'}
               cancelModalHandler={props.cancelModalHandler}
               modalHandler={props.modalHandler}
