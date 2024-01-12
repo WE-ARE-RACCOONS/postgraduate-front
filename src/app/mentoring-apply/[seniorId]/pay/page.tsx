@@ -58,31 +58,33 @@ function MentoringApplyPayPage() {
             <div id="map-time-list">
               <ol>
                 <li>
-                  <div className="map-time-text">첫{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
-                  <div className="map-time-value">{formatTime(firstTime)}</div>
+                  <div className="map-text">첫{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
+                  <div className="map-value">{formatTime(firstTime)}</div>
                 </li>
                 <li>
-                  <div className="map-time-text">두{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
-                  <div className="map-time-value">{formatTime(secondTime)}</div>
+                  <div className="map-text">두{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
+                  <div className="map-value">{formatTime(secondTime)}</div>
                 </li>
                 <li>
-                  <div className="map-time-text">세{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
-                  <div className="map-time-value">{formatTime(thirdTime)}</div>
+                  <div className="map-text">세{MENTORING_PAY_ETC_TEXT.nthSchedule}</div>
+                  <div className="map-value">{formatTime(thirdTime)}</div>
                 </li>
               </ol>
             </div>
           </MAPTimeWrapper>
         </MAPBox>
         <MAPBox>
-          <MAPTitle>{MENTORING_PAY_TITLE.payAmount}</MAPTitle>
-          <div>
-            <div>{MENTORING_PAY_PAYMENT_TEXT.timeText}</div>
-            <div>{MENTORING_PAY_PAYMENT_TEXT.timeValue}</div>
-          </div>
-          <div>
-            <div>{MENTORING_PAY_PAYMENT_TEXT.amountText}</div>
-            <div>{MENTORING_PAY_PAYMENT_TEXT.amountValue}</div>
-          </div>
+          <MAPPayWrapper>
+            <MAPTitle>{MENTORING_PAY_TITLE.payAmount}</MAPTitle>
+            <div id="map-pay-time-container">
+              <div className="map-text">{MENTORING_PAY_PAYMENT_TEXT.timeText}</div>
+              <div className="map-value">{MENTORING_PAY_PAYMENT_TEXT.timeValue}</div>
+            </div>
+            <div id="map-pay-amount-container">
+              <div id="map-pay-amount-text">{MENTORING_PAY_PAYMENT_TEXT.amountText}</div>
+              <div id="map-pay-amount-value">{MENTORING_PAY_PAYMENT_TEXT.amountValue}</div>
+            </div>
+          </MAPPayWrapper>
         </MAPBox>
       </MAPContent>
     </MAPContainer>
@@ -121,6 +123,16 @@ const MAPBox = styled.div`
   padding: 1rem;
   margin-bottom: 0.75rem;
   border: 1px solid #000;
+
+  .map-text {
+    color: #868E96;
+    margin-right: 2.375rem;
+    font-size: 14px;
+  }
+
+  .map-value {
+    font-size: 14px;
+  }
 `
 
 const MAPInfoWrapper = styled.div`
@@ -169,13 +181,32 @@ const MAPTimeWrapper = styled.div`
     white-space: nowrap;
   }
 
-  .map-time-text {
-    color: #868E96;
-    margin-right: 2.375rem;
+`
+
+const MAPPayWrapper = styled.div`
+  width: 100%;
+
+  #map-pay-time-container {
+    width: 100%;
+    height: 1.5rem;
+    border-bottom: 1px solid #DEE2E6;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.875rem;
   }
 
-  .map-time-value {
-    
+  #map-pay-amount-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: -0.5px;
+    margin-top: 0.875rem;
+
+    #map-pay-amount-value {
+      font-size: 18px;
+      color: #2FC4B2;
+      font-weight: 700;
+    }
   }
 `
 
