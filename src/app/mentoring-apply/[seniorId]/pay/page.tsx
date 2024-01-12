@@ -7,8 +7,9 @@ import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from "@/components/Text/AuthLabeledText";
 import { useAtomValue } from "jotai";
 import { firAbleTimeAtom, secAbleTimeAtom, thiAbleTimeAtom } from "@/stores/mentoring";
-import { useEffect } from "react";
 import { MENTORING_PAY_ETC_TEXT, MENTORING_PAY_PAYMENT_TEXT, MENTORING_PAY_TITLE } from "@/constants/pay/pay";
+import Image from "next/image";
+import mint_check from '../../../../../public/mint_check.png';
 
 function MentoringApplyPayPage() {
   const firstTime = useAtomValue(firAbleTimeAtom);
@@ -74,7 +75,7 @@ function MentoringApplyPayPage() {
           </MAPTimeWrapper>
         </MAPBox>
         <MAPBox>
-          <MAPPayWrapper>
+          <MAPPayAmountWrapper>
             <MAPTitle>{MENTORING_PAY_TITLE.payAmount}</MAPTitle>
             <div id="map-pay-time-container">
               <div className="map-text">{MENTORING_PAY_PAYMENT_TEXT.timeText}</div>
@@ -84,7 +85,16 @@ function MentoringApplyPayPage() {
               <div id="map-pay-amount-text">{MENTORING_PAY_PAYMENT_TEXT.amountText}</div>
               <div id="map-pay-amount-value">{MENTORING_PAY_PAYMENT_TEXT.amountValue}</div>
             </div>
-          </MAPPayWrapper>
+          </MAPPayAmountWrapper>
+        </MAPBox>
+        <MAPBox>
+          <MAPPayMethodWrapper>
+            <MAPTitle>{MENTORING_PAY_TITLE.payMethod}</MAPTitle>
+            <div id="map-pay-method-container">
+              <Image id="map-pay-method-check" src={mint_check} alt="체크 표시" />
+              <div id="map-pay-method-text">{MENTORING_PAY_PAYMENT_TEXT.methodText}</div>
+            </div>
+          </MAPPayMethodWrapper>
         </MAPBox>
       </MAPContent>
     </MAPContainer>
@@ -183,7 +193,7 @@ const MAPTimeWrapper = styled.div`
 
 `
 
-const MAPPayWrapper = styled.div`
+const MAPPayAmountWrapper = styled.div`
   width: 100%;
 
   #map-pay-time-container {
@@ -206,6 +216,27 @@ const MAPPayWrapper = styled.div`
       font-size: 18px;
       color: #2FC4B2;
       font-weight: 700;
+    }
+  }
+`
+
+const MAPPayMethodWrapper = styled.div`
+  width: 100%;
+
+  #map-pay-method-container {
+    display: flex;
+    justify-content: space-between;
+    width: 6.57rem;
+    align-items: center;
+    margin-top: 0.875rem;
+
+    #map-pay-method-check {
+      width: 0.875rem;
+      height: 0.625rem;
+    }
+
+    #map-pay-method-text {
+      font-size: 14px;
     }
   }
 `
