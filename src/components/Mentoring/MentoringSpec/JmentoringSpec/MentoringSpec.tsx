@@ -65,7 +65,7 @@ function MentoringSpec(props: ModalMentoringProps) {
           <Color>&nbsp;에게 보낸 신청서</Color>
         </MNick>
         <ApplyCancleBtn
-        kind='jcancel'
+          kind="jcancel"
           btnText={'취소하기'}
           cancelModalHandler={props.cancelModalHandler}
           modalHandler={props.modalHandler}

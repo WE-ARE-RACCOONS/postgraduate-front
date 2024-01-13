@@ -20,7 +20,7 @@ function AccountPage() {
   const [modalType, setModalType] = useState<ModalType>('bank');
   const [flag, setFlag] = useState(false);
   const [accountNumber, setAccountNumber] = useState('');
-  const bank = useAtomValue(bankNameAtom)
+  const bank = useAtomValue(bankNameAtom);
   const [accountHolder, setAccountHolder] = useState('');
   const [data, setData] = useState('');
   const { getAccessToken } = useAuth();
@@ -55,6 +55,7 @@ function AccountPage() {
         )
         .then((response) => {
           setData(response.data);
+          console.log(response.data);
         })
         .catch((error) => {
           setFlag(true);
@@ -68,64 +69,75 @@ function AccountPage() {
       router.push('/senior/account/done');
     }
   };
+  console.log(accountNumber);
+  console.log(bank);
+  console.log(accountHolder);
   return (
     <SAContent>
-      <BackHeader headerText='정산 정보 입력'/>
-      <div style={{marginLeft:'1rem'}}>
-      <h3 style={{marginTop:'1.5rem'}}>정산받을 계좌와</h3>
-      <h3 style={{marginBottom:'0.5rem'}}>주은행, 예금주를 입력해주세요</h3>
-      <div id='msg-top'>입력한 정보는 멘토링 보수 정산에 사용됩니다.</div>
+      <BackHeader headerText="정산 정보 입력" />
+      <div style={{ marginLeft: '1rem' }}>
+        <h3 style={{ marginTop: '1.5rem' }}>정산받을 계좌와</h3>
+        <h3 style={{ marginBottom: '0.5rem' }}>
+          주은행, 예금주를 입력해주세요
+        </h3>
+        <div id="msg-top">입력한 정보는 멘토링 보수 정산에 사용됩니다.</div>
       </div>
       <AccontInput>
-      <BtnBox>
-            <MBtnFont>
+        <BtnBox>
+          <MBtnFont>
             계좌번호&nbsp;<div id="font-color">*</div>
-            </MBtnFont>
-         
-        <InputForm
-          placeholder="xxxx-xxx-xxxxxx"
-          type="number"
-          value={accountNumber}
-          onChange={(e) => setAccountNumber(e.target.value)}
-        />
-         </BtnBox>
-         <BtnBox>
-         <MBtnFont>
-         입금은행&nbsp;<div id="font-color">*</div>
-            </MBtnFont>
-        <ModalBtn
-        isGet={!bank}
-              type="bankInfo"
-              btnText={bank ? bank : '은행을 선택해주세요.'}
-              modalHandler={modalHandler}
-              onClick={() => {
-                setModalType('bank');
-              }}
-            />
+          </MBtnFont>
+
+          <InputForm
+            placeholder="xxxx-xxx-xxxxxx"
+            type="number"
+            value={accountNumber}
+            onChange={(e) => setAccountNumber(e.target.value)}
+          />
         </BtnBox>
         <BtnBox>
-        <MBtnFont>
-        예금주명&nbsp;<div id="font-color">*</div>
-            </MBtnFont>
-        <InputForm
-          placeholder="예금주명 입력"
-          type="text"
-          value={accountHolder}
-          onChange={(e) => setAccountHolder(e.target.value)}
-        />
+          <MBtnFont>
+            입금은행&nbsp;<div id="font-color">*</div>
+          </MBtnFont>
+          <ModalBtn
+            isGet={!bank}
+            type="bankInfo"
+            btnText={bank ? bank : '은행을 선택해주세요.'}
+            modalHandler={modalHandler}
+            onClick={() => {
+              setModalType('bank');
+            }}
+          />
+        </BtnBox>
+        <BtnBox>
+          <MBtnFont>
+            예금주명&nbsp;<div id="font-color">*</div>
+          </MBtnFont>
+          <InputForm
+            placeholder="예금주명 입력"
+            type="text"
+            value={accountHolder}
+            onChange={(e) => setAccountHolder(e.target.value)}
+          />
         </BtnBox>
         {flag && (
-        <SingleValidator textColor="#FF3347" msg="잘못 입력된 내용이있어요" />
-      )}
+          <SingleValidator textColor="#FF3347" msg="잘못 입력된 내용이있어요" />
+        )}
       </AccontInput>
-      <div id='msg-bottom'>정확한 정보를 입력했는지 다시 한 번 확인해주세요</div>
-      {isInputsFilled ? <SABtnT onClick={handleComplete}>완료</SABtnT>:<SABtnF onClick={handleComplete}>완료</SABtnF>}
+      <div id="msg-bottom">
+        정확한 정보를 입력했는지 다시 한 번 확인해주세요
+      </div>
+      {isInputsFilled ? (
+        <SABtnT onClick={handleComplete}>완료</SABtnT>
+      ) : (
+        <SABtnF onClick={handleComplete}>완료</SABtnF>
+      )}
       {modal && portalElement
-          ? createPortal(
-              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-              portalElement,
-            )
-          : null}
+        ? createPortal(
+            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
+            portalElement,
+          )
+        : null}
     </SAContent>
   );
 }
@@ -137,61 +149,61 @@ const AccontInput = styled.div`
   margin-bottom: 2.6rem;
 `;
 const SABtnT = styled.div`
-display: flex;
-width: 96%;
-padding: 1rem 0rem;
-justify-content: center;
-align-items: center;
-margin-left: 0.5rem;
-gap: 0.625rem;
-border-radius: 0.75rem;
-background-color: #2FC4B2;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  display: flex;
+  width: 96%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  margin-left: 0.5rem;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background-color: #2fc4b2;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 const SABtnF = styled.div`
   display: flex;
-width: 96%;
-padding: 1rem 0rem;
-margin-left: 0.5rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-border-radius: 0.75rem;
-background-color: #DEE2E6;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
+  width: 96%;
+  padding: 1rem 0rem;
+  margin-left: 0.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background-color: #dee2e6;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
 `;
 const SAContent = styled.div`
-  #msg-top{
-    color: #868E96;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
+  #msg-top {
+    color: #868e96;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
+    letter-spacing: -0.03125rem;
   }
-  #msg-bottom{
+  #msg-bottom {
     color: #212529;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
-margin-bottom: 0.75rem;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
+    letter-spacing: -0.03125rem;
+    margin-bottom: 0.75rem;
   }
 `;
 const BtnBox = styled.div`

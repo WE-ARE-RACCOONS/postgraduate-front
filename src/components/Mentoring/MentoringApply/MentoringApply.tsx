@@ -12,7 +12,7 @@ import {
   Color,
   DateDone,
   RemainFont,
-  MRFont
+  MRFont,
 } from './MentoringApply.styled';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '../../../stores/tap';
@@ -32,7 +32,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
   return (
     <div>
       <ConfirmBox>
-        <ConfirmContent isJunior={userType === 'junior'} >
+        <ConfirmContent isJunior={userType === 'junior'}>
           <div style={{ display: 'flex' }}>
             <ConfirmProfile
               src={data ? data.profile : '/user.png'}
@@ -54,10 +54,16 @@ function MentoringApply({ data }: MentoringApplyProps) {
               )}
               {userType === 'senior' && (
                 <>
-                <MRFont>
-                  <div style={{display:'flex'}}>
-                <RemainFont>{activeTab === TAB.waiting && (data && data.remainTime)}</RemainFont>후에 자동취소!</div><div>지금 수락하세요</div>
-                </MRFont>
+                  {activeTab === TAB.waiting && (
+                    <MRFont>
+                      <div style={{ display: 'flex' }}>
+                        <RemainFont>{data && data.remainTime}</RemainFont>후에
+                        자동취소!
+                      </div>
+                      <div>지금 수락하세요</div>
+                    </MRFont>
+                  )}
+
                   {activeTab === TAB.expected && dateExpected}
                   {activeTab === TAB.done && dateDone}
                 </>

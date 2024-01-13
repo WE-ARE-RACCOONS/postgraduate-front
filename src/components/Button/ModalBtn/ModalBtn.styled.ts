@@ -32,7 +32,7 @@ export const StyledSModalBtn = styled.button`
   line-height: 140%; /* 1.4rem */
 `;
 export const StyledMSBtn = styled.button`
-margin-bottom: 1rem;
+  margin-bottom: 1rem;
   display: flex;
   margin-left: 4%;
   align-items: center;

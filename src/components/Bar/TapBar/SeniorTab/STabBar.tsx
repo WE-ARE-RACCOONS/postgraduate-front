@@ -1,8 +1,14 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringMapBox,TabWrap,
-  TabResultContainer, TabResult,MentoringBox} from './STabBrar.styled';
+import {
+  TapStyle,
+  MentoringMapBox,
+  TabWrap,
+  TabResultContainer,
+  TabResult,
+  MentoringBox,
+} from './STabBrar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -64,6 +70,7 @@ function STabBar() {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
+  console.log(data);
   const renderTabContent = () => {
     return (
       <div>
@@ -73,7 +80,7 @@ function STabBar() {
               <MentoringBox key={idx}>
                 <MentoringApply data={el} />
                 <ModalBtn
-                type='seniorShow'
+                  type="seniorShow"
                   btnText={
                     activeTab === TAB.waiting
                       ? '신청서 보고 수락하기'
@@ -132,10 +139,10 @@ function STabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-        {modal && portalElement
+      {modal && portalElement
         ? createPortal(
             <FullModal
-            modalType='senior-mentoring-spec'
+              modalType="senior-mentoring-spec"
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               acceptModalHandler={acceptModalHandler}

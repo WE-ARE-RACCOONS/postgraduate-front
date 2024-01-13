@@ -1,4 +1,4 @@
-export type btnKindClicked = 'spec'|'jcancel';
+export type btnKindClicked = 'spec' | 'jcancel';
 export interface CancleBtnProps {
   btnText: string;
   mentoringId: number;

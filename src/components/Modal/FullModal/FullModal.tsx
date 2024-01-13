@@ -34,7 +34,16 @@ function FullModal(props: FullModalProps) {
         <AddTime modalHandler={props.modalHandler} />
       )}
       {props.modalType == 'senior-mentoring-spec' && (
-        <SmentoringSpec cancelModalHandler={props.cancelModalHandler ? props.cancelModalHandler :(() => {})} modalHandler={props.modalHandler} acceptModalHandler={props.acceptModalHandler ?props.acceptModalHandler:  (() => {})} mentoringId={props.mentoringId ? props.mentoringId:0}/>
+        <SmentoringSpec
+          cancelModalHandler={
+            props.cancelModalHandler ? props.cancelModalHandler : () => {}
+          }
+          modalHandler={props.modalHandler}
+          acceptModalHandler={
+            props.acceptModalHandler ? props.acceptModalHandler : () => {}
+          }
+          mentoringId={props.mentoringId ? props.mentoringId : 0}
+        />
       )}
     </FullModalContainer>
   );

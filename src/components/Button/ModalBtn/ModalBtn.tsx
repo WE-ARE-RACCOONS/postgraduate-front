@@ -1,5 +1,10 @@
 import { ModalBtnProps } from '@/types/button/modalBtn';
-import { StyledModalBtn, StyledSModalBtn, SInfoBtn,StyledMSBtn } from './ModalBtn.styled';
+import {
+  StyledModalBtn,
+  StyledSModalBtn,
+  SInfoBtn,
+  StyledMSBtn,
+} from './ModalBtn.styled';
 
 function ModalBtn(props: ModalBtnProps) {
   const handleClick = () => {

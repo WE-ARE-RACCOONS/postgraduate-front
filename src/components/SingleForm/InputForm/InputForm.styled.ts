@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 export const InputFormStyle = styled.input`
   margin-top: 0.5rem;
   width: 97%;
@@ -9,11 +9,11 @@ export const InputFormStyle = styled.input`
   padding: 0.88rem;
   color: #212529;
   ::placeholder {
-    color: #ADB5BD;
-font-family: Noto Sans JP;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    color: #adb5bd;
+    font-family: Noto Sans JP;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 `;

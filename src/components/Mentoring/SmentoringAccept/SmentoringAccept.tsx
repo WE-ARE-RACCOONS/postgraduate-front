@@ -24,15 +24,17 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
         src={accept}
         width={80}
         height={80}
-        style={{marginTop:'10.5rem',marginLeft:'9.25rem'}}
+        style={{ marginTop: '10.5rem', marginLeft: '9.25rem' }}
         alt="멘토링 승인 축하 이미지"
       />
-      <div style={{marginTop:'2.75rem',textAlign:'center'}}>
-      <h3 style={{marginBottom:'0.87rem'}}>후배와의 멘토링이 확정됐어요</h3>
-      <div id='msg-show'>내멘토링 진행예정 탭에서 확인할 수 있어요</div>
+      <div style={{ marginTop: '2.75rem', textAlign: 'center' }}>
+        <h3 style={{ marginBottom: '0.87rem' }}>
+          후배와의 멘토링이 확정됐어요
+        </h3>
+        <div id="msg-show">내멘토링 진행예정 탭에서 확인할 수 있어요</div>
       </div>
-      <div id ='msg-btn'>계좌를 등록해야 멘토링 보수를 정산받을 수 있어요</div>
-      <NextBtn kind='route' url='/senior/account' btnText='정산계좌 입력하기'/>
+      <div id="msg-btn">계좌를 등록해야 멘토링 보수를 정산받을 수 있어요</div>
+      <NextBtn kind="route" url="/senior/account" btnText="정산계좌 입력하기" />
     </SmentoringAccBox>
   );
 }

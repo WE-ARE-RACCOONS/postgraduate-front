@@ -16,7 +16,7 @@ function SeniorMentoringPage() {
     portalElement: searchPortalElement,
   } = useModal('search-portal');
   return (
-      <div style={{ width: 'inherit', height: 'inherit' }}>
+    <div style={{ width: 'inherit', height: 'inherit' }}>
       <LogoLayer modalHandler={searchModalHandler} />
       <STapBar />
       <MenuBarWrapper>
