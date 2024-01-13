@@ -50,13 +50,9 @@ export const UserInfo = styled.div`
   line-height: 140%; /* 1.05rem */
 `;
 export const ModalMentoringBackground = styled.div`
-  top: 0;
-  left: 0;
   width: 100%;
   height: 100vh;
   overflow: auto;
-  z-index: 2;
-  background-color: white;
   #mmtop {
     color: #212529;
     text-align: center;

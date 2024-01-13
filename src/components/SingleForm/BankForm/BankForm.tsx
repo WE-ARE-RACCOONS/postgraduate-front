@@ -29,42 +29,42 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
             {BANK_NAME.k}
           </BankColumn>
           <BankColumn onClick={() => handleClick(BANK_NAME.n)}>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
+            <Image src={kbank} alt="농협은행" width={22} height={22} />
             {BANK_NAME.n}
           </BankColumn>
           <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            {BANK_NAME.s}
+            <Image src={kbank} alt="케이뱅크" width={22} height={22} />
+            {BANK_NAME.ky}
           </BankColumn>
           <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            {BANK_NAME.h}
-          </BankColumn>
-          <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
+            <Image src={kbank} alt="SC제일은행" width={22} height={22} />
             {BANK_NAME.sc}
           </BankColumn>
           <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            {BANK_NAME.g}
-          </BankColumn>
-          <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            {BANK_NAME.g}
-          </BankColumn>
-          <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            {BANK_NAME.h}
+            <Image src={kbank} alt="토스뱅크" width={22} height={22} />
+            {BANK_NAME.t}
           </BankColumn>
         </BankLeft>
         <BankRight>
           <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            국민은행
+            <Image src={kbank} alt="기업은행" width={22} height={22} />
+            {BANK_NAME.ki}
           </BankColumn>
           <BankColumn>
-            <Image src={kbank} alt="국민은행" width={22} height={22} />
-            국민은행
+            <Image src={kbank} alt="신한은행" width={22} height={22} />
+            {BANK_NAME.si}
+          </BankColumn>
+          <BankColumn>
+            <Image src={kbank} alt="우리은행" width={22} height={22} />
+            {BANK_NAME.u}
+          </BankColumn>
+          <BankColumn>
+            <Image src={kbank} alt="하나은행" width={22} height={22} />
+            {BANK_NAME.ha}
+          </BankColumn>
+          <BankColumn>
+            <Image src={kbank} alt="카카오뱅크" width={22} height={22} />
+            {BANK_NAME.ka}
           </BankColumn>
         </BankRight>
       </BankBox>

@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const FullModalContainer = styled.div`
   width: 600px;
-  height: 100%;
+  height: 100vh;
   position: fixed;
+  overflow: auto;
   top: 0;
   left: 50%;
   transform: translateX(-50%);

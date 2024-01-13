@@ -14,6 +14,7 @@ export const BankRight = styled.div`
 `;
 export const BankLeft = styled.div`
   border: 1px solid red;
+  margin-right: 3.31rem;
 `;
 export const BankColumn = styled.button`
   border: none;
