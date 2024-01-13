@@ -1,14 +1,14 @@
 'use client';
-import styled from "styled-components";
-import Image from "next/image";
+import styled from 'styled-components';
+import Image from 'next/image';
 import cState from '../../../../public/cState.png';
-import { MENTORING_DONE_TEXT } from "@/constants/mentoring/done";
-import { useRouter } from "next/navigation";
+import { MENTORING_DONE_TEXT } from '@/constants/mentoring/done';
+import { useRouter } from 'next/navigation';
 
 function MentoringApplyDonePage() {
   const router = useRouter();
 
-  return(
+  return (
     <MADContainer>
       <MADContent>
         <Image id="check-img" src={cState} alt="체크 이미지" />
@@ -17,17 +17,24 @@ function MentoringApplyDonePage() {
       </MADContent>
       <MADBtnContainer>
         <div id="mentoring-done-view-msg">{MENTORING_DONE_TEXT.viewMsg}</div>
-        <button id="mentoring-done-view-btn" onClick={() => {router.push('/junior/mentoring');}}>{MENTORING_DONE_TEXT.viewBtnText}</button>
+        <button
+          id="mentoring-done-view-btn"
+          onClick={() => {
+            router.push('/junior/mentoring');
+          }}
+        >
+          {MENTORING_DONE_TEXT.viewBtnText}
+        </button>
       </MADBtnContainer>
     </MADContainer>
-  )
+  );
 }
 
 const MADContainer = styled.div`
   width: inherit;
   height: 100%;
   position: relative;
-`
+`;
 
 const MADContent = styled.div`
   width: 14.82rem;
@@ -43,13 +50,13 @@ const MADContent = styled.div`
   }
 
   #mentoring-done-msg {
-    color: #868E96;
+    color: #868e96;
     line-height: 140%;
     letter-spacing: -0.5px;
     white-space: pre;
     margin-top: 0.875rem;
   }
-`
+`;
 
 const MADBtnContainer = styled.div`
   width: 95%;
@@ -65,13 +72,13 @@ const MADBtnContainer = styled.div`
     height: 3.375rem;
     margin-top: 0.75rem;
     border-radius: 12px;
-    background-color: #2FC4B2;
+    background-color: #2fc4b2;
     color: #fff;
     border: none;
     font-size: 18px;
     font-weight: 700;
     cursor: pointer;
   }
-`
+`;
 
 export default MentoringApplyDonePage;
