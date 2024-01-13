@@ -10,11 +10,24 @@ import { firAbleTimeAtom, secAbleTimeAtom, thiAbleTimeAtom } from "@/stores/ment
 import { MENTORING_PAY_ETC_TEXT, MENTORING_PAY_NOTICE_TEXT, MENTORING_PAY_PAYMENT_TEXT, MENTORING_PAY_TITLE } from "@/constants/pay/pay";
 import Image from "next/image";
 import mint_check from '../../../../../public/mint_check.png';
+import { useEffect, useState } from "react";
+import { usePathname } from "next/navigation";
+import useAuth from "@/hooks/useAuth";
+import axios from "axios";
 
 function MentoringApplyPayPage() {
+  const [nickName, setNickName] = useState('');
+  const [profile, setProfile] = useState('');
+  const [postgradu, setPostgradu] = useState('');
+  const [major, setMajor] = useState('');
+  const [lab, setLab] = useState('');
   const firstTime = useAtomValue(firAbleTimeAtom);
   const secondTime = useAtomValue(secAbleTimeAtom);
   const thirdTime = useAtomValue(thiAbleTimeAtom);
+  const currentPath = usePathname();
+  const pathArr = currentPath.split('/');
+  const seniorId = pathArr[2];
+  const { getAccessToken } = useAuth();
 
   const formatTime = (time: string) => {
     if(!time) return '';
@@ -34,6 +47,28 @@ function MentoringApplyPayPage() {
     } else return '';
   }
 
+  useEffect(() => {
+    const accessTkn = getAccessToken();
+    if(accessTkn) {
+      axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/profile`, {
+        headers: {
+          Authorization: `Bearer ${accessTkn}`
+        }
+      }).then((response) => {
+        const res = response.data;
+        if(res.code && res.code == 'SNR200') {
+          setNickName(res.data.nickName);
+          setProfile(res.data.profile);
+          setPostgradu(res.data.postgradu);
+          setMajor(res.data.major);
+          setLab(res.data.lab);
+        }
+      }).catch((err) => {
+        console.error(err);
+      })
+    }
+  }, []);
+
   return (
     <MAPContainer>
       <BackHeader headerText="멘토링 결제 정보" />
@@ -42,14 +77,14 @@ function MentoringApplyPayPage() {
         <MAPTitle id="map-title-senior-info">{MENTORING_PAY_TITLE.seniorInfo}</MAPTitle>
         <MAPBox>
           <MAPInfoWrapper>
-            <RoundedImage imgSrc={user_icon} altMsg="대학원생 프로필 이미지" />
+            <RoundedImage imgSrc={profile ? profile : user_icon} altMsg="대학원생 프로필 이미지" />
             <div id="map-info-text">
               <div id="map-info-postgradu-major">
-                <div id="map-info-postgradu">카이스트&nbsp;</div>
-                <div id="map-info-major">인공지능융합과</div>
+                <div id="map-info-postgradu">{postgradu}&nbsp;</div>
+                <div id="map-info-major">{major}</div>
               </div>
-              <AuthLabeledText str="김도민님" />
-              <div id="map-info-lab">Computer Systems and Intelligence</div>
+              <AuthLabeledText str={`${nickName}님`} />
+              <div id="map-info-lab">{lab}</div>
             </div>
           </MAPInfoWrapper>
         </MAPBox>
