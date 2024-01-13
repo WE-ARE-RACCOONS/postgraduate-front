@@ -6,12 +6,12 @@ import styled from "styled-components";
 import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from "@/components/Text/AuthLabeledText";
 import { useAtomValue } from "jotai";
-import { firAbleTimeAtom, secAbleTimeAtom, thiAbleTimeAtom } from "@/stores/mentoring";
+import { firAbleTimeAtom, questionAtom, secAbleTimeAtom, subjectAtom, thiAbleTimeAtom } from "@/stores/mentoring";
 import { MENTORING_PAY_ETC_TEXT, MENTORING_PAY_NOTICE_TEXT, MENTORING_PAY_PAYMENT_TEXT, MENTORING_PAY_TITLE } from "@/constants/pay/pay";
 import Image from "next/image";
 import mint_check from '../../../../../public/mint_check.png';
 import { useEffect, useState } from "react";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import useAuth from "@/hooks/useAuth";
 import axios from "axios";
 
@@ -21,9 +21,12 @@ function MentoringApplyPayPage() {
   const [postgradu, setPostgradu] = useState('');
   const [major, setMajor] = useState('');
   const [lab, setLab] = useState('');
+  const topic = useAtomValue(subjectAtom);
+  const question = useAtomValue(questionAtom);
   const firstTime = useAtomValue(firAbleTimeAtom);
   const secondTime = useAtomValue(secAbleTimeAtom);
   const thirdTime = useAtomValue(thiAbleTimeAtom);
+  const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
@@ -45,6 +48,31 @@ function MentoringApplyPayPage() {
       result += (Number(min) == 0) ? `${hour}시 00분 ~ ${hour}시 30분` : `${hour}시 30분 ~ ${Number(hour) + 1}시 00분`;
       return result;
     } else return '';
+  }
+
+  const payHandler = () => {
+    // 결제 연결할 때 디벨롭 예정
+    const accessTkn = getAccessToken();
+    if(accessTkn && topic && question && firstTime && secondTime && thirdTime) {
+      const timeArr = [firstTime, secondTime, thirdTime];
+
+      axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`, 
+      {
+        seniorId: seniorId,
+        topic: topic,
+        question: question,
+        date: timeArr.join(',')
+      }, 
+      {
+        headers: {
+          Authorization: `Bearer ${accessTkn}`
+        }
+      }).then((response) => {
+        console.log(response);
+      }).catch((err) => {
+        console.error(err);
+      })
+    }
   }
 
   useEffect(() => {
@@ -140,7 +168,19 @@ function MentoringApplyPayPage() {
             <li>{MENTORING_PAY_NOTICE_TEXT.noResponse}</li>
           </ul>
         </MAPNoticeWrapper>
+        <MAPPolicyWrapper>
+          <MAPTitle>{MENTORING_PAY_TITLE.noShow}</MAPTitle>
+          <button className="policy-more-detail">자세히 알아보기</button>
+        </MAPPolicyWrapper>
+        <MAPPolicyWrapper>
+          <MAPTitle>{MENTORING_PAY_TITLE.refund}</MAPTitle>
+          <button className="policy-more-detail">자세히 알아보기</button>
+        </MAPPolicyWrapper>
       </MAPContent>
+      <MAPBtnContainer>
+        <button id="map-prev-btn" className="map-btn" onClick={() => {router.back();}}>이전</button>
+        <button id="map-next-btn" className="map-btn">결제하기</button>
+      </MAPBtnContainer>
     </MAPContainer>
   );
 }
@@ -164,7 +204,7 @@ const MAPContent = styled.div`
 `
 
 const MAPTitle = styled.div`
-  width: 90%;
+  width: max-content;
   height: 1.375rem;
   font-weight: 700;
 `
@@ -287,6 +327,7 @@ const MAPPayMethodWrapper = styled.div`
 const MAPNoticeWrapper = styled.div`
   width: 100%;
   margin-top: 1.5rem;
+  padding-bottom: 0.75rem;
 
   ul {
     width: 95%;
@@ -299,6 +340,53 @@ const MAPNoticeWrapper = styled.div`
 
   li:last-child {
     text-decoration-line: underline;
+  }
+`
+
+const MAPPolicyWrapper = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.75rem;
+
+  .policy-more-detail {
+    border: none;
+    background-color: transparent;
+    color: #868E96;
+    font-size: 14px;
+    font-family: Pretendard;
+    text-decoration-line: underline;
+    cursor: pointer;
+  }
+`
+
+const MAPBtnContainer = styled.div`
+  width: 93%;
+  height: 3.375rem;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  margin-top: 4.375rem;
+
+  .map-btn {
+    font-size: 18px;
+    color: #fff;
+    font-family: Pretendard;
+    border: none;
+    font-weight: 700;
+    height: 3.375rem;
+    border-radius: 12px;
+    cursor: pointer;
+  }
+
+  #map-prev-btn {
+    width: 34%;
+    background-color: #ADB5BD;
+  }
+
+  #map-next-btn {
+    width: 63%;
+    background-color: #2FC4B2;
   }
 `
 
