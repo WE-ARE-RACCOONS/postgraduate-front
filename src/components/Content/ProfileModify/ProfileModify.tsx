@@ -237,7 +237,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
         </ValidatorBox>
       )}
       <SaveBtnBox>
-        <ClickedBtn btnText="저장" clickHandler={submitHandler} />
+        <ClickedBtn kind="click" btnText="저장" clickHandler={submitHandler} />
       </SaveBtnBox>
       {modal && portalElement
         ? createPortal(
