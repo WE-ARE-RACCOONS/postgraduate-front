@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-interface SMCBtnProps {
-  isActive?: boolean;
-}
 export const ConfirmProfile = styled.img`
   width: 3.375rem;
   height: 3.375rem;
@@ -88,6 +85,7 @@ export const ModalMentoringBackground = styled.div`
     line-height: 1rem; /* 114.286% */
     letter-spacing: -0.0375rem;
     margin-bottom: 0.38rem;
+    margin-bottom: 0.5rem;
   }
 `;
 export const ModalClose = styled.button`
@@ -111,6 +109,8 @@ export const ModalClose = styled.button`
 export const ModalBottomBtn = styled.div`
   justify-content: center;
   display: flex;
+  margin-bottom: 7rem;
+  margin-top: 3rem;
 `;
 export const MMTop = styled.div`
   align-items: center;
@@ -130,8 +130,7 @@ export const MMTop = styled.div`
     margin-left: 35%;
   }
 `;
-export const SMCBtn = styled.button<SMCBtnProps>`
-  background-color: ${(props) => (props.isActive ? '#2FC4B2' : '#F8F9FA')};
+export const SMCBtn = styled.button`
   border-radius: 0.25rem;
   display: flex;
   height: 2.5rem;

@@ -17,6 +17,7 @@ export const ApplyCancleBtnStyle = styled.button`
   border: none;
 `;
 export const ACsenior = styled.button`
+  margin-right: 0.5rem;
   display: flex;
   width: 10.07744rem;
   padding: 1rem 0rem;

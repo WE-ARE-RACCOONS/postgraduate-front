@@ -36,11 +36,13 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   const activeTab = useAtomValue(activeTabAtom);
   const [isActive, setIsActive] = useState(false);
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
-    const buttonContent = e.currentTarget.textContent;
+    const button = e.currentTarget;
+    const buttonContent = button.textContent;
+    const newClicked = !isActive;
+    setIsActive(newClicked);
     setDate(buttonContent ? buttonContent : '');
-    setIsActive(!isActive);
+    button.style.backgroundColor = newClicked ?'#2FC4B2':'#F8F9FA';
   };
-
   useEffect(() => {
     if (props.mentoringId !== 0) {
       const Token = getAccessToken();
@@ -145,9 +147,8 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         <div>
           {data &&
             data.dates.map((date, index) => (
-              <div>
+              <div key={index}>
                 <SMCBtn
-                  isActive={!isActive}
                   key={index}
                   onClick={handleButtonClick}
                 >
