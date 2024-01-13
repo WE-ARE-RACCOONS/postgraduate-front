@@ -3,8 +3,11 @@ import styled from "styled-components";
 import Image from "next/image";
 import cState from '../../../../public/cState.png';
 import { MENTORING_DONE_TEXT } from "@/constants/mentoring/done";
+import { useRouter } from "next/navigation";
 
 function MentoringApplyDonePage() {
+  const router = useRouter();
+
   return(
     <MADContainer>
       <MADContent>
@@ -14,7 +17,7 @@ function MentoringApplyDonePage() {
       </MADContent>
       <MADBtnContainer>
         <div id="mentoring-done-view-msg">{MENTORING_DONE_TEXT.viewMsg}</div>
-        <button id="mentoring-done-view-btn">{MENTORING_DONE_TEXT.viewBtnText}</button>
+        <button id="mentoring-done-view-btn" onClick={() => {router.push('/junior/mentoring');}}>{MENTORING_DONE_TEXT.viewBtnText}</button>
       </MADBtnContainer>
     </MADContainer>
   )
