@@ -14,21 +14,32 @@ import {
   RemainFont,
   MRFont,
   STDday,
-  STDDexpect
+  STDDexpect,
+  MASalaryBox,
+  MASalaryBoxY
 } from './MentoringApply.styled';
+import Image from 'next/image';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '../../../stores/tap';
 import { TAB } from '../../../constants/tab/ctap';
 import KakaoOpenChat from '../../KakaoOpenChat/KakaoOpenChat';
 import NaverPoint from '../../NaverPoint/NaverPoint';
 import useAuth from '../../../hooks/useAuth';
+import state_n from '../../../../public/cState_n.png'
+import state_y from '../../../../public/cState.png'
 import { MentoringApplyProps } from '../../../types/mentoring/mentoring';
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
-  const datasplit = data ? data.date : '';
-  const dateParts = (datasplit || '').split('-');
-  const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
-  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+  const dataSplit = data ? data.date : '';
+  const salarySplit = data ? data.salaryDate : '';
+  const dateParts = (dataSplit || '').split('-');
+  const salParts = (salarySplit || '').split('-');
+  const hour = parseInt(dateParts[3], 10);
+  const period = hour >= 12 ? '오후' : '오전';
+  const formattedHour = hour > 12 ? hour - 12 : hour;
+  const dateExpected = `${dateParts[1]}월 ${dateParts[2]}일 ${period} ${formattedHour}시 ${dateParts[4]}분`;
+  const dateDone = `${dateParts[1]}월 ${dateParts[2]}일 ${period} ${formattedHour}시 ${dateParts[4]}분`;
+  const dateSalary = `${salParts[1]}월 ${salParts[2]}일`;
   const { getUserType } = useAuth();
   const userType = getUserType();
   return (
@@ -73,7 +84,13 @@ function MentoringApply({ data }: MentoringApplyProps) {
                    {dateExpected}
                    </STDDexpect>
                    </div>}
-                  {activeTab === TAB.done && dateDone}
+                   {activeTab === TAB.done &&
+                  <div style={{display:'flex',marginTop:'0.5rem'}}>
+                  <STDday>D-20</STDday>
+                  <STDDexpect>
+                   {dateDone}
+                   </STDDexpect>
+                   </div>}
                 </>
               )}
             </ConfirmInfo>
@@ -110,9 +127,33 @@ function MentoringApply({ data }: MentoringApplyProps) {
                 {/* {data ? data.remainTime : ''}후에 자동취소, 지금 수락하세요! */}
               </div>
             )}
-            {activeTab === TAB.done && (
-              <div>{data ? data.salaryDate : ''} 정산예정</div>
-            )}
+            {activeTab === TAB.done ? (
+  data && data.status ? (
+    <>
+      <MASalaryBoxY>
+        <Image 
+          src={state_y}
+          alt='state'
+          width={18}
+          height={18}
+          style={{ marginRight: '0.19rem' }}
+        />
+        {dateSalary} 정산완료
+      </MASalaryBoxY>
+    </>
+  ) : (
+    <MASalaryBox>
+        <Image 
+          src={state_n}
+          alt='no-state'
+          width={18}
+          height={18}
+          style={{ marginRight: '0.19rem' }}
+        />
+        {dateSalary} 정산예정
+      </MASalaryBox>
+  )
+) : null}
           </>
         )}
       </ConfirmBox>

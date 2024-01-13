@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
-
+import {ASBtn} from './AccountShowBtn.styled'
 function AccountShowBtn() {
   const router = useRouter();
   const showAccount = () => {
@@ -8,9 +8,7 @@ function AccountShowBtn() {
   };
   return (
     <div>
-      <div>후배에게 리뷰작성을 요청하세요!</div>
-      <div>멘토링 성사율이 올라가요!</div>
-      <button onClick={showAccount}>정산 내역 보기</button>
+      <ASBtn onClick={showAccount}>정산 내역 보기</ASBtn>
     </div>
   );
 }

@@ -97,6 +97,46 @@ export const ConfirmState = styled.div`
 export const ConfirmShow = styled.div`
   border: 1px solid black;
 `;
+export const MASalaryBox = styled.div`
+border: none;
+  width: 19.4375rem;
+height: 2.375rem;
+flex-shrink: 0;
+border-radius: 0.5rem;
+background: #F8F9FA;
+color: #212529;
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.4rem */
+margin-left: 1rem;
+align-items: center;
+justify-content: center;
+display: flex;
+margin-bottom: 1rem;
+`;
+export const MASalaryBoxY = styled.div`
+border: none;
+  width: 19.4375rem;
+height: 2.375rem;
+flex-shrink: 0;
+border-radius: 0.5rem;
+background: #F8F9FA;
+color: #00A0E1;
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.4rem */
+margin-left: 1rem;
+align-items: center;
+justify-content: center;
+display: flex;
+margin-bottom: 1rem;
+`;
 export const STDday = styled.div`
 margin-right: 0.31rem;
   color: #495565;

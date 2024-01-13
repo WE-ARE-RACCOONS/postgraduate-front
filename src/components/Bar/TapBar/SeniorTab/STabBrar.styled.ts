@@ -20,6 +20,22 @@ export const TabWrap = styled.div`
   justify-content: space-between;
   margin: 0 1.7rem;
 `;
+export const NoMentoring = styled.div`
+color: #C2CEDE;
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 1.4rem */
+display: flex;
+justify-content: center;
+`;
+export const DoneBtnBox = styled.div`
+  width: 19.4375rem;
+height: 2.375rem;
+flex-shrink: 0;
+`;
 export const TapStyle = styled.div<TapStyleProps>`
   width: 4.9rem;
   height: 3.37rem;

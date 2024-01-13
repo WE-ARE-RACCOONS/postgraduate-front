@@ -13,6 +13,15 @@ import {
   ModalBottomBtn,
   MMTop,
   SMCBtn,
+  MApplyBox,
+  ConfirmContent,
+  ConfirmProfile,
+  ConfirmInfo,
+  ConfirmTitle,
+  UserInfo,
+  TermBox,
+  SMSDate,
+  ServiceMsg
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
@@ -96,7 +105,22 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         />
       </MMTop>
       <div id="mentoring-back">
-        <MentoringApply data={data} />
+      <MApplyBox>
+        <ConfirmContent>
+          <ConfirmProfile
+            src={data ? data.profile : '/user.png'}
+          ></ConfirmProfile>
+          <ConfirmInfo>
+            <ConfirmTitle>
+              {data ? data.nickName : ''}&nbsp;
+              후배와 멘토링
+            </ConfirmTitle>
+          </ConfirmInfo>
+          <TermBox>
+            {data? data.term :''}분
+          </TermBox>
+        </ConfirmContent>
+      </MApplyBox>
       </div>
       <div id="mentoring-topic">원하는 멘토링 주제</div>
       <div style={{ marginBottom: '1.5rem' }}>
@@ -133,7 +157,10 @@ function SmentoringSpec(props: ModalMentoringSProps) {
             ))}
         </div>
       ) : (
-        data && data.dates
+        <SMSDate>
+        {data && data.dates}
+        </SMSDate>
+        
       )}
       <ModalBottomBtn>
         {activeTab === 'waiting' ? (
@@ -148,7 +175,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
             <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
           </>
         ) : (
-          <div>멘토링 취소는 고객센터로 문의해주세요</div>
+          <ServiceMsg>멘토링 취소는 고객센터로 문의해주세요</ServiceMsg>
         )}
       </ModalBottomBtn>
     </ModalMentoringBackground>
