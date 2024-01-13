@@ -97,3 +97,20 @@ export const ConfirmState = styled.div`
 export const ConfirmShow = styled.div`
   border: 1px solid black;
 `;
+export const STDday = styled.div`
+margin-right: 0.31rem;
+  color: #495565;
+font-family: Pretendard;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.05rem */
+`;
+export const STDDexpect = styled.div`
+color: #495565;
+font-family: Pretendard;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 400;
+line-height: 140%; /* 1.05rem */
+`;

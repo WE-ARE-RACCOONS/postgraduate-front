@@ -13,6 +13,8 @@ import {
   DateDone,
   RemainFont,
   MRFont,
+  STDday,
+  STDDexpect
 } from './MentoringApply.styled';
 import { useAtomValue } from 'jotai';
 import { activeTabAtom } from '../../../stores/tap';
@@ -64,7 +66,13 @@ function MentoringApply({ data }: MentoringApplyProps) {
                     </MRFont>
                   )}
 
-                  {activeTab === TAB.expected && dateExpected}
+                  {activeTab === TAB.expected &&
+                  <div style={{display:'flex',marginTop:'0.5rem'}}>
+                  <STDday>D-20</STDday>
+                  <STDDexpect>
+                   {dateExpected}
+                   </STDDexpect>
+                   </div>}
                   {activeTab === TAB.done && dateDone}
                 </>
               )}
