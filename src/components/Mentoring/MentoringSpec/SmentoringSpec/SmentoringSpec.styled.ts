@@ -182,3 +182,12 @@ font-style: normal;
 font-weight: 400;
 line-height: 140%; /* 1.225rem */
 `;
+export const WarnMsg = styled.div`
+margin-left:1rem;
+color: #F16464;
+font-family: Noto Sans JP;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+`;

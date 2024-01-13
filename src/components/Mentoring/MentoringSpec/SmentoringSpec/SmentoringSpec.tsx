@@ -21,7 +21,8 @@ import {
   UserInfo,
   TermBox,
   SMSDate,
-  ServiceMsg
+  ServiceMsg,
+  WarnMsg
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
@@ -29,6 +30,7 @@ import { activeTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
+import { ValidatorBox } from '@/components/Content/AddTime/AddTime.styled';
 function SmentoringSpec(props: ModalMentoringSProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
@@ -165,6 +167,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         </SMSDate>
         
       )}
+      {isActive ? '': <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>}
       <ModalBottomBtn>
         {activeTab === 'waiting' ? (
           <>
