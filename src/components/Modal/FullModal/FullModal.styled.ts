@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const FullModalContainer = styled.div`
   width: 600px;
-  height: 100vh;
+  height: 100%;
   position: fixed;
   overflow: auto;
   top: 0;
