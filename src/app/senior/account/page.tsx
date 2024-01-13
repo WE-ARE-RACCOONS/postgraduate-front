@@ -130,7 +130,7 @@ function AccountPage() {
       {isInputsFilled ? (
         <SABtnT onClick={handleComplete}>완료</SABtnT>
       ) : (
-        <SABtnF onClick={handleComplete}>완료</SABtnF>
+        <SABtnF>완료</SABtnF>
       )}
       {modal && portalElement
         ? createPortal(

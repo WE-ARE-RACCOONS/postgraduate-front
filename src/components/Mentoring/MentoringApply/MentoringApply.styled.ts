@@ -99,7 +99,7 @@ export const ConfirmShow = styled.div`
 `;
 export const MASalaryBox = styled.div`
 border: none;
-  width: 19.4375rem;
+width: 91%;
 height: 2.375rem;
 flex-shrink: 0;
 border-radius: 0.5rem;
@@ -119,7 +119,7 @@ margin-bottom: 1rem;
 `;
 export const MASalaryBoxY = styled.div`
 border: none;
-  width: 19.4375rem;
+  width: 91%;
 height: 2.375rem;
 flex-shrink: 0;
 border-radius: 0.5rem;

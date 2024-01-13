@@ -167,7 +167,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         </SMSDate>
         
       )}
-      {isActive ? '': <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>}
+      {activeTab === 'waiting' && (isActive ? '': <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>)}
       <ModalBottomBtn>
         {activeTab === 'waiting' ? (
           <>

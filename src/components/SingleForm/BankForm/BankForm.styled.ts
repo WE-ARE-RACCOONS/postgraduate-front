@@ -6,6 +6,8 @@ export const BankBox = styled.div`
   margin: 0rem 1.87rem;
   display: flex;
   margin-top: 2.7rem;
+  justify-content: center;
+  align-items: center;
 `;
 export const BankRight = styled.div`
 `;

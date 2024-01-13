@@ -174,7 +174,7 @@ background: #F8F9FA;
 margin-left: 1rem;
 `;
 export const ServiceMsg = styled.div`
-margin-top: 5rem;
+margin-top: 3rem;
   color: #868E96;
 font-family: Pretendard;
 font-size: 0.875rem;
