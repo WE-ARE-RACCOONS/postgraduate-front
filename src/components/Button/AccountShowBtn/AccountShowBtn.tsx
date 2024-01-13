@@ -1,6 +1,6 @@
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import {ASBtn} from './AccountShowBtn.styled'
+import { ASBtn } from './AccountShowBtn.styled';
 function AccountShowBtn() {
   const router = useRouter();
   const showAccount = () => {

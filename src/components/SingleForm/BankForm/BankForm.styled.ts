@@ -9,14 +9,13 @@ export const BankBox = styled.div`
   justify-content: center;
   align-items: center;
 `;
-export const BankRight = styled.div`
-`;
+export const BankRight = styled.div``;
 export const BankLeft = styled.div`
   margin-right: 3.31rem;
 `;
 export const BankColumn = styled.button`
-background-color: white;
-margin-bottom: 1.25rem;
+  background-color: white;
+  margin-bottom: 1.25rem;
   border: none;
   display: flex;
   justify-content: center;

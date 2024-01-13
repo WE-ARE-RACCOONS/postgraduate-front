@@ -9,5 +9,4 @@ export const BANK_NAME = {
   u: '우리은행',
   ha: '하나은행',
   ka: '카카오뱅크',
-
 };

@@ -11,24 +11,24 @@ export const ConfirmInfo = styled.div`
   margin-left: 0.94rem;
 `;
 export const TermBox = styled.div`
-margin-left:2.8rem;
-margin-top: 1rem;
+  margin-left: 2.8rem;
+  margin-top: 1rem;
   display: inline-flex;
-height: 1.375rem;
-padding: 0.0625rem 0.5rem;
-align-items: center;
-flex-shrink: 0;
-border-radius: 6.25rem;
-border: 1px solid #2FC4B2;
-background: #FFF;
-color: #2FC4B2;
-text-align: center;
-font-family: Pretendard;
-font-size: 0.625rem;
-font-style: normal;
-font-weight: 700;
-line-height: 1.125rem; /* 180% */
-letter-spacing: -0.0375rem;
+  height: 1.375rem;
+  padding: 0.0625rem 0.5rem;
+  align-items: center;
+  flex-shrink: 0;
+  border-radius: 6.25rem;
+  border: 1px solid #2fc4b2;
+  background: #fff;
+  color: #2fc4b2;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 0.625rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 1.125rem; /* 180% */
+  letter-spacing: -0.0375rem;
 `;
 export const ConfirmTitle = styled.div`
   color: #212529;
@@ -128,7 +128,7 @@ export const MMTop = styled.div`
     letter-spacing: -0.03125rem;
     margin-left: 35%;
   }
-  #img{
+  #img {
     text-align: center;
     margin-left: 91%;
     position: absolute;
@@ -165,29 +165,29 @@ export const ConfirmContent = styled.div`
 `;
 export const SMSDate = styled.div`
   display: flex;
-height: 2.5rem;
-width: 92%;
-padding: 0.5rem 0.75rem;
-display: flex;
-border-radius: 0.25rem;
-background: #F8F9FA;
-margin-left: 1rem;
+  height: 2.5rem;
+  width: 92%;
+  padding: 0.5rem 0.75rem;
+  display: flex;
+  border-radius: 0.25rem;
+  background: #f8f9fa;
+  margin-left: 1rem;
 `;
 export const ServiceMsg = styled.div`
-margin-top: 3rem;
-  color: #868E96;
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.225rem */
+  margin-top: 3rem;
+  color: #868e96;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.225rem */
 `;
 export const WarnMsg = styled.div`
-margin-left:1rem;
-color: #F16464;
-font-family: Noto Sans JP;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+  margin-left: 1rem;
+  color: #f16464;
+  font-family: Noto Sans JP;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
 `;

@@ -7,9 +7,9 @@ import {
   TabWrap,
   TabResultContainer,
   TabResult,
-  MentoringBox,DoneBtnBox,
-  NoMentoring
-
+  MentoringBox,
+  DoneBtnBox,
+  NoMentoring,
 } from './STabBrar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
@@ -82,21 +82,22 @@ function STabBar() {
               <MentoringBox key={idx}>
                 <MentoringApply data={el} />
                 {activeTab === TAB.waiting || activeTab === TAB.expected ? (
-          <ModalBtn
-            type="seniorShow"
-            btnText={
-              activeTab === TAB.waiting
-                ? '신청서 보고 수락하기'
-                : '신청서 보기'
-            }
-            modalHandler={modalHandler}
-            onClick={() => {
-              setModalType('senior');
-              setSelectedMentoringId(el.mentoringId);
-            }}
-          />
-        ) : ''}
-
+                  <ModalBtn
+                    type="seniorShow"
+                    btnText={
+                      activeTab === TAB.waiting
+                        ? '신청서 보고 수락하기'
+                        : '신청서 보기'
+                    }
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('senior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                ) : (
+                  ''
+                )}
               </MentoringBox>
             ))}
             {activeTab === TAB.done ? (
@@ -104,7 +105,7 @@ function STabBar() {
                 style={{
                   position: 'sticky',
                   bottom: '4rem',
-                  zIndex:'100'
+                  zIndex: '100',
                 }}
               >
                 <AccountShowBtn />
@@ -114,9 +115,7 @@ function STabBar() {
             )}
           </div>
         ) : (
-          <NoMentoring>
-          {TAB_STATE[activeTab]}인 멘토링이 없어요
-          </NoMentoring>
+          <NoMentoring>{TAB_STATE[activeTab]}인 멘토링이 없어요</NoMentoring>
         )}
       </div>
     );

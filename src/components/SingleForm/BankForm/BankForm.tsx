@@ -13,7 +13,6 @@ import { bankNameAtom } from '@/stores/bankName';
 import { BankColumnItemProps } from '@/types/bank/bank';
 import { Bank } from '@/types/bank/bank';
 
-
 const banks: Bank[] = [
   { name: BANK_NAME.k, imgSrc: '/Kbank.png' },
   { name: BANK_NAME.n, imgSrc: '/nh.png' },
@@ -26,7 +25,6 @@ const banks: Bank[] = [
   { name: BANK_NAME.ha, imgSrc: '/ha.png' },
   { name: BANK_NAME.ka, imgSrc: '/ka.png' },
 ];
-
 
 const BankColumnItem: React.FC<BankColumnItemProps> = ({ bank, onClick }) => (
   <BankColumn onClick={onClick}>

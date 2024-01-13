@@ -22,7 +22,7 @@ import {
   TermBox,
   SMSDate,
   ServiceMsg,
-  WarnMsg
+  WarnMsg,
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
@@ -43,7 +43,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     const newClicked = !isActive;
     setIsActive(newClicked);
     setDate(buttonContent ? buttonContent : '');
-    button.style.backgroundColor = newClicked ?'#2FC4B2':'#F8F9FA';
+    button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
   };
   useEffect(() => {
     if (props.mentoringId !== 0) {
@@ -98,35 +98,32 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     <ModalMentoringBackground>
       <MMTop>
         <div id="header-text">멘토링 신청서</div>
-        <div id ='img'>
-        <Image
-          id="x-icon"
-          src={x_icon}
-          alt="계정 수정 모달 닫기 버튼"
-          width={24}
-          height={24}
-          style={{}}
-          onClick={props.modalHandler}
-        />
+        <div id="img">
+          <Image
+            id="x-icon"
+            src={x_icon}
+            alt="계정 수정 모달 닫기 버튼"
+            width={24}
+            height={24}
+            style={{}}
+            onClick={props.modalHandler}
+          />
         </div>
       </MMTop>
       <div id="mentoring-back">
-      <MApplyBox>
-        <ConfirmContent>
-          <ConfirmProfile
-            src={data ? data.profile : '/user.png'}
-          ></ConfirmProfile>
-          <ConfirmInfo>
-            <ConfirmTitle>
-              {data ? data.nickName : ''}&nbsp;
-              후배와 멘토링
-            </ConfirmTitle>
-          </ConfirmInfo>
-          <TermBox>
-            {data? data.term :''}분
-          </TermBox>
-        </ConfirmContent>
-      </MApplyBox>
+        <MApplyBox>
+          <ConfirmContent>
+            <ConfirmProfile
+              src={data ? data.profile : '/user.png'}
+            ></ConfirmProfile>
+            <ConfirmInfo>
+              <ConfirmTitle>
+                {data ? data.nickName : ''}&nbsp; 후배와 멘토링
+              </ConfirmTitle>
+            </ConfirmInfo>
+            <TermBox>{data ? data.term : ''}분</TermBox>
+          </ConfirmContent>
+        </MApplyBox>
       </div>
       <div id="mentoring-topic">원하는 멘토링 주제</div>
       <div style={{ marginBottom: '1.5rem' }}>
@@ -152,22 +149,21 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           {data &&
             data.dates.map((date, index) => (
               <div key={index}>
-                <SMCBtn
-                  key={index}
-                  onClick={handleButtonClick}
-                >
+                <SMCBtn key={index} onClick={handleButtonClick}>
                   {date}
                 </SMCBtn>
               </div>
             ))}
         </div>
       ) : (
-        <SMSDate>
-        {data && data.dates}
-        </SMSDate>
-        
+        <SMSDate>{data && data.dates}</SMSDate>
       )}
-      {activeTab === 'waiting' && (isActive ? '': <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>)}
+      {activeTab === 'waiting' &&
+        (isActive ? (
+          ''
+        ) : (
+          <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>
+        ))}
       <ModalBottomBtn>
         {activeTab === 'waiting' ? (
           <>

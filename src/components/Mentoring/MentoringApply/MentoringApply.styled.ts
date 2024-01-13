@@ -98,59 +98,59 @@ export const ConfirmShow = styled.div`
   border: 1px solid black;
 `;
 export const MASalaryBox = styled.div`
-border: none;
-width: 91%;
-height: 2.375rem;
-flex-shrink: 0;
-border-radius: 0.5rem;
-background: #F8F9FA;
-color: #212529;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.4rem */
-margin-left: 1rem;
-align-items: center;
-justify-content: center;
-display: flex;
-margin-bottom: 1rem;
+  border: none;
+  width: 91%;
+  height: 2.375rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+  color: #212529;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
+  margin-left: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 1rem;
 `;
 export const MASalaryBoxY = styled.div`
-border: none;
+  border: none;
   width: 91%;
-height: 2.375rem;
-flex-shrink: 0;
-border-radius: 0.5rem;
-background: #F8F9FA;
-color: #00A0E1;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.4rem */
-margin-left: 1rem;
-align-items: center;
-justify-content: center;
-display: flex;
-margin-bottom: 1rem;
+  height: 2.375rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+  color: #00a0e1;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
+  margin-left: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 1rem;
 `;
 export const STDday = styled.div`
-margin-right: 0.31rem;
+  margin-right: 0.31rem;
   color: #495565;
-font-family: Pretendard;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.05rem */
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.05rem */
 `;
 export const STDDexpect = styled.div`
-color: #495565;
-font-family: Pretendard;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.05rem */
+  color: #495565;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.05rem */
 `;

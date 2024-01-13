@@ -1,8 +1,8 @@
 export interface Bank {
-    name: string;
-    imgSrc: string;
-  }
+  name: string;
+  imgSrc: string;
+}
 export interface BankColumnItemProps {
-    bank: Bank;
-    onClick: () => void;
-  }
+  bank: Bank;
+  onClick: () => void;
+}

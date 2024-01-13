@@ -16,7 +16,7 @@ import {
   STDday,
   STDDexpect,
   MASalaryBox,
-  MASalaryBoxY
+  MASalaryBoxY,
 } from './MentoringApply.styled';
 import Image from 'next/image';
 import { useAtomValue } from 'jotai';
@@ -25,8 +25,8 @@ import { TAB } from '../../../constants/tab/ctap';
 import KakaoOpenChat from '../../KakaoOpenChat/KakaoOpenChat';
 import NaverPoint from '../../NaverPoint/NaverPoint';
 import useAuth from '../../../hooks/useAuth';
-import state_n from '../../../../public/cState_n.png'
-import state_y from '../../../../public/cState.png'
+import state_n from '../../../../public/cState_n.png';
+import state_y from '../../../../public/cState.png';
 import { MentoringApplyProps } from '../../../types/mentoring/mentoring';
 function MentoringApply({ data }: MentoringApplyProps) {
   const activeTab = useAtomValue(activeTabAtom);
@@ -77,20 +77,18 @@ function MentoringApply({ data }: MentoringApplyProps) {
                     </MRFont>
                   )}
 
-                  {activeTab === TAB.expected &&
-                  <div style={{display:'flex',marginTop:'0.5rem'}}>
-                  <STDday>D-20</STDday>
-                  <STDDexpect>
-                   {dateExpected}
-                   </STDDexpect>
-                   </div>}
-                   {activeTab === TAB.done &&
-                  <div style={{display:'flex',marginTop:'0.5rem'}}>
-                  <STDday>D-20</STDday>
-                  <STDDexpect>
-                   {dateDone}
-                   </STDDexpect>
-                   </div>}
+                  {activeTab === TAB.expected && (
+                    <div style={{ display: 'flex', marginTop: '0.5rem' }}>
+                      <STDday>D-20</STDday>
+                      <STDDexpect>{dateExpected}</STDDexpect>
+                    </div>
+                  )}
+                  {activeTab === TAB.done && (
+                    <div style={{ display: 'flex', marginTop: '0.5rem' }}>
+                      <STDday>D-20</STDday>
+                      <STDDexpect>{dateDone}</STDDexpect>
+                    </div>
+                  )}
                 </>
               )}
             </ConfirmInfo>
@@ -128,32 +126,32 @@ function MentoringApply({ data }: MentoringApplyProps) {
               </div>
             )}
             {activeTab === TAB.done ? (
-  data && data.status ? (
-    <>
-      <MASalaryBoxY>
-        <Image 
-          src={state_y}
-          alt='state'
-          width={18}
-          height={18}
-          style={{ marginRight: '0.19rem' }}
-        />
-        {dateSalary} 정산완료
-      </MASalaryBoxY>
-    </>
-  ) : (
-    <MASalaryBox>
-        <Image 
-          src={state_n}
-          alt='no-state'
-          width={18}
-          height={18}
-          style={{ marginRight: '0.19rem' }}
-        />
-        {dateSalary} 정산예정
-      </MASalaryBox>
-  )
-) : null}
+              data && data.status ? (
+                <>
+                  <MASalaryBoxY>
+                    <Image
+                      src={state_y}
+                      alt="state"
+                      width={18}
+                      height={18}
+                      style={{ marginRight: '0.19rem' }}
+                    />
+                    {dateSalary} 정산완료
+                  </MASalaryBoxY>
+                </>
+              ) : (
+                <MASalaryBox>
+                  <Image
+                    src={state_n}
+                    alt="no-state"
+                    width={18}
+                    height={18}
+                    style={{ marginRight: '0.19rem' }}
+                  />
+                  {dateSalary} 정산예정
+                </MASalaryBox>
+              )
+            ) : null}
           </>
         )}
       </ConfirmBox>
