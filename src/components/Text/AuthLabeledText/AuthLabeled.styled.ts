@@ -16,8 +16,8 @@ export const AuthLabeledContainer = styled.div`
   }
 
   #auth-mark-icon {
-    width: 1.5rem;
-    height: 1.5rem;
+    width: 1rem;
+    height: 1rem;
     position: absolute;
     top: 50%;
     right: 0;
