@@ -96,15 +96,17 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     <ModalMentoringBackground>
       <MMTop>
         <div id="header-text">멘토링 신청서</div>
+        <div id ='img'>
         <Image
           id="x-icon"
           src={x_icon}
           alt="계정 수정 모달 닫기 버튼"
           width={24}
           height={24}
-          style={{ marginLeft: '25%' }}
+          style={{}}
           onClick={props.modalHandler}
         />
+        </div>
       </MMTop>
       <div id="mentoring-back">
       <MApplyBox>

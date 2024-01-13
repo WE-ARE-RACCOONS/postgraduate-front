@@ -8,8 +8,8 @@ export const InputFormStyle = styled.input`
   background: #fff;
   padding: 0.88rem;
   color: #212529;
-  ::placeholder {
-    color: #adb5bd;
+  &::placeholder {
+    color: #ADB5BD;
     font-family: Noto Sans JP;
     font-size: 1rem;
     font-style: normal;

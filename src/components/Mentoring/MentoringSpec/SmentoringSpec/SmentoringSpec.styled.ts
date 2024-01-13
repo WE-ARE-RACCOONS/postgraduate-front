@@ -114,7 +114,6 @@ export const ModalBottomBtn = styled.div`
 `;
 export const MMTop = styled.div`
   align-items: center;
-  text-align: center;
   display: flex;
   width: inherit;
   height: 3.5rem;
@@ -128,6 +127,11 @@ export const MMTop = styled.div`
     line-height: 140%; /* 1.75rem */
     letter-spacing: -0.03125rem;
     margin-left: 35%;
+  }
+  #img{
+    text-align: center;
+    margin-left: 91%;
+    position: absolute;
   }
 `;
 export const SMCBtn = styled.button`
