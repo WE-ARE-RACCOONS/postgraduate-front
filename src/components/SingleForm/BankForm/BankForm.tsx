@@ -38,7 +38,6 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
 
   const handleClick = (selectedBank: string) => {
     setBank(selectedBank);
-    console.log(selectedBank);
     clickHandler();
   };
 

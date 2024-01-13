@@ -55,7 +55,6 @@ function AccountPage() {
         )
         .then((response) => {
           setData(response.data);
-          console.log(response.data);
         })
         .catch((error) => {
           setFlag(true);
@@ -69,9 +68,6 @@ function AccountPage() {
       router.push('/senior/account/done');
     }
   };
-  console.log(accountNumber);
-  console.log(bank);
-  console.log(accountHolder);
   return (
     <SAContent>
       <BackHeader headerText="정산 정보 입력" />
