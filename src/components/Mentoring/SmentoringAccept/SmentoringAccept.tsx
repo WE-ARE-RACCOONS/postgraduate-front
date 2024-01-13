@@ -20,15 +20,15 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
         priority
         onClick={modalHandler}
       />
+      <div style={{ textAlign: 'center' }}>
       <Image
         src={accept}
         width={80}
         height={80}
-        style={{ marginTop: '10.5rem', marginLeft: '9.25rem' }}
+        style={{marginTop:'10rem'}}
         alt="멘토링 승인 축하 이미지"
       />
-      <div style={{ marginTop: '2.75rem', textAlign: 'center' }}>
-        <h3 style={{ marginBottom: '0.87rem' }}>
+        <h3 style={{ marginBottom: '0.87rem' ,marginTop:'2.65rem'}}>
           후배와의 멘토링이 확정됐어요
         </h3>
         <div id="msg-show">내멘토링 진행예정 탭에서 확인할 수 있어요</div>
