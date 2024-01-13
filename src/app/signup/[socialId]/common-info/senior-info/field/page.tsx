@@ -24,6 +24,7 @@ import { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import BackHeader from '@/components/Header/BackHeader';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -33,7 +34,6 @@ function SeniorInfoPage() {
   const router = useRouter();
   const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
     useAuth();
-  const Token = getAccessToken();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const socialId = pathArr[2];
@@ -49,21 +49,15 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-  const headers = {
-    Authorization: `Bearer ${Token}`,
-  };
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
-    /**
-     * 1. 값 다 들어 있나 확인
-     * 2. 없으면 최초로 없는 값 SingleValidator 띄우고(flag true)
-     * 3. 있으면 회원가입 api 호출 후(flag false로 설정, userType senior로 설정)
-     * 4. api 호출 성공하면 signup/done 으로 이동
-     */
-
+    const token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
     if (!sPostGradu) {
       setFlag(true);
       setEmptyPart('대학원');
@@ -100,7 +94,7 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    if (Token && certification) {
+    if (token && certification) {
       axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
@@ -136,6 +130,7 @@ function SeniorInfoPage() {
           console.error(err);
         });
     }
+
     if (socialId && phoneNumber && nickName && certification) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
@@ -173,55 +168,47 @@ function SeniorInfoPage() {
   };
 
   return (
-    <SeniorInfoPageContainer>
-      <h3>선배 정보를 입력해주세요</h3>
-      <div>입력한 정보는 멘토링 매칭에 이용됩니다.</div>
-      <BtnContainer>
-        <ModalBtn
-          btnText={sPostGradu ? sPostGradu : '대학원*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('postgradu');
-          }}
-        />
-        <ModalBtn
-          btnText={sMajor ? sMajor : '학과*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('major');
-          }}
-        />
-        <TextForm placeholder="연구실명*" targetAtom="lab" />
-        <TextForm placeholder="지도 교수님*" targetAtom="professor" />
-        <ModalBtn
-          btnText={sField ? sField : '연구분야*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('field');
-          }}
-        />
-        <ModalBtn
-          btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
-          modalHandler={modalHandler}
-          onClick={() => {
-            setModalType('keyword');
-          }}
-        />
-        {flag && (
-          <SingleValidator
-            msg={`${emptyPart}을 입력해주세요`}
-            textColor="#FF0000"
+    <>
+      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+        <BackHeader headerText="정보입력" />
+      </div>
+      <SeniorInfoPageContainer>
+        <h3>연구 주제에 대해 알려주세요.</h3>
+        <BtnContainer>
+          <ModalBtn
+            type="seniorInfo"
+            btnText={sField ? sField : '연구분야*'}
+            modalHandler={modalHandler}
+            onClick={() => {
+              setModalType('field');
+            }}
           />
-        )}
-        <button onClick={handleSubmit}>완료</button>
-      </BtnContainer>
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
-    </SeniorInfoPageContainer>
+          <ModalBtn
+            type="seniorInfo"
+            btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
+            modalHandler={modalHandler}
+            onClick={() => {
+              setModalType('keyword');
+            }}
+          />
+          <div style={{ marginTop: '0.5rem' }}>
+            {flag && (
+              <SingleValidator
+                msg={`${emptyPart}을 입력해주세요`}
+                textColor="#FF3347"
+              />
+            )}
+          </div>
+          <button onClick={handleSubmit}>다음</button>
+        </BtnContainer>
+        {modal && portalElement
+          ? createPortal(
+              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
+              portalElement,
+            )
+          : null}
+      </SeniorInfoPageContainer>
+    </>
   );
 }
 
@@ -230,6 +217,25 @@ export default SeniorInfoPage;
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
+`;
+const SICBox = styled.div`
+  margin-top: 1rem;
+  width: 95%;
+  height: 5.9375rem;
+  flex-shrink: 0;
+  border-radius: 1rem;
+  background: #f8f9fa;
+  padding: 1.56rem 1rem;
+  margin-left: 0.56rem;
+  #info-content-msg {
+    color: #868e96;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.225rem */
+    letter-spacing: -0.03125rem;
+  }
 `;
 
 const BtnContainer = styled.div`

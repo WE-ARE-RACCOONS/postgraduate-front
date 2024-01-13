@@ -100,14 +100,14 @@ function page() {
         <div style={{ display: 'flex' }}>
           <SelectedImage src={selectpPhotoUrl} alt="Selected" />
           <div style={{ marginTop: '7rem', overflow: 'visible' }}>
-            <Photo handler={setPhotoUrl} />
+            <Photo type="camera" handler={setPhotoUrl} />
           </div>
         </div>
       ) : (
         <div style={{ display: 'flex' }}>
           <PhotoBox src={profile ? profile : ''} alt="userImage" />
           <div style={{ marginTop: '7rem', overflow: 'visible' }}>
-            <Photo handler={setPhotoUrl} />
+            <Photo type="camera" handler={setPhotoUrl} />
           </div>
         </div>
       )}
