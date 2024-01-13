@@ -7,7 +7,7 @@ import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from "@/components/Text/AuthLabeledText";
 import { useAtomValue } from "jotai";
 import { firAbleTimeAtom, secAbleTimeAtom, thiAbleTimeAtom } from "@/stores/mentoring";
-import { MENTORING_PAY_ETC_TEXT, MENTORING_PAY_PAYMENT_TEXT, MENTORING_PAY_TITLE } from "@/constants/pay/pay";
+import { MENTORING_PAY_ETC_TEXT, MENTORING_PAY_NOTICE_TEXT, MENTORING_PAY_PAYMENT_TEXT, MENTORING_PAY_TITLE } from "@/constants/pay/pay";
 import Image from "next/image";
 import mint_check from '../../../../../public/mint_check.png';
 
@@ -96,6 +96,15 @@ function MentoringApplyPayPage() {
             </div>
           </MAPPayMethodWrapper>
         </MAPBox>
+        <MAPNoticeWrapper>
+          <MAPTitle>{MENTORING_PAY_TITLE.notice}</MAPTitle>
+          <ul>
+            <li>{MENTORING_PAY_NOTICE_TEXT.scheduleChange}</li>
+            <li>{MENTORING_PAY_NOTICE_TEXT.reject}</li>
+            <li>{MENTORING_PAY_NOTICE_TEXT.cancelChange}</li>
+            <li>{MENTORING_PAY_NOTICE_TEXT.noResponse}</li>
+          </ul>
+        </MAPNoticeWrapper>
       </MAPContent>
     </MAPContainer>
   );
@@ -132,7 +141,6 @@ const MAPBox = styled.div`
   background-color: #FFF;
   padding: 1rem;
   margin-bottom: 0.75rem;
-  border: 1px solid #000;
 
   .map-text {
     color: #868E96;
@@ -238,6 +246,24 @@ const MAPPayMethodWrapper = styled.div`
     #map-pay-method-text {
       font-size: 14px;
     }
+  }
+`
+
+const MAPNoticeWrapper = styled.div`
+  width: 100%;
+  margin-top: 1.5rem;
+
+  ul {
+    width: 95%;
+    color: #868E96;
+    font-size: 14px;
+    padding-left: 1rem;
+    margin-top: 0.7rem;
+    line-height: 140%;
+  }
+
+  li:last-child {
+    text-decoration-line: underline;
   }
 `
 
