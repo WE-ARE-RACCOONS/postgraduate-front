@@ -18,7 +18,7 @@ import {
   MENTORING_PAY_NOTICE_TEXT,
   MENTORING_PAY_PAYMENT_TEXT,
   MENTORING_PAY_TITLE,
-} from '@/constants/pay/pay';
+} from '@/constants/mentoring/pay';
 import Image from 'next/image';
 import mint_check from '../../../../../public/mint_check.png';
 import { useEffect, useState } from 'react';
@@ -94,6 +94,8 @@ function MentoringApplyPayPage() {
         )
         .then((response) => {
           console.log(response);
+
+          // router.push('/mentoring-apply/done');
         })
         .catch((err) => {
           console.error(err);
