@@ -20,6 +20,7 @@ import { mySeniorId } from '../../stores/senior';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
+import MenuBar from '@/components/Bar/MenuBar';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -97,10 +98,10 @@ function MyPage() {
   }, [Token]);
 
   return (
-    <div style={{ backgroundColor: '#fff' }}>
+    <div style={{ backgroundColor: '#fff' ,width:'inherit'}}>
       <LogoLayer modalHandler={searchModalHandler} />
       {Token ? (
-        <div>
+        <div style={{backgroundColor:'#F8F9FA'}}>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
@@ -109,12 +110,12 @@ function MyPage() {
             certifiReg={certifiReg}
           />
           {userType == 'senior' && (
-            <>
+            <div style={{backgroundColor:'white'}}>
               <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
               <div style={{marginTop:'0.5rem'}}>
               <AccountShowBtn/>
               </div>
-            </>
+            </div>
           )}
           <ProfileManage
             userType={userType ? (userType as userType) : 'junior'}
@@ -129,6 +130,7 @@ function MyPage() {
         </div>
       )}
       <CustomerCenter />
+      <MenuBar />
       {modal && portalElement
         ? createPortal(
             <FullModal modalType="login-request" modalHandler={modalHandler} />,

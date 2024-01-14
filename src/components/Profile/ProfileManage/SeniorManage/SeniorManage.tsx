@@ -63,7 +63,7 @@ function SeniorManage(props: SeniorManageProps) {
         <TitleComponent title="계정 관리" />
         <ContentComponent content="계정 설정" onClick={infoHandler} />
         <ContentComponent content="내 프로필 보기" onClick={MyprofHandler} />
-        <ContentComponent  kind ='msg'profileReg={props.profileReg} content="내 프로필 수정" onClick={MyprofHandler} />
+        <ContentComponent  kind ='msg'profileReg={props.profileReg} content="내 프로필 수정" onClick={infoHandler} />
         <ContentComponent  kind ='auth'certifiReg={props.certifiReg} content="대학원 인증" onClick={MyprofHandler} />
       </SeniorManageContentContainer>
       <SeniorManageContentContainer>

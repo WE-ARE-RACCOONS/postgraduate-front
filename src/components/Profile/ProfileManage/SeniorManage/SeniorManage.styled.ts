@@ -2,7 +2,6 @@ import { certiRegType } from '@/types/profile/profile';
 import styled from 'styled-components';
 
 export const SeniorManageContainer = styled.div`
-border: 1px solid red;
   width: inherit;
   height: max-content;
 `;

@@ -41,6 +41,7 @@ function Profile(props: ProfileProps) {
             alt='warn'
             width={16}
             height={16}
+            style={{marginRight:'0.25rem'}}
             />
             <div id ='warn-msg'>멘토링 진행불가</div>
             </div>
