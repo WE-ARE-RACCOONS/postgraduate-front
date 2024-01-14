@@ -31,17 +31,21 @@ function ServiceCondition() {
   return (
     <TermsBox>
       <CheckBoxLayout>
-        <CheckBox checked={allAgreed} onChange={handleAllAgreedChange} />
+        <CheckBox
+          type="accept"
+          checked={allAgreed}
+          onChange={handleAllAgreedChange}
+        />
         모든 이용약관에 동의합니다.
       </CheckBoxLayout>
       <TermsContainer>
-        <CheckBox checked={service} onChange={setService} />
+        <CheckBox type="accept" checked={service} onChange={setService} />
         <div id="container-color">(필수)&nbsp;</div>
         <div id="container-line">이용약관</div>과&nbsp;
         <div id="container-line">개인정보 취급 방침</div>&nbsp;동의
       </TermsContainer>
       <TermsContainer>
-        <CheckBox checked={marketing} onChange={setMarketing} />
+        <CheckBox type="accept" checked={marketing} onChange={setMarketing} />
         (선택)&nbsp;<div id="container-line">마케팅 개인정보</div>&nbsp;활용
         동의
       </TermsContainer>

@@ -1,7 +1,16 @@
 'use client';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { TapStyle, MentoringMapBox } from './STabBrar.styled';
+import {
+  TapStyle,
+  MentoringMapBox,
+  TabWrap,
+  TabResultContainer,
+  TabResult,
+  MentoringBox,
+  DoneBtnBox,
+  NoMentoring,
+} from './STabBrar.styled';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
@@ -19,6 +28,7 @@ import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
+import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 function STabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -68,28 +78,33 @@ function STabBar() {
         {data && data!.length !== 0 ? (
           <div>
             {data!.map((el, idx) => (
-              <div key={idx}>
+              <MentoringBox key={idx}>
                 <MentoringApply data={el} />
-                <ModalBtn
-                  btnText={
-                    activeTab === TAB.waiting
-                      ? '신청서 보고 수락하기'
-                      : '신청서 보기'
-                  }
-                  modalHandler={modalHandler}
-                  onClick={() => {
-                    setModalType('senior');
-                    setSelectedMentoringId(el.mentoringId);
-                  }}
-                />
-              </div>
+                {activeTab === TAB.waiting || activeTab === TAB.expected ? (
+                  <ModalBtn
+                    type="seniorShow"
+                    btnText={
+                      activeTab === TAB.waiting
+                        ? '신청서 보고 수락하기'
+                        : '신청서 보기'
+                    }
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('senior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                ) : (
+                  ''
+                )}
+              </MentoringBox>
             ))}
             {activeTab === TAB.done ? (
               <div
                 style={{
                   position: 'sticky',
-                  bottom: 2,
-                  backgroundColor: '#FFFFFF',
+                  bottom: '4rem',
+                  zIndex: '100',
                 }}
               >
                 <AccountShowBtn />
@@ -99,24 +114,40 @@ function STabBar() {
             )}
           </div>
         ) : (
-          `${TAB_STATE[activeTab]}인 멘토링이 없어요`
+          <NoMentoring>{TAB_STATE[activeTab]}인 멘토링이 없어요</NoMentoring>
         )}
       </div>
     );
   };
   return (
-    <div>
-      <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick('waiting')}>확정 대기</TapStyle>
-        <TapStyle onClick={() => handleTabClick('expected')}>
+    <div style={{ height: '100%' }}>
+      <TabWrap>
+        <TapStyle
+          selected={activeTab === TAB.waiting}
+          onClick={() => handleTabClick('waiting')}
+        >
+          확정 대기
+        </TapStyle>
+        <TapStyle
+          selected={activeTab === TAB.expected}
+          onClick={() => handleTabClick('expected')}
+        >
           진행 예정
         </TapStyle>
-        <TapStyle onClick={() => handleTabClick('done')}>완료</TapStyle>
-      </div>
-      <div>{renderTabContent()}</div>
+        <TapStyle
+          selected={activeTab === TAB.done}
+          onClick={() => handleTabClick('done')}
+        >
+          완료
+        </TapStyle>
+      </TabWrap>
+      <TabResultContainer>
+        <TabResult>{renderTabContent()}</TabResult>
+      </TabResultContainer>
       {modal && portalElement
         ? createPortal(
-            <SmentoringSpec
+            <FullModal
+              modalType="senior-mentoring-spec"
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               acceptModalHandler={acceptModalHandler}
@@ -127,8 +158,7 @@ function STabBar() {
         : null}
       {cancelModal && cancelPortalElement
         ? createPortal(
-            <DimmedModal
-              modalType="cancelMent"
+            <SmentoringCancel
               modalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}
             />,

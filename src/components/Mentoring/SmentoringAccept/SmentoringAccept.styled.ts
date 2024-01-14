@@ -13,4 +13,26 @@ export const SmentoringAccBox = styled.div`
     right: 1rem;
     cursor: pointer;
   }
+  #msg-show {
+    color: #868e96;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
+    letter-spacing: -0.03125rem;
+  }
+  #msg-btn {
+    color: #212529;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
+    letter-spacing: -0.03125rem;
+    margin-top: 5rem;
+    margin-bottom: 1rem;
+  }
 `;

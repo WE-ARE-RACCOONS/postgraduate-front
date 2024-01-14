@@ -2,13 +2,15 @@
 import React from 'react';
 import checkedIcon from '../../../public/checkbox_o.png';
 import uncheckedIcon from '../../../public/checkbox_x.png';
+import cancelIcon from '../../../public/checkbox_c.png';
 
 type CheckboxProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;
+  type: 'accept' | 'cancel';
 };
 
-function CheckBox({ checked, onChange }: CheckboxProps) {
+function CheckBox({ checked, onChange, type }: CheckboxProps) {
   return (
     <div
       onClick={() => onChange(!checked)}
@@ -16,7 +18,7 @@ function CheckBox({ checked, onChange }: CheckboxProps) {
     >
       {checked ? (
         <img
-          src={checkedIcon.src}
+          src={type === 'accept' ? checkedIcon.src : cancelIcon.src}
           style={{ width: '1.5rem', height: '1.5rem' }}
           alt="Checked Icon"
         />

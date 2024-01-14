@@ -1,6 +1,12 @@
 import { ModalBtnProps } from '@/types/button/modalBtn';
-import { StyledModalBtn, StyledSModalBtn, SInfoBtn } from './ModalBtn.styled';
-
+import {
+  StyledModalBtn,
+  StyledSModalBtn,
+  SInfoBtn,
+  StyledMSBtn,
+} from './ModalBtn.styled';
+import Image from 'next/image';
+import down from '../../../../public/arrow-down-gray.png';
 function ModalBtn(props: ModalBtnProps) {
   const handleClick = () => {
     props.modalHandler();
@@ -21,6 +27,15 @@ function ModalBtn(props: ModalBtnProps) {
           {props.btnText}
         </StyledSModalBtn>
       )}
+      {props.type === 'seniorShow' && (
+        <StyledMSBtn
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </StyledMSBtn>
+      )}
       {props.type === 'seniorInfo' && (
         <SInfoBtn
           isGet={props.isGet}
@@ -29,6 +44,17 @@ function ModalBtn(props: ModalBtnProps) {
           }}
         >
           {props.btnText}
+        </SInfoBtn>
+      )}
+      {props.type === 'bankInfo' && (
+        <SInfoBtn
+          isGet={props.isGet}
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+          <Image src={down} alt="down" width={40} height={40} />
         </SInfoBtn>
       )}
     </>

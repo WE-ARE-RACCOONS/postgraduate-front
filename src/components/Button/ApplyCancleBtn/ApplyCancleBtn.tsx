@@ -3,7 +3,7 @@ import { CancleBtnProps } from '@/types/button/applyCancleBtn';
 import useModal from '@/hooks/useModal';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import { ApplyCancleBtnStyle } from './ApplyCancleBtn.styled';
+import { ApplyCancleBtnStyle, ACsenior } from './ApplyCancleBtn.styled';
 export default function ApplyCancleBtn(props: CancleBtnProps) {
   const handleClick = () => {
     if (props.cancelModalHandler) props.cancelModalHandler();
@@ -11,12 +11,25 @@ export default function ApplyCancleBtn(props: CancleBtnProps) {
     if (props.onClick) props.onClick();
   };
   return (
-    <ApplyCancleBtnStyle
-      onClick={() => {
-        handleClick();
-      }}
-    >
-      <div>{props.btnText}</div>
-    </ApplyCancleBtnStyle>
+    <>
+      {props.kind == 'spec' && (
+        <ACsenior
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </ACsenior>
+      )}
+      {props.kind == 'jcancel' && (
+        <ApplyCancleBtnStyle
+          onClick={() => {
+            handleClick();
+          }}
+        >
+          {props.btnText}
+        </ApplyCancleBtnStyle>
+      )}
+    </>
   );
 }

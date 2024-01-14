@@ -11,10 +11,10 @@ export const DateDone = styled.div`
   line-height: 140%; /* 1.4rem */
   letter-spacing: -0.03125rem;
 `;
-export const ConfirmContent = styled.div`
+export const ConfirmContent = styled.div<{ isJunior: boolean }>`
   width: 100%;
   height: 5.8rem;
-  border-bottom: 1px solid #dee2e6;
+  ${(props) => props.isJunior && 'border-bottom: 1px solid #dee2e6;'}
   padding: 1.2rem;
   display: flex;
   justify-content: space-between;
@@ -42,6 +42,22 @@ export const ConfirmProfile = styled.img`
   width: 3.375rem;
   height: 3.375rem;
   border-radius: 90%;
+`;
+export const MRFont = styled.div`
+  color: #495565;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%;
+`;
+export const RemainFont = styled.div`
+  color: #ff5757;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.05rem */
 `;
 export const ConfirmTitle = styled.div`
   color: #212529;
@@ -80,4 +96,61 @@ export const ConfirmState = styled.div`
 `;
 export const ConfirmShow = styled.div`
   border: 1px solid black;
+`;
+export const MASalaryBox = styled.div`
+  border: none;
+  width: 91%;
+  height: 2.375rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+  color: #212529;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
+  margin-left: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 1rem;
+`;
+export const MASalaryBoxY = styled.div`
+  border: none;
+  width: 91%;
+  height: 2.375rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #f8f9fa;
+  color: #00a0e1;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
+  margin-left: 1rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  margin-bottom: 1rem;
+`;
+export const STDday = styled.div`
+  margin-right: 0.31rem;
+  color: #495565;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.05rem */
+`;
+export const STDDexpect = styled.div`
+  color: #495565;
+  font-family: Pretendard;
+  font-size: 0.75rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.05rem */
 `;
