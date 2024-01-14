@@ -5,7 +5,8 @@ import {
   SInfoBtn,
   StyledMSBtn,
 } from './ModalBtn.styled';
-
+import Image from 'next/image';
+import down from '../../../../public/arrow-down-gray.png'
 function ModalBtn(props: ModalBtnProps) {
   const handleClick = () => {
     props.modalHandler();
@@ -53,6 +54,12 @@ function ModalBtn(props: ModalBtnProps) {
           }}
         >
           {props.btnText}
+          <Image 
+          src={down}
+          alt ='down'
+          width={40}
+          height={40}
+          />
         </SInfoBtn>
       )}
     </>

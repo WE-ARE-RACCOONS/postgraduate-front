@@ -15,6 +15,7 @@ import { createPortal } from 'react-dom';
 import { useAtomValue } from 'jotai';
 import { bankNameAtom } from '@/stores/bankName';
 function AccountPage() {
+ 
   const router = useRouter();
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const [modalType, setModalType] = useState<ModalType>('bank');

@@ -72,7 +72,6 @@ function STabBar() {
         console.error('Error fetching data:', error);
       });
   }, [activeTab]);
-  console.log(data);
   const renderTabContent = () => {
     return (
       <div>

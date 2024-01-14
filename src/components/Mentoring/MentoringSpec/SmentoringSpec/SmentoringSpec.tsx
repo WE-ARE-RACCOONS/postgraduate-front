@@ -23,6 +23,7 @@ import {
   SMSDate,
   ServiceMsg,
   WarnMsg,
+  ModalNClose
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
@@ -44,6 +45,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     setIsActive(newClicked);
     setDate(buttonContent ? buttonContent : '');
     button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
+    button.style.color = newClicked ? '#FFFFFF' : '#3D4044';
   };
   useEffect(() => {
     if (props.mentoringId !== 0) {
@@ -137,7 +139,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         멘토링 시간
         {activeTab === 'waiting' ? (
           <div id="mentoring-time-msg">
-            아래의 세가지 중{data ? data.nickName : ''}님이 선택한 시간대에
+            아래의 세가지 중 {data ? data.nickName : ''}님이 선택한 시간대에
             멘토링이 진행돼요
           </div>
         ) : (
@@ -146,15 +148,24 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       </div>
       {activeTab === 'waiting' ? (
         <div>
-          {data &&
-            data.dates.map((date, index) => (
+        {data &&
+          data.dates.map((dateString, index) => {
+            const dataSplit = dateString;
+  const dateParts = (dataSplit || '').split('-');
+  const dateSenior = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+      
+            return (
               <div key={index}>
-                <SMCBtn key={index} onClick={handleButtonClick}>
-                  {date}
+                <SMCBtn
+                  key={index}
+                  onClick={handleButtonClick}
+                >
+                  {dateSenior}
                 </SMCBtn>
               </div>
-            ))}
-        </div>
+            );
+          })}
+      </div>
       ) : (
         <SMSDate>{data && data.dates}</SMSDate>
       )}
@@ -174,7 +185,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               modalHandler={props.modalHandler}
               mentoringId={props.mentoringId}
             />
-            <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
+            {isActive ? <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose> : <ModalNClose>멘토링 수락</ModalNClose>}
           </>
         ) : (
           <ServiceMsg>멘토링 취소는 고객센터로 문의해주세요</ServiceMsg>

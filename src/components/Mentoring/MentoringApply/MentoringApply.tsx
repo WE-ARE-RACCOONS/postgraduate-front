@@ -73,7 +73,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
                         <RemainFont>{data && data.remainTime}</RemainFont>후에
                         자동취소!
                       </div>
-                      <div>지금 수락하세요</div>
+                      <div>지금 수락하세요!</div>
                     </MRFont>
                   )}
 

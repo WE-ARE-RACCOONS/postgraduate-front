@@ -13,13 +13,15 @@ function page() {
   };
   return (
     <div>
+      <div style={{display:'flex' , alignItems:'center',justifyContent:'center'}}>
       <Image
         src={accept}
         width={80}
         height={80}
-        style={{ marginTop: '13rem', marginLeft: '40%' }}
+        style={{ marginTop: '13rem' }}
         alt="계좌 등록 축하 이미지"
       />
+      </div>
       <ADFont>
         <h3>정산 정보 등록이 완료됐어요</h3>
         <div id="msg-mid">마이페이지 - 내프로필 수정에서 수정할 수 있어요</div>

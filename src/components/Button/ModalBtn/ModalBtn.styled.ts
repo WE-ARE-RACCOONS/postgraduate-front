@@ -62,7 +62,7 @@ export const SInfoBtn = styled.button<SInfoBtnProps>`
   background: #fff;
   padding: 0.8rem;
   display: flex;
-  justify-content: left;
+  justify-content: space-between;
   align-items: center;
   text-align: center;
   font-family: Noto Sans JP;
@@ -70,4 +70,5 @@ export const SInfoBtn = styled.button<SInfoBtnProps>`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
+
 `;

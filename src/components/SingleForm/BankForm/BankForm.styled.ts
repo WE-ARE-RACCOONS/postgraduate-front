@@ -21,4 +21,5 @@ export const BankColumn = styled.button`
   justify-content: center;
   text-align: center;
   align-items: center;
+
 `;
