@@ -64,7 +64,7 @@ function SalaryPage() {
             ))}
           </div>
         ) : (
-          <h3>{`${STAB_STATE[activeTab]}인 멘토링이 없어요`}</h3>
+          <NoMentoring>{`${STAB_STATE[activeTab]}인 멘토링이 없어요`}</NoMentoring>
         )}
       </div>
     );
@@ -83,7 +83,16 @@ function SalaryPage() {
     </>
   );
 }
-
+const NoMentoring = styled.div`
+color: #ADB5BD;
+text-align: center;
+font-family: Pretendard;
+font-size: 1rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.4rem */
+  margin-top: 1rem;
+`
 const TabWrap = styled.div`
 display: flex;
 justify-content: space-between;
