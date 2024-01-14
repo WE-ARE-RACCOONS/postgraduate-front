@@ -13,14 +13,20 @@ function page() {
   };
   return (
     <div>
-      <div style={{display:'flex' , alignItems:'center',justifyContent:'center'}}>
-      <Image
-        src={accept}
-        width={80}
-        height={80}
-        style={{ marginTop: '13rem' }}
-        alt="계좌 등록 축하 이미지"
-      />
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+      >
+        <Image
+          src={accept}
+          width={80}
+          height={80}
+          style={{ marginTop: '13rem' }}
+          alt="계좌 등록 축하 이미지"
+        />
       </div>
       <ADFont>
         <h3>정산 정보 등록이 완료됐어요</h3>

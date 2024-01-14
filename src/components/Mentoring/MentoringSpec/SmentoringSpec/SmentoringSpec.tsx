@@ -23,7 +23,7 @@ import {
   SMSDate,
   ServiceMsg,
   WarnMsg,
-  ModalNClose
+  ModalNClose,
 } from './SmentoringSpec.styled';
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
@@ -148,24 +148,21 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       </div>
       {activeTab === 'waiting' ? (
         <div>
-        {data &&
-          data.dates.map((dateString, index) => {
-            const dataSplit = dateString;
-  const dateParts = (dataSplit || '').split('-');
-  const dateSenior = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
-      
-            return (
-              <div key={index}>
-                <SMCBtn
-                  key={index}
-                  onClick={handleButtonClick}
-                >
-                  {dateSenior}
-                </SMCBtn>
-              </div>
-            );
-          })}
-      </div>
+          {data &&
+            data.dates.map((dateString, index) => {
+              const dataSplit = dateString;
+              const dateParts = (dataSplit || '').split('-');
+              const dateSenior = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+
+              return (
+                <div key={index}>
+                  <SMCBtn key={index} onClick={handleButtonClick}>
+                    {dateSenior}
+                  </SMCBtn>
+                </div>
+              );
+            })}
+        </div>
       ) : (
         <SMSDate>{data && data.dates}</SMSDate>
       )}
@@ -185,7 +182,11 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               modalHandler={props.modalHandler}
               mentoringId={props.mentoringId}
             />
-            {isActive ? <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose> : <ModalNClose>멘토링 수락</ModalNClose>}
+            {isActive ? (
+              <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
+            ) : (
+              <ModalNClose>멘토링 수락</ModalNClose>
+            )}
           </>
         ) : (
           <ServiceMsg>멘토링 취소는 고객센터로 문의해주세요</ServiceMsg>

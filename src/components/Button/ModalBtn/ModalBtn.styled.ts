@@ -70,5 +70,4 @@ export const SInfoBtn = styled.button<SInfoBtnProps>`
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-
 `;

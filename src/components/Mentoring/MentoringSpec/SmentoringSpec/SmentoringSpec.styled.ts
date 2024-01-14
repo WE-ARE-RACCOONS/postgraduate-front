@@ -114,7 +114,7 @@ export const ModalNClose = styled.button`
   align-items: center;
   gap: 0.625rem;
   border-radius: 0.75rem;
-  background: #DEE2E6;
+  background: #dee2e6;
   color: #fff;
   text-align: center;
   font-family: Pretendard;

@@ -12,7 +12,7 @@ import { useAtom } from 'jotai';
 import { bankNameAtom } from '@/stores/bankName';
 import { BankColumnItemProps } from '@/types/bank/bank';
 import { Bank } from '@/types/bank/bank';
-import x_btn from '../../../../public/x_gray.png'
+import x_btn from '../../../../public/x_gray.png';
 const banks: Bank[] = [
   { name: BANK_NAME.k, imgSrc: '/Kbank.png' },
   { name: BANK_NAME.n, imgSrc: '/nh.png' },
@@ -28,7 +28,13 @@ const banks: Bank[] = [
 
 const BankColumnItem: React.FC<BankColumnItemProps> = ({ bank, onClick }) => (
   <BankColumn onClick={onClick}>
-    <Image src={bank.imgSrc} alt={bank.name} width={22} height={22} style={{marginRight:'0.4rem'}} />
+    <Image
+      src={bank.imgSrc}
+      alt={bank.name}
+      width={22}
+      height={22}
+      style={{ marginRight: '0.4rem' }}
+    />
     {bank.name}
   </BankColumn>
 );
@@ -43,15 +49,15 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
 
   return (
     <BankContent>
-      <div style={{display:'flex'}}>
-      <h3>은행선택</h3>
-      <Image 
-      src={x_btn}
-      alt='x_btn'
-      width={21}
-      height={21}
-      style={{marginLeft:'70%'}}
-      />
+      <div style={{ display: 'flex' }}>
+        <h3>은행선택</h3>
+        <Image
+          src={x_btn}
+          alt="x_btn"
+          width={21}
+          height={21}
+          style={{ marginLeft: '70%' }}
+        />
       </div>
       <BankBox>
         <BankLeft>

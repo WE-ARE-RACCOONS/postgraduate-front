@@ -4,7 +4,6 @@ import checkedIcon from '../../../public/checkbox_o.png';
 import uncheckedIcon from '../../../public/checkbox_x.png';
 import cancelIcon from '../../../public/checkbox_c.png';
 
-
 type CheckboxProps = {
   checked: boolean;
   onChange: (checked: boolean) => void;
