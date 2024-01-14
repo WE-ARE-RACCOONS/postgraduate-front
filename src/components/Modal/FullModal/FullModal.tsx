@@ -43,7 +43,8 @@ function FullModal(props: FullModalProps) {
           acceptModalHandler={
             props.acceptModalHandler ? props.acceptModalHandler : () => {}
           }
-          mentoringId={props.mentoringId ? props.mentoringId : 0}
+          mentoringId={props.mentoringId ? props.mentoringId : 0}/>
+      )}
       {props.modalType == 'select-date-calendar' && (
         <SelectCalendar
           modalHandler={props.modalHandler}

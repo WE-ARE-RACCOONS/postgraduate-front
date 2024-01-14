@@ -19,6 +19,7 @@ import { certiRegType } from '../../types/profile/profile';
 import { mySeniorId } from '../../stores/senior';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
+import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -74,6 +75,7 @@ function MyPage() {
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
             setSeniorId(res.data.data.seniorId);
+            console.log(res.data.data)
           })
           .catch(function (error) {
             console.log(error);
@@ -95,7 +97,7 @@ function MyPage() {
   }, [Token]);
 
   return (
-    <div style={{ backgroundColor: '#F8F9FA' }}>
+    <div style={{ backgroundColor: '#fff' }}>
       <LogoLayer modalHandler={searchModalHandler} />
       {Token ? (
         <div>
@@ -109,13 +111,9 @@ function MyPage() {
           {userType == 'senior' && (
             <>
               <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
-              <button
-                onClick={() => {
-                  router.push('/mypage/salary');
-                }}
-              >
-                정산 내역 보기
-              </button>
+              <div style={{marginTop:'0.5rem'}}>
+              <AccountShowBtn/>
+              </div>
             </>
           )}
           <ProfileManage

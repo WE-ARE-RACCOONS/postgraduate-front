@@ -45,6 +45,9 @@ function SeniorManage(props: SeniorManageProps) {
         return '';
     }
   }
+  const MyprofHandler =()=>{
+    if (checkRegister()) modalHandler();
+  }
 
   const checkRegister = () => {
     if (props.profileReg) return true;
@@ -57,36 +60,15 @@ function SeniorManage(props: SeniorManageProps) {
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>
-        <TitleComponent title="계정 설정" />
-        <ContentComponent content="계정 수정" onClick={infoHandler} />
-        <SeniorManageAuthBox>
-          <button
-            onClick={() => {
-              if (checkRegister()) modalHandler();
-            }}
-          >
-            내 프로필 보기
-          </button>
-          {!props.profileReg && (
-            <SeniorManageAuthValue>미완성</SeniorManageAuthValue>
-          )}
-        </SeniorManageAuthBox>
-        <ContentComponent
-          content="내 프로필 수정"
-          onClick={() => {
-            if (checkRegister()) modifyHandler();
-          }}
-        />
-        <SeniorManageAuthBox>
-          <button>대학원 인증</button>
-          <SeniorManageAuthValue $certifiReg={props.certifiReg}>
-            {setAuthText(props.certifiReg)}
-          </SeniorManageAuthValue>
-        </SeniorManageAuthBox>
+        <TitleComponent title="계정 관리" />
+        <ContentComponent content="계정 설정" onClick={infoHandler} />
+        <ContentComponent content="내 프로필 보기" onClick={MyprofHandler} />
+        <ContentComponent  kind ='msg'profileReg={props.profileReg} content="내 프로필 수정" onClick={MyprofHandler} />
+        <ContentComponent  kind ='auth'certifiReg={props.certifiReg} content="대학원 인증" onClick={MyprofHandler} />
       </SeniorManageContentContainer>
       <SeniorManageContentContainer>
         <TitleComponent title="회원 상태 변경" />
-        <ContentComponent content="후배 회원으로 상태 변경" />
+        <ContentComponent content="대학생 후배 회원으로 변경" />
       </SeniorManageContentContainer>
       {modal && portalElement
         ? createPortal(

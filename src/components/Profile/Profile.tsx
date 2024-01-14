@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
-
+import warn  from '../../../public/warn.png'
 import {
   ProfileBox,
   ProfileInfo,
@@ -34,13 +34,18 @@ function Profile(props: ProfileProps) {
             {props.userType == 'junior' ? '후배 회원' : '선배 회원'}
           </ProfileButton>
         </ProfileName>
-        {!props.profileReg ||
-          (props.certifiReg !== 'APPROVE' && (
-            <SingleValidator
-              textColor="#FF0000"
-              msg="아직 멘토링을 진행할 수 없어요"
+          {props.certifiReg !== 'APPROVE' && (
+            <div style={{display:'flex',textAlign:'center',justifyContent:'center',alignItems:'center', marginLeft:'3.5rem'}}>
+            <Image 
+            src={warn}
+            alt='warn'
+            width={16}
+            height={16}
             />
-          ))}
+            <div id ='warn-msg'>멘토링 진행불가</div>
+            </div>
+          )}
+
       </ProfileInfo>
     </ProfileBox>
   );
