@@ -14,13 +14,13 @@ import {
 function SalaryProfile({ data }: SalaryProps) {
   return (
     <SalaryBox>
-      <SalaryImg src={data ? data.profile : '/user.png'} alt="Profile" />
+      <SalaryImg src={data ? data.profile : '/user.png'} alt="Profile" height={76} width={76} style={{borderRadius:'90%',marginTop:'0.2rem'}}/>
       <SalaryContent>
         <SalaryTitle>{data ? data.nickName : ''}후배와 맨토링</SalaryTitle>
         <SalaryDetail>
-          <Sdate>진행일시: {data ? data.date : ''}</Sdate>
-          <STerm>소요시간 : {data ? data.term : ''}</STerm>
-          <Samount>정산금액 : {data ? data.salaryAmount : ''}</Samount>
+          <Sdate>진행일시: <div id='date-msg'>{data ? data.date : ''}</div></Sdate>
+          <Sdate>소요시간: <div id='date-msg'>{data ? data.term : ''}분</div></Sdate>
+          <Samount>정산금액 <div id='salary-msg'>{data ? data.salaryAmount : ''}원</div></Samount>
         </SalaryDetail>
       </SalaryContent>
     </SalaryBox>

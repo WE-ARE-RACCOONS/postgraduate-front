@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import { tapType } from '@/types/tap/tap';
 import { TAB, STAB_STATE } from '@/constants/tab/ctap';
 import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
+import BackHeader from '@/components/Header/BackHeader';
 
 function SalaryPage() {
   const { getAccessToken, getUserType } = useAuth();
@@ -63,26 +64,47 @@ function SalaryPage() {
             ))}
           </div>
         ) : (
-          <div>{`${STAB_STATE[activeTab]}인 멘토링이 없어요`}</div>
+          <h3>{`${STAB_STATE[activeTab]}인 멘토링이 없어요`}</h3>
         )}
       </div>
     );
   };
   return (
     <>
-      <div>
+    <BackHeader headerText='정산내역'/>
+      <div style={{marginTop:'1rem'}}>
         <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
       </div>
-      <div style={{ display: 'flex' }}>
-        <TapStyle onClick={() => handleTabClick('waiting')}>정산예정</TapStyle>
-        <TapStyle onClick={() => handleTabClick('done')}>정산완료</TapStyle>
-      </div>
+      <TabWrap>
+        <TapStyle selected={activeTab === TAB.waiting} onClick={() => handleTabClick('waiting')}>정산예정</TapStyle>
+        <TapStyle selected={activeTab === TAB.done} onClick={() => handleTabClick('done')}>정산완료</TapStyle>
+      </TabWrap>
       <div>{renderTabContent()}</div>
     </>
   );
 }
-const TapStyle = styled.div`
-  border: 1px solid blue;
-`;
 
+const TabWrap = styled.div`
+display: flex;
+justify-content: space-between;
+border-bottom: 1px solid #C2CEDE;
+justify-content: center;
+`;
+interface TapStyleProps {
+  selected: boolean;
+}
+const TapStyle = styled.div<TapStyleProps>`
+padding: 0 2rem;
+  width: 9rem;
+  height: 3.37rem;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  color: #495565;
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 140%;
+  border-bottom: ${({ selected }) => (selected ? '2px solid #495565' : 'none')};
+  color: ${({ selected }) => (selected ? '#495565' : '#C2CEDE')};
+`;
 export default SalaryPage;
