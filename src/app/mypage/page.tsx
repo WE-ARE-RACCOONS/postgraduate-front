@@ -48,6 +48,11 @@ function MyPage() {
     modalHandler: suggestModalHandler,
     portalElement: suggesPortalElement,
   } = useModal('suggest-mypage-portal');
+  const {
+    modal: infoModal,
+    modalHandler: infoHandler,
+    portalElement: infoPortal,
+  } = useModal('senior-info-modify-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
@@ -162,11 +167,21 @@ function MyPage() {
         ? createPortal(
             <DimmedModal
               modalType="mypageSuggest"
-              modalHandler={seiorChangemodalHandler}
+              infoHandler={infoHandler}
+              modalHandler={suggestModalHandler}
             />,
             suggesPortalElement,
           )
         : ''}
+        {infoModal && infoPortal
+        ? createPortal(
+            <FullModal
+              modalType="senior-info-modify"
+              modalHandler={infoHandler}
+            />,
+            infoPortal,
+          )
+        : null}
     </div>
   );
 }

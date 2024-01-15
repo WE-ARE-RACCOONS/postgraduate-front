@@ -12,4 +12,5 @@ export interface DimmedModalProps {
   modalType: DimmedModalType;
   modalHandler: () => void;
   mentoringId?: number;
+  infoHandler?: () =>void;
 }
