@@ -43,6 +43,11 @@ function MyPage() {
     modalHandler: searchModalHandler,
     portalElement: searchPortalElement,
   } = useModal('search-portal');
+  const {
+    modal: suggestModal,
+    modalHandler: suggestModalHandler,
+    portalElement: suggesPortalElement,
+  } = useModal('suggest-mypage-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
@@ -108,6 +113,7 @@ function MyPage() {
             userType={userType ? (userType as userType) : 'junior'}
             profileReg={profileReg}
             certifiReg={certifiReg}
+            modalHandler={suggestModalHandler}
           />
           {userType == 'senior' && (
             <div style={{backgroundColor:'white'}}>
@@ -150,6 +156,15 @@ function MyPage() {
         ? createPortal(
             <SearchModal modalHandler={searchModalHandler} />,
             searchPortalElement,
+          )
+        : ''}
+        {suggestModal && suggesPortalElement
+        ? createPortal(
+            <DimmedModal
+              modalType="mypageSuggest"
+              modalHandler={seiorChangemodalHandler}
+            />,
+            suggesPortalElement,
           )
         : ''}
     </div>

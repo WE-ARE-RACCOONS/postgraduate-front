@@ -15,6 +15,10 @@ import { ProfileProps } from '@/types/profile/profile';
 import SingleValidator from '../Validator/SingleValidator';
 
 function Profile(props: ProfileProps) {
+  const suggestModal=()=>{
+  props.modalHandler();
+  }
+  
   const profile = props.profile;
   return (
     <ProfileBox>
@@ -43,7 +47,7 @@ function Profile(props: ProfileProps) {
             height={16}
             style={{marginRight:'0.25rem'}}
             />
-            <div id ='warn-msg'>멘토링 진행불가</div>
+            <button onClick={suggestModal} id ='warn-msg' style={{border:'none',backgroundColor:'white'}}>멘토링 진행불가</button>
             </div>
           )}
 
