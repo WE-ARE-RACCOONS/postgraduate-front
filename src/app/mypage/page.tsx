@@ -86,7 +86,6 @@ function MyPage() {
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
             setSeniorId(res.data.data.seniorId);
-            console.log(res.data.data);
           })
           .catch(function (error) {
             console.log(error);
