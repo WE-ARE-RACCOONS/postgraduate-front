@@ -10,6 +10,7 @@ export const ProfileBox = styled.div`
 `;
 export const ProfileInfo = styled.div`
   display: flex;
+  justify-content: space-between;
   width: 30rem;
   margin-left: 1rem;
   #warn-msg {
