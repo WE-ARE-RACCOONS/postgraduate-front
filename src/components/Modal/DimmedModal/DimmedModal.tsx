@@ -37,7 +37,10 @@ function DimmedModal(props: DimmedModalProps) {
           <SNotRegistered modalHandler={props.modalHandler} />
         )}
         {props.modalType == 'mypageSuggest' && (
-          <SuggestModal infoHandler={props.infoHandler && props.infoHandler}modalHandler={props.modalHandler} />
+          <SuggestModal
+            infoHandler={props.infoHandler && props.infoHandler}
+            modalHandler={props.modalHandler}
+          />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

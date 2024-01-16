@@ -20,21 +20,27 @@ const ContentBox = ({
   onClick,
   kind,
   profileReg,
-  certifiReg
+  certifiReg,
 }: {
-  certifiReg?:certiRegType;
-  kind?:string;
-  profileReg?:boolean;
+  certifiReg?: certiRegType;
+  kind?: string;
+  profileReg?: boolean;
   content: string;
   onClick?: () => void;
 }) => {
   return (
     <ContentWapper onClick={onClick}>
       {content}
-      <div style={{display:'flex'}}>
-      {kind ==='msg'&& ( profileReg ? <div id = 'msg'>작성완료</div> :<div id = 'msg'>미완성</div>)}
-      {kind ==='auth'&&( certifiReg ? <div id = 'msg'>{setAuthText(certifiReg)}</div> :'')}
-      <Image id="arrow" src={arrow} alt="화살표" width={24} height={24} />
+      <div style={{ display: 'flex' }}>
+        {kind === 'msg' &&
+          (profileReg ? (
+            <div id="msg">작성완료</div>
+          ) : (
+            <div id="msg">미완성</div>
+          ))}
+        {kind === 'auth' &&
+          (certifiReg ? <div id="msg">{setAuthText(certifiReg)}</div> : '')}
+        <Image id="arrow" src={arrow} alt="화살표" width={24} height={24} />
       </div>
     </ContentWapper>
   );

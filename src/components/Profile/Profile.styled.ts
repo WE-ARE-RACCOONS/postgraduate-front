@@ -9,17 +9,17 @@ export const ProfileBox = styled.div`
   align-items: center;
 `;
 export const ProfileInfo = styled.div`
-display: flex;
+  display: flex;
   width: 30rem;
   margin-left: 1rem;
-  #warn-msg{
-    color: #FF5757;
-font-family: Pretendard;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.05rem */
-letter-spacing: -0.03125rem;
+  #warn-msg {
+    color: #ff5757;
+    font-family: Pretendard;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.05rem */
+    letter-spacing: -0.03125rem;
   }
 `;
 export const ImageBox = styled.div`

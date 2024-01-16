@@ -27,7 +27,7 @@ function SalaryBox(props: SalaryBoxProps) {
         <SalaryDesc>정산 예정액</SalaryDesc>
         <SalaryValue>{addCommas(props.salaryAmount)}원</SalaryValue>
       </SalaryBlock>
-      <div id='middle'></div>
+      <div id="middle"></div>
       <SalaryBlock>
         <SalaryDesc>다음 정산 예정일</SalaryDesc>
         <SalaryValue>{formatDate(props.salaryDate)}</SalaryValue>

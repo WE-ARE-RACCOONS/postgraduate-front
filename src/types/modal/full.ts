@@ -10,7 +10,7 @@ export type FullModalType =
   | 'senior-info-modify'
   | 'senior-mentoring-time'
   | 'senior-mentoring-spec'
-  | 'select-date-calendar'
+  | 'select-date-calendar';
 
 export interface FullModalProps {
   modalType: FullModalType;
@@ -19,5 +19,4 @@ export interface FullModalProps {
   acceptModalHandler?: () => void;
   mentoringId?: number;
   targetAtom?: PrimitiveAtom<string>; // 'select-date-calendar'의 경우에만 추가
-
 }

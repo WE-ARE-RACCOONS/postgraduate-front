@@ -9,7 +9,7 @@ export interface ProfileProps {
   profileReg: boolean; // only senior
   certifiReg: certiRegType;
   modalHandler: () => void;
-   // only senior
+  // only senior
 }
 
 export interface ProfileManageProps {

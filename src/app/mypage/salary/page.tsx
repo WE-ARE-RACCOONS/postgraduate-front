@@ -71,39 +71,49 @@ function SalaryPage() {
   };
   return (
     <>
-    <BackHeader headerText='정산내역'/>
-      <div style={{marginTop:'1rem'}}>
+      <BackHeader headerText="정산내역" />
+      <div style={{ marginTop: '1rem' }}>
         <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
       </div>
       <TabWrap>
-        <TapStyle selected={activeTab === TAB.waiting} onClick={() => handleTabClick('waiting')}>정산예정</TapStyle>
-        <TapStyle selected={activeTab === TAB.done} onClick={() => handleTabClick('done')}>정산완료</TapStyle>
+        <TapStyle
+          selected={activeTab === TAB.waiting}
+          onClick={() => handleTabClick('waiting')}
+        >
+          정산예정
+        </TapStyle>
+        <TapStyle
+          selected={activeTab === TAB.done}
+          onClick={() => handleTabClick('done')}
+        >
+          정산완료
+        </TapStyle>
       </TabWrap>
       <div>{renderTabContent()}</div>
     </>
   );
 }
 const NoMentoring = styled.div`
-color: #ADB5BD;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.4rem */
+  color: #adb5bd;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 140%; /* 1.4rem */
   margin-top: 1rem;
-`
+`;
 const TabWrap = styled.div`
-display: flex;
-justify-content: space-between;
-border-bottom: 1px solid #C2CEDE;
-justify-content: center;
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #c2cede;
+  justify-content: center;
 `;
 interface TapStyleProps {
   selected: boolean;
 }
 const TapStyle = styled.div<TapStyleProps>`
-padding: 0 2rem;
+  padding: 0 2rem;
   width: 9rem;
   height: 3.37rem;
   align-items: center;

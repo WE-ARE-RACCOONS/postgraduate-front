@@ -86,7 +86,7 @@ function MyPage() {
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
             setSeniorId(res.data.data.seniorId);
-            console.log(res.data.data)
+            console.log(res.data.data);
           })
           .catch(function (error) {
             console.log(error);
@@ -108,10 +108,10 @@ function MyPage() {
   }, [Token]);
 
   return (
-    <div style={{backgroundColor:'#F8F9FA',width:'inherit'}}>
+    <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
       <LogoLayer modalHandler={searchModalHandler} />
       {Token ? (
-        <div style={{backgroundColor:'#F8F9FA'}}>
+        <div style={{ backgroundColor: '#F8F9FA' }}>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
@@ -121,10 +121,10 @@ function MyPage() {
             modalHandler={suggestModalHandler}
           />
           {userType == 'senior' && (
-            <div style={{backgroundColor:'white'}}>
+            <div style={{ backgroundColor: 'white' }}>
               <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
-              <div style={{marginTop:'0.5rem'}}>
-              <AccountShowBtn/>
+              <div style={{ marginTop: '0.5rem' }}>
+                <AccountShowBtn />
               </div>
             </div>
           )}
@@ -136,12 +136,10 @@ function MyPage() {
           />
         </div>
       ) : (
-        
-          <NotLmypage modalHandler={modalHandler}></NotLmypage>
-  
+        <NotLmypage modalHandler={modalHandler}></NotLmypage>
       )}
-      <div style={{marginTop:'1rem'}}>
-      <CustomerCenter />
+      <div style={{ marginTop: '1rem' }}>
+        <CustomerCenter />
       </div>
       <MenuBar />
       {modal && portalElement
@@ -165,7 +163,7 @@ function MyPage() {
             searchPortalElement,
           )
         : ''}
-        {suggestModal && suggesPortalElement
+      {suggestModal && suggesPortalElement
         ? createPortal(
             <DimmedModal
               modalType="mypageSuggest"
@@ -175,7 +173,7 @@ function MyPage() {
             suggesPortalElement,
           )
         : ''}
-        {infoModal && infoPortal
+      {infoModal && infoPortal
         ? createPortal(
             <FullModal
               modalType="senior-info-modify"

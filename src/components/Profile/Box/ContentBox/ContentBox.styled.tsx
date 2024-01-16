@@ -17,15 +17,15 @@ export const ContentWapper = styled.div`
   border-top: 1px solid #dee2e6;
   text-align: left;
   padding: 1rem;
-  #msg{
-    color: #00A0E1;
-text-align: right;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
-margin-right: 0.5rem;
+  #msg {
+    color: #00a0e1;
+    text-align: right;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
+    letter-spacing: -0.03125rem;
+    margin-right: 0.5rem;
   }
 `;
