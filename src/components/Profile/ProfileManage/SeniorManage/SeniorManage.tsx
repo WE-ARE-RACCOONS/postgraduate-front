@@ -67,6 +67,7 @@ function SeniorManage(props: SeniorManageProps) {
         <ContentComponent  kind ='auth'certifiReg={props.certifiReg} content="대학원 인증" onClick={MyprofHandler} />
       </SeniorManageContentContainer>
       <SeniorManageContentContainer>
+        <div style={{marginTop: '1rem'}}></div>
         <TitleComponent title="회원 상태 변경" />
         <ContentComponent content="대학생 후배 회원으로 변경" />
       </SeniorManageContentContainer>

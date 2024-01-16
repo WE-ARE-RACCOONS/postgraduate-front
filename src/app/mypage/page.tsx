@@ -108,7 +108,7 @@ function MyPage() {
   }, [Token]);
 
   return (
-    <div style={{ backgroundColor: '#fff' ,width:'inherit'}}>
+    <div style={{backgroundColor:'#F8F9FA',width:'inherit'}}>
       <LogoLayer modalHandler={searchModalHandler} />
       {Token ? (
         <div style={{backgroundColor:'#F8F9FA'}}>
@@ -136,11 +136,13 @@ function MyPage() {
           />
         </div>
       ) : (
-        <div>
+        
           <NotLmypage modalHandler={modalHandler}></NotLmypage>
-        </div>
+  
       )}
+      <div style={{marginTop:'1rem'}}>
       <CustomerCenter />
+      </div>
       <MenuBar />
       {modal && portalElement
         ? createPortal(
