@@ -15,21 +15,21 @@ export const SalaryBoxContainer = styled.div`
     border: 1px solid #dee2e6;
     margin-top: 1rem;
   }
-  #left{
+  #left {
     width: 50%;
     display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
-  #right{
+  #right {
     width: 50%;
     display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
   }
 `;
 
