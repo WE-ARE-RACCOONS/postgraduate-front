@@ -19,19 +19,19 @@ function SalaryProfile({ data }: SalaryProps) {
         alt="Profile"
         height={76}
         width={76}
-        style={{ borderRadius: '90%', marginTop: '0.2rem' }}
+        style={{ borderRadius: '90%', marginTop: '0.2rem' ,border:'none'}}
       />
       <SalaryContent>
-        <SalaryTitle>{data ? data.nickName : ''}후배와 맨토링</SalaryTitle>
+        <SalaryTitle>{data ? data.nickName : ''}&nbsp;후배와 맨토링</SalaryTitle>
         <SalaryDetail>
           <Sdate>
-            진행일시:<div id="date-msg">&nbsp;{data ? data.date : ''}</div>
+            진행일시&nbsp;<div id="date-msg">&nbsp;{data ? data.date : ''}</div>
           </Sdate>
           <Sdate>
-            소요시간: <div id="date-msg">&nbsp;{data ? data.term : ''}분</div>
+            소요시간&nbsp;<div id="date-msg">&nbsp;{data ? data.term : ''}분</div>
           </Sdate>
           <Samount>
-            정산금액{' '}
+            정산금액&nbsp;
             <div id="salary-msg">&nbsp;{data ? data.salaryAmount : ''}원</div>
           </Samount>
         </SalaryDetail>

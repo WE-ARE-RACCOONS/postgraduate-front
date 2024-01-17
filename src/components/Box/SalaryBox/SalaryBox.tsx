@@ -23,15 +23,19 @@ function SalaryBox(props: SalaryBoxProps) {
 
   return (
     <SalaryBoxContainer>
+      <div id = 'left'>
       <SalaryBlock>
         <SalaryDesc>정산 예정액</SalaryDesc>
         <SalaryValue>{addCommas(props.salaryAmount)}원</SalaryValue>
       </SalaryBlock>
+      </div>
       <div id="middle"></div>
+      <div id = 'right'>
       <SalaryBlock>
         <SalaryDesc>다음 정산 예정일</SalaryDesc>
         <SalaryValue>{formatDate(props.salaryDate)}</SalaryValue>
       </SalaryBlock>
+      </div>
     </SalaryBoxContainer>
   );
 }

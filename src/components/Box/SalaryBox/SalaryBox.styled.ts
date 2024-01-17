@@ -6,9 +6,6 @@ export const SalaryBoxContainer = styled.div`
   border-radius: 0.25rem;
   border: 1px solid #f1f3f5;
   background-color: #f8f9fa;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
   display: flex;
   margin-left: 1rem;
   #middle {
@@ -16,17 +13,35 @@ export const SalaryBoxContainer = styled.div`
     height: 3.18rem;
     flex-shrink: 0;
     border: 1px solid #dee2e6;
+    margin-top: 1rem;
   }
-`;
-
-export const SalaryBlock = styled.div`
-  display: flex;
+  #left{
+    width: 50%;
+    display: flex;
   flex-direction: column;
   text-align: center;
   justify-content: center;
   align-items: center;
+  }
+  #right{
+    width: 50%;
+    display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  }
+`;
+
+export const SalaryBlock = styled.div`
   width: 9.2rem;
   height: 4rem;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  align-items: center;
 `;
 
 export const SalaryDesc = styled.div`

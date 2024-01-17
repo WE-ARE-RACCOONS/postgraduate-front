@@ -41,10 +41,10 @@ function SuggestModal(props: SuggestModalProps) {
         </h3>
         <SMFontGray>
           <div style={{ display: 'flex' }}>
-            1. ‘대학원 인증’하고, <div id="color">승인완료</div> 받기
+            1. ‘대학원 인증’하고, <div id="color">&nbsp;승인완료&nbsp;</div> 받기
           </div>
           <div style={{ display: 'flex' }}>
-            2. ‘내 프로필' 완성하고, <div id="color">작성완료</div> 받기
+            2. ‘내 프로필' 완성하고, <div id="color">&nbsp;작성완료&nbsp;</div> 받기
           </div>
         </SMFontGray>
         <NextBtn btnText="대학원 인증하기" kind="route" onClick={seniorAuth} />
