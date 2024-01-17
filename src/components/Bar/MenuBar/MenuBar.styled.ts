@@ -5,6 +5,7 @@ export const MenuContainer = styled.div`
   width: inherit;
   height: 3.75rem;
   position: absolute;
+  position: fixed;
   bottom: 0;
   display: flex;
   justify-content: space-between;

@@ -5,10 +5,12 @@ export type DimmedModalType =
   | 'notSenior'
   | 'cancelMent'
   | 'juniorCancelMent'
-  | 'notRegistered';
+  | 'notRegistered'
+  | 'mypageSuggest';
 
 export interface DimmedModalProps {
   modalType: DimmedModalType;
   modalHandler: () => void;
   mentoringId?: number;
+  infoHandler?: () => void;
 }

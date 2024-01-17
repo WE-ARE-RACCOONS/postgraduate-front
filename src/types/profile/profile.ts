@@ -7,7 +7,9 @@ export interface ProfileProps {
   nickName: string;
   userType: userType;
   profileReg: boolean; // only senior
-  certifiReg: certiRegType; // only senior
+  certifiReg: certiRegType;
+  modalHandler: () => void;
+  // only senior
 }
 
 export interface ProfileManageProps {

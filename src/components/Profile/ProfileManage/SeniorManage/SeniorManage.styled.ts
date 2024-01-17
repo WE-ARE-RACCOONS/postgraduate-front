@@ -19,7 +19,6 @@ export const SeniorManageAuthBox = styled.div`
   display: flex;
   justify-content: space-between;
 `;
-
 export const SeniorManageAuthValue = styled.div<{ $certifiReg?: certiRegType }>`
   width: max-content;
   height: 1.75rem;
