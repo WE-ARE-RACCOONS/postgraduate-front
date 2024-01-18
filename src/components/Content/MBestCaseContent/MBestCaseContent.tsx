@@ -11,6 +11,8 @@ import TextField from '@/components/Text/TextField';
 function MBestCaseContent({ modalHandler }: { modalHandler: () => void }) {
   return (
     <MBestCaseContainer>
+      <div style={{display:'flex'}}>
+      <h3 style={{marginLeft:'38%',marginTop:'1rem'}}>프로필 예시</h3>
       <Image
         id="x-icon"
         src={x_icon}
@@ -19,6 +21,7 @@ function MBestCaseContent({ modalHandler }: { modalHandler: () => void }) {
         priority
         onClick={modalHandler}
       />
+      </div>
       <RoundedImage imgSrc={user_img} altMsg="선배 프로필 이미지" />
       <DividedText firStr="대학원" secStr="학과" />
       <AuthLabeledText str="닉네임" />
