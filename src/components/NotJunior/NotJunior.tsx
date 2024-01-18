@@ -46,9 +46,15 @@ function NotJunior(props: NotJuniorProps) {
       </NotSeniorBoxTop>
       <NotSeniorMid>
         <NSMain>{JUNIOR_MODAL.notJuniorUser}</NSMain>
-        <div style={{marginTop:'1.5rem',marginBottom:'1.5rem',marginLeft:'1rem'}}>
-        <NSSub>{JUNIOR_MODAL.needJuniorUserJoin}</NSSub>
-        <NSSub>{JUNIOR_MODAL.recommendJoin}</NSSub>
+        <div
+          style={{
+            marginTop: '1.5rem',
+            marginBottom: '1.5rem',
+            marginLeft: '1rem',
+          }}
+        >
+          <NSSub>{JUNIOR_MODAL.needJuniorUserJoin}</NSSub>
+          <NSSub>{JUNIOR_MODAL.recommendJoin}</NSSub>
         </div>
       </NotSeniorMid>
       <NotSeniorBottom>

@@ -10,7 +10,7 @@ export const NotSeniorMid = styled.div`
   align-items: center;
   text-align: center;
   position: absolute;
-   top: 2rem;
+  top: 2rem;
   left: 12%;
 `;
 export const NotSeniorBottom = styled.div`
@@ -19,8 +19,8 @@ export const NotSeniorBottom = styled.div`
   left: 5%;
 `;
 export const NSMain = styled.div`
-margin-left: 2rem;
-width: 12.6rem;
+  margin-left: 2rem;
+  width: 12.6rem;
   color: #333;
   text-align: center;
   font-family: Noto Sans JP;

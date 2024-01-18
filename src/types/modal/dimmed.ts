@@ -7,7 +7,7 @@ export type DimmedModalType =
   | 'juniorCancelMent'
   | 'notRegistered'
   | 'mypageSuggest'
-  |'notJunior';
+  | 'notJunior';
 
 export interface DimmedModalProps {
   modalType: DimmedModalType;

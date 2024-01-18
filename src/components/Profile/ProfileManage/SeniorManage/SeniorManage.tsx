@@ -71,7 +71,7 @@ function SeniorManage(props: SeniorManageProps) {
       registerHandler();
       return false;
     }
-  }; 
+  };
   const changeJunior = async () => {
     try {
       const Token = getAccessToken();
@@ -101,7 +101,7 @@ function SeniorManage(props: SeniorManageProps) {
 
   useEffect(() => {
     changeJunior();
-  }, []); 
+  }, []);
 
   return (
     <SeniorManageContainer>
@@ -125,7 +125,10 @@ function SeniorManage(props: SeniorManageProps) {
       <SeniorManageContentContainer>
         <div style={{ marginTop: '1rem' }}></div>
         <TitleComponent title="회원 상태 변경" />
-        <ContentComponent content="대학생 후배 회원으로 변경" onClick={changeJunior} />
+        <ContentComponent
+          content="대학생 후배 회원으로 변경"
+          onClick={changeJunior}
+        />
       </SeniorManageContentContainer>
       {modal && portalElement
         ? createPortal(
@@ -163,12 +166,9 @@ function SeniorManage(props: SeniorManageProps) {
             registerPortal,
           )
         : null}
-        {setJModal && juniorPortal
+      {setJModal && juniorPortal
         ? createPortal(
-            <DimmedModal
-              modalType="notJunior"
-              modalHandler={juniorHandler}
-            />,
+            <DimmedModal modalType="notJunior" modalHandler={juniorHandler} />,
             juniorPortal,
           )
         : null}

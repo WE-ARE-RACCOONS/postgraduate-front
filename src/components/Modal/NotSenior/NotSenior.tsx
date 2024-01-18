@@ -20,13 +20,12 @@ import { userType } from '@/types/user/user';
 function NotSenior(props: NotSeniorProps) {
   const socialId = useAtomValue(socialIdAtom);
   const [userType, setUserType] = useAtom(userTypeAtom);
-  console.log(socialId)
+  console.log(socialId);
   const xClick = () => {
     props.modalHandler();
   };
   const router = useRouter();
   const seniorJoin = () => {
-
     router.push(`/signup/${socialId}/common-info/auth`);
   };
   return (
@@ -48,9 +47,15 @@ function NotSenior(props: NotSeniorProps) {
       </NotSeniorBoxTop>
       <NotSeniorMid>
         <NSMain>{SENIOR_MODAL.notSeniorUser}</NSMain>
-        <div style={{marginTop:'1.5rem',marginBottom:'1.5rem',marginLeft:'1rem'}}>
-        <NSSub>{SENIOR_MODAL.needSeniorUserJoin}</NSSub>
-        <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
+        <div
+          style={{
+            marginTop: '1.5rem',
+            marginBottom: '1.5rem',
+            marginLeft: '1rem',
+          }}
+        >
+          <NSSub>{SENIOR_MODAL.needSeniorUserJoin}</NSSub>
+          <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
         </div>
       </NotSeniorMid>
       <NotSeniorBottom>
