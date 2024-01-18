@@ -60,6 +60,7 @@ function MatchingInfoPage() {
           }}
         >
           <CheckBox
+          type='accept'
             checked={matchingReceive}
             onChange={handleMatchingReceive}
           />

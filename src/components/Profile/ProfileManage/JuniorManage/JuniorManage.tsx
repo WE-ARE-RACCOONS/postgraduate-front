@@ -38,7 +38,6 @@ function JuniorManage(props: NotSeniorProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
-  console.log(socialId);
   return (
     <JuniorManageContainer>
       <TitleComponent title="계정 관리" />

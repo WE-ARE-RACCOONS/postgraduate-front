@@ -12,16 +12,29 @@ import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
-
+import useAuth from '@/hooks/useAuth';
+import axios from 'axios';
+import { userType } from '@/types/user/user';
+import Router from 'next/navigation';
+import { useRouter } from 'next/router';
+import { userTypeAtom } from '@/stores/signup';
+import { useAtom, useSetAtom } from 'jotai';
 function SeniorManage(props: SeniorManageProps) {
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
+  const router = useRouter();
+  const setuserTypeAtom = useSetAtom(userTypeAtom);
   const {
     modal: modifyModal,
     modalHandler: modifyHandler,
     portalElement: modifyPortal,
   } = useModal('profile-modify-portal');
+  const {
+    modal: setJModal,
+    modalHandler: juniorHandler,
+    portalElement: juniorPortal,
+  } = useModal('junior-request-portal');
   const {
     modal: infoModal,
     modalHandler: infoHandler,
@@ -55,6 +68,31 @@ function SeniorManage(props: SeniorManageProps) {
       registerHandler();
       return false;
     }
+  }; 
+  const changeJunior = async () => {
+    try {
+      const { getAccessToken } = useAuth();
+      const Token = getAccessToken();
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
+          { headers },
+        );
+        console.log(response.data.data.possible)
+        if (response.data.data.possible === true) {
+          setuserTypeAtom('junior');
+          router.push('/mypage')
+        }
+        if (response.data.data.possible === false) {
+          juniorHandler();
+        }
+      }
+    } catch (error) {
+      console.error('Error fetching data from the server:', error);
+    }
   };
 
   return (
@@ -79,7 +117,7 @@ function SeniorManage(props: SeniorManageProps) {
       <SeniorManageContentContainer>
         <div style={{ marginTop: '1rem' }}></div>
         <TitleComponent title="회원 상태 변경" />
-        <ContentComponent content="대학생 후배 회원으로 변경" />
+        <ContentComponent content="대학생 후배 회원으로 변경" onClick={changeJunior} />
       </SeniorManageContentContainer>
       {modal && portalElement
         ? createPortal(
@@ -115,6 +153,15 @@ function SeniorManage(props: SeniorManageProps) {
               modalHandler={registerHandler}
             />,
             registerPortal,
+          )
+        : null}
+        {setJModal && juniorPortal
+        ? createPortal(
+            <DimmedModal
+              modalType="notJunior"
+              modalHandler={registerHandler}
+            />,
+            juniorPortal,
           )
         : null}
     </SeniorManageContainer>
