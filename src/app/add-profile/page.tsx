@@ -37,7 +37,11 @@ function AddProfilePage() {
     'senior-best-case-portal',
   );
   const updateBtnSet = () => {
-    setButtonAct(singleIntro.length > 10 && multiIntro.length > 50 && recommended.length > 50);
+    setButtonAct(
+      singleIntro.length > 10 &&
+        multiIntro.length > 50 &&
+        recommended.length > 50,
+    );
   };
   useEffect(() => {
     updateBtnSet();
@@ -81,14 +85,14 @@ function AddProfilePage() {
 
   return (
     <AddProfilePageContainer>
-      <BackHeader headerText='멘토링 소개' />
+      <BackHeader headerText="멘토링 소개" />
       <ProgressBar activeNum={0} />
-      <div style={{marginTop:'1.25rem',marginLeft:'1rem'}}>
-      <h3 >{PROFILE_DIRECTION.addProfile}</h3>
-      <div id='profile-sub'>{PROFILE_SUB_DIRECTION.addProfile}</div>
+      <div style={{ marginTop: '1.25rem', marginLeft: '1rem' }}>
+        <h3>{PROFILE_DIRECTION.addProfile}</h3>
+        <div id="profile-sub">{PROFILE_SUB_DIRECTION.addProfile}</div>
       </div>
       <ProfileForm
-      flag={flag}
+        flag={flag}
         lineType="single"
         title={PROFILE_TITLE.singleIntroduce}
         placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
@@ -97,11 +101,16 @@ function AddProfilePage() {
         loadStr={singleIntro}
         changeHandler={setSingleIntro}
       />
-      <div style={{marginLeft:'1rem'}}>
-      { flag && <SingleValidator msg={'최소 10자 이상 입력해 주세요.'} textColor="#FF3347" />}
+      <div style={{ marginLeft: '1rem' }}>
+        {flag && (
+          <SingleValidator
+            msg={'최소 10자 이상 입력해 주세요.'}
+            textColor="#FF3347"
+          />
+        )}
       </div>
       <ProfileForm
-      flag={flag}
+        flag={flag}
         lineType="multi"
         title={PROFILE_TITLE.multiIntroduce}
         placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
@@ -110,11 +119,16 @@ function AddProfilePage() {
         loadStr={multiIntro}
         changeHandler={setMultiIntro}
       />
-      <div style={{marginLeft:'1rem'}}>
-      {flag && <SingleValidator msg={'최소 50자 이상 입력해 주세요.'} textColor="#FF3347" />}
+      <div style={{ marginLeft: '1rem' }}>
+        {flag && (
+          <SingleValidator
+            msg={'최소 50자 이상 입력해 주세요.'}
+            textColor="#FF3347"
+          />
+        )}
       </div>
       <ProfileForm
-      flag={flag}
+        flag={flag}
         lineType="multi"
         title={PROFILE_TITLE.recommendedFor}
         placeholder={PROFILE_PLACEHOLDER.recommendedFor}
@@ -123,13 +137,16 @@ function AddProfilePage() {
         loadStr={recommended}
         changeHandler={setRecommended}
       />
-      <div style={{marginLeft:'1rem'}}>
-      {flag && <SingleValidator msg={'최소 50자 이상 입력해 주세요.'} textColor="#FF3347" />}
+      <div style={{ marginLeft: '1rem' }}>
+        {flag && (
+          <SingleValidator
+            msg={'최소 50자 이상 입력해 주세요.'}
+            textColor="#FF3347"
+          />
+        )}
       </div>
-      <ShowProfBtn
-        onClick={modalHandler}
-      >프로필 예시 보기</ShowProfBtn>
-      <div style={{display:'flex',marginTop:'2rem'}}>
+      <ShowProfBtn onClick={modalHandler}>프로필 예시 보기</ShowProfBtn>
+      <div style={{ display: 'flex', marginTop: '2rem' }}>
         <PrevBtn
           onClick={() => {
             router.push('/mypage');
@@ -137,7 +154,11 @@ function AddProfilePage() {
         >
           이전
         </PrevBtn>
-        {buttonAct ? <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>:<NextAddBtn onClick={handleClick}>다음</NextAddBtn>}
+        {buttonAct ? (
+          <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>
+        ) : (
+          <NextAddBtn onClick={handleClick}>다음</NextAddBtn>
+        )}
       </div>
       {modal && portalElement
         ? createPortal(
@@ -155,87 +176,87 @@ const AddProfilePageContainer = styled.div`
   width: 100%;
   height: 100%;
   position: relative;
-  #profile-sub{
+  #profile-sub {
     margin-top: 0.5rem;
     margin-bottom: 1.69rem;
   }
 `;
 const PrevBtn = styled.button`
-display: flex;
-width: 35%;
-padding: 1rem 0rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-border-radius: 0.75rem;
-background: #ADB5BD;
-border: none;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-margin-left: 1rem;
-`
-const ShowProfBtn = styled.button`
-margin-top: 0.5rem;
   display: flex;
-width: 94%;
-height: 2.875rem;
-padding: 1rem 0rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-flex-shrink: 0;
-border-radius: 0.5rem;
-background: #495565;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-margin-left: 1rem;
-border: none;
-`
+  width: 35%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: #adb5bd;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 1rem;
+`;
+const ShowProfBtn = styled.button`
+  margin-top: 0.5rem;
+  display: flex;
+  width: 94%;
+  height: 2.875rem;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  background: #495565;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 1rem;
+  border: none;
+`;
 const NextAddBtn = styled.button`
   display: flex;
-width: 57%;
-padding: 1rem 0rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-margin-left: 0.4rem;
-border-radius: 0.75rem;
-background: #DEE2E6;
-border: none;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-`
+  width: 57%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  margin-left: 0.4rem;
+  border-radius: 0.75rem;
+  background: #dee2e6;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
 const NextAddBtnSet = styled.button`
   display: flex;
-width: 57%;
-padding: 1rem 0rem;
-justify-content: center;
-align-items: center;
-gap: 0.625rem;
-margin-left: 0.4rem;
-border: none;
-background: #2FC4B2;
-border-radius: 0.75rem;
-color: #FFF;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.125rem;
-font-style: normal;
-font-weight: 700;
-line-height: normal;
-`
+  width: 57%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  margin-left: 0.4rem;
+  border: none;
+  background: #2fc4b2;
+  border-radius: 0.75rem;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;

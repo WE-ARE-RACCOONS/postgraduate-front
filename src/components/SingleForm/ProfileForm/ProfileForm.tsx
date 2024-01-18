@@ -20,16 +20,16 @@ function ProfileForm(props: ProfileFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     props.changeHandler(e.currentTarget.value);
-   setCharCount(e.currentTarget.value.length);
+    setCharCount(e.currentTarget.value.length);
   };
 
   return (
     <ProfileFormContainer flag={props.flag}>
       <ProfileTitleContainer>
         <div>{props.title}</div>
-          <div id='char-count'>
-            {charCount} / {props.maxLength || 0} 자
-          </div>
+        <div id="char-count">
+          {charCount} / {props.maxLength || 0} 자
+        </div>
       </ProfileTitleContainer>
       {props.lineType == 'single' && (
         <textarea
