@@ -4,8 +4,8 @@ import TitleComponent from '../../Box/TitleBox';
 import { useRouter } from 'next/navigation';
 import { NotSeniorProps } from '@/types/modal/mypage';
 import useAuth from '@/hooks/useAuth';
-import { useAtom } from 'jotai';
-import { socialIdAtom } from '@/stores/signup';
+import { useAtom, useSetAtom } from 'jotai';
+import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { userType } from '@/types/user/user';
 import axios from 'axios';
 import { USER_TYPE } from '@/constants/user/cUser';
@@ -14,6 +14,7 @@ function JuniorManage(props: NotSeniorProps) {
   const handleProfileEditClick = () => {
     router.push('/mypage/edit');
   };
+  const setuserTypeAtom = useSetAtom(userTypeAtom);
   const { getAccessToken } = useAuth();
   const [socialId, setSocialId] = useAtom(socialIdAtom);
   const handleClick = async () => {
@@ -28,6 +29,8 @@ function JuniorManage(props: NotSeniorProps) {
           { headers },
         );
         if (response.data.data.possible === true) {
+          setuserTypeAtom('junior');
+          router.push('/mypage');
         }
         if (response.data.data.possible === false) {
           setSocialId(response.data.data.socialId);

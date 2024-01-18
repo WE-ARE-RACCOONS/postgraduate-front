@@ -1,5 +1,5 @@
 'use client';
-import { NotSeniorProps } from '@/types/modal/mypage';
+import { NotJuniorProps } from '@/types/modal/mypage';
 import React, { useState } from 'react';
 import x_icon from '../../../public/x_gray.png';
 import Image from 'next/image';
@@ -16,7 +16,7 @@ import {
 } from './NotJunior.styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
-function NotJunior(props: NotSeniorProps) {
+function NotJunior(props: NotJuniorProps) {
   const socialId = useAtomValue(socialIdAtom);
 
   const xClick = () => {

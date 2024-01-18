@@ -17,7 +17,7 @@ import axios from 'axios';
 import { userType } from '@/types/user/user';
 import Router from 'next/navigation';
 import { useRouter } from 'next/navigation';
-import { userTypeAtom } from '@/stores/signup';
+import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
@@ -26,6 +26,7 @@ function SeniorManage(props: SeniorManageProps) {
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
+  const [socialId, setSocialId] = useAtom(socialIdAtom);
   const setuserTypeAtom = useSetAtom(userTypeAtom);
   const {
     modal: modifyModal,
@@ -82,7 +83,6 @@ function SeniorManage(props: SeniorManageProps) {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
           { headers },
         );
-        console.log(response.data.data.possible);
 
         if (response.data.data.possible === true) {
           setuserTypeAtom('junior');
@@ -90,6 +90,7 @@ function SeniorManage(props: SeniorManageProps) {
         }
 
         if (response.data.data.possible === false) {
+          setSocialId(response.data.data.socialId);
           juniorHandler();
         }
       }
@@ -166,7 +167,7 @@ function SeniorManage(props: SeniorManageProps) {
         ? createPortal(
             <DimmedModal
               modalType="notJunior"
-              modalHandler={registerHandler}
+              modalHandler={juniorHandler}
             />,
             juniorPortal,
           )

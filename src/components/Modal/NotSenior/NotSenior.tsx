@@ -20,12 +20,13 @@ import { userType } from '@/types/user/user';
 function NotSenior(props: NotSeniorProps) {
   const socialId = useAtomValue(socialIdAtom);
   const [userType, setUserType] = useAtom(userTypeAtom);
-
+  console.log(socialId)
   const xClick = () => {
     props.modalHandler();
   };
   const router = useRouter();
   const seniorJoin = () => {
+
     router.push(`/signup/${socialId}/common-info/auth`);
   };
   return (
