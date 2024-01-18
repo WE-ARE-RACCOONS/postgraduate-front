@@ -1,4 +1,4 @@
-import { SingleValidatorProps } from '@/types/validator/singleValidator';
+import { SingleValidatorProps } from '@/types/Validator/singleValidator';
 import { SingleValidatorContainer } from './SingleValidator.styled';
 import Image from 'next/image';
 import alert_x from '../../../../public/alert_x.png';
