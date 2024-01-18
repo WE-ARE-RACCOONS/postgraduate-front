@@ -16,14 +16,16 @@ import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import { userType } from '@/types/user/user';
 import Router from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 import { userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
+import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
+  const router = useRouter();
+  const { getAccessToken } = useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
-  const router = useRouter();
   const setuserTypeAtom = useSetAtom(userTypeAtom);
   const {
     modal: modifyModal,
@@ -71,7 +73,6 @@ function SeniorManage(props: SeniorManageProps) {
   }; 
   const changeJunior = async () => {
     try {
-      const { getAccessToken } = useAuth();
       const Token = getAccessToken();
       if (Token) {
         const headers = {
@@ -81,11 +82,13 @@ function SeniorManage(props: SeniorManageProps) {
           `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
           { headers },
         );
-        console.log(response.data.data.possible)
+        console.log(response.data.data.possible);
+
         if (response.data.data.possible === true) {
           setuserTypeAtom('junior');
-          router.push('/mypage')
+          router.push('/mypage');
         }
+
         if (response.data.data.possible === false) {
           juniorHandler();
         }
@@ -94,6 +97,10 @@ function SeniorManage(props: SeniorManageProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
+
+  useEffect(() => {
+    changeJunior();
+  }, []); 
 
   return (
     <SeniorManageContainer>
