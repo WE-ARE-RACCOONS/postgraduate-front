@@ -6,6 +6,7 @@ import {
   SMPIntroduceBox,
   SMPLabBox,
   SMPLabKeywordBox,
+  EditBtn
 } from './SeniorMyProfile.styled';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
@@ -19,6 +20,7 @@ import { useAtomValue } from 'jotai';
 import { mySeniorId } from '@/stores/senior';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import NextBtn from '@/components/Button/NextBtn';
 
 function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false); // 예외처리용 flag
@@ -77,12 +79,15 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
 
   return (
     <SMPContainer>
+      <div>
+      <h3 style={{textAlign:'center',marginTop:'0.7rem'}}>프로필 상세</h3>
       <Image
         id="x-icon"
         src={x_icon}
         alt="모달 닫기 버튼"
         onClick={modalHandler}
       />
+      </div>
       {!flag && (
         <div>
           인증이 완료되지 않은 사용자는 프로필을 볼 수 없습니다!
@@ -98,6 +103,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
             <RoundedImage imgSrc={user_icon} altMsg="선배 프로필 이미지" />
             <SMPInfoTextBox>
               <AuthLabeledText str={nickName} />
+              {/* <div id='postgradu'>{postgradu} {major}</div> */}
               <DividedText firStr={postgradu} secStr={major} />
               <div>{professor}</div>
               <div id="mentoring-time-box">
@@ -126,7 +132,9 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
               <TextField content={time} />
             </div>
           </SMPIntroduceBox>
-          <button id="profile-modify-btn">내 프로필 수정하기</button>
+          <EditBtn>
+          <NextBtn kind ='route' url='/senior/edit-profile'btnText='수정하기'/>
+          </EditBtn>
         </>
       )}
     </SMPContainer>

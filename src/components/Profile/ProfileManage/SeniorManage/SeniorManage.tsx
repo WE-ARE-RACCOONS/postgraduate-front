@@ -46,7 +46,8 @@ function SeniorManage(props: SeniorManageProps) {
     }
   }
   const MyprofHandler = () => {
-    if (checkRegister()) modalHandler();
+    if (checkRegister()) {modalHandler();}
+
   };
 
   const checkRegister = () => {
