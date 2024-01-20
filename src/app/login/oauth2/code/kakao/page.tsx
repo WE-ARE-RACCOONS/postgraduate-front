@@ -4,10 +4,11 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { socialIdAtom } from '@/stores/signup';
 
 function KakaoPage() {
+  const setSocialId = useSetAtom(socialIdAtom);
   const router = useRouter();
   const { setAccessToken, setRefreshToken, setUserType } = useAuth();
   useEffect(() => {
@@ -20,7 +21,9 @@ function KakaoPage() {
       .then((res) => {
         const response = res.data;
         if (response.code == 'AU205') {
-          router.replace(`/signup/${response.data.socialId}`);
+          // router.replace(`/signup/${response.data.socialId}`);
+          router.replace('signup/select');
+          setSocialId(response.data.socialId);
           return;
         }
 
