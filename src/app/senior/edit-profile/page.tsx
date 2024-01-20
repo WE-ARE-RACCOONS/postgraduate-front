@@ -14,11 +14,11 @@ import React, { useState } from 'react'
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 function page() {
-  const { timeModal, timeModalHandler, timePortalElement } = useModal(
-    'senior-mentoring-time-portal'
-  );
     const [modalType, setModalType] = useState<ModalType>('postgradu');
     const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
+    const { modal:timeModal, modalHandler:timeModalHandler, portalElement:timePortalElement } = useModal(
+      'senior-mentoring-time-portal'
+    );
     const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
@@ -129,7 +129,7 @@ function page() {
               portalElement,
             )
           : null}
-          {timeModal && timePortalElement
+        {timeModal && timePortalElement
         ? createPortal(
             <FullModal
               modalType="senior-mentoring-time"
