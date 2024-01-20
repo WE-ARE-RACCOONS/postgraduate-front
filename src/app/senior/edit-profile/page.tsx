@@ -6,14 +6,18 @@ import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import TextForm from '@/components/SingleForm/TextForm';
 import { PROFILE_PLACEHOLDER, PROFILE_TITLE } from '@/constants/form/cProfileForm';
+import useAuth from '@/hooks/useAuth';
 import useModal from '@/hooks/useModal';
-import { sChatLink, sFieldAtom, sKeywordAtom, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from '@/stores/senior';
+import { mySeniorId, sAbleTime, sChatLink, sFieldAtom, sKeywordAtom, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from '@/stores/senior';
+import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
+import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 function page() {
+  const { getAccessToken} = useAuth();
     const [modalType, setModalType] = useState<ModalType>('postgradu');
     const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
     const { modal:timeModal, modalHandler:timeModalHandler, portalElement:timePortalElement } = useModal(
@@ -25,6 +29,27 @@ function page() {
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
+  const[time,setTime] = useState<Array<TimeType>>([])
+  const seniorId = useAtomValue(mySeniorId)
+  useEffect(() => {
+    const token = getAccessToken();
+    if (token) {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, {
+            headers,
+          })
+          .then((res) => {
+            console.log(res.data.data.times)
+            setTime(res.data.data.times);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+  }, []);
   return (
     <div>
       <BackHeader headerText='프로필 정보'/>
@@ -117,10 +142,24 @@ function page() {
         <div id ='setData-title'>가능 정기일정</div>
         <div id = 'setData-warn'>최소 3개 이상 일정을 추가해주세요</div>
         </div>
-        <SetDataForm>
-        <div id='setDataF-msg'>입력된 정기 일정이 없습니다.</div>
-          <div id='setData-btn' onClick={timeModalHandler}>+ 추가하기</div>
-        </SetDataForm>
+        <SetDataBox>
+          {time.length > 0 ? 
+        <>
+          {time &&
+          time.map((el, idx) => (
+          <IntroCardTimeBox key={idx}>
+            {el.day}요일 {el.startTime} ~ {el.endTime}
+            <div id='delete'>삭제</div>
+          </IntroCardTimeBox>
+        ))}
+        <div id='setData-btn' onClick={timeModalHandler}>추가하기</div> 
+        </>
+        : 
+          <SetDataForm >
+          <div id='setDataF-msg'>입력된 정기 일정이 없습니다.</div>
+          <div id='setData-btn' onClick={timeModalHandler}>+ 추가하기</div> 
+          </SetDataForm>}
+        </SetDataBox>
         </SetData>
       </EditPContainer>
         {modal && portalElement
@@ -147,16 +186,39 @@ export default page
 const EditPContainer = styled.div`
 margin-left: 1rem;
 `
+const SetDataBox = styled.div`
+  
+`
+const IntroCardTimeBox = styled.div`
+  width: 90%;
+  height: 2.5rem;
+  border-radius: 4px;
+  background-color: #f8f9fa;
+  font-size: 15px;
+  padding: 0.75rem;
+  margin-bottom: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+  #delete{
+    color: #FF5757;
+font-family: Pretendard;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 700;
+line-height: 140%; /* 1.05rem */
+letter-spacing: -0.03125rem;
+  }
+`;
 const SetDataForm = styled.div`
 padding: 0 0.75rem;
 width: 20.5rem;
 height: 3.1875rem;
 flex-shrink: 0;
+display: flex;
+justify-content: space-between;
+align-items: center;
 border-radius: 0.5rem;
 background: #F8F9FA;
-display: flex;
-align-items: center;
-justify-content: space-between;
 #setDataF-msg{
   color: #ADB5BD;
 font-family: "Noto Sans JP";

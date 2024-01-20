@@ -11,11 +11,13 @@ import {
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import { WEEK_ARRAY } from '@/constants/form/cProfileForm';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { useAtom } from 'jotai';
 import { sAbleTime } from '@/stores/senior';
 import { TimeObj } from '@/types/scheduler/scheduler';
+import ClickedBtn from '@/components/Button/ClickedBtn';
+import NextBtn from '@/components/Button/NextBtn';
 
 function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 16 }, (_, index) => index + 9);
@@ -27,6 +29,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const [endMin, setEndMin] = useState('00');
   const [flag, setFlag] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
+  const [active, setActive] = useState(false);
   const [ableTime, setAbleTime] = useAtom(sAbleTime);
 
   const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -37,6 +40,11 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
     e.currentTarget.classList.add('active');
     setInputWeek(e.currentTarget.innerText);
   };
+ useEffect(()=>{
+    if(inputWeek && startHour && endHour){
+      setActive(true);
+  }
+ },[inputWeek,startHour,endHour])
 
   const submitHandler = () => {
     /** 요일 선택하지 않은 경우 */
@@ -90,14 +98,18 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
 
   return (
     <AddTimeContainer>
+      <div style={{display:'flex'}}>
+        <h3 style={{marginLeft:'35%',marginTop:'1rem'}}>요일 및 시간설정</h3>
       <Image
         id="x-icon"
         src={x_icon}
         alt="계정 수정 모달 닫기 버튼"
         onClick={modalHandler}
       />
+      </div>
       <AddTimeWeekBox>
         <h3>요일 선택</h3>
+        <div style={{display:'flex',justifyContent:'center',marginTop:'0.75rem'}}>
         {WEEK_ARRAY.map((el, idx) => (
           <button
             className="add-time-week-btn"
@@ -109,12 +121,17 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
             {el}
           </button>
         ))}
+        </div>
       </AddTimeWeekBox>
       <AddTimeAbleBox>
-        <h3>가능한 시간 선택</h3>
+        <div style={{display:'flex',alignItems:'center'}}>
+        <h3>시간 선택</h3>
+        <div id='setTile-warn'>요일, 시작시간, 끝시간을 모두 선택해주세요</div>
+        </div>
         <AddTimeAbleBottom>
           <AddTimeDropdownBox>
-            <div>시작 시간</div>
+            <div id='ATD-title'>시작 시간</div>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
             <AddTimeDropdownSet>
               <AddTimeDropdown
                 onChange={(e) => setStartHour(e.currentTarget.value)}
@@ -125,7 +142,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
                   </option>
                 ))}
               </AddTimeDropdown>
-              <div>시</div>
+              <div id='ATD-middle'>시</div>
               <AddTimeDropdown
                 onChange={(e) => setStartMin(e.currentTarget.value)}
               >
@@ -135,12 +152,14 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
                   </option>
                 ))}
               </AddTimeDropdown>
-              <div>분</div>
+              <div id='ATD-middle'>분</div>
             </AddTimeDropdownSet>
+            <div id='ATD-bold'>부터</div>
+            </div>
           </AddTimeDropdownBox>
-          <div>~</div>
           <AddTimeDropdownBox>
-            <div>끝 시간</div>
+            <div id='ATD-title'>종료 시간</div>
+            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
             <AddTimeDropdownSet>
               <AddTimeDropdown
                 onChange={(e) => setEndHour(e.currentTarget.value)}
@@ -151,7 +170,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
                   </option>
                 ))}
               </AddTimeDropdown>
-              <div>시</div>
+              <div id='ATD-middle'>시</div>
               <AddTimeDropdown
                 onChange={(e) => setEndMin(e.currentTarget.value)}
               >
@@ -161,8 +180,10 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
                   </option>
                 ))}
               </AddTimeDropdown>
-              <div>분</div>
+              <div id='ATD-middle'>분</div>
             </AddTimeDropdownSet>
+            <div id='ATD-bold'>까지</div>
+            </div>
           </AddTimeDropdownBox>
         </AddTimeAbleBottom>
       </AddTimeAbleBox>
@@ -171,9 +192,12 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
           <SingleValidator msg={alertMsg} textColor="#FF3347" />
         </ValidatorBox>
       )}
-      <button id="add-time-submit-btn" onClick={submitHandler}>
-        등록하기
-      </button>
+      <div style={{marginTop:'31rem'}}>
+
+      {active ?  <NextBtn kind='route' onClick ={submitHandler} btnText='등록하기' />:<NextBtn kind='route-non' onClick ={submitHandler} btnText='등록하기' />}
+     
+      </div>
+    
     </AddTimeContainer>
   );
 }
