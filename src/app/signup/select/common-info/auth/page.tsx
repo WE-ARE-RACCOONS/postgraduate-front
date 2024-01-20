@@ -109,7 +109,7 @@ function AuthPage() {
     </div>
   );
 }
-
+export default AuthPage;
 // export const AuthFont = styled.div`
 //   color: #212529;
 //   font-family: Pretendard;
@@ -119,32 +119,8 @@ function AuthPage() {
 //   line-height: 140%; /* 1.225rem */
 //   letter-spacing: -0.03125rem;
 // `;
-export const AuthBtn = styled.button<{ getPhoto: boolean }>`
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin: 1rem;
-  margin-top: 6rem;
-  border: none;
-  display: flex;
-  width: 92%;
-  padding: 1rem 0rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  border-radius: 0.75rem;
-  background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
-`;
-export const AuthImgBox = styled.div`
-  height: 4.625rem;
-  width: inherit;
-  text-align: center;
-`;
-export const APhotoIn = styled.div`
+
+const APhotoIn = styled.div`
   justify-content: space-between;
   padding: 1rem 1rem;
   display: flex;
@@ -162,7 +138,7 @@ export const APhotoIn = styled.div`
   line-height: 140%; /* 1.05rem */
   letter-spacing: -0.03125rem;
 `;
-export const AuthComment = styled.div`
+const AuthComment = styled.div`
   padding: 0.7rem 1rem;
   margin-top: 2.3rem;
   width: 95%;
@@ -191,4 +167,28 @@ export const AuthComment = styled.div`
     letter-spacing: -0.03125rem;
   }
 `;
-export default AuthPage;
+const AuthBtn = styled.button<{ getPhoto: boolean }>`
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 1rem;
+  margin-top: 6rem;
+  border: none;
+  display: flex;
+  width: 92%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
+`;
+const AuthImgBox = styled.div`
+  height: 4.625rem;
+  width: inherit;
+  text-align: center;
+`;
