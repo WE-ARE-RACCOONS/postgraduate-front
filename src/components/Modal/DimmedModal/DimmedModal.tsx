@@ -7,6 +7,7 @@ import { userType } from '@/types/user/user';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import SNotRegistered from '@/components/Content/SNotRegistered';
+import SuggestModal from '@/components/SuggestModal/SuggestModal';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer onClick={props.modalHandler}>
@@ -34,6 +35,12 @@ function DimmedModal(props: DimmedModalProps) {
         )}
         {props.modalType == 'notRegistered' && (
           <SNotRegistered modalHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'mypageSuggest' && (
+          <SuggestModal
+            infoHandler={props.infoHandler && props.infoHandler}
+            modalHandler={props.modalHandler}
+          />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

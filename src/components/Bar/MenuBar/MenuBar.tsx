@@ -14,7 +14,7 @@ function MenuBar(props: MenubarProps) {
   const token = getAccessToken();
   const userType = getUserType();
   const handleClick = () => {
-    props.modalHandler();
+    if (props.modalHandler) props.modalHandler();
   };
 
   const mentoringPath =
