@@ -11,6 +11,7 @@ function ProfileManage(props: ProfileManageProps) {
       )}
       {props.userType == 'senior' && (
         <SeniorManage
+          seniorId={props.seniorId}
           certifiReg={props.certifiReg}
           profileReg={props.profileReg}
         />

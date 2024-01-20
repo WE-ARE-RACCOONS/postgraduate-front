@@ -12,11 +12,13 @@ import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
-
+import Router, { useRouter } from 'next/navigation';
+import { mySeniorId } from '@/stores/senior';
 function SeniorManage(props: SeniorManageProps) {
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
+  const router = useRouter();
   const {
     modal: modifyModal,
     modalHandler: modifyHandler,
@@ -46,7 +48,9 @@ function SeniorManage(props: SeniorManageProps) {
     }
   }
   const MyprofHandler = () => {
-    if (checkRegister()) {modalHandler();}
+    if (checkRegister()) {
+      router.push(`/senior/info/${props.seniorId}`)
+    }
 
   };
 

@@ -4,18 +4,19 @@ import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
 import useAuth from '@/hooks/useAuth';
+import { mySeniorId } from '@/stores/senior';
 import axios from 'axios';
+import { useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 function SeniorInfoPage() {
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
-
+  const mySeiorId = useAtomValue(mySeniorId).toString();
   const { getAccessToken } = useAuth();
-
+  const [findSeniorId, setFindSeniorId] = useState('');
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState([]);
   const [lab, setLab] = useState('');
@@ -31,6 +32,7 @@ function SeniorInfoPage() {
 
   useEffect(() => {
     const seniorId = pathArr[pathArr.length - 1];
+    setFindSeniorId(seniorId);
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
       .then((response) => {
@@ -64,7 +66,9 @@ function SeniorInfoPage() {
       router.push(`/mentoring-apply/${seniorId}/question`);
     }
   };
-
+const editHandler = ()=>{
+  router.push(`/senior/edit-profile`);
+}
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
@@ -93,7 +97,7 @@ function SeniorInfoPage() {
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
-      <MentoringApplyBtn onClick={applyHandler}>멘토링 신청</MentoringApplyBtn>
+      {(mySeiorId === findSeniorId) ? <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>:<MentoringApplyBtn onClick={applyHandler}>멘토링 신청</MentoringApplyBtn> }
     </SeniorInfoPageContainer>
   );
 }

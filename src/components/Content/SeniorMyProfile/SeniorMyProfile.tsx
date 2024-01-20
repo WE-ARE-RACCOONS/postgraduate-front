@@ -98,7 +98,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
         </div>
       )}
       {flag && (
-        <>
+        <div style={{background:'#F1F3F5'}}>
           <SMPInfoBox>
             <RoundedImage imgSrc={user_icon} altMsg="선배 프로필 이미지" />
             <SMPInfoTextBox>
@@ -135,7 +135,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
           <EditBtn>
           <NextBtn kind ='route' url='/senior/edit-profile'btnText='수정하기'/>
           </EditBtn>
-        </>
+        </div>
       )}
     </SMPContainer>
   );

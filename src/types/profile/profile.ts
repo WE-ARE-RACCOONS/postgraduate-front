@@ -13,6 +13,7 @@ export interface ProfileProps {
 }
 
 export interface ProfileManageProps {
+  seniorId:number;
   modalHandler: () => void;
   userType: userType;
   certifiReg: certiRegType; // only senior

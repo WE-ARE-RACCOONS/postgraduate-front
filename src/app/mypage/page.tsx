@@ -5,7 +5,7 @@ import CustomerCenter from '../../components/Profile/ProfileStateChange/Customer
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import NotLmypage from '../../components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
@@ -29,7 +29,7 @@ function MyPage() {
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
   const [profileReg, setProfileReg] = useState(true);
-  const setSeniorId = useSetAtom(mySeniorId);
+  const[senior , setSenior] = useAtom(mySeniorId)
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
@@ -81,11 +81,12 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
           .then((res) => {
+            console.log(res.data.data)
             setnickName(res.data.data.nickName);
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
-            setSeniorId(res.data.data.seniorId);
+            setSenior(res.data.data.seniorId);
           })
           .catch(function (error) {
             console.log(error);
@@ -105,7 +106,6 @@ function MyPage() {
       }
     }
   }, [Token]);
-
   return (
     <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
       <LogoLayer modalHandler={searchModalHandler} />
@@ -132,6 +132,7 @@ function MyPage() {
             certifiReg={certifiReg}
             profileReg={profileReg}
             modalHandler={seiorChangemodalHandler}
+            seniorId={senior}
           />
         </div>
       ) : (
