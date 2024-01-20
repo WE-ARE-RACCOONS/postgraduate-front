@@ -12,6 +12,7 @@ import SelectCalendar from '@/components/Content/SelectCalendar';
 import { firAbleTimeAtom } from '@/stores/mentoring';
 function FullModal(props: FullModalProps) {
   return (
+    <>
     <FullModalContainer>
       {props.modalType == 'best-case' && (
         <MBestCaseContent modalHandler={props.modalHandler} />
@@ -53,6 +54,7 @@ function FullModal(props: FullModalProps) {
         />
       )}
     </FullModalContainer>
+    </>
   );
 }
 
