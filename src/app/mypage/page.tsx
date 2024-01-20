@@ -55,8 +55,14 @@ function MyPage() {
   } = useModal('senior-info-modify-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
-  const userType = getUserType();
+  const [userType, setUserType] = useState('');
+  // const userType = getUserType();
   const router = useRouter();
+
+  useEffect(() => {
+    const userT = getUserType();
+      if(userT) setUserType(userT);
+ }, []);
 
   useEffect(() => {
     if (Token) {
