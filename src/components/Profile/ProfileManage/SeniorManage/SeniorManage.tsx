@@ -53,6 +53,17 @@ function SeniorManage(props: SeniorManageProps) {
     }
 
   };
+  const MyAuth = () => {
+    if (props.certifiReg === 'APPROVE') {
+      props.AmodalHandler();
+    }
+    if (props.certifiReg === 'NOT_APPROVE') {
+      router.push(`/signup/select/common-info/auth`);
+    }
+    if (props.certifiReg === 'WAITING') {
+      props.AmodalHandler();
+    }
+  };
 
   const checkRegister = () => {
     if (props.profileReg) return true;
@@ -78,7 +89,7 @@ function SeniorManage(props: SeniorManageProps) {
           kind="auth"
           certifiReg={props.certifiReg}
           content="대학원 인증"
-          onClick={MyprofHandler}
+          onClick={MyAuth}
         />
       </SeniorManageContentContainer>
       <SeniorManageContentContainer>

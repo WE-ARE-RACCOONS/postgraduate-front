@@ -5,4 +5,5 @@ export interface SeniorManageProps {
   profileReg: boolean;
   seniorId:number;
   modalHandler: () => void;
+  AmodalHandler: () => void;
 }

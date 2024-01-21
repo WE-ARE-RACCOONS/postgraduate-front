@@ -53,8 +53,13 @@ function MyPage() {
   const {
     modal: infoModal,
     modalHandler: infoHandler,
-    portalElement: infoPortal,
+    portalElement: infoPortalElement,
   } = useModal('senior-info-modify-portal');
+  const {
+    modal: authModal,
+    modalHandler: authHandler,
+    portalElement: authPortalElement,
+  } = useModal('senior-auth-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const userType = getUserType();
@@ -135,6 +140,7 @@ function MyPage() {
             profileReg={profileReg}
             modalHandler={seiorChangemodalHandler}
             BmodalHandler={BModalHandler}
+            AmodalHandler={authHandler}
             seniorId={senior}
           />
         </div>
@@ -176,19 +182,29 @@ function MyPage() {
             suggesPortalElement,
           )
         : ''}
-      {infoModal && infoPortal
+      {infoModal && infoPortalElement
         ? createPortal(
             <FullModal
               modalType="senior-info-modify"
               modalHandler={infoHandler}
             />,
-            infoPortal,
+            infoPortalElement,
           )
         : null}
         {BModal && BPotalElement
         ? createPortal(
             <RiseUpModal modalHandler={BModalHandler} modalType={'bank'} />,
             BPotalElement,
+          )
+        : null}
+        {authModal && authPortalElement
+        ? createPortal(
+          <DimmedModal
+          certifiReg={certifiReg}
+          modalType="authAproveMsg"
+          modalHandler={authHandler}
+        />,
+            authPortalElement,
           )
         : null}
     </div>
