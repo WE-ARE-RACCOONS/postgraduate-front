@@ -109,6 +109,7 @@ function SeniorManage(props: SeniorManageProps) {
             <FullModal
               modalType="senior-info-modify"
               modalHandler={infoHandler}
+              bModalHandler={props.modalHandler}
             />,
             infoPortal,
           )

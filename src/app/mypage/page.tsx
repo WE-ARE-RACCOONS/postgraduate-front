@@ -21,6 +21,7 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import MenuBar from '@/components/Bar/MenuBar';
+import RiseUpModal from '@/components/Modal/RiseUpModal';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -33,6 +34,7 @@ function MyPage() {
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
+    const { modal:BModal, modalHandler:BModalHandler, portalElement:BPotalElement } = useModal('senior-info-portal');
   const {
     modal: seniorChangemodal,
     modalHandler: seiorChangemodalHandler,
@@ -132,6 +134,7 @@ function MyPage() {
             certifiReg={certifiReg}
             profileReg={profileReg}
             modalHandler={seiorChangemodalHandler}
+            BmodalHandler={BModalHandler}
             seniorId={senior}
           />
         </div>
@@ -180,6 +183,12 @@ function MyPage() {
               modalHandler={infoHandler}
             />,
             infoPortal,
+          )
+        : null}
+        {BModal && BPotalElement
+        ? createPortal(
+            <RiseUpModal modalHandler={BModalHandler} modalType={'bank'} />,
+            BPotalElement,
           )
         : null}
     </div>

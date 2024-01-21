@@ -13,6 +13,7 @@ export interface ProfileProps {
 }
 
 export interface ProfileManageProps {
+  BmodalHandler:() => void;
   seniorId:number;
   modalHandler: () => void;
   userType: userType;

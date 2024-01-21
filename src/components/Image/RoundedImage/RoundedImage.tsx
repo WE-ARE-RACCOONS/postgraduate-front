@@ -5,19 +5,27 @@ import { RoundedImgContainer } from './RoundedImage.styled';
 function RoundedImage({
   imgSrc,
   altMsg,
+kind,
 }: {
   imgSrc: StaticImport | string;
   altMsg: string;
+  kind?:string;
 }) {
   return (
     <RoundedImgContainer>
-      <Image
+      {kind ==='big' ? <Image
         id="rounded-img"
         src={imgSrc}
         alt={altMsg}
-        width={72}
-        height={72}
-      />
+        width={120}
+        height={120}
+      />: <Image
+      id="rounded-img"
+      src={imgSrc}
+      alt={altMsg}
+      width={72}
+      height={72}
+    />}
     </RoundedImgContainer>
   );
 }

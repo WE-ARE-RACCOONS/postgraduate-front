@@ -11,6 +11,7 @@ function ProfileManage(props: ProfileManageProps) {
       )}
       {props.userType == 'senior' && (
         <SeniorManage
+        modalHandler={props.BmodalHandler}
           seniorId={props.seniorId}
           certifiReg={props.certifiReg}
           profileReg={props.profileReg}

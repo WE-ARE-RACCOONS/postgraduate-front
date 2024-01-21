@@ -130,7 +130,7 @@ export const ValidatorBox = styled.div`
   width: max-content;
   height: 0.8rem;
   position: absolute;
-  top: 37.5rem;
+  top: 32rem;
   left: 50%;
   transform: translateX(-50%);
 `;

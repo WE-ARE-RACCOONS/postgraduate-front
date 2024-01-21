@@ -177,6 +177,15 @@ function page() {
             timePortalElement,
           )
         : null}
+        {timeModal && timePortalElement
+        ? createPortal(
+            <FullModal
+              modalType="senior-mentoring-time"
+              modalHandler={timeModalHandler}
+            />,
+            timePortalElement,
+          )
+        : null}
     </div>
   )
 }
