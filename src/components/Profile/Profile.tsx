@@ -13,6 +13,7 @@ import {
 } from './Profile.styled';
 import { ProfileProps } from '@/types/profile/profile';
 import SingleValidator from '../Validator/SingleValidator';
+import user_icon from '../../../public/user.png';
 
 function Profile(props: ProfileProps) {
   const suggestModal = () => {
@@ -24,7 +25,7 @@ function Profile(props: ProfileProps) {
     <ProfileBox>
       <ImageBox>
         <Image
-          src={profile}
+          src={props.profile || user_icon}
           alt="profile image"
           width={52}
           height={52}
