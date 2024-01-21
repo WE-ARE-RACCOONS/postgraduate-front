@@ -27,7 +27,6 @@ export default function Home() {
   const postgradu = useAtomValue(suactiveTabAtom);
   useEffect(() => {
     setCurrentPath();
-    console.log('branch test');
   }, []);
   useEffect(() => {
     if (field && postgradu) {
