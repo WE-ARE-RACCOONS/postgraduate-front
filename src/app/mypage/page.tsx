@@ -61,7 +61,7 @@ function MyPage() {
 
   useEffect(() => {
     const userT = getUserType();
-      if(userT) setUserType(userT);
+    if(userT) setUserType(userT);
  }, []);
 
   useEffect(() => {
@@ -110,7 +110,7 @@ function MyPage() {
           });
       }
     }
-  }, [Token]);
+  }, [Token, userType]);
 
   return (
     <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
