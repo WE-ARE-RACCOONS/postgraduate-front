@@ -33,7 +33,7 @@ import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
-function page() {
+function EditProfilePage() {
   const { getAccessToken } = useAuth();
   const [modalType, setModalType] = useState<ModalType>('postgradu');
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
@@ -97,15 +97,6 @@ function page() {
 
     fetchData();
   }, [seniorId]);
-
-  console.log(sLab, 'sLab');
-  console.log(sKeyword, 'sKeyword');
-  console.log(multiIntro, 'multiIntro');
-  console.log(recommended, 'recommended');
-  console.log(sField, 'sField');
-  console.log(chatLink, 'chatLink');
-  console.log(singleIntro, 'singleIntro');
-  console.log(timeData, 'timeData');
   const handleClick = () => {
     const token = getAccessToken();
     const areConditionsMet =
@@ -113,6 +104,7 @@ function page() {
       multiIntro.length >= 50 &&
       recommended.length >= 50;
     if (
+      token &&
       areConditionsMet &&
       chatLink &&
       timeData.length >= 3 &&
@@ -141,14 +133,12 @@ function page() {
           },
         )
         .then((res) => {
-          console.log(res.data.data);
           router.back();
         })
         .catch(function (error) {
           console.log(error);
         });
     }
-    console.log('wh');
     setFlag(true);
   };
   return (
@@ -160,7 +150,7 @@ function page() {
           <BtnBox>
             <MBtnFont>
               연구실명&nbsp;<div id="font-color">*</div>
-              <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>
+             {flag &&  <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
             </MBtnFont>
             <TextForm
               placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}
@@ -170,7 +160,7 @@ function page() {
           <BtnBox>
             <MBtnFont>
               연구분야&nbsp;<div id="font-color">*</div>
-              <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
+              {flag && <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>}
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -184,7 +174,7 @@ function page() {
           <BtnBox>
             <MBtnFont>
               연구주제&nbsp;<div id="font-color">*</div>
-              <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
+              {flag && <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>}
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -199,6 +189,7 @@ function page() {
         <EPTitle>멘토링 정보</EPTitle>
         <ProfileForm
           flag={flag}
+          maxLength={100}
           lineType="single"
           title={PROFILE_TITLE.singleIntroduce}
           placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
@@ -278,7 +269,7 @@ function page() {
             }}
           >
             <div id="setData-title">가능 정기일정</div>
-            <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
+            {flag &&<div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>}
           </div>
           <SetDataBox>
             {timeData.length > 0 ? (
@@ -355,7 +346,7 @@ function page() {
   );
 }
 
-export default page;
+export default EditProfilePage;
 
 const EditPContainer = styled.div``;
 const SetDataBox = styled.div`

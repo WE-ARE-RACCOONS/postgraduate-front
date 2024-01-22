@@ -38,6 +38,7 @@ function SeniorInfoPage() {
 
     const seniorId = pathArr[pathArr.length - 1];
     setFindSeniorId(seniorId);
+    if(token){
     axios
       .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`, {
         headers,
@@ -64,7 +65,7 @@ function SeniorInfoPage() {
       .catch((err) => {
         console.error(err);
       });
-  }, []);
+  }}, []);
 
   const applyHandler = () => {
     const accessTkn = getAccessToken();
