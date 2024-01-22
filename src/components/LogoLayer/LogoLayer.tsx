@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import logo from '@/../../public/logo.png';
 import search from '@/../../public/search.png';
@@ -6,7 +6,19 @@ import { HomeTopLayer, Logo } from './LogoLayer.styled';
 import useModal from '@/hooks/useModal';
 import Login from '../kakao/login';
 import { SearchModalProps } from '@/types/modal/search';
+import useAuth from '@/hooks/useAuth';
 function LogoLayer(props: SearchModalProps) {
+  const [isLogin, setIsLogin] = useState(false);
+  const { getAccessToken } = useAuth();
+
+  useEffect(() => {
+    const accessTkn = getAccessToken();
+
+    if(accessTkn) {
+      setIsLogin(true);
+    }
+  }, []);
+
   const handleClick = () => {
     props.modalHandler();
   };
@@ -35,7 +47,7 @@ function LogoLayer(props: SearchModalProps) {
           priority
           onClick={handleClick}
         />
-        <Login />
+        {!isLogin && <Login />}
       </div>
     </HomeTopLayer>
   );

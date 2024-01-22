@@ -6,6 +6,7 @@
     height: auto;
     font-size: 1rem;
     margin: 0 auto;
+    background-color: #fff;
   }
 }
 @media (min-width: 600px) {
@@ -16,6 +17,7 @@
     width: 600px;
     height: auto;
     margin: 0 auto;
+    background-color: #fff;
   }
 }
 * {
@@ -28,11 +30,11 @@ body {
   font-family: 'Pretendard';
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;
   }
-}
+} */
 
 @font-face {
   font-family: 'Pretendard';
