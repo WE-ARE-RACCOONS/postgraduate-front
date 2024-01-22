@@ -16,8 +16,8 @@ function AuthPage() {
   const [photo, setPhoto] = useState<File | null>(null);
   const setphotoUrl = useSetAtom(photoUrlAtom);
   const currentPath = usePathname();
-  const pathArr = currentPath.split('/');
-  const socialId = pathArr[2];
+  // const pathArr = currentPath.split('/');
+  // const socialId = pathArr[2];
   const router = useRouter();
   const fileName = photo?.name;
   const handleClick = () => {
@@ -40,7 +40,7 @@ function AuthPage() {
 
           if (res.code == 'IMG202') {
             setphotoUrl(res.data.profileUrl);
-            router.push(`/signup/${socialId}/common-info/senior-info/major`);
+            router.push(`/signup/select/common-info/senior-info/major`);
           }
         })
         .catch((err) => {
@@ -63,9 +63,9 @@ function AuthPage() {
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
-        <AuthFont>
+{/*         <AuthFont>
           대학원 선배 회원으로 가입하면 멘토링을 진행할 수 있어요
-        </AuthFont>
+        </AuthFont> */}
         <br />
         <AuthImgBox>
           <Image width={233} height={100} alt="auth-img" src={auth} />
@@ -109,42 +109,18 @@ function AuthPage() {
     </div>
   );
 }
+export default AuthPage;
+// export const AuthFont = styled.div`
+//   color: #212529;
+//   font-family: Pretendard;
+//   font-size: 0.875rem;
+//   font-style: normal;
+//   font-weight: 400;
+//   line-height: 140%; /* 1.225rem */
+//   letter-spacing: -0.03125rem;
+// `;
 
-export const AuthFont = styled.div`
-  color: #212529;
-  font-family: Pretendard;
-  font-size: 0.875rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%; /* 1.225rem */
-  letter-spacing: -0.03125rem;
-`;
-export const AuthBtn = styled.button<{ getPhoto: boolean }>`
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin: 1rem;
-  margin-top: 6rem;
-  border: none;
-  display: flex;
-  width: 92%;
-  padding: 1rem 0rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  border-radius: 0.75rem;
-  background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
-`;
-export const AuthImgBox = styled.div`
-  height: 4.625rem;
-  width: inherit;
-  text-align: center;
-`;
-export const APhotoIn = styled.div`
+const APhotoIn = styled.div`
   justify-content: space-between;
   padding: 1rem 1rem;
   display: flex;
@@ -162,7 +138,7 @@ export const APhotoIn = styled.div`
   line-height: 140%; /* 1.05rem */
   letter-spacing: -0.03125rem;
 `;
-export const AuthComment = styled.div`
+const AuthComment = styled.div`
   padding: 0.7rem 1rem;
   margin-top: 2.3rem;
   width: 95%;
@@ -191,4 +167,28 @@ export const AuthComment = styled.div`
     letter-spacing: -0.03125rem;
   }
 `;
-export default AuthPage;
+const AuthBtn = styled.button<{ getPhoto: boolean }>`
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin: 1rem;
+  margin-top: 6rem;
+  border: none;
+  display: flex;
+  width: 92%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
+`;
+const AuthImgBox = styled.div`
+  height: 4.625rem;
+  width: inherit;
+  text-align: center;
+`;

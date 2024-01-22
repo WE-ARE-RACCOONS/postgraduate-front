@@ -15,7 +15,7 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { nickname, phoneNum, userTypeAtom } from '@/stores/signup';
+import { nickname, phoneNum, socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
 import { useAtomValue, useSetAtom } from 'jotai';
@@ -35,8 +35,9 @@ function SeniorInfoPage() {
   const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
     useAuth();
   const currentPath = usePathname();
-  const pathArr = currentPath.split('/');
-  const socialId = pathArr[2];
+  // const pathArr = currentPath.split('/');
+  // const socialId = pathArr[2];
+  const socialId = useAtomValue(socialIdAtom);
 
   const phoneNumber = useAtomValue(phoneNum);
   const nickName = useAtomValue(nickname);

@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import junior from '../../../../public/junior.png';
 import senior from '../../../../public/senior.png';
-function SignUpPage() {
+function SelectPage() {
   const router = useRouter();
   const currentPath = usePathname();
   const handleNextButtonClick = () => {
@@ -49,7 +49,7 @@ function SignUpPage() {
   );
 }
 
-export default SignUpPage;
+export default SelectPage;
 const TypeBtnWrapper = styled.div`
   display: flex;
   justify-content: center;
