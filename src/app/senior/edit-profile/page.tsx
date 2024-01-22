@@ -1,5 +1,7 @@
 'use client';
+import ClickedBtn from '@/components/Button/ClickedBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
+import NextBtn from '@/components/Button/NextBtn';
 import BackHeader from '@/components/Header/BackHeader'
 import FullModal from '@/components/Modal/FullModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
@@ -101,7 +103,7 @@ function page() {
               <div id='warn-msg'>&nbsp;연구실명을 입력해주세요</div>
             </MBtnFont>
             <TextForm
-              placeholder="연구실 이름을 입력해주세요."
+              placeholder={sLab ? sLab :"연구실 이름을 입력해주세요."}
               targetAtom="lab"
             />
           </BtnBox>
@@ -201,8 +203,11 @@ function page() {
           <div id='setData-btn' onClick={timeModalHandler}>+ 추가하기</div> 
           </SetDataForm>}
         </SetDataBox>
-        <button onClick={handleClick}>sdf</button>
         </SetData>
+        <div style={{marginTop:'3.94rem'}}>
+          {chatLink&&timeData.length > 3 &&sField&&sKeyword&&sLab ?  <ClickedBtn btnText='저장' kind='save' clickHandler={handleClick}/>
+          :<ClickedBtn btnText='저장' kind='save-non' clickHandler={handleClick}/>}
+        </div>
       </EditPContainer>
         {modal && portalElement
           ? createPortal(
