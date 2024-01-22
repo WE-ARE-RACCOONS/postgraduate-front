@@ -96,6 +96,7 @@ export default function Home() {
 const HomeLayer = styled.div`
   width: inherit;
   height: inherit;
+  padding-bottom: 2.5rem;
 `;
 const Logo = styled.div`
   display: flex;
