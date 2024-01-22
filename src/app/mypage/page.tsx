@@ -98,7 +98,6 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
           .then((res) => {
-            console.log(res.data.data);
             setnickName(res.data.data.nickName);
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
