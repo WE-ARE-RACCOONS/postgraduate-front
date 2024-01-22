@@ -45,7 +45,7 @@ function page() {
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
-  const sField = useAtomValue(sFieldAtom);
+  const [sField,setSfield] =useAtom(sFieldAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
@@ -57,38 +57,36 @@ function page() {
   };
 
   useEffect(() => {
-    const token = getAccessToken();
-    if (token) {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, {
-          headers,
-        })
-        .then((res) => {
-          setTimeData(res.data.data.times);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
-          headers,
-        })
-        .then((res) => {
-          console.log(res.data.data);
-          setChatLink(res.data.data.chatLink)
-          setMultiIntro(res.data.data.info)
-          setSingleIntro(res.data.data.oneLiner)
-          setRecommended(res.data.data.target)
-          setSlab(res.data.data.lab)
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
-  }, []);
+    const fetchData = async () => {
+      const token = getAccessToken();
+      if (token) {
+        try {
+          const headers = {
+            Authorization: `Bearer ${token}`,
+          };
+
+          const [timesResponse, profileResponse] = await Promise.all([
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, { headers }),
+            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, { headers }),
+          ]);
+
+          const timesData = timesResponse.data.data.times || [];
+          const profileData = profileResponse.data.data || {};
+          setTimeData(timesData);
+          setChatLink(profileData.chatLink);
+          setMultiIntro(profileData.info);
+          setSingleIntro(profileData.oneLiner);
+          setRecommended(profileData.target);
+          setSlab(profileData.lab); 
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    fetchData();
+  }, [getAccessToken, seniorId, setTimeData, setChatLink, setMultiIntro, setSingleIntro, setRecommended, setSlab]);
+
 
   const handleClick = () => {
     const token = getAccessToken();

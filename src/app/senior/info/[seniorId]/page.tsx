@@ -29,16 +29,22 @@ function SeniorInfoPage() {
   const [target, setTarget] = useState('');
   const [term, setTerm] = useState(40);
   const [times, setTimes] = useState([]);
-
+const [mine,setMine]=useState('false')
   useEffect(() => {
+    const token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
     const seniorId = pathArr[pathArr.length - 1];
     setFindSeniorId(seniorId);
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,{headers})
       .then((response) => {
         const res = response.data;
 
         if (res.code == 'SNR200') {
+          setMine(res.data.isMine)
           setInfo(res.data.info);
           setKeyword(res.data.keyword);
           setLab(res.data.lab);
@@ -69,8 +75,6 @@ function SeniorInfoPage() {
   const editHandler = () => {
     router.push(`/senior/edit-profile`);
   };
-  console.log(mySeiorId)
-  //서버 로직 바꾸면 확인용
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
@@ -100,7 +104,7 @@ function SeniorInfoPage() {
           
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
-      {mySeiorId === findSeniorId ? (
+      {mine ? (
         <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
       ) : (
         <>

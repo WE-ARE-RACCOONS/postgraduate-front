@@ -14,7 +14,7 @@ function ProfileForm(props: ProfileFormProps) {
       targetForm.value = props.loadStr;
       return;
     }
-  }, []);
+  }, [props.loadStr]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
