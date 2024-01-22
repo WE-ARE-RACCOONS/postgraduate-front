@@ -15,9 +15,7 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { nickname, phoneNum, userTypeAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
-import axios from 'axios';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -25,6 +23,7 @@ import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
+import { socialIdAtom } from '@/stores/signup';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -33,45 +32,29 @@ function SeniorInfoPage() {
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
   const { getAccessToken } = useAuth();
-  const token = getAccessToken();
   const currentPath = usePathname();
-  const pathArr = currentPath.split('/');
-  const socialId = pathArr[2];
-
-  const phoneNumber = useAtomValue(phoneNum);
-  const nickName = useAtomValue(nickname);
-  const marketingReceive = useAtomValue(option);
-
-  const certification = useAtomValue(photoUrlAtom);
+  // const pathArr = currentPath.split('/');
+  // const socialId = pathArr[2];
+  const socialId = useAtomValue(socialIdAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
-  const sLab = useAtomValue(sLabAtom);
-  const sProfessor = useAtomValue(sProfessorAtom);
-  const sField = useAtomValue(sFieldAtom);
-  const sKeyword = useAtomValue(sKeywordAtom);
   useEffect(() => {
-    if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
-      setFlag(false);
-  }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
+    if (sPostGradu && sMajor) setFlag(false);
+  }, [sPostGradu, sMajor]);
   const handleSubmit = () => {
-    const token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
-
-    if (!sLab) {
+    if (!sPostGradu) {
       setFlag(true);
-      setEmptyPart('연구실명');
+      setEmptyPart('대학원');
       return;
     }
 
-    if (!sProfessor) {
+    if (!sMajor) {
       setFlag(true);
-      setEmptyPart('지도 교수님');
+      setEmptyPart('학과');
       return;
     }
     setFlag(false);
-    router.push(`/signup/${socialId}/common-info/senior-info/field`);
+    router.push(`/signup/select/common-info/senior-info/lab`);
   };
 
   return (
@@ -80,24 +63,40 @@ function SeniorInfoPage() {
         <BackHeader headerText="정보입력" />
       </div>
       <SeniorInfoPageContainer>
+        <SICBox>
+          <h3>선배 정보를 입력해주세요</h3>
+          <div id="info-content-msg">
+            입력한 정보는 멘토링 매칭에 이용됩니다.
+          </div>
+        </SICBox>
         <BtnContainer>
-          <h3>연구실 정보를 알려주세요.</h3>
+          <h3>대학원 정보를 알려주세요.</h3>
           <BtnBox>
             <MBtnFont>
-              지도교수님&nbsp;<div id="font-color">*</div>
+              대학원&nbsp;<div id="font-color">*</div>
             </MBtnFont>
-            <TextForm
-              placeholder="연구실 이름을 입력해주세요."
-              targetAtom="lab"
+            <ModalBtn
+              isGet={!sPostGradu}
+              type="seniorInfo"
+              btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
+              modalHandler={modalHandler}
+              onClick={() => {
+                setModalType('postgradu');
+              }}
             />
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              연구실명&nbsp;<div id="font-color">*</div>
+              학과&nbsp;<div id="font-color">*</div>
             </MBtnFont>
-            <TextForm
-              placeholder="지도교수님 성함을 입력해주세요."
-              targetAtom="professor"
+            <ModalBtn
+              isGet={!sMajor}
+              type="seniorInfo"
+              btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
+              modalHandler={modalHandler}
+              onClick={() => {
+                setModalType('major');
+              }}
             />
           </BtnBox>
           <div style={{ marginTop: '0.5rem' }}>
@@ -110,12 +109,23 @@ function SeniorInfoPage() {
           </div>
         </BtnContainer>
         <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+        {modal && portalElement
+          ? createPortal(
+              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
+              portalElement,
+            )
+          : null}
       </SeniorInfoPageContainer>
     </>
   );
 }
 
 export default SeniorInfoPage;
+
+const SeniorInfoPageContainer = styled.div`
+  width: inherit;
+  height: 100%;
+`;
 const MBtnFont = styled.div`
   display: flex;
   color: #212529;
@@ -136,11 +146,8 @@ const MBtnFont = styled.div`
 const BtnBox = styled.div`
   margin-top: 1rem;
 `;
-const SeniorInfoPageContainer = styled.div`
-  width: inherit;
-  height: 100%;
-`;
 const SICBox = styled.div`
+  margin-bottom: 1.5rem;
   margin-top: 1rem;
   width: 95%;
   height: 5.9375rem;
@@ -161,9 +168,8 @@ const SICBox = styled.div`
 `;
 
 const BtnContainer = styled.div`
-  margin-bottom: 15rem;
-  margin-top: 1.25rem;
   margin-left: 1rem;
   display: flex;
   flex-direction: column;
+  margin-bottom: 8rem;
 `;

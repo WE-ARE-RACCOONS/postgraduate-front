@@ -15,7 +15,9 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
+import { nickname, phoneNum, socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
+import axios from 'axios';
 import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -31,28 +33,46 @@ function SeniorInfoPage() {
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
   const { getAccessToken } = useAuth();
+  const token = getAccessToken();
   const currentPath = usePathname();
-  const pathArr = currentPath.split('/');
-  const socialId = pathArr[2];
+  // const pathArr = currentPath.split('/');
+  // const socialId = pathArr[2];
+  const socialId = useAtomValue(socialIdAtom);
+
+  const phoneNumber = useAtomValue(phoneNum);
+  const nickName = useAtomValue(nickname);
+  const marketingReceive = useAtomValue(option);
+
+  const certification = useAtomValue(photoUrlAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
+  const sLab = useAtomValue(sLabAtom);
+  const sProfessor = useAtomValue(sProfessorAtom);
+  const sField = useAtomValue(sFieldAtom);
+  const sKeyword = useAtomValue(sKeywordAtom);
   useEffect(() => {
-    if (sPostGradu && sMajor) setFlag(false);
-  }, [sPostGradu, sMajor]);
+    if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
+      setFlag(false);
+  }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
   const handleSubmit = () => {
-    if (!sPostGradu) {
+    const token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
+
+    if (!sLab) {
       setFlag(true);
-      setEmptyPart('대학원');
+      setEmptyPart('연구실명');
       return;
     }
 
-    if (!sMajor) {
+    if (!sProfessor) {
       setFlag(true);
-      setEmptyPart('학과');
+      setEmptyPart('지도 교수님');
       return;
     }
     setFlag(false);
-    router.push(`/signup/${socialId}/common-info/senior-info/lab`);
+    router.push(`/signup/select/common-info/senior-info/field`);
   };
 
   return (
@@ -61,40 +81,24 @@ function SeniorInfoPage() {
         <BackHeader headerText="정보입력" />
       </div>
       <SeniorInfoPageContainer>
-        <SICBox>
-          <h3>선배 정보를 입력해주세요</h3>
-          <div id="info-content-msg">
-            입력한 정보는 멘토링 매칭에 이용됩니다.
-          </div>
-        </SICBox>
         <BtnContainer>
-          <h3>대학원 정보를 알려주세요.</h3>
+          <h3>연구실 정보를 알려주세요.</h3>
           <BtnBox>
             <MBtnFont>
-              대학원&nbsp;<div id="font-color">*</div>
+              지도교수님&nbsp;<div id="font-color">*</div>
             </MBtnFont>
-            <ModalBtn
-              isGet={!sPostGradu}
-              type="seniorInfo"
-              btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
-              modalHandler={modalHandler}
-              onClick={() => {
-                setModalType('postgradu');
-              }}
+            <TextForm
+              placeholder="연구실 이름을 입력해주세요."
+              targetAtom="lab"
             />
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              학과&nbsp;<div id="font-color">*</div>
+              연구실명&nbsp;<div id="font-color">*</div>
             </MBtnFont>
-            <ModalBtn
-              isGet={!sMajor}
-              type="seniorInfo"
-              btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
-              modalHandler={modalHandler}
-              onClick={() => {
-                setModalType('major');
-              }}
+            <TextForm
+              placeholder="지도교수님 성함을 입력해주세요."
+              targetAtom="professor"
             />
           </BtnBox>
           <div style={{ marginTop: '0.5rem' }}>
@@ -107,23 +111,12 @@ function SeniorInfoPage() {
           </div>
         </BtnContainer>
         <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
-        {modal && portalElement
-          ? createPortal(
-              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-              portalElement,
-            )
-          : null}
       </SeniorInfoPageContainer>
     </>
   );
 }
 
 export default SeniorInfoPage;
-
-const SeniorInfoPageContainer = styled.div`
-  width: inherit;
-  height: 100%;
-`;
 const MBtnFont = styled.div`
   display: flex;
   color: #212529;
@@ -144,8 +137,11 @@ const MBtnFont = styled.div`
 const BtnBox = styled.div`
   margin-top: 1rem;
 `;
+const SeniorInfoPageContainer = styled.div`
+  width: inherit;
+  height: 100%;
+`;
 const SICBox = styled.div`
-  margin-bottom: 1.5rem;
   margin-top: 1rem;
   width: 95%;
   height: 5.9375rem;
@@ -166,8 +162,9 @@ const SICBox = styled.div`
 `;
 
 const BtnContainer = styled.div`
+  margin-bottom: 15rem;
+  margin-top: 1.25rem;
   margin-left: 1rem;
   display: flex;
   flex-direction: column;
-  margin-bottom: 8rem;
 `;

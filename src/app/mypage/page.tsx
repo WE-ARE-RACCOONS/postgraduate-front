@@ -66,8 +66,14 @@ function MyPage() {
   } = useModal('senior-auth-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
-  const userType = getUserType();
+  const [userType, setUserType] = useState('');
+  // const userType = getUserType();
   const router = useRouter();
+
+  useEffect(() => {
+    const userT = getUserType();
+    if(userT) setUserType(userT);
+ }, []);
 
   useEffect(() => {
     if (Token) {
@@ -116,7 +122,8 @@ function MyPage() {
           });
       }
     }
-  }, [Token]);
+  }, [Token, userType]);
+
   return (
     <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
       <LogoLayer modalHandler={searchModalHandler} />

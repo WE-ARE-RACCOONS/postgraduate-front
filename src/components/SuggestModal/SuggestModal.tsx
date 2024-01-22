@@ -7,14 +7,15 @@ import { createPortal } from 'react-dom';
 import { SMFontGray } from './SuggestModal.styled';
 import NextBtn from '../Button/NextBtn';
 import FullModal from '../Modal/FullModal';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 interface SuggestModalProps {
   modalHandler: () => void;
   infoHandler?: () => void;
 }
 function SuggestModal(props: SuggestModalProps) {
+  const router = useRouter();
   const seniorAuth = () => {
-    // router.push(`/signup/${socialId}/common-info/auth`)
+     router.push(`/signup/select/common-info/auth`)
   };
   const ProfileinfoHandler = () => {
     if (props.infoHandler) {

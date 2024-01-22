@@ -8,11 +8,19 @@ import Image from 'next/image';
 import home from '../../../../public/home.png';
 import mentor from '@/../../public/mentor.png';
 import my from '@/../../public/my.png';
+import { useEffect, useState } from 'react';
 function MenuBar(props: MenubarProps) {
   const router = useRouter();
   const { getAccessToken, getUserType } = useAuth();
   const token = getAccessToken();
-  const userType = getUserType();
+  const [userType, setUserType] = useState('');
+  // const userType = getUserType();
+
+  useEffect(() => {
+    const userT = getUserType();
+      if(userT) setUserType(userT);
+ }, []);
+
   const handleClick = () => {
     if (props.modalHandler) props.modalHandler();
   };
