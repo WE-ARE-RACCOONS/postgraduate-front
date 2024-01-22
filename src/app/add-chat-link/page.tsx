@@ -84,7 +84,7 @@ function AddChatLinkPage() {
 
   return (
     <AddChatLinkContainer>
-      <BackHeader headerText='일정 입력'/>
+      <BackHeader headerText='링크 입력'/>
       <ProgressBar activeNum={2} />
       <h3 id="add-chat-link-direction">{PROFILE_DIRECTION.addChatLink}</h3>
       <div id="add-chat-link-sub-direction">

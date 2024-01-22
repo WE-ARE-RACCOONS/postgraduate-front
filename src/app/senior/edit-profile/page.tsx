@@ -8,11 +8,12 @@ import TextForm from '@/components/SingleForm/TextForm';
 import { PROFILE_PLACEHOLDER, PROFILE_TITLE } from '@/constants/form/cProfileForm';
 import useAuth from '@/hooks/useAuth';
 import useModal from '@/hooks/useModal';
-import { mySeniorId, sAbleTime, sChatLink, sFieldAtom, sKeywordAtom, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from '@/stores/senior';
+import { mySeniorId, sAbleTime, sChatLink, sFieldAtom, sKeywordAtom, sLabAtom, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
+import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react'
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
@@ -28,9 +29,16 @@ function page() {
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const sField = useAtomValue(sFieldAtom);
+  const sLab = useAtomValue(sLabAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
-  const[time,setTime] = useState<Array<TimeType>>([])
+  // const[time,setTime] = useState<Array<TimeType>>([])
   const seniorId = useAtomValue(mySeniorId)
+  const [timeData, setTimeData] = useAtom(sAbleTime);
+  const router = useRouter();
+  const clickHandler = (removeIdx: number) => {
+    setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
+  };
+
   useEffect(() => {
     const token = getAccessToken();
     if (token) {
@@ -43,13 +51,44 @@ function page() {
           })
           .then((res) => {
             console.log(res.data.data.times)
-            setTime(res.data.data.times);
+            setTimeData(res.data.data.times);
           })
           .catch(function (error) {
             console.log(error);
           });
     }
   }, []);
+        
+  const handleClick =()=>{
+    const token = getAccessToken();
+    if(chatLink&&timeData.length > 3 &&sField&&sKeyword&&sLab){
+      axios
+          .patch(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+            lab: sLab,
+            keyword: sKeyword,
+            info: multiIntro,
+            target: recommended,
+            chatLink: chatLink,
+            field:sField,
+            oneLiner:singleIntro,
+            times:timeData,
+          },
+          {
+            headers: {
+              Authorization: `Bearer ${token}`,
+            },
+          },)
+          .then((res) => {
+            console.log(res.data.data);
+            router.back();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+    }
+
+
+  }
   return (
     <div>
       <BackHeader headerText='프로필 정보'/>
@@ -63,7 +102,7 @@ function page() {
             </MBtnFont>
             <TextForm
               placeholder="연구실 이름을 입력해주세요."
-              targetAtom="professor"
+              targetAtom="lab"
             />
           </BtnBox>
           <BtnBox>
@@ -143,16 +182,18 @@ function page() {
         <div id = 'setData-warn'>최소 3개 이상 일정을 추가해주세요</div>
         </div>
         <SetDataBox>
-          {time.length > 0 ? 
+          {timeData.length > 0 ? 
         <>
-          {time &&
-          time.map((el, idx) => (
+          {timeData &&
+          timeData.map((el, idx) => (
           <IntroCardTimeBox key={idx}>
             {el.day}요일 {el.startTime} ~ {el.endTime}
-            <div id='delete'>삭제</div>
+            <div id='delete' onClick={() => clickHandler(idx)}>삭제</div>
           </IntroCardTimeBox>
         ))}
-        <div id='setData-btn' onClick={timeModalHandler}>추가하기</div> 
+       <div style={{display:'flex',alignItems:'center',justifyContent:'center',marginTop:'0.5rem'}}>
+       <div id='setData-btn' onClick={timeModalHandler}>추가하기</div> 
+       </div>
         </>
         : 
           <SetDataForm >
@@ -160,6 +201,7 @@ function page() {
           <div id='setData-btn' onClick={timeModalHandler}>+ 추가하기</div> 
           </SetDataForm>}
         </SetDataBox>
+        <button onClick={handleClick}>sdf</button>
         </SetData>
       </EditPContainer>
         {modal && portalElement
@@ -196,6 +238,21 @@ const EditPContainer = styled.div`
 margin-left: 1rem;
 `
 const SetDataBox = styled.div`
+#setData-btn{
+  display: inline-flex;
+padding: 0.3125rem 0.625rem;
+align-items: center;
+gap: 0.25rem;
+border-radius: 0.25rem;
+background: #495565;
+color: #FFF;
+font-family: Pretendard;
+font-size: 0.75rem;
+font-style: normal;
+font-weight: 700;
+line-height: 1.125rem; /* 150% */
+letter-spacing: -0.0375rem;
+}
   
 `
 const IntroCardTimeBox = styled.div`
@@ -235,21 +292,6 @@ font-size: 1rem;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-}
-#setData-btn{
-  display: inline-flex;
-padding: 0.3125rem 0.625rem;
-align-items: center;
-gap: 0.25rem;
-border-radius: 0.25rem;
-background: #495565;
-color: #FFF;
-font-family: Pretendard;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 700;
-line-height: 1.125rem; /* 150% */
-letter-spacing: -0.0375rem;
 }
 `
 const SetData = styled.div`
