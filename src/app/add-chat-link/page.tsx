@@ -84,13 +84,13 @@ function AddChatLinkPage() {
 
   return (
     <AddChatLinkContainer>
-      <BackHeader headerText='링크 입력'/>
+      <BackHeader headerText="링크 입력" />
       <ProgressBar activeNum={2} />
       <h3 id="add-chat-link-direction">{PROFILE_DIRECTION.addChatLink}</h3>
       <div id="add-chat-link-sub-direction">
         {PROFILE_SUB_DIRECTION.addChatLink}
       </div>
-      <div style={{marginLeft:'1rem'}}>
+      <div style={{ marginLeft: '1rem' }}>
         <div id="add-chat-link-kakao">카카오톡 오픈채팅방 링크</div>
         <input
           type="text"
@@ -108,7 +108,7 @@ function AddChatLinkPage() {
         />
       )}
       <div id="add-chat-link-btn-container">
-      <PrevBtn
+        <PrevBtn
           onClick={() => {
             router.back();
           }}
@@ -185,65 +185,64 @@ const PrevBtn = styled.button`
   margin-left: 1rem;
 `;
 
-
 const AddChatLinkContainer = styled.div`
   width: inherit;
   height: 100%;
   white-space: pre-line;
 
-#add-chat-link-direction {
-     margin-left: 1rem;
+  #add-chat-link-direction {
+    margin-left: 1rem;
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
     color: #212529;
-font-family: Pretendard;
-font-size: 1.25rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.75rem */
-letter-spacing: -0.03125rem;
+    font-family: Pretendard;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 1.75rem */
+    letter-spacing: -0.03125rem;
   }
   #add-chat-link-sub-direction {
     margin-left: 1rem;
     color: #212529;
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.225rem */
-letter-spacing: -0.03125rem;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.225rem */
+    letter-spacing: -0.03125rem;
   }
 
   #add-chat-link-kakao {
     margin-top: 2.5rem;
     color: #212529;
-font-family: "Noto Sans JP";
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+    font-family: 'Noto Sans JP';
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
   }
 
   #add-chat-link-form {
-   width: 95%;
-height: 3.1875rem;
-flex-shrink: 0;
-border-radius: 0.5rem;
-border: 1px solid #C2CEDE;
-background: #FFF;
-margin-top: 0.5rem;
-padding: 0.87rem 1rem;
+    width: 95%;
+    height: 3.1875rem;
+    flex-shrink: 0;
+    border-radius: 0.5rem;
+    border: 1px solid #c2cede;
+    background: #fff;
+    margin-top: 0.5rem;
+    padding: 0.87rem 1rem;
 
-&::placeholder{
-  color: #ADB5BD;
-font-family: "Noto Sans JP";
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-}
+    &::placeholder {
+      color: #adb5bd;
+      font-family: 'Noto Sans JP';
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
-  #add-chat-link-btn-container{
+  #add-chat-link-btn-container {
     display: flex;
     position: absolute;
     width: inherit;

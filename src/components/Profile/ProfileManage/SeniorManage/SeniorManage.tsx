@@ -49,9 +49,8 @@ function SeniorManage(props: SeniorManageProps) {
   }
   const MyprofHandler = () => {
     if (checkRegister()) {
-      router.push(`/senior/info/${props.seniorId}`)
+      router.push(`/senior/info/${props.seniorId}`);
     }
-
   };
   const MyAuth = () => {
     if (props.certifiReg === 'APPROVE') {

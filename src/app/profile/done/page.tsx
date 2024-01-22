@@ -14,9 +14,9 @@ function ProfileDonePage() {
   return (
     <ProfileDonePageContainer>
       <Image
-      width={172}
-      height={164}
-      style={{marginTop:'9rem'}}
+        width={172}
+        height={164}
+        style={{ marginTop: '9rem' }}
         id="profile-done-img"
         src={party_popper}
         alt="프로필 등록 축하 이미지"
@@ -31,7 +31,7 @@ function ProfileDonePage() {
             router.push('/');
           }}
         >
-         닫기
+          닫기
         </PrevBtn>
         <NextAddBtnSet
           onClick={() => {
@@ -86,7 +86,6 @@ const PrevBtn = styled.button`
   margin-left: 1rem;
 `;
 
-
 const ProfileDonePageContainer = styled.div`
   width: inherit;
   height: 100%;
@@ -96,35 +95,34 @@ const ProfileDonePageContainer = styled.div`
   text-align: center;
   align-items: center;
   justify-content: center;
-#profile-done-btn-container{
-  display: flex;
-  position: absolute;
-  width: inherit;
-  bottom: 1.62rem;
-}
+  #profile-done-btn-container {
+    display: flex;
+    position: absolute;
+    width: inherit;
+    bottom: 1.62rem;
+  }
   #profile-done-direction {
     margin-top: 0.46rem;
     color: #212529;
-text-align: center;
-font-family: Pretendard;
-font-size: 1.5rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 2.1rem */
-letter-spacing: -0.03125rem;
-margin-bottom: 0.88rem;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1.5rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 2.1rem */
+    letter-spacing: -0.03125rem;
+    margin-bottom: 0.88rem;
   }
-#profile-done-sub-direction{
-  color: #868E96;
-text-align: center;
-font-family: Pretendard;
-font-size: 1rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.4rem */
-letter-spacing: -0.03125rem;
-}
+  #profile-done-sub-direction {
+    color: #868e96;
+    text-align: center;
+    font-family: Pretendard;
+    font-size: 1rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.4rem */
+    letter-spacing: -0.03125rem;
+  }
   #profile-done-img {
-
   }
 `;

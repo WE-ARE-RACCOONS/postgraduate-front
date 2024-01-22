@@ -66,9 +66,9 @@ function SeniorInfoPage() {
       router.push(`/mentoring-apply/${seniorId}/question`);
     }
   };
-const editHandler = ()=>{
-  router.push(`/senior/edit-profile`);
-}
+  const editHandler = () => {
+    router.push(`/senior/edit-profile`);
+  };
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
@@ -97,7 +97,13 @@ const editHandler = ()=>{
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
-      {(mySeiorId === findSeniorId) ? <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>:<MentoringApplyBtn onClick={applyHandler}>멘토링 신청</MentoringApplyBtn> }
+      {mySeiorId === findSeniorId ? (
+        <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
+      ) : (
+        <MentoringApplyBtn onClick={applyHandler}>
+          멘토링 신청
+        </MentoringApplyBtn>
+      )}
     </SeniorInfoPageContainer>
   );
 }

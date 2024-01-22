@@ -6,7 +6,7 @@ import {
   SMPIntroduceBox,
   SMPLabBox,
   SMPLabKeywordBox,
-  EditBtn
+  EditBtn,
 } from './SeniorMyProfile.styled';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
@@ -80,13 +80,15 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
   return (
     <SMPContainer>
       <div>
-      <h3 style={{textAlign:'center',marginTop:'0.7rem'}}>프로필 상세</h3>
-      <Image
-        id="x-icon"
-        src={x_icon}
-        alt="모달 닫기 버튼"
-        onClick={modalHandler}
-      />
+        <h3 style={{ textAlign: 'center', marginTop: '0.7rem' }}>
+          프로필 상세
+        </h3>
+        <Image
+          id="x-icon"
+          src={x_icon}
+          alt="모달 닫기 버튼"
+          onClick={modalHandler}
+        />
       </div>
       {!flag && (
         <div>
@@ -98,7 +100,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
         </div>
       )}
       {flag && (
-        <div style={{background:'#F1F3F5'}}>
+        <div style={{ background: '#F1F3F5' }}>
           <SMPInfoBox>
             <RoundedImage imgSrc={user_icon} altMsg="선배 프로필 이미지" />
             <SMPInfoTextBox>
@@ -133,7 +135,11 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
             </div>
           </SMPIntroduceBox>
           <EditBtn>
-          <NextBtn kind ='route' url='/senior/edit-profile'btnText='수정하기'/>
+            <NextBtn
+              kind="route"
+              url="/senior/edit-profile"
+              btnText="수정하기"
+            />
           </EditBtn>
         </div>
       )}

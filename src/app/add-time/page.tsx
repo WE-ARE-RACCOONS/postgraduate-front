@@ -34,11 +34,19 @@ function AddTimePage() {
 
   return (
     <AddTimePageContainer>
-      <BackHeader headerText='일정 입력'/>
+      <BackHeader headerText="일정 입력" />
       <ProgressBar activeNum={1} />
-      <div style={{marginLeft:'1rem',marginTop:'1.25rem',marginBottom:'1.5rem'}}>
-      <h3 id="add-time-direction">{PROFILE_DIRECTION.addTime}</h3>
-      <div id="add-time-sub-direction-ex">{PROFILE_SUB_DIRECTION.addTime}</div>
+      <div
+        style={{
+          marginLeft: '1rem',
+          marginTop: '1.25rem',
+          marginBottom: '1.5rem',
+        }}
+      >
+        <h3 id="add-time-direction">{PROFILE_DIRECTION.addTime}</h3>
+        <div id="add-time-sub-direction-ex">
+          {PROFILE_SUB_DIRECTION.addTime}
+        </div>
       </div>
       <Scheduler />
       {flag && (
@@ -48,7 +56,7 @@ function AddTimePage() {
         />
       )}
       <div id="add-time-btn-container">
-      <PrevBtn
+        <PrevBtn
           onClick={() => {
             router.push('/mypage');
           }}
@@ -127,31 +135,31 @@ const PrevBtn = styled.button`
 `;
 
 const AddTimePageContainer = styled.div`
-position: absolute;
+  position: absolute;
   width: inherit;
   height: 100%;
   font-family: 'Pretendard';
   white-space: pre-line;
 
   #add-time-sub-direction {
-   color: #212529;
-font-family: Pretendard;
-font-size: 1.25rem;
-font-style: normal;
-font-weight: 700;
-line-height: 140%; /* 1.75rem */
-letter-spacing: -0.03125rem;
+    color: #212529;
+    font-family: Pretendard;
+    font-size: 1.25rem;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 140%; /* 1.75rem */
+    letter-spacing: -0.03125rem;
   }
 
   #add-time-sub-direction-ex {
     margin-top: 0.5rem;
     color: #212529;
-font-family: Pretendard;
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.225rem */
-letter-spacing: -0.03125rem;
+    font-family: Pretendard;
+    font-size: 0.875rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.225rem */
+    letter-spacing: -0.03125rem;
   }
 
   #add-time-textarea {

@@ -1,5 +1,11 @@
 import { ClickedBtnProps } from '@/types/button/clickedBtn';
-import { BtnAdd, BtnOut, BtnModal ,BtnSave,BtnSaveNo} from './ClickedBtn.styled';
+import {
+  BtnAdd,
+  BtnOut,
+  BtnModal,
+  BtnSave,
+  BtnSaveNo,
+} from './ClickedBtn.styled';
 function ClickedBtn(props: ClickedBtnProps) {
   return (
     <div>

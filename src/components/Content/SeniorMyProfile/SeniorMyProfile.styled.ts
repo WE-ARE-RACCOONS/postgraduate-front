@@ -37,27 +37,27 @@ export const SMPContainer = styled.div`
 export const SMPInfoBox = styled.div`
   width: 21.4375rem;
   margin-left: 1rem;
-height: 5.875rem;
-flex-shrink: 0;
+  height: 5.875rem;
+  flex-shrink: 0;
   border-radius: 1rem;
-background: #F8F9FA;
+  background: #f8f9fa;
   position: absolute;
   top: 3rem;
   display: flex;
-align-items: center;
+  align-items: center;
 `;
 
 export const SMPInfoTextBox = styled.div`
   width: max-content;
   height: 3.25rem;
   border: 1px solid #000;
-  #postgradu{
+  #postgradu {
     color: #495565;
-font-family: Pretendard;
-font-size: 0.75rem;
-font-style: normal;
-font-weight: 400;
-line-height: 140%; /* 1.05rem */
+    font-family: Pretendard;
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 140%; /* 1.05rem */
   }
 
   #mentoring-time-box {
@@ -120,5 +120,5 @@ export const SMPIntroDesc = styled.div`
   height: 1.4rem;
 `;
 export const EditBtn = styled.div`
-margin-top:40rem;
-`
+  margin-top: 40rem;
+`;

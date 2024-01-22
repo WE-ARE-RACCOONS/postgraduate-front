@@ -44,10 +44,10 @@ function DimmedModal(props: DimmedModalProps) {
           />
         )}
         {props.modalType == 'authAproveMsg' && (
-            <AproveModal
+          <AproveModal
             certifiReg={props.certifiReg || ''}
-              modalHandler={props.modalHandler}
-            />
+            modalHandler={props.modalHandler}
+          />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

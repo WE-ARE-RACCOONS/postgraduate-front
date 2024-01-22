@@ -101,22 +101,22 @@ export const SInfoImgInputBox = styled.div`
 export const InfoFieldTitle = styled.div`
   width: max-content;
   color: #212529;
-font-family: "Noto Sans JP";
-font-size: 0.875rem;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-margin-bottom: 0.5rem;
+  font-family: 'Noto Sans JP';
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0.5rem;
 `;
 
 export const InfoFieldForm = styled.input<{ $width: string }>`
   width: ${(prop) => prop.$width};
-height: 3.1875rem;
-flex-shrink: 0;
-border-radius: 0.5rem;
-border: 1px solid #C2CEDE;
-background: #FFF;
-padding: 0.88rem 1rem;
+  height: 3.1875rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #c2cede;
+  background: #fff;
+  padding: 0.88rem 1rem;
 `;
 
 export const ValidatorBox = styled.div`

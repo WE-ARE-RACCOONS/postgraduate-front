@@ -32,9 +32,19 @@ import useModal from '@/hooks/useModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { createPortal } from 'react-dom';
 
-function SInfoModify({ modalHandler,bModalHandler }: { bModalHandler:()=>void,modalHandler: () => void }) {
+function SInfoModify({
+  modalHandler,
+  bModalHandler,
+}: {
+  bModalHandler: () => void;
+  modalHandler: () => void;
+}) {
   const [flag, setFlag] = useState(false);
-  const { modal:BModal, modalHandler:BModalHandler, portalElement:BPotalElement } = useModal('senior-info-portal');
+  const {
+    modal: BModal,
+    modalHandler: BModalHandler,
+    portalElement: BPotalElement,
+  } = useModal('senior-info-portal');
   const [modalType, setModalType] = useState<ModalType>('bank');
   const [submitFlag, setSubmitFlag] = useState(false);
   const [accHolder, setAccHolder] = useState('');
@@ -153,10 +163,10 @@ function SInfoModify({ modalHandler,bModalHandler }: { bModalHandler:()=>void,mo
 
   return (
     <SInfoContainer>
-      <h3 style={{textAlign:'center',marginTop:'1rem'}}>계정 설정</h3>
+      <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>계정 설정</h3>
       <SInfoImgBox>
         <RoundedImage
-        kind='big'
+          kind="big"
           imgSrc={imgUrl ? imgUrl : user_icon}
           altMsg="계정 프로필 사진"
         />
@@ -223,7 +233,6 @@ function SInfoModify({ modalHandler,bModalHandler }: { bModalHandler:()=>void,mo
         <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
       </div>
     </SInfoContainer>
-    
   );
 }
 

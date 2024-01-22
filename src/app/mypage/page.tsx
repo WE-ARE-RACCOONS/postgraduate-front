@@ -30,11 +30,15 @@ function MyPage() {
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
   const [profileReg, setProfileReg] = useState(true);
-  const[senior , setSenior] = useAtom(mySeniorId)
+  const [senior, setSenior] = useAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
-    const { modal:BModal, modalHandler:BModalHandler, portalElement:BPotalElement } = useModal('senior-info-portal');
+  const {
+    modal: BModal,
+    modalHandler: BModalHandler,
+    portalElement: BPotalElement,
+  } = useModal('senior-info-portal');
   const {
     modal: seniorChangemodal,
     modalHandler: seiorChangemodalHandler,
@@ -88,7 +92,7 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
           .then((res) => {
-            console.log(res.data.data)
+            console.log(res.data.data);
             setnickName(res.data.data.nickName);
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
@@ -191,19 +195,19 @@ function MyPage() {
             infoPortalElement,
           )
         : null}
-        {BModal && BPotalElement
+      {BModal && BPotalElement
         ? createPortal(
             <RiseUpModal modalHandler={BModalHandler} modalType={'bank'} />,
             BPotalElement,
           )
         : null}
-        {authModal && authPortalElement
+      {authModal && authPortalElement
         ? createPortal(
-          <DimmedModal
-          certifiReg={certifiReg}
-          modalType="authAproveMsg"
-          modalHandler={authHandler}
-        />,
+            <DimmedModal
+              certifiReg={certifiReg}
+              modalType="authAproveMsg"
+              modalHandler={authHandler}
+            />,
             authPortalElement,
           )
         : null}

@@ -29,7 +29,10 @@ function FullModal(props: FullModalProps) {
         <SmentoringAccept modalHandler={props.modalHandler} />
       )}
       {props.modalType == 'senior-info-modify' && (
-        <SInfoModify bModalHandler={props.bModalHandler? props.bModalHandler: ()=>{}} modalHandler={props.modalHandler} />
+        <SInfoModify
+          bModalHandler={props.bModalHandler ? props.bModalHandler : () => {}}
+          modalHandler={props.modalHandler}
+        />
       )}
       {props.modalType == 'senior-mentoring-time' && (
         <AddTime modalHandler={props.modalHandler} />

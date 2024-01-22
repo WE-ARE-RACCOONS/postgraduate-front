@@ -40,11 +40,11 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
     e.currentTarget.classList.add('active');
     setInputWeek(e.currentTarget.innerText);
   };
- useEffect(()=>{
-    if(inputWeek && startHour && endHour){
+  useEffect(() => {
+    if (inputWeek && startHour && endHour) {
       setActive(true);
-  }
- },[inputWeek,startHour,endHour])
+    }
+  }, [inputWeek, startHour, endHour]);
 
   const submitHandler = () => {
     /** 요일 선택하지 않은 경우 */
@@ -98,91 +98,113 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
 
   return (
     <AddTimeContainer>
-      <div style={{display:'flex'}}>
-        <h3 style={{marginLeft:'35%',marginTop:'1rem'}}>요일 및 시간설정</h3>
-      <Image
-        id="x-icon"
-        src={x_icon}
-        alt="계정 수정 모달 닫기 버튼"
-        onClick={modalHandler}
-      />
+      <div style={{ display: 'flex' }}>
+        <h3 style={{ marginLeft: '35%', marginTop: '1rem' }}>
+          요일 및 시간설정
+        </h3>
+        <Image
+          id="x-icon"
+          src={x_icon}
+          alt="계정 수정 모달 닫기 버튼"
+          onClick={modalHandler}
+        />
       </div>
       <AddTimeWeekBox>
         <h3>요일 선택</h3>
-        <div style={{display:'flex',justifyContent:'center',marginTop:'0.75rem'}}>
-        {WEEK_ARRAY.map((el, idx) => (
-          <button
-            className="add-time-week-btn"
-            key={idx}
-            onClick={(e) => {
-              clickWeekHandler(e);
-            }}
-          >
-            {el}
-          </button>
-        ))}
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '0.75rem',
+          }}
+        >
+          {WEEK_ARRAY.map((el, idx) => (
+            <button
+              className="add-time-week-btn"
+              key={idx}
+              onClick={(e) => {
+                clickWeekHandler(e);
+              }}
+            >
+              {el}
+            </button>
+          ))}
         </div>
       </AddTimeWeekBox>
       <AddTimeAbleBox>
-        <div style={{display:'flex',alignItems:'center'}}>
-        <h3>시간 선택</h3>
-        <div id='setTile-warn'>요일, 시작시간, 끝시간을 모두 선택해주세요</div>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <h3>시간 선택</h3>
+          <div id="setTile-warn">
+            요일, 시작시간, 끝시간을 모두 선택해주세요
+          </div>
         </div>
         <AddTimeAbleBottom>
           <AddTimeDropdownBox>
-            <div id='ATD-title'>시작 시간</div>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-            <AddTimeDropdownSet>
-              <AddTimeDropdown
-                onChange={(e) => setStartHour(e.currentTarget.value)}
-              >
-                {hourOptions.map((value, idx) => (
-                  <option key={idx} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </AddTimeDropdown>
-              <div id='ATD-middle'>시</div>
-              <AddTimeDropdown
-                onChange={(e) => setStartMin(e.currentTarget.value)}
-              >
-                {minOptions.map((value, idx) => (
-                  <option key={idx} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </AddTimeDropdown>
-              <div id='ATD-middle'>분</div>
-            </AddTimeDropdownSet>
-            <div id='ATD-bold'>부터</div>
+            <div id="ATD-title">시작 시간</div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <AddTimeDropdownSet>
+                <AddTimeDropdown
+                  onChange={(e) => setStartHour(e.currentTarget.value)}
+                >
+                  {hourOptions.map((value, idx) => (
+                    <option key={idx} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </AddTimeDropdown>
+                <div id="ATD-middle">시</div>
+                <AddTimeDropdown
+                  onChange={(e) => setStartMin(e.currentTarget.value)}
+                >
+                  {minOptions.map((value, idx) => (
+                    <option key={idx} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </AddTimeDropdown>
+                <div id="ATD-middle">분</div>
+              </AddTimeDropdownSet>
+              <div id="ATD-bold">부터</div>
             </div>
           </AddTimeDropdownBox>
           <AddTimeDropdownBox>
-            <div id='ATD-title'>종료 시간</div>
-            <div style={{display:'flex',justifyContent:'space-between',alignItems:'center'}}>
-            <AddTimeDropdownSet>
-              <AddTimeDropdown
-                onChange={(e) => setEndHour(e.currentTarget.value)}
-              >
-                {hourOptions.map((value, idx) => (
-                  <option key={idx} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </AddTimeDropdown>
-              <div id='ATD-middle'>시</div>
-              <AddTimeDropdown
-                onChange={(e) => setEndMin(e.currentTarget.value)}
-              >
-                {minOptions.map((value, idx) => (
-                  <option key={idx} value={value}>
-                    {value}
-                  </option>
-                ))}
-              </AddTimeDropdown>
-              <div id='ATD-middle'>분</div>
-            </AddTimeDropdownSet>
-            <div id='ATD-bold'>까지</div>
+            <div id="ATD-title">종료 시간</div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+              }}
+            >
+              <AddTimeDropdownSet>
+                <AddTimeDropdown
+                  onChange={(e) => setEndHour(e.currentTarget.value)}
+                >
+                  {hourOptions.map((value, idx) => (
+                    <option key={idx} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </AddTimeDropdown>
+                <div id="ATD-middle">시</div>
+                <AddTimeDropdown
+                  onChange={(e) => setEndMin(e.currentTarget.value)}
+                >
+                  {minOptions.map((value, idx) => (
+                    <option key={idx} value={value}>
+                      {value}
+                    </option>
+                  ))}
+                </AddTimeDropdown>
+                <div id="ATD-middle">분</div>
+              </AddTimeDropdownSet>
+              <div id="ATD-bold">까지</div>
             </div>
           </AddTimeDropdownBox>
         </AddTimeAbleBottom>
@@ -192,12 +214,17 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
           <SingleValidator msg={alertMsg} textColor="#FF3347" />
         </ValidatorBox>
       )}
-      <div style={{marginTop:'31rem'}}>
-
-      {active ?  <NextBtn kind='route' onClick ={submitHandler} btnText='등록하기' />:<NextBtn kind='route-non' onClick ={submitHandler} btnText='등록하기' />}
-     
+      <div style={{ marginTop: '31rem' }}>
+        {active ? (
+          <NextBtn kind="route" onClick={submitHandler} btnText="등록하기" />
+        ) : (
+          <NextBtn
+            kind="route-non"
+            onClick={submitHandler}
+            btnText="등록하기"
+          />
+        )}
       </div>
-    
     </AddTimeContainer>
   );
 }

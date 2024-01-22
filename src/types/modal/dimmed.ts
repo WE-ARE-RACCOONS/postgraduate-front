@@ -7,10 +7,10 @@ export type DimmedModalType =
   | 'juniorCancelMent'
   | 'notRegistered'
   | 'mypageSuggest'
-  |'authAproveMsg';
+  | 'authAproveMsg';
 
 export interface DimmedModalProps {
-  certifiReg?:string;
+  certifiReg?: string;
   modalType: DimmedModalType;
   modalHandler: () => void;
   mentoringId?: number;
