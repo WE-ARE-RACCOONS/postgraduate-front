@@ -48,22 +48,85 @@ function AddTimePage() {
         />
       )}
       <div id="add-time-btn-container">
-        <button
+      <PrevBtn
           onClick={() => {
-            router.back();
+            router.push('/mypage');
           }}
         >
           이전
-        </button>
-        <button onClick={handleClick}>다음</button>
+        </PrevBtn>
+        {ableTime.length >= 3 ? (
+          <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>
+        ) : (
+          <NextAddBtn onClick={handleClick}>다음</NextAddBtn>
+        )}
       </div>
     </AddTimePageContainer>
   );
 }
 
 export default AddTimePage;
+const NextAddBtn = styled.button`
+  display: flex;
+  width: 55%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  margin-left: 0.4rem;
+  border-radius: 0.75rem;
+  background: #dee2e6;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+const NextAddBtnSet = styled.button`
+  display: flex;
+  width: 55%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  margin-left: 0.4rem;
+  border: none;
+  background: #2fc4b2;
+  border-radius: 0.75rem;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+
+const PrevBtn = styled.button`
+  display: flex;
+  width: 35%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: #adb5bd;
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-left: 1rem;
+`;
 
 const AddTimePageContainer = styled.div`
+position: absolute;
   width: inherit;
   height: 100%;
   font-family: 'Pretendard';
@@ -97,8 +160,9 @@ letter-spacing: -0.03125rem;
   }
 
   #add-time-btn-container {
-    width: max-content;
-    height: 1.375rem;
+    position: absolute;
+    width: inherit;
     display: flex;
+    bottom: 1rem;
   }
 `;
