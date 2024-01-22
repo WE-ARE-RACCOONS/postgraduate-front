@@ -7,6 +7,7 @@ import FullModal from '@/components/Modal/FullModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import TextForm from '@/components/SingleForm/TextForm';
+import SingleValidator from '@/components/Validator/SingleValidator';
 import {
   PROFILE_PLACEHOLDER,
   PROFILE_TITLE,
@@ -41,13 +42,14 @@ function page() {
     modalHandler: timeModalHandler,
     portalElement: timePortalElement,
   } = useModal('senior-mentoring-time-portal');
+  const [flag, setFlag] = useState(false);
   const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField,setSfield] =useAtom(sFieldAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
-  const sKeyword = useAtomValue(sKeywordAtom);
+  const [sKeyword,setSkeyword] = useAtom(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
   const seniorId = useAtomValue(mySeniorId);
   const [timeData, setTimeData] = useAtom(sAbleTime);
@@ -72,7 +74,10 @@ function page() {
 
           const timesData = timesResponse.data.data.times || [];
           const profileData = profileResponse.data.data || {};
+          console.log(profileData)
           setTimeData(timesData);
+          setSfield(profileData.field.join(', '));
+          setSkeyword(profileData.keyword.join(', '))
           setChatLink(profileData.chatLink);
           setMultiIntro(profileData.info);
           setSingleIntro(profileData.oneLiner);
@@ -85,12 +90,24 @@ function page() {
     };
 
     fetchData();
-  }, [getAccessToken, seniorId, setTimeData, setChatLink, setMultiIntro, setSingleIntro, setRecommended, setSlab]);
+  }, [seniorId]);
 
-
+console.log(sLab,'sLab')
+console.log(sKeyword,'sKeyword')
+console.log(multiIntro,'multiIntro')
+console.log(recommended,'recommended')
+console.log(sField,'sField')
+console.log(chatLink,'chatLink')
+console.log(singleIntro,'singleIntro')
+console.log(timeData,'timeData')
   const handleClick = () => {
     const token = getAccessToken();
-    if (chatLink && timeData.length > 3 && sField && sKeyword && sLab) {
+    const areConditionsMet =
+    singleIntro.length >= 10 &&
+    multiIntro.length >= 50 &&
+    recommended.length >= 50;
+    if (areConditionsMet&&chatLink && timeData.length >= 3 && sField && sKeyword && sLab) {
+      setFlag(false);
       axios
         .patch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
@@ -119,6 +136,7 @@ function page() {
         });
     }
     console.log('wh')
+    setFlag(true)
   };
   return (
     <div>
@@ -167,6 +185,7 @@ function page() {
         </div>
         <EPTitle>멘토링 정보</EPTitle>
         <ProfileForm
+        flag={flag}
           lineType="single"
           title={PROFILE_TITLE.singleIntroduce}
           placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
@@ -174,7 +193,16 @@ function page() {
           loadStr={singleIntro}
           changeHandler={setSingleIntro}
         />
+        <div style={{ marginLeft: '1rem' }}>
+        {flag && (
+          <SingleValidator
+            msg={'최소 10자 이상 입력해 주세요.'}
+            textColor="#FF3347"
+          />
+        )}
+      </div>
         <ProfileForm
+        flag={flag}
           lineType="multi"
           title={PROFILE_TITLE.multiIntroduce}
           placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
@@ -182,8 +210,16 @@ function page() {
           formType="multiIntro"
           loadStr={multiIntro}
           changeHandler={setMultiIntro}
-        />
+        /><div style={{ marginLeft: '1rem' }}>
+        {flag && (
+          <SingleValidator
+            msg={'최소 50자 이상 입력해 주세요.'}
+            textColor="#FF3347"
+          />
+        )}
+      </div>
         <ProfileForm
+        flag={flag}
           lineType="multi"
           title={PROFILE_TITLE.recommendedFor}
           placeholder={PROFILE_PLACEHOLDER.recommendedFor}
@@ -192,6 +228,14 @@ function page() {
           loadStr={recommended}
           changeHandler={setRecommended}
         />
+        <div style={{ marginLeft: '1rem' }}>
+        {flag && (
+          <SingleValidator
+            msg={'최소 50자 이상 입력해 주세요.'}
+            textColor="#FF3347"
+          />
+        )}
+      </div>
         <EPMentoring>
           <div>
             <div id="mentoring-title">카카오톡 오픈 채팅방 링크</div>
@@ -202,16 +246,17 @@ function page() {
             </div>
           </div>
           <input
+          defaultValue={chatLink}
             type="text"
             id="add-chat-link-form"
-            placeholder={chatLink?chatLink:PROFILE_PLACEHOLDER.addChatLink}
+            placeholder={PROFILE_PLACEHOLDER.addChatLink}
             onChange={(e) => {
               setChatLink(e.currentTarget.value);
             }}
           />
         </EPMentoring>
         <SetData>
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div style={{ display: 'flex', alignItems: 'center',marginLeft:'1rem' }}>
             <div id="setData-title">가능 정기일정</div>
             <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
           </div>
@@ -312,7 +357,8 @@ const SetDataBox = styled.div`
   }
 `;
 const IntroCardTimeBox = styled.div`
-  width: 90%;
+margin-left: 1rem;
+  width: 91%;
   height: 2.5rem;
   border-radius: 4px;
   background-color: #f8f9fa;
@@ -332,8 +378,9 @@ const IntroCardTimeBox = styled.div`
   }
 `;
 const SetDataForm = styled.div`
+margin-left: 1rem;
   padding: 0 0.75rem;
-  width: 20.5rem;
+  width: 93%;
   height: 3.1875rem;
   flex-shrink: 0;
   display: flex;
@@ -351,7 +398,6 @@ const SetDataForm = styled.div`
   }
 `;
 const SetData = styled.div`
- margin-left: 1rem;
   margin-top: 2.75rem;
   #setData-warn {
     color: #f16464;
@@ -413,7 +459,7 @@ const BtnBox = styled.div`
 const EPMentoring = styled.div`
  margin-left: 1rem;
   #add-chat-link-form {
-    width: 20.5rem;
+    width: 95%;
     height: 3.1875rem;
     flex-shrink: 0;
     border-radius: 0.5rem;
