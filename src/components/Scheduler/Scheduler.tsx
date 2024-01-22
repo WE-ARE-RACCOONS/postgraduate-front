@@ -4,6 +4,8 @@ import {
   SchedulerEl,
   SchedulerElContainer,
   SchedulerEmptyBox,
+  SCHAddBtn,
+  SchedulerBox
 } from './Scheduler.styled';
 import { PROFILE_SUB_DIRECTION } from '@/constants/form/cProfileForm';
 import React, { useEffect, useState } from 'react';
@@ -24,29 +26,34 @@ function Scheduler() {
   };
 
   return (
+    <div>
     <SchedulerContainer>
       {timeData.length <= 0 ? (
+        <SchedulerBox>
         <SchedulerEmptyBox>
-          <div>{PROFILE_SUB_DIRECTION.addTimeEmpty}</div>
-          <button onClick={modalHandler}>+추가하기</button>
+          <div  id='add-time-empty'style={{marginBottom:'1.25rem'}}>{PROFILE_SUB_DIRECTION.addTimeEmpty}</div>
+          <SCHAddBtn onClick={modalHandler}>+추가하기</SCHAddBtn>
         </SchedulerEmptyBox>
+        </SchedulerBox>
       ) : (
+        <div style={{display:'flex',flexDirection:'column', alignItems:'center'}}>
         <SchedulerElContainer>
           {timeData.map((el, idx) => (
             <SchedulerEl key={idx}>
               <div id="scheduler-el-time">
                 {el.startTime} ~ {el.endTime} ({el.day})
               </div>
-              <button
+              <div
                 id="scheduler-el-remove-btn"
                 onClick={() => clickHandler(idx)}
               >
                 삭제
-              </button>
+              </div>
             </SchedulerEl>
           ))}
-          <button onClick={modalHandler}>+추가하기</button>
         </SchedulerElContainer>
+        <SCHAddBtn onClick={modalHandler}>+추가하기</SCHAddBtn>
+        </div>
       )}
       {modal && portalElement
         ? createPortal(
@@ -58,6 +65,7 @@ function Scheduler() {
           )
         : ''}
     </SchedulerContainer>
+    </div>
   );
 }
 
