@@ -112,7 +112,9 @@ function SeniorManage(props: SeniorManageProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
-
+  const editProf =()=>{
+    router.push(' /senior/edit-profile')
+  }
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>
@@ -123,7 +125,7 @@ function SeniorManage(props: SeniorManageProps) {
           kind="msg"
           profileReg={props.profileReg}
           content="내 프로필 수정"
-          onClick={infoHandler}
+          onClick={editProf}
         />
         <ContentComponent
           kind="auth"
