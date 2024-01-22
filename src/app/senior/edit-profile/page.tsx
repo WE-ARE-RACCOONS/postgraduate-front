@@ -47,9 +47,9 @@ function page() {
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
-  const [sField,setSfield] =useAtom(sFieldAtom);
+  const [sField, setSfield] = useAtom(sFieldAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
-  const [sKeyword,setSkeyword] = useAtom(sKeywordAtom);
+  const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
   const seniorId = useAtomValue(mySeniorId);
   const [timeData, setTimeData] = useAtom(sAbleTime);
@@ -68,21 +68,27 @@ function page() {
           };
 
           const [timesResponse, profileResponse] = await Promise.all([
-            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, { headers }),
-            axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, { headers }),
+            axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
+              { headers },
+            ),
+            axios.get(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
+              { headers },
+            ),
           ]);
 
           const timesData = timesResponse.data.data.times || [];
           const profileData = profileResponse.data.data || {};
-          console.log(profileData)
+          console.log(profileData);
           setTimeData(timesData);
           setSfield(profileData.field.join(', '));
-          setSkeyword(profileData.keyword.join(', '))
+          setSkeyword(profileData.keyword.join(', '));
           setChatLink(profileData.chatLink);
           setMultiIntro(profileData.info);
           setSingleIntro(profileData.oneLiner);
           setRecommended(profileData.target);
-          setSlab(profileData.lab); 
+          setSlab(profileData.lab);
         } catch (error) {
           console.error(error);
         }
@@ -92,21 +98,28 @@ function page() {
     fetchData();
   }, [seniorId]);
 
-console.log(sLab,'sLab')
-console.log(sKeyword,'sKeyword')
-console.log(multiIntro,'multiIntro')
-console.log(recommended,'recommended')
-console.log(sField,'sField')
-console.log(chatLink,'chatLink')
-console.log(singleIntro,'singleIntro')
-console.log(timeData,'timeData')
+  console.log(sLab, 'sLab');
+  console.log(sKeyword, 'sKeyword');
+  console.log(multiIntro, 'multiIntro');
+  console.log(recommended, 'recommended');
+  console.log(sField, 'sField');
+  console.log(chatLink, 'chatLink');
+  console.log(singleIntro, 'singleIntro');
+  console.log(timeData, 'timeData');
   const handleClick = () => {
     const token = getAccessToken();
     const areConditionsMet =
-    singleIntro.length >= 10 &&
-    multiIntro.length >= 50 &&
-    recommended.length >= 50;
-    if (areConditionsMet&&chatLink && timeData.length >= 3 && sField && sKeyword && sLab) {
+      singleIntro.length >= 10 &&
+      multiIntro.length >= 50 &&
+      recommended.length >= 50;
+    if (
+      areConditionsMet &&
+      chatLink &&
+      timeData.length >= 3 &&
+      sField &&
+      sKeyword &&
+      sLab
+    ) {
       setFlag(false);
       axios
         .patch(
@@ -135,15 +148,15 @@ console.log(timeData,'timeData')
           console.log(error);
         });
     }
-    console.log('wh')
-    setFlag(true)
+    console.log('wh');
+    setFlag(true);
   };
   return (
     <div>
       <BackHeader headerText="프로필 정보" />
       <EditPContainer>
         <EPTitle>프로필 정보</EPTitle>
-        <div style={{ marginBottom: '2.62rem' ,marginLeft:'1rem'}}>
+        <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
           <BtnBox>
             <MBtnFont>
               연구실명&nbsp;<div id="font-color">*</div>
@@ -185,7 +198,7 @@ console.log(timeData,'timeData')
         </div>
         <EPTitle>멘토링 정보</EPTitle>
         <ProfileForm
-        flag={flag}
+          flag={flag}
           lineType="single"
           title={PROFILE_TITLE.singleIntroduce}
           placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
@@ -194,15 +207,15 @@ console.log(timeData,'timeData')
           changeHandler={setSingleIntro}
         />
         <div style={{ marginLeft: '1rem' }}>
-        {flag && (
-          <SingleValidator
-            msg={'최소 10자 이상 입력해 주세요.'}
-            textColor="#FF3347"
-          />
-        )}
-      </div>
+          {flag && (
+            <SingleValidator
+              msg={'최소 10자 이상 입력해 주세요.'}
+              textColor="#FF3347"
+            />
+          )}
+        </div>
         <ProfileForm
-        flag={flag}
+          flag={flag}
           lineType="multi"
           title={PROFILE_TITLE.multiIntroduce}
           placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
@@ -210,16 +223,17 @@ console.log(timeData,'timeData')
           formType="multiIntro"
           loadStr={multiIntro}
           changeHandler={setMultiIntro}
-        /><div style={{ marginLeft: '1rem' }}>
-        {flag && (
-          <SingleValidator
-            msg={'최소 50자 이상 입력해 주세요.'}
-            textColor="#FF3347"
-          />
-        )}
-      </div>
+        />
+        <div style={{ marginLeft: '1rem' }}>
+          {flag && (
+            <SingleValidator
+              msg={'최소 50자 이상 입력해 주세요.'}
+              textColor="#FF3347"
+            />
+          )}
+        </div>
         <ProfileForm
-        flag={flag}
+          flag={flag}
           lineType="multi"
           title={PROFILE_TITLE.recommendedFor}
           placeholder={PROFILE_PLACEHOLDER.recommendedFor}
@@ -229,13 +243,13 @@ console.log(timeData,'timeData')
           changeHandler={setRecommended}
         />
         <div style={{ marginLeft: '1rem' }}>
-        {flag && (
-          <SingleValidator
-            msg={'최소 50자 이상 입력해 주세요.'}
-            textColor="#FF3347"
-          />
-        )}
-      </div>
+          {flag && (
+            <SingleValidator
+              msg={'최소 50자 이상 입력해 주세요.'}
+              textColor="#FF3347"
+            />
+          )}
+        </div>
         <EPMentoring>
           <div>
             <div id="mentoring-title">카카오톡 오픈 채팅방 링크</div>
@@ -246,7 +260,7 @@ console.log(timeData,'timeData')
             </div>
           </div>
           <input
-          defaultValue={chatLink}
+            defaultValue={chatLink}
             type="text"
             id="add-chat-link-form"
             placeholder={PROFILE_PLACEHOLDER.addChatLink}
@@ -256,7 +270,13 @@ console.log(timeData,'timeData')
           />
         </EPMentoring>
         <SetData>
-          <div style={{ display: 'flex', alignItems: 'center',marginLeft:'1rem' }}>
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              marginLeft: '1rem',
+            }}
+          >
             <div id="setData-title">가능 정기일정</div>
             <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
           </div>
@@ -295,7 +315,7 @@ console.log(timeData,'timeData')
             )}
           </SetDataBox>
         </SetData>
-        <div style={{ marginTop: '3.94rem' ,marginLeft:'1rem'}}>
+        <div style={{ marginTop: '3.94rem', marginLeft: '1rem' }}>
           {chatLink && timeData.length >= 3 ? (
             <ClickedBtn btnText="저장" kind="save" clickHandler={handleClick} />
           ) : (
@@ -337,8 +357,7 @@ console.log(timeData,'timeData')
 
 export default page;
 
-const EditPContainer = styled.div`
-`;
+const EditPContainer = styled.div``;
 const SetDataBox = styled.div`
   #setData-btn {
     display: inline-flex;
@@ -357,7 +376,7 @@ const SetDataBox = styled.div`
   }
 `;
 const IntroCardTimeBox = styled.div`
-margin-left: 1rem;
+  margin-left: 1rem;
   width: 91%;
   height: 2.5rem;
   border-radius: 4px;
@@ -378,7 +397,7 @@ margin-left: 1rem;
   }
 `;
 const SetDataForm = styled.div`
-margin-left: 1rem;
+  margin-left: 1rem;
   padding: 0 0.75rem;
   width: 93%;
   height: 3.1875rem;
@@ -444,7 +463,7 @@ const MBtnFont = styled.div`
   }
 `;
 const EPTitle = styled.div`
- margin-left: 1rem;
+  margin-left: 1rem;
   color: #212529;
   font-family: Pretendard;
   font-size: 1.25rem;
@@ -457,7 +476,7 @@ const BtnBox = styled.div`
   margin-top: 1rem;
 `;
 const EPMentoring = styled.div`
- margin-left: 1rem;
+  margin-left: 1rem;
   #add-chat-link-form {
     width: 95%;
     height: 3.1875rem;

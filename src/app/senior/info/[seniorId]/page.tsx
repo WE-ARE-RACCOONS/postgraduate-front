@@ -29,7 +29,7 @@ function SeniorInfoPage() {
   const [target, setTarget] = useState('');
   const [term, setTerm] = useState(40);
   const [times, setTimes] = useState([]);
-const [mine,setMine]=useState('false')
+  const [mine, setMine] = useState('false');
   useEffect(() => {
     const token = getAccessToken();
     const headers = {
@@ -39,12 +39,14 @@ const [mine,setMine]=useState('false')
     const seniorId = pathArr[pathArr.length - 1];
     setFindSeniorId(seniorId);
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,{headers})
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`, {
+        headers,
+      })
       .then((response) => {
         const res = response.data;
 
         if (res.code == 'SNR200') {
-          setMine(res.data.isMine)
+          setMine(res.data.isMine);
           setInfo(res.data.info);
           setKeyword(res.data.keyword);
           setLab(res.data.lab);
@@ -101,16 +103,15 @@ const [mine,setMine]=useState('false')
               times={times}
             />
           </div>
-          
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
       {mine ? (
         <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
       ) : (
         <>
-        <MentoringApplyBtn onClick={applyHandler}>
-          멘토링 신청
-        </MentoringApplyBtn>
+          <MentoringApplyBtn onClick={applyHandler}>
+            멘토링 신청
+          </MentoringApplyBtn>
         </>
       )}
     </SeniorInfoPageContainer>

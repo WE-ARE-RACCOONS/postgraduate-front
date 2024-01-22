@@ -72,8 +72,8 @@ function MyPage() {
 
   useEffect(() => {
     const userT = getUserType();
-    if(userT) setUserType(userT);
- }, []);
+    if (userT) setUserType(userT);
+  }, []);
 
   useEffect(() => {
     if (Token) {

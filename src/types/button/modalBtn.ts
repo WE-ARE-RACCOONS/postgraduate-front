@@ -5,5 +5,5 @@ export interface ModalBtnProps {
   modalHandler: () => void;
   cancelModalHandler?: () => void;
   onClick?: () => void;
-  target?:string;
+  target?: string;
 }

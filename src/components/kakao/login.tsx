@@ -12,13 +12,12 @@ function Login() {
   const loginHandler = () => {
     // console.log(window.location.hostname);
     // window.location.href = link;
-    if(typeof window !== undefined) {
-      if(window.location.hostname.includes('localhost')) {
+    if (typeof window !== undefined) {
+      if (window.location.hostname.includes('localhost')) {
         const REDIRECT_URI = process.env.NEXT_PUBLIC_LOCAL_REDIRECT_URI;
         const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
         window.location.href = link;
-      }
-      else {
+      } else {
         const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
         const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
         window.location.href = link;

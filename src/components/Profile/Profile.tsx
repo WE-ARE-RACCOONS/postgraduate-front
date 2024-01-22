@@ -39,7 +39,7 @@ function Profile(props: ProfileProps) {
             {props.userType == 'junior' ? '후배 회원' : '선배 회원'}
           </ProfileButton>
         </ProfileName>
-        {props.certifiReg !== 'APPROVE' && !props.profileReg &&  (
+        {props.certifiReg !== 'APPROVE' && !props.profileReg && (
           <div
             style={{
               display: 'flex',

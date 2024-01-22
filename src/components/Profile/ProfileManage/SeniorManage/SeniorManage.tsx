@@ -112,9 +112,9 @@ function SeniorManage(props: SeniorManageProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
-  const editProf =()=>{
-    router.push(' /senior/edit-profile')
-  }
+  const editProf = () => {
+    router.push(' /senior/edit-profile');
+  };
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>
