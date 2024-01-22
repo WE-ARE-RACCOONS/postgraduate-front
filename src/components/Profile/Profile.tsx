@@ -20,7 +20,6 @@ function Profile(props: ProfileProps) {
     props.modalHandler();
   };
 
-  const profile = props.profile;
   return (
     <ProfileBox>
       <ImageBox>
