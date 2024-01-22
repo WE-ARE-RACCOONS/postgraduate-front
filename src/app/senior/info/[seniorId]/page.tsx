@@ -4,9 +4,9 @@ import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
 import useAuth from '@/hooks/useAuth';
-import { mySeniorId } from '@/stores/senior';
+import { enterSeniorId, mySeniorId } from '@/stores/senior';
 import axios from 'axios';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -16,7 +16,7 @@ function SeniorInfoPage() {
   const pathArr = currentPath.split('/');
   const mySeiorId = useAtomValue(mySeniorId).toString();
   const { getAccessToken } = useAuth();
-  const [findSeniorId, setFindSeniorId] = useState('');
+  const [findSeniorId, setFindSeniorId] = useAtom(enterSeniorId);
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState([]);
   const [lab, setLab] = useState('');
@@ -69,6 +69,8 @@ function SeniorInfoPage() {
   const editHandler = () => {
     router.push(`/senior/edit-profile`);
   };
+  console.log(mySeiorId)
+  //서버 로직 바꾸면 확인용
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
@@ -95,14 +97,17 @@ function SeniorInfoPage() {
               times={times}
             />
           </div>
+          
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
       {mySeiorId === findSeniorId ? (
         <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
       ) : (
+        <>
         <MentoringApplyBtn onClick={applyHandler}>
           멘토링 신청
         </MentoringApplyBtn>
+        </>
       )}
     </SeniorInfoPageContainer>
   );
