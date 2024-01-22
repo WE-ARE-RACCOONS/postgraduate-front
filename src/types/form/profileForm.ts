@@ -7,6 +7,7 @@ export type lineType = 'single' | 'multi';
 export type profileFormType = 'singleIntro' | 'multiIntro' | 'recommendedFor';
 
 export interface ProfileFormProps {
+  flag: boolean;
   lineType: lineType;
   title: string;
   maxLength?: number; // lineType이 'multi'인 경우에만 들어옴
