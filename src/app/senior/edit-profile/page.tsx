@@ -46,7 +46,7 @@ function page() {
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const sField = useAtomValue(sFieldAtom);
-  const sLab = useAtomValue(sLabAtom);
+  const [sLab, setSlab] = useAtom(sLabAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
   const seniorId = useAtomValue(mySeniorId);
@@ -67,8 +67,22 @@ function page() {
           headers,
         })
         .then((res) => {
-          console.log(res.data.data.times);
           setTimeData(res.data.data.times);
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+          headers,
+        })
+        .then((res) => {
+          console.log(res.data.data);
+          setChatLink(res.data.data.chatLink)
+          setMultiIntro(res.data.data.info)
+          setSingleIntro(res.data.data.oneLiner)
+          setRecommended(res.data.data.target)
+          setSlab(res.data.data.lab)
         })
         .catch(function (error) {
           console.log(error);
@@ -106,13 +120,14 @@ function page() {
           console.log(error);
         });
     }
+    console.log('wh')
   };
   return (
     <div>
       <BackHeader headerText="프로필 정보" />
       <EditPContainer>
         <EPTitle>프로필 정보</EPTitle>
-        <div style={{ marginBottom: '2.62rem' }}>
+        <div style={{ marginBottom: '2.62rem' ,marginLeft:'1rem'}}>
           <BtnBox>
             <MBtnFont>
               연구실명&nbsp;<div id="font-color">*</div>
@@ -191,7 +206,7 @@ function page() {
           <input
             type="text"
             id="add-chat-link-form"
-            placeholder={PROFILE_PLACEHOLDER.addChatLink}
+            placeholder={chatLink?chatLink:PROFILE_PLACEHOLDER.addChatLink}
             onChange={(e) => {
               setChatLink(e.currentTarget.value);
             }}
@@ -237,8 +252,8 @@ function page() {
             )}
           </SetDataBox>
         </SetData>
-        <div style={{ marginTop: '3.94rem' }}>
-          {chatLink && timeData.length > 3 && sField && sKeyword && sLab ? (
+        <div style={{ marginTop: '3.94rem' ,marginLeft:'1rem'}}>
+          {chatLink && timeData.length >= 3 ? (
             <ClickedBtn btnText="저장" kind="save" clickHandler={handleClick} />
           ) : (
             <ClickedBtn
@@ -280,7 +295,6 @@ function page() {
 export default page;
 
 const EditPContainer = styled.div`
-  margin-left: 1rem;
 `;
 const SetDataBox = styled.div`
   #setData-btn {
@@ -339,6 +353,7 @@ const SetDataForm = styled.div`
   }
 `;
 const SetData = styled.div`
+ margin-left: 1rem;
   margin-top: 2.75rem;
   #setData-warn {
     color: #f16464;
@@ -385,6 +400,7 @@ const MBtnFont = styled.div`
   }
 `;
 const EPTitle = styled.div`
+ margin-left: 1rem;
   color: #212529;
   font-family: Pretendard;
   font-size: 1.25rem;
@@ -397,6 +413,7 @@ const BtnBox = styled.div`
   margin-top: 1rem;
 `;
 const EPMentoring = styled.div`
+ margin-left: 1rem;
   #add-chat-link-form {
     width: 20.5rem;
     height: 3.1875rem;
@@ -416,6 +433,7 @@ const EPMentoring = styled.div`
     }
   }
   #mentoring-title {
+    margin-top: 3.13rem;
     color: #212529;
     font-family: Pretendard;
     font-size: 1rem;

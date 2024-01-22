@@ -113,10 +113,6 @@ function SeniorManage(props: SeniorManageProps) {
     }
   };
 
-  useEffect(() => {
-    changeJunior();
-  }, []);
-
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>
