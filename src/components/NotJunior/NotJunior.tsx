@@ -24,7 +24,7 @@ function NotJunior(props: NotJuniorProps) {
   };
   const router = useRouter();
   const seniorJoin = () => {
-    router.push(`/signup/${socialId}/common-info/matching-info`);
+    router.push(`/signup/select/common-info/matching-info`);
   };
   return (
     <div>
