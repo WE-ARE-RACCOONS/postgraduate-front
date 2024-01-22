@@ -20,9 +20,12 @@ function Scheduler() {
   const { modal, modalHandler, portalElement } = useModal(
     'senior-mentoring-time-portal',
   );
-
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
+  };
+  const formatTime = (time:string) => {
+    const [hours, minutes] = time.split(':');
+    return `${hours}시 ${minutes}분`;
   };
 
   return (
@@ -49,7 +52,7 @@ function Scheduler() {
               {timeData.map((el, idx) => (
                 <SchedulerEl key={idx}>
                   <div id="scheduler-el-time">
-                    {el.startTime} ~ {el.endTime} ({el.day})
+                  {el.day}요일 {formatTime(el.startTime)} ~ {formatTime(el.endTime)}
                   </div>
                   <div
                     id="scheduler-el-remove-btn"
