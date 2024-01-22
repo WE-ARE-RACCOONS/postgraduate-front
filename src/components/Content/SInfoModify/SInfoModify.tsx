@@ -209,7 +209,7 @@ function SInfoModify({
           <ModalBtn
             isGet={!bankname}
             type="bankInfo"
-            btnText={bankname ? bankname : ''}
+            btnText={bankname ? bankname : '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}
             onClick={() => {
               setModalType('bank');
