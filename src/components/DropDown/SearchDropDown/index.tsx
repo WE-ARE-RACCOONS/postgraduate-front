@@ -1,3 +1,3 @@
-import SearchDropDown from "./SearchDropDown";
+import SearchDropDown from './SearchDropDown';
 
 export default SearchDropDown;

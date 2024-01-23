@@ -24,7 +24,7 @@ function NotJunior(props: NotJuniorProps) {
   };
   const router = useRouter();
   const seniorJoin = () => {
-    router.push(`/signup/${socialId}/common-info/matching-info`);
+    router.push(`/signup/select/common-info/matching-info`);
   };
   return (
     <div>
@@ -58,7 +58,7 @@ function NotJunior(props: NotJuniorProps) {
         </div>
       </NotSeniorMid>
       <NotSeniorBottom>
-        <NSBtn onClick={seniorJoin}>대학원 선배로 가입하기</NSBtn>
+        <NSBtn onClick={seniorJoin}>대학원 후배로 가입하기</NSBtn>
       </NotSeniorBottom>
     </div>
   );

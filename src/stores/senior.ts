@@ -24,3 +24,4 @@ export const sAbleTime = atom<Array<TimeObj>>([]);
 export const sChatLink = atom<string>('');
 
 export const mySeniorId = atom<number>(0);
+export const enterSeniorId = atom<string>('');

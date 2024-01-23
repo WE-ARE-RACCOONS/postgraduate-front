@@ -63,9 +63,9 @@ function AuthPage() {
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
-{/*         <AuthFont>
+                <AuthFont>
           대학원 선배 회원으로 가입하면 멘토링을 진행할 수 있어요
-        </AuthFont> */}
+        </AuthFont>
         <br />
         <AuthImgBox>
           <Image width={233} height={100} alt="auth-img" src={auth} />
@@ -110,15 +110,15 @@ function AuthPage() {
   );
 }
 export default AuthPage;
-// export const AuthFont = styled.div`
-//   color: #212529;
-//   font-family: Pretendard;
-//   font-size: 0.875rem;
-//   font-style: normal;
-//   font-weight: 400;
-//   line-height: 140%; /* 1.225rem */
-//   letter-spacing: -0.03125rem;
-// `;
+const AuthFont = styled.div`
+  color: #212529;
+  font-family: Pretendard;
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.225rem */
+  letter-spacing: -0.03125rem;
+`;
 
 const APhotoIn = styled.div`
   justify-content: space-between;

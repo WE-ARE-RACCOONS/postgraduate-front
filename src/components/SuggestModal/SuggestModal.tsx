@@ -15,7 +15,7 @@ interface SuggestModalProps {
 function SuggestModal(props: SuggestModalProps) {
   const router = useRouter();
   const seniorAuth = () => {
-     router.push(`/signup/select/common-info/auth`)
+    router.push(`/signup/select/common-info/auth`);
   };
   const ProfileinfoHandler = () => {
     if (props.infoHandler) {

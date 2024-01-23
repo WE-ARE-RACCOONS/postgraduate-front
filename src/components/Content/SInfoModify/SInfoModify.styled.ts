@@ -17,48 +17,54 @@ export const SInfoContainer = styled.div`
 
   #nickname-form-wrapper {
     position: absolute;
+    width: 98%;
     top: 11.25rem;
   }
 
   #phonenum-form-wrapper {
     position: absolute;
-    top: 19.5rem;
+    width: 98%;
+    top: 18.3rem;
   }
 
   #account-form-wrapper {
     position: absolute;
     top: 26.375rem;
+    width: 98%;
+    margin-left: 0.75rem;
   }
 
   #bank-and-name-wrapper {
-    width: 20.5rem;
     height: 5.75rem;
+    width: 93%;
     position: absolute;
-    top: 33.56rem;
+    top: 32.56rem;
     display: flex;
     justify-content: space-between;
+    margin-left: 0.75rem;
   }
 
   #bank-form-wrapper {
-    width: 11.56rem;
+    width: 55%;
     height: 5.75rem;
   }
 
   #name-form-wrapper {
-    width: 8.2rem;
+    width: 40%;
     height: 5.75rem;
   }
 
   #submit-btn-box {
     position: absolute;
-    top: 43.5rem;
+    top: 38.5rem;
+    width: 99%;
   }
 `;
 
 export const SInfoImgBox = styled.div`
-  width: 4.875rem;
-  height: 4.688rem;
   position: absolute;
+  width: 7.3rem;
+  height: 7.4rem;
   top: 4.75rem;
   left: 50%;
   transform: translateX(-50%);
@@ -94,12 +100,23 @@ export const SInfoImgInputBox = styled.div`
 
 export const InfoFieldTitle = styled.div`
   width: max-content;
-  height: 1.375rem;
+  color: #212529;
+  font-family: 'Noto Sans JP';
+  font-size: 0.875rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 0.5rem;
 `;
 
 export const InfoFieldForm = styled.input<{ $width: string }>`
   width: ${(prop) => prop.$width};
-  height: 3.875rem;
+  height: 3.1875rem;
+  flex-shrink: 0;
+  border-radius: 0.5rem;
+  border: 1px solid #c2cede;
+  background: #fff;
+  padding: 0.88rem 1rem;
 `;
 
 export const ValidatorBox = styled.div`

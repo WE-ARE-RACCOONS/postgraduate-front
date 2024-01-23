@@ -12,11 +12,11 @@ import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '@/components/Modal/FullModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
+import Router, { useRouter } from 'next/navigation';
+import { mySeniorId } from '@/stores/senior';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import { userType } from '@/types/user/user';
-import Router from 'next/navigation';
-import { useRouter } from 'next/navigation';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
@@ -28,6 +28,7 @@ function SeniorManage(props: SeniorManageProps) {
   );
   const [socialId, setSocialId] = useAtom(socialIdAtom);
   const setuserTypeAtom = useSetAtom(userTypeAtom);
+
   const {
     modal: modifyModal,
     modalHandler: modifyHandler,
@@ -62,7 +63,20 @@ function SeniorManage(props: SeniorManageProps) {
     }
   }
   const MyprofHandler = () => {
-    if (checkRegister()) modalHandler();
+    if (checkRegister()) {
+      router.push(`/senior/info/${props.seniorId}`);
+    }
+  };
+  const MyAuth = () => {
+    if (props.certifiReg === 'APPROVE') {
+      props.AmodalHandler();
+    }
+    if (props.certifiReg === 'NOT_APPROVE') {
+      router.push(`/signup/select/common-info/auth`);
+    }
+    if (props.certifiReg === 'WAITING') {
+      props.AmodalHandler();
+    }
   };
 
   const checkRegister = () => {
@@ -98,11 +112,9 @@ function SeniorManage(props: SeniorManageProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
-
-  useEffect(() => {
-    changeJunior();
-  }, []);
-
+  const editProf = () => {
+    router.push(' /senior/edit-profile');
+  };
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>
@@ -113,13 +125,13 @@ function SeniorManage(props: SeniorManageProps) {
           kind="msg"
           profileReg={props.profileReg}
           content="내 프로필 수정"
-          onClick={infoHandler}
+          onClick={editProf}
         />
         <ContentComponent
           kind="auth"
           certifiReg={props.certifiReg}
           content="대학원 인증"
-          onClick={MyprofHandler}
+          onClick={MyAuth}
         />
       </SeniorManageContentContainer>
       <SeniorManageContentContainer>
@@ -153,6 +165,7 @@ function SeniorManage(props: SeniorManageProps) {
             <FullModal
               modalType="senior-info-modify"
               modalHandler={infoHandler}
+              bModalHandler={props.modalHandler}
             />,
             infoPortal,
           )

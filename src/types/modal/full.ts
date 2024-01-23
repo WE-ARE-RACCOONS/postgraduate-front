@@ -15,6 +15,7 @@ export type FullModalType =
 export interface FullModalProps {
   modalType: FullModalType;
   modalHandler: () => void;
+  bModalHandler?: () => void;
   cancelModalHandler?: () => void;
   acceptModalHandler?: () => void;
   mentoringId?: number;
