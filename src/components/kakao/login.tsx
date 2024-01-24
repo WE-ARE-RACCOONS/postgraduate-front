@@ -8,8 +8,8 @@ function Login() {
   const [token, setToken] = useState<string | null | undefined>('');
 
   const loginHandler = () => {
-    if(typeof window !== undefined) {
-      if(window.location.hostname.includes('localhost')) {
+    if (typeof window !== undefined) {
+      if (window.location.hostname.includes('localhost')) {
         const REDIRECT_URI = process.env.NEXT_PUBLIC_LOCAL_REDIRECT_URI;
         const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
         window.location.href = link;

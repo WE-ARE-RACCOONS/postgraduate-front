@@ -63,7 +63,7 @@ function AuthPage() {
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
-                <AuthFont>
+        <AuthFont>
           대학원 선배 회원으로 가입하면 멘토링을 진행할 수 있어요
         </AuthFont>
         <br />

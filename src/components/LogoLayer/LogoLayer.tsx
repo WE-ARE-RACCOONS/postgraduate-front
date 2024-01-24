@@ -14,7 +14,7 @@ function LogoLayer(props: SearchModalProps) {
   useEffect(() => {
     const accessTkn = getAccessToken();
 
-    if(accessTkn) {
+    if (accessTkn) {
       setIsLogin(true);
     }
   }, []);

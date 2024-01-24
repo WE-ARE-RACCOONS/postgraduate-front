@@ -23,7 +23,7 @@ function Scheduler() {
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
   };
-  const formatTime = (time:string) => {
+  const formatTime = (time: string) => {
     const [hours, minutes] = time.split(':');
     return `${hours}시 ${minutes}분`;
   };
@@ -52,7 +52,8 @@ function Scheduler() {
               {timeData.map((el, idx) => (
                 <SchedulerEl key={idx}>
                   <div id="scheduler-el-time">
-                  {el.day}요일 {formatTime(el.startTime)} ~ {formatTime(el.endTime)}
+                    {el.day}요일 {formatTime(el.startTime)} ~{' '}
+                    {formatTime(el.endTime)}
                   </div>
                   <div
                     id="scheduler-el-remove-btn"

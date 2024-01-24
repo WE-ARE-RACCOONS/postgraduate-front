@@ -38,34 +38,35 @@ function SeniorInfoPage() {
 
     const seniorId = pathArr[pathArr.length - 1];
     setFindSeniorId(seniorId);
-    if(token){
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`, {
-        headers,
-      })
-      .then((response) => {
-        const res = response.data;
+    if (token) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`, {
+          headers,
+        })
+        .then((response) => {
+          const res = response.data;
 
-        if (res.code == 'SNR200') {
-          setMine(res.data.isMine);
-          setInfo(res.data.info);
-          setKeyword(res.data.keyword);
-          setLab(res.data.lab);
-          setMajor(res.data.major);
-          setNickName(res.data.nickName);
-          setOneLiner(res.data.oneLiner);
-          setPostgradu(res.data.postgradu);
-          setProfessor(res.data.professor);
-          setProfile(res.data.profile);
-          setTarget(res.data.target);
-          setTerm(res.data.term);
-          setTimes(res.data.times);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
-  }}, []);
+          if (res.code == 'SNR200') {
+            setMine(res.data.isMine);
+            setInfo(res.data.info);
+            setKeyword(res.data.keyword);
+            setLab(res.data.lab);
+            setMajor(res.data.major);
+            setNickName(res.data.nickName);
+            setOneLiner(res.data.oneLiner);
+            setPostgradu(res.data.postgradu);
+            setProfessor(res.data.professor);
+            setProfile(res.data.profile);
+            setTarget(res.data.target);
+            setTerm(res.data.term);
+            setTimes(res.data.times);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  }, []);
 
   const applyHandler = () => {
     const accessTkn = getAccessToken();

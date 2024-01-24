@@ -246,7 +246,13 @@ function MentoringApplyPayPage() {
         >
           이전
         </button>
-        <button id="map-next-btn" className="map-btn">
+        <button
+          id="map-next-btn"
+          className="map-btn"
+          onClick={() => {
+            router.push('/mentoring-apply/done');
+          }}
+        >
           결제하기
         </button>
       </MAPBtnContainer>
