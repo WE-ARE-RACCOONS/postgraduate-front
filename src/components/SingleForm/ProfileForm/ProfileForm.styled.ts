@@ -1,8 +1,5 @@
 import styled from 'styled-components';
 
-interface setflag {
-  flag: boolean;
-}
 export const ProfileFormContainer = styled.div<{ $flag: boolean }>`
   width: inherit;
   height: max-content;
@@ -14,12 +11,14 @@ export const ProfileFormContainer = styled.div<{ $flag: boolean }>`
     width: 94%;
     border-radius: 0.25rem;
     border: 1px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
-    padding: 0.2rem 0.75rem;
+    padding: 0.5rem;
     resize: none;
+    font-family: Pretendard;
+    font-size: 16px;
     &::placeholder {
       color: #adb5bd;
       font-family: Pretendard;
-      font-size: 1rem;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: 1.5rem;
@@ -33,7 +32,9 @@ export const ProfileFormContainer = styled.div<{ $flag: boolean }>`
     resize: none;
     border-radius: 0.25rem;
     border: 1px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
-    padding: 0.5rem 0.75rem;
+    padding: 0.5rem;
+    font-family: Pretendard;
+    font-size: 16px;
 
     &::placeholder {
       color: #adb5bd;

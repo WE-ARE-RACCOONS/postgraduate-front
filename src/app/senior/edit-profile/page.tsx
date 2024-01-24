@@ -80,7 +80,6 @@ function EditProfilePage() {
 
           const timesData = timesResponse.data.data.times || [];
           const profileData = profileResponse.data.data || {};
-          console.log(profileData);
           setTimeData(timesData);
           setSfield(profileData.field.join(', '));
           setSkeyword(profileData.keyword.join(', '));
@@ -149,7 +148,9 @@ function EditProfilePage() {
         <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
           <BtnBox>
             <MBtnFont>
-              연구실명&nbsp;<div id="font-color">*</div>
+              <div className='title-with-modify'>
+                연구실명&nbsp;<div id="font-color">*</div>
+              </div>
               {flag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
             </MBtnFont>
             <TextForm
@@ -159,10 +160,16 @@ function EditProfilePage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              연구분야&nbsp;<div id="font-color">*</div>
-              {flag && (
-                <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
-              )}
+              <div className='title-with-modify'>
+                연구분야&nbsp;<div id="font-color">*</div>
+                {flag && (
+                  <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
+                )}
+              </div>
+              <button className='modify-btn' onClick={() => {
+                setModalType('field');
+                modalHandler();
+              }}>수정</button>
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -175,10 +182,16 @@ function EditProfilePage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              연구주제&nbsp;<div id="font-color">*</div>
-              {flag && (
-                <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
-              )}
+              <div className='title-with-modify'>
+                연구주제&nbsp;<div id="font-color">*</div>
+                {flag && (
+                  <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
+                )}
+              </div>
+              <button className='modify-btn' onClick={() => {
+                setModalType('keyword');
+                modalHandler();
+              }}>수정</button>
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -435,7 +448,9 @@ const SetData = styled.div`
   }
 `;
 const MBtnFont = styled.div`
+  width: 95%;
   display: flex;
+  justify-content: space-between;
   color: #212529;
   font-family: Noto Sans JP;
   font-size: 0.875rem;
@@ -457,6 +472,18 @@ const MBtnFont = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  .title-with-modify {
+    display: flex;
+  }
+  .modify-btn {
+    border: 0;
+    color: #00A0E1;
+    font-family: Pretendard;
+    border-bottom: 1px solid #00A0E1;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
   }
 `;
 const EPTitle = styled.div`

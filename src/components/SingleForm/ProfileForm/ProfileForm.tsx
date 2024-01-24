@@ -12,6 +12,7 @@ function ProfileForm(props: ProfileFormProps) {
         `.profile-form-${props.formType}`,
       ) as HTMLInputElement | HTMLTextAreaElement;
       targetForm.value = props.loadStr;
+      setCharCount(props.loadStr.length);
       return;
     }
   }, [props.loadStr]);
