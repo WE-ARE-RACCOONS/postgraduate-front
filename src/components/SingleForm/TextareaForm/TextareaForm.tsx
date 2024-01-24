@@ -10,9 +10,11 @@ function TextareaForm(props: TextareaFormProps) {
   const [content, setContent] = useAtom(props.targetAtom);
 
   useEffect(() => {
-    if(content) {
-      const formEl = document.getElementById(`textarea-${props.targetAtom.toString()}`) as HTMLTextAreaElement;
-      if(formEl) formEl.value = content;
+    if (content) {
+      const formEl = document.getElementById(
+        `textarea-${props.targetAtom.toString()}`,
+      ) as HTMLTextAreaElement;
+      if (formEl) formEl.value = content;
     }
   }, []);
 

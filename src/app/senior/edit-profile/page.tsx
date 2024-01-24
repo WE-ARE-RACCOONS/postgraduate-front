@@ -150,7 +150,7 @@ function EditProfilePage() {
           <BtnBox>
             <MBtnFont>
               연구실명&nbsp;<div id="font-color">*</div>
-             {flag &&  <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
+              {flag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
             </MBtnFont>
             <TextForm
               placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}
@@ -160,7 +160,9 @@ function EditProfilePage() {
           <BtnBox>
             <MBtnFont>
               연구분야&nbsp;<div id="font-color">*</div>
-              {flag && <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>}
+              {flag && (
+                <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
+              )}
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -174,7 +176,9 @@ function EditProfilePage() {
           <BtnBox>
             <MBtnFont>
               연구주제&nbsp;<div id="font-color">*</div>
-              {flag && <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>}
+              {flag && (
+                <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
+              )}
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -269,7 +273,9 @@ function EditProfilePage() {
             }}
           >
             <div id="setData-title">가능 정기일정</div>
-            {flag &&<div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>}
+            {flag && (
+              <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
+            )}
           </div>
           <SetDataBox>
             {timeData.length > 0 ? (
