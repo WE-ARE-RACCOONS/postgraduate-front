@@ -3,7 +3,7 @@ import styled from 'styled-components';
 interface setflag {
   flag: boolean;
 }
-export const ProfileFormContainer = styled.div<setflag>`
+export const ProfileFormContainer = styled.div<{ $flag: boolean }>`
   width: inherit;
   height: max-content;
   margin-left: 1rem;
@@ -13,7 +13,7 @@ export const ProfileFormContainer = styled.div<setflag>`
     height: 4.125rem;
     width: 94%;
     border-radius: 0.25rem;
-    border: 1px solid ${(props) => (props.flag ? '#FF5757' : '#DFDFDF')};
+    border: 1px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
     padding: 0.2rem 0.75rem;
     resize: none;
     &::placeholder {
@@ -32,7 +32,7 @@ export const ProfileFormContainer = styled.div<setflag>`
     width: 94%;
     resize: none;
     border-radius: 0.25rem;
-    border: 1px solid ${(props) => (props.flag ? '#FF5757' : '#DFDFDF')};
+    border: 1px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
     padding: 0.5rem 0.75rem;
 
     &::placeholder {

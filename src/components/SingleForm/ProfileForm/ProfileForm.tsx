@@ -24,7 +24,7 @@ function ProfileForm(props: ProfileFormProps) {
   };
 
   return (
-    <ProfileFormContainer flag={props.flag}>
+    <ProfileFormContainer $flag={props.flag}>
       <ProfileTitleContainer>
         <div>{props.title}</div>
         <div id="char-count">
