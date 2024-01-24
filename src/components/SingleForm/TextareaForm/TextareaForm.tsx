@@ -1,13 +1,20 @@
 import { TextareaFormProps } from '@/types/form/textareaForm';
 import { TextareaFormContainer, TextareaFormTop } from './TextareaForm.styled';
-import { useState } from 'react';
-import { useSetAtom } from 'jotai';
+import { useEffect, useState } from 'react';
+import { useAtom } from 'jotai';
 import SingleValidator from '@/components/Validator/SingleValidator';
 
 function TextareaForm(props: TextareaFormProps) {
   const [charCnt, setCharCnt] = useState(0);
   const [flag, setFlag] = useState(false);
-  const setContent = useSetAtom(props.targetAtom);
+  const [content, setContent] = useAtom(props.targetAtom);
+
+  useEffect(() => {
+    if(content) {
+      const formEl = document.getElementById(`textarea-${props.targetAtom.toString()}`) as HTMLTextAreaElement;
+      if(formEl) formEl.value = content;
+    }
+  }, []);
 
   const changeHandler = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const target = e.currentTarget;
@@ -28,6 +35,7 @@ function TextareaForm(props: TextareaFormProps) {
         </div>
       </TextareaFormTop>
       <textarea
+        id={`textarea-${props.targetAtom.toString()}`}
         className={flag ? 'alert' : ''}
         placeholder={props.placeholder}
         onChange={(e) => {
