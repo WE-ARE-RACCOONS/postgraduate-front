@@ -43,11 +43,7 @@ function SelectForm(props: SelectFormProps) {
 
   return (
     <SelectFormContainer>
-      <div id="select-form-direction">
-        여러 분야에 걸쳐 있을 경우,
-        <br />
-        모두 선택할 때 매칭 성사율이 올라가요
-      </div>
+      <h3>연구 분야에 대해 알려주세요.</h3>
       <SelectFormBtnContainer>
         {totalBtns &&
           totalBtns.map((el, idx) => (
@@ -58,7 +54,7 @@ function SelectForm(props: SelectFormProps) {
               key={idx}
             />
           ))}
-        {otherBtn && (
+        {/* {otherBtn && (
           <button
             id="other-field-add-btn"
             onClick={() => {
@@ -79,12 +75,12 @@ function SelectForm(props: SelectFormProps) {
               저장
             </button>
           </div>
-        )}
+        )} */}
       </SelectFormBtnContainer>
       {flag && (
-        <SingleValidator msg="연구분야를 선택해주세요" textColor="#FF0000" />
+        <SingleValidator msg="최소 1개 이상 입력해 주세요" textColor="#FF0000" />
       )}
-      <ClickedBtn kind="modal" clickHandler={handleConfirm} btnText="확인" />
+      <button onClick={handleConfirm}>확인</button>
     </SelectFormContainer>
   );
 }

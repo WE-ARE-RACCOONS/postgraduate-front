@@ -24,11 +24,12 @@ import {
   sMultiIntroduce,
   sRecommendedFor,
   sSingleIntroduce,
+  selectedFieldAtom,
 } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -48,6 +49,7 @@ function EditProfilePage() {
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField, setSfield] = useAtom(sFieldAtom);
+  const setSelectedField = useSetAtom(selectedFieldAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
@@ -81,6 +83,7 @@ function EditProfilePage() {
           const timesData = timesResponse.data.data.times || [];
           const profileData = profileResponse.data.data || {};
           setTimeData(timesData);
+          setSelectedField(profileData.field);
           setSfield(profileData.field.join(', '));
           setSkeyword(profileData.keyword.join(', '));
           setChatLink(profileData.chatLink);
@@ -341,15 +344,6 @@ function EditProfilePage() {
         ? createPortal(
             <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
             portalElement,
-          )
-        : null}
-      {timeModal && timePortalElement
-        ? createPortal(
-            <FullModal
-              modalType="senior-mentoring-time"
-              modalHandler={timeModalHandler}
-            />,
-            timePortalElement,
           )
         : null}
       {timeModal && timePortalElement
