@@ -62,6 +62,7 @@ function useAuth() {
       if (isExpired(accessExp)) {
         if (getRefreshToken()) {
           reissueToken();
+          const accessTkn = localStorage.getItem('accessToken');
           return accessTkn;
         } else {
           return '';
