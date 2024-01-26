@@ -22,14 +22,34 @@ import {
   StaticImageData,
   StaticImport,
 } from 'next/dist/shared/lib/get-img-props';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { nickname, phoneNum } from '@/stores/signup';
+import NextBtn from '@/components/Button/NextBtn';
+import ModalBtn from '@/components/Button/ModalBtn';
+import { bankNameAtom } from '@/stores/bankName';
+import { ModalType } from '@/types/modal/riseUp';
+import useModal from '@/hooks/useModal';
+import RiseUpModal from '@/components/Modal/RiseUpModal';
+import { createPortal } from 'react-dom';
 
-function SInfoModify({ modalHandler }: { modalHandler: () => void }) {
+function SInfoModify({
+  modalHandler,
+  bModalHandler,
+}: {
+  bModalHandler: () => void;
+  modalHandler: () => void;
+}) {
   const [flag, setFlag] = useState(false);
+  const {
+    modal: BModal,
+    modalHandler: BModalHandler,
+    portalElement: BPotalElement,
+  } = useModal('senior-info-portal');
+  const [modalType, setModalType] = useState<ModalType>('bank');
   const [submitFlag, setSubmitFlag] = useState(false);
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
+  const bankname = useAtomValue(bankNameAtom);
   const [bank, setBank] = useState('');
   const [nickName, setNickname] = useAtom(nickname);
   const [fullNum, setPhoneNum] = useAtom(phoneNum);
@@ -143,8 +163,10 @@ function SInfoModify({ modalHandler }: { modalHandler: () => void }) {
 
   return (
     <SInfoContainer>
+      <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>계정 설정</h3>
       <SInfoImgBox>
         <RoundedImage
+          kind="big"
           imgSrc={imgUrl ? imgUrl : user_icon}
           altMsg="계정 프로필 사진"
         />
@@ -179,16 +201,24 @@ function SInfoModify({ modalHandler }: { modalHandler: () => void }) {
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
-        <InfoFieldForm $width="20.5rem" type="text" defaultValue={accNumber} />
+        <InfoFieldForm $width="95%" type="text" defaultValue={accNumber} />
       </div>
       <div id="bank-and-name-wrapper">
         <div id="bank-form-wrapper">
           <InfoFieldTitle>은행명</InfoFieldTitle>
-          <InfoFieldForm $width="11.56rem" type="text" defaultValue={bank} />
+          <ModalBtn
+            isGet={!bankname}
+            type="bankInfo"
+            btnText={bankname ? bankname : '\u00A0\u00A0\u00A0\u00A0'}
+            modalHandler={bModalHandler}
+            onClick={() => {
+              setModalType('bank');
+            }}
+          />
         </div>
         <div id="name-form-wrapper">
           <InfoFieldTitle>예금주</InfoFieldTitle>
-          <InfoFieldForm $width="8.2rem" type="text" defaultValue={accHolder} />
+          <InfoFieldForm $width="100%" type="text" defaultValue={accHolder} />
         </div>
       </div>
       {flag && (
@@ -200,7 +230,7 @@ function SInfoModify({ modalHandler }: { modalHandler: () => void }) {
         </ValidatorBox>
       )}
       <div id="submit-btn-box">
-        <ClickedBtn kind="click" btnText="저장" clickHandler={submitHandler} />
+        <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
       </div>
     </SInfoContainer>
   );

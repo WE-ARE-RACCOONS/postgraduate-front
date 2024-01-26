@@ -13,18 +13,18 @@ import {
 } from './Profile.styled';
 import { ProfileProps } from '@/types/profile/profile';
 import SingleValidator from '../Validator/SingleValidator';
+import user_icon from '../../../public/user.png';
 
 function Profile(props: ProfileProps) {
   const suggestModal = () => {
     props.modalHandler();
   };
 
-  const profile = props.profile;
   return (
     <ProfileBox>
       <ImageBox>
         <Image
-          src={profile}
+          src={props.profile || user_icon}
           alt="profile image"
           width={52}
           height={52}
@@ -38,7 +38,7 @@ function Profile(props: ProfileProps) {
             {props.userType == 'junior' ? '후배 회원' : '선배 회원'}
           </ProfileButton>
         </ProfileName>
-        {props.certifiReg !== 'APPROVE' && (
+        {props.certifiReg !== 'APPROVE' && !props.profileReg && (
           <div
             style={{
               display: 'flex',

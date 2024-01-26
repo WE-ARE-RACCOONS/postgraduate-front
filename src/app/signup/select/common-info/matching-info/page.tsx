@@ -60,10 +60,9 @@ function MatchingInfoPage() {
           }}
         >
           <CheckBox
-          type='accept'
+            type="accept"
             checked={matchingReceive}
             onChange={handleMatchingReceive}
-
           />
           <MILabel>(선택) 나에게 맞는 멘토링을 문자로 추천 받아볼래요!</MILabel>
         </div>

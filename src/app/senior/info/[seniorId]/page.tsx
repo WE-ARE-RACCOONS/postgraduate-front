@@ -4,18 +4,19 @@ import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
 import useAuth from '@/hooks/useAuth';
+import { enterSeniorId, mySeniorId } from '@/stores/senior';
 import axios from 'axios';
+import { useAtom, useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-
 function SeniorInfoPage() {
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
-
+  const mySeiorId = useAtomValue(mySeniorId).toString();
   const { getAccessToken } = useAuth();
-
+  const [findSeniorId, setFindSeniorId] = useAtom(enterSeniorId);
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState([]);
   const [lab, setLab] = useState('');
@@ -28,32 +29,43 @@ function SeniorInfoPage() {
   const [target, setTarget] = useState('');
   const [term, setTerm] = useState(40);
   const [times, setTimes] = useState([]);
-
+  const [mine, setMine] = useState('false');
   useEffect(() => {
-    const seniorId = pathArr[pathArr.length - 1];
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
-      .then((response) => {
-        const res = response.data;
+    const token = getAccessToken();
+    const headers = {
+      Authorization: `Bearer ${token}`,
+    };
 
-        if (res.code == 'SNR200') {
-          setInfo(res.data.info);
-          setKeyword(res.data.keyword);
-          setLab(res.data.lab);
-          setMajor(res.data.major);
-          setNickName(res.data.nickName);
-          setOneLiner(res.data.oneLiner);
-          setPostgradu(res.data.postgradu);
-          setProfessor(res.data.professor);
-          setProfile(res.data.profile);
-          setTarget(res.data.target);
-          setTerm(res.data.term);
-          setTimes(res.data.times);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    const seniorId = pathArr[pathArr.length - 1];
+    setFindSeniorId(seniorId);
+    if (token) {
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`, {
+          headers,
+        })
+        .then((response) => {
+          const res = response.data;
+
+          if (res.code == 'SNR200') {
+            setMine(res.data.isMine);
+            setInfo(res.data.info);
+            setKeyword(res.data.keyword);
+            setLab(res.data.lab);
+            setMajor(res.data.major);
+            setNickName(res.data.nickName);
+            setOneLiner(res.data.oneLiner);
+            setPostgradu(res.data.postgradu);
+            setProfessor(res.data.professor);
+            setProfile(res.data.profile);
+            setTarget(res.data.target);
+            setTerm(res.data.term);
+            setTimes(res.data.times);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, []);
 
   const applyHandler = () => {
@@ -64,7 +76,9 @@ function SeniorInfoPage() {
       router.push(`/mentoring-apply/${seniorId}/question`);
     }
   };
-
+  const editHandler = () => {
+    router.push(`/senior/edit-profile`);
+  };
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
@@ -93,7 +107,15 @@ function SeniorInfoPage() {
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
-      <MentoringApplyBtn onClick={applyHandler}>멘토링 신청</MentoringApplyBtn>
+      {mine ? (
+        <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
+      ) : (
+        <>
+          <MentoringApplyBtn onClick={applyHandler}>
+            멘토링 신청
+          </MentoringApplyBtn>
+        </>
+      )}
     </SeniorInfoPageContainer>
   );
 }

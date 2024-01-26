@@ -8,6 +8,8 @@ import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/Smentoring
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import SNotRegistered from '@/components/Content/SNotRegistered';
 import SuggestModal from '@/components/SuggestModal/SuggestModal';
+import AproveModal from '../AproveModal/AproveModal';
+import NotJunior from '@/components/NotJunior/NotJunior';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer onClick={props.modalHandler}>
@@ -20,6 +22,9 @@ function DimmedModal(props: DimmedModalProps) {
         )}
         {props.modalType == 'notSenior' && (
           <NotSenior modalHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'notJunior' && (
+          <NotJunior modalHandler={props.modalHandler} />
         )}
         {props.modalType == 'cancelMent' && (
           <SmentoringCancel
@@ -39,6 +44,12 @@ function DimmedModal(props: DimmedModalProps) {
         {props.modalType == 'mypageSuggest' && (
           <SuggestModal
             infoHandler={props.infoHandler && props.infoHandler}
+            modalHandler={props.modalHandler}
+          />
+        )}
+        {props.modalType == 'authAproveMsg' && (
+          <AproveModal
+            certifiReg={props.certifiReg || ''}
             modalHandler={props.modalHandler}
           />
         )}

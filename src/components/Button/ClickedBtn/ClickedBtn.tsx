@@ -1,5 +1,11 @@
 import { ClickedBtnProps } from '@/types/button/clickedBtn';
-import { BtnAdd, BtnOut, BtnModal } from './ClickedBtn.styled';
+import {
+  BtnAdd,
+  BtnOut,
+  BtnModal,
+  BtnSave,
+  BtnSaveNo,
+} from './ClickedBtn.styled';
 function ClickedBtn(props: ClickedBtnProps) {
   return (
     <div>
@@ -14,6 +20,12 @@ function ClickedBtn(props: ClickedBtnProps) {
       )}
       {props.kind == 'click' && (
         <button onClick={props.clickHandler}>{props.btnText}</button>
+      )}
+      {props.kind == 'save' && (
+        <BtnSave onClick={props.clickHandler}>{props.btnText}</BtnSave>
+      )}
+      {props.kind == 'save-non' && (
+        <BtnSaveNo onClick={props.clickHandler}>{props.btnText}</BtnSaveNo>
       )}
     </div>
   );

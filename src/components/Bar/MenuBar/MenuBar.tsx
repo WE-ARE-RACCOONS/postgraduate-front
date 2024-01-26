@@ -18,8 +18,8 @@ function MenuBar(props: MenubarProps) {
 
   useEffect(() => {
     const userT = getUserType();
-      if(userT) setUserType(userT);
- }, []);
+    if (userT) setUserType(userT);
+  }, []);
 
   const handleClick = () => {
     if (props.modalHandler) props.modalHandler();

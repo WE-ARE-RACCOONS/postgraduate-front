@@ -15,7 +15,12 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { nickname, phoneNum, socialIdAtom, userTypeAtom } from '@/stores/signup';
+import {
+  nickname,
+  phoneNum,
+  socialIdAtom,
+  userTypeAtom,
+} from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
 import { useAtomValue, useSetAtom } from 'jotai';

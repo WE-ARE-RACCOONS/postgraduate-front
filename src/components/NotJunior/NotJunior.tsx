@@ -1,10 +1,10 @@
 'use client';
-import { NotSeniorProps } from '@/types/modal/mypage';
+import { NotJuniorProps } from '@/types/modal/mypage';
 import React, { useState } from 'react';
-import x_icon from '../../../../public/x_gray.png';
+import x_icon from '../../../public/x_gray.png';
 import Image from 'next/image';
 import Router, { useRouter } from 'next/navigation';
-import { SENIOR_MODAL } from '@/constants/form/notSeniorForm';
+import { JUNIOR_MODAL } from '@/constants/form/notSeniorForm';
 import { sAbleTime } from '@/stores/senior';
 import {
   NotSeniorBoxTop,
@@ -13,19 +13,18 @@ import {
   NSMain,
   NSSub,
   NSBtn,
-} from './NotSenior.styled';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+} from './NotJunior.styled';
+import { useAtom, useAtomValue } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
-import { userType } from '@/types/user/user';
-function NotSenior(props: NotSeniorProps) {
+function NotJunior(props: NotJuniorProps) {
   const socialId = useAtomValue(socialIdAtom);
-  const [userType, setUserType] = useAtom(userTypeAtom);
+
   const xClick = () => {
     props.modalHandler();
   };
   const router = useRouter();
   const seniorJoin = () => {
-    router.push(`/signup/select/common-info/auth`);
+    router.push(`/signup/select/common-info/matching-info`);
   };
   return (
     <div>
@@ -41,11 +40,12 @@ function NotSenior(props: NotSeniorProps) {
           height={21}
           style={{
             margin: '1rem',
+            color: '#CBCFDB',
           }}
         />
       </NotSeniorBoxTop>
       <NotSeniorMid>
-        <NSMain>{SENIOR_MODAL.notSeniorUser}</NSMain>
+        <NSMain>{JUNIOR_MODAL.notJuniorUser}</NSMain>
         <div
           style={{
             marginTop: '1.5rem',
@@ -53,14 +53,14 @@ function NotSenior(props: NotSeniorProps) {
             marginLeft: '1rem',
           }}
         >
-          <NSSub>{SENIOR_MODAL.needSeniorUserJoin}</NSSub>
-          <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
+          <NSSub>{JUNIOR_MODAL.needJuniorUserJoin}</NSSub>
+          <NSSub>{JUNIOR_MODAL.recommendJoin}</NSSub>
         </div>
       </NotSeniorMid>
       <NotSeniorBottom>
-        <NSBtn onClick={seniorJoin}>대학원 선배로 가입하기</NSBtn>
+        <NSBtn onClick={seniorJoin}>대학원 후배로 가입하기</NSBtn>
       </NotSeniorBottom>
     </div>
   );
 }
-export default NotSenior;
+export default NotJunior;

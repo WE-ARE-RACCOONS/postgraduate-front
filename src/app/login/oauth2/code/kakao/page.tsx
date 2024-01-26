@@ -15,15 +15,20 @@ function KakaoPage() {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
     axios
-      .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login/KAKAO`, {
-        code: code,
-      })
+      .post(
+        window.location.hostname.includes('localhost')
+          ? `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/dev/login/KAKAO`
+          : `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login/KAKAO`,
+        {
+          code: code,
+        },
+      )
       .then((res) => {
         const response = res.data;
         if (response.code == 'AU205') {
           // router.replace(`/signup/${response.data.socialId}`);
-          router.replace('signup/select');
           setSocialId(response.data.socialId);
+          router.push('/signup/select');
           return;
         }
 

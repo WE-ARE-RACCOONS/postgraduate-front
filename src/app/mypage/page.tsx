@@ -5,7 +5,7 @@ import CustomerCenter from '../../components/Profile/ProfileStateChange/Customer
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
-import { useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import NotLmypage from '../../components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
@@ -21,6 +21,7 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import MenuBar from '@/components/Bar/MenuBar';
+import RiseUpModal from '@/components/Modal/RiseUpModal';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -29,10 +30,15 @@ function MyPage() {
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
   const [profileReg, setProfileReg] = useState(true);
-  const setSeniorId = useSetAtom(mySeniorId);
+  const [senior, setSenior] = useAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
   );
+  const {
+    modal: BModal,
+    modalHandler: BModalHandler,
+    portalElement: BPotalElement,
+  } = useModal('senior-info-portal');
   const {
     modal: seniorChangemodal,
     modalHandler: seiorChangemodalHandler,
@@ -51,8 +57,13 @@ function MyPage() {
   const {
     modal: infoModal,
     modalHandler: infoHandler,
-    portalElement: infoPortal,
+    portalElement: infoPortalElement,
   } = useModal('senior-info-modify-portal');
+  const {
+    modal: authModal,
+    modalHandler: authHandler,
+    portalElement: authPortalElement,
+  } = useModal('senior-auth-portal');
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const [userType, setUserType] = useState('');
@@ -61,8 +72,8 @@ function MyPage() {
 
   useEffect(() => {
     const userT = getUserType();
-      if(userT) setUserType(userT);
- }, []);
+    if (userT) setUserType(userT);
+  }, []);
 
   useEffect(() => {
     if (Token) {
@@ -91,7 +102,7 @@ function MyPage() {
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
             setProfileReg(res.data.data.profileRegister);
-            setSeniorId(res.data.data.seniorId);
+            setSenior(res.data.data.seniorId);
           })
           .catch(function (error) {
             console.log(error);
@@ -110,7 +121,7 @@ function MyPage() {
           });
       }
     }
-  }, [Token]);
+  }, [Token, userType]);
 
   return (
     <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
@@ -138,6 +149,9 @@ function MyPage() {
             certifiReg={certifiReg}
             profileReg={profileReg}
             modalHandler={seiorChangemodalHandler}
+            BmodalHandler={BModalHandler}
+            AmodalHandler={authHandler}
+            seniorId={senior}
           />
         </div>
       ) : (
@@ -178,13 +192,29 @@ function MyPage() {
             suggesPortalElement,
           )
         : ''}
-      {infoModal && infoPortal
+      {infoModal && infoPortalElement
         ? createPortal(
             <FullModal
               modalType="senior-info-modify"
               modalHandler={infoHandler}
             />,
-            infoPortal,
+            infoPortalElement,
+          )
+        : null}
+      {BModal && BPotalElement
+        ? createPortal(
+            <RiseUpModal modalHandler={BModalHandler} modalType={'bank'} />,
+            BPotalElement,
+          )
+        : null}
+      {authModal && authPortalElement
+        ? createPortal(
+            <DimmedModal
+              certifiReg={certifiReg}
+              modalType="authAproveMsg"
+              modalHandler={authHandler}
+            />,
+            authPortalElement,
           )
         : null}
     </div>
