@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const StyledSelectedBtn = styled.button<{ $selected: boolean }>`
   width: max-content;
   height: 2.125rem;
-  margin: 0 0.2rem;
+  margin: 0.25rem 0.5rem 0.25rem 0;
   padding: 0.3rem 0.75rem;
   font-size: 16px;
   font-family: Pretendard;
@@ -18,6 +18,8 @@ export const StyledSelectedBtn = styled.button<{ $selected: boolean }>`
     width: 1rem;
     height: 1rem;
     margin-left: 0.375rem;
+    margin-bottom: 0.2rem;
     cursor: pointer;
+    vertical-align: middle;
   }
 `;
