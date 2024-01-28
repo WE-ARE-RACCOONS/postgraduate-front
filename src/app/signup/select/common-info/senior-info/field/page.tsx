@@ -30,6 +30,7 @@ import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
+import ProgressBar from '@/components/Bar/ProgressBar';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -39,9 +40,6 @@ function SeniorInfoPage() {
   const router = useRouter();
   const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
     useAuth();
-  const currentPath = usePathname();
-  // const pathArr = currentPath.split('/');
-  // const socialId = pathArr[2];
   const socialId = useAtomValue(socialIdAtom);
 
   const phoneNumber = useAtomValue(phoneNum);
@@ -55,10 +53,12 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
+
   useEffect(() => {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
+
   const handleSubmit = () => {
     const token = getAccessToken();
     const headers = {
@@ -178,9 +178,32 @@ function SeniorInfoPage() {
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="정보입력" />
       </div>
+      <ProgressBar activeNum={2} />
       <SeniorInfoPageContainer>
-        <h3>연구 주제에 대해 알려주세요.</h3>
-        <BtnContainer>
+        <h3>소속 중인 연구실에 대해 알려주세요.</h3>
+        <SIFormTitleContainer>
+          <SIFormTitle>
+            <div className='si-form-title-text'>연구분야&nbsp;</div>
+            <div className='si-form-title-star'>*</div>
+          </SIFormTitle>
+          <SIModifyBtn>수정</SIModifyBtn>
+        </SIFormTitleContainer>
+        <SIFormBox>
+          <div className='si-form-select-text'>선택된 연구분야가 없습니다.</div>
+          <SIAddBtn>+ 추가하기</SIAddBtn>
+        </SIFormBox>
+        <SIFormTitleContainer>
+          <SIFormTitle>
+            <div className='si-form-title-text'>연구주제&nbsp;</div>
+            <div className='si-form-title-star'>*</div>
+          </SIFormTitle>
+          <SIModifyBtn>수정</SIModifyBtn>
+        </SIFormTitleContainer>
+        <SIFormBox>
+          <div className='si-form-select-text'>선택된 연구주제가 없습니다.</div>
+          <SIAddBtn>+ 추가하기</SIAddBtn>
+        </SIFormBox>
+        {/* <BtnContainer>
           <ModalBtn
             type="seniorInfo"
             btnText={sField ? sField : '연구분야*'}
@@ -205,8 +228,8 @@ function SeniorInfoPage() {
               />
             )}
           </div>
-          <button onClick={handleSubmit}>다음</button>
-        </BtnContainer>
+          <button onClick={handleSubmit}>가입완료</button>
+        </BtnContainer> */}
         {modal && portalElement
           ? createPortal(
               <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
@@ -223,6 +246,11 @@ export default SeniorInfoPage;
 const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
+  padding: 0 1rem;
+
+  h3 {
+    margin: 1.25rem 0 1rem 0;
+  }
 `;
 const SICBox = styled.div`
   margin-top: 1rem;
@@ -248,3 +276,64 @@ const BtnContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
+
+const SIFormTitleContainer = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+`
+
+const SIFormTitle = styled.div`
+  display: flex;
+  font-size: 14px;
+
+  .si-form-title-text {
+    color: #212529;
+  }
+
+  .si-form-title-star {
+    color: #00A0E1;
+    font-weight: 700;
+  }
+`
+
+const SIModifyBtn = styled.button`
+  font-size: 14px;
+  font-family: Pretendard;
+  color: #00A0E1;
+  background-color: transparent;
+  border: none;
+  line-height: 140%;
+  text-decoration-line: underline;
+  cursor: pointer;
+`
+
+const SIFormBox = styled.div`
+  width: 100%;
+  height: 3.25rem;
+  border-radius: 8px;
+  background-color: #F8F9FA;
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin-bottom: 2.625rem;
+  align-items: center;
+
+  .si-form-select-text {
+    color: #ADB5BD;
+  }
+`
+
+const SIAddBtn = styled.button`
+  width: 4.375rem;
+  height: 1.75rem;
+  font-size: 12px;
+  font-weight: 700;
+  font-family: Pretendard;
+  border-radius: 4px;
+  background-color: #495565;
+  color: #FFF;
+  border: none;
+  cursor: pointer;
+`
