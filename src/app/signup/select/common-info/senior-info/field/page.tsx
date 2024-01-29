@@ -59,34 +59,44 @@ function SeniorInfoPage() {
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
 
+  const fieldHandler = () => {
+    setModalType('field');
+    modalHandler();
+  }
+
+  const keywordHandler = () => {
+    setModalType('keyword');
+    modalHandler();
+  }
+
   const handleSubmit = () => {
     const token = getAccessToken();
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    if (!sPostGradu) {
-      setFlag(true);
-      setEmptyPart('대학원');
-      return;
-    }
+    // if (!sPostGradu) {
+    //   setFlag(true);
+    //   setEmptyPart('대학원');
+    //   return;
+    // }
 
-    if (!sMajor) {
-      setFlag(true);
-      setEmptyPart('학과');
-      return;
-    }
+    // if (!sMajor) {
+    //   setFlag(true);
+    //   setEmptyPart('학과');
+    //   return;
+    // }
 
-    if (!sLab) {
-      setFlag(true);
-      setEmptyPart('연구실명');
-      return;
-    }
+    // if (!sLab) {
+    //   setFlag(true);
+    //   setEmptyPart('연구실명');
+    //   return;
+    // }
 
-    if (!sProfessor) {
-      setFlag(true);
-      setEmptyPart('지도 교수님');
-      return;
-    }
+    // if (!sProfessor) {
+    //   setFlag(true);
+    //   setEmptyPart('지도 교수님');
+    //   return;
+    // }
 
     if (!sField) {
       setFlag(true);
@@ -186,22 +196,22 @@ function SeniorInfoPage() {
             <div className='si-form-title-text'>연구분야&nbsp;</div>
             <div className='si-form-title-star'>*</div>
           </SIFormTitle>
-          <SIModifyBtn>수정</SIModifyBtn>
+          {sField && <SIModifyBtn onClick={fieldHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox>
           <div className='si-form-select-text'>선택된 연구분야가 없습니다.</div>
-          <SIAddBtn>+ 추가하기</SIAddBtn>
+          {!sField && <SIAddBtn onClick={fieldHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         <SIFormTitleContainer>
           <SIFormTitle>
             <div className='si-form-title-text'>연구주제&nbsp;</div>
             <div className='si-form-title-star'>*</div>
           </SIFormTitle>
-          <SIModifyBtn>수정</SIModifyBtn>
+          {sKeyword && <SIModifyBtn onClick={keywordHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox>
           <div className='si-form-select-text'>선택된 연구주제가 없습니다.</div>
-          <SIAddBtn>+ 추가하기</SIAddBtn>
+          {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         {/* <BtnContainer>
           <ModalBtn
