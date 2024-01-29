@@ -73,7 +73,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
               />
             ))}
         </KeywordFormBtnContainer>
-        <KeywordInputFormBox>
+        {selected.length < 6 && (<KeywordInputFormBox>
           <input
             id='keyword-input-form' 
             type="text"
@@ -83,7 +83,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
             <button id='keyword-input-btn' onClick={addKeyword}>
               {SELECT_KEYWORD_TEXT.keywordInputBtnText}
             </button>
-        </KeywordInputFormBox>
+        </KeywordInputFormBox>)}
       </KeywordFormWrapper>
       <button id='keyword-submit-btn' onClick={handleConfirm}>확인</button>
     </KeywordFormContainer>
