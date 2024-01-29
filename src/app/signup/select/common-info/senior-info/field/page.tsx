@@ -69,6 +69,16 @@ function SeniorInfoPage() {
     modalHandler();
   }
 
+  const formatField = (fields: string) => {
+    return fields.replaceAll(',', ', ');
+  }
+
+  const formatKeyword = (keywords: string) => {
+    const splittedKeywords = keywords.split(',');
+    const resultArray = splittedKeywords.map(str => '#' + str);
+    return resultArray.join(', ');
+  }
+
   const handleSubmit = () => {
     const token = getAccessToken();
     const headers = {
@@ -199,7 +209,7 @@ function SeniorInfoPage() {
           {sField && <SIModifyBtn onClick={fieldHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sField ? true : false}>
-          <div className='si-form-select-text'>{sField ? sField : `선택된 연구분야가 없습니다.`}</div>
+          <div className='si-form-select-text'>{sField ? formatField(sField) : `선택된 연구분야가 없습니다.`}</div>
           {!sField && <SIAddBtn onClick={fieldHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         <SIFormTitleContainer>
@@ -210,7 +220,7 @@ function SeniorInfoPage() {
           {sKeyword && <SIModifyBtn onClick={keywordHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sKeyword ? true : false}>
-          <div className='si-form-select-text'>{sKeyword ? sKeyword : '선택된 연구주제가 없습니다.'}</div>
+          <div className='si-form-select-text'>{sKeyword ? formatKeyword(sKeyword) : '선택된 연구주제가 없습니다.'}</div>
           {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         <button>가입완료</button>
