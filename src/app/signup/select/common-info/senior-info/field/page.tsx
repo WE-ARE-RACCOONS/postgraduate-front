@@ -240,6 +240,7 @@ function SeniorInfoPage() {
           </div>
           <button onClick={handleSubmit}>가입완료</button>
         </BtnContainer> */}
+        <button>가입완료</button>
         {modal && portalElement
           ? createPortal(
               <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
