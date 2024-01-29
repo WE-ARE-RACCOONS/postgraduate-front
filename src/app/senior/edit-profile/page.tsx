@@ -25,6 +25,8 @@ import {
   sRecommendedFor,
   sSingleIntroduce,
   selectedFieldAtom,
+  selectedKeywordAtom,
+  totalKeywordAtom,
 } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
@@ -50,15 +52,28 @@ function EditProfilePage() {
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField, setSfield] = useAtom(sFieldAtom);
   const setSelectedField = useSetAtom(selectedFieldAtom);
+  const setTotalKeyword = useSetAtom(totalKeywordAtom);
+  const setSelectedKeyword = useSetAtom(selectedKeywordAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
   const seniorId = useAtomValue(mySeniorId);
   const [timeData, setTimeData] = useAtom(sAbleTime);
   const router = useRouter();
+
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
   };
+
+  const formatField = (fields: string) => {
+    return fields.replaceAll(',', ', ');
+  }
+
+  const formatKeyword = (keywords: string) => {
+    const splittedKeywords = keywords.split(',');
+    const resultArray = splittedKeywords.map(str => '#' + str);
+    return resultArray.join(', ');
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,8 +99,10 @@ function EditProfilePage() {
           const profileData = profileResponse.data.data || {};
           setTimeData(timesData);
           setSelectedField(profileData.field);
-          setSfield(profileData.field.join(', '));
-          setSkeyword(profileData.keyword.join(', '));
+          setTotalKeyword(profileData.keyword);
+          setSelectedKeyword(profileData.keyword);
+          setSfield(profileData.field.join(','));
+          setSkeyword(profileData.keyword.join(','));
           setChatLink(profileData.chatLink);
           setMultiIntro(profileData.info);
           setSingleIntro(profileData.oneLiner);
@@ -99,6 +116,7 @@ function EditProfilePage() {
 
     fetchData();
   }, [seniorId]);
+
   const handleClick = () => {
     const token = getAccessToken();
     const areConditionsMet =
@@ -143,6 +161,7 @@ function EditProfilePage() {
     }
     setFlag(true);
   };
+
   return (
     <div>
       <BackHeader headerText="프로필 정보" />
@@ -176,7 +195,7 @@ function EditProfilePage() {
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
-              btnText={sField ? sField : '연구분야*'}
+              btnText={sField ? formatField(sField) : '연구분야*'}
               modalHandler={modalHandler}
               onClick={() => {
                 setModalType('field');
@@ -198,7 +217,7 @@ function EditProfilePage() {
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
-              btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
+              btnText={sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'}
               modalHandler={modalHandler}
               onClick={() => {
                 setModalType('keyword');
