@@ -198,8 +198,8 @@ function SeniorInfoPage() {
           </SIFormTitle>
           {sField && <SIModifyBtn onClick={fieldHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
-        <SIFormBox>
-          <div className='si-form-select-text'>선택된 연구분야가 없습니다.</div>
+        <SIFormBox $isNotEmpty={sField ? true : false}>
+          <div className='si-form-select-text'>{sField ? sField : `선택된 연구분야가 없습니다.`}</div>
           {!sField && <SIAddBtn onClick={fieldHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         <SIFormTitleContainer>
@@ -209,7 +209,7 @@ function SeniorInfoPage() {
           </SIFormTitle>
           {sKeyword && <SIModifyBtn onClick={keywordHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
-        <SIFormBox>
+        <SIFormBox $isNotEmpty={sKeyword ? true : false}>
           <div className='si-form-select-text'>선택된 연구주제가 없습니다.</div>
           {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
@@ -319,7 +319,7 @@ const SIModifyBtn = styled.button`
   cursor: pointer;
 `
 
-const SIFormBox = styled.div`
+const SIFormBox = styled.div<{ $isNotEmpty: boolean }>`
   width: 100%;
   height: 3.25rem;
   border-radius: 8px;
@@ -331,7 +331,7 @@ const SIFormBox = styled.div`
   align-items: center;
 
   .si-form-select-text {
-    color: #ADB5BD;
+    color: ${props => props.$isNotEmpty ? '#495565' : '#ADB5BD'}
   }
 `
 
