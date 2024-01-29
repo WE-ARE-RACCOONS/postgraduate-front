@@ -36,6 +36,7 @@ function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
   const [emptyPart, setEmptyPart] = useState('');
   const [flag, setFlag] = useState(false);
+  const [ableSubmit, setAbleSubmit] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
   const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
@@ -55,9 +56,13 @@ function SeniorInfoPage() {
   const sKeyword = useAtomValue(sKeywordAtom);
 
   useEffect(() => {
-    if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
+    if (sField && sKeyword) {
       setFlag(false);
-  }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
+      setAbleSubmit(true);
+    } else {
+      setAbleSubmit(false);
+    }
+  }, [sField, sKeyword]);
 
   const fieldHandler = () => {
     setModalType('field');
@@ -84,29 +89,6 @@ function SeniorInfoPage() {
     const headers = {
       Authorization: `Bearer ${token}`,
     };
-    // if (!sPostGradu) {
-    //   setFlag(true);
-    //   setEmptyPart('대학원');
-    //   return;
-    // }
-
-    // if (!sMajor) {
-    //   setFlag(true);
-    //   setEmptyPart('학과');
-    //   return;
-    // }
-
-    // if (!sLab) {
-    //   setFlag(true);
-    //   setEmptyPart('연구실명');
-    //   return;
-    // }
-
-    // if (!sProfessor) {
-    //   setFlag(true);
-    //   setEmptyPart('지도 교수님');
-    //   return;
-    // }
 
     if (!sField) {
       setFlag(true);
@@ -157,7 +139,7 @@ function SeniorInfoPage() {
         });
     }
 
-    if (socialId && phoneNumber && nickName && certification) {
+    if (socialId && phoneNumber && nickName && certification && sMajor && sPostGradu && sProfessor && sLab) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
           socialId: socialId,
@@ -223,7 +205,7 @@ function SeniorInfoPage() {
           <div className='si-form-select-text'>{sKeyword ? formatKeyword(sKeyword) : '선택된 연구주제가 없습니다.'}</div>
           {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
-        <button>가입완료</button>
+        <SignupSubmitBtn $ableSubmit={ableSubmit} id='signup-submit-btn'>가입완료</SignupSubmitBtn>
         {modal && portalElement
           ? createPortal(
               <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
@@ -241,6 +223,7 @@ const SeniorInfoPageContainer = styled.div`
   width: inherit;
   height: 100%;
   padding: 0 1rem;
+  position: relative;
 
   h3 {
     margin: 1.25rem 0 1rem 0;
@@ -330,4 +313,21 @@ const SIAddBtn = styled.button`
   color: #FFF;
   border: none;
   cursor: pointer;
+`
+
+const SignupSubmitBtn = styled.button<{ $ableSubmit: boolean }>`
+  width: 95%;
+  height: 3.375rem;
+  border-radius: 12px;
+  border: none;
+  background-color: ${props => props.$ableSubmit ? '#2FC4B2' : '#ADB5BD'};
+  color: #FFF;
+  font-size: 18px;
+  font-family: Pretendard;
+  font-weight: 700;
+  cursor: ${props => props.$ableSubmit ? 'pointer' : 'default'};
+  position: absolute;
+  top: 27rem;
+  left: 50%;
+  transform: translateX(-50%);
 `
