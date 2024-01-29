@@ -20,6 +20,7 @@ export const SearchModalInput = styled.div`
   height: 8rem;
   top: 0;
   left: 50%;
+   z-index: 10;
   transform: translate(-50%, -50%);
   background-color: #fff;
   position: absolute;

@@ -6,7 +6,7 @@ import search from '../../../../public/search.png';
 import HomeSearchForm from '@/components/SingleForm/HomeSearchForm/HomeSearchForm';
 export default function SearchModal(props: SearchModalProps) {
   const ModalClick = () => {
-    //  props.modalHandler();
+      //props.modalHandler();
   };
   return (
     <SearchModalBgBox onClick={ModalClick}>
