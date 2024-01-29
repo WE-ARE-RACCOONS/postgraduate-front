@@ -210,36 +210,9 @@ function SeniorInfoPage() {
           {sKeyword && <SIModifyBtn onClick={keywordHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sKeyword ? true : false}>
-          <div className='si-form-select-text'>선택된 연구주제가 없습니다.</div>
+          <div className='si-form-select-text'>{sKeyword ? sKeyword : '선택된 연구주제가 없습니다.'}</div>
           {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
-        {/* <BtnContainer>
-          <ModalBtn
-            type="seniorInfo"
-            btnText={sField ? sField : '연구분야*'}
-            modalHandler={modalHandler}
-            onClick={() => {
-              setModalType('field');
-            }}
-          />
-          <ModalBtn
-            type="seniorInfo"
-            btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
-            modalHandler={modalHandler}
-            onClick={() => {
-              setModalType('keyword');
-            }}
-          />
-          <div style={{ marginTop: '0.5rem' }}>
-            {flag && (
-              <SingleValidator
-                msg={`${emptyPart}을 입력해주세요`}
-                textColor="#FF3347"
-              />
-            )}
-          </div>
-          <button onClick={handleSubmit}>가입완료</button>
-        </BtnContainer> */}
         <button>가입완료</button>
         {modal && portalElement
           ? createPortal(

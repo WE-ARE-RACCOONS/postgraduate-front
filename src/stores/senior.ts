@@ -17,6 +17,9 @@ export const totalFieldAtom = atom<Array<string>>([
 ]);
 export const selectedFieldAtom = atom<Array<string>>([]);
 
+export const totalKeywordAtom = atom<Array<string>>([]);
+export const selectedKeywordAtom = atom<Array<string>>([]);
+
 export const sSingleIntroduce = atom<string>('');
 export const sMultiIntroduce = atom<string>('');
 export const sRecommendedFor = atom<string>('');
