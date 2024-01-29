@@ -9,7 +9,6 @@ import { SELECT_KEYWORD_TEXT } from '@/constants/keyword/keyword';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 
 function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
-  // const inputKeyword = useAtomValue(sKeywordAtom);
   const [flag, setFlag] = useState(false);
   const [totalBtns, setTotalBtns] = useAtom(totalKeywordAtom);
   const [selected, setSelected] = useAtom(selectedKeywordAtom);
@@ -34,6 +33,14 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
 
     }
   }
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+
+    if (newValue.length <= 10) {
+      setUserInputKeyword(newValue);
+    }
+  };
   
   useEffect(() => {
     if(selected.length > 0) {
@@ -70,8 +77,9 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           <input
             id='keyword-input-form' 
             type="text"
+            value={userInputKeyword || ""}
             placeholder={SELECT_KEYWORD_TEXT.keywordInputDirection}
-            onChange={(e) => setUserInputKeyword(e.currentTarget.value)} />
+            onChange={handleInputChange} />
             <button id='keyword-input-btn' onClick={addKeyword}>
               {SELECT_KEYWORD_TEXT.keywordInputBtnText}
             </button>

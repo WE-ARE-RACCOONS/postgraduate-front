@@ -205,7 +205,7 @@ function SeniorInfoPage() {
           <div className='si-form-select-text'>{sKeyword ? formatKeyword(sKeyword) : '선택된 연구주제가 없습니다.'}</div>
           {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
-        <SignupSubmitBtn $ableSubmit={ableSubmit} id='signup-submit-btn'>가입완료</SignupSubmitBtn>
+        <SignupSubmitBtn $ableSubmit={ableSubmit} id='signup-submit-btn' onClick={handleSubmit}>가입완료</SignupSubmitBtn>
         {modal && portalElement
           ? createPortal(
               <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
