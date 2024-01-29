@@ -27,34 +27,34 @@ export const SelectFormContainer = styled.div`
       justify-content: space-between;
 
       #field-star {
-        color: #00A0E1;
+        color: #00a0e1;
         font-weight: 700;
       }
     }
 
     #field-alert {
-      color: #FF5757;
+      color: #ff5757;
     }
   }
 
   #select-field-direction {
     width: 12.5rem;
     height: 2.5rem;
-    color: #868E96;
+    color: #868e96;
     font-size: 14px;
     flex-wrap: pre;
     line-height: 140%;
     letter-spacing: -0.5px;
     margin-bottom: 0.125rem;
   }
-  
+
   #field-submit-btn {
     width: 100%;
     height: 3.313rem;
     border: none;
     border-radius: 12px;
-    background-color: #2FC4B2;
-    color: #FFF;
+    background-color: #2fc4b2;
+    color: #fff;
     font-size: 18px;
     font-weight: 700;
     position: absolute;
@@ -73,14 +73,14 @@ export const SelectFormWrapper = styled.div`
   height: 82%;
   overflow-x: hidden;
   overflow-y: scroll;
-`
+`;
 
 export const FieldInputFormBox = styled.div`
   width: 100%;
   height: 3.19rem;
   border-radius: 8px;
-  border: 1px solid #C2CEDE;
-  background: #FFF;
+  border: 1px solid #c2cede;
+  background: #fff;
   margin-top: 0.625rem;
   padding: 1rem 0.5rem;
   display: flex;
@@ -94,7 +94,7 @@ export const FieldInputFormBox = styled.div`
   #field-input-form::placeholder {
     font-family: Pretendard;
     font-size: 16px;
-    color: #ADB5BD;
+    color: #adb5bd;
   }
 
   #field-input-form:focus {
@@ -105,10 +105,10 @@ export const FieldInputFormBox = styled.div`
     width: 3.5rem;
     border: none;
     background-color: transparent;
-    color: #2FC4B2;
+    color: #2fc4b2;
     font-size: 16px;
     font-weight: 700;
     font-family: Pretendard;
     cursor: pointer;
   }
-`
+`;

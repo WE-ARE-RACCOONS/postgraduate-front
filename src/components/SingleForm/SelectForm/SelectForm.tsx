@@ -39,13 +39,15 @@ function SelectForm(props: SelectFormProps) {
     if (userInputField) {
       setTotalBtns([...totalBtns, userInputField]);
       setSelected([...selected, userInputField]);
-      const inputEl = document.getElementById('field-input-form') as HTMLInputElement;
-      if(inputEl) inputEl.value = '';
+      const inputEl = document.getElementById(
+        'field-input-form',
+      ) as HTMLInputElement;
+      if (inputEl) inputEl.value = '';
     }
   };
 
   useEffect(() => {
-    if(selected.length > 0) {
+    if (selected.length > 0) {
       setFlag(false);
     }
   }, [selected]);
@@ -53,17 +55,17 @@ function SelectForm(props: SelectFormProps) {
   return (
     <SelectFormContainer>
       <SelectFormWrapper>
-        <h3 id='select-field-title'>{SELECT_FIELD_TEXT.fieldTitle}</h3>
-        <div id='select-field-subtitle'>
-          <div id='select-field-subtitle-text'>
-            <div id='field-text'>{SELECT_FIELD_TEXT.fieldText}</div>
-            <div id='field-star'>*</div>
+        <h3 id="select-field-title">{SELECT_FIELD_TEXT.fieldTitle}</h3>
+        <div id="select-field-subtitle">
+          <div id="select-field-subtitle-text">
+            <div id="field-text">{SELECT_FIELD_TEXT.fieldText}</div>
+            <div id="field-star">*</div>
           </div>
-          {flag && (
-            <div id='field-alert'>{SELECT_FIELD_TEXT.fieldAlert}</div>
-          )}
+          {flag && <div id="field-alert">{SELECT_FIELD_TEXT.fieldAlert}</div>}
         </div>
-        <div id='select-field-direction'>{SELECT_FIELD_TEXT.fieldDirection}</div>
+        <div id="select-field-direction">
+          {SELECT_FIELD_TEXT.fieldDirection}
+        </div>
         <SelectFormBtnContainer>
           {totalBtns &&
             totalBtns.map((el, idx) => (
@@ -77,17 +79,19 @@ function SelectForm(props: SelectFormProps) {
         </SelectFormBtnContainer>
         <FieldInputFormBox>
           <input
-            id='field-input-form'
-            type="text" 
-            placeholder={SELECT_FIELD_TEXT.fieldInputDirection} 
-            onChange={(e) => setUserInputField(e.currentTarget.value)} 
+            id="field-input-form"
+            type="text"
+            placeholder={SELECT_FIELD_TEXT.fieldInputDirection}
+            onChange={(e) => setUserInputField(e.currentTarget.value)}
           />
-          <button id='field-input-btn' onClick={handleAddOtherField}>
+          <button id="field-input-btn" onClick={handleAddOtherField}>
             {SELECT_FIELD_TEXT.fieldInputBtnText}
           </button>
         </FieldInputFormBox>
       </SelectFormWrapper>
-      <button id='field-submit-btn' onClick={handleConfirm}>확인</button>
+      <button id="field-submit-btn" onClick={handleConfirm}>
+        확인
+      </button>
     </SelectFormContainer>
   );
 }

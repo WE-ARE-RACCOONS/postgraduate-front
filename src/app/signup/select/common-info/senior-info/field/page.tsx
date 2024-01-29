@@ -67,22 +67,22 @@ function SeniorInfoPage() {
   const fieldHandler = () => {
     setModalType('field');
     modalHandler();
-  }
+  };
 
   const keywordHandler = () => {
     setModalType('keyword');
     modalHandler();
-  }
+  };
 
   const formatField = (fields: string) => {
     return fields.replaceAll(',', ', ');
-  }
+  };
 
   const formatKeyword = (keywords: string) => {
     const splittedKeywords = keywords.split(',');
-    const resultArray = splittedKeywords.map(str => '#' + str);
+    const resultArray = splittedKeywords.map((str) => '#' + str);
     return resultArray.join(', ');
-  }
+  };
 
   const handleSubmit = () => {
     const token = getAccessToken();
@@ -139,7 +139,16 @@ function SeniorInfoPage() {
         });
     }
 
-    if (socialId && phoneNumber && nickName && certification && sMajor && sPostGradu && sProfessor && sLab) {
+    if (
+      socialId &&
+      phoneNumber &&
+      nickName &&
+      certification &&
+      sMajor &&
+      sPostGradu &&
+      sProfessor &&
+      sLab
+    ) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
           socialId: socialId,
@@ -185,27 +194,39 @@ function SeniorInfoPage() {
         <h3>소속 중인 연구실에 대해 알려주세요.</h3>
         <SIFormTitleContainer>
           <SIFormTitle>
-            <div className='si-form-title-text'>연구분야&nbsp;</div>
-            <div className='si-form-title-star'>*</div>
+            <div className="si-form-title-text">연구분야&nbsp;</div>
+            <div className="si-form-title-star">*</div>
           </SIFormTitle>
           {sField && <SIModifyBtn onClick={fieldHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sField ? true : false}>
-          <div className='si-form-select-text'>{sField ? formatField(sField) : `선택된 연구분야가 없습니다.`}</div>
+          <div className="si-form-select-text">
+            {sField ? formatField(sField) : `선택된 연구분야가 없습니다.`}
+          </div>
           {!sField && <SIAddBtn onClick={fieldHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         <SIFormTitleContainer>
           <SIFormTitle>
-            <div className='si-form-title-text'>연구주제&nbsp;</div>
-            <div className='si-form-title-star'>*</div>
+            <div className="si-form-title-text">연구주제&nbsp;</div>
+            <div className="si-form-title-star">*</div>
           </SIFormTitle>
           {sKeyword && <SIModifyBtn onClick={keywordHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sKeyword ? true : false}>
-          <div className='si-form-select-text'>{sKeyword ? formatKeyword(sKeyword) : '선택된 연구주제가 없습니다.'}</div>
-          {!sKeyword && <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>}
+          <div className="si-form-select-text">
+            {sKeyword ? formatKeyword(sKeyword) : '선택된 연구주제가 없습니다.'}
+          </div>
+          {!sKeyword && (
+            <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>
+          )}
         </SIFormBox>
-        <SignupSubmitBtn $ableSubmit={ableSubmit} id='signup-submit-btn' onClick={handleSubmit}>가입완료</SignupSubmitBtn>
+        <SignupSubmitBtn
+          $ableSubmit={ableSubmit}
+          id="signup-submit-btn"
+          onClick={handleSubmit}
+        >
+          가입완료
+        </SignupSubmitBtn>
         {modal && portalElement
           ? createPortal(
               <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
@@ -259,7 +280,7 @@ const SIFormTitleContainer = styled.div`
   display: flex;
   justify-content: space-between;
   margin-bottom: 1rem;
-`
+`;
 
 const SIFormTitle = styled.div`
   display: flex;
@@ -270,27 +291,27 @@ const SIFormTitle = styled.div`
   }
 
   .si-form-title-star {
-    color: #00A0E1;
+    color: #00a0e1;
     font-weight: 700;
   }
-`
+`;
 
 const SIModifyBtn = styled.button`
   font-size: 14px;
   font-family: Pretendard;
-  color: #00A0E1;
+  color: #00a0e1;
   background-color: transparent;
   border: none;
   line-height: 140%;
   text-decoration-line: underline;
   cursor: pointer;
-`
+`;
 
 const SIFormBox = styled.div<{ $isNotEmpty: boolean }>`
   width: 100%;
   height: 3.25rem;
   border-radius: 8px;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
@@ -298,9 +319,9 @@ const SIFormBox = styled.div<{ $isNotEmpty: boolean }>`
   align-items: center;
 
   .si-form-select-text {
-    color: ${props => props.$isNotEmpty ? '#495565' : '#ADB5BD'}
+    color: ${(props) => (props.$isNotEmpty ? '#495565' : '#ADB5BD')};
   }
-`
+`;
 
 const SIAddBtn = styled.button`
   width: 4.375rem;
@@ -310,24 +331,24 @@ const SIAddBtn = styled.button`
   font-family: Pretendard;
   border-radius: 4px;
   background-color: #495565;
-  color: #FFF;
+  color: #fff;
   border: none;
   cursor: pointer;
-`
+`;
 
 const SignupSubmitBtn = styled.button<{ $ableSubmit: boolean }>`
   width: 95%;
   height: 3.375rem;
   border-radius: 12px;
   border: none;
-  background-color: ${props => props.$ableSubmit ? '#2FC4B2' : '#ADB5BD'};
-  color: #FFF;
+  background-color: ${(props) => (props.$ableSubmit ? '#2FC4B2' : '#ADB5BD')};
+  color: #fff;
   font-size: 18px;
   font-family: Pretendard;
   font-weight: 700;
-  cursor: ${props => props.$ableSubmit ? 'pointer' : 'default'};
+  cursor: ${(props) => (props.$ableSubmit ? 'pointer' : 'default')};
   position: absolute;
   top: 27rem;
   left: 50%;
   transform: translateX(-50%);
-`
+`;

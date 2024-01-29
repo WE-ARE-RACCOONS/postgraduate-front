@@ -59,7 +59,7 @@ export const SInfoBtn = styled.button<SInfoBtnProps>`
   flex-shrink: 0;
   border-radius: 0.5rem;
   border: 1px solid #c2cede;
-  background: #F8F9FA;
+  background: #f8f9fa;
   padding: 0.8rem;
   display: flex;
   justify-content: space-between;

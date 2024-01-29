@@ -67,13 +67,13 @@ function EditProfilePage() {
 
   const formatField = (fields: string) => {
     return fields.replaceAll(',', ', ');
-  }
+  };
 
   const formatKeyword = (keywords: string) => {
     const splittedKeywords = keywords.split(',');
-    const resultArray = splittedKeywords.map(str => '#' + str);
+    const resultArray = splittedKeywords.map((str) => '#' + str);
     return resultArray.join(', ');
-  }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -170,7 +170,7 @@ function EditProfilePage() {
         <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
           <BtnBox>
             <MBtnFont>
-              <div className='title-with-modify'>
+              <div className="title-with-modify">
                 연구실명&nbsp;<div id="font-color">*</div>
               </div>
               {flag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
@@ -182,16 +182,21 @@ function EditProfilePage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              <div className='title-with-modify'>
+              <div className="title-with-modify">
                 연구분야&nbsp;<div id="font-color">*</div>
                 {flag && (
                   <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
                 )}
               </div>
-              <button className='modify-btn' onClick={() => {
-                setModalType('field');
-                modalHandler();
-              }}>수정</button>
+              <button
+                className="modify-btn"
+                onClick={() => {
+                  setModalType('field');
+                  modalHandler();
+                }}
+              >
+                수정
+              </button>
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -204,16 +209,21 @@ function EditProfilePage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              <div className='title-with-modify'>
+              <div className="title-with-modify">
                 연구주제&nbsp;<div id="font-color">*</div>
                 {flag && (
                   <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
                 )}
               </div>
-              <button className='modify-btn' onClick={() => {
-                setModalType('keyword');
-                modalHandler();
-              }}>수정</button>
+              <button
+                className="modify-btn"
+                onClick={() => {
+                  setModalType('keyword');
+                  modalHandler();
+                }}
+              >
+                수정
+              </button>
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
@@ -491,9 +501,9 @@ const MBtnFont = styled.div`
   }
   .modify-btn {
     border: 0;
-    color: #00A0E1;
+    color: #00a0e1;
     font-family: Pretendard;
-    border-bottom: 1px solid #00A0E1;
+    border-bottom: 1px solid #00a0e1;
     background-color: transparent;
     font-size: 14px;
     cursor: pointer;
