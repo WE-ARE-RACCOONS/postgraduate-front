@@ -24,6 +24,7 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import { socialIdAtom } from '@/stores/signup';
+import ProgressBar from '@/components/Bar/ProgressBar';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -59,8 +60,9 @@ function SeniorInfoPage() {
 
   return (
     <>
-      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+      <div>
         <BackHeader headerText="정보입력" />
+        <ProgressBar activeNum={1} />
       </div>
       <SeniorInfoPageContainer>
         <SICBox>
@@ -108,7 +110,7 @@ function SeniorInfoPage() {
             )}
           </div>
         </BtnContainer>
-        <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+        {sPostGradu && sMajor ? <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />:<NextBtn kind="route-non" btnText="다음" />}
         {modal && portalElement
           ? createPortal(
               <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,

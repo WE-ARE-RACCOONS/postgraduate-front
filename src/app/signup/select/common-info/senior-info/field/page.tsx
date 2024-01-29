@@ -30,6 +30,7 @@ import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
+import ProgressBar from '@/components/Bar/ProgressBar';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -175,8 +176,9 @@ function SeniorInfoPage() {
 
   return (
     <>
-      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+      <div>
         <BackHeader headerText="정보입력" />
+        <ProgressBar activeNum={1} />
       </div>
       <SeniorInfoPageContainer>
         <h3>연구 주제에 대해 알려주세요.</h3>
