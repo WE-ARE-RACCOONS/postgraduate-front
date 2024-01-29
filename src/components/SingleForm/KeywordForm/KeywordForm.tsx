@@ -28,9 +28,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
     if(userInputKeyword) {
       setTotalBtns([...totalBtns, userInputKeyword]);
       setSelected([...selected, userInputKeyword]);
-      const inputEl = document.getElementById('keyword-input-form') as HTMLInputElement;
-      if(inputEl) inputEl.value = '';
-
+      setUserInputKeyword('');
     }
   }
 
