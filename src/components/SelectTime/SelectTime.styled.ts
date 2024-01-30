@@ -1,9 +1,21 @@
 import styled from 'styled-components';
 
-export const SelectTimeContainer = styled.div`
+export const SelectTimeWrapper = styled.div`
+  width: 100%;
+  height: max-content;
+`
+
+export const SelectTimeValidator = styled.div`
+  color: #F16464;
+  font-size: 12px;
+  margin: 0.375rem 0 1rem 0;
+`
+
+export const SelectTimeContainer = styled.div<{ $alertFlag: boolean }>`
   width: 100%;
   height: 3.19rem;
   border-radius: 0.5rem;
+  border: ${props => props.$alertFlag ? '1px solid #F16464' : 'none'};
   background-color: #f8f9fa;
   cursor: pointer;
   position: relative;

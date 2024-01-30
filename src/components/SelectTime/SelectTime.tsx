@@ -3,6 +3,8 @@ import {
   SelectTimeContainer,
   SelectTimeContent,
   SelectTimeText,
+  SelectTimeValidator,
+  SelectTimeWrapper,
 } from './SelectTime.styled';
 import Image from 'next/image';
 import down_arrow from '../../../public/arrow-down.png';
@@ -14,6 +16,8 @@ import { useEffect, useState } from 'react';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 
 function SelectTime(props: SelectTimeProps) {
+  const targetAtomValue = useAtomValue(props.targetAtom);
+  const [thisFlag, setThisFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal(
     'select-date-calendar',
   );
@@ -44,23 +48,38 @@ function SelectTime(props: SelectTimeProps) {
     }
   }, [selectedTime]);
 
+  useEffect(() => {
+    if(props.checkTrigger && !targetAtomValue) {
+      setThisFlag(true);
+    } else setThisFlag(false);
+  }, [props.checkTrigger]);
+
+  useEffect(() => {
+    if(targetAtomValue) setThisFlag(false);
+  }, [targetAtomValue]);
+
   return (
-    <SelectTimeContainer onClick={modalHandler}>
-      <SelectTimeContent>
-        <SelectTimeText className="disabled">{inputValue}</SelectTimeText>
-        <Image id="down-arrow" src={down_arrow} alt="아래 화살표" />
-      </SelectTimeContent>
-      {modal && portalElement
-        ? createPortal(
-            <FullModal
-              modalType="select-date-calendar"
-              modalHandler={modalHandler}
-              targetAtom={props.targetAtom}
-            />,
-            portalElement,
-          )
-        : null}
-    </SelectTimeContainer>
+    <SelectTimeWrapper>
+      <SelectTimeContainer onClick={modalHandler} $alertFlag={thisFlag}>
+        <SelectTimeContent>
+          <SelectTimeText className="disabled">{inputValue}</SelectTimeText>
+          <Image id="down-arrow" src={down_arrow} alt="아래 화살표" />
+        </SelectTimeContent>
+        {modal && portalElement
+          ? createPortal(
+              <FullModal
+                modalType="select-date-calendar"
+                modalHandler={modalHandler}
+                targetAtom={props.targetAtom}
+              />,
+              portalElement,
+            )
+          : null}
+      </SelectTimeContainer>
+      {thisFlag && (
+        <SelectTimeValidator>일정이 선택되지 않았습니다.</SelectTimeValidator>
+      )}
+    </SelectTimeWrapper>
   );
 }
 

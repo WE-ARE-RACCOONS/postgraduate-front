@@ -21,6 +21,7 @@ import styled from 'styled-components';
 function MentoringApplySchedulePage() {
   const [sNickname, setSNickname] = useState('');
   const [timeArr, setTimeArr] = useAtom(sAbleMentoringTimeArr);
+  const [clickTrigger, setClickTrigger] = useState(false);
   const firstTime = useAtomValue(firAbleTimeAtom);
   const secondTime = useAtomValue(secAbleTimeAtom);
   const thirdTime = useAtomValue(thiAbleTimeAtom);
@@ -61,6 +62,7 @@ function MentoringApplySchedulePage() {
   }, [firstTime, secondTime, thirdTime]);
 
   const nextBtnClickHandler = () => {
+    setClickTrigger(!clickTrigger);
     if (firstTime && secondTime && thirdTime) {
       router.push(`/mentoring-apply/${seniorId}/pay`);
     }
@@ -89,9 +91,9 @@ function MentoringApplySchedulePage() {
         <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
       </div>
       <div id="select-time-container">
-        <SelectTime numStr="첫" targetAtom={firAbleTimeAtom} />
-        <SelectTime numStr="두" targetAtom={secAbleTimeAtom} />
-        <SelectTime numStr="세" targetAtom={thiAbleTimeAtom} />
+        <SelectTime numStr="첫" targetAtom={firAbleTimeAtom} checkTrigger={clickTrigger} />
+        <SelectTime numStr="두" targetAtom={secAbleTimeAtom} checkTrigger={clickTrigger} />
+        <SelectTime numStr="세" targetAtom={thiAbleTimeAtom} checkTrigger={clickTrigger} />
       </div>
       <MASBtnContainer $timeArr={timeArr}>
         <button
@@ -219,13 +221,13 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
     font-family: Pretendard;
     border-radius: 12px;
     border: none;
-    cursor: pointer;
   }
 
   .prev-btn {
     width: 34%;
     height: 3.375rem;
     background-color: #adb5bd;
+    cursor: pointer;
   }
 
   .next-btn {
@@ -236,6 +238,7 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
 
   .active {
     background-color: #2fc4b2;
+    cursor: pointer;
   }
 `;
 
