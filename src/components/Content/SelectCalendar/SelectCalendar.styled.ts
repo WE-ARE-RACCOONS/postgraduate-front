@@ -56,7 +56,7 @@ export const SelectCalendarContainer = styled.div`
         }
 
         abbr[title='토요일'] {
-          color: #00a0e1;
+          color: #ff5757;
         }
 
         abbr[title='일요일'] {
