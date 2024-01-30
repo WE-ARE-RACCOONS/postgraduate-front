@@ -24,11 +24,14 @@ import {
   sMultiIntroduce,
   sRecommendedFor,
   sSingleIntroduce,
+  selectedFieldAtom,
+  selectedKeywordAtom,
+  totalKeywordAtom,
 } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
@@ -48,14 +51,28 @@ function EditProfilePage() {
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField, setSfield] = useAtom(sFieldAtom);
+  const setSelectedField = useSetAtom(selectedFieldAtom);
+  const setTotalKeyword = useSetAtom(totalKeywordAtom);
+  const setSelectedKeyword = useSetAtom(selectedKeywordAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
   // const[time,setTime] = useState<Array<TimeType>>([])
   const seniorId = useAtomValue(mySeniorId);
   const [timeData, setTimeData] = useAtom(sAbleTime);
   const router = useRouter();
+
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
+  };
+
+  const formatField = (fields: string) => {
+    return fields.replaceAll(',', ', ');
+  };
+
+  const formatKeyword = (keywords: string) => {
+    const splittedKeywords = keywords.split(',');
+    const resultArray = splittedKeywords.map((str) => '#' + str);
+    return resultArray.join(', ');
   };
 
   useEffect(() => {
@@ -80,10 +97,12 @@ function EditProfilePage() {
 
           const timesData = timesResponse.data.data.times || [];
           const profileData = profileResponse.data.data || {};
-          console.log(profileData);
           setTimeData(timesData);
-          setSfield(profileData.field.join(', '));
-          setSkeyword(profileData.keyword.join(', '));
+          setSelectedField(profileData.field);
+          setTotalKeyword(profileData.keyword);
+          setSelectedKeyword(profileData.keyword);
+          setSfield(profileData.field.join(','));
+          setSkeyword(profileData.keyword.join(','));
           setChatLink(profileData.chatLink);
           setMultiIntro(profileData.info);
           setSingleIntro(profileData.oneLiner);
@@ -97,6 +116,7 @@ function EditProfilePage() {
 
     fetchData();
   }, [seniorId]);
+
   const handleClick = () => {
     const token = getAccessToken();
     const areConditionsMet =
@@ -141,6 +161,7 @@ function EditProfilePage() {
     }
     setFlag(true);
   };
+
   return (
     <div>
       <BackHeader headerText="프로필 정보" />
@@ -149,7 +170,9 @@ function EditProfilePage() {
         <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
           <BtnBox>
             <MBtnFont>
-              연구실명&nbsp;<div id="font-color">*</div>
+              <div className="title-with-modify">
+                연구실명&nbsp;<div id="font-color">*</div>
+              </div>
               {flag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
             </MBtnFont>
             <TextForm
@@ -159,14 +182,25 @@ function EditProfilePage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              연구분야&nbsp;<div id="font-color">*</div>
-              {flag && (
-                <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
-              )}
+              <div className="title-with-modify">
+                연구분야&nbsp;<div id="font-color">*</div>
+                {flag && (
+                  <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
+                )}
+              </div>
+              <button
+                className="modify-btn"
+                onClick={() => {
+                  setModalType('field');
+                  modalHandler();
+                }}
+              >
+                수정
+              </button>
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
-              btnText={sField ? sField : '연구분야*'}
+              btnText={sField ? formatField(sField) : '연구분야*'}
               modalHandler={modalHandler}
               onClick={() => {
                 setModalType('field');
@@ -175,14 +209,25 @@ function EditProfilePage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              연구주제&nbsp;<div id="font-color">*</div>
-              {flag && (
-                <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
-              )}
+              <div className="title-with-modify">
+                연구주제&nbsp;<div id="font-color">*</div>
+                {flag && (
+                  <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
+                )}
+              </div>
+              <button
+                className="modify-btn"
+                onClick={() => {
+                  setModalType('keyword');
+                  modalHandler();
+                }}
+              >
+                수정
+              </button>
             </MBtnFont>
             <ModalBtn
               type="seniorInfo"
-              btnText={sKeyword ? sKeyword : '연구 주제 키워드*'}
+              btnText={sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'}
               modalHandler={modalHandler}
               onClick={() => {
                 setModalType('keyword');
@@ -339,15 +384,6 @@ function EditProfilePage() {
             timePortalElement,
           )
         : null}
-      {timeModal && timePortalElement
-        ? createPortal(
-            <FullModal
-              modalType="senior-mentoring-time"
-              modalHandler={timeModalHandler}
-            />,
-            timePortalElement,
-          )
-        : null}
     </div>
   );
 }
@@ -435,7 +471,9 @@ const SetData = styled.div`
   }
 `;
 const MBtnFont = styled.div`
+  width: 95%;
   display: flex;
+  justify-content: space-between;
   color: #212529;
   font-family: Noto Sans JP;
   font-size: 0.875rem;
@@ -457,6 +495,18 @@ const MBtnFont = styled.div`
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+  }
+  .title-with-modify {
+    display: flex;
+  }
+  .modify-btn {
+    border: 0;
+    color: #00a0e1;
+    font-family: Pretendard;
+    border-bottom: 1px solid #00a0e1;
+    background-color: transparent;
+    font-size: 14px;
+    cursor: pointer;
   }
 `;
 const EPTitle = styled.div`
