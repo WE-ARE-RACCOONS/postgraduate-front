@@ -49,13 +49,13 @@ function SelectTime(props: SelectTimeProps) {
   }, [selectedTime]);
 
   useEffect(() => {
-    if(props.checkTrigger && !targetAtomValue) {
+    if (props.checkTrigger && !targetAtomValue) {
       setThisFlag(true);
     } else setThisFlag(false);
   }, [props.checkTrigger]);
 
   useEffect(() => {
-    if(targetAtomValue) setThisFlag(false);
+    if (targetAtomValue) setThisFlag(false);
   }, [targetAtomValue]);
 
   return (
