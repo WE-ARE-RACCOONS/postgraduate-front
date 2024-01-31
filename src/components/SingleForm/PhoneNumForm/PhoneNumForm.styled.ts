@@ -16,7 +16,9 @@ export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
     border: ${(props) =>
       props.flag ? '1px solid #FF3347' : '1px solid initial'};
   }
-  #phone-num-input {
+  
+  input:focus {
+    outline: none;
   }
 `;
 

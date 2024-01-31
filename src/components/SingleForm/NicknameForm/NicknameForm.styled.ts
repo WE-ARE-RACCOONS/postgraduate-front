@@ -37,6 +37,10 @@ export const InputBox = styled.div<NicknameContainerProps>`
     border: none;
     height: 2rem;
   }
+
+  #user-nickname:focus {
+    outline: none;
+  }
 `;
 
 export const InputBtn = styled.button`
