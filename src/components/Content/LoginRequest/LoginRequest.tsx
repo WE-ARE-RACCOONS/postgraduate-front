@@ -47,6 +47,7 @@ function LoginRequest(props: loginRequestProps) {
             height: '2.3rem',
             margin: '1rem',
             color: '#CBCFDB',
+            cursor: 'pointer'
           }}
         />
       </LoginRequestBoxTop>

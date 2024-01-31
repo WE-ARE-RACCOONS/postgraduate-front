@@ -64,6 +64,12 @@ function MyPage() {
     modalHandler: authHandler,
     portalElement: authPortalElement,
   } = useModal('senior-auth-portal');
+  const {
+    modal: loginRequestModal,
+    modalHandler: loginRequestHandler,
+    portalElement: loginRequestElement
+  } = useModal('login-request-portal');
+
   const { getAccessToken, getUserType } = useAuth();
   const Token = getAccessToken();
   const [userType, setUserType] = useState('');
@@ -160,7 +166,7 @@ function MyPage() {
       <div style={{ marginTop: '1rem' }}>
         <CustomerCenter />
       </div>
-      <MenuBar />
+      <MenuBar modalHandler={loginRequestHandler} />
       {modal && portalElement
         ? createPortal(
             <FullModal modalType="login-request" modalHandler={modalHandler} />,
@@ -217,6 +223,8 @@ function MyPage() {
             authPortalElement,
           )
         : null}
+      {loginRequestModal && loginRequestElement
+        ? createPortal(<DimmedModal modalType='notuser' modalHandler={loginRequestHandler} />, loginRequestElement) : null}
     </div>
   );
 }
