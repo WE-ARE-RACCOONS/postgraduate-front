@@ -19,6 +19,7 @@ export const SelectTimeContainer = styled.div<{ $alertFlag: boolean }>`
   background-color: #f8f9fa;
   cursor: pointer;
   position: relative;
+  margin-bottom: 0.5rem;
 
   #down-arrow {
     width: 1.5rem;
