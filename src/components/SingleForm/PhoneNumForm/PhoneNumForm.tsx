@@ -49,7 +49,7 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
             />
           )}
         </div>
-        <PhoneNumContainer flag={flag}>
+        <PhoneNumContainer>
           <input
             type="text"
             id="phone-num-input"

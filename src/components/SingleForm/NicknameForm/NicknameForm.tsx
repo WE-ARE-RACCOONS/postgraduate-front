@@ -67,7 +67,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
             />
           )}
         </div>
-        <InputBox flag={flag}>
+        <InputBox>
           <input
             type="text"
             name="user-nickname"
