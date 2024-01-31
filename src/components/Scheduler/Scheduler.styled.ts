@@ -28,6 +28,7 @@ export const SCHAddBtn = styled.button`
   font-weight: 700;
   line-height: 1.125rem; /* 150% */
   letter-spacing: -0.0375rem;
+  cursor: pointer;
 `;
 
 export const SchedulerEmptyBox = styled.div`

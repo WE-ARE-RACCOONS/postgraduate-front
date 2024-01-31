@@ -174,6 +174,7 @@ function SelectCalendar(props: SelectCalendarProps) {
         view="month"
         prev2Label={null}
         next2Label={null}
+        showNeighboringMonth={false}
       />
       <SelectCalendarTimeContainer>
         <div id="select-calendar-time-text">
