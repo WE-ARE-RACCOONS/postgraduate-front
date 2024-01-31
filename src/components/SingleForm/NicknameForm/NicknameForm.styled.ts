@@ -61,4 +61,5 @@ export const InputBtn = styled.button`
   letter-spacing: -0.0375rem;
   margin: 0.6rem 0.3rem;
   margin-right: 1rem;
+  cursor: pointer;
 `;

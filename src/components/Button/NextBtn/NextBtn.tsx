@@ -1,5 +1,5 @@
 'use client';
-import { allchecked } from '@/stores/condition';
+import { essential } from '@/stores/condition';
 import { nickname, notDuplicate, phoneNumValidation } from '@/stores/signup';
 import { NextBtnProps } from '@/types/button/nextBtn';
 import { useAtomValue } from 'jotai';
@@ -8,7 +8,7 @@ import { BtnStyle, BtnStylePrev, BtnStyleNon } from './NextBtn.styled';
 function NextBtn(props: NextBtnProps) {
   const userNick = useAtomValue(nickname);
   const notDupli = useAtomValue(notDuplicate);
-  const checked = useAtomValue(allchecked);
+  const checked = useAtomValue(essential);
   const numValidation = useAtomValue(phoneNumValidation);
   const router = useRouter();
   const currentPath = usePathname();
