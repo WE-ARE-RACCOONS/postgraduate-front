@@ -113,7 +113,7 @@ function SeniorManage(props: SeniorManageProps) {
     }
   };
   const editProf = () => {
-    router.push(' /senior/edit-profile');
+    router.push('/senior/edit-profile');
   };
   return (
     <SeniorManageContainer>

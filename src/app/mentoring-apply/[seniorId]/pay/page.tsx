@@ -65,7 +65,7 @@ function MentoringApplyPayPage() {
   };
 
   const payHandler = () => {
-    // 결제 연결할 때 디벨롭 예정
+    /** 결제 연결 필요 */
     const accessTkn = getAccessToken();
     if (
       accessTkn &&
@@ -93,9 +93,10 @@ function MentoringApplyPayPage() {
           },
         )
         .then((response) => {
-          console.log(response);
-
-          // router.push('/mentoring-apply/done');
+          const res = response.data;
+          if (res.code == 'MT202') {
+            router.push('/mentoring-apply/done');
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -249,9 +250,7 @@ function MentoringApplyPayPage() {
         <button
           id="map-next-btn"
           className="map-btn"
-          onClick={() => {
-            router.push('/mentoring-apply/done');
-          }}
+          onClick={payHandler}
         >
           결제하기
         </button>
