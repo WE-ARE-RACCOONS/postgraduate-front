@@ -12,6 +12,7 @@ function ProfileForm(props: ProfileFormProps) {
         `.profile-form-${props.formType}`,
       ) as HTMLInputElement | HTMLTextAreaElement;
       targetForm.value = props.loadStr;
+      setCharCount(props.loadStr.length);
       return;
     }
   }, [props.loadStr]);
@@ -24,7 +25,7 @@ function ProfileForm(props: ProfileFormProps) {
   };
 
   return (
-    <ProfileFormContainer flag={props.flag}>
+    <ProfileFormContainer $flag={props.flag}>
       <ProfileTitleContainer>
         <div>{props.title}</div>
         <div id="char-count">

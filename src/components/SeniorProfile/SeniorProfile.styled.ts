@@ -6,6 +6,7 @@ export const SeniorProfileBox = styled.div`
   background-color: #f8f9fa;
   border-radius: 1rem;
   margin-bottom: 0.75rem;
+  cursor: pointer;
 `;
 
 export const SeniorProfileContent = styled.div`
