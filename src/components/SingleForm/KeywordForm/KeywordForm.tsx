@@ -90,6 +90,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
               value={userInputKeyword || ''}
               placeholder={SELECT_KEYWORD_TEXT.keywordInputDirection}
               onChange={handleInputChange}
+              max={10}
             />
             <button id="keyword-input-btn" onClick={addKeyword}>
               {SELECT_KEYWORD_TEXT.keywordInputBtnText}
