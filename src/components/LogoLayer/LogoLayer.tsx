@@ -8,7 +8,7 @@ import Login from '../kakao/login';
 import { SearchModalProps } from '@/types/modal/search';
 import useAuth from '@/hooks/useAuth';
 import Router from 'next/navigation';
-import { useRouter } from 'next/router';
+import { useRouter } from 'next/navigation';
 function LogoLayer(props: SearchModalProps) {
   const [isLogin, setIsLogin] = useState(false);
   const { getAccessToken } = useAuth();
@@ -25,7 +25,7 @@ function LogoLayer(props: SearchModalProps) {
     props.modalHandler();
   };
   const logoClick =()=>{
-    router.push('/')
+    router.push('/');
   }
   return (
     <HomeTopLayer>
