@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const PhoneNumContainer = styled.div`
   display: flex;
 
@@ -10,9 +11,10 @@ export const PhoneNumContainer = styled.div`
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     background: #fff;
-    border: 1px solid initial;
   }
-  #phone-num-input {
+
+  input:focus {
+    outline: none;
   }
 `;
 

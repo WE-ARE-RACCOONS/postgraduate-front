@@ -13,7 +13,7 @@ import {
 } from './NicknameForm.styled';
 
 function NicknameForm({ defaultValue }: { defaultValue?: string }) {
-  const maxLength = 12;
+  const maxLength = 6;
   const [userNick, useUserNick] = useAtom(nickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
   const [flag, setFlag] = useState(false);

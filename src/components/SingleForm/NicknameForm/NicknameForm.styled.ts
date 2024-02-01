@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+
 export const NicknameTotalContainer = styled.div`
   margin-left: 0.75rem;
   justify-content: center;
@@ -25,13 +26,16 @@ export const InputBox = styled.div`
   border-radius: 0.5rem;
   border: 1px solid #c2cede;
   background: #fff;
-  border: 1px solid initial;
 
   #user-nickname {
     width: 14rem;
     margin: 0.55rem 1rem;
     border: none;
     height: 2rem;
+  }
+
+  #user-nickname:focus {
+    outline: none;
   }
 `;
 
@@ -53,4 +57,5 @@ export const InputBtn = styled.button`
   letter-spacing: -0.0375rem;
   margin: 0.6rem 0.3rem;
   margin-right: 1rem;
+  cursor: pointer;
 `;
