@@ -4,7 +4,13 @@ import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
 import useAuth from '@/hooks/useAuth';
-import { firAbleTimeAtom, questionAtom, secAbleTimeAtom, subjectAtom, thiAbleTimeAtom } from '@/stores/mentoring';
+import {
+  firAbleTimeAtom,
+  questionAtom,
+  secAbleTimeAtom,
+  subjectAtom,
+  thiAbleTimeAtom,
+} from '@/stores/mentoring';
 import { enterSeniorId, mySeniorId } from '@/stores/senior';
 import axios from 'axios';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';

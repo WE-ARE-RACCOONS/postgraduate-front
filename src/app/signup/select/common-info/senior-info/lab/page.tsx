@@ -89,7 +89,7 @@ function SeniorInfoPage() {
               지도교수님&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
-            max={5}
+              max={5}
               placeholder="지도교수님 성함을 입력해주세요."
               targetAtom="lab"
             />
@@ -99,7 +99,7 @@ function SeniorInfoPage() {
               연구실명&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
-          max={30}
+              max={30}
               placeholder="연구실 이름을 입력해주세요."
               targetAtom="professor"
             />

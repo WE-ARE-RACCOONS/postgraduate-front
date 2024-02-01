@@ -67,7 +67,7 @@ function MyPage() {
   const {
     modal: loginRequestModal,
     modalHandler: loginRequestHandler,
-    portalElement: loginRequestElement
+    portalElement: loginRequestElement,
   } = useModal('login-request-portal');
 
   const { getAccessToken, getUserType } = useAuth();
@@ -224,7 +224,14 @@ function MyPage() {
           )
         : null}
       {loginRequestModal && loginRequestElement
-        ? createPortal(<DimmedModal modalType='notuser' modalHandler={loginRequestHandler} />, loginRequestElement) : null}
+        ? createPortal(
+            <DimmedModal
+              modalType="notuser"
+              modalHandler={loginRequestHandler}
+            />,
+            loginRequestElement,
+          )
+        : null}
     </div>
   );
 }
