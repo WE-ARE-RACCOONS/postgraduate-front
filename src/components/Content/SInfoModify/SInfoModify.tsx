@@ -79,7 +79,7 @@ function SInfoModify({
             setNickname(res.data.nickName || '');
             setPhoneNum(res.data.phoneNumber || '');
             setProfileUrl(res.data.profile || '');
-            console.log(res.data.profile)
+            console.log(res.data.profile);
           }
         })
         .catch((err) => {
@@ -95,10 +95,10 @@ function SInfoModify({
   }, [inputImg]);
 
   const submitHandler = async () => {
-    console.log('adåå')
+    console.log('adåå');
     const accessTkn = getAccessToken();
-    let submitImgUrl = profileUrl?profileUrl:'';
-    console.log(profileUrl)
+    let submitImgUrl = profileUrl ? profileUrl : '';
+    console.log(profileUrl);
 
     if (inputImg) {
       const formData = new FormData();
@@ -118,7 +118,7 @@ function SInfoModify({
           )
           .then((response) => {
             const res = response.data;
-            console.log(res)
+            console.log(res);
 
             if (res.code == 'IMG202') {
               submitImgUrl = res.data.profileUrl;
@@ -151,7 +151,7 @@ function SInfoModify({
         )
         .then((response) => {
           const res = response.data;
-          console.log(res)
+          console.log(res);
 
           if (res.code == 'SNR201') {
             modalHandler();

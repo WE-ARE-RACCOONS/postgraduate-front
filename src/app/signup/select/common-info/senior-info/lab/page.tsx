@@ -117,7 +117,11 @@ function SeniorInfoPage() {
             )}
           </div>
         </BtnContainer>
-        {sLab && sProfessor ? <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />:<NextBtn kind="route-non" btnText="다음" />}
+        {sLab && sProfessor ? (
+          <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+        ) : (
+          <NextBtn kind="route-non" btnText="다음" />
+        )}
       </SeniorInfoPageContainer>
     </>
   );

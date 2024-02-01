@@ -59,7 +59,7 @@ function AuthPage() {
   };
   return (
     <div>
-      <div >
+      <div>
         <BackHeader headerText="인증하기" />
         <ProgressBar activeNum={0} />
       </div>
