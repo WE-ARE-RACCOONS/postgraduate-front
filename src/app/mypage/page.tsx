@@ -71,7 +71,8 @@ function MyPage() {
   } = useModal('login-request-portal');
 
   const { getAccessToken, getUserType } = useAuth();
-  const Token = getAccessToken();
+  // const Token = getAccessToken();
+  const [accessTkn, setAccessTkn] = useState('');
   const [userType, setUserType] = useState('');
   // const userType = getUserType();
   const router = useRouter();
@@ -79,12 +80,14 @@ function MyPage() {
   useEffect(() => {
     const userT = getUserType();
     if (userT) setUserType(userT);
+    const userTkn = getAccessToken();
+    if (userTkn) setAccessTkn(userTkn);
   }, []);
 
   useEffect(() => {
-    if (Token) {
+    if (accessTkn) {
       const headers = {
-        Authorization: `Bearer ${Token}`,
+        Authorization: `Bearer ${accessTkn}`,
       };
 
       if (userType == 'junior') {
@@ -127,12 +130,12 @@ function MyPage() {
           });
       }
     }
-  }, [Token, userType]);
+  }, [accessTkn, userType]);
 
   return (
     <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
       <LogoLayer modalHandler={searchModalHandler} />
-      {Token ? (
+      {accessTkn ? (
         <div style={{ backgroundColor: '#F8F9FA' }}>
           <Profile
             profile={profile ? profile : ''}
