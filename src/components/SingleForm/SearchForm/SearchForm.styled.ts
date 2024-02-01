@@ -25,7 +25,7 @@ export const SearchResultWrapper = styled.div`
 `;
 
 export const SearchResult = styled.div`
-  width: 19.8rem;
+  width: 16rem;
   height: 3.9rem;
   line-height: 3.9rem;
   display: flex;

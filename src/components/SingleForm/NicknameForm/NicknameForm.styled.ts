@@ -1,7 +1,4 @@
 import styled from 'styled-components';
-interface NicknameContainerProps {
-  flag: boolean;
-}
 export const NicknameTotalContainer = styled.div`
   margin-left: 0.75rem;
   justify-content: center;
@@ -19,7 +16,7 @@ export const NameFont = styled.div`
   line-height: normal;
   margin-bottom: 0.5rem;
 `;
-export const InputBox = styled.div<NicknameContainerProps>`
+export const InputBox = styled.div`
   display: flex;
   justify-content: space-between;
   width: 97%;
@@ -28,8 +25,7 @@ export const InputBox = styled.div<NicknameContainerProps>`
   border-radius: 0.5rem;
   border: 1px solid #c2cede;
   background: #fff;
-  border: ${(props) =>
-    props.flag ? '1px solid #FF3347' : '1px solid initial'};
+  border: 1px solid initial;
 
   #user-nickname {
     width: 14rem;

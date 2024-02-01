@@ -14,13 +14,12 @@ import ClickedBtn from '@/components/Button/ClickedBtn';
 import { SELECT_FIELD_TEXT } from '@/constants/field/field';
 
 function SelectForm(props: SelectFormProps) {
-  // 추후 연구분야 상수 처리
   const [totalBtns, setTotalBtns] = useAtom(totalFieldAtom);
   const [selected, setSelected] = useAtom(selectedFieldAtom);
   const setSField = useSetAtom(sFieldAtom);
   const [flag, setFlag] = useState(false);
   const [userInputField, setUserInputField] = useState('');
-
+  const [inputCount, setInputCount] = useState(0);
   const handleConfirm = () => {
     if (selected.length == 0) setFlag(true);
     else {
@@ -36,9 +35,10 @@ function SelectForm(props: SelectFormProps) {
      * 2. 해당 버튼 selected로 추가
      * 3. otherBtn true로
      */
-    if (userInputField) {
+    if (userInputField && inputCount < 6) {
       setTotalBtns([...totalBtns, userInputField]);
       setSelected([...selected, userInputField]);
+      setInputCount(inputCount + 1);
       const inputEl = document.getElementById(
         'field-input-form',
       ) as HTMLInputElement;
@@ -83,6 +83,7 @@ function SelectForm(props: SelectFormProps) {
             type="text"
             placeholder={SELECT_FIELD_TEXT.fieldInputDirection}
             onChange={(e) => setUserInputField(e.currentTarget.value)}
+            maxLength={10}
           />
           <button id="field-input-btn" onClick={handleAddOtherField}>
             {SELECT_FIELD_TEXT.fieldInputBtnText}

@@ -186,8 +186,9 @@ function SeniorInfoPage() {
 
   return (
     <>
-      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+      <div>
         <BackHeader headerText="정보입력" />
+        <ProgressBar activeNum={1} />
       </div>
       <ProgressBar activeNum={2} />
       <SeniorInfoPageContainer>

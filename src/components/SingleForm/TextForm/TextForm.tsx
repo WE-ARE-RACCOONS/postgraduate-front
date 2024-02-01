@@ -24,13 +24,24 @@ function TextForm(props: TextFormProps) {
         break;
     }
   }, []);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const inputValue = e.currentTarget.value;
+    
+    if (props.max && inputValue.length <= props.max) {
+      setTarget(inputValue);
+    }
+    if (!props.max && inputValue.length <= 20) {
+      setTarget(inputValue);
+    }
+    
+  };
 
   return (
     <TextFormEl
       type="text"
       placeholder={props.placeholder}
-      onChange={(e) => setTarget(e.currentTarget.value)}
-      defaultValue={target}
+      onChange={handleChange}
+      value={target}
     />
   );
 }

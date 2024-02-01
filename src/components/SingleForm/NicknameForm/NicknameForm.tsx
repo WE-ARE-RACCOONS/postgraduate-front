@@ -38,17 +38,22 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   }
 
   function checkDuplicate() {
-    const params = { nickName: userNick };
-    if (!flag) setFlag(true);
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
-      .then((res) => {
-        if (res.data.data) useAvailability(true);
-        else useAvailability(false);
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    if (userNick.length > 0) {
+      const params = { nickName: userNick };
+      axios
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
+        .then((res) => {
+          if (res.data.data) {
+            setFlag(true);
+            useAvailability(true);
+          } else {
+            useAvailability(false);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }
 
   return (
@@ -67,7 +72,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
             />
           )}
         </div>
-        <InputBox flag={flag}>
+        <InputBox>
           <input
             type="text"
             name="user-nickname"
