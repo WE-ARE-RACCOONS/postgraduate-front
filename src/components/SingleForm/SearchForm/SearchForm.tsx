@@ -159,7 +159,7 @@ function SearchForm(props: SearchFormProps) {
                 handleClick(e);
               }}
             >
-              {el}
+            {el}
             </SearchResult>
           ))}
       </SearchResultWrapper>

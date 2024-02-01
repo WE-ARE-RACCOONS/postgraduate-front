@@ -44,12 +44,6 @@ function SeniorInfoPage() {
   // const pathArr = currentPath.split('/');
   // const socialId = pathArr[2];
   const socialId = useAtomValue(socialIdAtom);
-
-  const phoneNumber = useAtomValue(phoneNum);
-  const nickName = useAtomValue(nickname);
-  const marketingReceive = useAtomValue(option);
-
-  const certification = useAtomValue(photoUrlAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
   const sLab = useAtomValue(sLabAtom);
@@ -95,6 +89,7 @@ function SeniorInfoPage() {
               지도교수님&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
+            max={5}
               placeholder="지도교수님 성함을 입력해주세요."
               targetAtom="lab"
             />
