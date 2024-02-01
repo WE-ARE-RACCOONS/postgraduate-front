@@ -23,6 +23,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const [selected, setSelected] = useAtom(selectedKeywordAtom);
   const setSKeyword = useSetAtom(sKeywordAtom);
   const [userInputKeyword, setUserInputKeyword] = useState('');
+  const [inputCount, setInputCount] = useState(0);
 
   const handleConfirm = () => {
     if (selected.length == 0) setFlag(true);
@@ -34,10 +35,11 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   };
 
   const addKeyword = () => {
-    if (userInputKeyword) {
+    if (userInputKeyword && inputCount < 6) {
       setTotalBtns([...totalBtns, userInputKeyword]);
       setSelected([...selected, userInputKeyword]);
       setUserInputKeyword('');
+      setInputCount(inputCount + 1);
     }
   };
 
