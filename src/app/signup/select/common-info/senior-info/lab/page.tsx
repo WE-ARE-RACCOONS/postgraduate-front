@@ -99,6 +99,7 @@ function SeniorInfoPage() {
               연구실명&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
+          max={30}
               placeholder="연구실 이름을 입력해주세요."
               targetAtom="professor"
             />
