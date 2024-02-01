@@ -126,7 +126,7 @@ function SInfoModify({
       }
     }
 
-    if (nickName && fullNum && accessTkn) {
+    if (nickName && fullNum && accessTkn && bank &&submitImgUrl && accNumber && accHolder) {
       setFlag(false);
       axios
         .patch(
