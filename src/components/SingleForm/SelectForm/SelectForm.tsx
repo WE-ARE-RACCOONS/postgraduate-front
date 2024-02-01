@@ -14,7 +14,6 @@ import ClickedBtn from '@/components/Button/ClickedBtn';
 import { SELECT_FIELD_TEXT } from '@/constants/field/field';
 
 function SelectForm(props: SelectFormProps) {
-  // 추후 연구분야 상수 처리
   const [totalBtns, setTotalBtns] = useAtom(totalFieldAtom);
   const [selected, setSelected] = useAtom(selectedFieldAtom);
   const setSField = useSetAtom(sFieldAtom);
@@ -83,6 +82,7 @@ function SelectForm(props: SelectFormProps) {
             type="text"
             placeholder={SELECT_FIELD_TEXT.fieldInputDirection}
             onChange={(e) => setUserInputField(e.currentTarget.value)}
+            maxLength={10}
           />
           <button id="field-input-btn" onClick={handleAddOtherField}>
             {SELECT_FIELD_TEXT.fieldInputBtnText}
