@@ -41,8 +41,8 @@ function ServiceCondition() {
       <TermsContainer>
         <CheckBox type="accept" checked={service} onChange={setService} />
         <div id="container-color">(필수)&nbsp;</div>
-        <div id="container-line">이용약관</div>과&nbsp;
-        <div id="container-line">개인정보 취급 방침</div>&nbsp;동의
+        <div id="container-line" onClick={() => {if(typeof window !== undefined) window.open(process.env.NEXT_PUBLIC_TERMS_OF_USE, "_blank", "noopener, noreferrer")}}>이용약관</div>과&nbsp;
+        <div id="container-line" onClick={() => {if(typeof window !== undefined) window.open(process.env.NEXT_PUBLIC_PRIVACY_STATEMENT, "_blank", "noopener, noreferrer")}}>개인정보 취급 방침</div>&nbsp;동의
       </TermsContainer>
       <TermsContainer>
         <CheckBox type="accept" checked={marketing} onChange={setMarketing} />

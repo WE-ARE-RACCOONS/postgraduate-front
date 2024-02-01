@@ -24,6 +24,7 @@ export const TermsContainer = styled.div`
   }
   #container-line {
     text-decoration-line: underline;
+    cursor: pointer;
   }
 `;
 export const TermsBox = styled.div`
