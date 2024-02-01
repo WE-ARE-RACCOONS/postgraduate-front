@@ -12,6 +12,7 @@ import {
 } from '@/stores/matching';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import CheckBox from '@/components/Checkbox';
+import NextBtn from '@/components/Button/NextBtn';
 
 function MatchingInfoPage() {
   const setDesiredSchool = useSetAtom(desiredSchool);
@@ -66,7 +67,7 @@ function MatchingInfoPage() {
           />
           <MILabel>(선택) 나에게 맞는 멘토링을 문자로 추천 받아볼래요!</MILabel>
         </div>
-        <SignUpBtn />
+        {schoolCharCount && fieldCharCount ? <SignUpBtn />:<NextBtn kind='route-non-matching'btnText='가입완료 하기'/>}
       </div>
     </div>
   );
