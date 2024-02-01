@@ -1,8 +1,5 @@
 import styled from 'styled-components';
-interface PhoneNumContainerProps {
-  flag: boolean;
-}
-export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
+export const PhoneNumContainer = styled.div`
   display: flex;
 
   input {
@@ -13,8 +10,7 @@ export const PhoneNumContainer = styled.div<PhoneNumContainerProps>`
     border-radius: 0.5rem;
     padding: 0.5rem 1rem;
     background: #fff;
-    border: ${(props) =>
-      props.flag ? '1px solid #FF3347' : '1px solid initial'};
+    border: 1px solid initial;
   }
   #phone-num-input {
   }

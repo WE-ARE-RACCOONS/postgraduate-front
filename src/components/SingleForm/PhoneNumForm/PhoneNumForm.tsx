@@ -8,12 +8,14 @@ import { phoneNum, phoneNumValidation } from '@/stores/signup';
 function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
   const [flag, setFlag] = useState(false); // 최초 입력 체크하는 flag
   const [fullNum, setFullNum] = useAtom(phoneNum);
+  const [availability, useAvailability]= useState(false)
   const setValidation = useSetAtom(phoneNumValidation);
 
   function checkPhoneNum(e: React.ChangeEvent<HTMLInputElement>) {
     if (!flag) setFlag(true);
     if (checkValidation()) {
       setFlag(false);
+      useAvailability(true)
       setValidation(true);
     }
   }
@@ -45,11 +47,17 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
           {flag && (
             <SingleValidator
               textColor="#FF3347"
-              msg="올바르지 않은 휴대폰 번호입니다"
+              msg="올바르지 않은 휴대폰 번호입니다."
+            />
+          )}
+          {!flag && availability && (
+            <SingleValidator
+              textColor="#00A0E1"
+              msg="올바른 휴대폰 번호입니다."
             />
           )}
         </div>
-        <PhoneNumContainer flag={flag}>
+        <PhoneNumContainer >
           <input
             type="text"
             id="phone-num-input"
