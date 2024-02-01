@@ -7,10 +7,12 @@ import useModal from '@/hooks/useModal';
 import Login from '../kakao/login';
 import { SearchModalProps } from '@/types/modal/search';
 import useAuth from '@/hooks/useAuth';
+import Router from 'next/navigation';
+import { useRouter } from 'next/router';
 function LogoLayer(props: SearchModalProps) {
   const [isLogin, setIsLogin] = useState(false);
   const { getAccessToken } = useAuth();
-
+  const router = useRouter();
   useEffect(() => {
     const accessTkn = getAccessToken();
 
@@ -22,6 +24,9 @@ function LogoLayer(props: SearchModalProps) {
   const handleClick = () => {
     props.modalHandler();
   };
+  const logoClick =()=>{
+    router.push('/')
+  }
   return (
     <HomeTopLayer>
       <Logo>
@@ -32,7 +37,7 @@ function LogoLayer(props: SearchModalProps) {
           width={36}
           height={24}
           priority
-          onClick={handleClick}
+          onClick={logoClick}
           style={{ marginRight: '0.13rem' }}
         />
         <div className="none-name">대학원</div>
