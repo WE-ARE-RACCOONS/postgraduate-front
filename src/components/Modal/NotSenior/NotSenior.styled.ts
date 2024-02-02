@@ -1,4 +1,9 @@
 import styled from 'styled-components';
+
+export const NotSeniorContainer = styled.div`
+  font-family: Pretendard;
+`
+
 export const NotSeniorBoxTop = styled.div`
   height: 2.5rem;
   display: flex;
@@ -12,6 +17,7 @@ export const NotSeniorMid = styled.div`
   position: absolute;
   top: 2rem;
   left: 12%;
+  font-family: Pretendard;
 `;
 export const NotSeniorBottom = styled.div`
   position: absolute;
@@ -23,20 +29,20 @@ export const NSMain = styled.div`
   width: 12.6rem;
   color: #333;
   text-align: center;
-  font-family: Noto Sans JP;
   font-size: 1.25rem;
   font-style: normal;
+  font-family: Pretendard;
   font-weight: 700;
-  line-height: 130%; /* 1.625rem */
+  line-height: 130%;
 `;
 export const NSSub = styled.div`
   color: #868e96;
   text-align: center;
-  font-family: Noto Sans JP;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
-  line-height: 140%; /* 1.4rem */
+  font-family: Pretendard;
+  line-height: 140%;
 `;
 export const NSBtn = styled.button`
   display: flex;
@@ -56,4 +62,5 @@ export const NSBtn = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;

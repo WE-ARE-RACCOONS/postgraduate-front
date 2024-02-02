@@ -13,6 +13,7 @@ import {
   NSMain,
   NSSub,
   NSBtn,
+  NotSeniorContainer,
 } from './NotSenior.styled';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
@@ -28,7 +29,7 @@ function NotSenior(props: NotSeniorProps) {
     router.push(`/signup/select/common-info/auth`);
   };
   return (
-    <div>
+    <NotSeniorContainer>
       <NotSeniorBoxTop>
         <Image
           id="x-icon"
@@ -41,6 +42,7 @@ function NotSenior(props: NotSeniorProps) {
           height={21}
           style={{
             margin: '1rem',
+            cursor: 'pointer'
           }}
         />
       </NotSeniorBoxTop>
@@ -60,7 +62,7 @@ function NotSenior(props: NotSeniorProps) {
       <NotSeniorBottom>
         <NSBtn onClick={seniorJoin}>대학원 선배로 가입하기</NSBtn>
       </NotSeniorBottom>
-    </div>
+    </NotSeniorContainer>
   );
 }
 export default NotSenior;
