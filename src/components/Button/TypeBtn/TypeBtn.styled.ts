@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const TypeBtnIcon = styled.button`
   border: none;
+  cursor: pointer;
 `;
 export const TypeBtnIconBox = styled.div<{ $choice: boolean }>`
   margin-top: 4.19rem;
@@ -15,6 +16,7 @@ export const TypeBtnIconBox = styled.div<{ $choice: boolean }>`
   justify-content: center;
   text-align: center;
   align-items: 'center';
+  cursor: pointer;
 `;
 
 export const TypeBtnFont = styled.div`
