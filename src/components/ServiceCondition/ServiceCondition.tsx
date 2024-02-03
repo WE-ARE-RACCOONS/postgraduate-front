@@ -10,6 +10,7 @@ import { useAtom } from 'jotai';
 import { essential } from '@/stores/condition';
 import { allchecked } from '@/stores/condition';
 import { option } from '@/stores/condition';
+import { TEMRS_LINK } from '@/constants/terms/terms';
 
 function ServiceCondition() {
   const [marketing, setMarketing] = useAtom(option);
@@ -41,12 +42,12 @@ function ServiceCondition() {
       <TermsContainer>
         <CheckBox type="accept" checked={service} onChange={setService} />
         <div id="container-color">(필수)&nbsp;</div>
-        <div id="container-line" onClick={() => {if(typeof window !== undefined) window.open(process.env.NEXT_PUBLIC_TERMS_OF_USE, "_blank", "noopener, noreferrer")}}>이용약관</div>과&nbsp;
-        <div id="container-line" onClick={() => {if(typeof window !== undefined) window.open(process.env.NEXT_PUBLIC_PRIVACY_STATEMENT, "_blank", "noopener, noreferrer")}}>개인정보 취급 방침</div>&nbsp;동의
+        <div id="container-line" onClick={() => {if(typeof window !== undefined) window.open(TEMRS_LINK.termsOfUse, "_blank", "noopener, noreferrer")}}>이용약관</div>과&nbsp;
+        <div id="container-line" onClick={() => {if(typeof window !== undefined) window.open(TEMRS_LINK.privacyStatement, "_blank", "noopener, noreferrer")}}>개인정보 취급 방침</div>&nbsp;동의
       </TermsContainer>
       <TermsContainer>
         <CheckBox type="accept" checked={marketing} onChange={setMarketing} />
-        (선택)&nbsp;<div id="container-line">마케팅 개인정보</div>&nbsp;활용
+        (선택)&nbsp;<div>마케팅 개인정보</div>&nbsp;활용
         동의
       </TermsContainer>
     </TermsBox>
