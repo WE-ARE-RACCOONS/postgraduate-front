@@ -24,8 +24,10 @@ function TextareaForm(props: TextareaFormProps) {
     if (target.value.length < 10) setFlag(true);
     else setFlag(false);
 
-    setCharCnt(target.value.length);
-    setContent(target.value);
+    if(target.value.length <= props.maxCount) {
+      setCharCnt(target.value.length);
+      setContent(target.value);
+    }
   };
 
   return (
@@ -39,6 +41,7 @@ function TextareaForm(props: TextareaFormProps) {
       <textarea
         id={`textarea-${props.targetAtom.toString()}`}
         className={flag ? 'alert' : ''}
+        value={content}
         placeholder={props.placeholder}
         onChange={(e) => {
           changeHandler(e);
