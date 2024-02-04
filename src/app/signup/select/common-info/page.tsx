@@ -4,7 +4,7 @@ import ServiceCondition from '@/components/ServiceCondition';
 import NextBtn from '@/components/Button/NextBtn';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useAtomValue } from 'jotai';
-import { nickname, phoneNum, userTypeAtom } from '@/stores/signup';
+import { nickname, notDuplicate, phoneNum, userTypeAtom } from '@/stores/signup';
 import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
 
@@ -13,6 +13,7 @@ function CommonInfoPage() {
   const userNick = useAtomValue(nickname);
   const fullNum = useAtomValue(phoneNum);
   const service = useAtomValue(essential);
+  const available = useAtomValue(notDuplicate);
   return (
     <div>
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
@@ -22,7 +23,7 @@ function CommonInfoPage() {
       <NicknameForm />
       <PhoneNumForm />
       <ServiceCondition />
-      {userNick && fullNum && service ? (
+      {userNick && fullNum && service && available  ? (
         <NextBtn
           kind="next"
           url={userType == 'junior' ? '/matching-info' : '/auth'}
