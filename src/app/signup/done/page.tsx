@@ -21,7 +21,7 @@ function SignUpDonePage() {
 
   return (
     <div>
-      <BackHeader headerText="회원가입" />
+      <BackHeader headerText="회원가입" kind='select' />
       <div style={{ textAlign: 'center', marginTop: '6.5rem' }}>
         <Image
           src={party_popper}

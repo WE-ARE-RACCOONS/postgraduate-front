@@ -64,6 +64,7 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
             className="phone-num-input"
             placeholder="숫자만 입력"
             defaultValue={defaultValue || ''}
+            maxLength={11}
             onChange={(e) => {
               setFullNum(e.currentTarget.value);
             }}
