@@ -18,6 +18,7 @@ export const BtnStyle = styled.button`
   line-height: normal;
   border: none;
   margin: 0 0.5rem;
+  cursor: pointer;
 `;
 export const BtnStyleNon = styled.button`
   display: flex;
@@ -37,6 +38,24 @@ export const BtnStyleNon = styled.button`
   line-height: normal;
   border: none;
   margin: 0 0.5rem;
+`;
+export const BtnStyleNonM = styled.button`
+  display: flex;
+  width: 96%;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: #dee2e6;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  border: none;
 `;
 export const BtnStylePrev = styled.button`
   margin-top: 0.75rem;

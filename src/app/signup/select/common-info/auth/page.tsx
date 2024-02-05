@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import auth from '../../../../../../public/auth.png';
 import Image from 'next/image';
 import cancel from '../../../../../../public/cancel.png';
+import ProgressBar from '@/components/Bar/ProgressBar';
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
@@ -58,8 +59,9 @@ function AuthPage() {
   };
   return (
     <div>
-      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+      <div>
         <BackHeader headerText="인증하기" />
+        <ProgressBar activeNum={0} />
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
@@ -186,6 +188,7 @@ const AuthBtn = styled.button<{ getPhoto: boolean }>`
   gap: 0.625rem;
   border-radius: 0.75rem;
   background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
+  cursor: ${(props) => (props.getPhoto ? 'pointer' : 'default')};
 `;
 const AuthImgBox = styled.div`
   height: 4.625rem;

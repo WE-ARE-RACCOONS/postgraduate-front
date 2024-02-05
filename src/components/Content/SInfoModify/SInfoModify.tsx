@@ -49,6 +49,7 @@ function SInfoModify({
   const [submitFlag, setSubmitFlag] = useState(false);
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
+  const [profileUrl, setProfileUrl] = useState('');
   const bankname = useAtomValue(bankNameAtom);
   const [bank, setBank] = useState('');
   const [nickName, setNickname] = useAtom(nickname);
@@ -77,7 +78,7 @@ function SInfoModify({
             setBank(res.data.bank || '');
             setNickname(res.data.nickName || '');
             setPhoneNum(res.data.phoneNumber || '');
-            // setProfileUrl(res.data.profile || '');
+            setProfileUrl(res.data.profile || '');
           }
         })
         .catch((err) => {
@@ -94,7 +95,7 @@ function SInfoModify({
 
   const submitHandler = async () => {
     const accessTkn = getAccessToken();
-    let profileUrl = '';
+    let submitImgUrl = profileUrl ? profileUrl : '';
 
     if (inputImg) {
       const formData = new FormData();
@@ -116,7 +117,7 @@ function SInfoModify({
             const res = response.data;
 
             if (res.code == 'IMG202') {
-              profileUrl = res.data.profileUrl;
+              submitImgUrl = res.data.profileUrl;
             }
           })
           .catch((err) => {
@@ -125,7 +126,15 @@ function SInfoModify({
       }
     }
 
-    if (nickName && fullNum && accessTkn) {
+    if (
+      nickName &&
+      fullNum &&
+      accessTkn &&
+      bank &&
+      submitImgUrl &&
+      accNumber &&
+      accHolder
+    ) {
       setFlag(false);
       axios
         .patch(
@@ -133,7 +142,7 @@ function SInfoModify({
           {
             nickName: nickName,
             phoneNumber: fullNum,
-            profile: profileUrl,
+            profile: submitImgUrl,
             accountNumber: accNumber,
             bank: bank,
             accountHolder: accHolder,
@@ -167,7 +176,7 @@ function SInfoModify({
       <SInfoImgBox>
         <RoundedImage
           kind="big"
-          imgSrc={imgUrl ? imgUrl : user_icon}
+          imgSrc={imgUrl ? imgUrl : profileUrl}
           altMsg="계정 프로필 사진"
         />
         <Image id="camera-icon" src={camera_icon} alt="카메라 아이콘" />

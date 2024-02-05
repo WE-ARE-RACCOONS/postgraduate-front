@@ -1,6 +1,8 @@
 import { SelectedBtnProps } from '@/types/button/selectedBtn';
 import { StyledSelectedBtn } from './SelectedBtn.styled';
 import { useEffect, useState } from 'react';
+import Image from 'next/image';
+import selected_x from '../../../../public/selected-cancel.png';
 
 function SelectedBtn(props: SelectedBtnProps) {
   const [selected, setSelected] = useState(false);
@@ -26,6 +28,9 @@ function SelectedBtn(props: SelectedBtnProps) {
   return (
     <StyledSelectedBtn $selected={selected} onClick={handleClick}>
       {props.btnText}
+      {selected && (
+        <Image id="selected-x-btn" src={selected_x} alt="선택 취소 버튼" />
+      )}
     </StyledSelectedBtn>
   );
 }

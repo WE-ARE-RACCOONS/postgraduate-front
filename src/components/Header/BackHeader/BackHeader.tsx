@@ -2,8 +2,11 @@ import { BackHeaderContainer } from './BackHeader.styled';
 import Image from 'next/image';
 import back_arrow from '../../../../public/arrow.png';
 import { useRouter } from 'next/navigation';
-
-function BackHeader({ headerText }: { headerText: string }) {
+interface BackHeaderProps {
+  headerText: string;
+  kind?: string;
+}
+function BackHeader({ headerText, kind }: BackHeaderProps) {
   const router = useRouter();
 
   return (
@@ -13,7 +16,11 @@ function BackHeader({ headerText }: { headerText: string }) {
         src={back_arrow}
         alt="뒤로가기 화살표"
         onClick={() => {
-          router.back();
+          if (kind === 'select') {
+            router.push('/');
+          } else {
+            router.back();
+          }
         }}
       />
       <div id="header-text">{headerText}</div>

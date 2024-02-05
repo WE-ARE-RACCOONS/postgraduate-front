@@ -30,6 +30,28 @@ function MentoringSpec(props: ModalMentoringProps) {
   const [data, setData] = useState<MentoringSpecData | null>(null);
   const { getUserType } = useAuth();
   const userType = getUserType();
+
+  const formatTime = (time: string) => {
+    if (!time) return '';
+
+    let result = '';
+    const timeArr = time.split('-');
+    if (timeArr.length >= 5) {
+      const month = Number(timeArr[1]);
+      const date = Number(timeArr[2]);
+      const hour = timeArr[3];
+      const min = timeArr[4];
+
+      result += `${month}월 `;
+      result += `${date}일 `;
+      result +=
+        Number(min) == 0
+          ? `${hour}시 00분 ~ ${hour}시 30분`
+          : `${hour}시 30분 ~ ${Number(hour) + 1}시 00분`;
+      return result;
+    } else return '';
+  };
+
   useEffect(() => {
     if (props.mentoringId !== 0) {
       const Token = getAccessToken();
@@ -105,7 +127,7 @@ function MentoringSpec(props: ModalMentoringProps) {
           data.dates &&
           data.dates.length > 0 &&
           data.dates.map((date, index) => (
-            <TextToggleButton key={index} text={date} />
+            <TextToggleButton key={index} text={formatTime(date)} />
           ))}
       </div>
       <Mmargin>

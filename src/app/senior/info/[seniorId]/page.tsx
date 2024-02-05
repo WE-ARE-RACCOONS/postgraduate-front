@@ -4,9 +4,16 @@ import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
 import useAuth from '@/hooks/useAuth';
+import {
+  firAbleTimeAtom,
+  questionAtom,
+  secAbleTimeAtom,
+  subjectAtom,
+  thiAbleTimeAtom,
+} from '@/stores/mentoring';
 import { enterSeniorId, mySeniorId } from '@/stores/senior';
 import axios from 'axios';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -30,6 +37,20 @@ function SeniorInfoPage() {
   const [term, setTerm] = useState(40);
   const [times, setTimes] = useState([]);
   const [mine, setMine] = useState('false');
+  const setTempSubject = useSetAtom(subjectAtom);
+  const setTempQuestion = useSetAtom(questionAtom);
+  const setFirAbleTime = useSetAtom(firAbleTimeAtom);
+  const setSecAbleTime = useSetAtom(secAbleTimeAtom);
+  const setThiAbleTime = useSetAtom(thiAbleTimeAtom);
+
+  useEffect(() => {
+    setTempSubject('');
+    setTempQuestion('');
+    setFirAbleTime('');
+    setSecAbleTime('');
+    setThiAbleTime('');
+  }, []);
+
   useEffect(() => {
     const token = getAccessToken();
     const headers = {
@@ -76,9 +97,11 @@ function SeniorInfoPage() {
       router.push(`/mentoring-apply/${seniorId}/question`);
     }
   };
+
   const editHandler = () => {
     router.push(`/senior/edit-profile`);
   };
+
   return (
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />

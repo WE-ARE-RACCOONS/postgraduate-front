@@ -30,6 +30,7 @@ import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
+import ProgressBar from '@/components/Bar/ProgressBar';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -43,12 +44,6 @@ function SeniorInfoPage() {
   // const pathArr = currentPath.split('/');
   // const socialId = pathArr[2];
   const socialId = useAtomValue(socialIdAtom);
-
-  const phoneNumber = useAtomValue(phoneNum);
-  const nickName = useAtomValue(nickname);
-  const marketingReceive = useAtomValue(option);
-
-  const certification = useAtomValue(photoUrlAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
   const sLab = useAtomValue(sLabAtom);
@@ -82,8 +77,9 @@ function SeniorInfoPage() {
 
   return (
     <>
-      <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
+      <div>
         <BackHeader headerText="정보입력" />
+        <ProgressBar activeNum={1} />
       </div>
       <SeniorInfoPageContainer>
         <BtnContainer>
@@ -93,7 +89,8 @@ function SeniorInfoPage() {
               지도교수님&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
-              placeholder="연구실 이름을 입력해주세요."
+              max={5}
+              placeholder="지도교수님 성함을 입력해주세요."
               targetAtom="lab"
             />
           </BtnBox>
@@ -102,7 +99,8 @@ function SeniorInfoPage() {
               연구실명&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
-              placeholder="지도교수님 성함을 입력해주세요."
+              max={30}
+              placeholder="연구실 이름을 입력해주세요."
               targetAtom="professor"
             />
           </BtnBox>
@@ -115,7 +113,11 @@ function SeniorInfoPage() {
             )}
           </div>
         </BtnContainer>
-        <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+        {sLab && sProfessor ? (
+          <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
+        ) : (
+          <NextBtn kind="route-non" btnText="다음" />
+        )}
       </SeniorInfoPageContainer>
     </>
   );

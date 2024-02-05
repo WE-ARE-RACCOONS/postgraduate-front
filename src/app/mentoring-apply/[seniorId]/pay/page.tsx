@@ -25,6 +25,7 @@ import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
+import { TEMRS_LINK } from '@/constants/terms/terms';
 
 function MentoringApplyPayPage() {
   const [nickName, setNickName] = useState('');
@@ -65,7 +66,7 @@ function MentoringApplyPayPage() {
   };
 
   const payHandler = () => {
-    // 결제 연결할 때 디벨롭 예정
+    /** 결제 연결 필요 */
     const accessTkn = getAccessToken();
     if (
       accessTkn &&
@@ -93,9 +94,10 @@ function MentoringApplyPayPage() {
           },
         )
         .then((response) => {
-          console.log(response);
-
-          // router.push('/mentoring-apply/done');
+          const res = response.data;
+          if (res.code == 'MT202') {
+            router.push('/mentoring-apply/done');
+          }
         })
         .catch((err) => {
           console.error(err);
@@ -229,11 +231,35 @@ function MentoringApplyPayPage() {
         </MAPNoticeWrapper>
         <MAPPolicyWrapper>
           <MAPTitle>{MENTORING_PAY_TITLE.noShow}</MAPTitle>
-          <button className="policy-more-detail">자세히 알아보기</button>
+          <button
+            className="policy-more-detail"
+            onClick={() => {
+              if (typeof window !== undefined)
+                window.open(
+                  TEMRS_LINK.noShowPolicy,
+                  '_blank',
+                  'noopener, noreferrer',
+                );
+            }}
+          >
+            자세히 알아보기
+          </button>
         </MAPPolicyWrapper>
         <MAPPolicyWrapper>
           <MAPTitle>{MENTORING_PAY_TITLE.refund}</MAPTitle>
-          <button className="policy-more-detail">자세히 알아보기</button>
+          <button
+            className="policy-more-detail"
+            onClick={() => {
+              if (typeof window !== undefined)
+                window.open(
+                  TEMRS_LINK.refundPolicy,
+                  '_blank',
+                  'noopener, noreferrer',
+                );
+            }}
+          >
+            자세히 알아보기
+          </button>
         </MAPPolicyWrapper>
       </MAPContent>
       <MAPBtnContainer>
@@ -246,13 +272,7 @@ function MentoringApplyPayPage() {
         >
           이전
         </button>
-        <button
-          id="map-next-btn"
-          className="map-btn"
-          onClick={() => {
-            router.push('/mentoring-apply/done');
-          }}
-        >
+        <button id="map-next-btn" className="map-btn" onClick={payHandler}>
           결제하기
         </button>
       </MAPBtnContainer>

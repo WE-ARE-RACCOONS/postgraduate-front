@@ -4,6 +4,7 @@ export const FullModalContainer = styled.div`
   width: 600px;
   height: 100%;
   position: fixed;
+  overflow-x: hidden;
   overflow-y: scroll;
   top: 0;
   left: 50%;
