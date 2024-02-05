@@ -20,7 +20,9 @@ function LogoLayer(props: SearchModalProps) {
       setIsLogin(true);
     }
   }, []);
-
+const orderRoute =()=>{
+  router.push('/order/confirm')
+}
   const handleClick = () => {
     props.modalHandler();
   };
@@ -43,6 +45,7 @@ function LogoLayer(props: SearchModalProps) {
         <div className="none-name">대학원</div>
         <div className="bold-name">김선배</div>
       </Logo>
+      <button onClick={orderRoute}>결제</button>
       <div style={{ display: 'flex', alignItems: 'center' }}>
         <Image
           id="search"
