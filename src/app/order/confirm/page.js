@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Script from "next/script";
 import $ from 'jquery'
 const PayplePayment = () => {
+    const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
   useEffect(() => {
     $(document).ready(() => {
       $('#requsetPayplePay').on('click', function (event) {
@@ -21,7 +22,7 @@ const PayplePayment = () => {
     obj.PCD_PAY_TOTAL = "1000";
     obj.PCD_PAY_ISTAX = "Y";
     obj.PCD_PAY_TAXTOTAL = "10";
-    obj.clientKey = "test_DF55F29DA654A8CBC0F0A9DD4B556486";
+    obj.clientKey = PAPLE_CLIENT_KEY;
   
     obj.PCD_RST_URL = "/order_result.php"; // 결제결과 수신 URL
 
