@@ -6,7 +6,7 @@ interface BackHeaderProps {
   headerText: string;
   kind?: string;
 }
-function BackHeader({ headerText , kind}: BackHeaderProps) {
+function BackHeader({ headerText, kind }: BackHeaderProps) {
   const router = useRouter();
 
   return (
@@ -16,11 +16,11 @@ function BackHeader({ headerText , kind}: BackHeaderProps) {
         src={back_arrow}
         alt="뒤로가기 화살표"
         onClick={() => {
-          if(kind === 'select'){
-            router.push('/')
+          if (kind === 'select') {
+            router.push('/');
+          } else {
+            router.back();
           }
-          else{router.back();}
-          
         }}
       />
       <div id="header-text">{headerText}</div>

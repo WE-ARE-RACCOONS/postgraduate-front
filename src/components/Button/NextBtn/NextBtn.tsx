@@ -4,7 +4,12 @@ import { nickname, notDuplicate, phoneNumValidation } from '@/stores/signup';
 import { NextBtnProps } from '@/types/button/nextBtn';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
-import { BtnStyle, BtnStylePrev, BtnStyleNon,BtnStyleNonM } from './NextBtn.styled';
+import {
+  BtnStyle,
+  BtnStylePrev,
+  BtnStyleNon,
+  BtnStyleNonM,
+} from './NextBtn.styled';
 function NextBtn(props: NextBtnProps) {
   const userNick = useAtomValue(nickname);
   const notDupli = useAtomValue(notDuplicate);
@@ -52,7 +57,7 @@ function NextBtn(props: NextBtnProps) {
       {props.kind == 'prev' && (
         <BtnStylePrev onClick={handleClick}>{props.btnText}</BtnStylePrev>
       )}
-      {props.kind =='route-non-matching' &&(
+      {props.kind == 'route-non-matching' && (
         <BtnStyleNonM>{props.btnText}</BtnStyleNonM>
       )}
     </div>

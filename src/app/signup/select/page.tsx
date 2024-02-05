@@ -15,7 +15,7 @@ function SelectPage() {
   return (
     <div>
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
-        <BackHeader headerText="회원가입" kind='select' />
+        <BackHeader headerText="회원가입" kind="select" />
       </div>
       <div style={{ margin: '1.6rem 1rem' }}>
         <h3>회원 유형 선택</h3>

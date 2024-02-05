@@ -4,7 +4,12 @@ import ServiceCondition from '@/components/ServiceCondition';
 import NextBtn from '@/components/Button/NextBtn';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useAtomValue } from 'jotai';
-import { nickname, notDuplicate, phoneNum, userTypeAtom } from '@/stores/signup';
+import {
+  nickname,
+  notDuplicate,
+  phoneNum,
+  userTypeAtom,
+} from '@/stores/signup';
 import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
 
@@ -23,7 +28,7 @@ function CommonInfoPage() {
       <NicknameForm />
       <PhoneNumForm />
       <ServiceCondition />
-      {userNick && fullNum && service && available  ? (
+      {userNick && fullNum && service && available ? (
         <NextBtn
           kind="next"
           url={userType == 'junior' ? '/matching-info' : '/auth'}

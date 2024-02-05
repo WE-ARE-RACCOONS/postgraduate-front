@@ -20,15 +20,15 @@ function LogoLayer(props: SearchModalProps) {
       setIsLogin(true);
     }
   }, []);
-const orderRoute =()=>{
-  router.push('/order/confirm')
-}
+  const orderRoute = () => {
+    router.push('/order/confirm');
+  };
   const handleClick = () => {
     props.modalHandler();
   };
-  const logoClick =()=>{
+  const logoClick = () => {
     router.push('/');
-  }
+  };
   return (
     <HomeTopLayer>
       <Logo>
