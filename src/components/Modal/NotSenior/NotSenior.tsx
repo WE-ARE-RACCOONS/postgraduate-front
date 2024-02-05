@@ -42,7 +42,7 @@ function NotSenior(props: NotSeniorProps) {
           height={21}
           style={{
             margin: '1rem',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         />
       </NotSeniorBoxTop>

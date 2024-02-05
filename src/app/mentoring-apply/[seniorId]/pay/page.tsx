@@ -231,11 +231,35 @@ function MentoringApplyPayPage() {
         </MAPNoticeWrapper>
         <MAPPolicyWrapper>
           <MAPTitle>{MENTORING_PAY_TITLE.noShow}</MAPTitle>
-          <button className="policy-more-detail" onClick={() => {if(typeof window !== undefined) window.open(TEMRS_LINK.noShowPolicy, "_blank", "noopener, noreferrer")}}>자세히 알아보기</button>
+          <button
+            className="policy-more-detail"
+            onClick={() => {
+              if (typeof window !== undefined)
+                window.open(
+                  TEMRS_LINK.noShowPolicy,
+                  '_blank',
+                  'noopener, noreferrer',
+                );
+            }}
+          >
+            자세히 알아보기
+          </button>
         </MAPPolicyWrapper>
         <MAPPolicyWrapper>
           <MAPTitle>{MENTORING_PAY_TITLE.refund}</MAPTitle>
-          <button className="policy-more-detail" onClick={() => {if(typeof window !== undefined) window.open(TEMRS_LINK.refundPolicy, "_blank", "noopener, noreferrer")}}>자세히 알아보기</button>
+          <button
+            className="policy-more-detail"
+            onClick={() => {
+              if (typeof window !== undefined)
+                window.open(
+                  TEMRS_LINK.refundPolicy,
+                  '_blank',
+                  'noopener, noreferrer',
+                );
+            }}
+          >
+            자세히 알아보기
+          </button>
         </MAPPolicyWrapper>
       </MAPContent>
       <MAPBtnContainer>

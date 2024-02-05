@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const NotSeniorContainer = styled.div`
   font-family: Pretendard;
-`
+`;
 
 export const NotSeniorBoxTop = styled.div`
   height: 2.5rem;

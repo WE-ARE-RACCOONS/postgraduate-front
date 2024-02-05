@@ -188,7 +188,7 @@ const AuthBtn = styled.button<{ getPhoto: boolean }>`
   gap: 0.625rem;
   border-radius: 0.75rem;
   background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
-  cursor: ${props => props.getPhoto ? 'pointer' : 'default'};
+  cursor: ${(props) => (props.getPhoto ? 'pointer' : 'default')};
 `;
 const AuthImgBox = styled.div`
   height: 4.625rem;

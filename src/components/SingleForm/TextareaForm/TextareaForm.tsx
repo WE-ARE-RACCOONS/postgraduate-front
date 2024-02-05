@@ -24,7 +24,7 @@ function TextareaForm(props: TextareaFormProps) {
     if (target.value.length < 10) setFlag(true);
     else setFlag(false);
 
-    if(target.value.length <= props.maxCount) {
+    if (target.value.length <= props.maxCount) {
       setCharCnt(target.value.length);
       setContent(target.value);
     }

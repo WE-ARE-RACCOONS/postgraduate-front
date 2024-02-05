@@ -51,7 +51,7 @@ function MentoringSpec(props: ModalMentoringProps) {
       return result;
     } else return '';
   };
-  
+
   useEffect(() => {
     if (props.mentoringId !== 0) {
       const Token = getAccessToken();
