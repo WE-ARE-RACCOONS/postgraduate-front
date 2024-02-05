@@ -24,9 +24,9 @@ function LogoLayer(props: SearchModalProps) {
   const handleClick = () => {
     props.modalHandler();
   };
-  const logoClick =()=>{
+  const logoClick = () => {
     router.push('/');
-  }
+  };
   return (
     <HomeTopLayer>
       <Logo>
