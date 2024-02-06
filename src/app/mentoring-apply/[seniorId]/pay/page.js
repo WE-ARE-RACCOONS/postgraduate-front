@@ -87,7 +87,7 @@ function MentoringApplyPayPage() {
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;
 
-        obj.PCD_RST_URL = 'https://kimseonbaedevelop.com/payment/payple/result'; // 결제결과 수신 URL
+        obj.PCD_RST_URL = '/api/payple'; // 결제결과 수신 URL
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });

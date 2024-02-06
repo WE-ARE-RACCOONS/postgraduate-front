@@ -21,13 +21,11 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
 
   useEffect(() => {
     if (defaultValue === userNick) {
-      console.log('sdkjfn');
       useAvailability(true);
       setFlag(false);
     }
   }, [userNick, defaultValue]);
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.currentTarget.value);
     e.currentTarget.value = filterInputText(e.currentTarget.value);
     e.currentTarget.value = checkLength(e.currentTarget.value);
     if (e.currentTarget.value === userNick) {
@@ -72,7 +70,6 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
         });
     }
   }
-  console.log(availability);
   return (
     <NicknameTotalContainer>
       <NicknameContainer>
