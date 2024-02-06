@@ -1,7 +1,7 @@
 'use client';
 import { useAtom } from 'jotai';
-import { nickname, notDuplicate } from '@/stores/signup';
-import { useState } from 'react';
+import { changeNickname, nickname, notDuplicate } from '@/stores/signup';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
@@ -15,13 +15,30 @@ import {
 function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   const maxLength = 12;
   const [userNick, useUserNick] = useAtom(nickname);
+  const [changeNick, setChangeNick] = useAtom(changeNickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
   const [flag, setFlag] = useState(false);
 
+useEffect(() => {
+  if (defaultValue === userNick) {
+    console.log('sdkjfn')
+    useAvailability(true);
+    setFlag(false);
+  }
+}, [userNick,defaultValue]);
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e.currentTarget.value)
     e.currentTarget.value = filterInputText(e.currentTarget.value);
     e.currentTarget.value = checkLength(e.currentTarget.value);
-    useUserNick(e.currentTarget.value);
+    if (e.currentTarget.value === userNick){ //입력한것이 기존 닉네임과 같으면
+      useAvailability(true);
+      setFlag(false);
+    }
+    else{
+      useAvailability(false);
+      setChangeNick(e.currentTarget.value); //입력한거 저장 및 가용성 false
+    }
+   
   }
 
   function filterInputText(inputValue: string) {
@@ -37,9 +54,10 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
     return inputValue;
   }
 
+  //원래 닉네임과 바뀐닉네임이 다를때만 유효성 검사
   function checkDuplicate() {
-    if (userNick.length > 0) {
-      const params = { nickName: userNick };
+    if (changeNick.length > 0 && changeNick !== userNick) {
+      const params = { nickName: changeNick };
       axios
         .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
         .then((res) => {
@@ -55,7 +73,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
         });
     }
   }
-
+console.log(availability)
   return (
     <NicknameTotalContainer>
       <NicknameContainer>

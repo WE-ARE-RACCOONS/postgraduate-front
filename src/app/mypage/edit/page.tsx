@@ -5,7 +5,7 @@ import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
-import { nickname } from '@/stores/signup';
+import { changeNickname, nickname, notDuplicate, phoneNumValidation } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
@@ -14,12 +14,16 @@ import BackHeader from '@/components/Header/BackHeader';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
-  const [nickName, setNickName] = useAtom(nickname);
+  const [myNickName, setNickName] = useAtom(nickname);
+  const changeNick = useAtomValue(changeNickname)
   const [phoneNumber, setPhoneNumber] = useAtom(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken } = useAuth();
   const router = useRouter();
+  const [nickAvail , setNickAvail] = useState(false)
+  const availability = useAtomValue(notDuplicate);
+  const availablePhone = useAtomValue(phoneNumValidation)
   useEffect(() => {
     const token = getAccessToken();
     if (token) {
@@ -68,13 +72,13 @@ function page() {
           });
       }
     }
-    if (editProfileUrl || nickName || phoneNumber) {
+    if (editProfileUrl || myNickName || phoneNumber) {
       axios
         .patch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
           {
-            profile: editProfileUrl,
-            nickName: nickName,
+            profile: editProfileUrl ? editProfileUrl : profile,
+            nickName: myNickName,
             phoneNumber: phoneNumber,
           },
           {
@@ -85,6 +89,7 @@ function page() {
         )
         .then((response) => {
           const res = response.data;
+          console.log(res)
           if (res.code == 'UR201') {
             router.push('/mypage');
           }
@@ -113,9 +118,9 @@ function page() {
           </div>
         </div>
       )}
-      <NicknameForm defaultValue={nickName} />
+      <NicknameForm defaultValue={myNickName} />
       <PhoneNumForm defaultValue={phoneNumber}/>
-      <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
+      {availability ?  <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn> :<ProfileSetBtnNon >저장하기</ProfileSetBtnNon>}
     </div>
   );
 }
@@ -143,6 +148,26 @@ const ProfileSetBtn = styled.button`
   gap: 0.625rem;
   border-radius: 0.75rem;
   background: #2fc4b2;
+  border: none;
+  margin-top: 38%;
+  margin-left: 0.5rem;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+const ProfileSetBtnNon = styled.button`
+  display: flex;
+  width: 21.4375rem;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: #DEE2E6;
   border: none;
   margin-top: 38%;
   margin-left: 0.5rem;

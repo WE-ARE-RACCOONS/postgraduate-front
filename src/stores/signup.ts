@@ -7,6 +7,7 @@ export const userTypeAtom = atom<userType>('junior');
 export const prevPathAtom = atom<string>('/');
 
 export const nickname = atom<string>('');
+export const changeNickname = atom<string>('');
 export const notDuplicate = atom<boolean>(false);
 export const phoneNum = atom<string>('');
 export const phoneNumValidation = atom<boolean>(false);
