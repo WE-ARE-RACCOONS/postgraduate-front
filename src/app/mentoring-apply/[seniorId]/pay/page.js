@@ -25,7 +25,8 @@ import { useEffect, useState } from 'react';
 import { usePathname, useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-
+import Script from 'next/script';
+import $ from 'jquery';
 function MentoringApplyPayPage() {
   const [nickName, setNickName] = useState('');
   const [profile, setProfile] = useState('');
@@ -42,8 +43,8 @@ function MentoringApplyPayPage() {
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
   const { getAccessToken } = useAuth();
-
-  const formatTime = (time: string) => {
+  const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
+  const formatTime = (time) => {
     if (!time) return '';
 
     let result = '';
@@ -63,9 +64,37 @@ function MentoringApplyPayPage() {
       return result;
     } else return '';
   };
+  useEffect(() => {
+    $(document).ready(() => {
+      $('#requsetPayplePay').on('click', function (event) {
+        let obj = new Object();
+        obj.PCD_PAY_TYPE = 'card';
+        obj.PCD_PAY_WORK = 'PAY';
 
+        /* 02 : 앱카드 결제창 */
+        obj.PCD_CARD_VER = '02';
+        //유저 userId
+        obj.PCD_PAYER_NO = '1234';
+        obj.PCD_PAYER_NAME = '홍길동';
+        //내 번호 넣으면 알림톡 감
+        obj.PCD_PAYER_HP = '01012345678';
+        obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
+        obj.PCD_PAY_GOODS = '멘토링 선배 닉네임';
+        obj.PCD_PAY_TOTAL = '101';
+        obj.PCD_PAY_ISTAX = 'Y';
+        obj.PCD_PAY_TAXTOTAL = '10';
+        obj.clientKey = PAPLE_CLIENT_KEY;
+
+        obj.PCD_RST_URL = 'https://kimseonbaedevelop.com/payment/payple/result'; // 결제결과 수신 URL
+        // 결제요청 함수 호출
+        PaypleCpayAuthCheck(obj);
+      });
+    });
+    router.push('/')
+  }, []);
   const payHandler = () => {
     /** 결제 연결 필요 */
+
     const accessTkn = getAccessToken();
     if (
       accessTkn &&
@@ -134,6 +163,8 @@ function MentoringApplyPayPage() {
 
   return (
     <MAPContainer>
+      <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
+      <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>
       <BackHeader headerText="멘토링 결제 정보" />
       <ProgressBar activeNum={2} />
       <MAPContent>
@@ -247,7 +278,7 @@ function MentoringApplyPayPage() {
         >
           이전
         </button>
-        <button id="map-next-btn" className="map-btn" onClick={payHandler}>
+        <button id="requsetPayplePay" className="map-btn" onClick={payHandler}>
           결제하기
         </button>
       </MAPBtnContainer>
@@ -453,7 +484,7 @@ const MAPBtnContainer = styled.div`
     background-color: #adb5bd;
   }
 
-  #map-next-btn {
+  #requsetPayplePay {
     width: 63%;
     background-color: #2fc4b2;
   }

@@ -2,7 +2,9 @@
 import { useEffect } from 'react';
 import Script from 'next/script';
 import $ from 'jquery';
+import { useRouter } from 'next/navigation';
 const PayplePayment = () => {
+    const router = useRouter();
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
   useEffect(() => {
     $(document).ready(() => {
@@ -20,12 +22,12 @@ const PayplePayment = () => {
         obj.PCD_PAYER_HP = '01012345678';
         obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
         obj.PCD_PAY_GOODS = '멘토링 선배 닉네임';
-        obj.PCD_PAY_TOTAL = '1000';
+        obj.PCD_PAY_TOTAL = '101';
         obj.PCD_PAY_ISTAX = 'Y';
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;
 
-        obj.PCD_RST_URL = 'https://payple.kr/order_result.php'; // 결제결과 수신 URL
+        obj.PCD_RST_URL = 'https://kimseonbaedevelop.com/payment/payple/result'; // 결제결과 수신 URL
 
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);

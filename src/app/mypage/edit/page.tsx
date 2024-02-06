@@ -4,7 +4,7 @@ import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { nickname } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
@@ -14,8 +14,8 @@ import BackHeader from '@/components/Header/BackHeader';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
-  const nickName = useAtomValue(nickname);
-  const phoneNumber = useAtomValue(phoneNum);
+  const [nickName, setNickName] = useAtom(nickname);
+  const [phoneNumber, setPhoneNumber] = useAtom(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken } = useAuth();
@@ -27,8 +27,10 @@ function page() {
         Authorization: `Bearer ${token}`,
       };
       axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, { headers })
         .then((res) => {
+          setNickName(res.data.data.nickName);
+          setPhoneNumber(res.data.data.phoneNumber);
           setprofile(res.data.data.profile);
         })
         .catch(function (error) {
@@ -111,8 +113,8 @@ function page() {
           </div>
         </div>
       )}
-      <NicknameForm />
-      <PhoneNumForm />
+      <NicknameForm defaultValue={nickName} />
+      <PhoneNumForm defaultValue={phoneNumber}/>
       <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
     </div>
   );

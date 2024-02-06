@@ -77,7 +77,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
             type="text"
             name="user-nickname"
             id="user-nickname"
-            placeholder="영어, 한글로 6글자까지 입력"
+            placeholder={"영어, 한글로 6글자까지 입력"}
             onChange={(e) => checkNickname(e)}
             defaultValue={defaultValue || ''}
           />
