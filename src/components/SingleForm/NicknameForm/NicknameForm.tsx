@@ -19,26 +19,25 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   const [availability, useAvailability] = useAtom(notDuplicate);
   const [flag, setFlag] = useState(false);
 
-useEffect(() => {
-  if (defaultValue === userNick) {
-    console.log('sdkjfn')
-    useAvailability(true);
-    setFlag(false);
-  }
-}, [userNick,defaultValue]);
-  function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
-    console.log(e.currentTarget.value)
-    e.currentTarget.value = filterInputText(e.currentTarget.value);
-    e.currentTarget.value = checkLength(e.currentTarget.value);
-    if (e.currentTarget.value === userNick){ //입력한것이 기존 닉네임과 같으면
+  useEffect(() => {
+    if (defaultValue === userNick) {
+      console.log('sdkjfn');
       useAvailability(true);
       setFlag(false);
     }
-    else{
+  }, [userNick, defaultValue]);
+  function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
+    console.log(e.currentTarget.value);
+    e.currentTarget.value = filterInputText(e.currentTarget.value);
+    e.currentTarget.value = checkLength(e.currentTarget.value);
+    if (e.currentTarget.value === userNick) {
+      //입력한것이 기존 닉네임과 같으면
+      useAvailability(true);
+      setFlag(false);
+    } else {
       useAvailability(false);
       setChangeNick(e.currentTarget.value); //입력한거 저장 및 가용성 false
     }
-   
   }
 
   function filterInputText(inputValue: string) {
@@ -73,7 +72,7 @@ useEffect(() => {
         });
     }
   }
-console.log(availability)
+  console.log(availability);
   return (
     <NicknameTotalContainer>
       <NicknameContainer>
@@ -95,7 +94,7 @@ console.log(availability)
             type="text"
             name="user-nickname"
             id="user-nickname"
-            placeholder={"영어, 한글로 6글자까지 입력"}
+            placeholder={'영어, 한글로 6글자까지 입력'}
             onChange={(e) => checkNickname(e)}
             defaultValue={defaultValue || ''}
           />

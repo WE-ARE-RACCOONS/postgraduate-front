@@ -5,7 +5,12 @@ import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
-import { changeNickname, nickname, notDuplicate, phoneNumValidation } from '@/stores/signup';
+import {
+  changeNickname,
+  nickname,
+  notDuplicate,
+  phoneNumValidation,
+} from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
@@ -15,15 +20,15 @@ function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
   const [myNickName, setNickName] = useAtom(nickname);
-  const changeNick = useAtomValue(changeNickname)
+  const changeNick = useAtomValue(changeNickname);
   const [phoneNumber, setPhoneNumber] = useAtom(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken } = useAuth();
   const router = useRouter();
-  const [nickAvail , setNickAvail] = useState(false)
+  const [nickAvail, setNickAvail] = useState(false);
   const availability = useAtomValue(notDuplicate);
-  const availablePhone = useAtomValue(phoneNumValidation)
+  const availablePhone = useAtomValue(phoneNumValidation);
   useEffect(() => {
     const token = getAccessToken();
     if (token) {
@@ -89,7 +94,7 @@ function page() {
         )
         .then((response) => {
           const res = response.data;
-          console.log(res)
+          console.log(res);
           if (res.code == 'UR201') {
             router.push('/mypage');
           }
@@ -119,8 +124,12 @@ function page() {
         </div>
       )}
       <NicknameForm defaultValue={myNickName} />
-      <PhoneNumForm defaultValue={phoneNumber}/>
-      {availability ?  <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn> :<ProfileSetBtnNon >저장하기</ProfileSetBtnNon>}
+      <PhoneNumForm defaultValue={phoneNumber} />
+      {availability ? (
+        <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
+      ) : (
+        <ProfileSetBtnNon>저장하기</ProfileSetBtnNon>
+      )}
     </div>
   );
 }
@@ -167,7 +176,7 @@ const ProfileSetBtnNon = styled.button`
   align-items: center;
   gap: 0.625rem;
   border-radius: 0.75rem;
-  background: #DEE2E6;
+  background: #dee2e6;
   border: none;
   margin-top: 38%;
   margin-left: 0.5rem;

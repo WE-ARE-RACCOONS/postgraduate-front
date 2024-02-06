@@ -90,7 +90,7 @@ function MentoringApplyPayPage() {
         PaypleCpayAuthCheck(obj);
       });
     });
-    router.push('/')
+    router.push('/');
   }, []);
   const payHandler = () => {
     /** 결제 연결 필요 */

@@ -4,7 +4,7 @@ import Script from 'next/script';
 import $ from 'jquery';
 import { useRouter } from 'next/navigation';
 const PayplePayment = () => {
-    const router = useRouter();
+  const router = useRouter();
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
   useEffect(() => {
     $(document).ready(() => {
