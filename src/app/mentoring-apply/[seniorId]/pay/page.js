@@ -27,6 +27,8 @@ import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import Script from 'next/script';
 import $ from 'jquery';
+import { TEMRS_LINK } from '@/constants/terms/terms';
+
 function MentoringApplyPayPage() {
   const [nickName, setNickName] = useState('');
   const [profile, setProfile] = useState('');
@@ -261,11 +263,35 @@ function MentoringApplyPayPage() {
         </MAPNoticeWrapper>
         <MAPPolicyWrapper>
           <MAPTitle>{MENTORING_PAY_TITLE.noShow}</MAPTitle>
-          <button className="policy-more-detail">자세히 알아보기</button>
+          <button
+            className="policy-more-detail"
+            onClick={() => {
+              if (typeof window !== undefined)
+                window.open(
+                  TEMRS_LINK.noShowPolicy,
+                  '_blank',
+                  'noopener, noreferrer',
+                );
+            }}
+          >
+            자세히 알아보기
+          </button>
         </MAPPolicyWrapper>
         <MAPPolicyWrapper>
           <MAPTitle>{MENTORING_PAY_TITLE.refund}</MAPTitle>
-          <button className="policy-more-detail">자세히 알아보기</button>
+          <button
+            className="policy-more-detail"
+            onClick={() => {
+              if (typeof window !== undefined)
+                window.open(
+                  TEMRS_LINK.refundPolicy,
+                  '_blank',
+                  'noopener, noreferrer',
+                );
+            }}
+          >
+            자세히 알아보기
+          </button>
         </MAPPolicyWrapper>
       </MAPContent>
       <MAPBtnContainer>

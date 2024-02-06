@@ -25,9 +25,11 @@ export default function Home() {
   const [data, setData] = useState([]);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
+
   useEffect(() => {
     setCurrentPath();
   }, []);
+
   useEffect(() => {
     if (field && postgradu) {
       axios
@@ -42,9 +44,11 @@ export default function Home() {
         });
     }
   }, [field, postgradu]);
+
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',
   );
+
   const {
     modal: searchModal,
     modalHandler: searchModalHandler,

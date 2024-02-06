@@ -18,6 +18,7 @@ export const BtnStyle = styled.button`
   line-height: normal;
   border: none;
   margin: 0 0.5rem;
+  cursor: pointer;
 `;
 export const BtnStyleNon = styled.button`
   display: flex;
