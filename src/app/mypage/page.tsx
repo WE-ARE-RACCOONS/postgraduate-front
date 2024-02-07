@@ -133,10 +133,10 @@ function MyPage() {
   }, [accessTkn, userType]);
 
   return (
-    <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
+    <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' , height: '100vh'}}>
       <LogoLayer modalHandler={searchModalHandler} />
       {accessTkn ? (
-        <div style={{ backgroundColor: '#F8F9FA' }}>
+        <div style={{ backgroundColor: '#F8F9FA' ,marginTop:'1rem'}}>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
@@ -166,7 +166,7 @@ function MyPage() {
       ) : (
         <NotLmypage modalHandler={modalHandler}></NotLmypage>
       )}
-      <div style={{ marginTop: '1rem' }}>
+      <div style={{ backgroundColor: '#F8F9FA',marginTop: '1rem', border:'none'}}>
         <CustomerCenter />
       </div>
       <MenuBar modalHandler={loginRequestHandler} />
