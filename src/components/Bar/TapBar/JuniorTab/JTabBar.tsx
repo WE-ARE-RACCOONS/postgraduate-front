@@ -86,7 +86,7 @@ function TabBar() {
                       ) : (
                         <ModalBtn
                           type={'show'}
-                          btnText={'리뷰 작성하기'}
+                          btnText={'내 신청서 보기'}
                           modalHandler={modalHandler}
                           onClick={() => {
                             setModalType('junior');
