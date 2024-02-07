@@ -199,10 +199,6 @@ const MentoringApplyBtn = styled.button`
   font-weight: 700;
   font-family: Pretendard;
   cursor: pointer;
-
-  @media (min-width: 600px) {
-    width: 34rem;
-  }
 `;
 
 export default SeniorInfoPage;
