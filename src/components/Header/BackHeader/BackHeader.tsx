@@ -16,7 +16,7 @@ function BackHeader({ headerText, kind }: BackHeaderProps) {
         src={back_arrow}
         alt="뒤로가기 화살표"
         onClick={() => {
-          if (kind === 'select') {
+          if (kind === 'home') {
             router.push('/');
           } else {
             router.back();

@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import camera from '@../../../public/check.png';
+import camera from '@../../../public/camera.png';
 import { AuthImgBtn } from './Photo.styled';
 import upload from '@../../../public/upload.png';
 import { PhotoProps } from '@/types/photo/photo';

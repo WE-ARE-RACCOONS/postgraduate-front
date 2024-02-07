@@ -4,8 +4,13 @@ import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useAtomValue } from 'jotai';
-import { nickname } from '@/stores/signup';
+import { useAtom, useAtomValue } from 'jotai';
+import {
+  changeNickname,
+  nickname,
+  notDuplicate,
+  phoneNumValidation,
+} from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
@@ -14,12 +19,16 @@ import BackHeader from '@/components/Header/BackHeader';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
-  const nickName = useAtomValue(nickname);
-  const phoneNumber = useAtomValue(phoneNum);
+  const [myNickName, setNickName] = useAtom(nickname);
+  const changeNick = useAtomValue(changeNickname);
+  const [phoneNumber, setPhoneNumber] = useAtom(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken } = useAuth();
   const router = useRouter();
+  const [nickAvail, setNickAvail] = useState(false);
+  const availability = useAtomValue(notDuplicate);
+  const availablePhone = useAtomValue(phoneNumValidation);
   useEffect(() => {
     const token = getAccessToken();
     if (token) {
@@ -27,8 +36,10 @@ function page() {
         Authorization: `Bearer ${token}`,
       };
       axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, { headers })
         .then((res) => {
+          setNickName(res.data.data.nickName);
+          setPhoneNumber(res.data.data.phoneNumber);
           setprofile(res.data.data.profile);
         })
         .catch(function (error) {
@@ -66,13 +77,13 @@ function page() {
           });
       }
     }
-    if (editProfileUrl || nickName || phoneNumber) {
+    if (editProfileUrl || myNickName || phoneNumber) {
       axios
         .patch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
           {
-            profile: editProfileUrl,
-            nickName: nickName,
+            profile: editProfileUrl ? editProfileUrl : profile,
+            nickName: myNickName,
             phoneNumber: phoneNumber,
           },
           {
@@ -111,9 +122,13 @@ function page() {
           </div>
         </div>
       )}
-      <NicknameForm />
-      <PhoneNumForm />
-      <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
+      <NicknameForm defaultValue={myNickName} />
+      <PhoneNumForm defaultValue={phoneNumber} />
+      {availability ? (
+        <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
+      ) : (
+        <ProfileSetBtnNon>저장하기</ProfileSetBtnNon>
+      )}
     </div>
   );
 }
@@ -141,6 +156,26 @@ const ProfileSetBtn = styled.button`
   gap: 0.625rem;
   border-radius: 0.75rem;
   background: #2fc4b2;
+  border: none;
+  margin-top: 38%;
+  margin-left: 0.5rem;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+`;
+const ProfileSetBtnNon = styled.button`
+  display: flex;
+  width: 21.4375rem;
+  padding: 1rem 0rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 0.75rem;
+  background: #dee2e6;
   border: none;
   margin-top: 38%;
   margin-left: 0.5rem;
