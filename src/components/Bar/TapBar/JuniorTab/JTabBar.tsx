@@ -24,6 +24,7 @@ import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import DimmedModal from '@/components/Modal/DimmedModal';
+import FullModal from '@/components/Modal/FullModal';
 function TabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -139,9 +140,10 @@ function TabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-      {modal && portalElement
+        {modal && portalElement
         ? createPortal(
-            <MentoringSpec
+            <FullModal
+            modalType='junior-mentoring-spec'
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}

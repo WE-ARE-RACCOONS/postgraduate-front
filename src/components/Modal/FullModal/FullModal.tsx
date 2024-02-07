@@ -10,6 +10,7 @@ import AddTime from '@/components/Content/AddTime';
 import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
 import SelectCalendar from '@/components/Content/SelectCalendar';
 import { firAbleTimeAtom } from '@/stores/mentoring';
+import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 function FullModal(props: FullModalProps) {
   return (
     <>
@@ -22,6 +23,13 @@ function FullModal(props: FullModalProps) {
         )}
         {props.modalType == 'senior-my-profile' && (
           <SeniorMyProfile modalHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'junior-mentoring-spec' && (
+          <MentoringSpec
+          modalHandler={props.modalHandler}
+          cancelModalHandler={props.cancelModalHandler ? props.cancelModalHandler : () => {}}
+          mentoringId={props.mentoringId ? props.mentoringId : 0}
+        />
         )}
         {props.modalType == 'profile-modify' && (
           <ProfileModify modalHandler={props.modalHandler} />

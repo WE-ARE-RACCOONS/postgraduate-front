@@ -11,6 +11,7 @@ export const ModalMentoringBackground = styled.div`
 
   @media (min-width: 360px) and (max-width: 600px) {
     width: 360px;
+    height: 100vh;
   }
 `;
 export const ModalClose = styled.button`
