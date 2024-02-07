@@ -47,6 +47,7 @@ function SeniorInfoPage() {
   const setSecAbleTime = useSetAtom(secAbleTimeAtom);
   const setThiAbleTime = useSetAtom(thiAbleTimeAtom);
   const { modal, modalHandler, portalElement } = useModal('mentoring-login-portal');
+  const { modal: cjModal, modalHandler: cjModalHandler, portalElement: cjPortalEl } = useModal('change-junior-portal');
 
   useEffect(() => {
     setTempSubject('');
@@ -108,7 +109,7 @@ function SeniorInfoPage() {
 
       if(userType == 'senior') {
         // 후배 회원 전환 요청 모달 출현
-        
+        cjModalHandler();
       }
 
     } else {
@@ -162,6 +163,12 @@ function SeniorInfoPage() {
         ? createPortal(
             <DimmedModal modalType="mentoringLogin" modalHandler={modalHandler} />,
             portalElement,
+          )
+        : ''}
+      {cjModal && cjPortalEl
+        ? createPortal(
+            <DimmedModal modalType='changeJunior' modalHandler={cjModalHandler} />,
+            cjPortalEl,
           )
         : ''}
     </SeniorInfoPageContainer>
