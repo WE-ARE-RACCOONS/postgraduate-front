@@ -8,7 +8,8 @@ export type DimmedModalType =
   | 'notRegistered'
   | 'mypageSuggest'
   | 'authAproveMsg'
-  | 'notJunior';
+  | 'notJunior'
+  | 'mentoringLogin';
 
 export interface DimmedModalProps {
   certifiReg?: string;
