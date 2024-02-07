@@ -20,7 +20,6 @@ function LogoLayer(props: SearchModalProps) {
       setIsLogin(true);
     }
   }, []);
-
   const handleClick = () => {
     props.modalHandler();
   };
@@ -38,7 +37,7 @@ function LogoLayer(props: SearchModalProps) {
           height={24}
           priority
           onClick={logoClick}
-          style={{ marginRight: '0.13rem' }}
+          style={{ marginRight: '0.13rem', cursor: 'pointer' }}
         />
         <div className="none-name">대학원</div>
         <div className="bold-name">김선배</div>
