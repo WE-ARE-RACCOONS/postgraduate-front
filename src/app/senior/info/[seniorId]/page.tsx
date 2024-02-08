@@ -3,7 +3,9 @@ import IntroCard from '@/components/Card/IntroCard';
 import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
+import DimmedModal from '@/components/Modal/DimmedModal';
 import useAuth from '@/hooks/useAuth';
+import useModal from '@/hooks/useModal';
 import {
   firAbleTimeAtom,
   questionAtom,
@@ -16,13 +18,15 @@ import axios from 'axios';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+
 function SeniorInfoPage() {
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const mySeiorId = useAtomValue(mySeniorId).toString();
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, getUserType } = useAuth();
   const [findSeniorId, setFindSeniorId] = useAtom(enterSeniorId);
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState([]);
@@ -42,6 +46,8 @@ function SeniorInfoPage() {
   const setFirAbleTime = useSetAtom(firAbleTimeAtom);
   const setSecAbleTime = useSetAtom(secAbleTimeAtom);
   const setThiAbleTime = useSetAtom(thiAbleTimeAtom);
+  const { modal, modalHandler, portalElement } = useModal('mentoring-login-portal');
+  const { modal: cjModal, modalHandler: cjModalHandler, portalElement: cjPortalEl } = useModal('change-junior-portal');
 
   useEffect(() => {
     setTempSubject('');
@@ -91,10 +97,23 @@ function SeniorInfoPage() {
 
   const applyHandler = () => {
     const accessTkn = getAccessToken();
-    const seniorId = pathArr[pathArr.length - 1];
-    /** user type 확인하는 부분 추가 */
     if (accessTkn) {
-      router.push(`/mentoring-apply/${seniorId}/question`);
+      const userType = getUserType();
+
+      if(userType == 'junior') {
+        const seniorId = pathArr[pathArr.length - 1];
+        router.push(`/mentoring-apply/${seniorId}/question`);
+        return;
+      }
+
+      if(userType == 'senior') {
+        // 후배 회원 전환 요청 모달 출현
+        cjModalHandler();
+      }
+
+    } else {
+      // 로그인 요청 모달 출현
+      modalHandler();
     }
   };
 
@@ -139,6 +158,18 @@ function SeniorInfoPage() {
           </MentoringApplyBtn>
         </>
       )}
+      {modal && portalElement
+        ? createPortal(
+            <DimmedModal modalType="mentoringLogin" modalHandler={modalHandler} />,
+            portalElement,
+          )
+        : ''}
+      {cjModal && cjPortalEl
+        ? createPortal(
+            <DimmedModal modalType='changeJunior' modalHandler={cjModalHandler} />,
+            cjPortalEl,
+          )
+        : ''}
     </SeniorInfoPageContainer>
   );
 }
@@ -199,10 +230,6 @@ const MentoringApplyBtn = styled.button`
   font-weight: 700;
   font-family: Pretendard;
   cursor: pointer;
-
-  @media (min-width: 600px) {
-    width: 34rem;
-  }
 `;
 
 export default SeniorInfoPage;
