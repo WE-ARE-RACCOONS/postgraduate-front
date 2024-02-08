@@ -97,7 +97,6 @@ function SeniorInfoPage() {
 
   const applyHandler = () => {
     const accessTkn = getAccessToken();
-    /** user type 확인하는 부분 추가 */
     if (accessTkn) {
       const userType = getUserType();
 

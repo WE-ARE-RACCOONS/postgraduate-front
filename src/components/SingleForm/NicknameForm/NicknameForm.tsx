@@ -14,7 +14,7 @@ import {
 
 function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   const maxLength = 6;
-  const [userNick, useUserNick] = useAtom(nickname);
+  const [userNick, setUserNick] = useAtom(nickname);
   const [changeNick, setChangeNick] = useAtom(changeNickname);
   const [availability, useAvailability] = useAtom(notDuplicate);
   const [flag, setFlag] = useState(false);
@@ -25,16 +25,19 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
       setFlag(false);
     }
   }, [userNick, defaultValue]);
+
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
     e.currentTarget.value = filterInputText(e.currentTarget.value);
     e.currentTarget.value = checkLength(e.currentTarget.value);
-    if (e.currentTarget.value === userNick) {
-      //입력한것이 기존 닉네임과 같으면
+    if (e.currentTarget.value === defaultValue) {
+      // 입력한 것이 기존 닉네임과 같으면
       useAvailability(true);
       setFlag(false);
     } else {
+      // 입력한 거 저장 및 가용성 false
       useAvailability(false);
-      setChangeNick(e.currentTarget.value); //입력한거 저장 및 가용성 false
+      setUserNick(e.currentTarget.value);
+      setChangeNick(e.currentTarget.value);
     }
   }
 
@@ -51,9 +54,9 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
     return inputValue;
   }
 
-  //원래 닉네임과 바뀐닉네임이 다를때만 유효성 검사
+  // 원래 닉네임과 바뀐 닉네임이 다를때만 유효성 검사
   function checkDuplicate() {
-    if (changeNick.length > 0 && changeNick !== userNick) {
+    if (changeNick.length > 0 && changeNick !== defaultValue) {
       const params = { nickName: changeNick };
       axios
         .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
@@ -70,6 +73,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
         });
     }
   }
+
   return (
     <NicknameTotalContainer>
       <NicknameContainer>
