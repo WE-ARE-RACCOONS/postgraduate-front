@@ -18,14 +18,16 @@ import { useAtom, useAtomValue } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 function NotJunior(props: NotJuniorProps) {
   const socialId = useAtomValue(socialIdAtom);
+  const router = useRouter();
 
   const xClick = () => {
     props.modalHandler();
   };
-  const router = useRouter();
+  
   const seniorJoin = () => {
     router.push(`/signup/select/common-info/matching-info`);
   };
+  
   return (
     <div>
       <NotSeniorBoxTop>
@@ -41,6 +43,7 @@ function NotJunior(props: NotJuniorProps) {
           style={{
             margin: '1rem',
             color: '#CBCFDB',
+            cursor: 'pointer'
           }}
         />
       </NotSeniorBoxTop>
