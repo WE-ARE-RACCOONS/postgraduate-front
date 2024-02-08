@@ -23,11 +23,11 @@ function NotJunior(props: NotJuniorProps) {
   const xClick = () => {
     props.modalHandler();
   };
-  
+
   const seniorJoin = () => {
     router.push(`/signup/select/common-info/matching-info`);
   };
-  
+
   return (
     <div>
       <NotSeniorBoxTop>
@@ -43,7 +43,7 @@ function NotJunior(props: NotJuniorProps) {
           style={{
             margin: '1rem',
             color: '#CBCFDB',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         />
       </NotSeniorBoxTop>

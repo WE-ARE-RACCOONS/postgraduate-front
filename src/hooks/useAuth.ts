@@ -141,15 +141,15 @@ function useAuth() {
   /** 로그아웃 등 토큰 지우는 함수 */
   function removeTokens() {
     if (typeof window !== undefined) {
-      if(localStorage.hasOwnProperty('accessToken')) {
+      if (localStorage.hasOwnProperty('accessToken')) {
         localStorage.removeItem('accessToken');
       }
 
-      if(localStorage.hasOwnProperty('accessExpire')) {
+      if (localStorage.hasOwnProperty('accessExpire')) {
         localStorage.removeItem('accessExpire');
       }
 
-      if(localStorage.hasOwnProperty('userType')) {
+      if (localStorage.hasOwnProperty('userType')) {
         localStorage.removeItem('userType');
       }
 
@@ -164,7 +164,7 @@ function useAuth() {
     getRefreshToken,
     setUserType,
     getUserType,
-    removeTokens
+    removeTokens,
   };
 }
 

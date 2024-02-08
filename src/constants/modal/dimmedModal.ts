@@ -7,11 +7,11 @@ export const PROFILE_NOT_REGISTERED = {
 export const MENTORING_APPLY_LOGIN = {
   title: '멘토링 신청은\n로그인 후 가능합니다',
   desc: '3초만에 로그인하고\n프로필을 마음껏 열람하세요',
-  btnText: '로그인하러가기'
-}
+  btnText: '로그인하러가기',
+};
 
 export const MENTORING_APPLY_USER_TYPE = {
   title: '멘토링 신청은\n후배회원만 가능합니다',
   desc: '후배회원으로 변경은\n마이페이지에서 가능합니다',
-  btnText: '마이페이지로 가기'
-}
+  btnText: '마이페이지로 가기',
+};

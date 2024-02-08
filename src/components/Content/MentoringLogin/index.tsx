@@ -1,3 +1,3 @@
-import MentoringLogin from "./MentoringLogin";
+import MentoringLogin from './MentoringLogin';
 
 export default MentoringLogin;

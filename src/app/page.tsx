@@ -48,28 +48,35 @@ export default function Home() {
     setCurrentPath();
 
     const infiniteScroll = () => {
-      let isScrollAtBottom = window.innerHeight + window.scrollY >= document.body.offsetHeight;
-      if(isScrollAtBottom) {
-        axios.get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}&page=${page + 1}`)
-        .then((response) => {
-          const res = response.data;
-          if(res.code == 'SNR200') {
-            setData(data => [...data, ...res.data.seniorSearchResponses]);
-            setPage(page => page + 1);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        })
+      let isScrollAtBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+      if (isScrollAtBottom) {
+        axios
+          .get(
+            `${
+              process.env.NEXT_PUBLIC_SERVER_URL
+            }/senior/field?field=${field}&postgradu=${postgradu}&page=${
+              page + 1
+            }`,
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR200') {
+              setData((data) => [...data, ...res.data.seniorSearchResponses]);
+              setPage((page) => page + 1);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
-    }
+    };
 
     window.addEventListener('scroll', infiniteScroll);
 
     return () => {
       window.removeEventListener('scroll', infiniteScroll);
-    }
-
+    };
   }, [page]);
 
   const { modal, modalHandler, portalElement } = useModal(
