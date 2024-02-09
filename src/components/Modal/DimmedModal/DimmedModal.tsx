@@ -10,6 +10,8 @@ import SNotRegistered from '@/components/Content/SNotRegistered';
 import SuggestModal from '@/components/SuggestModal/SuggestModal';
 import AproveModal from '../AproveModal/AproveModal';
 import NotJunior from '@/components/NotJunior/NotJunior';
+import MentoringLogin from '@/components/Content/MentoringLogin';
+import ChangeJunior from '@/components/Content/ChangeJunior';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer onClick={props.modalHandler}>
@@ -52,6 +54,12 @@ function DimmedModal(props: DimmedModalProps) {
             certifiReg={props.certifiReg || ''}
             modalHandler={props.modalHandler}
           />
+        )}
+        {props.modalType == 'mentoringLogin' && (
+          <MentoringLogin modalHandler={props.modalHandler} />
+        )}
+        {props.modalType == 'changeJunior' && (
+          <ChangeJunior modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>
