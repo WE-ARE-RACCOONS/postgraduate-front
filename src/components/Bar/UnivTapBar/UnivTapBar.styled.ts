@@ -14,4 +14,5 @@ export const TapStyle = styled.div<TapStyleProps>`
   border: ${({ selected }) =>
     selected ? '1px solid #2FC4B2' : '1px solid #DEE2E6'};
   color: ${({ selected }) => (selected ? '#2fc4b2' : '#DEE2E6')};
+  cursor: pointer;
 `;

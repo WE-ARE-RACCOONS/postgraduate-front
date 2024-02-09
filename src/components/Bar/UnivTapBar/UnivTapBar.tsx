@@ -3,13 +3,16 @@ import React from 'react';
 import { TapStyle } from './UnivTapBar.styled';
 import { smtapType } from '@/types/tap/tap';
 import { suactiveTabAtom } from '@/stores/tap';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { SMTAB } from '@/constants/tab/ctap';
 import Image from 'next/image';
 import check from '../../../../public/check.png';
 import nonCheck from '../../../../public/non-check.png';
+import { pageNumAtom } from '@/stores/home';
 function UnivTapBar() {
   const [fuActiveTab, setFuActiveTab] = useAtom(suactiveTabAtom);
+  const setPageNum = useSetAtom(pageNumAtom);
+
   const renderCheckmark = (tabIndex: smtapType) => {
     return fuActiveTab === tabIndex ? (
       <Image
@@ -33,8 +36,10 @@ function UnivTapBar() {
       />
     );
   };
+
   const handleTabClick = (tabIndex: smtapType) => {
     setFuActiveTab(tabIndex);
+    setPageNum(1);
   };
 
   return (

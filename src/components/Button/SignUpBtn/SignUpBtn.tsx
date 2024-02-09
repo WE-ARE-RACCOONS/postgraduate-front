@@ -13,9 +13,6 @@ import {
 } from '@/stores/matching';
 
 function SignUpBtn() {
-  const currentPath = usePathname();
-  // const pathArr = currentPath.split('/');
-  // const socialId = pathArr[2];
   const socialId = useAtomValue(socialIdAtom);
   const nickName = useAtomValue(nickname);
   const phoneNumber = useAtomValue(phoneNum);
@@ -24,9 +21,53 @@ function SignUpBtn() {
   const field = useAtomValue(desiredField);
   const matchingReceive = useAtomValue(matchingReceiveAtom);
   const router = useRouter();
-  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
+  const { setAccessToken, setRefreshToken, setUserType, getAccessToken } =
+    useAuth();
 
   const handleSignUp = () => {
+    const accessTkn = getAccessToken();
+
+    // 선배 -> 후배 변경 회원
+    if (accessTkn) {
+      if (major && field) {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/change`,
+            {
+              major: major,
+              field: field,
+              matchingReceive: matchingReceive,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+
+            if (res.code == 'AU202') {
+              setAccessToken({
+                token: res.data.accessToken,
+                expires: res.data.accessExpiration,
+              });
+              setRefreshToken({
+                token: res.data.refreshToken,
+                expires: res.data.refreshExpiration,
+              });
+              setUserType(res.data.role);
+
+              router.push('/signup/done');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+      return;
+    }
+
     if (socialId && nickName) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/signup`, {

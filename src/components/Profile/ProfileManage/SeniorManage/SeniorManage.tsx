@@ -22,7 +22,8 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } =
+    useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
@@ -98,12 +99,12 @@ function SeniorManage(props: SeniorManageProps) {
           { headers },
         );
 
-        if (response.data.data.possible === true) {
+        if (response.data.data.possible == true) {
           setuserTypeAtom('junior');
-          router.push('/mypage');
+          renewJuniorToken();
         }
 
-        if (response.data.data.possible === false) {
+        if (response.data.data.possible == false) {
           setSocialId(response.data.data.socialId);
           juniorHandler();
         }
@@ -112,9 +113,48 @@ function SeniorManage(props: SeniorManageProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
+
+  const renewJuniorToken = () => {
+    const accessTkn = getAccessToken();
+    if (accessTkn) {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/token`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessTkn}`,
+            },
+          },
+        )
+        .then((response) => {
+          const res = response.data;
+
+          if (res.code == 'AU202') {
+            setAccessToken({
+              token: res.data.accessToken,
+              expires: res.data.accessExpiration,
+            });
+            setRefreshToken({
+              token: res.data.refreshToken,
+              expires: res.data.refreshExpiration,
+            });
+            setUserType(res.data.role);
+
+            router.replace('/');
+            return;
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
   const editProf = () => {
     router.push('/senior/edit-profile');
   };
+
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>

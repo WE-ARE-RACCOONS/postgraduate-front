@@ -8,7 +8,6 @@ export interface SeniorProfileData {
   lab: string;
   major: string;
   nickName: string;
-  oneLiner: string;
   postgradu: string;
   seniorId: number;
 }
