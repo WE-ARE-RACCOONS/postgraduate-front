@@ -46,6 +46,7 @@ function NotSenior(props: NotSeniorProps) {
           }}
         />
       </NotSeniorBoxTop>
+      <div style={{justifyContent:'center', alignItems:'center',display:'flex'}}>
       <NotSeniorMid>
         <NSMain>{SENIOR_MODAL.notSeniorUser}</NSMain>
         <div
@@ -59,6 +60,7 @@ function NotSenior(props: NotSeniorProps) {
           <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
         </div>
       </NotSeniorMid>
+      </div>
       <NotSeniorBottom>
         <NSBtn onClick={seniorJoin}>대학원 선배로 가입하기</NSBtn>
       </NotSeniorBottom>
