@@ -2,7 +2,7 @@ import React from 'react';
 import { SearchModalBgBox, SearchModalInput } from './SearchModal.styled';
 import { SearchModalProps } from '@/types/modal/search';
 import Image from 'next/image';
-import search from '../../../../public/search.png';
+import search from '../../../../public/search2.png';
 import HomeSearchForm from '@/components/SingleForm/HomeSearchForm/HomeSearchForm';
 export default function SearchModal(props: SearchModalProps) {
   const ModalClick = () => {
@@ -15,11 +15,12 @@ export default function SearchModal(props: SearchModalProps) {
           id="search"
           src={search}
           alt="검색"
-          sizes="(max-width: 600px) 3.rem"
+        width={32}
+        height={32}
           priority
           style={{
             position: 'absolute',
-            top: '65%',
+            top: '62%',
             left: '3%',
           }}
         />
