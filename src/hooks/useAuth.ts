@@ -7,10 +7,10 @@ import { useAtom } from 'jotai';
 import { useCookies } from 'react-cookie';
 
 function useAuth() {
-  const [cookies, setCookie] = useCookies(['refresh_token']);
+  const [cookies, setCookie, removeCookie] = useCookies(['refresh_token']);
   // const [accessTkn, setAccessTkn] = useAtom(accessTokenAtom);
-  const [accessExp, setAccessExp] = useAtom(accessExpireAtom);
-  const [type, setType] = useAtom(userTypeAtom);
+  // const [accessExp, setAccessExp] = useAtom(accessExpireAtom);
+  // const [type, setType] = useAtom(userTypeAtom);
 
   /** 초 단위 만료 시간 Date 객체로 반환 */
   function calculateExpires(expires: number) {
@@ -138,6 +138,25 @@ function useAuth() {
     } catch {}
   }
 
+  /** 로그아웃 등 토큰 지우는 함수 */
+  function removeTokens() {
+    if (typeof window !== undefined) {
+      if (localStorage.hasOwnProperty('accessToken')) {
+        localStorage.removeItem('accessToken');
+      }
+
+      if (localStorage.hasOwnProperty('accessExpire')) {
+        localStorage.removeItem('accessExpire');
+      }
+
+      if (localStorage.hasOwnProperty('userType')) {
+        localStorage.removeItem('userType');
+      }
+
+      removeCookie('refresh_token', { path: '/' });
+    }
+  }
+
   return {
     setAccessToken,
     setRefreshToken,
@@ -145,6 +164,7 @@ function useAuth() {
     getRefreshToken,
     setUserType,
     getUserType,
+    removeTokens,
   };
 }
 

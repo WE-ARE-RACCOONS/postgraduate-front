@@ -18,23 +18,22 @@ import SearchModal from '../components/Modal/SearchModal';
 import useAuth from '../hooks/useAuth';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
+import { SeniorProfileData } from '@/types/profile/seniorProfile';
+import { pageNumAtom } from '@/stores/home';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Array<SeniorProfileData>>([]);
+  const [page, setPage] = useAtom(pageNumAtom);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
-
-  useEffect(() => {
-    setCurrentPath();
-  }, []);
 
   useEffect(() => {
     if (field && postgradu) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}&page=${page}`,
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
@@ -44,6 +43,41 @@ export default function Home() {
         });
     }
   }, [field, postgradu]);
+
+  useEffect(() => {
+    setCurrentPath();
+
+    const infiniteScroll = () => {
+      let isScrollAtBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+      if (isScrollAtBottom) {
+        axios
+          .get(
+            `${
+              process.env.NEXT_PUBLIC_SERVER_URL
+            }/senior/field?field=${field}&postgradu=${postgradu}&page=${
+              page + 1
+            }`,
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR200') {
+              setData((data) => [...data, ...res.data.seniorSearchResponses]);
+              setPage((page) => page + 1);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    };
+
+    window.addEventListener('scroll', infiniteScroll);
+
+    return () => {
+      window.removeEventListener('scroll', infiniteScroll);
+    };
+  }, [page]);
 
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',

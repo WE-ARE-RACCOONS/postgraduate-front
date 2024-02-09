@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const CJContainer = styled.div`
   width: 18.5rem;
@@ -16,7 +16,7 @@ export const CJContainer = styled.div`
     right: 0;
     cursor: pointer;
   }
-`
+`;
 
 export const CJTitle = styled.div`
   font-size: 20px;
@@ -27,23 +27,23 @@ export const CJTitle = styled.div`
   top: 2.2rem;
   left: 50%;
   transform: translateX(-50%);
-`
+`;
 
 export const CJDesc = styled.div`
   font-size: 17px;
   white-space: pre;
   text-align: center;
-  color: #868E96;
+  color: #868e96;
   position: absolute;
   top: 6.1rem;
   left: 50%;
   transform: translateX(-50%);
-`
+`;
 
 export const CJBtn = styled.button`
   width: 18.5rem;
   height: 3.375rem;
-  background-color: #2FC4B2;
+  background-color: #2fc4b2;
   color: #fff;
   font-size: 18px;
   font-family: Pretendard;
@@ -53,4 +53,4 @@ export const CJBtn = styled.button`
   cursor: pointer;
   position: absolute;
   bottom: 0;
-`
+`;
