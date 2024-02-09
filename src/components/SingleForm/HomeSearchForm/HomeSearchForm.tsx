@@ -8,7 +8,7 @@ import {
 } from './HomeSearchForm.styled';
 import { SearchModalProps } from '@/types/modal/search';
 
-function HomeSearchForm(props:SearchModalProps) {
+function HomeSearchForm(props: SearchModalProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
   const handleInputChange = (e: React.ChangeEvent<any>) => {

@@ -15,8 +15,8 @@ export default function SearchModal(props: SearchModalProps) {
           id="search"
           src={search}
           alt="검색"
-        width={32}
-        height={32}
+          width={32}
+          height={32}
           priority
           style={{
             position: 'absolute',
@@ -24,7 +24,7 @@ export default function SearchModal(props: SearchModalProps) {
             left: '3%',
           }}
         />
-        <HomeSearchForm modalHandler={props.modalHandler}/>
+        <HomeSearchForm modalHandler={props.modalHandler} />
       </SearchModalInput>
     </SearchModalBgBox>
   );
