@@ -103,7 +103,6 @@ function page() {
         });
     }
   };
-  console.log(availability);
   return (
     <div style={{ justifyContent: 'center', alignItems: 'center' }}>
       <BackHeader headerText="계정 설정" />
