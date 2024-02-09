@@ -24,7 +24,7 @@ export default function SearchModal(props: SearchModalProps) {
             left: '3%',
           }}
         />
-        <HomeSearchForm />
+        <HomeSearchForm modalHandler={props.modalHandler}/>
       </SearchModalInput>
     </SearchModalBgBox>
   );

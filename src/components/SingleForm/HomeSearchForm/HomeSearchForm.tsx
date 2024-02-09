@@ -6,8 +6,9 @@ import {
   HomeSearchFormBox,
   HomeSearchFormInput,
 } from './HomeSearchForm.styled';
+import { SearchModalProps } from '@/types/modal/search';
 
-function HomeSearchForm() {
+function HomeSearchForm(props:SearchModalProps) {
   const [searchTerm, setSearchTerm] = useState('');
   const router = useRouter();
   const handleInputChange = (e: React.ChangeEvent<any>) => {
@@ -17,6 +18,7 @@ function HomeSearchForm() {
   const keyPressDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       router.push(`/search-results?searchTerm=${searchTerm}`);
+      props.modalHandler();
     }
   };
   return (
