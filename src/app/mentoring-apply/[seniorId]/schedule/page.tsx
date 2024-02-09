@@ -233,6 +233,7 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
     font-family: Pretendard;
     border-radius: 12px;
     border: none;
+    cursor: pointer;
   }
 
   .prev-btn {
@@ -243,6 +244,7 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
   }
 
   .next-btn {
+    cursor: pointer;
     width: 62%;
     height: 3.375rem;
     background-color: #f1f3f5;
