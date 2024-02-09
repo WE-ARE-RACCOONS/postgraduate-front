@@ -3,6 +3,7 @@ import { useEffect } from 'react';
 import Script from 'next/script';
 import $ from 'jquery';
 import { useRouter } from 'next/navigation';
+import { ACTION } from 'next/dist/client/components/app-router-headers';
 const PayplePayment = () => {
   const router = useRouter();
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
@@ -27,14 +28,14 @@ const PayplePayment = () => {
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;
 
-        obj.PCD_RST_URL = 'http://localhost:3000/api/payple'; // 결제결과 수신 URL
+        obj.PCD_RST_URL = 'https://kimseonbaedevelop.com/payment/payple/dev/result'; // 결제결과 수신 URL
 
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });
     });
   }, []);
-
+console.log(ACTION.payload);
   return (
     <div>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>

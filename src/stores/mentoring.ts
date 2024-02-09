@@ -8,3 +8,4 @@ export const sAbleMentoringTimeArr = atom<Array<TimeObj>>([]);
 export const firAbleTimeAtom = atom<string>('');
 export const secAbleTimeAtom = atom<string>('');
 export const thiAbleTimeAtom = atom<string>('');
+export const orderIdAtom = atom<string>('');

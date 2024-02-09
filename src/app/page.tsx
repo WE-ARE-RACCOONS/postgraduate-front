@@ -22,6 +22,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import { SeniorProfileData } from '@/types/profile/seniorProfile';
 import { pageNumAtom } from '@/stores/home';
+import { useRouter } from 'next/router';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
   const [data, setData] = useState<Array<SeniorProfileData>>([]);
@@ -30,6 +31,7 @@ export default function Home() {
   const postgradu = useAtomValue(suactiveTabAtom);
 
   useEffect(() => {
+
     if (field && postgradu) {
       axios
         .get(
