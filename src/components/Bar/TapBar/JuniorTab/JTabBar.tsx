@@ -140,10 +140,10 @@ function TabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-        {modal && portalElement
+      {modal && portalElement
         ? createPortal(
             <FullModal
-            modalType='junior-mentoring-spec'
+              modalType="junior-mentoring-spec"
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}

@@ -40,7 +40,6 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
       setChangeNick(e.currentTarget.value);
     }
   }
-  
 
   function filterInputText(inputValue: string) {
     const filteredValue = inputValue.replace(/[^a-zA-Zㄱ-힣]/g, '');

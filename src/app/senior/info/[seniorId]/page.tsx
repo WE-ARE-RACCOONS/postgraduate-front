@@ -46,8 +46,14 @@ function SeniorInfoPage() {
   const setFirAbleTime = useSetAtom(firAbleTimeAtom);
   const setSecAbleTime = useSetAtom(secAbleTimeAtom);
   const setThiAbleTime = useSetAtom(thiAbleTimeAtom);
-  const { modal, modalHandler, portalElement } = useModal('mentoring-login-portal');
-  const { modal: cjModal, modalHandler: cjModalHandler, portalElement: cjPortalEl } = useModal('change-junior-portal');
+  const { modal, modalHandler, portalElement } = useModal(
+    'mentoring-login-portal',
+  );
+  const {
+    modal: cjModal,
+    modalHandler: cjModalHandler,
+    portalElement: cjPortalEl,
+  } = useModal('change-junior-portal');
 
   useEffect(() => {
     setTempSubject('');
@@ -100,17 +106,16 @@ function SeniorInfoPage() {
     if (accessTkn) {
       const userType = getUserType();
 
-      if(userType == 'junior') {
+      if (userType == 'junior') {
         const seniorId = pathArr[pathArr.length - 1];
         router.push(`/mentoring-apply/${seniorId}/question`);
         return;
       }
 
-      if(userType == 'senior') {
+      if (userType == 'senior') {
         // 후배 회원 전환 요청 모달 출현
         cjModalHandler();
       }
-
     } else {
       // 로그인 요청 모달 출현
       modalHandler();
@@ -160,13 +165,19 @@ function SeniorInfoPage() {
       )}
       {modal && portalElement
         ? createPortal(
-            <DimmedModal modalType="mentoringLogin" modalHandler={modalHandler} />,
+            <DimmedModal
+              modalType="mentoringLogin"
+              modalHandler={modalHandler}
+            />,
             portalElement,
           )
         : ''}
       {cjModal && cjPortalEl
         ? createPortal(
-            <DimmedModal modalType='changeJunior' modalHandler={cjModalHandler} />,
+            <DimmedModal
+              modalType="changeJunior"
+              modalHandler={cjModalHandler}
+            />,
             cjPortalEl,
           )
         : ''}

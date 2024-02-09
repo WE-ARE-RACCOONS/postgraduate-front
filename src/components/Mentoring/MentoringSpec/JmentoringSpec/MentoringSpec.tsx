@@ -159,8 +159,8 @@ function MentoringSpec(props: ModalMentoringProps) {
       <div>
         <TextToggleButton text={data ? data.question : ''} />
       </div>
-      <div style={{marginBottom:'7rem'}}>
-      <ModalClose onClick={props.modalHandler}>확인 완료</ModalClose>
+      <div style={{ marginBottom: '7rem' }}>
+        <ModalClose onClick={props.modalHandler}>확인 완료</ModalClose>
       </div>
     </ModalMentoringBackground>
   );

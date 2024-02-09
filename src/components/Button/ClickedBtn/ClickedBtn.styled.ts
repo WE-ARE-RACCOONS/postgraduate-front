@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 export const BtnAdd = styled.div`
-cursor: pointer;
+  cursor: pointer;
   display: flex;
   width: 12.8rem;
   padding: 1rem 0rem;
@@ -18,7 +18,7 @@ cursor: pointer;
   line-height: normal;
 `;
 export const BtnSave = styled.div`
-cursor: pointer;
+  cursor: pointer;
   display: flex;
   width: 95%;
   padding: 1rem 0rem;
@@ -36,7 +36,7 @@ cursor: pointer;
   line-height: normal;
 `;
 export const BtnSaveNo = styled.div`
-cursor: pointer;
+  cursor: pointer;
   display: flex;
   width: 95%;
   padding: 1rem 0rem;
@@ -54,7 +54,7 @@ cursor: pointer;
   line-height: normal;
 `;
 export const BtnOut = styled.div`
-cursor: pointer;
+  cursor: pointer;
   margin-right: 0.5rem;
   width: 7.5rem;
   display: inline-flex;
@@ -73,7 +73,7 @@ cursor: pointer;
   line-height: normal;
 `;
 export const BtnModal = styled.div`
-cursor: pointer;
+  cursor: pointer;
   width: 9rem;
   padding: 1rem 0rem;
   margin-top: 8.5rem;

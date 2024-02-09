@@ -26,10 +26,12 @@ function FullModal(props: FullModalProps) {
         )}
         {props.modalType == 'junior-mentoring-spec' && (
           <MentoringSpec
-          modalHandler={props.modalHandler}
-          cancelModalHandler={props.cancelModalHandler ? props.cancelModalHandler : () => {}}
-          mentoringId={props.mentoringId ? props.mentoringId : 0}
-        />
+            modalHandler={props.modalHandler}
+            cancelModalHandler={
+              props.cancelModalHandler ? props.cancelModalHandler : () => {}
+            }
+            mentoringId={props.mentoringId ? props.mentoringId : 0}
+          />
         )}
         {props.modalType == 'profile-modify' && (
           <ProfileModify modalHandler={props.modalHandler} />

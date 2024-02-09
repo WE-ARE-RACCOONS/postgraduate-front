@@ -46,20 +46,26 @@ function NotSenior(props: NotSeniorProps) {
           }}
         />
       </NotSeniorBoxTop>
-      <div style={{justifyContent:'center', alignItems:'center',display:'flex'}}>
-      <NotSeniorMid>
-        <NSMain>{SENIOR_MODAL.notSeniorUser}</NSMain>
-        <div
-          style={{
-            marginTop: '1.5rem',
-            marginBottom: '1.5rem',
-            marginLeft: '1rem',
-          }}
-        >
-          <NSSub>{SENIOR_MODAL.needSeniorUserJoin}</NSSub>
-          <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
-        </div>
-      </NotSeniorMid>
+      <div
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          display: 'flex',
+        }}
+      >
+        <NotSeniorMid>
+          <NSMain>{SENIOR_MODAL.notSeniorUser}</NSMain>
+          <div
+            style={{
+              marginTop: '1.5rem',
+              marginBottom: '1.5rem',
+              marginLeft: '1rem',
+            }}
+          >
+            <NSSub>{SENIOR_MODAL.needSeniorUserJoin}</NSSub>
+            <NSSub>{SENIOR_MODAL.recommendJoin}</NSSub>
+          </div>
+        </NotSeniorMid>
       </div>
       <NotSeniorBottom>
         <NSBtn onClick={seniorJoin}>대학원 선배로 가입하기</NSBtn>

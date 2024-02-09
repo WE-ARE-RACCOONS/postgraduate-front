@@ -11,13 +11,13 @@ export type FullModalType =
   | 'senior-mentoring-time'
   | 'senior-mentoring-spec'
   | 'select-date-calendar'
-  |'junior-mentoring-spec';
+  | 'junior-mentoring-spec';
 
 export interface FullModalProps {
   modalType: FullModalType;
   modalHandler: () => void;
   bModalHandler?: () => void;
-  selectedMentoringId?:number;
+  selectedMentoringId?: number;
   cancelModalHandler?: () => void;
   acceptModalHandler?: () => void;
   mentoringId?: number;

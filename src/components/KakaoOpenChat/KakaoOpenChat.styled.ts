@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
-export const OpenChatBox = styled.div`
-`;
+export const OpenChatBox = styled.div``;
 
 export const OpenChatComent = styled.div`
   color: #495565;
@@ -14,18 +13,18 @@ export const OpenChatComent = styled.div`
 `;
 
 export const OpenChatBtn = styled.div`
-cursor: pointer;
-display: flex;
-text-align: center;
-justify-content: space-between;
-padding: 0 0.5rem;
-align-items: center;
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  align-items: center;
   width: 19rem;
   height: 2.375rem;
   border-radius: 0.5rem;
   background: #f8f9fa;
   border: none;
-  color: 868E96;
+  color: 868e96;
 `;
 export const OpenChatCopy = styled.div`
   z-index: 100;
