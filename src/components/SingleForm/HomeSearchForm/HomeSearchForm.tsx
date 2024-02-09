@@ -13,7 +13,6 @@ function HomeSearchForm() {
   const handleInputChange = (e: React.ChangeEvent<any>) => {
     setSearchTerm(e.target.value);
   };
-  const pathname = usePathname();
 
   const keyPressDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
@@ -29,14 +28,6 @@ function HomeSearchForm() {
         onChange={handleInputChange}
         onKeyDown={keyPressDown}
       />
-      <Link
-        href={{
-          pathname: '/search-results',
-          query: { searchTerm: searchTerm },
-        }}
-      >
-        Search
-      </Link>
     </HomeSearchFormBox>
   );
 }
