@@ -20,6 +20,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   const [flag, setFlag] = useState(false);
 
   useEffect(() => {
+    //기존서버 닉네임과 사용자입력 닉네임이 같을때
     if (defaultValue === userNick) {
       useAvailability(true);
       setFlag(false);
@@ -36,7 +37,6 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
     } else {
       // 입력한 거 저장 및 가용성 false
       useAvailability(false);
-      setUserNick(e.currentTarget.value);
       setChangeNick(e.currentTarget.value);
     }
   }

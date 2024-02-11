@@ -24,6 +24,7 @@ import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import DimmedModal from '@/components/Modal/DimmedModal';
+import FullModal from '@/components/Modal/FullModal';
 function TabBar() {
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -86,7 +87,7 @@ function TabBar() {
                       ) : (
                         <ModalBtn
                           type={'show'}
-                          btnText={'리뷰 작성하기'}
+                          btnText={'내 신청서 보기'}
                           modalHandler={modalHandler}
                           onClick={() => {
                             setModalType('junior');
@@ -141,7 +142,8 @@ function TabBar() {
       </TabResultContainer>
       {modal && portalElement
         ? createPortal(
-            <MentoringSpec
+            <FullModal
+              modalType="junior-mentoring-spec"
               modalHandler={modalHandler}
               cancelModalHandler={cancelModalHandler}
               mentoringId={selectedMentoringId || 0}

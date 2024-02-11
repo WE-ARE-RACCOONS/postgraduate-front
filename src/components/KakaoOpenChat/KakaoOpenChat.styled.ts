@@ -12,12 +12,19 @@ export const OpenChatComent = styled.div`
   margin: 0.4rem 0;
 `;
 
-export const OpenChatBtn = styled.button`
+export const OpenChatBtn = styled.div`
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  justify-content: space-between;
+  padding: 0 0.5rem;
+  align-items: center;
   width: 19rem;
   height: 2.375rem;
   border-radius: 0.5rem;
   background: #f8f9fa;
   border: none;
+  color: 868e96;
 `;
 export const OpenChatCopy = styled.div`
   z-index: 100;

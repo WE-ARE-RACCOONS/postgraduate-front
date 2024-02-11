@@ -507,6 +507,7 @@ const MAPBtnContainer = styled.div`
 
   #map-prev-btn {
     width: 34%;
+    cursor: pointer;
     background-color: #adb5bd;
   }
 

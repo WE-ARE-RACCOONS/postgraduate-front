@@ -7,6 +7,8 @@ import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
+import Image from 'next/image';
+import x_icon from '../../../../../public/x.png';
 import {
   ModalMentoringBackground,
   ModalClose,
@@ -22,6 +24,7 @@ import {
   ConfirmTitle,
   UserInfo,
   ConfirmState,
+  MMTop,
 } from './MentoringSpec.styled';
 
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
@@ -75,6 +78,20 @@ function MentoringSpec(props: ModalMentoringProps) {
   }, []);
   return (
     <ModalMentoringBackground>
+      <MMTop>
+        <div id="header-text">멘토링 신청서</div>
+        <div id="img">
+          <Image
+            id="x-icon"
+            src={x_icon}
+            alt="계정 수정 모달 닫기 버튼"
+            width={24}
+            height={24}
+            style={{}}
+            onClick={props.modalHandler}
+          />
+        </div>
+      </MMTop>
       <div
         style={{
           display: 'flex',
@@ -142,7 +159,9 @@ function MentoringSpec(props: ModalMentoringProps) {
       <div>
         <TextToggleButton text={data ? data.question : ''} />
       </div>
-      <ModalClose onClick={props.modalHandler}>확인 완료</ModalClose>
+      <div style={{ marginBottom: '7rem' }}>
+        <ModalClose onClick={props.modalHandler}>확인 완료</ModalClose>
+      </div>
     </ModalMentoringBackground>
   );
 }

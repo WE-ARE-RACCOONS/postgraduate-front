@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 export const SearchModalBgBox = styled.div`
-  width: 100%;
+  width: 22.5rem;
   @media (min-width: 360px) and (max-width: 600px) {
-    width: 360px;
+    width: 22.5rem;
   }
   height: 100%;
   position: fixed;
@@ -13,7 +13,7 @@ export const SearchModalBgBox = styled.div`
   background-color: rgba(39, 39, 39, 0.48);
 `;
 export const SearchModalInput = styled.div`
-  width: 37.3rem;
+  width: 360px;
   @media (min-width: 360px) and (max-width: 600px) {
     width: 360px;
   }
