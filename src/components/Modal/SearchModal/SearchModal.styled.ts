@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 export const SearchModalBgBox = styled.div`
-  width: 360px;
+  width: 22.5rem;
   @media (min-width: 360px) and (max-width: 600px) {
-    width: 360px;
+    width: 22.5rem;
   }
   height: 100%;
   position: fixed;
