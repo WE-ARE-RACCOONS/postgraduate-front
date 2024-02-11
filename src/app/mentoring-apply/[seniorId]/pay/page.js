@@ -5,9 +5,10 @@ import RoundedImage from '@/components/Image/RoundedImage';
 import styled from 'styled-components';
 import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from '@/components/Text/AuthLabeledText';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import {
   firAbleTimeAtom,
+  paySeniorIdAtom,
   questionAtom,
   secAbleTimeAtom,
   subjectAtom,
@@ -44,8 +45,10 @@ function MentoringApplyPayPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
+  const [paySeniorId,setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
+  setPaySeniorId(seniorId);
   const formatTime = (time) => {
     if (!time) return '';
 
@@ -87,7 +90,7 @@ function MentoringApplyPayPage() {
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;
 
-        obj.PCD_RST_URL = '/api/payple'; // 결제결과 수신 URL
+        obj.PCD_RST_URL = 'https://kimseonbaedevelop.com/payment/payple/dev/result'; // 결제결과 수신 URL
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });
