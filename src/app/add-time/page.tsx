@@ -112,6 +112,7 @@ const NextAddBtnSet = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;
 
 const PrevBtn = styled.button`
@@ -132,6 +133,7 @@ const PrevBtn = styled.button`
   font-weight: 700;
   line-height: normal;
   margin-left: 1rem;
+  cursor: pointer;
 `;
 
 const AddTimePageContainer = styled.div`

@@ -166,6 +166,7 @@ export const SMCBtn = styled.button`
   border: none;
   margin-bottom: 0.37rem;
 `;
+
 export const MApplyBox = styled.div`
   width: 95%;
   height: 5.875rem;

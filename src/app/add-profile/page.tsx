@@ -221,6 +221,7 @@ const ShowProfBtn = styled.button`
   line-height: normal;
   margin-left: 1rem;
   border: none;
+  cursor: pointer;
 `;
 const NextAddBtn = styled.button`
   display: flex;
@@ -240,6 +241,7 @@ const NextAddBtn = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;
 const NextAddBtnSet = styled.button`
   display: flex;
@@ -259,4 +261,5 @@ const NextAddBtnSet = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;

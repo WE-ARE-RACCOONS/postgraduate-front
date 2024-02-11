@@ -161,6 +161,7 @@ const SABtnT = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;
 const SABtnF = styled.div`
   display: flex;

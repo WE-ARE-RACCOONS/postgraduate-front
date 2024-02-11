@@ -53,7 +53,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
     }
   };
   return (
-    <>
+    <div style={{ textAlign: 'center', justifyContent: 'center' }}>
       {cancelStatus ? (
         <Image
           id="cState"
@@ -98,7 +98,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
           </>
         )}
       </MentoringCancelBox>
-    </>
+    </div>
   );
 }
 

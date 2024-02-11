@@ -9,15 +9,22 @@ import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
 import SearchDropDown from '@/components/DropDown/SearchDropDown';
+import useModal from '@/hooks/useModal';
+import SearchModal from '@/components/Modal/SearchModal';
+import { createPortal } from 'react-dom';
 
 function SearchResultPage() {
-  const router = useRouter();
   const { getAccessToken } = useAuth();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('searchTerm');
   const [sort, setSort] = useState('');
   const [data, setData] = useState([]);
   const [length, setLength] = useState('');
+  const {
+    modal: searchModal,
+    modalHandler: searchModalHandler,
+    portalElement: searchPortalElement,
+  } = useModal('search-portal');
   useEffect(() => {
     const Token = getAccessToken();
     const headers = {
@@ -43,7 +50,7 @@ function SearchResultPage() {
   }, [searchTerm]);
 
   const pageBack = () => {
-    router.back();
+    searchModalHandler();
   };
 
   return (
@@ -81,6 +88,12 @@ function SearchResultPage() {
           <div>해당하는 선배가 없어요</div>
         )}
       </SearchReasultProfile>
+      {searchModal && searchPortalElement
+        ? createPortal(
+            <SearchModal modalHandler={searchModalHandler} />,
+            searchPortalElement,
+          )
+        : ''}
     </>
   );
 }

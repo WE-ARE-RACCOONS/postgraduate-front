@@ -37,7 +37,7 @@ function KakaoOpenChat({ url }: KakaoOpenChatProps) {
             height={20}
             priority
             onClick={handleCopyClick}
-            style={{ marginLeft: '11.3rem' }}
+            style={{ marginLeft: '1rem' }}
           />
         </OpenChatBtn>
         {isCopied && <OpenChatCopy>복사되었습니다</OpenChatCopy>}
