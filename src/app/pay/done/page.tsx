@@ -1,3 +1,4 @@
+'use client';
 import { firAbleTimeAtom, orderIdAtom, paySeniorIdAtom, questionAtom, secAbleTimeAtom, subjectAtom, thiAbleTimeAtom } from '@/stores/mentoring'
 import axios from 'axios';
 import { useAtomValue } from 'jotai'

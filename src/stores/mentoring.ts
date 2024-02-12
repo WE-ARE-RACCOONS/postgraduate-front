@@ -10,3 +10,6 @@ export const secAbleTimeAtom = atom<string>('');
 export const thiAbleTimeAtom = atom<string>('');
 export const orderIdAtom = atom<string>('');
 export const paySeniorIdAtom = atom<string>('');
+export const PhoneNumberAtom = atom<string>('');
+export const userIdAtom = atom<string>('');
+export const seniorNickname = atom<string>('');

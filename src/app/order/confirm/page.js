@@ -18,17 +18,19 @@ const PayplePayment = () => {
         obj.PCD_CARD_VER = '02';
         //유저 userId
         obj.PCD_PAYER_NO = '1234';
-        obj.PCD_PAYER_NAME = '홍길동';
+        // obj.PCD_PAYER_NAME = '홍길동';
         //내 번호 넣으면 알림톡 감
         obj.PCD_PAYER_HP = '01012345678';
-        obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
+        // obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
         obj.PCD_PAY_GOODS = '멘토링 선배 닉네임';
         obj.PCD_PAY_TOTAL = '101';
         obj.PCD_PAY_ISTAX = 'Y';
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;
 
-        obj.PCD_RST_URL = 'https://kimseonbaedevelop.com/payment/payple/dev/result'; // 결제결과 수신 URL
+        obj.PCD_RST_URL = window.location.hostname.includes('localhost')
+        ? `https://kimseonbaedevelop.com/payment/payple/dev/result`
+        : `https://kimseonbaedevelop.com/payment/payple/result`  // 결제결과 수신 URL
 
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);

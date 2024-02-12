@@ -20,9 +20,7 @@ function NextBtn(props: NextBtnProps) {
 
   const handleClick = () => {
     if (props.kind == 'next') {
-      if (userNick && notDupli && checked && numValidation) {
-        router.push(currentPath + props.url);
-      }
+      router.push(currentPath + props.url);
       return;
     }
 
