@@ -91,7 +91,6 @@ function MentoringApplyPayPage() {
         )
         .then((response) => {
           const res = response.data;
-          console.log(res)
           if (res.code && res.code == 'SNR200') {
             setNickName(res.data.nickName);
             setProfile(res.data.profile);
