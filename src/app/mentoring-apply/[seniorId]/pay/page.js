@@ -53,6 +53,7 @@ function MentoringApplyPayPage() {
   const [paySeniorId,setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
+  const [dataLoaded, setDataLoaded] = useState(false);
   setPaySeniorId(seniorId);
   const formatTime = (time) => {
     if (!time) return '';
@@ -100,6 +101,7 @@ function MentoringApplyPayPage() {
             setLab(res.data.lab);
             setUserId(res.data.userId);
             setPhoneNumber(res.data.phoneNumber);
+            setDataLoaded(true);
           }
         })
         .catch((err) => {
@@ -108,7 +110,9 @@ function MentoringApplyPayPage() {
     }
   }, []);
   useEffect(() => {
+   
     $(document).ready(() => {
+      if (dataLoaded) {
       $('#requsetPayplePay').on('click', function (event) {
         let obj = new Object();
         obj.PCD_PAY_TYPE = 'card';
@@ -138,7 +142,7 @@ function MentoringApplyPayPage() {
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });
-    });
+    }});
   }, [nickName,userId,PhoneNumber]);
   return (
     <MAPContainer>
