@@ -137,8 +137,8 @@ function MentoringApplyPayPage() {
 
        // 결제결과 수신 URL
         obj.PCD_RST_URL = window.location.hostname.includes('localhost')
-        ? 'https://kimseonbaedevelop.com/payment/payple/dev/result'
-        : 'https://kimseonbaedevelop.com/payment/payple/result'
+        ? process.env.NEXT_PUBLIC_SERVER_URL_PAY_DEV
+        : process.env.NEXT_PUBLIC_SERVER_URL_PAY
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });

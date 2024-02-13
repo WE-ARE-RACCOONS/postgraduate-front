@@ -35,7 +35,7 @@ function MentoringApplyDonePage() {
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
           {
-            seniorId: paySeniorId,
+            // seniorId: paySeniorId,
             orderId:oderId,
             topic: topic,
             question: question,
@@ -50,7 +50,6 @@ function MentoringApplyDonePage() {
         .then((response) => {
           const res = response.data;
           if (res.code == 'MT202') {
-            //  router.push('/mentoring-apply/done');
           }
         })
         .catch((err) => {
@@ -59,7 +58,7 @@ function MentoringApplyDonePage() {
     }
   };
   useEffect(() => {
-    payHandler(); // This will be called after the component mounts
+    payHandler();
   }, []);
 
   return (
