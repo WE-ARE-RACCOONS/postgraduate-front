@@ -5,13 +5,17 @@ import RoundedImage from '@/components/Image/RoundedImage';
 import styled from 'styled-components';
 import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from '@/components/Text/AuthLabeledText';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import {
+  PhoneNumberAtom,
   firAbleTimeAtom,
+  paySeniorIdAtom,
   questionAtom,
   secAbleTimeAtom,
+  seniorNickname,
   subjectAtom,
   thiAbleTimeAtom,
+  userIdAtom,
 } from '@/stores/mentoring';
 import {
   MENTORING_PAY_ETC_TEXT,
@@ -30,11 +34,13 @@ import $ from 'jquery';
 import { TEMRS_LINK } from '@/constants/terms/terms';
 
 function MentoringApplyPayPage() {
-  const [nickName, setNickName] = useState('');
+  const [nickName, setNickName] = useAtom(seniorNickname);
   const [profile, setProfile] = useState('');
   const [postgradu, setPostgradu] = useState('');
   const [major, setMajor] = useState('');
   const [lab, setLab] = useState('');
+  const [PhoneNumber,setPhoneNumber] = useAtom(PhoneNumberAtom);
+  const [userId,setUserId] = useAtom(userIdAtom);
   const topic = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
   const firstTime = useAtomValue(firAbleTimeAtom);
@@ -44,8 +50,10 @@ function MentoringApplyPayPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
+  const [paySeniorId,setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
-  const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
+  const [dataLoaded, setDataLoaded] = useState(false);
+  setPaySeniorId(seniorId);
   const formatTime = (time) => {
     if (!time) return '';
 
@@ -66,73 +74,7 @@ function MentoringApplyPayPage() {
       return result;
     } else return '';
   };
-  useEffect(() => {
-    $(document).ready(() => {
-      $('#requsetPayplePay').on('click', function (event) {
-        let obj = new Object();
-        obj.PCD_PAY_TYPE = 'card';
-        obj.PCD_PAY_WORK = 'PAY';
-
-        /* 02 : 앱카드 결제창 */
-        obj.PCD_CARD_VER = '02';
-        //유저 userId
-        obj.PCD_PAYER_NO = '1234';
-        obj.PCD_PAYER_NAME = '홍길동';
-        //내 번호 넣으면 알림톡 감
-        obj.PCD_PAYER_HP = '01012345678';
-        obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
-        obj.PCD_PAY_GOODS = '멘토링 선배 닉네임';
-        obj.PCD_PAY_TOTAL = '101';
-        obj.PCD_PAY_ISTAX = 'Y';
-        obj.PCD_PAY_TAXTOTAL = '10';
-        obj.clientKey = PAPLE_CLIENT_KEY;
-
-        obj.PCD_RST_URL = '/api/payple'; // 결제결과 수신 URL
-        // 결제요청 함수 호출
-        PaypleCpayAuthCheck(obj);
-      });
-    });
-    router.push('/');
-  }, []);
   const payHandler = () => {
-    /** 결제 연결 필요 */
-
-    const accessTkn = getAccessToken();
-    if (
-      accessTkn &&
-      topic &&
-      question &&
-      firstTime &&
-      secondTime &&
-      thirdTime
-    ) {
-      const timeArr = [firstTime, secondTime, thirdTime];
-
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
-          {
-            seniorId: seniorId,
-            topic: topic,
-            question: question,
-            date: timeArr.join(','),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
-            },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code == 'MT202') {
-            router.push('/mentoring-apply/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
   };
 
   useEffect(() => {
@@ -149,12 +91,16 @@ function MentoringApplyPayPage() {
         )
         .then((response) => {
           const res = response.data;
+          console.log(res)
           if (res.code && res.code == 'SNR200') {
             setNickName(res.data.nickName);
             setProfile(res.data.profile);
             setPostgradu(res.data.postgradu);
             setMajor(res.data.major);
             setLab(res.data.lab);
+            setUserId(res.data.userId);
+            setPhoneNumber(res.data.phoneNumber);
+            setDataLoaded(true);
           }
         })
         .catch((err) => {
@@ -162,7 +108,40 @@ function MentoringApplyPayPage() {
         });
     }
   }, []);
+  useEffect(() => {
+   
+    $(document).ready(() => {
+      if (dataLoaded) {
+      $('#requsetPayplePay').on('click', function (event) {
+        let obj = new Object();
+        obj.PCD_PAY_TYPE = 'card';
+        obj.PCD_PAY_WORK = 'PAY';
+        /* 02 : 앱카드 결제창 */
+        obj.PCD_CARD_VER = '02';
+        //유저 userId
+        obj.PCD_PAYER_NO = userId;
+        // obj.PCD_PAYER_NAME = '홍길동';
+        //내 번호 넣으면 알림톡 감
+        obj.PCD_PAYER_HP = PhoneNumber;
+        // obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
+        obj.PCD_PAY_GOODS = nickName;
+        obj.PCD_PAY_TOTAL = '101';
+        // obj.PCD_PAY_TOTAL = '20000';
+        obj.PCD_PAY_ISTAX = 'Y';
+        obj.PCD_PAY_TAXTOTAL = '10';
+        obj.clientKey = window.location.hostname.includes('localhost')
+        ? process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY_DEV
+        : process.env.PAPLE_CLIENT_KEY_DEV
 
+       // 결제결과 수신 URL
+        obj.PCD_RST_URL = window.location.hostname.includes('localhost')
+        ? process.env.NEXT_PUBLIC_SERVER_URL_PAY_DEV
+        : process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY
+        // 결제요청 함수 호출
+        PaypleCpayAuthCheck(obj);
+      });
+    }});
+  }, [nickName,userId,PhoneNumber]);
   return (
     <MAPContainer>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
