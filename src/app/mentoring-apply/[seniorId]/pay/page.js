@@ -131,8 +131,7 @@ function MentoringApplyPayPage() {
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = window.location.hostname.includes('localhost')
         ? process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY_DEV
-        : process.env.PAPLE_CLIENT_KEY_DEV
-
+        : process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY
        // 결제결과 수신 URL
         obj.PCD_RST_URL = window.location.hostname.includes('localhost')
         ? process.env.NEXT_PUBLIC_SERVER_URL_PAY_DEV
@@ -141,7 +140,7 @@ function MentoringApplyPayPage() {
         PaypleCpayAuthCheck(obj);
       });
     }});
-  }, [nickName,userId,PhoneNumber]);
+  }, [dataLoaded,nickName,userId,PhoneNumber]);
   return (
     <MAPContainer>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
