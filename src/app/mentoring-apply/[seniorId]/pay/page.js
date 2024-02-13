@@ -52,7 +52,6 @@ function MentoringApplyPayPage() {
   const seniorId = pathArr[2];
   const [paySeniorId,setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
-  const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
   const [dataLoaded, setDataLoaded] = useState(false);
   setPaySeniorId(seniorId);
   const formatTime = (time) => {
@@ -117,9 +116,6 @@ function MentoringApplyPayPage() {
         let obj = new Object();
         obj.PCD_PAY_TYPE = 'card';
         obj.PCD_PAY_WORK = 'PAY';
-        console.log(nickName,'1');
-        console.log(userId,'2');
-        console.log(PhoneNumber,'3');
         /* 02 : 앱카드 결제창 */
         obj.PCD_CARD_VER = '02';
         //유저 userId
@@ -133,12 +129,14 @@ function MentoringApplyPayPage() {
         // obj.PCD_PAY_TOTAL = '20000';
         obj.PCD_PAY_ISTAX = 'Y';
         obj.PCD_PAY_TAXTOTAL = '10';
-        obj.clientKey = PAPLE_CLIENT_KEY;
+        obj.clientKey = window.location.hostname.includes('localhost')
+        ? process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY_DEV
+        : process.env.PAPLE_CLIENT_KEY_DEV
 
        // 결제결과 수신 URL
         obj.PCD_RST_URL = window.location.hostname.includes('localhost')
         ? process.env.NEXT_PUBLIC_SERVER_URL_PAY_DEV
-        : process.env.NEXT_PUBLIC_SERVER_URL_PAY
+        : process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });
