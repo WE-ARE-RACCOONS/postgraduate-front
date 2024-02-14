@@ -111,7 +111,7 @@ function MentoringApplyPayPage() {
    
     $(document).ready(() => {
       if (dataLoaded) {
-      $('#requsetPayplePay').on('click', function (event) {
+        window.$('#requsetPayplePay').on('click', function (event) {
         let obj = new Object();
         obj.PCD_PAY_TYPE = 'card';
         obj.PCD_PAY_WORK = 'PAY';

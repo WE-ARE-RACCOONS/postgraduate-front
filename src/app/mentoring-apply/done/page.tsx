@@ -49,6 +49,7 @@ function MentoringApplyDonePage() {
         )
         .then((response) => {
           const res = response.data;
+          console.log(res)
           if (res.code == 'MT202') {
           }
         })
