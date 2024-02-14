@@ -12,6 +12,7 @@ const PayResultPage = () => {
     const search = searchParams.get('orderId')
     if (search) {
       setOrderId(search);
+      router.refresh();
       router.push('/mentoring-apply/done')
     }
   }, []);
