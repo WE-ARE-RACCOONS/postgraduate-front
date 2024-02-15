@@ -30,6 +30,7 @@ function MentoringApplyQuestionPage() {
     if (subject && question)
       router.push(`/mentoring-apply/${seniorId}/schedule`);
   };
+
   return (
     <MAQContainer>
       <BackHeader headerText="신청서 작성" />

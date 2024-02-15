@@ -5,27 +5,19 @@ import cState from '../../../../public/cState.png';
 import { MENTORING_DONE_TEXT } from '@/constants/mentoring/done';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import {
-  firAbleTimeAtom,
-  orderIdAtom,
-  paySeniorIdAtom,
-  questionAtom,
-  secAbleTimeAtom,
-  subjectAtom,
-  thiAbleTimeAtom,
-} from '@/stores/mentoring';
+import { firAbleTimeAtom, orderIdAtom, paySeniorIdAtom, questionAtom, secAbleTimeAtom, subjectAtom, thiAbleTimeAtom } from '@/stores/mentoring';
 import { useAtomValue } from 'jotai';
-import React, { useEffect } from 'react';
+import React, { useEffect } from 'react'
 import useAuth from '@/hooks/useAuth';
 function MentoringApplyDonePage() {
   const router = useRouter();
   const oderId = useAtomValue(orderIdAtom);
+  const topic = useAtomValue(subjectAtom);
+  const question = useAtomValue(questionAtom);
+  const firstTime = useAtomValue(firAbleTimeAtom);
+  const secondTime = useAtomValue(secAbleTimeAtom);
+  const thirdTime = useAtomValue(thiAbleTimeAtom);
   const paySeniorId = useAtomValue(paySeniorIdAtom);
-  const topic = window.localStorage.getItem('topic');
-  const question = window.localStorage.getItem('question');
-  const firstTime = window.localStorage.getItem('firstTime');
-  const secondTime = window.localStorage.getItem('secondTime');
-  const thirdTime = window.localStorage.getItem('thirdTime');
   const { getAccessToken } = useAuth();
   const payHandler = () => {
     const accessTkn = getAccessToken();
@@ -38,11 +30,13 @@ function MentoringApplyDonePage() {
       thirdTime
     ) {
       const timeArr = [firstTime, secondTime, thirdTime];
+
       axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
           {
-            orderId: oderId,
+            // seniorId: paySeniorId,
+            orderId:oderId,
             topic: topic,
             question: question,
             date: timeArr.join(','),
@@ -56,7 +50,6 @@ function MentoringApplyDonePage() {
         .then((response) => {
           const res = response.data;
           if (res.code == 'MT202') {
-            location.reload();
           }
         })
         .catch((err) => {
@@ -66,12 +59,8 @@ function MentoringApplyDonePage() {
   };
   useEffect(() => {
     payHandler();
-    window.localStorage.removeItem('topic');
-    window.localStorage.removeItem('question');
-    window.localStorage.removeItem('firstTime');
-    window.localStorage.removeItem('secondTime');
-    window.localStorage.removeItem('thirdTime');
-  }, [topic, question, firstTime, secondTime, thirdTime]);
+  }, []);
+
   return (
     <MADContainer>
       <MADContent>
