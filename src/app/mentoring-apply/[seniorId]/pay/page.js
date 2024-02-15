@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from '@/components/Text/AuthLabeledText';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import '../../../../components/JQ/loader';
 import {
   PhoneNumberAtom,
   firAbleTimeAtom,
@@ -39,8 +40,8 @@ function MentoringApplyPayPage() {
   const [postgradu, setPostgradu] = useState('');
   const [major, setMajor] = useState('');
   const [lab, setLab] = useState('');
-  const [PhoneNumber,setPhoneNumber] = useAtom(PhoneNumberAtom);
-  const [userId,setUserId] = useAtom(userIdAtom);
+  const [PhoneNumber, setPhoneNumber] = useAtom(PhoneNumberAtom);
+  const [userId, setUserId] = useAtom(userIdAtom);
   const topic = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
   const firstTime = useAtomValue(firAbleTimeAtom);
@@ -50,10 +51,17 @@ function MentoringApplyPayPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
-  const [paySeniorId,setPaySeniorId] = useAtom(paySeniorIdAtom);
+  const [paySeniorId, setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
   setPaySeniorId(seniorId);
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem('topic', topic);
+    window.localStorage.setItem('question', question);
+    window.localStorage.setItem('firstTime', firstTime);
+    window.localStorage.setItem('secondTime', secondTime);
+    window.localStorage.setItem('thirdTime', thirdTime);
+  }
   const formatTime = (time) => {
     if (!time) return '';
 
@@ -74,8 +82,7 @@ function MentoringApplyPayPage() {
       return result;
     } else return '';
   };
-  const payHandler = () => {
-  };
+  const payHandler = () => {};
 
   useEffect(() => {
     const accessTkn = getAccessToken();
@@ -108,38 +115,38 @@ function MentoringApplyPayPage() {
     }
   }, []);
   useEffect(() => {
-   
-    $(document).ready(() => {
+    window.$(document).ready(() => {
       if (dataLoaded) {
-      $('#requsetPayplePay').on('click', function (event) {
-        let obj = new Object();
-        obj.PCD_PAY_TYPE = 'card';
-        obj.PCD_PAY_WORK = 'PAY';
-        /* 02 : 앱카드 결제창 */
-        obj.PCD_CARD_VER = '02';
-        //유저 userId
-        obj.PCD_PAYER_NO = userId;
-        // obj.PCD_PAYER_NAME = '홍길동';
-        //내 번호 넣으면 알림톡 감
-        obj.PCD_PAYER_HP = PhoneNumber;
-        // obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
-        obj.PCD_PAY_GOODS = nickName;
-        obj.PCD_PAY_TOTAL = '101';
-        // obj.PCD_PAY_TOTAL = '20000';
-        obj.PCD_PAY_ISTAX = 'Y';
-        obj.PCD_PAY_TAXTOTAL = '10';
-        obj.clientKey = window.location.hostname.includes('localhost')
-        ? process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY_DEV
-        : process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY
-       // 결제결과 수신 URL
-        obj.PCD_RST_URL = window.location.hostname.includes('localhost')
-        ? process.env.NEXT_PUBLIC_SERVER_URL_PAY_DEV
-        : process.env.NEXT_PUBLIC_SERVER_URL_PAY
-        // 결제요청 함수 호출
-        PaypleCpayAuthCheck(obj);
-      });
-    }});
-  }, [dataLoaded,nickName,userId,PhoneNumber]);
+        $('#requsetPayplePay').on('click', function (event) {
+          let obj = new Object();
+          obj.PCD_PAY_TYPE = 'card';
+          obj.PCD_PAY_WORK = 'PAY';
+          /* 02 : 앱카드 결제창 */
+          obj.PCD_CARD_VER = '02';
+          //유저 userId
+          obj.PCD_PAYER_NO = userId;
+          // obj.PCD_PAYER_NAME = '홍길동';
+          //내 번호 넣으면 알림톡 감
+          obj.PCD_PAYER_HP = PhoneNumber;
+          // obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
+          obj.PCD_PAY_GOODS = nickName;
+          obj.PCD_PAY_TOTAL = '101';
+          // obj.PCD_PAY_TOTAL = '20000';
+          obj.PCD_PAY_ISTAX = 'Y';
+          obj.PCD_PAY_TAXTOTAL = '10';
+          obj.clientKey = window.location.hostname.includes('localhost')
+            ? process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY_DEV
+            : process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
+          // 결제결과 수신 URL
+          obj.PCD_RST_URL = window.location.hostname.includes('localhost')
+            ? process.env.NEXT_PUBLIC_SERVER_URL_PAY_DEV
+            : process.env.NEXT_PUBLIC_SERVER_URL_PAY;
+          // 결제요청 함수 호출
+          PaypleCpayAuthCheck(obj);
+        });
+      }
+    });
+  }, [dataLoaded, nickName, userId, PhoneNumber]);
   return (
     <MAPContainer>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
