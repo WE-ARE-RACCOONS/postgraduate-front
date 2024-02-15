@@ -20,7 +20,6 @@ function CommonInfoPage() {
   const fullNum = useAtomValue(phoneNum);
   const service = useAtomValue(essential);
   const available = useAtomValue(notDuplicate);
-console.log(userType,userNick,fullNum,service,available)
   return (
     <div>
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>

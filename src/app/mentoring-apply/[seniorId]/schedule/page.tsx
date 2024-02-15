@@ -7,8 +7,10 @@ import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 import useAuth from '@/hooks/useAuth';
 import {
   firAbleTimeAtom,
+  questionAtom,
   sAbleMentoringTimeArr,
   secAbleTimeAtom,
+  subjectAtom,
   thiAbleTimeAtom,
 } from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
@@ -67,7 +69,6 @@ function MentoringApplySchedulePage() {
       router.push(`/mentoring-apply/${seniorId}/pay`);
     }
   };
-
   return (
     <MASContainer $timeArr={timeArr}>
       <BackHeader headerText="멘토링 일정 제안" />
