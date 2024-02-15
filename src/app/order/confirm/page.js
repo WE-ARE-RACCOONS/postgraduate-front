@@ -28,13 +28,11 @@ const PayplePayment = () => {
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;
 
-
         // 결제요청 함수 호출
         PaypleCpayAuthCheck(obj);
       });
     });
   }, []);
-console.log(ACTION.payload);
   return (
     <div>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>

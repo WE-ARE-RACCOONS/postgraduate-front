@@ -5,19 +5,40 @@ import cState from '../../../../public/cState.png';
 import { MENTORING_DONE_TEXT } from '@/constants/mentoring/done';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
-import { firAbleTimeAtom, orderIdAtom, paySeniorIdAtom, questionAtom, secAbleTimeAtom, subjectAtom, thiAbleTimeAtom } from '@/stores/mentoring';
+import {
+  firAbleTimeAtom,
+  orderIdAtom,
+  paySeniorIdAtom,
+  questionAtom,
+  secAbleTimeAtom,
+  subjectAtom,
+  thiAbleTimeAtom,
+} from '@/stores/mentoring';
 import { useAtomValue } from 'jotai';
-import React, { useEffect } from 'react'
+import React, { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
 function MentoringApplyDonePage() {
   const router = useRouter();
   const oderId = useAtomValue(orderIdAtom);
-  const topic = useAtomValue(subjectAtom);
-  const question = useAtomValue(questionAtom);
-  const firstTime = useAtomValue(firAbleTimeAtom);
-  const secondTime = useAtomValue(secAbleTimeAtom);
-  const thirdTime = useAtomValue(thiAbleTimeAtom);
   const paySeniorId = useAtomValue(paySeniorIdAtom);
+  const topic =
+    typeof window !== 'undefined' ? window.localStorage.getItem('topic') : null;
+  const question =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('question')
+      : null;
+  const firstTime =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('firstTime')
+      : null;
+  const secondTime =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('secondTime')
+      : null;
+  const thirdTime =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('thirdTime')
+      : null;
   const { getAccessToken } = useAuth();
   const payHandler = () => {
     const accessTkn = getAccessToken();
@@ -35,7 +56,7 @@ function MentoringApplyDonePage() {
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
           {
-            orderId:oderId,
+            orderId: oderId,
             topic: topic,
             question: question,
             date: timeArr.join(','),
@@ -49,6 +70,7 @@ function MentoringApplyDonePage() {
         .then((response) => {
           const res = response.data;
           if (res.code == 'MT202') {
+            location.reload();
           }
         })
         .catch((err) => {
