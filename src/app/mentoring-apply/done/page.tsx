@@ -66,11 +66,13 @@ function MentoringApplyDonePage() {
   };
   useEffect(() => {
     payHandler();
-    window.localStorage.removeItem('topic');
-    window.localStorage.removeItem('question');
-    window.localStorage.removeItem('firstTime');
-    window.localStorage.removeItem('secondTime');
-    window.localStorage.removeItem('thirdTime');
+    if (typeof window !== 'undefined') {
+      window.localStorage.removeItem('topic');
+      window.localStorage.removeItem('question');
+      window.localStorage.removeItem('firstTime');
+      window.localStorage.removeItem('secondTime');
+      window.localStorage.removeItem('thirdTime');
+    }
   }, [topic, question, firstTime, secondTime, thirdTime]);
   return (
     <MADContainer>

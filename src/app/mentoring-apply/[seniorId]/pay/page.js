@@ -54,12 +54,14 @@ function MentoringApplyPayPage() {
   const [paySeniorId, setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
-  window.localStorage.setItem('topic', topic);
-  window.localStorage.setItem('question', question);
-  window.localStorage.setItem('firstTime', firstTime);
-  window.localStorage.setItem('secondTime', secondTime);
-  window.localStorage.setItem('thirdTime', thirdTime);
   setPaySeniorId(seniorId);
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem('topic', topic);
+    window.localStorage.setItem('question', question);
+    window.localStorage.setItem('firstTime', firstTime);
+    window.localStorage.setItem('secondTime', secondTime);
+    window.localStorage.setItem('thirdTime', thirdTime);
+  }
   const formatTime = (time) => {
     if (!time) return '';
 
