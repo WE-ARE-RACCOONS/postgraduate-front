@@ -31,6 +31,7 @@ export default function Home() {
   const postgradu = useAtomValue(suactiveTabAtom);
 
   useEffect(() => {
+
     if (field && postgradu) {
       axios
         .get(
