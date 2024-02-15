@@ -34,7 +34,6 @@ const PayplePayment = () => {
       });
     });
   }, []);
-console.log(ACTION.payload);
   return (
     <div>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>

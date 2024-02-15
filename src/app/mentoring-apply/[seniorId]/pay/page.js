@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from '@/components/Text/AuthLabeledText';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import '../../../../components/JQ/loader'
 import {
   PhoneNumberAtom,
   firAbleTimeAtom,
@@ -53,6 +54,11 @@ function MentoringApplyPayPage() {
   const [paySeniorId,setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
+  window.localStorage.setItem('topic', topic);
+  window.localStorage.setItem('question', question);
+  window.localStorage.setItem('firstTime', firstTime);
+  window.localStorage.setItem('secondTime', secondTime);
+  window.localStorage.setItem('thirdTime', thirdTime);
   setPaySeniorId(seniorId);
   const formatTime = (time) => {
     if (!time) return '';
@@ -108,7 +114,6 @@ function MentoringApplyPayPage() {
     }
   }, []);
   useEffect(() => {
-   
     $(document).ready(() => {
       if (dataLoaded) {
         window.$('#requsetPayplePay').on('click', function (event) {

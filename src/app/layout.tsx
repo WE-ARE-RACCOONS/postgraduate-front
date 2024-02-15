@@ -3,7 +3,6 @@ import type { Metadata } from 'next';
 import Providers from '@/components/Provider/providers';
 import Token from '@/components/Common/Token';
 import StyledComponentsRegistry from '@/lib/registry';
-
 export const metadata: Metadata = {
   title: '김선배',
   description: '후배 멘티와 대학원생 멘토를 매칭하는 서비스!',
