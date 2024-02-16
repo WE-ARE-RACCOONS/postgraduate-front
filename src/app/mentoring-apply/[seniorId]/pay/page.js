@@ -123,12 +123,9 @@ function MentoringApplyPayPage() {
           obj.PCD_PAY_WORK = 'PAY';
           /* 02 : 앱카드 결제창 */
           obj.PCD_CARD_VER = '02';
-          //유저 userId
           obj.PCD_PAYER_NO = userId;
-          // obj.PCD_PAYER_NAME = '홍길동';
           //내 번호 넣으면 알림톡 감
           obj.PCD_PAYER_HP = PhoneNumber;
-          // obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
           obj.PCD_PAY_GOODS = nickName;
           obj.PCD_PAY_TOTAL = '101';
           // obj.PCD_PAY_TOTAL = '20000';

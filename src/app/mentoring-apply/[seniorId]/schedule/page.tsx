@@ -30,7 +30,6 @@ function MentoringApplySchedulePage() {
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
   const router = useRouter();
-
   useEffect(() => {
     const accessTkn = getAccessToken();
     if (accessTkn) {
