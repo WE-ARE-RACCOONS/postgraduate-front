@@ -59,6 +59,8 @@ function MentoringCancel(props: ModalMentoringclProps) {
 
   return (
     <div style={{ textAlign: 'center', justifyContent: 'center' }}>
+      {loading ? '취소 중...' : 
+      <>
       {cancelStatus ? (
         <Image
           id="cState"
@@ -98,12 +100,13 @@ function MentoringCancel(props: ModalMentoringclProps) {
             </MCSub>
             <div style={{ display: 'flex', marginTop: '1.8rem' }}>
               <CancelBtn onClick={cancelMentoring}>취소</CancelBtn>
-              {loading ? '취소 중...' : '취소'}
               <NoCancelBtn onClick={() => handleClick()}>닫기</NoCancelBtn>
             </div>
           </>
         )}
       </MentoringCancelBox>
+      </>
+}
     </div>
   );
 }
