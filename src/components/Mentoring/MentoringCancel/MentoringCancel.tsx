@@ -21,6 +21,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
   const [cancelStatus, setCancelStatus] = useState<string>('');
   const [noCancelText, setNoCancelText] = useState<string>('아니요');
   const [showCancelButton, setShowCancelButton] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
   const handleClick = () => {
     props.modalHandler();
     if (props.onClick) props.onClick();
@@ -28,6 +29,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
 
   const cancelMentoring = async () => {
     try {
+      setLoading(true);
       const Token = getAccessToken();
       const headers = {
         'Content-Type': 'application/json',
@@ -42,16 +44,19 @@ function MentoringCancel(props: ModalMentoringclProps) {
         { headers },
       );
       setData(response.data);
-      setShowCancelButton(true);
+      console.log(response.data);
       if (response.data.code === 'MT201') {
         setCancelStatus('취소되었습니다');
       } else {
         setCancelStatus('취소 실패');
       }
     } catch (error) {
-      console.error('Error cancelling mentoring:', error);
+      console.error(error);
+    } finally {
+      setLoading(false); 
     }
   };
+
   return (
     <div style={{ textAlign: 'center', justifyContent: 'center' }}>
       {cancelStatus ? (
@@ -93,6 +98,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
             </MCSub>
             <div style={{ display: 'flex', marginTop: '1.8rem' }}>
               <CancelBtn onClick={cancelMentoring}>취소</CancelBtn>
+              {loading ? '취소 중...' : '취소'}
               <NoCancelBtn onClick={() => handleClick()}>닫기</NoCancelBtn>
             </div>
           </>
