@@ -66,7 +66,9 @@ export default function Home() {
             const res = response.data;
             if (res.code == 'SNR200') {
               setData((data) => [...data, ...res.data.seniorSearchResponses]);
-              setPage((page) => (res.data.totalElements / 10 < page) ? page : page + 1);
+              setPage((page) =>
+                res.data.totalElements / 10 < page ? page : page + 1,
+              );
             }
           })
           .catch((err) => {

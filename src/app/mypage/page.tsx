@@ -172,7 +172,7 @@ function MyPage() {
         style={{
           backgroundColor: '#F8F9FA',
           marginTop: '1rem',
-          paddingBottom: (userType == 'senior') ? '4rem' : '',
+          paddingBottom: userType == 'senior' ? '4rem' : '',
           border: 'none',
         }}
       >
