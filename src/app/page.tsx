@@ -21,20 +21,22 @@ import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import { SeniorProfileData } from '@/types/profile/seniorProfile';
-import { pageNumAtom } from '@/stores/home';
+import { listDataAtom, pageNumAtom } from '@/stores/home';
 import { useRouter } from 'next/router';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-  const [data, setData] = useState<Array<SeniorProfileData>>([]);
+  // const [data, setData] = useState<Array<SeniorProfileData>>([]);
+  const [data, setData] = useAtom(listDataAtom);
   const [page, setPage] = useAtom(pageNumAtom);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
   useEffect(() => {
+    setPage(1);
     if (field && postgradu) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}&page=${page}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
@@ -48,7 +50,7 @@ export default function Home() {
   useEffect(() => {
     setCurrentPath();
 
-    const infiniteScroll = () => {
+    const infiniteBottom = () => {
       let isScrollAtBottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight;
       if (isScrollAtBottom) {
@@ -64,7 +66,7 @@ export default function Home() {
             const res = response.data;
             if (res.code == 'SNR200') {
               setData((data) => [...data, ...res.data.seniorSearchResponses]);
-              setPage((page) => page + 1);
+              setPage((page) => (res.data.totalElements / 10 < page) ? page : page + 1);
             }
           })
           .catch((err) => {
@@ -73,10 +75,10 @@ export default function Home() {
       }
     };
 
-    window.addEventListener('scroll', infiniteScroll);
+    window.addEventListener('scroll', infiniteBottom);
 
     return () => {
-      window.removeEventListener('scroll', infiniteScroll);
+      window.removeEventListener('scroll', infiniteBottom);
     };
   }, [page]);
 
