@@ -28,7 +28,7 @@ function LogoLayer(props: SearchModalProps) {
   };
   return (
     <HomeTopLayer>
-      <Logo>
+      <Logo onClick={logoClick}>
         <Image
           id="logo"
           src={logo}
@@ -36,7 +36,6 @@ function LogoLayer(props: SearchModalProps) {
           width={36}
           height={24}
           priority
-          onClick={logoClick}
           style={{ marginRight: '0.13rem', cursor: 'pointer' }}
         />
         <div className="none-name">대학원</div>

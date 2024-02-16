@@ -9,6 +9,7 @@ export const HomeTopLayer = styled.div`
 `;
 export const Logo = styled.div`
   display: flex;
+  cursor: pointer;
   .none-name {
     font-size: 1.3rem;
   }
