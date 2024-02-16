@@ -64,10 +64,11 @@ function SeniorInfoPage() {
   }, []);
 
   useEffect(() => {
+    const accessTkn = getAccessToken();
     const seniorId = pathArr[pathArr.length - 1];
     setFindSeniorId(seniorId);
     axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`, accessTkn ? { headers: { Authorization: `Bearer ${accessTkn}` } } : {})
       .then((response) => {
         const res = response.data;
 
