@@ -27,6 +27,7 @@ export const IntroCardTextBox = styled.div`
   font-size: 15px;
   padding: 0.75rem;
   margin-bottom: 2.5rem;
+  white-space: pre;
 `;
 
 export const IntroCardTextDesc = styled.div`
