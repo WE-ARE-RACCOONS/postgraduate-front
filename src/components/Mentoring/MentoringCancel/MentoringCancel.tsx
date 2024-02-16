@@ -44,7 +44,6 @@ function MentoringCancel(props: ModalMentoringclProps) {
         { headers },
       );
       setData(response.data);
-      console.log(response.data);
       if (response.data.code === 'MT201') {
         setCancelStatus('취소되었습니다');
       } else {
@@ -53,60 +52,64 @@ function MentoringCancel(props: ModalMentoringclProps) {
     } catch (error) {
       console.error(error);
     } finally {
-      setLoading(false); 
+      setLoading(false);
     }
   };
 
   return (
     <div style={{ textAlign: 'center', justifyContent: 'center' }}>
-      {loading ? '취소 중...' : 
-      <>
-      {cancelStatus ? (
-        <Image
-          id="cState"
-          src={cState}
-          alt="확인상태"
-          width={65}
-          height={65}
-          style={{ margin: '0.5rem 7.5rem ' }}
-          priority
-        />
+      {loading ? (
+        '취소 중...'
       ) : (
-        <Image
-          id="state"
-          src={state}
-          alt="경고상태"
-          width={65}
-          height={65}
-          style={{ margin: ' 0.5rem 7.5rem' }}
-          priority
-        />
+        <>
+          {cancelStatus ? (
+            <Image
+              id="cState"
+              src={cState}
+              alt="확인상태"
+              width={65}
+              height={65}
+              style={{ margin: '0.5rem 7.5rem ' }}
+              priority
+            />
+          ) : (
+            <Image
+              id="state"
+              src={state}
+              alt="경고상태"
+              width={65}
+              height={65}
+              style={{ margin: ' 0.5rem 7.5rem' }}
+              priority
+            />
+          )}
+          <MentoringCancelBox>
+            <MCMain>
+              {cancelStatus
+                ? `${cancelStatus}`
+                : '멘토링 신청을 취소하시겠어요?'}
+            </MCMain>
+            {cancelStatus ? (
+              <>
+                <MCSub>
+                  환불은 카드사 정책에 따라 영업일 기준 2~3일이 소요됩니다.
+                </MCSub>
+                <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
+              </>
+            ) : (
+              <>
+                <MCSub>
+                  반복되는 신청 취소시 멘토링 매칭에 불이익이 있을 수 있습니다.
+                </MCSub>
+                <div style={{ display: 'flex', marginTop: '1.8rem' }}>
+                  <CancelBtn onClick={cancelMentoring}>취소</CancelBtn>
+                  <NoCancelBtn onClick={() => handleClick()}>닫기</NoCancelBtn>
+                </div>
+              </>
+            )}
+          </MentoringCancelBox>
+        </>
       )}
-      <MentoringCancelBox>
-        <MCMain>
-          {cancelStatus ? `${cancelStatus}` : '멘토링 신청을 취소하시겠어요?'}
-        </MCMain>
-        {cancelStatus ? (
-          <>
-            <MCSub>
-              환불은 카드사 정책에 따라 영업일 기준 2~3일이 소요됩니다.
-            </MCSub>
-            <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
-          </>
-        ) : (
-          <>
-            <MCSub>
-              반복되는 신청 취소시 멘토링 매칭에 불이익이 있을 수 있습니다.
-            </MCSub>
-            <div style={{ display: 'flex', marginTop: '1.8rem' }}>
-              <CancelBtn onClick={cancelMentoring}>취소</CancelBtn>
-              <NoCancelBtn onClick={() => handleClick()}>닫기</NoCancelBtn>
-            </div>
-          </>
-        )}
-      </MentoringCancelBox>
-      </>
-}
     </div>
   );
 }

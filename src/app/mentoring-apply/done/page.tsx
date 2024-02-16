@@ -50,7 +50,7 @@ function MentoringApplyDonePage() {
       secondTime &&
       thirdTime
     ) {
-      const timeArr = [firstTime,secondTime,thirdTime];
+      const timeArr = [firstTime, secondTime, thirdTime];
 
       axios
         .post(
