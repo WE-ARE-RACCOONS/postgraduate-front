@@ -17,6 +17,7 @@ function SearchResultPage() {
   const { getAccessToken } = useAuth();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('searchTerm');
+  const router = useRouter();
   const [sort, setSort] = useState('');
   const [data, setData] = useState([]);
   const [length, setLength] = useState('');
@@ -25,6 +26,7 @@ function SearchResultPage() {
     modalHandler: searchModalHandler,
     portalElement: searchPortalElement,
   } = useModal('search-portal');
+
   useEffect(() => {
     const Token = getAccessToken();
     const headers = {
@@ -49,14 +51,10 @@ function SearchResultPage() {
     }
   }, [searchTerm]);
 
-  const pageBack = () => {
-    searchModalHandler();
-  };
-
   return (
     <>
       <SearchReasult>
-        <SearchReasultOut onClick={pageBack}>
+        <SearchReasultOut onClick={() => {router.back();}}>
           <Image
             id="arrow"
             src={arrow}
@@ -66,10 +64,11 @@ function SearchResultPage() {
             style={{
               width: '1.5rem',
               height: '1.5rem',
+              cursor: 'pointer'
             }}
           />
         </SearchReasultOut>
-        <SearchReasultTerm>{searchTerm}</SearchReasultTerm>
+        <SearchReasultTerm onClick={searchModalHandler}>{searchTerm}</SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
         <SearchFcount>총 {length}건</SearchFcount>
