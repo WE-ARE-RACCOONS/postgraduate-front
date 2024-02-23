@@ -49,6 +49,7 @@ function LogoLayer(props: SearchModalProps) {
           sizes="(max-width: 600px) 2.rem"
           priority
           onClick={handleClick}
+          style={{ cursor: 'pointer' }}
         />
         {!isLogin && <Login />}
       </div>
