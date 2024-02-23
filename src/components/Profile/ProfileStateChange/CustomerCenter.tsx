@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import TitleComponent from '../Box/TitleBox/TitleBox';
 import ContentComponent from '../Box/ContentBox/ContentBox';
 import { CustomerCenterBox } from './CustomerCenter.styled';
@@ -7,7 +7,13 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 function CustomerCenter() {
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(false);
   const { getAccessToken, removeTokens } = useAuth();
+
+  useEffect(() => {
+    const accessTkn = getAccessToken();
+    if(accessTkn) setIsLogin(true);
+  }, []);
 
   const logout = () => {
     const accessTkn = getAccessToken();
@@ -40,7 +46,7 @@ function CustomerCenter() {
     <CustomerCenterBox>
       <TitleComponent title="고객센터"></TitleComponent>
       <ContentComponent content="문의하기"></ContentComponent>
-      <ContentComponent content="로그아웃" onClick={logout}></ContentComponent>
+      {isLogin && <ContentComponent content="로그아웃" onClick={logout}></ContentComponent>}
     </CustomerCenterBox>
   );
 }

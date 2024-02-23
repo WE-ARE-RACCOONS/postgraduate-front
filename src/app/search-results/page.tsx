@@ -113,7 +113,7 @@ const Searchfilter = styled.div`
   height: 3rem;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #f5f5f5;
   align-items: center;
   padding: 0 1rem;
 `;
@@ -124,7 +124,7 @@ const SearchReasultProfile = styled.div`
   padding: 1rem;
   width: 100%;
   height: 100%;
-  background-color: #dee2e6;
+  background-color: #f5f5f5;
 `;
 
 export default SearchResultPage;
