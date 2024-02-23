@@ -54,7 +54,11 @@ function SearchResultPage() {
   return (
     <>
       <SearchReasult>
-        <SearchReasultOut onClick={() => {router.back();}}>
+        <SearchReasultOut
+          onClick={() => {
+            router.back();
+          }}
+        >
           <Image
             id="arrow"
             src={arrow}
@@ -64,11 +68,13 @@ function SearchResultPage() {
             style={{
               width: '1.5rem',
               height: '1.5rem',
-              cursor: 'pointer'
+              cursor: 'pointer',
             }}
           />
         </SearchReasultOut>
-        <SearchReasultTerm onClick={searchModalHandler}>{searchTerm}</SearchReasultTerm>
+        <SearchReasultTerm onClick={searchModalHandler}>
+          {searchTerm}
+        </SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
         <SearchFcount>총 {length}건</SearchFcount>

@@ -12,7 +12,7 @@ function CustomerCenter() {
 
   useEffect(() => {
     const accessTkn = getAccessToken();
-    if(accessTkn) setIsLogin(true);
+    if (accessTkn) setIsLogin(true);
   }, []);
 
   const logout = () => {
@@ -46,7 +46,12 @@ function CustomerCenter() {
     <CustomerCenterBox>
       <TitleComponent title="고객센터"></TitleComponent>
       <ContentComponent content="문의하기"></ContentComponent>
-      {isLogin && <ContentComponent content="로그아웃" onClick={logout}></ContentComponent>}
+      {isLogin && (
+        <ContentComponent
+          content="로그아웃"
+          onClick={logout}
+        ></ContentComponent>
+      )}
     </CustomerCenterBox>
   );
 }

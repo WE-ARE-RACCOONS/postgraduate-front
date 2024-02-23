@@ -15,7 +15,8 @@ function JuniorManage(props: NotSeniorProps) {
     router.push('/mypage/edit');
   };
   const setuserTypeAtom = useSetAtom(userTypeAtom);
-  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } = useAuth();
+  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } =
+    useAuth();
   const [socialId, setSocialId] = useAtom(socialIdAtom);
 
   const handleClick = async () => {
