@@ -17,6 +17,7 @@ function SearchResultPage() {
   const { getAccessToken } = useAuth();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('searchTerm');
+  const router = useRouter();
   const [sort, setSort] = useState('');
   const [data, setData] = useState([]);
   const [length, setLength] = useState('');
@@ -25,6 +26,7 @@ function SearchResultPage() {
     modalHandler: searchModalHandler,
     portalElement: searchPortalElement,
   } = useModal('search-portal');
+
   useEffect(() => {
     const Token = getAccessToken();
     const headers = {
@@ -49,14 +51,14 @@ function SearchResultPage() {
     }
   }, [searchTerm]);
 
-  const pageBack = () => {
-    searchModalHandler();
-  };
-
   return (
     <>
       <SearchReasult>
-        <SearchReasultOut onClick={pageBack}>
+        <SearchReasultOut
+          onClick={() => {
+            router.back();
+          }}
+        >
           <Image
             id="arrow"
             src={arrow}
@@ -66,10 +68,13 @@ function SearchResultPage() {
             style={{
               width: '1.5rem',
               height: '1.5rem',
+              cursor: 'pointer',
             }}
           />
         </SearchReasultOut>
-        <SearchReasultTerm>{searchTerm}</SearchReasultTerm>
+        <SearchReasultTerm onClick={searchModalHandler}>
+          {searchTerm}
+        </SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
         <SearchFcount>총 {length}건</SearchFcount>
@@ -113,7 +118,7 @@ const Searchfilter = styled.div`
   height: 3rem;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #f5f5f5;
   align-items: center;
   padding: 0 1rem;
 `;
@@ -124,7 +129,7 @@ const SearchReasultProfile = styled.div`
   padding: 1rem;
   width: 100%;
   height: 100%;
-  background-color: #dee2e6;
+  background-color: #f5f5f5;
 `;
 
 export default SearchResultPage;

@@ -140,6 +140,7 @@ function SeniorInfoPage() {
     }
 
     if (
+      !token &&
       socialId &&
       phoneNumber &&
       nickName &&

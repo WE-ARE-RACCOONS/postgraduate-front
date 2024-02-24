@@ -15,8 +15,10 @@ function JuniorManage(props: NotSeniorProps) {
     router.push('/mypage/edit');
   };
   const setuserTypeAtom = useSetAtom(userTypeAtom);
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } =
+    useAuth();
   const [socialId, setSocialId] = useAtom(socialIdAtom);
+
   const handleClick = async () => {
     try {
       const Token = getAccessToken();
@@ -30,7 +32,7 @@ function JuniorManage(props: NotSeniorProps) {
         );
         if (response.data.data.possible === true) {
           setuserTypeAtom('junior');
-          router.push('/mypage');
+          renewSeniorToken();
         }
         if (response.data.data.possible === false) {
           setSocialId(response.data.data.socialId);
@@ -41,6 +43,44 @@ function JuniorManage(props: NotSeniorProps) {
       console.error('Error fetching data from the server:', error);
     }
   };
+
+  const renewSeniorToken = () => {
+    const accessTkn = getAccessToken();
+    if (accessTkn) {
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/token`,
+          {},
+          {
+            headers: {
+              Authorization: `Bearer ${accessTkn}`,
+            },
+          },
+        )
+        .then((response) => {
+          const res = response.data;
+
+          if (res.code == 'AU202') {
+            setAccessToken({
+              token: res.data.accessToken,
+              expires: res.data.accessExpiration,
+            });
+            setRefreshToken({
+              token: res.data.refreshToken,
+              expires: res.data.refreshExpiration,
+            });
+            setUserType(res.data.role);
+
+            router.replace('/');
+            return;
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
+  };
+
   return (
     <JuniorManageContainer>
       <TitleComponent title="계정 관리" />
