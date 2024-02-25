@@ -1,19 +1,24 @@
 import { useRouter } from 'next/navigation';
 import { MenuBox, MenuContainer, MenuWord } from './MenuBar.styled';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { userTypeAtom } from '@/stores/signup';
 import { MenubarProps } from '@/types/modal/menubar';
 import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
 import home from '../../../../public/home.png';
 import mentor from '@/../../public/mentor.png';
+import mentorA from '@/../../public/mentoring-act.png';
+import homeA from '@/../../public/home-act.png';
 import my from '@/../../public/my.png';
+import myA from '@/../../public/mypage-act.png';
 import { useEffect, useState } from 'react';
+import { menuBarAtom } from '@/stores/home';
 function MenuBar(props: MenubarProps) {
   const router = useRouter();
   const { getAccessToken, getUserType } = useAuth();
   const token = getAccessToken();
   const [userType, setUserType] = useState('');
+  const [activeMenu, setActiveMenu] = useAtom(menuBarAtom);
   // const userType = getUserType();
 
   useEffect(() => {
@@ -32,9 +37,21 @@ function MenuBar(props: MenubarProps) {
     <MenuContainer>
       <MenuBox
         onClick={() => {
+          setActiveMenu('home');
           router.push('/');
         }}
       >
+        {activeMenu === 'home' ? <Image
+          id="home"
+          src={homeA}
+          alt="home icon"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          style={{
+            width: '1.5rem',
+            height: '1.5rem',
+          }}
+        /> : 
         <Image
           id="home"
           src={home}
@@ -45,18 +62,19 @@ function MenuBar(props: MenubarProps) {
             width: '1.5rem',
             height: '1.5rem',
           }}
-        />
+        />}
         <MenuWord>홈</MenuWord>
       </MenuBox>
       {token ? (
         <MenuBox
           onClick={() => {
+            setActiveMenu('mentoring');
             router.push(mentoringPath);
           }}
         >
-          <Image
+          {activeMenu === 'mentoring' ? <Image
             id="mentor"
-            src={mentor}
+            src={mentorA}
             alt="mentor icon"
             sizes="(max-width: 600px) 3.rem"
             priority
@@ -64,18 +82,29 @@ function MenuBar(props: MenubarProps) {
               width: '1.5rem',
               height: '1.5rem',
             }}
-          />
+          />:<Image
+          id="mentor"
+          src={mentor}
+          alt="mentor icon"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          style={{
+            width: '1.5rem',
+            height: '1.5rem',
+          }}
+        />}
           <MenuWord>내 멘토링</MenuWord>
         </MenuBox>
       ) : (
         <MenuBox
           onClick={() => {
+            setActiveMenu('mentoring');
             handleClick();
           }}
         >
-          <Image
+         {activeMenu === 'mentoring' ? <Image
             id="mentor"
-            src={mentor}
+            src={mentorA}
             alt="mentor icon"
             sizes="(max-width: 600px) 3.rem"
             priority
@@ -83,15 +112,37 @@ function MenuBar(props: MenubarProps) {
               width: '1.5rem',
               height: '1.5rem',
             }}
-          />
+          />:<Image
+          id="mentor"
+          src={mentor}
+          alt="mentor icon"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          style={{
+            width: '1.5rem',
+            height: '1.5rem',
+          }}
+        />}
           <MenuWord>내 멘토링</MenuWord>
         </MenuBox>
       )}
       <MenuBox
         onClick={() => {
           router.push('/mypage');
+          setActiveMenu('mypage');
         }}
       >
+      {activeMenu === 'mypage' ? <Image
+          id="my"
+          src={myA}
+          alt="my icon"
+          sizes="(max-width: 600px) 3.rem"
+          priority
+          style={{
+            width: '1.5rem',
+            height: '1.5rem',
+          }}
+        /> : 
         <Image
           id="my"
           src={my}
@@ -102,7 +153,7 @@ function MenuBar(props: MenubarProps) {
             width: '1.5rem',
             height: '1.5rem',
           }}
-        />
+        />}
         <MenuWord>마이페이지</MenuWord>
       </MenuBox>
     </MenuContainer>
