@@ -31,7 +31,7 @@ function page() {
   const [nickAvail, setNickAvail] = useState(false);
   const availability = useAtomValue(notDuplicate);
   const availablePhone = useAtomValue(phoneNumValidation);
-  const newAvailability= useAtomValue(newNotDuplicate);
+  const newAvailability = useAtomValue(newNotDuplicate);
   const sameUser = useAtomValue(sameUserAtom);
   useEffect(() => {
     const token = getAccessToken();
@@ -127,7 +127,7 @@ function page() {
       )}
       <NicknameForm defaultValue={myNickName} />
       <PhoneNumForm defaultValue={phoneNumber} />
-      {(newAvailability && availability) || (sameUser && availablePhone)  ? (
+      {(newAvailability && availability) || (sameUser && availablePhone) ? (
         <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
       ) : (
         <ProfileSetBtnNon>저장하기</ProfileSetBtnNon>

@@ -41,28 +41,31 @@ function MenuBar(props: MenubarProps) {
           router.push('/');
         }}
       >
-        {activeMenu === 'home' ? <Image
-          id="home"
-          src={homeA}
-          alt="home icon"
-          sizes="(max-width: 600px) 3.rem"
-          priority
-          style={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        /> : 
-        <Image
-          id="home"
-          src={home}
-          alt="home icon"
-          sizes="(max-width: 600px) 3.rem"
-          priority
-          style={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        />}
+        {activeMenu === 'home' ? (
+          <Image
+            id="home"
+            src={homeA}
+            alt="home icon"
+            sizes="(max-width: 600px) 3.rem"
+            priority
+            style={{
+              width: '1.5rem',
+              height: '1.5rem',
+            }}
+          />
+        ) : (
+          <Image
+            id="home"
+            src={home}
+            alt="home icon"
+            sizes="(max-width: 600px) 3.rem"
+            priority
+            style={{
+              width: '1.5rem',
+              height: '1.5rem',
+            }}
+          />
+        )}
         <MenuWord>홈</MenuWord>
       </MenuBox>
       {token ? (
@@ -72,27 +75,31 @@ function MenuBar(props: MenubarProps) {
             router.push(mentoringPath);
           }}
         >
-          {activeMenu === 'mentoring' ? <Image
-            id="mentor"
-            src={mentorA}
-            alt="mentor icon"
-            sizes="(max-width: 600px) 3.rem"
-            priority
-            style={{
-              width: '1.5rem',
-              height: '1.5rem',
-            }}
-          />:<Image
-          id="mentor"
-          src={mentor}
-          alt="mentor icon"
-          sizes="(max-width: 600px) 3.rem"
-          priority
-          style={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        />}
+          {activeMenu === 'mentoring' ? (
+            <Image
+              id="mentor"
+              src={mentorA}
+              alt="mentor icon"
+              sizes="(max-width: 600px) 3.rem"
+              priority
+              style={{
+                width: '1.5rem',
+                height: '1.5rem',
+              }}
+            />
+          ) : (
+            <Image
+              id="mentor"
+              src={mentor}
+              alt="mentor icon"
+              sizes="(max-width: 600px) 3.rem"
+              priority
+              style={{
+                width: '1.5rem',
+                height: '1.5rem',
+              }}
+            />
+          )}
           <MenuWord>내 멘토링</MenuWord>
         </MenuBox>
       ) : (
@@ -102,27 +109,31 @@ function MenuBar(props: MenubarProps) {
             handleClick();
           }}
         >
-         {activeMenu === 'mentoring' ? <Image
-            id="mentor"
-            src={mentorA}
-            alt="mentor icon"
-            sizes="(max-width: 600px) 3.rem"
-            priority
-            style={{
-              width: '1.5rem',
-              height: '1.5rem',
-            }}
-          />:<Image
-          id="mentor"
-          src={mentor}
-          alt="mentor icon"
-          sizes="(max-width: 600px) 3.rem"
-          priority
-          style={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        />}
+          {activeMenu === 'mentoring' ? (
+            <Image
+              id="mentor"
+              src={mentorA}
+              alt="mentor icon"
+              sizes="(max-width: 600px) 3.rem"
+              priority
+              style={{
+                width: '1.5rem',
+                height: '1.5rem',
+              }}
+            />
+          ) : (
+            <Image
+              id="mentor"
+              src={mentor}
+              alt="mentor icon"
+              sizes="(max-width: 600px) 3.rem"
+              priority
+              style={{
+                width: '1.5rem',
+                height: '1.5rem',
+              }}
+            />
+          )}
           <MenuWord>내 멘토링</MenuWord>
         </MenuBox>
       )}
@@ -132,28 +143,31 @@ function MenuBar(props: MenubarProps) {
           setActiveMenu('mypage');
         }}
       >
-      {activeMenu === 'mypage' ? <Image
-          id="my"
-          src={myA}
-          alt="my icon"
-          sizes="(max-width: 600px) 3.rem"
-          priority
-          style={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        /> : 
-        <Image
-          id="my"
-          src={my}
-          alt="my icon"
-          sizes="(max-width: 600px) 3.rem"
-          priority
-          style={{
-            width: '1.5rem',
-            height: '1.5rem',
-          }}
-        />}
+        {activeMenu === 'mypage' ? (
+          <Image
+            id="my"
+            src={myA}
+            alt="my icon"
+            sizes="(max-width: 600px) 3.rem"
+            priority
+            style={{
+              width: '1.5rem',
+              height: '1.5rem',
+            }}
+          />
+        ) : (
+          <Image
+            id="my"
+            src={my}
+            alt="my icon"
+            sizes="(max-width: 600px) 3.rem"
+            priority
+            style={{
+              width: '1.5rem',
+              height: '1.5rem',
+            }}
+          />
+        )}
         <MenuWord>마이페이지</MenuWord>
       </MenuBox>
     </MenuContainer>
