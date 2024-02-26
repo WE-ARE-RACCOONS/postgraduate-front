@@ -70,7 +70,7 @@ function SInfoModify({
           })
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'SNR200') {
               setAccHolder(res.data.accountHolder || '');
               setAccNumber(res.data.accountNumber || '');
@@ -100,7 +100,7 @@ function SInfoModify({
       if (inputImg) {
         const formData = new FormData();
         formData.append('profileFile', inputImg);
-  
+
         if (accessTkn) {
           await axios
             .post(
@@ -115,7 +115,7 @@ function SInfoModify({
             )
             .then((response) => {
               const res = response.data;
-  
+
               if (res.code == 'IMG202') {
                 submitImgUrl = res.data.profileUrl;
               }
@@ -125,7 +125,7 @@ function SInfoModify({
             });
         }
       }
-  
+
       if (
         nickName &&
         fullNum &&
@@ -155,7 +155,7 @@ function SInfoModify({
           )
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'SNR201') {
               modalHandler();
               setSubmitFlag(!submitFlag);

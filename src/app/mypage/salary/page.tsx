@@ -54,7 +54,7 @@ function SalaryPage() {
             });
         }
       }
-    })
+    });
   }, [activeTab]);
 
   const renderTabContent = () => {
@@ -74,7 +74,7 @@ function SalaryPage() {
       </div>
     );
   };
-  
+
   return (
     <>
       <BackHeader headerText="정산내역" />

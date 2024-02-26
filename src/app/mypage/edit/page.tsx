@@ -37,7 +37,9 @@ function page() {
           Authorization: `Bearer ${token}`,
         };
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, { headers })
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, {
+            headers,
+          })
           .then((res) => {
             setNickName(res.data.data.nickName);
             setPhoneNumber(res.data.data.phoneNumber);
@@ -47,7 +49,7 @@ function page() {
             console.log(error);
           });
       }
-    })
+    });
   });
 
   const handleClick = async () => {
@@ -55,7 +57,7 @@ function page() {
       if (photoUrl) {
         const formData = new FormData();
         formData.append('profileFile', photoUrl);
-  
+
         if (token) {
           await axios
             .post(
@@ -105,7 +107,7 @@ function page() {
             console.error(err);
           });
       }
-    })
+    });
   };
 
   return (

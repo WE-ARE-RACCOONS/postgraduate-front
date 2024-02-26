@@ -46,14 +46,17 @@ function TabBar() {
   );
   useEffect(() => {
     getAccessToken().then((Token) => {
-      if(Token) {
+      if (Token) {
         const headers = {
           Authorization: `Bearer ${Token}`,
         };
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
-            headers,
-          })
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`,
+            {
+              headers,
+            },
+          )
           .then((response) => {
             setData(response.data.data.mentoringInfos);
           })
@@ -118,7 +121,7 @@ function TabBar() {
       </div>
     );
   };
-  
+
   return (
     <div style={{ height: '100%' }}>
       <TabWrap>

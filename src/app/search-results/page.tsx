@@ -29,17 +29,17 @@ function SearchResultPage() {
 
   useEffect(() => {
     getAccessToken().then((Token) => {
-      if(Token) {
+      if (Token) {
         const headers = {
           Authorization: `Bearer ${Token}`,
         };
-    
+
         if (searchTerm) {
           let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
           if (sort) {
             url += `&sort=${sort}`;
           }
-    
+
           axios
             .get(url, { headers })
             .then((res) => {

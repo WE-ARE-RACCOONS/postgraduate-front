@@ -56,7 +56,7 @@ function STabBar() {
 
   useEffect(() => {
     getAccessToken().then((Token) => {
-      if(Token) {
+      if (Token) {
         const headers = {
           Authorization: `Bearer ${Token}`,
         };
@@ -74,7 +74,7 @@ function STabBar() {
             console.error('Error fetching data:', error);
           });
       }
-    })
+    });
   }, [activeTab]);
 
   const renderTabContent = () => {

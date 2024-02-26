@@ -52,7 +52,7 @@ function MentoringApplyDonePage() {
         thirdTime
       ) {
         const timeArr = [firstTime, secondTime, thirdTime];
-  
+
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
@@ -78,7 +78,7 @@ function MentoringApplyDonePage() {
             console.error(err);
           });
       }
-    })
+    });
   };
 
   useEffect(() => {

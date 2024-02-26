@@ -40,7 +40,7 @@ function AccountPage() {
   const accountHandler = () => {
     if (!flag) {
       getAccessToken().then((Token) => {
-        if(Token) {
+        if (Token) {
           const headers = {
             Authorization: `Bearer ${Token}`,
           };
@@ -74,7 +74,7 @@ function AccountPage() {
       router.push('/senior/account/done');
     }
   };
-  
+
   return (
     <SAContent>
       <BackHeader headerText="정산 정보 입력" />

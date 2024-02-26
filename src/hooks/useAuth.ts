@@ -136,15 +136,19 @@ function useAuth() {
       //     console.error(err);
       //   });
 
-      const response = await axios.post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
-        headers: {
-          Authorization: `Bearer ${getRefreshToken()}`,
+      const response = await axios.post(
+        `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`,
+        null,
+        {
+          headers: {
+            Authorization: `Bearer ${getRefreshToken()}`,
+          },
         },
-      });
+      );
 
       const res = response.data;
 
-      if(res.code && res.code == 'AU201') {
+      if (res.code && res.code == 'AU201') {
         setAccessToken({
           token: response.data.accessToken,
           expires: response.data.accessExpiration,
@@ -157,11 +161,10 @@ function useAuth() {
         return;
       }
 
-      if(res.errorCode && res.errorCode == 'EX202') {
+      if (res.errorCode && res.errorCode == 'EX202') {
         removeTokens();
         return;
       }
-
     } catch {}
   }
 

@@ -30,19 +30,22 @@ function MentoringApplySchedulePage() {
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
   const router = useRouter();
-  
+
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) {
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
             },
-          })
+          )
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'SNR200') {
               setSNickname(res.data.nickName);
               setTimeArr(res.data.times);
@@ -52,7 +55,7 @@ function MentoringApplySchedulePage() {
             console.error(err);
           });
       }
-    }) 
+    });
   }, []);
 
   useEffect(() => {

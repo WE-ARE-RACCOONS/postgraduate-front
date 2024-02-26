@@ -98,12 +98,12 @@ function SeniorManage(props: SeniorManageProps) {
             `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
             { headers },
           );
-  
+
           if (response.data.data.possible == true) {
             setuserTypeAtom('junior');
             renewJuniorToken();
           }
-  
+
           if (response.data.data.possible == false) {
             setSocialId(response.data.data.socialId);
             juniorHandler();
@@ -130,7 +130,7 @@ function SeniorManage(props: SeniorManageProps) {
           )
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'AU202') {
               setAccessToken({
                 token: res.data.accessToken,
@@ -141,7 +141,7 @@ function SeniorManage(props: SeniorManageProps) {
                 expires: res.data.refreshExpiration,
               });
               setUserType(res.data.role);
-  
+
               router.replace('/');
               return;
             }

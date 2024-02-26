@@ -60,7 +60,7 @@ function JuniorManage(props: NotSeniorProps) {
           )
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'AU202') {
               setAccessToken({
                 token: res.data.accessToken,
@@ -71,7 +71,7 @@ function JuniorManage(props: NotSeniorProps) {
                 expires: res.data.refreshExpiration,
               });
               setUserType(res.data.role);
-  
+
               router.replace('/');
               return;
             }

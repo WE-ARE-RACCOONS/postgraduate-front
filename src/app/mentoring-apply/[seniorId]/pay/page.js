@@ -113,7 +113,7 @@ function MentoringApplyPayPage() {
             console.error(err);
           });
       }
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -146,7 +146,7 @@ function MentoringApplyPayPage() {
       }
     });
   }, [dataLoaded, nickName, userId, PhoneNumber]);
-  
+
   return (
     <MAPContainer>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>

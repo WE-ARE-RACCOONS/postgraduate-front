@@ -58,7 +58,7 @@ function MentoringSpec(props: ModalMentoringProps) {
   useEffect(() => {
     if (props.mentoringId !== 0) {
       getAccessToken().then((Token) => {
-        if(Token) {
+        if (Token) {
           const headers = {
             Authorization: `Bearer ${Token}`,
           };
@@ -76,8 +76,8 @@ function MentoringSpec(props: ModalMentoringProps) {
               console.error('Error fetching data:', error);
             });
         }
-      })
-    };
+      });
+    }
   }, []);
   return (
     <ModalMentoringBackground>

@@ -80,7 +80,7 @@ function MyPage() {
     if (userT) setUserType(userT);
     getAccessToken().then((userTkn) => {
       if (userTkn) setAccessTkn(userTkn);
-    })
+    });
   }, []);
 
   useEffect(() => {

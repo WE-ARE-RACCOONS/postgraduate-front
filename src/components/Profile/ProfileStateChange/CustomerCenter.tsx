@@ -11,7 +11,7 @@ function CustomerCenter() {
   const { getAccessToken, removeTokens } = useAuth();
 
   useEffect(() => {
-    getAccessToken().then(accessTkn => {
+    getAccessToken().then((accessTkn) => {
       if (accessTkn) setIsLogin(true);
     });
   }, []);
@@ -31,7 +31,7 @@ function CustomerCenter() {
           )
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'AU203') {
               removeTokens();
               router.replace('/');

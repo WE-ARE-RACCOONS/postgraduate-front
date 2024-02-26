@@ -50,7 +50,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   useEffect(() => {
     if (props.mentoringId !== 0) {
       getAccessToken().then((Token) => {
-        if(Token) {
+        if (Token) {
           const headers = {
             Authorization: `Bearer ${Token}`,
           };
@@ -68,19 +68,19 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               console.error('Error fetching data:', error);
             });
         }
-      })      
-    };
+      });
+    }
   }, []);
 
   const acceptMentoring = async () => {
     try {
       getAccessToken().then(async (Token) => {
-        if(Token) {
+        if (Token) {
           const headers = {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Token}`,
           };
-    
+
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
             {
@@ -97,8 +97,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           }
           props.modalHandler();
         }
-      })
-
+      });
     } catch (error) {
       console.error('Error cancelling mentoring:', error);
     }

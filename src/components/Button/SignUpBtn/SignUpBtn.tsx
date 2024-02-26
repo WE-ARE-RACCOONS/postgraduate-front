@@ -25,7 +25,7 @@ function SignUpBtn() {
     useAuth();
 
   const handleSignUp = () => {
-    getAccessToken().then(accessTkn => {
+    getAccessToken().then((accessTkn) => {
       // 선배 -> 후배 변경 회원
       if (accessTkn) {
         if (major && field) {
@@ -66,7 +66,7 @@ function SignUpBtn() {
         }
         return;
       }
-    })
+    });
 
     if (socialId && nickName) {
       axios

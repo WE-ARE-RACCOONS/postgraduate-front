@@ -33,12 +33,12 @@ function SmentoringCancel(props: ModalMentoringProps) {
       const Token = getAccessToken();
 
       getAccessToken().then(async (Token) => {
-        if(Token) {
+        if (Token) {
           const headers = {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Token}`,
           };
-    
+
           const response = await fetch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/refuse`,
             {

@@ -83,7 +83,7 @@ function EditProfilePage() {
             const headers = {
               Authorization: `Bearer ${token}`,
             };
-  
+
             const [timesResponse, profileResponse] = await Promise.all([
               axios.get(
                 `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
@@ -94,7 +94,7 @@ function EditProfilePage() {
                 { headers },
               ),
             ]);
-  
+
             const timesData = timesResponse.data.data.times || [];
             const profileData = profileResponse.data.data || {};
             setTimeData(timesData);
@@ -112,7 +112,7 @@ function EditProfilePage() {
             console.error(error);
           }
         }
-      })
+      });
     };
 
     fetchData();
@@ -124,7 +124,7 @@ function EditProfilePage() {
       multiIntro.length >= 50 &&
       recommended.length >= 50;
 
-    getAccessToken().then(token => {
+    getAccessToken().then((token) => {
       if (
         token &&
         areConditionsMet &&
@@ -161,8 +161,8 @@ function EditProfilePage() {
             console.log(error);
           });
       }
-    })
-    
+    });
+
     setFlag(true);
   };
 

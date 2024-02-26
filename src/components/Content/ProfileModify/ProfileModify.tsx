@@ -59,7 +59,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
           })
           .then((response) => {
             const res = response.data;
-  
+
             if (res.code == 'SNR200') {
               setChatLink(res.data.chatLink);
               setField(res.data.field);
@@ -103,7 +103,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const submitHandler = () => {
     const emptyCheck = checkEmpty();
 
-    getAccessToken().then(accessTkn => {
+    getAccessToken().then((accessTkn) => {
       if (accessTkn && !emptyCheck) {
         axios
           .patch(

@@ -20,8 +20,8 @@ function MenuBar(props: MenubarProps) {
     const userT = getUserType();
     if (userT) setUserType(userT);
     getAccessToken().then((accessTkn) => {
-      if(accessTkn) setToken(accessTkn);
-    })
+      if (accessTkn) setToken(accessTkn);
+    });
   }, []);
 
   const handleClick = () => {

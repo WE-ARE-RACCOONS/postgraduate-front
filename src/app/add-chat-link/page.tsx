@@ -76,7 +76,7 @@ function AddChatLinkPage() {
               console.error(err);
             });
         }
-      })
+      });
       return;
     }
   };

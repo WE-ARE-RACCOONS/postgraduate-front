@@ -85,7 +85,6 @@ function SeniorInfoPage() {
   };
 
   const handleSubmit = () => {
-
     if (!sField) {
       setFlag(true);
       setEmptyPart('연구분야');
@@ -99,7 +98,7 @@ function SeniorInfoPage() {
     }
     setFlag(false);
 
-    getAccessToken().then(token => {
+    getAccessToken().then((token) => {
       const headers = {
         Authorization: `Bearer ${token}`,
       };
@@ -140,7 +139,7 @@ function SeniorInfoPage() {
             console.error(err);
           });
       }
-  
+
       if (
         !token &&
         socialId &&
@@ -184,9 +183,8 @@ function SeniorInfoPage() {
           .catch((err) => {
             console.error(err);
           });
-        }
       }
-    );
+    });
   };
 
   return (
