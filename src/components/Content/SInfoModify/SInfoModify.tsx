@@ -60,31 +60,31 @@ function SInfoModify({
   const { getAccessToken } = useAuth();
 
   useEffect(() => {
-    const accessTkn = getAccessToken();
-
-    if (accessTkn) {
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`, {
-          headers: {
-            Authorization: `Bearer ${accessTkn}`,
-          },
-        })
-        .then((response) => {
-          const res = response.data;
-
-          if (res.code == 'SNR200') {
-            setAccHolder(res.data.accountHolder || '');
-            setAccNumber(res.data.accountNumber || '');
-            setBank(res.data.bank || '');
-            setNickname(res.data.nickName || '');
-            setPhoneNum(res.data.phoneNumber || '');
-            setProfileUrl(res.data.profile || '');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`, {
+            headers: {
+              Authorization: `Bearer ${accessTkn}`,
+            },
+          })
+          .then((response) => {
+            const res = response.data;
+  
+            if (res.code == 'SNR200') {
+              setAccHolder(res.data.accountHolder || '');
+              setAccNumber(res.data.accountNumber || '');
+              setBank(res.data.bank || '');
+              setNickname(res.data.nickName || '');
+              setPhoneNum(res.data.phoneNumber || '');
+              setProfileUrl(res.data.profile || '');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
   }, [submitFlag]);
 
   useEffect(() => {
@@ -94,80 +94,81 @@ function SInfoModify({
   }, [inputImg]);
 
   const submitHandler = async () => {
-    const accessTkn = getAccessToken();
     let submitImgUrl = profileUrl ? profileUrl : '';
 
-    if (inputImg) {
-      const formData = new FormData();
-      formData.append('profileFile', inputImg);
-
-      if (accessTkn) {
-        await axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
-            formData,
+    getAccessToken().then(async (accessTkn) => {
+      if (inputImg) {
+        const formData = new FormData();
+        formData.append('profileFile', inputImg);
+  
+        if (accessTkn) {
+          await axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
+              formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: `Bearer ${accessTkn}`,
+                },
+              },
+            )
+            .then((response) => {
+              const res = response.data;
+  
+              if (res.code == 'IMG202') {
+                submitImgUrl = res.data.profileUrl;
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      }
+  
+      if (
+        nickName &&
+        fullNum &&
+        accessTkn &&
+        bank &&
+        submitImgUrl &&
+        accNumber &&
+        accHolder
+      ) {
+        setFlag(false);
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`,
+            {
+              nickName: nickName,
+              phoneNumber: fullNum,
+              profile: submitImgUrl,
+              accountNumber: accNumber,
+              bank: bank,
+              accountHolder: accHolder,
+            },
             {
               headers: {
-                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${accessTkn}`,
               },
             },
           )
           .then((response) => {
             const res = response.data;
-
-            if (res.code == 'IMG202') {
-              submitImgUrl = res.data.profileUrl;
+  
+            if (res.code == 'SNR201') {
+              modalHandler();
+              setSubmitFlag(!submitFlag);
             }
           })
           .catch((err) => {
             console.error(err);
           });
+      } else {
+        setFlag(true);
+        return;
       }
-    }
-
-    if (
-      nickName &&
-      fullNum &&
-      accessTkn &&
-      bank &&
-      submitImgUrl &&
-      accNumber &&
-      accHolder
-    ) {
-      setFlag(false);
-      axios
-        .patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`,
-          {
-            nickName: nickName,
-            phoneNumber: fullNum,
-            profile: submitImgUrl,
-            accountNumber: accNumber,
-            bank: bank,
-            accountHolder: accHolder,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
-            },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-
-          if (res.code == 'SNR201') {
-            modalHandler();
-            setSubmitFlag(!submitFlag);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    } else {
-      setFlag(true);
-      return;
-    }
+    });
   };
 
   return (

@@ -40,44 +40,47 @@ function MentoringApplyDonePage() {
       ? window.localStorage.getItem('thirdTime')
       : null;
   const { getAccessToken } = useAuth();
-  const payHandler = () => {
-    const accessTkn = getAccessToken();
-    if (
-      accessTkn &&
-      topic &&
-      question &&
-      firstTime &&
-      secondTime &&
-      thirdTime
-    ) {
-      const timeArr = [firstTime, secondTime, thirdTime];
 
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
-          {
-            orderId: oderId,
-            topic: topic,
-            question: question,
-            date: timeArr.join(','),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
+  const payHandler = () => {
+    getAccessToken().then((accessTkn) => {
+      if (
+        accessTkn &&
+        topic &&
+        question &&
+        firstTime &&
+        secondTime &&
+        thirdTime
+      ) {
+        const timeArr = [firstTime, secondTime, thirdTime];
+  
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
+            {
+              orderId: oderId,
+              topic: topic,
+              question: question,
+              date: timeArr.join(','),
             },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code == 'MT202') {
-            location.reload();
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'MT202') {
+              location.reload();
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    })
   };
+
   useEffect(() => {
     payHandler();
     if (typeof window !== 'undefined') {
@@ -88,6 +91,7 @@ function MentoringApplyDonePage() {
       window.localStorage.removeItem('thirdTime');
     }
   }, [topic, question, firstTime, secondTime, thirdTime]);
+
   return (
     <MADContainer>
       <MADContent>

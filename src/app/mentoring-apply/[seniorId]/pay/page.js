@@ -85,35 +85,37 @@ function MentoringApplyPayPage() {
   const payHandler = () => {};
 
   useEffect(() => {
-    const accessTkn = getAccessToken();
-    if (accessTkn) {
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/profile`,
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/profile`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
             },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code && res.code == 'SNR200') {
-            setNickName(res.data.nickName);
-            setProfile(res.data.profile);
-            setPostgradu(res.data.postgradu);
-            setMajor(res.data.major);
-            setLab(res.data.lab);
-            setUserId(res.data.userId);
-            setPhoneNumber(res.data.phoneNumber);
-            setDataLoaded(true);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code && res.code == 'SNR200') {
+              setNickName(res.data.nickName);
+              setProfile(res.data.profile);
+              setPostgradu(res.data.postgradu);
+              setMajor(res.data.major);
+              setLab(res.data.lab);
+              setUserId(res.data.userId);
+              setPhoneNumber(res.data.phoneNumber);
+              setDataLoaded(true);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    })
   }, []);
+
   useEffect(() => {
     window.$(document).ready(() => {
       if (dataLoaded) {
@@ -144,6 +146,7 @@ function MentoringApplyPayPage() {
       }
     });
   }, [dataLoaded, nickName, userId, PhoneNumber]);
+  
   return (
     <MAPContainer>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>

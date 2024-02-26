@@ -49,49 +49,56 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   };
   useEffect(() => {
     if (props.mentoringId !== 0) {
-      const Token = getAccessToken();
-      const headers = {
-        Authorization: `Bearer ${Token}`,
-      };
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}`,
-          {
-            headers,
-          },
-        )
-        .then((response) => {
-          setData(response.data.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
-    }
+      getAccessToken().then((Token) => {
+        if(Token) {
+          const headers = {
+            Authorization: `Bearer ${Token}`,
+          };
+          axios
+            .get(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}`,
+              {
+                headers,
+              },
+            )
+            .then((response) => {
+              setData(response.data.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching data:', error);
+            });
+        }
+      })      
+    };
   }, []);
 
   const acceptMentoring = async () => {
     try {
-      const Token = getAccessToken();
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${Token}`,
-      };
+      getAccessToken().then(async (Token) => {
+        if(Token) {
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Token}`,
+          };
+    
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
+            {
+              method: 'PATCH',
+              headers,
+              body: JSON.stringify({
+                date: date,
+              }),
+            },
+          );
+          // const responseData = await response.json();
+          if (props.acceptModalHandler) {
+            props.acceptModalHandler();
+          }
+          props.modalHandler();
+        }
+      })
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
-        {
-          method: 'PATCH',
-          headers,
-          body: JSON.stringify({
-            date: date,
-          }),
-        },
-      );
-      const responseData = await response.json();
-      if (props.acceptModalHandler) {
-        props.acceptModalHandler();
-      }
-      props.modalHandler();
     } catch (error) {
       console.error('Error cancelling mentoring:', error);
     }

@@ -11,35 +11,37 @@ function CustomerCenter() {
   const { getAccessToken, removeTokens } = useAuth();
 
   useEffect(() => {
-    const accessTkn = getAccessToken();
-    if (accessTkn) setIsLogin(true);
+    getAccessToken().then(accessTkn => {
+      if (accessTkn) setIsLogin(true);
+    });
   }, []);
 
   const logout = () => {
-    const accessTkn = getAccessToken();
-    if (accessTkn) {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/logout`,
-          {},
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/logout`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
             },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-
-          if (res.code == 'AU203') {
-            removeTokens();
-            router.replace('/');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+          )
+          .then((response) => {
+            const res = response.data;
+  
+            if (res.code == 'AU203') {
+              removeTokens();
+              router.replace('/');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
   };
 
   return (

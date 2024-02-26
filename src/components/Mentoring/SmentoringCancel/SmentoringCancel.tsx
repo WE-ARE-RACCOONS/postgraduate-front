@@ -31,23 +31,28 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const cancelMentoring = async () => {
     try {
       const Token = getAccessToken();
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${Token}`,
-      };
 
-      const response = await fetch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/refuse`,
-        {
-          method: 'PATCH',
-          headers,
-          body: JSON.stringify({
-            reason: reason,
-          }),
-        },
-      );
-      const responseData = await response.json();
-      props.modalHandler();
+      getAccessToken().then(async (Token) => {
+        if(Token) {
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Token}`,
+          };
+    
+          const response = await fetch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/refuse`,
+            {
+              method: 'PATCH',
+              headers,
+              body: JSON.stringify({
+                reason: reason,
+              }),
+            },
+          );
+          // const responseData = await response.json();
+          props.modalHandler();
+        }
+      });
     } catch (error) {
       console.error('Error cancelling mentoring:', error);
     }

@@ -16,7 +16,9 @@ function Login() {
   };
 
   useEffect(() => {
-    setToken(getAccessToken());
+    getAccessToken().then((accessTkn) => {
+      setToken(accessTkn);
+    });
   }, [token]);
 
   return (

@@ -53,25 +53,30 @@ function STabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
+
   useEffect(() => {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
-    axios
-      .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${activeTab}`,
-        {
-          headers,
-        },
-      )
-      .then((response) => {
-        setData(response.data.data.seniorMentoringInfos);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    getAccessToken().then((Token) => {
+      if(Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${activeTab}`,
+            {
+              headers,
+            },
+          )
+          .then((response) => {
+            setData(response.data.data.seniorMentoringInfos);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }
+    })
   }, [activeTab]);
+
   const renderTabContent = () => {
     return (
       <div>

@@ -30,25 +30,29 @@ function MentoringCancel(props: ModalMentoringclProps) {
   const cancelMentoring = async () => {
     try {
       setLoading(true);
-      const Token = getAccessToken();
-      const headers = {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${Token}`,
-      };
 
-      const response = await axios.patch(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}/cancel`,
-        {
-          mentoringId: props.mentoringId,
-        },
-        { headers },
-      );
-      setData(response.data);
-      if (response.data.code === 'MT201') {
-        setCancelStatus('취소되었습니다');
-      } else {
-        setCancelStatus('취소 실패');
-      }
+      getAccessToken().then(async (Token) => {
+        if(Token) {
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Token}`,
+          };
+    
+          const response = await axios.patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}/cancel`,
+            {
+              mentoringId: props.mentoringId,
+            },
+            { headers },
+          );
+          setData(response.data);
+          if (response.data.code === 'MT201') {
+            setCancelStatus('취소되었습니다');
+          } else {
+            setCancelStatus('취소 실패');
+          }
+        }
+      });
     } catch (error) {
       console.error(error);
     } finally {

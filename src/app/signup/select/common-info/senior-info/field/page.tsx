@@ -85,10 +85,6 @@ function SeniorInfoPage() {
   };
 
   const handleSubmit = () => {
-    const token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
 
     if (!sField) {
       setFlag(true);
@@ -102,11 +98,66 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    if (token && certification) {
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
-          {
+
+    getAccessToken().then(token => {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      if (token && certification) {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
+            {
+              major: sMajor,
+              postgradu: sPostGradu,
+              professor: sProfessor,
+              lab: sLab,
+              field: sField,
+              keyword: sKeyword,
+              certification: certification,
+            },
+            {
+              headers,
+            },
+          )
+          .then((res) => {
+            const response = res.data;
+            if (response.code == 'SNR202') {
+              setAccessToken({
+                token: response.data.accessToken,
+                expires: response.data.accessExpiration,
+              });
+              setRefreshToken({
+                token: response.data.refreshToken,
+                expires: response.data.refreshExpiration,
+              });
+              setUserType(response.data.role);
+              router.push('/signup/done');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+  
+      if (
+        !token &&
+        socialId &&
+        phoneNumber &&
+        nickName &&
+        certification &&
+        sMajor &&
+        sPostGradu &&
+        sProfessor &&
+        sLab
+      ) {
+        axios
+          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
+            socialId: socialId,
+            phoneNumber: phoneNumber,
+            nickName: nickName,
+            marketingReceive: marketingReceive,
             major: sMajor,
             postgradu: sPostGradu,
             professor: sProfessor,
@@ -114,75 +165,28 @@ function SeniorInfoPage() {
             field: sField,
             keyword: sKeyword,
             certification: certification,
-          },
-          {
-            headers,
-          },
-        )
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR202') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-
-    if (
-      !token &&
-      socialId &&
-      phoneNumber &&
-      nickName &&
-      certification &&
-      sMajor &&
-      sPostGradu &&
-      sProfessor &&
-      sLab
-    ) {
-      axios
-        .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
-          socialId: socialId,
-          phoneNumber: phoneNumber,
-          nickName: nickName,
-          marketingReceive: marketingReceive,
-          major: sMajor,
-          postgradu: sPostGradu,
-          professor: sProfessor,
-          lab: sLab,
-          field: sField,
-          keyword: sKeyword,
-          certification: certification,
-        })
-        .then((res) => {
-          const response = res.data;
-          if (response.code == 'SNR202') {
-            setAccessToken({
-              token: response.data.accessToken,
-              expires: response.data.accessExpiration,
-            });
-            setRefreshToken({
-              token: response.data.refreshToken,
-              expires: response.data.refreshExpiration,
-            });
-            setUserType(response.data.role);
-            router.push('/signup/done');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+          })
+          .then((res) => {
+            const response = res.data;
+            if (response.code == 'SNR202') {
+              setAccessToken({
+                token: response.data.accessToken,
+                expires: response.data.accessExpiration,
+              });
+              setRefreshToken({
+                token: response.data.refreshToken,
+                expires: response.data.refreshExpiration,
+              });
+              setUserType(response.data.role);
+              router.push('/signup/done');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+        }
+      }
+    );
   };
 
   return (

@@ -12,13 +12,16 @@ import { useEffect, useState } from 'react';
 function MenuBar(props: MenubarProps) {
   const router = useRouter();
   const { getAccessToken, getUserType } = useAuth();
-  const token = getAccessToken();
   const [userType, setUserType] = useState('');
+  const [token, setToken] = useState('');
   // const userType = getUserType();
 
   useEffect(() => {
     const userT = getUserType();
     if (userT) setUserType(userT);
+    getAccessToken().then((accessTkn) => {
+      if(accessTkn) setToken(accessTkn);
+    })
   }, []);
 
   const handleClick = () => {
