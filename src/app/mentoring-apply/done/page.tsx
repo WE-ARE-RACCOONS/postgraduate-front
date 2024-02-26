@@ -19,10 +19,8 @@ import React, { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
 import { successAtom } from '@/stores/condition';
 function MentoringApplyDonePage() {
-  location.reload();
   const router = useRouter();
   const success = useAtomValue(successAtom)
-  const oderId = useAtomValue(orderIdAtom);
   const paySeniorId = useAtomValue(paySeniorIdAtom);
   const topic =
     typeof window !== 'undefined' ? window.localStorage.getItem('topic') : null;
@@ -42,6 +40,9 @@ function MentoringApplyDonePage() {
     typeof window !== 'undefined'
       ? window.localStorage.getItem('thirdTime')
       : null;
+      const oderId = typeof window !== 'undefined'
+      ? window.localStorage.getItem('searchLocal')
+      : null;
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem('topic');
@@ -49,8 +50,10 @@ function MentoringApplyDonePage() {
       window.localStorage.removeItem('firstTime');
       window.localStorage.removeItem('secondTime');
       window.localStorage.removeItem('thirdTime');
+      window.localStorage.removeItem('searchLocal');
     }
-  }, [topic, question, firstTime, secondTime, thirdTime]);
+  }, []);
+  // location.reload();
   return (
     <MADContainer>
       <MADContent>

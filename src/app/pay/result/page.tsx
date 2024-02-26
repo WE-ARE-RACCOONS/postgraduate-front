@@ -33,7 +33,11 @@ const thirdTime =
   const { getAccessToken } = useAuth();
   const payHandler = () => {
       const accessTkn = getAccessToken();
+      const oderId = typeof window !== 'undefined'
+    ? window.localStorage.getItem('searchLocal')
+    : null;
       if (
+        oderId &&
         accessTkn &&
         topic &&
         question &&
@@ -60,7 +64,6 @@ const thirdTime =
           )
           .then((response) => {
             const res = response.data;
-            console.log(res)
             if (res.code == 'MT202') {
               setSuccess(true);
               router.replace('/mentoring-apply/done');
@@ -79,6 +82,9 @@ const thirdTime =
     const search = searchParams.get('orderId');
     if (search) {
       setOrderId(search);
+      if (typeof window !== 'undefined') {
+        window.localStorage.setItem('searchLocal', search);
+      }
       payHandler();
     }
   }, []);
