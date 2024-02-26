@@ -9,17 +9,7 @@ function Login() {
 
   const loginHandler = () => {
     if (typeof window !== undefined) {
-      if (window.location.hostname.includes('localhost')) {
-        const REDIRECT_URI = process.env.NEXT_PUBLIC_LOCAL_REDIRECT_URI;
-        const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-        window.location.href = link;
-      } else {
-        const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
-        const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-        window.location.href = link;
-      }
-    } else {
-      const REDIRECT_URI = process.env.NEXT_PUBLIC_REDIRECT_URI;
+      const REDIRECT_URI = window.location.href + 'login/oauth2/code/kakao';
       const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
       window.location.href = link;
     }
@@ -31,13 +21,6 @@ function Login() {
 
   return (
     <div>
-      {/* {token ? (
-        <></>
-       ) : (
-        <button type="button" onClick={loginHandler}>
-        로그인 하기
-      </button>
-       )} */}
       <button
         type="button"
         onClick={loginHandler}
