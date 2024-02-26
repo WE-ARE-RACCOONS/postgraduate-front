@@ -43,10 +43,17 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     const buttonContent = button.textContent;
     const newClicked = !isActive;
     setIsActive(newClicked);
-    const dateTarget = buttonContent ? buttonContent : '';
-    const dateParts = dateTarget.split(' ');
-    const dateSend = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}-${dateParts[3]}-${dateParts[4]}`;
-    setDate(dateSend ? dateSend : '');
+    if (buttonContent) {
+      const match = buttonContent.match(/(\d{4})년 (\d{2})월 (\d{2})일 (\d{2})시 (\d{2})분/);
+      if (match) {
+        const dateSend = `${match[1]}-${match[2]}-${match[3]}-${match[4]}-${match[5]}`;
+        setDate(dateSend);
+      } else {
+        setDate('');
+      }
+    } else {
+      setDate('');
+    }
     button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
     button.style.color = newClicked ? '#FFFFFF' : '#3D4044';
   };
@@ -79,7 +86,6 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${Token}`,
       };
-
       const response = await fetch(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
         {

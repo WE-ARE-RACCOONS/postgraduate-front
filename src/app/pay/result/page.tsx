@@ -60,6 +60,7 @@ const thirdTime =
           )
           .then((response) => {
             const res = response.data;
+            console.log(res)
             if (res.code == 'MT202') {
               setSuccess(true);
               router.replace('/mentoring-apply/done');

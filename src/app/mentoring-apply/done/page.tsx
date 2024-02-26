@@ -19,6 +19,7 @@ import React, { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
 import { successAtom } from '@/stores/condition';
 function MentoringApplyDonePage() {
+  location.reload();
   const router = useRouter();
   const success = useAtomValue(successAtom)
   const oderId = useAtomValue(orderIdAtom);
@@ -50,7 +51,6 @@ function MentoringApplyDonePage() {
       window.localStorage.removeItem('thirdTime');
     }
   }, [topic, question, firstTime, secondTime, thirdTime]);
-  location.reload();
   return (
     <MADContainer>
       <MADContent>
