@@ -7,3 +7,5 @@ export const option = atom<boolean>(false);
 export const noTime = atom<boolean>(false);
 export const notKnow = atom<boolean>(false);
 export const SCEtc = atom<boolean>(false);
+
+export const successAtom = atom<boolean>(false);

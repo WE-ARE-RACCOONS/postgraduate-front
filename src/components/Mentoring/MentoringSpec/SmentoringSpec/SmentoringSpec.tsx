@@ -43,7 +43,10 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     const buttonContent = button.textContent;
     const newClicked = !isActive;
     setIsActive(newClicked);
-    setDate(buttonContent ? buttonContent : '');
+    const dateTarget = buttonContent ? buttonContent : '';
+    const dateParts = dateTarget.split(' ');
+    const dateSend = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}-${dateParts[3]}-${dateParts[4]}`;
+    setDate(dateSend ? dateSend : '');
     button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
     button.style.color = newClicked ? '#FFFFFF' : '#3D4044';
   };
@@ -152,7 +155,8 @@ function SmentoringSpec(props: ModalMentoringSProps) {
             data.dates.map((dateString, index) => {
               const dataSplit = dateString;
               const dateParts = (dataSplit || '').split('-');
-              const dateSenior = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+              const dateSenior = `${dateParts[0]}년 ${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+              const dateSend = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}-${dateParts[3]}-${dateParts[4]}`;
 
               return (
                 <div key={index}>
