@@ -67,11 +67,10 @@ const PayResultPage = () => {
           const res = response.data;
           if (res.code == 'MT202') {
             setSuccess(true);
-            router.replace('/mentoring-apply/done');
           } else {
             setSuccess(false);
-            router.replace('/mentoring-apply/done');
           }
+          router.push('/mentoring-apply/done');
         })
         .catch((err) => {
           console.error(err);
