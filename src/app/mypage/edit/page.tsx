@@ -7,9 +7,11 @@ import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
 import {
   changeNickname,
+  newNotDuplicate,
   nickname,
   notDuplicate,
   phoneNumValidation,
+  sameUserAtom,
 } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
 import Photo from '@/components/Photo';
@@ -29,6 +31,8 @@ function page() {
   const [nickAvail, setNickAvail] = useState(false);
   const availability = useAtomValue(notDuplicate);
   const availablePhone = useAtomValue(phoneNumValidation);
+  const newAvailability = useAtomValue(newNotDuplicate);
+  const sameUser = useAtomValue(sameUserAtom);
   useEffect(() => {
     const token = getAccessToken();
     if (token) {
@@ -123,7 +127,7 @@ function page() {
       )}
       <NicknameForm defaultValue={myNickName} />
       <PhoneNumForm defaultValue={phoneNumber} />
-      {availability ? (
+      {(newAvailability && availability) || (sameUser && availablePhone) ? (
         <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
       ) : (
         <ProfileSetBtnNon>저장하기</ProfileSetBtnNon>

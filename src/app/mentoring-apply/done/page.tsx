@@ -17,9 +17,10 @@ import {
 import { useAtomValue } from 'jotai';
 import React, { useEffect } from 'react';
 import useAuth from '@/hooks/useAuth';
+import { successAtom } from '@/stores/condition';
 function MentoringApplyDonePage() {
   const router = useRouter();
-  const oderId = useAtomValue(orderIdAtom);
+  const success = useAtomValue(successAtom);
   const paySeniorId = useAtomValue(paySeniorIdAtom);
   const topic =
     typeof window !== 'undefined' ? window.localStorage.getItem('topic') : null;
@@ -39,72 +40,52 @@ function MentoringApplyDonePage() {
     typeof window !== 'undefined'
       ? window.localStorage.getItem('thirdTime')
       : null;
-  const { getAccessToken } = useAuth();
-  const payHandler = () => {
-    const accessTkn = getAccessToken();
-    if (
-      accessTkn &&
-      topic &&
-      question &&
-      firstTime &&
-      secondTime &&
-      thirdTime
-    ) {
-      const timeArr = [firstTime, secondTime, thirdTime];
-
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
-          {
-            orderId: oderId,
-            topic: topic,
-            question: question,
-            date: timeArr.join(','),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
-            },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code == 'MT202') {
-            location.reload();
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  };
+  const oderId =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('orderId')
+      : null;
   useEffect(() => {
-    payHandler();
     if (typeof window !== 'undefined') {
       window.localStorage.removeItem('topic');
       window.localStorage.removeItem('question');
       window.localStorage.removeItem('firstTime');
       window.localStorage.removeItem('secondTime');
       window.localStorage.removeItem('thirdTime');
+      window.localStorage.removeItem('orderId');
     }
-  }, [topic, question, firstTime, secondTime, thirdTime]);
+  }, []);
+  // location.reload();
   return (
     <MADContainer>
       <MADContent>
-        <Image id="check-img" src={cState} alt="체크 이미지" />
-        <h2>{MENTORING_DONE_TEXT.submitDone}</h2>
-        <div id="mentoring-done-msg">{MENTORING_DONE_TEXT.waitingMsg}</div>
+        {success ? (
+          <>
+            <Image id="check-img" src={cState} alt="체크 이미지" />
+            <h2>{MENTORING_DONE_TEXT.submitDone}</h2>
+            <div id="mentoring-done-msg">{MENTORING_DONE_TEXT.waitingMsg}</div>
+          </>
+        ) : (
+          <>결제실패</>
+        )}
       </MADContent>
       <MADBtnContainer>
-        <div id="mentoring-done-view-msg">{MENTORING_DONE_TEXT.viewMsg}</div>
-        <button
-          id="mentoring-done-view-btn"
-          onClick={() => {
-            router.push('/junior/mentoring');
-          }}
-        >
-          {MENTORING_DONE_TEXT.viewBtnText}
-        </button>
+        {success ? (
+          <>
+            <div id="mentoring-done-view-msg">
+              {MENTORING_DONE_TEXT.viewMsg}
+            </div>
+            <button
+              id="mentoring-done-view-btn"
+              onClick={() => {
+                router.push('/junior/mentoring');
+              }}
+            >
+              {MENTORING_DONE_TEXT.viewBtnText}
+            </button>
+          </>
+        ) : (
+          <>결제실패</>
+        )}
       </MADBtnContainer>
     </MADContainer>
   );
