@@ -44,7 +44,9 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     const newClicked = !isActive;
     setIsActive(newClicked);
     if (buttonContent) {
-      const match = buttonContent.match(/(\d{4})년 (\d{2})월 (\d{2})일 (\d{2})시 (\d{2})분/);
+      const match = buttonContent.match(
+        /(\d{4})년 (\d{2})월 (\d{2})일 (\d{2})시 (\d{2})분/,
+      );
       if (match) {
         const dateSend = `${match[1]}-${match[2]}-${match[3]}-${match[4]}-${match[5]}`;
         setDate(dateSend);

@@ -20,7 +20,7 @@ import useAuth from '@/hooks/useAuth';
 import { successAtom } from '@/stores/condition';
 function MentoringApplyDonePage() {
   const router = useRouter();
-  const success = useAtomValue(successAtom)
+  const success = useAtomValue(successAtom);
   const paySeniorId = useAtomValue(paySeniorIdAtom);
   const topic =
     typeof window !== 'undefined' ? window.localStorage.getItem('topic') : null;
@@ -40,7 +40,8 @@ function MentoringApplyDonePage() {
     typeof window !== 'undefined'
       ? window.localStorage.getItem('thirdTime')
       : null;
-      const oderId = typeof window !== 'undefined'
+  const oderId =
+    typeof window !== 'undefined'
       ? window.localStorage.getItem('searchLocal')
       : null;
   useEffect(() => {
@@ -57,32 +58,34 @@ function MentoringApplyDonePage() {
   return (
     <MADContainer>
       <MADContent>
-        {success ? 
-        <>
-        <Image id="check-img" src={cState} alt="체크 이미지" />
-        <h2>{MENTORING_DONE_TEXT.submitDone}</h2>
-        <div id="mentoring-done-msg">{MENTORING_DONE_TEXT.waitingMsg}</div></>
-        :
-        <>결제실패</>}
-        
+        {success ? (
+          <>
+            <Image id="check-img" src={cState} alt="체크 이미지" />
+            <h2>{MENTORING_DONE_TEXT.submitDone}</h2>
+            <div id="mentoring-done-msg">{MENTORING_DONE_TEXT.waitingMsg}</div>
+          </>
+        ) : (
+          <>결제실패</>
+        )}
       </MADContent>
       <MADBtnContainer>
-        {success ? 
-        <>
-         <div id="mentoring-done-view-msg">{MENTORING_DONE_TEXT.viewMsg}</div>
-         <button
-           id="mentoring-done-view-btn"
-           onClick={() => {
-             router.push('/junior/mentoring');
-           }}
-         >
-           {MENTORING_DONE_TEXT.viewBtnText}
-         </button> 
-         </> :
-         <>
-         결제실패
+        {success ? (
+          <>
+            <div id="mentoring-done-view-msg">
+              {MENTORING_DONE_TEXT.viewMsg}
+            </div>
+            <button
+              id="mentoring-done-view-btn"
+              onClick={() => {
+                router.push('/junior/mentoring');
+              }}
+            >
+              {MENTORING_DONE_TEXT.viewBtnText}
+            </button>
           </>
-          }
+        ) : (
+          <>결제실패</>
+        )}
       </MADBtnContainer>
     </MADContainer>
   );
