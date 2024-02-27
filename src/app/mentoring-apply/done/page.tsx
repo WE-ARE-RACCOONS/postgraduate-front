@@ -42,7 +42,7 @@ function MentoringApplyDonePage() {
       : null;
   const oderId =
     typeof window !== 'undefined'
-      ? window.localStorage.getItem('searchLocal')
+      ? window.localStorage.getItem('orderId')
       : null;
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -51,7 +51,7 @@ function MentoringApplyDonePage() {
       window.localStorage.removeItem('firstTime');
       window.localStorage.removeItem('secondTime');
       window.localStorage.removeItem('thirdTime');
-      window.localStorage.removeItem('searchLocal');
+      window.localStorage.removeItem('orderId');
     }
   }, []);
   // location.reload();

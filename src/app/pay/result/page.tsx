@@ -35,7 +35,7 @@ const PayResultPage = () => {
     const accessTkn = getAccessToken();
     const oderId =
       typeof window !== 'undefined'
-        ? window.localStorage.getItem('searchLocal')
+        ? window.localStorage.getItem('orderId')
         : null;
     if (
       oderId &&
@@ -83,7 +83,7 @@ const PayResultPage = () => {
     if (search) {
       setOrderId(search);
       if (typeof window !== 'undefined') {
-        window.localStorage.setItem('searchLocal', search);
+        window.localStorage.setItem('orderId', search);
       }
       payHandler();
     }
