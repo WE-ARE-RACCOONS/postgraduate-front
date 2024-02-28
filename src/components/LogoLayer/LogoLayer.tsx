@@ -13,22 +13,24 @@ function LogoLayer(props: SearchModalProps) {
   const [isLogin, setIsLogin] = useState(false);
   const { getAccessToken } = useAuth();
   const router = useRouter();
-  useEffect(() => {
-    const accessTkn = getAccessToken();
 
-    if (accessTkn) {
-      setIsLogin(true);
-    }
+  useEffect(() => {
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) setIsLogin(true);
+    });
   }, []);
+
   const handleClick = () => {
     props.modalHandler();
   };
+
   const logoClick = () => {
     router.push('/');
   };
+
   return (
     <HomeTopLayer>
-      <Logo>
+      <Logo onClick={logoClick}>
         <Image
           id="logo"
           src={logo}
@@ -36,7 +38,6 @@ function LogoLayer(props: SearchModalProps) {
           width={36}
           height={24}
           priority
-          onClick={logoClick}
           style={{ marginRight: '0.13rem', cursor: 'pointer' }}
         />
         <div className="none-name">대학원</div>
@@ -50,6 +51,7 @@ function LogoLayer(props: SearchModalProps) {
           sizes="(max-width: 600px) 2.rem"
           priority
           onClick={handleClick}
+          style={{ cursor: 'pointer' }}
         />
         {!isLogin && <Login />}
       </div>

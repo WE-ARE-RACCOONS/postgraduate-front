@@ -15,8 +15,10 @@ export const NotSeniorMid = styled.div`
   align-items: center;
   text-align: center;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   top: 2rem;
-  left: 12%;
   font-family: Pretendard;
 `;
 export const NotSeniorBottom = styled.div`
@@ -25,7 +27,6 @@ export const NotSeniorBottom = styled.div`
   left: 5%;
 `;
 export const NSMain = styled.div`
-  margin-left: 2rem;
   width: 12.6rem;
   color: #333;
   text-align: center;

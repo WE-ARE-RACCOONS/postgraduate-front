@@ -18,19 +18,21 @@ import SearchModal from '../components/Modal/SearchModal';
 import useAuth from '../hooks/useAuth';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
+import { SeniorProfileData } from '@/types/profile/seniorProfile';
+import { listDataAtom, pageNumAtom } from '@/stores/home';
+import { useRouter } from 'next/router';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState<Array<SeniorProfileData>>([]);
+  const [data, setData] = useAtom(listDataAtom);
+  const [page, setPage] = useAtom(pageNumAtom);
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
   useEffect(() => {
-    setCurrentPath();
-  }, []);
-
-  useEffect(() => {
+    setPage(1);
     if (field && postgradu) {
       axios
         .get(
@@ -44,6 +46,43 @@ export default function Home() {
         });
     }
   }, [field, postgradu]);
+
+  useEffect(() => {
+    setCurrentPath();
+
+    const infiniteBottom = () => {
+      let isScrollAtBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+      if (isScrollAtBottom) {
+        axios
+          .get(
+            `${
+              process.env.NEXT_PUBLIC_SERVER_URL
+            }/senior/field?field=${field}&postgradu=${postgradu}&page=${
+              page + 1
+            }`,
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR200') {
+              setData((data) => [...data, ...res.data.seniorSearchResponses]);
+              setPage((page) =>
+                res.data.totalElements / 10 <= page ? page : page + 1,
+              );
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    };
+
+    window.addEventListener('scroll', infiniteBottom);
+
+    return () => {
+      window.removeEventListener('scroll', infiniteBottom);
+    };
+  }, [page]);
 
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-portal',

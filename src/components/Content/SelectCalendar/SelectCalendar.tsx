@@ -89,7 +89,7 @@ function SelectCalendar(props: SelectCalendarProps) {
   /** 시간 데이터를 HH-MM 형태로 만드는 함수 */
   function formatTimeHyphen(time: string) {
     let formattedTime = time.replace('시 ', '-');
-    formattedTime = formattedTime.replace('분', '');
+    formattedTime = formattedTime.replace(/\s*분\s*/g, '');
     return formattedTime;
   }
 

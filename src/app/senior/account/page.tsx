@@ -25,6 +25,7 @@ function AccountPage() {
   const [data, setData] = useState('');
   const { getAccessToken } = useAuth();
   const isInputsFilled = accountNumber && bank && accountHolder;
+
   const validateInputs = () => {
     const isAccountNumberValid = /^[0-9]+$/.test(accountNumber);
     const isBankNameValid = /^[가-힣]+$/.test(bank);
@@ -35,39 +36,45 @@ function AccountPage() {
     setFlag(!isValid);
     return isValid;
   };
+
   const accountHandler = () => {
     if (!flag) {
-      const Token = getAccessToken();
-      const headers = {
-        Authorization: `Bearer ${Token}`,
-      };
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/account`,
-          {
-            accountNumber: accountNumber,
-            bank: bank,
-            accountHolder: accountHolder,
-          },
-          {
-            headers,
-          },
-        )
-        .then((response) => {
-          setData(response.data);
-        })
-        .catch((error) => {
-          setFlag(true);
-          console.error('Error fetching data:', error);
-        });
+      getAccessToken().then((Token) => {
+        if (Token) {
+          const headers = {
+            Authorization: `Bearer ${Token}`,
+          };
+          axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/account`,
+              {
+                accountNumber: accountNumber,
+                bank: bank,
+                accountHolder: accountHolder,
+              },
+              {
+                headers,
+              },
+            )
+            .then((response) => {
+              setData(response.data);
+            })
+            .catch((error) => {
+              setFlag(true);
+              console.error('Error fetching data:', error);
+            });
+        }
+      });
     }
   };
+
   const handleComplete = () => {
     if (validateInputs()) {
       accountHandler();
       router.push('/senior/account/done');
     }
   };
+
   return (
     <SAContent>
       <BackHeader headerText="정산 정보 입력" />
@@ -161,6 +168,7 @@ const SABtnT = styled.div`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;
 const SABtnF = styled.div`
   display: flex;

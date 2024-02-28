@@ -32,26 +32,30 @@ function MentoringApplySchedulePage() {
   const router = useRouter();
 
   useEffect(() => {
-    const accessTkn = getAccessToken();
-    if (accessTkn) {
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`, {
-          headers: {
-            Authorization: `Bearer ${accessTkn}`,
-          },
-        })
-        .then((response) => {
-          const res = response.data;
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
 
-          if (res.code == 'SNR200') {
-            setSNickname(res.data.nickName);
-            setTimeArr(res.data.times);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+            if (res.code == 'SNR200') {
+              setSNickname(res.data.nickName);
+              setTimeArr(res.data.times);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
   }, []);
 
   useEffect(() => {
@@ -233,6 +237,7 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
     font-family: Pretendard;
     border-radius: 12px;
     border: none;
+    cursor: pointer;
   }
 
   .prev-btn {
@@ -243,6 +248,7 @@ const MASBtnContainer = styled.div<{ $timeArr: Array<TimeObj> }>`
   }
 
   .next-btn {
+    cursor: pointer;
     width: 62%;
     height: 3.375rem;
     background-color: #f1f3f5;

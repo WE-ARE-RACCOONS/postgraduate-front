@@ -111,7 +111,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
               <>
                 <DateDone>
                   {dateDone}
-                  <Color> 멘토링 예정</Color>
+                  <Color>&nbsp;멘토링 완료</Color>
                 </DateDone>
                 {/* <NaverPoint /> */}
               </>

@@ -71,17 +71,16 @@ function MyPage() {
   } = useModal('login-request-portal');
 
   const { getAccessToken, getUserType } = useAuth();
-  // const Token = getAccessToken();
   const [accessTkn, setAccessTkn] = useState('');
   const [userType, setUserType] = useState('');
-  // const userType = getUserType();
   const router = useRouter();
 
   useEffect(() => {
     const userT = getUserType();
     if (userT) setUserType(userT);
-    const userTkn = getAccessToken();
-    if (userTkn) setAccessTkn(userTkn);
+    getAccessToken().then((userTkn) => {
+      if (userTkn) setAccessTkn(userTkn);
+    });
   }, []);
 
   useEffect(() => {
@@ -133,10 +132,12 @@ function MyPage() {
   }, [accessTkn, userType]);
 
   return (
-    <div style={{ backgroundColor: '#F8F9FA', width: 'inherit' }}>
+    <div
+      style={{ backgroundColor: '#F8F9FA', width: 'inherit', height: '100vh' }}
+    >
       <LogoLayer modalHandler={searchModalHandler} />
       {accessTkn ? (
-        <div style={{ backgroundColor: '#F8F9FA' }}>
+        <div style={{ backgroundColor: '#F8F9FA', marginTop: '1rem' }}>
           <Profile
             profile={profile ? profile : ''}
             nickName={nickName ? nickName : ''}
@@ -166,7 +167,14 @@ function MyPage() {
       ) : (
         <NotLmypage modalHandler={modalHandler}></NotLmypage>
       )}
-      <div style={{ marginTop: '1rem' }}>
+      <div
+        style={{
+          backgroundColor: '#F8F9FA',
+          marginTop: '1rem',
+          paddingBottom: userType == 'senior' ? '4rem' : '',
+          border: 'none',
+        }}
+      >
         <CustomerCenter />
       </div>
       <MenuBar modalHandler={loginRequestHandler} />

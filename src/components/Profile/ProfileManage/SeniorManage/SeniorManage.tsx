@@ -22,7 +22,8 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } =
+    useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
@@ -88,33 +89,74 @@ function SeniorManage(props: SeniorManageProps) {
   };
   const changeJunior = async () => {
     try {
-      const Token = getAccessToken();
-      if (Token) {
-        const headers = {
-          Authorization: `Bearer ${Token}`,
-        };
-        const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
-          { headers },
-        );
+      getAccessToken().then(async (Token) => {
+        if (Token) {
+          const headers = {
+            Authorization: `Bearer ${Token}`,
+          };
+          const response = await axios.get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
+            { headers },
+          );
 
-        if (response.data.data.possible === true) {
-          setuserTypeAtom('junior');
-          router.push('/mypage');
-        }
+          if (response.data.data.possible == true) {
+            setuserTypeAtom('junior');
+            renewJuniorToken();
+          }
 
-        if (response.data.data.possible === false) {
-          setSocialId(response.data.data.socialId);
-          juniorHandler();
+          if (response.data.data.possible == false) {
+            setSocialId(response.data.data.socialId);
+            juniorHandler();
+          }
         }
-      }
+      });
     } catch (error) {
       console.error('Error fetching data from the server:', error);
     }
   };
+
+  const renewJuniorToken = () => {
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/token`,
+            {},
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+
+            if (res.code == 'AU202') {
+              setAccessToken({
+                token: res.data.accessToken,
+                expires: res.data.accessExpiration,
+              });
+              setRefreshToken({
+                token: res.data.refreshToken,
+                expires: res.data.refreshExpiration,
+              });
+              setUserType(res.data.role);
+
+              router.replace('/');
+              return;
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
+  };
+
   const editProf = () => {
     router.push('/senior/edit-profile');
   };
+
   return (
     <SeniorManageContainer>
       <SeniorManageContentContainer>

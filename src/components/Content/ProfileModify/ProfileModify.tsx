@@ -49,35 +49,35 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   } = useModal('senior-info-portal');
 
   useEffect(() => {
-    const accessTkn = getAccessToken();
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+            headers: {
+              Authorization: `Bearer ${accessTkn}`,
+            },
+          })
+          .then((response) => {
+            const res = response.data;
 
-    if (accessTkn) {
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
-          headers: {
-            Authorization: `Bearer ${accessTkn}`,
-          },
-        })
-        .then((response) => {
-          const res = response.data;
-
-          if (res.code == 'SNR200') {
-            setChatLink(res.data.chatLink);
-            setField(res.data.field);
-            const totalArr = dedupeInTotalField(res.data.field);
-            setTotalField(totalArr);
-            setInfo(res.data.info);
-            setKeyword(res.data.keyword.join(','));
-            setLab(res.data.lab);
-            setOneLiner(res.data.oneLiner);
-            setTarget(res.data.target);
-            setTimes(res.data.times);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+            if (res.code == 'SNR200') {
+              setChatLink(res.data.chatLink);
+              setField(res.data.field);
+              const totalArr = dedupeInTotalField(res.data.field);
+              setTotalField(totalArr);
+              setInfo(res.data.info);
+              setKeyword(res.data.keyword.join(','));
+              setLab(res.data.lab);
+              setOneLiner(res.data.oneLiner);
+              setTarget(res.data.target);
+              setTimes(res.data.times);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
   }, [submitFlag]);
 
   const clickKeyword = () => {
@@ -101,41 +101,42 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   };
 
   const submitHandler = () => {
-    const accessTkn = getAccessToken();
     const emptyCheck = checkEmpty();
 
-    if (accessTkn && !emptyCheck) {
-      axios
-        .patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-          {
-            lab: lab,
-            keyword: keyword,
-            info: info,
-            target: target,
-            chatLink: chatLink,
-            field: field.join(','),
-            oneLiner: oneLiner,
-            times: times,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn && !emptyCheck) {
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
+            {
+              lab: lab,
+              keyword: keyword,
+              info: info,
+              target: target,
+              chatLink: chatLink,
+              field: field.join(','),
+              oneLiner: oneLiner,
+              times: times,
             },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code == 'SNR201') {
-            setFlag(false);
-            modalHandler();
-            setSubmitFlag(!submitFlag);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR201') {
+              setFlag(false);
+              modalHandler();
+              setSubmitFlag(!submitFlag);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
   };
 
   const checkEmpty = () => {

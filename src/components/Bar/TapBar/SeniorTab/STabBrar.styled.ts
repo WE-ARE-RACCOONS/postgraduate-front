@@ -48,6 +48,7 @@ export const TapStyle = styled.div<TapStyleProps>`
   line-height: 140%;
   border-bottom: ${({ selected }) => (selected ? '2px solid #495565' : 'none')};
   color: ${({ selected }) => (selected ? '#495565' : '#C2CEDE')};
+  cursor: pointer;
 `;
 export const TabResultContainer = styled.div`
   height: 100vh;
@@ -56,4 +57,5 @@ export const TabResultContainer = styled.div`
 export const TabResult = styled.div`
   border-top: 1px solid #c2cede;
   height: 100%;
+  padding-bottom: 5rem;
 `;

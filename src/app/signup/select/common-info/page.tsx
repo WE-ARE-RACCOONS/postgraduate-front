@@ -5,6 +5,7 @@ import NextBtn from '@/components/Button/NextBtn';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useAtomValue } from 'jotai';
 import {
+  changeNickname,
   nickname,
   notDuplicate,
   phoneNum,
@@ -15,7 +16,7 @@ import { essential } from '@/stores/condition';
 
 function CommonInfoPage() {
   const userType = useAtomValue(userTypeAtom);
-  const userNick = useAtomValue(nickname);
+  const userNick = useAtomValue(changeNickname);
   const fullNum = useAtomValue(phoneNum);
   const service = useAtomValue(essential);
   const available = useAtomValue(notDuplicate);

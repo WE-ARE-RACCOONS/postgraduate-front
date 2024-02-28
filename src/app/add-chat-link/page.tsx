@@ -48,36 +48,35 @@ function AddChatLinkPage() {
     }
 
     if (chatLink && info && oneLiner && target && times.length >= 3) {
-      const accessTkn = getAccessToken();
-
-      if (accessTkn) {
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`,
-            {
-              info: info,
-              target: target,
-              chatLink: chatLink,
-              times: times,
-              oneLiner: oneLiner,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessTkn}`,
+      getAccessToken().then((accessTkn) => {
+        if (accessTkn) {
+          axios
+            .patch(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`,
+              {
+                info: info,
+                target: target,
+                chatLink: chatLink,
+                times: times,
+                oneLiner: oneLiner,
               },
-            },
-          )
-          .then((response) => {
-            const res = response.data;
-            if (res.code == 'SNR201') {
-              router.push('/profile/done');
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-
+              {
+                headers: {
+                  Authorization: `Bearer ${accessTkn}`,
+                },
+              },
+            )
+            .then((response) => {
+              const res = response.data;
+              if (res.code == 'SNR201') {
+                router.push('/profile/done');
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      });
       return;
     }
   };
@@ -163,6 +162,7 @@ const NextAddBtnSet = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;
 
 const PrevBtn = styled.button`
@@ -183,6 +183,7 @@ const PrevBtn = styled.button`
   font-weight: 700;
   line-height: normal;
   margin-left: 1rem;
+  cursor: pointer;
 `;
 
 const AddChatLinkContainer = styled.div`

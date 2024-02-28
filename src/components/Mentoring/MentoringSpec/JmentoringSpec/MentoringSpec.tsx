@@ -7,6 +7,8 @@ import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
+import Image from 'next/image';
+import x_icon from '../../../../../public/x.png';
 import {
   ModalMentoringBackground,
   ModalClose,
@@ -22,6 +24,7 @@ import {
   ConfirmTitle,
   UserInfo,
   ConfirmState,
+  MMTop,
 } from './MentoringSpec.styled';
 
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
@@ -54,27 +57,44 @@ function MentoringSpec(props: ModalMentoringProps) {
 
   useEffect(() => {
     if (props.mentoringId !== 0) {
-      const Token = getAccessToken();
-      const headers = {
-        Authorization: `Bearer ${Token}`,
-      };
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}`,
-          {
-            headers,
-          },
-        )
-        .then((response) => {
-          setData(response.data.data);
-        })
-        .catch((error) => {
-          console.error('Error fetching data:', error);
-        });
+      getAccessToken().then((Token) => {
+        if (Token) {
+          const headers = {
+            Authorization: `Bearer ${Token}`,
+          };
+          axios
+            .get(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}`,
+              {
+                headers,
+              },
+            )
+            .then((response) => {
+              setData(response.data.data);
+            })
+            .catch((error) => {
+              console.error('Error fetching data:', error);
+            });
+        }
+      });
     }
   }, []);
   return (
     <ModalMentoringBackground>
+      <MMTop>
+        <div id="header-text">멘토링 신청서</div>
+        <div id="img">
+          <Image
+            id="x-icon"
+            src={x_icon}
+            alt="계정 수정 모달 닫기 버튼"
+            width={24}
+            height={24}
+            style={{}}
+            onClick={props.modalHandler}
+          />
+        </div>
+      </MMTop>
       <div
         style={{
           display: 'flex',
@@ -142,7 +162,9 @@ function MentoringSpec(props: ModalMentoringProps) {
       <div>
         <TextToggleButton text={data ? data.question : ''} />
       </div>
-      <ModalClose onClick={props.modalHandler}>확인 완료</ModalClose>
+      <div style={{ marginBottom: '7rem' }}>
+        <ModalClose onClick={props.modalHandler}>확인 완료</ModalClose>
+      </div>
     </ModalMentoringBackground>
   );
 }

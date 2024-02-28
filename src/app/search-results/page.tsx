@@ -9,47 +9,59 @@ import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
 import SearchDropDown from '@/components/DropDown/SearchDropDown';
+import useModal from '@/hooks/useModal';
+import SearchModal from '@/components/Modal/SearchModal';
+import { createPortal } from 'react-dom';
 
 function SearchResultPage() {
-  const router = useRouter();
   const { getAccessToken } = useAuth();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('searchTerm');
+  const router = useRouter();
   const [sort, setSort] = useState('');
   const [data, setData] = useState([]);
   const [length, setLength] = useState('');
+  const {
+    modal: searchModal,
+    modalHandler: searchModalHandler,
+    portalElement: searchPortalElement,
+  } = useModal('search-portal');
+
   useEffect(() => {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
+    getAccessToken().then((Token) => {
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
 
-    if (searchTerm) {
-      let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
-      if (sort) {
-        url += `&sort=${sort}`;
+        if (searchTerm) {
+          let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
+          if (sort) {
+            url += `&sort=${sort}`;
+          }
+
+          axios
+            .get(url, { headers })
+            .then((res) => {
+              setData(res.data.data.seniorSearchResponses);
+              setLength(res.data.data.seniorSearchResponses.length);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
       }
-
-      axios
-        .get(url, { headers })
-        .then((res) => {
-          setData(res.data.data.seniorSearchResponses);
-          setLength(res.data.data.seniorSearchResponses.length);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+    });
   }, [searchTerm]);
-
-  const pageBack = () => {
-    router.back();
-  };
 
   return (
     <>
       <SearchReasult>
-        <SearchReasultOut onClick={pageBack}>
+        <SearchReasultOut
+          onClick={() => {
+            router.back();
+          }}
+        >
           <Image
             id="arrow"
             src={arrow}
@@ -59,10 +71,13 @@ function SearchResultPage() {
             style={{
               width: '1.5rem',
               height: '1.5rem',
+              cursor: 'pointer',
             }}
           />
         </SearchReasultOut>
-        <SearchReasultTerm>{searchTerm}</SearchReasultTerm>
+        <SearchReasultTerm onClick={searchModalHandler}>
+          {searchTerm}
+        </SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
         <SearchFcount>총 {length}건</SearchFcount>
@@ -81,6 +96,12 @@ function SearchResultPage() {
           <div>해당하는 선배가 없어요</div>
         )}
       </SearchReasultProfile>
+      {searchModal && searchPortalElement
+        ? createPortal(
+            <SearchModal modalHandler={searchModalHandler} />,
+            searchPortalElement,
+          )
+        : ''}
     </>
   );
 }
@@ -100,7 +121,7 @@ const Searchfilter = styled.div`
   height: 3rem;
   display: flex;
   justify-content: space-between;
-  border-top: 1px solid #dee2e6;
+  border-top: 1px solid #f5f5f5;
   align-items: center;
   padding: 0 1rem;
 `;
@@ -111,7 +132,7 @@ const SearchReasultProfile = styled.div`
   padding: 1rem;
   width: 100%;
   height: 100%;
-  background-color: #dee2e6;
+  background-color: #f5f5f5;
 `;
 
 export default SearchResultPage;

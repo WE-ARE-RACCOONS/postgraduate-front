@@ -10,8 +10,11 @@ export const NotSeniorMid = styled.div`
   align-items: center;
   text-align: center;
   position: absolute;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   top: 2rem;
-  left: 12%;
+  font-family: Pretendard;
 `;
 export const NotSeniorBottom = styled.div`
   position: absolute;
@@ -19,11 +22,10 @@ export const NotSeniorBottom = styled.div`
   left: 5%;
 `;
 export const NSMain = styled.div`
-  margin-left: 2rem;
   width: 12.6rem;
   color: #333;
   text-align: center;
-  font-family: Noto Sans JP;
+  font-family: Pretendard;
   font-size: 1.25rem;
   font-style: normal;
   font-weight: 700;
@@ -32,7 +34,7 @@ export const NSMain = styled.div`
 export const NSSub = styled.div`
   color: #868e96;
   text-align: center;
-  font-family: Noto Sans JP;
+  font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
@@ -56,4 +58,5 @@ export const NSBtn = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;

@@ -18,14 +18,16 @@ import { useAtom, useAtomValue } from 'jotai';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 function NotJunior(props: NotJuniorProps) {
   const socialId = useAtomValue(socialIdAtom);
+  const router = useRouter();
 
   const xClick = () => {
     props.modalHandler();
   };
-  const router = useRouter();
+
   const seniorJoin = () => {
     router.push(`/signup/select/common-info/matching-info`);
   };
+
   return (
     <div>
       <NotSeniorBoxTop>
@@ -41,22 +43,31 @@ function NotJunior(props: NotJuniorProps) {
           style={{
             margin: '1rem',
             color: '#CBCFDB',
+            cursor: 'pointer',
           }}
         />
       </NotSeniorBoxTop>
-      <NotSeniorMid>
-        <NSMain>{JUNIOR_MODAL.notJuniorUser}</NSMain>
-        <div
-          style={{
-            marginTop: '1.5rem',
-            marginBottom: '1.5rem',
-            marginLeft: '1rem',
-          }}
-        >
-          <NSSub>{JUNIOR_MODAL.needJuniorUserJoin}</NSSub>
-          <NSSub>{JUNIOR_MODAL.recommendJoin}</NSSub>
-        </div>
-      </NotSeniorMid>
+      <div
+        style={{
+          justifyContent: 'center',
+          alignItems: 'center',
+          display: 'flex',
+        }}
+      >
+        <NotSeniorMid>
+          <NSMain>{JUNIOR_MODAL.notJuniorUser}</NSMain>
+          <div
+            style={{
+              marginTop: '1.5rem',
+              marginBottom: '1.5rem',
+              marginLeft: '1rem',
+            }}
+          >
+            <NSSub>{JUNIOR_MODAL.needJuniorUserJoin}</NSSub>
+            <NSSub>{JUNIOR_MODAL.recommendJoin}</NSSub>
+          </div>
+        </NotSeniorMid>
+      </div>
       <NotSeniorBottom>
         <NSBtn onClick={seniorJoin}>대학원 후배로 가입하기</NSBtn>
       </NotSeniorBottom>

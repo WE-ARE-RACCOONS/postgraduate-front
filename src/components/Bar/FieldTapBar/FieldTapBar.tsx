@@ -3,12 +3,16 @@ import React from 'react';
 import { TapStyle } from './FieldTapBar.styled';
 import { sftapType } from '@/types/tap/tap';
 import { sfactiveTabAtom } from '@/stores/tap';
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { SFTAB } from '@/constants/tab/ctap';
+import { pageNumAtom } from '@/stores/home';
 function FieldTapBar() {
   const [fpActiveTab, setFpActiveTab] = useAtom(sfactiveTabAtom);
+  const setPageNum = useSetAtom(pageNumAtom);
+
   const handleTabClick = (tabIndex: sftapType) => {
     setFpActiveTab(tabIndex);
+    setPageNum(1);
   };
 
   return (

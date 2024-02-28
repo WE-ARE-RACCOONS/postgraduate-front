@@ -44,6 +44,8 @@ export default function RootLayout({
             <div id="select-date-calendar"></div>
             <div id="suggest-mypage-portal"></div>
             <div id="senior-auth-portal"></div>
+            <div id="mentoring-login-portal"></div>
+            <div id="change-junior-portal"></div>
           </StyledComponentsRegistry>
         </Providers>
       </body>

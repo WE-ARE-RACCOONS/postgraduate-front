@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
 export const TextToggleBtnBox = styled.div`
+  white-space: pre;
   display: flex;
-  height: 2.5rem;
   padding: 0.5rem 0.75rem;
   flex-direction: column;
   align-self: stretch;

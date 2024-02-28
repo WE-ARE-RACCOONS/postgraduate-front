@@ -2,6 +2,11 @@ import styled from 'styled-components';
 
 export const MentoringCancelBox = styled.div`
   margin-bottom: 2rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-direction: column;
 `;
 export const MCSub = styled.div`
   color: #868e96;
@@ -12,7 +17,6 @@ export const MCSub = styled.div`
   font-weight: 400;
   line-height: 140%; /* 1.4rem */
   width: 15rem;
-  margin-left: 1.85rem;
   margin-top: 1.5rem;
 `;
 export const MCMain = styled.div`
@@ -39,7 +43,6 @@ export const CancelBtn = styled.button`
   font-weight: 700;
   line-height: normal;
   border: none;
-  margin-left: 0.5rem;
   margin-right: 0.44rem;
 `;
 export const OkayBtn = styled.button`

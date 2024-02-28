@@ -77,88 +77,92 @@ function EditProfilePage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const token = getAccessToken();
-      if (token) {
-        try {
-          const headers = {
-            Authorization: `Bearer ${token}`,
-          };
+      getAccessToken().then(async (token) => {
+        if (token) {
+          try {
+            const headers = {
+              Authorization: `Bearer ${token}`,
+            };
 
-          const [timesResponse, profileResponse] = await Promise.all([
-            axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
-              { headers },
-            ),
-            axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-              { headers },
-            ),
-          ]);
+            const [timesResponse, profileResponse] = await Promise.all([
+              axios.get(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
+                { headers },
+              ),
+              axios.get(
+                `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
+                { headers },
+              ),
+            ]);
 
-          const timesData = timesResponse.data.data.times || [];
-          const profileData = profileResponse.data.data || {};
-          setTimeData(timesData);
-          setSelectedField(profileData.field);
-          setTotalKeyword(profileData.keyword);
-          setSelectedKeyword(profileData.keyword);
-          setSfield(profileData.field.join(','));
-          setSkeyword(profileData.keyword.join(','));
-          setChatLink(profileData.chatLink);
-          setMultiIntro(profileData.info);
-          setSingleIntro(profileData.oneLiner);
-          setRecommended(profileData.target);
-          setSlab(profileData.lab);
-        } catch (error) {
-          console.error(error);
+            const timesData = timesResponse.data.data.times || [];
+            const profileData = profileResponse.data.data || {};
+            setTimeData(timesData);
+            setSelectedField(profileData.field);
+            setTotalKeyword(profileData.keyword);
+            setSelectedKeyword(profileData.keyword);
+            setSfield(profileData.field.join(','));
+            setSkeyword(profileData.keyword.join(','));
+            setChatLink(profileData.chatLink);
+            setMultiIntro(profileData.info);
+            setSingleIntro(profileData.oneLiner);
+            setRecommended(profileData.target);
+            setSlab(profileData.lab);
+          } catch (error) {
+            console.error(error);
+          }
         }
-      }
+      });
     };
 
     fetchData();
   }, [seniorId]);
 
   const handleClick = () => {
-    const token = getAccessToken();
     const areConditionsMet =
       singleIntro.length >= 10 &&
       multiIntro.length >= 50 &&
       recommended.length >= 50;
-    if (
-      token &&
-      areConditionsMet &&
-      chatLink &&
-      timeData.length >= 3 &&
-      sField &&
-      sKeyword &&
-      sLab
-    ) {
-      setFlag(false);
-      axios
-        .patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-          {
-            lab: sLab,
-            keyword: sKeyword,
-            info: multiIntro,
-            target: recommended,
-            chatLink: chatLink,
-            field: sField,
-            oneLiner: singleIntro,
-            times: timeData,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
+
+    getAccessToken().then((token) => {
+      if (
+        token &&
+        areConditionsMet &&
+        chatLink &&
+        timeData.length >= 3 &&
+        sField &&
+        sKeyword &&
+        sLab
+      ) {
+        setFlag(false);
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
+            {
+              lab: sLab,
+              keyword: sKeyword,
+              info: multiIntro,
+              target: recommended,
+              chatLink: chatLink,
+              field: sField,
+              oneLiner: singleIntro,
+              times: timeData,
             },
-          },
-        )
-        .then((res) => {
-          router.back();
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+            {
+              headers: {
+                Authorization: `Bearer ${token}`,
+              },
+            },
+          )
+          .then((res) => {
+            router.back();
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    });
+
     setFlag(true);
   };
 

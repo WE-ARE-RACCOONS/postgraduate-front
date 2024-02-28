@@ -4,8 +4,6 @@ import 'react-calendar/dist/Calendar.css';
 export const SelectCalendarContainer = styled.div`
   width: inherit;
   height: 100%;
-  overflow-y: scroll;
-  overflow-x: hidden;
 
   .react-calendar {
     width: inherit;
