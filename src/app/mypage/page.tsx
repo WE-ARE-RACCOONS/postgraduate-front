@@ -71,17 +71,16 @@ function MyPage() {
   } = useModal('login-request-portal');
 
   const { getAccessToken, getUserType } = useAuth();
-  // const Token = getAccessToken();
   const [accessTkn, setAccessTkn] = useState('');
   const [userType, setUserType] = useState('');
-  // const userType = getUserType();
   const router = useRouter();
 
   useEffect(() => {
     const userT = getUserType();
     if (userT) setUserType(userT);
-    const userTkn = getAccessToken();
-    if (userTkn) setAccessTkn(userTkn);
+    getAccessToken().then((userTkn) => {
+      if (userTkn) setAccessTkn(userTkn);
+    });
   }, []);
 
   useEffect(() => {

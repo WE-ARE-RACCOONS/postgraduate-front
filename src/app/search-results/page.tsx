@@ -28,27 +28,30 @@ function SearchResultPage() {
   } = useModal('search-portal');
 
   useEffect(() => {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
+    getAccessToken().then((Token) => {
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
 
-    if (searchTerm) {
-      let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
-      if (sort) {
-        url += `&sort=${sort}`;
+        if (searchTerm) {
+          let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
+          if (sort) {
+            url += `&sort=${sort}`;
+          }
+
+          axios
+            .get(url, { headers })
+            .then((res) => {
+              setData(res.data.data.seniorSearchResponses);
+              setLength(res.data.data.seniorSearchResponses.length);
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
       }
-
-      axios
-        .get(url, { headers })
-        .then((res) => {
-          setData(res.data.data.seniorSearchResponses);
-          setLength(res.data.data.seniorSearchResponses.length);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+    });
   }, [searchTerm]);
 
   return (

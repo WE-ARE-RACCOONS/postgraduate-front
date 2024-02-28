@@ -18,4 +18,5 @@ export const ASBtn = styled.button`
   font-weight: 700;
   line-height: normal;
   margin-left: 0.5rem;
+  cursor: pointer;
 `;

@@ -13,19 +13,21 @@ function LogoLayer(props: SearchModalProps) {
   const [isLogin, setIsLogin] = useState(false);
   const { getAccessToken } = useAuth();
   const router = useRouter();
-  useEffect(() => {
-    const accessTkn = getAccessToken();
 
-    if (accessTkn) {
-      setIsLogin(true);
-    }
+  useEffect(() => {
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) setIsLogin(true);
+    });
   }, []);
+
   const handleClick = () => {
     props.modalHandler();
   };
+
   const logoClick = () => {
     router.push('/');
   };
+
   return (
     <HomeTopLayer>
       <Logo onClick={logoClick}>

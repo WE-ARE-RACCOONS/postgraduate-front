@@ -45,20 +45,26 @@ function TabBar() {
     null,
   );
   useEffect(() => {
-    const Token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${Token}`,
-    };
-    axios
-      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`, {
-        headers,
-      })
-      .then((response) => {
-        setData(response.data.data.mentoringInfos);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
+    getAccessToken().then((Token) => {
+      if (Token) {
+        const headers = {
+          Authorization: `Bearer ${Token}`,
+        };
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`,
+            {
+              headers,
+            },
+          )
+          .then((response) => {
+            setData(response.data.data.mentoringInfos);
+          })
+          .catch((error) => {
+            console.error('Error fetching data:', error);
+          });
+      }
+    });
   }, [activeTab]);
 
   const renderTabContent = () => {
@@ -115,6 +121,7 @@ function TabBar() {
       </div>
     );
   };
+
   return (
     <div style={{ height: '100%' }}>
       <TabWrap>
