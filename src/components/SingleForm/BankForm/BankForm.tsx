@@ -52,6 +52,7 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
       <div style={{ display: 'flex' }}>
         <h3>은행선택</h3>
         <Image
+          onClick={clickHandler}
           src={x_btn}
           alt="x_btn"
           width={21}

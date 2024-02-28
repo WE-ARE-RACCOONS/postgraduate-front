@@ -43,7 +43,19 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     const buttonContent = button.textContent;
     const newClicked = !isActive;
     setIsActive(newClicked);
-    setDate(buttonContent ? buttonContent : '');
+    if (buttonContent) {
+      const match = buttonContent.match(
+        /(\d{4})년 (\d{2})월 (\d{2})일 (\d{2})시 (\d{2})분/,
+      );
+      if (match) {
+        const dateSend = `${match[1]}-${match[2]}-${match[3]}-${match[4]}-${match[5]}`;
+        setDate(dateSend);
+      } else {
+        setDate('');
+      }
+    } else {
+      setDate('');
+    }
     button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
     button.style.color = newClicked ? '#FFFFFF' : '#3D4044';
   };
@@ -91,7 +103,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               }),
             },
           );
-          // const responseData = await response.json();
+          const responseData = await response.json();
           if (props.acceptModalHandler) {
             props.acceptModalHandler();
           }
@@ -158,7 +170,8 @@ function SmentoringSpec(props: ModalMentoringSProps) {
             data.dates.map((dateString, index) => {
               const dataSplit = dateString;
               const dateParts = (dataSplit || '').split('-');
-              const dateSenior = `${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+              const dateSenior = `${dateParts[0]}년 ${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
+              const dateSend = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}-${dateParts[3]}-${dateParts[4]}`;
 
               return (
                 <div key={index}>
