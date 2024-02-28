@@ -9,7 +9,7 @@ function Login() {
 
   const loginHandler = () => {
     if (typeof window !== undefined) {
-      const REDIRECT_URI = window.location.href + 'login/oauth2/code/kakao';
+      const REDIRECT_URI = window.location.origin + '/login/oauth2/code/kakao';
       const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
       window.location.href = link;
     }
