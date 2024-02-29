@@ -34,79 +34,85 @@ function page() {
   const newAvailability = useAtomValue(newNotDuplicate);
   const sameUser = useAtomValue(sameUserAtom);
   useEffect(() => {
-    const token = getAccessToken();
-    if (token) {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, { headers })
-        .then((res) => {
-          setNickName(res.data.data.nickName);
-          setPhoneNumber(res.data.data.phoneNumber);
-          setprofile(res.data.data.profile);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
-    }
+    getAccessToken().then((token) => {
+      if (token) {
+        const headers = {
+          Authorization: `Bearer ${token}`,
+        };
+        axios
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, {
+            headers,
+          })
+          .then((res) => {
+            setNickName(res.data.data.nickName);
+            setPhoneNumber(res.data.data.phoneNumber);
+            setprofile(res.data.data.profile);
+          })
+          .catch(function (error) {
+            console.log(error);
+          });
+      }
+    });
   });
 
   const handleClick = async () => {
-    const token = getAccessToken();
-    if (photoUrl) {
-      const formData = new FormData();
-      formData.append('profileFile', photoUrl);
+    getAccessToken().then(async (token) => {
+      if (photoUrl) {
+        const formData = new FormData();
+        formData.append('profileFile', photoUrl);
 
-      if (token) {
-        await axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
-            formData,
+        if (token) {
+          await axios
+            .post(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
+              formData,
+              {
+                headers: {
+                  'Content-Type': 'multipart/form-data',
+                  Authorization: `Bearer ${token}`,
+                },
+              },
+            )
+            .then((response) => {
+              const res = response.data;
+              if (res.code == 'IMG202') {
+                editProfileUrl = res.data.profileUrl;
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      }
+
+      if (editProfileUrl || myNickName || phoneNumber) {
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
+            {
+              profile: editProfileUrl ? editProfileUrl : profile,
+              nickName: myNickName,
+              phoneNumber: phoneNumber,
+            },
             {
               headers: {
-                'Content-Type': 'multipart/form-data',
                 Authorization: `Bearer ${token}`,
               },
             },
           )
           .then((response) => {
             const res = response.data;
-            if (res.code == 'IMG202') {
-              editProfileUrl = res.data.profileUrl;
+            if (res.code == 'UR201') {
+              router.push('/mypage');
             }
           })
           .catch((err) => {
             console.error(err);
           });
       }
-    }
-    if (editProfileUrl || myNickName || phoneNumber) {
-      axios
-        .patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
-          {
-            profile: editProfileUrl ? editProfileUrl : profile,
-            nickName: myNickName,
-            phoneNumber: phoneNumber,
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code == 'UR201') {
-            router.push('/mypage');
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+    });
   };
+
   return (
     <div style={{ justifyContent: 'center', alignItems: 'center' }}>
       <BackHeader headerText="계정 설정" />

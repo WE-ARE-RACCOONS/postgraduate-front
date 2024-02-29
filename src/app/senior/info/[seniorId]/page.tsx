@@ -64,57 +64,64 @@ function SeniorInfoPage() {
   }, []);
 
   useEffect(() => {
-    const accessTkn = getAccessToken();
     const seniorId = pathArr[pathArr.length - 1];
     setFindSeniorId(seniorId);
-    axios
-      .get(
-        `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,
-        accessTkn ? { headers: { Authorization: `Bearer ${accessTkn}` } } : {},
-      )
-      .then((response) => {
-        const res = response.data;
 
-        if (res.code == 'SNR200') {
-          setMine(res.data.isMine);
-          setInfo(res.data.info);
-          setKeyword(res.data.keyword);
-          setLab(res.data.lab);
-          setMajor(res.data.major);
-          setNickName(res.data.nickName);
-          setOneLiner(res.data.oneLiner);
-          setPostgradu(res.data.postgradu);
-          setProfessor(res.data.professor);
-          setProfile(res.data.profile);
-          setTarget(res.data.target);
-          setTerm(res.data.term);
-          setTimes(res.data.times);
-        }
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        axios
+          .get(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,
+            accessTkn
+              ? { headers: { Authorization: `Bearer ${accessTkn}` } }
+              : {},
+          )
+          .then((response) => {
+            const res = response.data;
+
+            if (res.code == 'SNR200') {
+              setMine(res.data.isMine);
+              setInfo(res.data.info);
+              setKeyword(res.data.keyword);
+              setLab(res.data.lab);
+              setMajor(res.data.major);
+              setNickName(res.data.nickName);
+              setOneLiner(res.data.oneLiner);
+              setPostgradu(res.data.postgradu);
+              setProfessor(res.data.professor);
+              setProfile(res.data.profile);
+              setTarget(res.data.target);
+              setTerm(res.data.term);
+              setTimes(res.data.times);
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
   }, []);
 
   const applyHandler = () => {
-    const accessTkn = getAccessToken();
-    if (accessTkn) {
-      const userType = getUserType();
+    getAccessToken().then((accessTkn) => {
+      if (accessTkn) {
+        const userType = getUserType();
 
-      if (userType == 'junior') {
-        const seniorId = pathArr[pathArr.length - 1];
-        router.push(`/mentoring-apply/${seniorId}/question`);
-        return;
-      }
+        if (userType == 'junior') {
+          const seniorId = pathArr[pathArr.length - 1];
+          router.push(`/mentoring-apply/${seniorId}/question`);
+          return;
+        }
 
-      if (userType == 'senior') {
-        // 후배 회원 전환 요청 모달 출현
-        cjModalHandler();
+        if (userType == 'senior') {
+          // 후배 회원 전환 요청 모달 출현
+          cjModalHandler();
+        }
+      } else {
+        // 로그인 요청 모달 출현
+        modalHandler();
       }
-    } else {
-      // 로그인 요청 모달 출현
-      modalHandler();
-    }
+    });
   };
 
   const editHandler = () => {

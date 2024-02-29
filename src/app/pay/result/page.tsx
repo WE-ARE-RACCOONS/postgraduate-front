@@ -32,50 +32,52 @@ const PayResultPage = () => {
       : null;
   const { getAccessToken } = useAuth();
   const payHandler = () => {
-    const accessTkn = getAccessToken();
-    const oderId =
+
+    getAccessToken().then((accessTkn) => {
+      const oderId =
       typeof window !== 'undefined'
         ? window.localStorage.getItem('orderId')
         : null;
-    if (
-      oderId &&
-      accessTkn &&
-      topic &&
-      question &&
-      firstTime &&
-      secondTime &&
-      thirdTime
-    ) {
-      const timeArr = [firstTime, secondTime, thirdTime];
+      if (
+        oderId &&
+        accessTkn &&
+        topic &&
+        question &&
+        firstTime &&
+        secondTime &&
+        thirdTime
+      ) {
+        const timeArr = [firstTime, secondTime, thirdTime];
 
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
-          {
-            orderId: oderId,
-            topic: topic,
-            question: question,
-            date: timeArr.join(','),
-          },
-          {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
+            {
+              orderId: oderId,
+              topic: topic,
+              question: question,
+              date: timeArr.join(','),
             },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-          if (res.code == 'MT202') {
-            setSuccess(true);
-          } else {
-            setSuccess(false);
-          }
-          router.push('/mentoring-apply/done');
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'MT202') {
+              setSuccess(true);
+            } else {
+              setSuccess(false);
+            }
+            router.push('/mentoring-apply/done');
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+        }
+    })
   };
   useEffect(() => {
     const search = searchParams.get('orderId');

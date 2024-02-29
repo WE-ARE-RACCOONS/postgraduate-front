@@ -39,7 +39,6 @@ function SeniorInfoPage() {
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
   const { getAccessToken } = useAuth();
-  const token = getAccessToken();
   const currentPath = usePathname();
   // const pathArr = currentPath.split('/');
   // const socialId = pathArr[2];
@@ -54,12 +53,8 @@ function SeniorInfoPage() {
     if (sPostGradu && sMajor && sLab && sProfessor && sField && sKeyword)
       setFlag(false);
   }, [sPostGradu, sMajor, sLab, sProfessor, sField, sKeyword]);
-  const handleSubmit = () => {
-    const token = getAccessToken();
-    const headers = {
-      Authorization: `Bearer ${token}`,
-    };
 
+  const handleSubmit = () => {
     if (!sLab) {
       setFlag(true);
       setEmptyPart('연구실명');
@@ -71,6 +66,7 @@ function SeniorInfoPage() {
       setEmptyPart('지도 교수님');
       return;
     }
+
     setFlag(false);
     router.push(`/signup/select/common-info/senior-info/field`);
   };
