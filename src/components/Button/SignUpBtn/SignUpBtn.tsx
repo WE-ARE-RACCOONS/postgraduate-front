@@ -1,6 +1,11 @@
 'use client';
 import useAuth from '@/hooks/useAuth';
-import { changeNickname, nickname, phoneNum, socialIdAtom } from '@/stores/signup';
+import {
+  changeNickname,
+  nickname,
+  phoneNum,
+  socialIdAtom,
+} from '@/stores/signup';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';

@@ -110,13 +110,17 @@ function MentoringSpec(props: ModalMentoringProps) {
           {data ? data.nickName : ''}
           <Color>&nbsp;에게 보낸 신청서</Color>
         </MNick>
-        {activeTab === TAB.waiting ? <ApplyCancleBtn
-          kind="jcancel"
-          btnText={'취소하기'}
-          cancelModalHandler={props.cancelModalHandler}
-          modalHandler={props.modalHandler}
-          mentoringId={props.mentoringId}
-        /> : ''}
+        {activeTab === TAB.waiting ? (
+          <ApplyCancleBtn
+            kind="jcancel"
+            btnText={'취소하기'}
+            cancelModalHandler={props.cancelModalHandler}
+            modalHandler={props.modalHandler}
+            mentoringId={props.mentoringId}
+          />
+        ) : (
+          ''
+        )}
       </div>
       <MApplyBox>
         <ConfirmContent>
