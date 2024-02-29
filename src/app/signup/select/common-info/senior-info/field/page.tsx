@@ -150,7 +150,8 @@ function SeniorInfoPage() {
         sMajor &&
         sPostGradu &&
         sProfessor &&
-        sLab
+        sLab &&
+        sKeyword
       ) {
         axios
           .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
