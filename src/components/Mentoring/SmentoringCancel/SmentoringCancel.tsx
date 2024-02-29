@@ -30,8 +30,6 @@ function SmentoringCancel(props: ModalMentoringProps) {
   };
   const cancelMentoring = async () => {
     try {
-      const Token = getAccessToken();
-
       getAccessToken().then(async (Token) => {
         if (Token) {
           const headers = {
