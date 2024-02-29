@@ -16,6 +16,7 @@ import {
   sProfessorAtom,
 } from '@/stores/senior';
 import {
+  changeNickname,
   nickname,
   phoneNum,
   socialIdAtom,
@@ -44,7 +45,7 @@ function SeniorInfoPage() {
   const socialId = useAtomValue(socialIdAtom);
 
   const phoneNumber = useAtomValue(phoneNum);
-  const nickName = useAtomValue(nickname);
+  const nickName = useAtomValue(changeNickname);
   const marketingReceive = useAtomValue(option);
 
   const certification = useAtomValue(photoUrlAtom);
