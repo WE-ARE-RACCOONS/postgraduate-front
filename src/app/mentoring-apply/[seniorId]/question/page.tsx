@@ -20,6 +20,10 @@ function MentoringApplyQuestionPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem('topic', subject);
+    window.localStorage.setItem('question', question);
+  }
 
   useEffect(() => {
     if (subject && question) setActive(true);

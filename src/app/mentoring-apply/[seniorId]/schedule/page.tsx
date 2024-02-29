@@ -30,6 +30,11 @@ function MentoringApplySchedulePage() {
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
   const router = useRouter();
+  if (typeof window !== 'undefined') {
+    window.localStorage.setItem('firstTime', firstTime);
+    window.localStorage.setItem('secondTime', secondTime);
+    window.localStorage.setItem('thirdTime', thirdTime);
+  }
 
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
