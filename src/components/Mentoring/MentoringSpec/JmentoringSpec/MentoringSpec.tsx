@@ -28,11 +28,15 @@ import {
 } from './MentoringSpec.styled';
 
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
+import { useAtom } from 'jotai';
+import { activeTabAtom } from '@/stores/tap';
+import { TAB } from '@/constants/tab/ctap';
 function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
   const { getUserType } = useAuth();
   const userType = getUserType();
+  const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   const formatTime = (time: string) => {
     if (!time) return '';
@@ -106,13 +110,17 @@ function MentoringSpec(props: ModalMentoringProps) {
           {data ? data.nickName : ''}
           <Color>&nbsp;에게 보낸 신청서</Color>
         </MNick>
-        <ApplyCancleBtn
-          kind="jcancel"
-          btnText={'취소하기'}
-          cancelModalHandler={props.cancelModalHandler}
-          modalHandler={props.modalHandler}
-          mentoringId={props.mentoringId}
-        />
+        {activeTab === TAB.waiting ? (
+          <ApplyCancleBtn
+            kind="jcancel"
+            btnText={'취소하기'}
+            cancelModalHandler={props.cancelModalHandler}
+            modalHandler={props.modalHandler}
+            mentoringId={props.mentoringId}
+          />
+        ) : (
+          ''
+        )}
       </div>
       <MApplyBox>
         <ConfirmContent>

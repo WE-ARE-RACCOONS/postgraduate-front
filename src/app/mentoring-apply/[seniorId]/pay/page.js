@@ -55,13 +55,6 @@ function MentoringApplyPayPage() {
   const { getAccessToken } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
   setPaySeniorId(seniorId);
-  if (typeof window !== 'undefined') {
-    window.localStorage.setItem('topic', topic);
-    window.localStorage.setItem('question', question);
-    window.localStorage.setItem('firstTime', firstTime);
-    window.localStorage.setItem('secondTime', secondTime);
-    window.localStorage.setItem('thirdTime', thirdTime);
-  }
   const formatTime = (time) => {
     if (!time) return '';
 
@@ -83,7 +76,6 @@ function MentoringApplyPayPage() {
     } else return '';
   };
   const payHandler = () => {};
-
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) {

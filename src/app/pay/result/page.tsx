@@ -32,12 +32,11 @@ const PayResultPage = () => {
       : null;
   const { getAccessToken } = useAuth();
   const payHandler = () => {
-
     getAccessToken().then((accessTkn) => {
       const oderId =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem('orderId')
-        : null;
+        typeof window !== 'undefined'
+          ? window.localStorage.getItem('orderId')
+          : null;
       if (
         oderId &&
         accessTkn &&
@@ -76,8 +75,8 @@ const PayResultPage = () => {
           .catch((err) => {
             console.error(err);
           });
-        }
-    })
+      }
+    });
   };
   useEffect(() => {
     const search = searchParams.get('orderId');
