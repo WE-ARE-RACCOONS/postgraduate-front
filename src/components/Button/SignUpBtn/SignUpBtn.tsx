@@ -1,6 +1,6 @@
 'use client';
 import useAuth from '@/hooks/useAuth';
-import { nickname, phoneNum, socialIdAtom } from '@/stores/signup';
+import { changeNickname, nickname, phoneNum, socialIdAtom } from '@/stores/signup';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
@@ -14,7 +14,8 @@ import {
 
 function SignUpBtn() {
   const socialId = useAtomValue(socialIdAtom);
-  const nickName = useAtomValue(nickname);
+  // const nickName = useAtomValue(nickname);
+  const nickName = useAtomValue(changeNickname);
   const phoneNumber = useAtomValue(phoneNum);
   const marketingReceive = useAtomValue(option);
   const major = useAtomValue(desiredSchool);
