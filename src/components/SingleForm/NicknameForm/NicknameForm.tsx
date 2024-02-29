@@ -29,7 +29,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
 
   useEffect(() => {
     //기존서버 닉네임과 사용자입력 닉네임이 같을때
-    if (defaultValue === userNick) {
+    if (defaultValue && defaultValue === userNick) {
       useAvailability(false);
       setSameUser(true);
       setFlag(false);
@@ -39,7 +39,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
     e.currentTarget.value = filterInputText(e.currentTarget.value);
     e.currentTarget.value = checkLength(e.currentTarget.value);
-    if (e.currentTarget.value === defaultValue) {
+    if (defaultValue && e.currentTarget.value === defaultValue) {
       // 입력한 것이 기존 닉네임과 같으면
       useAvailability(true);
       useNewAvailability(false);
