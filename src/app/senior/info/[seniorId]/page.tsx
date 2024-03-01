@@ -97,8 +97,7 @@ function SeniorInfoPage() {
         .catch((err) => {
           console.error(err);
         });
-      }
-    );
+    });
   }, []);
 
   const applyHandler = () => {
