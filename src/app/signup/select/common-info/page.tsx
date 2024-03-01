@@ -13,6 +13,7 @@ import {
 } from '@/stores/signup';
 import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
+import { useEffect } from 'react';
 
 function CommonInfoPage() {
   const userType = useAtomValue(userTypeAtom);
@@ -20,6 +21,11 @@ function CommonInfoPage() {
   const fullNum = useAtomValue(phoneNum);
   const service = useAtomValue(essential);
   const available = useAtomValue(notDuplicate);
+
+  useEffect(() => {
+    console.log(userType);
+  }, []);
+
   return (
     <div>
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
