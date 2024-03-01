@@ -22,9 +22,9 @@ function CommonInfoPage() {
   const service = useAtomValue(essential);
   const available = useAtomValue(notDuplicate);
 
-  useEffect(() => {
-    console.log(userType);
-  }, []);
+  // useEffect(() => {
+  //   console.log(userType);
+  // }, []);
 
   return (
     <div>
