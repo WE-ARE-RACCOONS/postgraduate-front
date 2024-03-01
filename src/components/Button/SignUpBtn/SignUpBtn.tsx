@@ -74,14 +74,6 @@ function SignUpBtn() {
       }
     });
 
-    console.log(socialId);
-    console.log(nickName);
-    console.log(phoneNumber);
-    console.log(marketingReceive);
-    console.log(major);
-    console.log(field);
-    console.log(matchingReceive);
-
     if (socialId && nickName) {
       axios
         .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/signup`, {
