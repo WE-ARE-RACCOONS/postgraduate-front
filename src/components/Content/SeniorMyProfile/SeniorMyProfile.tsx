@@ -43,7 +43,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
         .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
         .then((response) => {
           const res = response.data;
-          if (res.errorCode && res.errorCode == 'EX400') {
+          if (res.code == 'EX400') {
             setFlag(true);
             return;
           }

@@ -161,7 +161,7 @@ function useAuth() {
         return;
       }
 
-      if (res.errorCode && (res.errorCode == 'EX202' || 'EX201')) {
+      if (res.code && (res.code == 'EX202' || 'EX201')) {
         removeTokens();
         return;
       }
