@@ -34,7 +34,7 @@ function MBestCaseContent({ modalHandler }: { modalHandler: () => void }) {
       <div id="tag-container">
         <div className="profile-tag">#멘토링 1회</div>
         <div className="profile-tag">#리뷰 1회</div>
-        <div className="profile-tag">#멘토링 1회당 40분</div>
+        <div className="profile-tag">#멘토링 1회당 30분</div>
       </div>
       <div className="profile-field">
         <div className="profile-field-title">한줄 소개</div>

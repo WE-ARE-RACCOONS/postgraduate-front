@@ -110,7 +110,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
               <div>{professor}</div>
               <div id="mentoring-time-box">
                 <div id="mentoring-text">멘토링</div>
-                <div id="time-text">40분</div>
+                <div id="time-text">30분</div>
               </div>
             </SMPInfoTextBox>
           </SMPInfoBox>
