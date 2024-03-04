@@ -15,13 +15,16 @@ import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import state from '@/../../public/state.png';
 import cState from '@/../../public/cState.png';
+import { useRouter } from 'next/navigation';
 function MentoringCancel(props: ModalMentoringclProps) {
   const [data, setData] = useState<MentoringData[] | null>(null);
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const [cancelStatus, setCancelStatus] = useState<string>('');
   const [noCancelText, setNoCancelText] = useState<string>('아니요');
   const [showCancelButton, setShowCancelButton] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+
   const handleClick = () => {
     props.modalHandler();
     if (props.onClick) props.onClick();
@@ -45,6 +48,13 @@ function MentoringCancel(props: ModalMentoringclProps) {
             },
             { headers },
           );
+
+          if (response.data.code == 'EX201') {
+            removeTokens();
+            router.replace('/');
+            return;
+          }
+
           setData(response.data);
           if (response.data.code === 'MT201') {
             setCancelStatus('취소되었습니다');

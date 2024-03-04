@@ -29,14 +29,16 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
+import { useRouter } from 'next/navigation';
 function STabBar() {
+  const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const [data, setData] = useState<MentoringData[] | null>(null);
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-mentoring-detail',
   );
@@ -68,6 +70,11 @@ function STabBar() {
             },
           )
           .then((response) => {
+            if (response.data.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
             setData(response.data.data.seniorMentoringInfos);
           })
           .catch((error) => {

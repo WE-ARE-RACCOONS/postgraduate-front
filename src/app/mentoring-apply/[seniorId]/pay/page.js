@@ -52,7 +52,7 @@ function MentoringApplyPayPage() {
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
   const [paySeniorId, setPaySeniorId] = useAtom(paySeniorIdAtom);
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
   setPaySeniorId(seniorId);
   const formatTime = (time) => {
@@ -99,6 +99,12 @@ function MentoringApplyPayPage() {
               setUserId(res.data.userId);
               setPhoneNumber(res.data.phoneNumber);
               setDataLoaded(true);
+            }
+
+            if (res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
             }
           })
           .catch((err) => {

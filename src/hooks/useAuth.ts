@@ -160,9 +160,7 @@ function useAuth() {
         });
         setUserType(response.data.role);
         return;
-      }
-
-      if (res.code && (res.code == 'EX202' || res.code == 'EX201')) {
+      } else {
         removeTokens();
         return;
       }

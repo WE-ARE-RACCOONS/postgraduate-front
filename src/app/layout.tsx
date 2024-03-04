@@ -1,7 +1,6 @@
 import './globals.css';
 import type { Metadata } from 'next';
 import Providers from '@/components/Provider/providers';
-import Token from '@/components/Common/Token';
 import StyledComponentsRegistry from '@/lib/registry';
 
 export const metadata: Metadata = {
