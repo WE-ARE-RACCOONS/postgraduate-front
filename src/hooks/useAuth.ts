@@ -65,6 +65,7 @@ function useAuth() {
           const accessTkn = localStorage.getItem('accessToken');
           return accessTkn;
         } else {
+          removeTokens();
           return '';
         }
       }
