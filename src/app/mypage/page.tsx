@@ -70,7 +70,7 @@ function MyPage() {
     portalElement: loginRequestElement,
   } = useModal('login-request-portal');
 
-  const { getAccessToken, getUserType } = useAuth();
+  const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [accessTkn, setAccessTkn] = useState('');
   const [userType, setUserType] = useState('');
   const router = useRouter();
@@ -93,6 +93,13 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
           .then((res) => {
+
+            if(res.data.code == 'EX201') {
+              removeTokens();
+              router.push('/');
+              return;
+            }
+
             setnickName(res.data.data.nickName);
             setprofile(res.data.data.profile);
           })
@@ -106,6 +113,13 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
           .then((res) => {
+
+            if(res.data.code == 'EX201') {
+              removeTokens();
+              router.push('/');
+              return;
+            }
+
             setnickName(res.data.data.nickName);
             setprofile(res.data.data.profile);
             setCertifiReg(res.data.data.certificationRegister);
