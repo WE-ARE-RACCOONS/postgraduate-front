@@ -32,12 +32,16 @@ import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
 import { ValidatorBox } from '@/components/Content/AddTime/AddTime.styled';
+import { useRouter } from 'next/navigation';
+
 function SmentoringSpec(props: ModalMentoringSProps) {
-  const { getAccessToken } = useAuth();
+  const router = useRouter();
+  const { getAccessToken, removeTokens } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
   const [date, setDate] = useState('');
   const activeTab = useAtomValue(activeTabAtom);
   const [isActive, setIsActive] = useState(false);
+
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const button = e.currentTarget;
     const buttonContent = button.textContent;
@@ -59,6 +63,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
     button.style.color = newClicked ? '#FFFFFF' : '#3D4044';
   };
+
   useEffect(() => {
     if (props.mentoringId !== 0) {
       getAccessToken().then((Token) => {
@@ -74,6 +79,11 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               },
             )
             .then((response) => {
+              if (response.data.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
               setData(response.data.data);
             })
             .catch((error) => {

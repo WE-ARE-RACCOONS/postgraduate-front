@@ -15,8 +15,13 @@ function JuniorManage(props: NotSeniorProps) {
     router.push('/mypage/edit');
   };
   const setuserTypeAtom = useSetAtom(userTypeAtom);
-  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } =
-    useAuth();
+  const {
+    getAccessToken,
+    setUserType,
+    setAccessToken,
+    setRefreshToken,
+    removeTokens,
+  } = useAuth();
   const [socialId, setSocialId] = useAtom(socialIdAtom);
 
   const handleClick = async () => {
@@ -30,6 +35,13 @@ function JuniorManage(props: NotSeniorProps) {
             `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/role`,
             { headers },
           );
+
+          if (response.data.code == 'EX201') {
+            removeTokens();
+            router.replace('/');
+            return;
+          }
+
           if (response.data.data.possible === true) {
             setuserTypeAtom('junior');
             renewSeniorToken();
@@ -60,6 +72,12 @@ function JuniorManage(props: NotSeniorProps) {
           )
           .then((response) => {
             const res = response.data;
+
+            if (res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
 
             if (res.code == 'AU202') {
               setAccessToken({

@@ -40,8 +40,13 @@ function SeniorInfoPage() {
   const [ableSubmit, setAbleSubmit] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { getAccessToken, setAccessToken, setRefreshToken, setUserType } =
-    useAuth();
+  const {
+    getAccessToken,
+    setAccessToken,
+    setRefreshToken,
+    setUserType,
+    removeTokens,
+  } = useAuth();
   const socialId = useAtomValue(socialIdAtom);
 
   const phoneNumber = useAtomValue(phoneNum);
@@ -123,6 +128,13 @@ function SeniorInfoPage() {
           )
           .then((res) => {
             const response = res.data;
+
+            if (response.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
+
             if (response.code == 'SNR202') {
               setAccessToken({
                 token: response.data.accessToken,

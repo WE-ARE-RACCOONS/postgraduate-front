@@ -31,11 +31,12 @@ import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constants/tab/ctap';
+import { useRouter } from 'next/navigation';
 function MentoringSpec(props: ModalMentoringProps) {
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
-  const { getUserType } = useAuth();
   const userType = getUserType();
+  const router = useRouter();
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
 
   const formatTime = (time: string) => {
@@ -74,6 +75,12 @@ function MentoringSpec(props: ModalMentoringProps) {
               },
             )
             .then((response) => {
+              if (response.data.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
+
               setData(response.data.data);
             })
             .catch((error) => {

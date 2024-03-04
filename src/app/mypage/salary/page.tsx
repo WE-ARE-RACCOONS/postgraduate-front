@@ -8,13 +8,15 @@ import { tapType } from '@/types/tap/tap';
 import { TAB, STAB_STATE } from '@/constants/tab/ctap';
 import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
 import BackHeader from '@/components/Header/BackHeader';
+import { useRouter } from 'next/navigation';
 
 function SalaryPage() {
-  const { getAccessToken, getUserType } = useAuth();
+  const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [data, setData] = useState([]);
   const [salaryDate, setSalaryDate] = useState('');
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [activeTab, setActiveTab] = useState(TAB.waiting);
+  const router = useRouter();
 
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
@@ -34,6 +36,11 @@ function SalaryPage() {
               headers,
             })
             .then((res) => {
+              if (res.data.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
               if (res.data.code == 'SLR200') {
                 setData(res.data.data.salaryDetails);
               }
@@ -44,6 +51,11 @@ function SalaryPage() {
           axios
             .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
             .then((res) => {
+              if (res.data.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
               if (res.data.code == 'SLR200') {
                 setSalaryDate(res.data.data.salaryDate);
                 setSalaryAmount(res.data.data.salaryAmount);

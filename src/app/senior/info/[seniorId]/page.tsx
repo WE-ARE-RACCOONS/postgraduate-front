@@ -26,7 +26,7 @@ function SeniorInfoPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const mySeiorId = useAtomValue(mySeniorId).toString();
-  const { getAccessToken, getUserType } = useAuth();
+  const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [findSeniorId, setFindSeniorId] = useAtom(enterSeniorId);
   const [info, setInfo] = useState('');
   const [keyword, setKeyword] = useState([]);
@@ -77,6 +77,12 @@ function SeniorInfoPage() {
         )
         .then((response) => {
           const res = response.data;
+
+          if (res.code == 'EX201') {
+            removeTokens();
+            router.replace('/');
+            return;
+          }
 
           if (res.code == 'SNR200') {
             setMine(res.data.isMine);

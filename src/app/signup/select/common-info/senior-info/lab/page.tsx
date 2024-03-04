@@ -38,7 +38,6 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const { getAccessToken } = useAuth();
   const currentPath = usePathname();
   // const pathArr = currentPath.split('/');
   // const socialId = pathArr[2];

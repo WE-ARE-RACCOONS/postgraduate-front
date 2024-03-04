@@ -26,7 +26,7 @@ function page() {
   const [phoneNumber, setPhoneNumber] = useAtom(phoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const router = useRouter();
   const [nickAvail, setNickAvail] = useState(false);
   const availability = useAtomValue(notDuplicate);
@@ -44,6 +44,12 @@ function page() {
             headers,
           })
           .then((res) => {
+            if (res.data.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
+
             setNickName(res.data.data.nickName);
             setPhoneNumber(res.data.data.phoneNumber);
             setprofile(res.data.data.profile);
@@ -75,6 +81,11 @@ function page() {
             )
             .then((response) => {
               const res = response.data;
+              if (res.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
               if (res.code == 'IMG202') {
                 editProfileUrl = res.data.profileUrl;
               }
@@ -102,6 +113,11 @@ function page() {
           )
           .then((response) => {
             const res = response.data;
+            if (res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
             if (res.code == 'UR201') {
               router.push('/mypage');
             }
