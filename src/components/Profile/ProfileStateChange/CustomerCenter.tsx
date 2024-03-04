@@ -32,6 +32,12 @@ function CustomerCenter() {
           .then((response) => {
             const res = response.data;
 
+            if(res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
+
             if (res.code == 'AU203') {
               removeTokens();
               router.replace('/');

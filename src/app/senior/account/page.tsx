@@ -23,7 +23,7 @@ function AccountPage() {
   const bank = useAtomValue(bankNameAtom);
   const [accountHolder, setAccountHolder] = useState('');
   const [data, setData] = useState('');
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const isInputsFilled = accountNumber && bank && accountHolder;
 
   const validateInputs = () => {
@@ -57,6 +57,11 @@ function AccountPage() {
               },
             )
             .then((response) => {
+              if(response.data.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
               setData(response.data);
             })
             .catch((error) => {

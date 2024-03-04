@@ -14,7 +14,7 @@ import SearchModal from '@/components/Modal/SearchModal';
 import { createPortal } from 'react-dom';
 
 function SearchResultPage() {
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('searchTerm');
   const router = useRouter();
@@ -43,6 +43,13 @@ function SearchResultPage() {
           axios
             .get(url, { headers })
             .then((res) => {
+
+              if(res.data.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
+
               setData(res.data.data.seniorSearchResponses);
               setLength(res.data.data.seniorSearchResponses.length);
             })

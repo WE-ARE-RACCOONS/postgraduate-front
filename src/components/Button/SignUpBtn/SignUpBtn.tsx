@@ -27,7 +27,7 @@ function SignUpBtn() {
   const field = useAtomValue(desiredField);
   const matchingReceive = useAtomValue(matchingReceiveAtom);
   const router = useRouter();
-  const { setAccessToken, setRefreshToken, setUserType, getAccessToken } =
+  const { setAccessToken, setRefreshToken, setUserType, getAccessToken, removeTokens } =
     useAuth();
 
   const handleSignUp = () => {
@@ -51,6 +51,12 @@ function SignUpBtn() {
             )
             .then((response) => {
               const res = response.data;
+
+              if(res.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
 
               if (res.code == 'AU202') {
                 setAccessToken({

@@ -22,7 +22,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
-  const { getAccessToken, setUserType, setAccessToken, setRefreshToken } =
+  const { getAccessToken, setUserType, setAccessToken, setRefreshToken, removeTokens } =
     useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
@@ -51,23 +51,12 @@ function SeniorManage(props: SeniorManageProps) {
     portalElement: registerPortal,
   } = useModal('senior-profile-not-registered');
 
-  function setAuthText(auth: certiRegType) {
-    switch (auth) {
-      case 'APPROVE':
-        return '승인 완료';
-      case 'NOT_APPROVE':
-        return '미승인';
-      case 'WAITING':
-        return '승인 대기중';
-      default:
-        return '';
-    }
-  }
   const MyprofHandler = () => {
     if (checkRegister()) {
       router.push(`/senior/info/${props.seniorId}`);
     }
   };
+
   const MyAuth = () => {
     if (props.certifiReg === 'APPROVE') {
       props.AmodalHandler();
@@ -87,6 +76,7 @@ function SeniorManage(props: SeniorManageProps) {
       return false;
     }
   };
+
   const changeJunior = async () => {
     try {
       getAccessToken().then(async (Token) => {
@@ -98,6 +88,12 @@ function SeniorManage(props: SeniorManageProps) {
             `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
             { headers },
           );
+
+          if(response.data.code == 'EX201') {
+            removeTokens();
+            router.replace('/');
+            return;
+          }
 
           if (response.data.data.possible == true) {
             setuserTypeAtom('junior');
@@ -130,6 +126,12 @@ function SeniorManage(props: SeniorManageProps) {
           )
           .then((response) => {
             const res = response.data;
+
+            if(res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
 
             if (res.code == 'AU202') {
               setAccessToken({

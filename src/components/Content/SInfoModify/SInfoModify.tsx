@@ -31,6 +31,7 @@ import { ModalType } from '@/types/modal/riseUp';
 import useModal from '@/hooks/useModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { createPortal } from 'react-dom';
+import { useRouter } from 'next/navigation';
 
 function SInfoModify({
   modalHandler,
@@ -39,6 +40,7 @@ function SInfoModify({
   bModalHandler: () => void;
   modalHandler: () => void;
 }) {
+  const router = useRouter();
   const [flag, setFlag] = useState(false);
   const {
     modal: BModal,
@@ -57,7 +59,7 @@ function SInfoModify({
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
   const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
 
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
 
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
@@ -70,6 +72,12 @@ function SInfoModify({
           })
           .then((response) => {
             const res = response.data;
+
+            if(res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
 
             if (res.code == 'SNR200') {
               setAccHolder(res.data.accountHolder || '');
@@ -116,6 +124,12 @@ function SInfoModify({
             .then((response) => {
               const res = response.data;
 
+              if(res.code == 'EX201') {
+                removeTokens();
+                router.replace('/');
+                return;
+              }
+
               if (res.code == 'IMG202') {
                 submitImgUrl = res.data.profileUrl;
               }
@@ -155,6 +169,12 @@ function SInfoModify({
           )
           .then((response) => {
             const res = response.data;
+
+            if(res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
 
             if (res.code == 'SNR201') {
               modalHandler();

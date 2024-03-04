@@ -30,7 +30,7 @@ const PayResultPage = () => {
     typeof window !== 'undefined'
       ? window.localStorage.getItem('thirdTime')
       : null;
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const payHandler = () => {
     getAccessToken().then((accessTkn) => {
       const oderId =
@@ -65,6 +65,11 @@ const PayResultPage = () => {
           )
           .then((response) => {
             const res = response.data;
+            if(res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
             if (res.code == 'MT202') {
               setSuccess(true);
             } else {

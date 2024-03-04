@@ -25,7 +25,7 @@ function MentoringApplySchedulePage() {
   const firstTime = useAtomValue(firAbleTimeAtom);
   const secondTime = useAtomValue(secAbleTimeAtom);
   const thirdTime = useAtomValue(thiAbleTimeAtom);
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const seniorId = pathArr[2];
@@ -54,6 +54,12 @@ function MentoringApplySchedulePage() {
             if (res.code == 'SNR200') {
               setSNickname(res.data.nickName);
               setTimeArr(res.data.times);
+            }
+
+            if (res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
             }
           })
           .catch((err) => {

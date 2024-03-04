@@ -27,8 +27,10 @@ import {
   totalFieldAtom,
 } from '@/stores/senior';
 import Scheduler from '@/components/Scheduler';
+import { useRouter } from 'next/navigation';
 
 function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
+  const router = useRouter();
   const [modalType, setModalType] = useState<ModalType>('keyword');
   const [flag, setFlag] = useState(false);
   const [lab, setLab] = useState('');
@@ -41,7 +43,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const [oneLiner, setOneLiner] = useState('');
   const [times, setTimes] = useAtom(sAbleTime);
   const [submitFlag, setSubmitFlag] = useState(false);
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const {
     modal,
     modalHandler: infoHandler,
@@ -59,6 +61,12 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
           })
           .then((response) => {
             const res = response.data;
+
+            if(res.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
 
             if (res.code == 'SNR200') {
               setChatLink(res.data.chatLink);

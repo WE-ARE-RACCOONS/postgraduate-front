@@ -25,14 +25,16 @@ import { createPortal } from 'react-dom';
 import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
+import { useRouter } from 'next/navigation';
 function TabBar() {
+  const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const [data, setData] = useState<MentoringData[] | null>(null);
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'junior-mentoring-detail',
   );
@@ -44,6 +46,7 @@ function TabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
+
   useEffect(() => {
     getAccessToken().then((Token) => {
       if (Token) {
@@ -58,6 +61,11 @@ function TabBar() {
             },
           )
           .then((response) => {
+            if(response.data.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
             setData(response.data.data.mentoringInfos);
           })
           .catch((error) => {

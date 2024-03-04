@@ -37,7 +37,7 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 function EditProfilePage() {
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, removeTokens } = useAuth();
   const [modalType, setModalType] = useState<ModalType>('postgradu');
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const {
@@ -94,6 +94,18 @@ function EditProfilePage() {
                 { headers },
               ),
             ]);
+
+            if(timesResponse.data.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
+
+            if(profileResponse.data.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
 
             const timesData = timesResponse.data.data.times || [];
             const profileData = profileResponse.data.data || {};
@@ -155,6 +167,11 @@ function EditProfilePage() {
             },
           )
           .then((res) => {
+            if(res.data.code == 'EX201') {
+              removeTokens();
+              router.replace('/');
+              return;
+            }
             router.back();
           })
           .catch(function (error) {
