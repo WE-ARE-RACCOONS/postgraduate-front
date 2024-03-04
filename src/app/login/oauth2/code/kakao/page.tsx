@@ -56,8 +56,8 @@ function KakaoPage() {
 
   return (
     <KakaoLoginPageContainer>
-      <div id='login-ing-text'>로그인 중입니다...</div>
-      <div id='spinner-container'>
+      <div id="login-ing-text">로그인 중입니다...</div>
+      <div id="spinner-container">
         <Spinner />
       </div>
     </KakaoLoginPageContainer>
@@ -82,6 +82,6 @@ const KakaoLoginPageContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;
 
 export default KakaoPage;
