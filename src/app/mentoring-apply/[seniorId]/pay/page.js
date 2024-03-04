@@ -101,7 +101,7 @@ function MentoringApplyPayPage() {
               setDataLoaded(true);
             }
 
-            if(res.code == 'EX201') {
+            if (res.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;

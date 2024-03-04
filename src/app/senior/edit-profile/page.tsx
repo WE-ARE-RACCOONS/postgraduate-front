@@ -95,13 +95,13 @@ function EditProfilePage() {
               ),
             ]);
 
-            if(timesResponse.data.code == 'EX201') {
+            if (timesResponse.data.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;
             }
 
-            if(profileResponse.data.code == 'EX201') {
+            if (profileResponse.data.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;
@@ -167,7 +167,7 @@ function EditProfilePage() {
             },
           )
           .then((res) => {
-            if(res.data.code == 'EX201') {
+            if (res.data.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;

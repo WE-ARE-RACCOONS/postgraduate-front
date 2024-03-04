@@ -22,8 +22,13 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
-  const { getAccessToken, setUserType, setAccessToken, setRefreshToken, removeTokens } =
-    useAuth();
+  const {
+    getAccessToken,
+    setUserType,
+    setAccessToken,
+    setRefreshToken,
+    removeTokens,
+  } = useAuth();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-my-profile-portal',
   );
@@ -89,7 +94,7 @@ function SeniorManage(props: SeniorManageProps) {
             { headers },
           );
 
-          if(response.data.code == 'EX201') {
+          if (response.data.code == 'EX201') {
             removeTokens();
             router.replace('/');
             return;
@@ -127,7 +132,7 @@ function SeniorManage(props: SeniorManageProps) {
           .then((response) => {
             const res = response.data;
 
-            if(res.code == 'EX201') {
+            if (res.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;

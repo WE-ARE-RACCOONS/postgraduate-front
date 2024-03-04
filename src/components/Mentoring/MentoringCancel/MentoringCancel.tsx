@@ -49,7 +49,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
             { headers },
           );
 
-          if(response.data.code == 'EX201') {
+          if (response.data.code == 'EX201') {
             removeTokens();
             router.replace('/');
             return;

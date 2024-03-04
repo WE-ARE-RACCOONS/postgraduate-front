@@ -43,8 +43,7 @@ function SearchResultPage() {
           axios
             .get(url, { headers })
             .then((res) => {
-
-              if(res.data.code == 'EX201') {
+              if (res.data.code == 'EX201') {
                 removeTokens();
                 router.replace('/');
                 return;

@@ -57,7 +57,7 @@ function AccountPage() {
               },
             )
             .then((response) => {
-              if(response.data.code == 'EX201') {
+              if (response.data.code == 'EX201') {
                 removeTokens();
                 router.replace('/');
                 return;

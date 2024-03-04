@@ -73,7 +73,7 @@ function SInfoModify({
           .then((response) => {
             const res = response.data;
 
-            if(res.code == 'EX201') {
+            if (res.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;
@@ -124,7 +124,7 @@ function SInfoModify({
             .then((response) => {
               const res = response.data;
 
-              if(res.code == 'EX201') {
+              if (res.code == 'EX201') {
                 removeTokens();
                 router.replace('/');
                 return;
@@ -170,7 +170,7 @@ function SInfoModify({
           .then((response) => {
             const res = response.data;
 
-            if(res.code == 'EX201') {
+            if (res.code == 'EX201') {
               removeTokens();
               router.replace('/');
               return;

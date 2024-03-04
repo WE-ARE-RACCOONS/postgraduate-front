@@ -160,10 +160,9 @@ function useAuth() {
         });
         setUserType(response.data.role);
         return;
-      }
-      else {
+      } else {
         removeTokens();
-        return;        
+        return;
       }
     } catch {}
   }
