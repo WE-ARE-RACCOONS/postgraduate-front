@@ -20,6 +20,7 @@ import { userType } from '@/types/user/user';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
 import { useEffect } from 'react';
+import findExCode from '@/utils/findExCode';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
   const {
@@ -94,7 +95,7 @@ function SeniorManage(props: SeniorManageProps) {
             { headers },
           );
 
-          if (response.data.code == 'EX201') {
+          if (findExCode(response.data.code)) {
             removeTokens();
             router.replace('/');
             return;
@@ -132,7 +133,7 @@ function SeniorManage(props: SeniorManageProps) {
           .then((response) => {
             const res = response.data;
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

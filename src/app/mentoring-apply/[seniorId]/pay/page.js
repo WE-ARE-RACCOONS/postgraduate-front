@@ -33,6 +33,7 @@ import axios from 'axios';
 import Script from 'next/script';
 import $ from 'jquery';
 import { TEMRS_LINK } from '@/constants/terms/terms';
+import findExCode from '@/utils/findExCode';
 
 function MentoringApplyPayPage() {
   const [nickName, setNickName] = useAtom(seniorNickname);
@@ -101,7 +102,7 @@ function MentoringApplyPayPage() {
               setDataLoaded(true);
             }
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

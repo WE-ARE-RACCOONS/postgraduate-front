@@ -6,6 +6,7 @@ import { orderIdAtom } from '@/stores/mentoring';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
 import { successAtom } from '@/stores/condition';
+import findExCode from '@/utils/findExCode';
 
 const PayResultPage = () => {
   const [oderId, setOrderId] = useAtom(orderIdAtom);
@@ -65,7 +66,7 @@ const PayResultPage = () => {
           )
           .then((response) => {
             const res = response.data;
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

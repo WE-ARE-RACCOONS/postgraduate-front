@@ -30,6 +30,7 @@ import {
 } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
+import findExCode from '@/utils/findExCode';
 import axios from 'axios';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
@@ -95,13 +96,13 @@ function EditProfilePage() {
               ),
             ]);
 
-            if (timesResponse.data.code == 'EX201') {
+            if (findExCode(timesResponse.data.code)) {
               removeTokens();
               router.replace('/');
               return;
             }
 
-            if (profileResponse.data.code == 'EX201') {
+            if (findExCode(profileResponse.data.code)) {
               removeTokens();
               router.replace('/');
               return;
@@ -167,7 +168,7 @@ function EditProfilePage() {
             },
           )
           .then((res) => {
-            if (res.data.code == 'EX201') {
+            if (findExCode(res.data.code)) {
               removeTokens();
               router.replace('/');
               return;

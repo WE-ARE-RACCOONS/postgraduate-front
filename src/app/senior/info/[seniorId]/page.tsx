@@ -14,6 +14,7 @@ import {
   thiAbleTimeAtom,
 } from '@/stores/mentoring';
 import { enterSeniorId, mySeniorId } from '@/stores/senior';
+import findExCode from '@/utils/findExCode';
 import axios from 'axios';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
@@ -78,7 +79,7 @@ function SeniorInfoPage() {
         .then((response) => {
           const res = response.data;
 
-          if (res.code == 'EX201') {
+          if (findExCode(res.code)) {
             removeTokens();
             router.replace('/');
             return;

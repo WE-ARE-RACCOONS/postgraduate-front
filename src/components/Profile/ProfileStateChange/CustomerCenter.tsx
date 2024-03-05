@@ -5,6 +5,7 @@ import { CustomerCenterBox } from './CustomerCenter.styled';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 function CustomerCenter() {
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(false);
@@ -32,7 +33,7 @@ function CustomerCenter() {
           .then((response) => {
             const res = response.data;
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

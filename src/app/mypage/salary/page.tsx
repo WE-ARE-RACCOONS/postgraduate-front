@@ -9,6 +9,7 @@ import { TAB, STAB_STATE } from '@/constants/tab/ctap';
 import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
 import BackHeader from '@/components/Header/BackHeader';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 
 function SalaryPage() {
   const { getAccessToken, getUserType, removeTokens } = useAuth();
@@ -36,7 +37,7 @@ function SalaryPage() {
               headers,
             })
             .then((res) => {
-              if (res.data.code == 'EX201') {
+              if (findExCode(res.data.code)) {
                 removeTokens();
                 router.replace('/');
                 return;
@@ -51,7 +52,7 @@ function SalaryPage() {
           axios
             .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
             .then((res) => {
-              if (res.data.code == 'EX201') {
+              if (findExCode(res.data.code)) {
                 removeTokens();
                 router.replace('/');
                 return;

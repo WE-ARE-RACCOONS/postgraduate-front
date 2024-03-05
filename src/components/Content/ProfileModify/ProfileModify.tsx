@@ -28,6 +28,7 @@ import {
 } from '@/stores/senior';
 import Scheduler from '@/components/Scheduler';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 
 function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const router = useRouter();
@@ -62,7 +63,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
           .then((response) => {
             const res = response.data;
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

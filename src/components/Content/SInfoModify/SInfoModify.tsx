@@ -32,6 +32,7 @@ import useModal from '@/hooks/useModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 
 function SInfoModify({
   modalHandler,
@@ -73,7 +74,7 @@ function SInfoModify({
           .then((response) => {
             const res = response.data;
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;
@@ -124,7 +125,7 @@ function SInfoModify({
             .then((response) => {
               const res = response.data;
 
-              if (res.code == 'EX201') {
+              if (findExCode(res.code)) {
                 removeTokens();
                 router.replace('/');
                 return;
@@ -170,7 +171,7 @@ function SInfoModify({
           .then((response) => {
             const res = response.data;
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

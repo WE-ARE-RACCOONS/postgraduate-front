@@ -26,6 +26,7 @@ import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCan
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 function TabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
@@ -61,7 +62,7 @@ function TabBar() {
             },
           )
           .then((response) => {
-            if (response.data.code == 'EX201') {
+            if (findExCode(response.data.code)) {
               removeTokens();
               router.replace('/');
               return;

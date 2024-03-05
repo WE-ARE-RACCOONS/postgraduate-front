@@ -16,6 +16,7 @@ import {
   desiredSchool,
   matchingReceiveAtom,
 } from '@/stores/matching';
+import findExCode from '@/utils/findExCode';
 
 function SignUpBtn() {
   const socialId = useAtomValue(socialIdAtom);
@@ -57,7 +58,7 @@ function SignUpBtn() {
             .then((response) => {
               const res = response.data;
 
-              if (res.code == 'EX201') {
+              if (findExCode(res.code)) {
                 removeTokens();
                 router.replace('/');
                 return;
