@@ -14,6 +14,7 @@ import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { createPortal } from 'react-dom';
 import { useAtomValue } from 'jotai';
 import { bankNameAtom } from '@/stores/bankName';
+import findExCode from '@/utils/findExCode';
 function AccountPage() {
   const router = useRouter();
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
@@ -57,7 +58,7 @@ function AccountPage() {
               },
             )
             .then((response) => {
-              if (response.data.code == 'EX201') {
+              if (findExCode(response.data.code)) {
                 removeTokens();
                 router.replace('/');
                 return;

@@ -18,6 +18,7 @@ import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import BackHeader from '@/components/Header/BackHeader';
+import findExCode from '@/utils/findExCode';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
   let editProfileUrl = '';
@@ -44,7 +45,7 @@ function page() {
             headers,
           })
           .then((res) => {
-            if (res.data.code == 'EX201') {
+            if (findExCode(res.data.code)) {
               removeTokens();
               router.replace('/');
               return;
@@ -81,7 +82,7 @@ function page() {
             )
             .then((response) => {
               const res = response.data;
-              if (res.code == 'EX201') {
+              if (findExCode(res.code)) {
                 removeTokens();
                 router.replace('/');
                 return;
@@ -113,7 +114,7 @@ function page() {
           )
           .then((response) => {
             const res = response.data;
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

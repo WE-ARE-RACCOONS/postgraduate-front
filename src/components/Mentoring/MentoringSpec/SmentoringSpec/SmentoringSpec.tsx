@@ -33,6 +33,7 @@ import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
 import { ValidatorBox } from '@/components/Content/AddTime/AddTime.styled';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 
 function SmentoringSpec(props: ModalMentoringSProps) {
   const router = useRouter();
@@ -79,7 +80,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               },
             )
             .then((response) => {
-              if (response.data.code == 'EX201') {
+              if (findExCode(response.data.code)) {
                 removeTokens();
                 router.replace('/');
                 return;

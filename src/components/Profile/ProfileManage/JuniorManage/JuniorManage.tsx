@@ -9,6 +9,7 @@ import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { userType } from '@/types/user/user';
 import axios from 'axios';
 import { USER_TYPE } from '@/constants/user/cUser';
+import findExCode from '@/utils/findExCode';
 function JuniorManage(props: NotSeniorProps) {
   const router = useRouter();
   const handleProfileEditClick = () => {
@@ -36,7 +37,7 @@ function JuniorManage(props: NotSeniorProps) {
             { headers },
           );
 
-          if (response.data.code == 'EX201') {
+          if (findExCode(response.data.code)) {
             removeTokens();
             router.replace('/');
             return;
@@ -73,7 +74,7 @@ function JuniorManage(props: NotSeniorProps) {
           .then((response) => {
             const res = response.data;
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

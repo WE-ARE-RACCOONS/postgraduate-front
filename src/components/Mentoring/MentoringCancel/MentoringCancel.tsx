@@ -16,6 +16,7 @@ import Image from 'next/image';
 import state from '@/../../public/state.png';
 import cState from '@/../../public/cState.png';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 function MentoringCancel(props: ModalMentoringclProps) {
   const [data, setData] = useState<MentoringData[] | null>(null);
   const { getAccessToken, removeTokens } = useAuth();
@@ -49,7 +50,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
             { headers },
           );
 
-          if (response.data.code == 'EX201') {
+          if (findExCode(response.data.code)) {
             removeTokens();
             router.replace('/');
             return;
