@@ -32,6 +32,7 @@ import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constants/tab/ctap';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 function MentoringSpec(props: ModalMentoringProps) {
   const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [data, setData] = useState<MentoringSpecData | null>(null);
@@ -75,7 +76,7 @@ function MentoringSpec(props: ModalMentoringProps) {
               },
             )
             .then((response) => {
-              if (response.data.code == 'EX201') {
+              if (findExCode(response.data.code)) {
                 removeTokens();
                 router.replace('/');
                 return;

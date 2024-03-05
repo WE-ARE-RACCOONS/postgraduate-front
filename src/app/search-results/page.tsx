@@ -12,6 +12,7 @@ import SearchDropDown from '@/components/DropDown/SearchDropDown';
 import useModal from '@/hooks/useModal';
 import SearchModal from '@/components/Modal/SearchModal';
 import { createPortal } from 'react-dom';
+import findExCode from '@/utils/findExCode';
 
 function SearchResultPage() {
   const { getAccessToken, removeTokens } = useAuth();
@@ -43,7 +44,7 @@ function SearchResultPage() {
           axios
             .get(url, { headers })
             .then((res) => {
-              if (res.data.code == 'EX201') {
+              if (findExCode(res.data.code)) {
                 removeTokens();
                 router.replace('/');
                 return;

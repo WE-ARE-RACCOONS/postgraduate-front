@@ -32,6 +32,7 @@ import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
+import findExCode from '@/utils/findExCode';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -129,7 +130,7 @@ function SeniorInfoPage() {
           .then((res) => {
             const response = res.data;
 
-            if (response.code == 'EX201') {
+            if (findExCode(response.code)) {
               removeTokens();
               router.replace('/');
               return;

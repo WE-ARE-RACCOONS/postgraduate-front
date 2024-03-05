@@ -22,6 +22,7 @@ import SearchModal from '@/components/Modal/SearchModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import MenuBar from '@/components/Bar/MenuBar';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
+import findExCode from '@/utils/findExCode';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -93,7 +94,7 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
           .then((res) => {
-            if (res.data.code == 'EX201') {
+            if (findExCode(res.data.code)) {
               removeTokens();
               router.push('/');
               return;
@@ -112,7 +113,7 @@ function MyPage() {
         axios
           .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
           .then((res) => {
-            if (res.data.code == 'EX201') {
+            if (findExCode(res.data.code)) {
               removeTokens();
               router.push('/');
               return;

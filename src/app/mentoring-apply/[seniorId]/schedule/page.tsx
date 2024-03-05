@@ -12,6 +12,7 @@ import {
   thiAbleTimeAtom,
 } from '@/stores/mentoring';
 import { TimeObj } from '@/types/scheduler/scheduler';
+import findExCode from '@/utils/findExCode';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
@@ -56,7 +57,7 @@ function MentoringApplySchedulePage() {
               setTimeArr(res.data.times);
             }
 
-            if (res.code == 'EX201') {
+            if (findExCode(res.code)) {
               removeTokens();
               router.replace('/');
               return;

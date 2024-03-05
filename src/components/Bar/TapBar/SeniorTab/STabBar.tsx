@@ -30,6 +30,7 @@ import FullModal from '@/components/Modal/FullModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
 function STabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
@@ -70,7 +71,7 @@ function STabBar() {
             },
           )
           .then((response) => {
-            if (response.data.code == 'EX201') {
+            if (findExCode(response.data.code)) {
               removeTokens();
               router.replace('/');
               return;
