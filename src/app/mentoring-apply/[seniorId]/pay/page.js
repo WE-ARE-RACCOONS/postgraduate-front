@@ -45,9 +45,6 @@ function MentoringApplyPayPage() {
   const [userId, setUserId] = useAtom(userIdAtom);
   const topic = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
-  const firstTime = useAtomValue(firAbleTimeAtom);
-  const secondTime = useAtomValue(secAbleTimeAtom);
-  const thirdTime = useAtomValue(thiAbleTimeAtom);
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -55,6 +52,18 @@ function MentoringApplyPayPage() {
   const [paySeniorId, setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken, removeTokens } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
+   const firstTime =
+  typeof window !== 'undefined'
+    ? window.localStorage.getItem('firstTime')
+    : null;
+const secondTime =
+  typeof window !== 'undefined'
+    ? window.localStorage.getItem('secondTime')
+    : null;
+const thirdTime =
+  typeof window !== 'undefined'
+    ? window.localStorage.getItem('thirdTime')
+    : null;
   setPaySeniorId(seniorId);
   const formatTime = (time) => {
     if (!time) return '';
