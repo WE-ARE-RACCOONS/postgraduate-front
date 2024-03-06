@@ -39,16 +39,9 @@ const PayResultPage = () => {
           ? window.localStorage.getItem('orderId')
           : null;
       if (
-        oderId &&
-        accessTkn &&
-        topic &&
-        question &&
-        firstTime &&
-        secondTime &&
-        thirdTime
+        accessTkn
       ) {
         const timeArr = [firstTime, secondTime, thirdTime];
-
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/applying`,
