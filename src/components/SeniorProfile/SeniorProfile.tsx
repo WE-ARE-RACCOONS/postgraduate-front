@@ -17,7 +17,6 @@ import { useRouter } from 'next/navigation';
 import auth from '../../../public/auth_mark.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
-
   return (
     <SeniorProfileBox>
       <SeniorProfileContent
@@ -27,7 +26,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
       >
         <SeniorProfileImg src={data ? data.profile : ''} />
         <SeniorProfileInfo>
-          <SPmajor>{data.major}</SPmajor>
+          <SPmajor>{data.postgradu}&nbsp;{data.major}</SPmajor>
           <SPnickname>
             {data.nickName}
             <Image src={auth} alt="auth" width={16} height={16} />
