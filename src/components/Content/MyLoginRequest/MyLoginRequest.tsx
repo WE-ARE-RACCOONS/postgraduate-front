@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import LoginReq from '../../../../public/LoginReq.png';
+import loginBg from '../../../../public/login-background.png';
 import kakao from '../../../../public/kakao.png';
 import logo from '../../../../public/logo.png';
 import {
@@ -53,7 +54,7 @@ function MyLoginRequest({ modalHandler }: { modalHandler: () => void }) {
       <MLBoxMiddle>
         <Image
           id="LoginReq"
-          src={LoginReq}
+          src={loginBg}
           alt="로그인 중간 사진"
           sizes="(max-width: 600px) 3.rem"
           priority
