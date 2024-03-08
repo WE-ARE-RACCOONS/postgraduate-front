@@ -21,6 +21,7 @@ export const MLBoxMiddle = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
 `;
 export const Logo = styled.div`
   display: flex;
