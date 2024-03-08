@@ -23,6 +23,7 @@ import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import MenuBar from '@/components/Bar/MenuBar';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import findExCode from '@/utils/findExCode';
+import Footer from '@/components/Footer';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -190,6 +191,7 @@ function MyPage() {
       >
         <CustomerCenter />
       </div>
+      <Footer />
       <MenuBar modalHandler={loginRequestHandler} />
       {modal && portalElement
         ? createPortal(

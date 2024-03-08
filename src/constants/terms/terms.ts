@@ -1,6 +1,6 @@
 export const TEMRS_LINK = {
   termsOfUse:
-    'https://drive.google.com/file/d/145yDMxashAU-LApuFWT-C8jZBnw5XKmT/view?usp=sharing',
+    'https://drive.google.com/file/d/1dbwxYelqqHrISAnsaaKysXD3TigerEIj/view?usp=sharing',
   privacyStatement:
     'https://drive.google.com/file/d/1Ae4raDbSSRRbVEKG8_8gSVLCQ-8Zrfti/view?usp=sharing',
   noShowPolicy:

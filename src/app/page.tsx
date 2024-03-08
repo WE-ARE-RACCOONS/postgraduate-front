@@ -23,6 +23,7 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import { SeniorProfileData } from '@/types/profile/seniorProfile';
 import { listDataAtom, pageNumAtom } from '@/stores/home';
 import { useRouter } from 'next/router';
+import Footer from '@/components/Footer';
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
   // const [data, setData] = useState<Array<SeniorProfileData>>([]);
@@ -117,6 +118,7 @@ export default function Home() {
           <div>해당하는 선배가 없어요</div>
         )}
       </HomeProfileLayer>
+      <Footer />
       <MenuBarWrapper>
         <MenuBar modalHandler={modalHandler} />
       </MenuBarWrapper>
@@ -139,7 +141,7 @@ export default function Home() {
 const HomeLayer = styled.div`
   width: inherit;
   height: inherit;
-  padding-bottom: 2.5rem;
+  padding-bottom: 3.5rem;
 `;
 const Logo = styled.div`
   display: flex;
@@ -174,6 +176,7 @@ const HomeUnivLayer = styled.div`
   padding: 1rem 0.9rem;
 `;
 const HomeProfileLayer = styled.div`
+  min-height: 22rem;
   height: inherit;
   padding: 1rem;
 `;
