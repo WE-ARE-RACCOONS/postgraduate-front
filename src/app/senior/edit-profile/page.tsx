@@ -26,6 +26,7 @@ import {
   sSingleIntroduce,
   selectedFieldAtom,
   selectedKeywordAtom,
+  totalFieldAtom,
   totalKeywordAtom,
 } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
@@ -52,13 +53,12 @@ function EditProfilePage() {
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField, setSfield] = useAtom(sFieldAtom);
+  const [totalField, setTotalField] = useAtom(totalFieldAtom);
   const setSelectedField = useSetAtom(selectedFieldAtom);
   const setTotalKeyword = useSetAtom(totalKeywordAtom);
   const setSelectedKeyword = useSetAtom(selectedKeywordAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
-  // const[time,setTime] = useState<Array<TimeType>>([])
-  const seniorId = useAtomValue(mySeniorId);
   const [timeData, setTimeData] = useAtom(sAbleTime);
   const router = useRouter();
 
@@ -85,42 +85,40 @@ function EditProfilePage() {
               Authorization: `Bearer ${token}`,
             };
 
-            const [timesResponse, profileResponse] = await Promise.all([
-              axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
-                { headers },
-              ),
-              axios.get(
-                `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-                { headers },
-              ),
-            ]);
+            axios
+              .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+                headers,
+              })
+              .then((response) => {
+                const res = response.data;
 
-            if (findExCode(timesResponse.data.code)) {
-              removeTokens();
-              router.replace('/');
-              return;
-            }
+                if (findExCode(res.code)) {
+                  removeTokens();
+                  router.replace('/');
+                  return;
+                }
 
-            if (findExCode(profileResponse.data.code)) {
-              removeTokens();
-              router.replace('/');
-              return;
-            }
+                const tempFields = [...totalField];
+                res.data.field.forEach((el: string) => {
+                  if (!tempFields.includes(el)) tempFields.push(el);
+                });
 
-            const timesData = timesResponse.data.data.times || [];
-            const profileData = profileResponse.data.data || {};
-            setTimeData(timesData);
-            setSelectedField(profileData.field);
-            setTotalKeyword(profileData.keyword);
-            setSelectedKeyword(profileData.keyword);
-            setSfield(profileData.field.join(','));
-            setSkeyword(profileData.keyword.join(','));
-            setChatLink(profileData.chatLink);
-            setMultiIntro(profileData.info);
-            setSingleIntro(profileData.oneLiner);
-            setRecommended(profileData.target);
-            setSlab(profileData.lab);
+                setTimeData(res.data.times);
+                setTotalField(tempFields);
+                setSelectedField(res.data.field);
+                setTotalKeyword(res.data.keyword);
+                setSelectedKeyword(res.data.keyword);
+                setSfield(res.data.field.join(','));
+                setSkeyword(res.data.keyword.join(','));
+                setChatLink(res.data.chatLink);
+                setMultiIntro(res.data.info);
+                setSingleIntro(res.data.oneLiner);
+                setRecommended(res.data.target);
+                setSlab(res.data.lab);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
           } catch (error) {
             console.error(error);
           }
@@ -129,7 +127,7 @@ function EditProfilePage() {
     };
 
     fetchData();
-  }, [seniorId]);
+  }, []);
 
   const handleClick = () => {
     const areConditionsMet =
@@ -351,7 +349,11 @@ function EditProfilePage() {
                   timeData.map((el, idx) => (
                     <IntroCardTimeBox key={idx}>
                       {el.day}요일 {el.startTime} ~ {el.endTime}
-                      <div id="delete" onClick={() => clickHandler(idx)}>
+                      <div
+                        id="delete"
+                        onClick={() => clickHandler(idx)}
+                        style={{ cursor: 'pointer' }}
+                      >
                         삭제
                       </div>
                     </IntroCardTimeBox>
@@ -364,7 +366,11 @@ function EditProfilePage() {
                     marginTop: '0.5rem',
                   }}
                 >
-                  <div id="setData-btn" onClick={timeModalHandler}>
+                  <div
+                    id="setData-btn"
+                    onClick={timeModalHandler}
+                    style={{ cursor: 'pointer' }}
+                  >
                     추가하기
                   </div>
                 </div>

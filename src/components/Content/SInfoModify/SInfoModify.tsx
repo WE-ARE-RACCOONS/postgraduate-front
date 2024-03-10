@@ -238,7 +238,7 @@ function SInfoModify({
         <div id="bank-form-wrapper">
           <InfoFieldTitle>은행명</InfoFieldTitle>
           <ModalBtn
-            isGet={!bankname}
+            $isGet={!bankname}
             type="bankInfo"
             btnText={bankname ? bankname : '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}

@@ -38,7 +38,7 @@ function ModalBtn(props: ModalBtnProps) {
       )}
       {props.type === 'seniorInfo' && (
         <SInfoBtn
-          isGet={props.isGet}
+          $isGet={props.$isGet}
           onClick={() => {
             handleClick();
           }}
@@ -48,7 +48,7 @@ function ModalBtn(props: ModalBtnProps) {
       )}
       {props.type === 'bankInfo' && (
         <SInfoBtn
-          isGet={props.isGet}
+          $isGet={props.$isGet}
           onClick={() => {
             handleClick();
           }}

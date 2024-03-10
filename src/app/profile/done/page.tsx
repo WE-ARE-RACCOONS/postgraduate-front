@@ -64,6 +64,7 @@ const NextAddBtnSet = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: normal;
+  cursor: pointer;
 `;
 
 const PrevBtn = styled.button`
