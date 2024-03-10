@@ -3,7 +3,10 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import cState from '../../../../public/cState.png';
 import State from '../../../../public/state.png';
-import { MENTORING_DONE_TEXT, MENTORING_FAIL_TEXT } from '@/constants/mentoring/done';
+import {
+  MENTORING_DONE_TEXT,
+  MENTORING_FAIL_TEXT,
+} from '@/constants/mentoring/done';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import {
@@ -67,10 +70,10 @@ function MentoringApplyDonePage() {
           </>
         ) : (
           <>
-           <Image id="check-img" src={State} alt="체크 이미지" />
+            <Image id="check-img" src={State} alt="체크 이미지" />
             <h2>{MENTORING_FAIL_TEXT.submitDone}</h2>
-            <div id="mentoring-done-msg">{MENTORING_FAIL_TEXT.waitingMsg}</div></>
-          
+            <div id="mentoring-done-msg">{MENTORING_FAIL_TEXT.waitingMsg}</div>
+          </>
         )}
       </MADContent>
       <MADBtnContainer>
@@ -89,8 +92,14 @@ function MentoringApplyDonePage() {
             </button>
           </>
         ) : (
-          <div style={{display:'flex',justifyContent:'space-between',marginLeft:'0.2rem'}}>
-          <button
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginLeft: '0.2rem',
+            }}
+          >
+            <button
               id="mentoring-done-home-btn"
               onClick={() => {
                 router.push('/');
@@ -106,7 +115,7 @@ function MentoringApplyDonePage() {
             >
               {MENTORING_FAIL_TEXT.viewBtnTextRight}
             </button>
-            </div>
+          </div>
         )}
       </MADBtnContainer>
     </MADContainer>
@@ -162,7 +171,7 @@ const MADBtnContainer = styled.div`
     font-weight: 700;
     cursor: pointer;
   }
-  #mentoring-done-home-btn{
+  #mentoring-done-home-btn {
     width: 9.8rem;
     height: 3.375rem;
     border-radius: 12px;

@@ -38,9 +38,7 @@ const PayResultPage = () => {
         typeof window !== 'undefined'
           ? window.localStorage.getItem('orderId')
           : null;
-      if (
-        accessTkn
-      ) {
+      if (accessTkn) {
         const timeArr = [firstTime, secondTime, thirdTime];
         axios
           .post(

@@ -52,18 +52,18 @@ function MentoringApplyPayPage() {
   const [paySeniorId, setPaySeniorId] = useAtom(paySeniorIdAtom);
   const { getAccessToken, removeTokens } = useAuth();
   const [dataLoaded, setDataLoaded] = useState(false);
-   const firstTime =
-  typeof window !== 'undefined'
-    ? window.localStorage.getItem('firstTime')
-    : null;
-const secondTime =
-  typeof window !== 'undefined'
-    ? window.localStorage.getItem('secondTime')
-    : null;
-const thirdTime =
-  typeof window !== 'undefined'
-    ? window.localStorage.getItem('thirdTime')
-    : null;
+  const firstTime =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('firstTime')
+      : null;
+  const secondTime =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('secondTime')
+      : null;
+  const thirdTime =
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('thirdTime')
+      : null;
   setPaySeniorId(seniorId);
   const formatTime = (time) => {
     if (!time) return '';

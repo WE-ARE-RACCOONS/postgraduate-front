@@ -26,7 +26,9 @@ function SeniorProfile({ data }: SeniorProfileProps) {
       >
         <SeniorProfileImg src={data ? data.profile : ''} />
         <SeniorProfileInfo>
-          <SPmajor>{data.postgradu}&nbsp;{data.major}</SPmajor>
+          <SPmajor>
+            {data.postgradu}&nbsp;{data.major}
+          </SPmajor>
           <SPnickname>
             {data.nickName}
             <Image src={auth} alt="auth" width={16} height={16} />
