@@ -109,7 +109,7 @@ function AccountPage() {
             입금은행&nbsp;<div id="font-color">*</div>
           </MBtnFont>
           <ModalBtn
-            isGet={!bank}
+            $isGet={!bank}
             type="bankInfo"
             btnText={bank ? bank : '은행을 선택해주세요.'}
             modalHandler={modalHandler}
