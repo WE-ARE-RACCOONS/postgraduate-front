@@ -26,6 +26,7 @@ import {
   sSingleIntroduce,
   selectedFieldAtom,
   selectedKeywordAtom,
+  totalFieldAtom,
   totalKeywordAtom,
 } from '@/stores/senior';
 import { TimeType } from '@/types/card/introCard';
@@ -52,13 +53,12 @@ function EditProfilePage() {
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField, setSfield] = useAtom(sFieldAtom);
+  const [totalField, setTotalField] = useAtom(totalFieldAtom);
   const setSelectedField = useSetAtom(selectedFieldAtom);
   const setTotalKeyword = useSetAtom(totalKeywordAtom);
   const setSelectedKeyword = useSetAtom(selectedKeywordAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
-  // const[time,setTime] = useState<Array<TimeType>>([])
-  const seniorId = useAtomValue(mySeniorId);
   const [timeData, setTimeData] = useAtom(sAbleTime);
   const router = useRouter();
 
@@ -97,7 +97,13 @@ function EditProfilePage() {
                 return;
               }
 
+              const tempFields = [...totalField];
+              (res.data.field).forEach((el: string) => {
+                if(!tempFields.includes(el)) tempFields.push(el);
+              });
+
               setTimeData(res.data.times);
+              setTotalField(tempFields);
               setSelectedField(res.data.field);
               setTotalKeyword(res.data.keyword);
               setSelectedKeyword(res.data.keyword);

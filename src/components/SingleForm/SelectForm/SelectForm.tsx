@@ -20,6 +20,7 @@ function SelectForm(props: SelectFormProps) {
   const [flag, setFlag] = useState(false);
   const [userInputField, setUserInputField] = useState('');
   const [inputCount, setInputCount] = useState(0);
+
   const handleConfirm = () => {
     if (selected.length == 0) setFlag(true);
     else {
