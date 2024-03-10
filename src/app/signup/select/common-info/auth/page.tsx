@@ -105,7 +105,7 @@ function AuthPage() {
           />
         )}
       </div>
-      <AuthBtn getPhoto={!!photo} onClick={handleClick}>
+      <AuthBtn $getPhoto={!!photo} onClick={handleClick}>
         다음으로
       </AuthBtn>
     </div>
@@ -169,7 +169,7 @@ const AuthComment = styled.div`
     letter-spacing: -0.03125rem;
   }
 `;
-const AuthBtn = styled.button<{ getPhoto: boolean }>`
+const AuthBtn = styled.button<{ $getPhoto: boolean }>`
   color: #fff;
   text-align: center;
   font-family: Pretendard;
@@ -187,8 +187,8 @@ const AuthBtn = styled.button<{ getPhoto: boolean }>`
   align-items: center;
   gap: 0.625rem;
   border-radius: 0.75rem;
-  background: ${(props) => (props.getPhoto ? '#2FC4B2' : '#DEE2E6')};
-  cursor: ${(props) => (props.getPhoto ? 'pointer' : 'default')};
+  background: ${(props) => (props.$getPhoto ? '#2FC4B2' : '#DEE2E6')};
+  cursor: ${(props) => (props.$getPhoto ? 'pointer' : 'default')};
 `;
 const AuthImgBox = styled.div`
   height: 4.625rem;
