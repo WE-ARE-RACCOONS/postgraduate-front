@@ -12,9 +12,11 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
   const setValidation = useSetAtom(phoneNumValidation);
 
   useEffect(() => {
-    if(fullNum) {
-      const inputForm = document.getElementById('phone-num-input') as HTMLInputElement;
-      if(inputForm) inputForm.value = fullNum;
+    if (fullNum) {
+      const inputForm = document.getElementById(
+        'phone-num-input',
+      ) as HTMLInputElement;
+      if (inputForm) inputForm.value = fullNum;
     }
   }, []);
 

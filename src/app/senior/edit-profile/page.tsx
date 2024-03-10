@@ -85,40 +85,40 @@ function EditProfilePage() {
               Authorization: `Bearer ${token}`,
             };
 
-            axios.get(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-              { headers },
-            ).then((response) => {
-              const res = response.data;
+            axios
+              .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
+                headers,
+              })
+              .then((response) => {
+                const res = response.data;
 
-              if (findExCode(res.code)) {
-                removeTokens();
-                router.replace('/');
-                return;
-              }
+                if (findExCode(res.code)) {
+                  removeTokens();
+                  router.replace('/');
+                  return;
+                }
 
-              const tempFields = [...totalField];
-              (res.data.field).forEach((el: string) => {
-                if(!tempFields.includes(el)) tempFields.push(el);
+                const tempFields = [...totalField];
+                res.data.field.forEach((el: string) => {
+                  if (!tempFields.includes(el)) tempFields.push(el);
+                });
+
+                setTimeData(res.data.times);
+                setTotalField(tempFields);
+                setSelectedField(res.data.field);
+                setTotalKeyword(res.data.keyword);
+                setSelectedKeyword(res.data.keyword);
+                setSfield(res.data.field.join(','));
+                setSkeyword(res.data.keyword.join(','));
+                setChatLink(res.data.chatLink);
+                setMultiIntro(res.data.info);
+                setSingleIntro(res.data.oneLiner);
+                setRecommended(res.data.target);
+                setSlab(res.data.lab);
+              })
+              .catch((err) => {
+                console.error(err);
               });
-
-              setTimeData(res.data.times);
-              setTotalField(tempFields);
-              setSelectedField(res.data.field);
-              setTotalKeyword(res.data.keyword);
-              setSelectedKeyword(res.data.keyword);
-              setSfield(res.data.field.join(','));
-              setSkeyword(res.data.keyword.join(','));
-              setChatLink(res.data.chatLink);
-              setMultiIntro(res.data.info);
-              setSingleIntro(res.data.oneLiner);
-              setRecommended(res.data.target);
-              setSlab(res.data.lab);
-
-            }).catch((err) => {
-              console.error(err);
-            })
-
           } catch (error) {
             console.error(error);
           }
@@ -349,7 +349,11 @@ function EditProfilePage() {
                   timeData.map((el, idx) => (
                     <IntroCardTimeBox key={idx}>
                       {el.day}요일 {el.startTime} ~ {el.endTime}
-                      <div id="delete" onClick={() => clickHandler(idx)} style={{ 'cursor' : 'pointer' }}>
+                      <div
+                        id="delete"
+                        onClick={() => clickHandler(idx)}
+                        style={{ cursor: 'pointer' }}
+                      >
                         삭제
                       </div>
                     </IntroCardTimeBox>
@@ -362,7 +366,11 @@ function EditProfilePage() {
                     marginTop: '0.5rem',
                   }}
                 >
-                  <div id="setData-btn" onClick={timeModalHandler} style={{ 'cursor': 'pointer' }}>
+                  <div
+                    id="setData-btn"
+                    onClick={timeModalHandler}
+                    style={{ cursor: 'pointer' }}
+                  >
                     추가하기
                   </div>
                 </div>
