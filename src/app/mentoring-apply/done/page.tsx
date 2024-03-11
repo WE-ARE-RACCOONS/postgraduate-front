@@ -2,7 +2,11 @@
 import styled from 'styled-components';
 import Image from 'next/image';
 import cState from '../../../../public/cState.png';
-import { MENTORING_DONE_TEXT } from '@/constants/mentoring/done';
+import State from '../../../../public/state.png';
+import {
+  MENTORING_DONE_TEXT,
+  MENTORING_FAIL_TEXT,
+} from '@/constants/mentoring/done';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import {
@@ -65,7 +69,11 @@ function MentoringApplyDonePage() {
             <div id="mentoring-done-msg">{MENTORING_DONE_TEXT.waitingMsg}</div>
           </>
         ) : (
-          <>결제실패</>
+          <>
+            <Image id="check-img" src={State} alt="체크 이미지" />
+            <h2>{MENTORING_FAIL_TEXT.submitDone}</h2>
+            <div id="mentoring-done-msg">{MENTORING_FAIL_TEXT.waitingMsg}</div>
+          </>
         )}
       </MADContent>
       <MADBtnContainer>
@@ -84,7 +92,30 @@ function MentoringApplyDonePage() {
             </button>
           </>
         ) : (
-          <>결제실패</>
+          <div
+            style={{
+              display: 'flex',
+              justifyContent: 'space-between',
+              marginLeft: '0.2rem',
+            }}
+          >
+            <button
+              id="mentoring-done-home-btn"
+              onClick={() => {
+                router.push('/');
+              }}
+            >
+              {MENTORING_FAIL_TEXT.viewBtnTextLeft}
+            </button>
+            <button
+              id="mentoring-done-home-btn"
+              onClick={() => {
+                router.push('/');
+              }}
+            >
+              {MENTORING_FAIL_TEXT.viewBtnTextRight}
+            </button>
+          </div>
         )}
       </MADBtnContainer>
     </MADContainer>
@@ -134,6 +165,18 @@ const MADBtnContainer = styled.div`
     margin-top: 0.75rem;
     border-radius: 12px;
     background-color: #2fc4b2;
+    color: #fff;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #mentoring-done-home-btn {
+    width: 9.8rem;
+    height: 3.375rem;
+    border-radius: 12px;
+    background-color: #2fc4b2;
+    margin-top: 0.75rem;
     color: #fff;
     border: none;
     font-size: 18px;
