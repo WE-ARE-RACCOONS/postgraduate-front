@@ -1,5 +1,5 @@
 export interface ModalBtnProps {
-  isGet?: boolean;
+  $isGet?: boolean;
   btnText: string;
   type?: string;
   modalHandler: () => void;

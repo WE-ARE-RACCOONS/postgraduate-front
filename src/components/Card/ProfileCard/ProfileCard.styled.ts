@@ -17,7 +17,7 @@ export const ProfileCardContainer = styled.div`
 `;
 
 export const ProfileCardInfo = styled.div`
-  width: 12.4rem;
+  width: 13rem;
   height: 4.7rem;
   position: absolute;
   top: 50%;
@@ -30,7 +30,7 @@ export const ProfileCardInfo = styled.div`
 `;
 
 export const ProfileCardInfoTop = styled.div`
-  width: 12.4rem;
+  width: 13rem;
   height: 1.57rem;
   display: flex;
   justify-content: space-between;
@@ -55,10 +55,10 @@ export const ProfileCardInfoTop = styled.div`
 `;
 
 export const ProfileCardInfoMid = styled.div`
-  width: max-content;
+  width: 13rem;
   height: 1.25rem;
-  max-width: 12.4rem;
   font-size: 14px;
   display: flex;
+  justify-content: space-between;
   color: #868e96;
 `;
