@@ -23,13 +23,13 @@ const SwiperComponent = () => {
       }}
     >
       <SwiperSlide>
-        <Img src="/racoon1.png" alt="Image 1" />
+        <Img src="/banner1.png" alt="Image 1" />
       </SwiperSlide>
       <SwiperSlide>
-        <Img src="/racoon2.png" alt="Image 2" />
+        <Img src="/banner2.png" alt="Image 2" />
       </SwiperSlide>
       <SwiperSlide>
-        <Img src="/racoon3.png" alt="Image 3" />
+        <Img src="/banner3.png" alt="Image 3" />
       </SwiperSlide>
     </Swiper>
   );

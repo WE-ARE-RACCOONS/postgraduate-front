@@ -31,10 +31,10 @@ function MenuBar(props: MenubarProps) {
     if (pathname === '/') {
       setActiveMenu('home');
     }
-    if (pathname === '/junior/mentoring' || '/senior/mentoring') {
+    else if (pathname === '/junior/mentoring' || '/senior/mentoring') {
       setActiveMenu('mentoring');
     }
-    if (pathname === '/mypage') {
+    else if (pathname === '/mypage') {
       setActiveMenu('mypage');
     }
   }, []);
