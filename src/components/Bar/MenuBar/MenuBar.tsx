@@ -1,4 +1,4 @@
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { MenuBox, MenuContainer, MenuWord } from './MenuBar.styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { userTypeAtom } from '@/stores/signup';
@@ -15,6 +15,7 @@ import { useEffect, useState } from 'react';
 import { menuBarAtom } from '@/stores/home';
 function MenuBar(props: MenubarProps) {
   const router = useRouter();
+  const pathname = usePathname();
   const { getAccessToken, getUserType } = useAuth();
   const [userType, setUserType] = useState('');
   const [token, setToken] = useState('');
@@ -27,6 +28,15 @@ function MenuBar(props: MenubarProps) {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) setToken(accessTkn);
     });
+    if (pathname === '/') {
+      setActiveMenu('home');
+    }
+    if (pathname === '/junior/mentoring' || '/senior/mentoring') {
+      setActiveMenu('mentoring');
+    }
+    if (pathname === '/mypage') {
+      setActiveMenu('mypage');
+    }
   }, []);
 
   const handleClick = () => {
