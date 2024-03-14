@@ -46,7 +46,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
 
-    if (newValue.length <= 10) {
+    if (newValue.length <= 20) {
       setUserInputKeyword(newValue);
     }
   };
