@@ -11,10 +11,10 @@ export const DateDone = styled.div`
   line-height: 140%; /* 1.4rem */
   letter-spacing: -0.03125rem;
 `;
-export const ConfirmContent = styled.div<{ isJunior: boolean }>`
+export const ConfirmContent = styled.div<{ isjunior: boolean }>`
   width: 100%;
   height: 5.8rem;
-  ${(props) => props.isJunior && 'border-bottom: 1px solid #dee2e6;'}
+  ${(props) => props.isjunior && 'border-bottom: 1px solid #dee2e6;'}
   padding: 1.2rem;
   display: flex;
   justify-content: space-between;
