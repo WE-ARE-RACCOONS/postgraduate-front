@@ -42,10 +42,16 @@ function MentoringApply({ data }: MentoringApplyProps) {
   const dateSalary = `${salParts[1]}월 ${salParts[2]}일`;
   const { getUserType } = useAuth();
   const userType = getUserType();
+
+  const formatRemainTime = (remainTime: string) => {
+    const splittedTime = remainTime.split('-');
+    return `${splittedTime[0]}시간 ${splittedTime[1]}분 `;
+  };
+
   return (
     <div>
       <ConfirmBox>
-        <ConfirmContent isJunior={userType === 'junior'}>
+        <ConfirmContent $isjunior={userType === 'junior'}>
           <div style={{ display: 'flex' }}>
             <ConfirmProfile
               src={data ? data.profile : '/user.png'}
@@ -70,8 +76,10 @@ function MentoringApply({ data }: MentoringApplyProps) {
                   {activeTab === TAB.waiting && (
                     <MRFont>
                       <div style={{ display: 'flex' }}>
-                        <RemainFont>{data && data.remainTime}</RemainFont>후에
-                        자동취소!
+                        <RemainFont>
+                          {data && formatRemainTime(data.remainTime)}
+                        </RemainFont>
+                        &nbsp;후에 자동취소!
                       </div>
                       <div>지금 수락하세요!</div>
                     </MRFont>

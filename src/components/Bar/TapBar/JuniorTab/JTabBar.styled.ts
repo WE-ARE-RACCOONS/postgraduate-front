@@ -7,7 +7,7 @@ interface TapStyleProps {
 export const TabResult = styled.div`
   border-top: 1px solid #c2cede;
   height: 100%;
-  padding-bottom: 5.3rem;
+  padding-bottom: 5.5rem;
 `;
 export const TabResultContainer = styled.div`
   height: 100vh;

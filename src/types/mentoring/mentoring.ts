@@ -1,6 +1,6 @@
 export interface MentoringData {
   status: boolean;
-  remainTime: number;
+  remainTime: string;
   seniorId: number;
   profile: string;
   nickName: string;
@@ -27,7 +27,7 @@ export interface KakaoOpenChatProps {
 
 export interface MentoringSpecData {
   status: boolean;
-  remainTime: number;
+  remainTime: string;
   dates: string[];
   lab: string;
   major: string;

@@ -190,8 +190,8 @@ function MyPage() {
         }}
       >
         <CustomerCenter />
+        <Footer />
       </div>
-      <Footer />
       <MenuBar modalHandler={loginRequestHandler} />
       {modal && portalElement
         ? createPortal(
