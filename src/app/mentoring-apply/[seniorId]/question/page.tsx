@@ -26,12 +26,12 @@ function MentoringApplyQuestionPage() {
   }
 
   useEffect(() => {
-    if ((subject.length > 9) && (question.length > 9)) setActive(true);
+    if (subject.length > 9 && question.length > 9) setActive(true);
     else setActive(false);
   }, [subject, question]);
 
   const clickHandler = () => {
-    if ((subject.length > 9) && (question.length > 9))
+    if (subject.length > 9 && question.length > 9)
       router.push(`/mentoring-apply/${seniorId}/schedule`);
   };
 

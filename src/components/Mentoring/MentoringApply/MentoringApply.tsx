@@ -45,8 +45,8 @@ function MentoringApply({ data }: MentoringApplyProps) {
 
   const formatRemainTime = (remainTime: string) => {
     const splittedTime = remainTime.split('-');
-    return `${splittedTime[0]}시간 ${splittedTime[1]}분 `
-  }
+    return `${splittedTime[0]}시간 ${splittedTime[1]}분 `;
+  };
 
   return (
     <div>
@@ -76,8 +76,10 @@ function MentoringApply({ data }: MentoringApplyProps) {
                   {activeTab === TAB.waiting && (
                     <MRFont>
                       <div style={{ display: 'flex' }}>
-                        <RemainFont>{data && formatRemainTime(data.remainTime)}</RemainFont>&nbsp;후에
-                        자동취소!
+                        <RemainFont>
+                          {data && formatRemainTime(data.remainTime)}
+                        </RemainFont>
+                        &nbsp;후에 자동취소!
                       </div>
                       <div>지금 수락하세요!</div>
                     </MRFont>
