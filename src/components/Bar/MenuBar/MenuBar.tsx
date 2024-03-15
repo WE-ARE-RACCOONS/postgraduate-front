@@ -30,11 +30,9 @@ function MenuBar(props: MenubarProps) {
     });
     if (pathname === '/') {
       setActiveMenu('home');
-    }
-    else if (pathname === '/junior/mentoring' || '/senior/mentoring') {
+    } else if (pathname === '/junior/mentoring' || '/senior/mentoring') {
       setActiveMenu('mentoring');
-    }
-    else if (pathname === '/mypage') {
+    } else if (pathname === '/mypage') {
       setActiveMenu('mypage');
     }
   }, []);
