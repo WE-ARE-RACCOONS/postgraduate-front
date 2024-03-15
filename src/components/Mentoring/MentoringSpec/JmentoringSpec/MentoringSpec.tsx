@@ -123,7 +123,7 @@ function MentoringSpec(props: ModalMentoringProps) {
             kind="jcancel"
             btnText={'취소하기'}
             cancelModalHandler={props.cancelModalHandler}
-            modalHandler={props.modalHandler}
+            // modalHandler={props.modalHandler}
             mentoringId={props.mentoringId}
           />
         ) : (

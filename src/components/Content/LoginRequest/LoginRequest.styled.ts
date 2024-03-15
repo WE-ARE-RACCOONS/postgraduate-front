@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const LoginRequestBox = styled.div`
   position: absolute;
   text-align: center;
-  margin-left: 1.5rem;
+  margin-left: 1.3rem;
   margin-top: 0.3rem;
   #Login-guide-msg {
     color: #333;
@@ -36,7 +36,7 @@ export const LoginRequestBoxTop = styled.div`
 export const LoginRequestBtn = styled.button`
   margin-top: 1.5rem;
   display: inline-flex;
-  padding: 1rem 5.8125rem;
+  padding: 1rem 5.6rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
