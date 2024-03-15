@@ -61,6 +61,19 @@ export const KeywordFormContainer = styled.div`
     bottom: 0;
     cursor: pointer;
   }
+  #keyword-submit-btn-non{
+    width: 100%;
+    height: 3.313rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #ADB5BD;
+    color: #fff;
+    font-size: 18px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+  }
 `;
 
 export const KeywordFormBtnContainer = styled.div`

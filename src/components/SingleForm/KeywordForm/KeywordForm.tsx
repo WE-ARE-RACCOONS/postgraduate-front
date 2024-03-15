@@ -24,7 +24,6 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const setSKeyword = useSetAtom(sKeywordAtom);
   const [userInputKeyword, setUserInputKeyword] = useState('');
   const [inputCount, setInputCount] = useState(0);
-
   const handleConfirm = () => {
     if (selected.length == 0) setFlag(true);
     else {
@@ -54,6 +53,9 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   useEffect(() => {
     if (selected.length > 0) {
       setFlag(false);
+    }
+    else{
+      setFlag(true);
     }
   }, [selected]);
 
@@ -100,9 +102,11 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           </KeywordInputFormBox>
         )}
       </KeywordFormWrapper>
-      <button id="keyword-submit-btn" onClick={handleConfirm}>
+      {flag ?  <button id="keyword-submit-btn-non">
         확인
-      </button>
+      </button> :  <button id="keyword-submit-btn" onClick={handleConfirm}>
+        확인
+      </button>}
     </KeywordFormContainer>
   );
 }
