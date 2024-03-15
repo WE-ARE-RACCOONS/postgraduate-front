@@ -166,6 +166,7 @@ export const SMCBtn = styled.button`
   align-self: stretch;
   border: none;
   margin-bottom: 0.37rem;
+  cursor: pointer;
 `;
 
 export const MApplyBox = styled.div`
