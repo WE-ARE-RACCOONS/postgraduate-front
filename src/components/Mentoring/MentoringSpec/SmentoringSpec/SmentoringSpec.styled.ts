@@ -11,7 +11,7 @@ export const ConfirmInfo = styled.div`
   margin-left: 0.94rem;
 `;
 export const TermBox = styled.div`
-  margin-left: 2.8rem;
+  margin-left: 2rem;
   margin-top: 1rem;
   display: inline-flex;
   height: 1.375rem;
@@ -31,6 +31,7 @@ export const TermBox = styled.div`
   letter-spacing: -0.0375rem;
 `;
 export const ConfirmTitle = styled.div`
+  width: 7rem;
   color: #212529;
   font-family: Pretendard;
   font-size: 0.875rem;
