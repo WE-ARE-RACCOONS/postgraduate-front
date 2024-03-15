@@ -45,7 +45,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
   return (
     <div>
       <ConfirmBox>
-        <ConfirmContent isjunior={userType === 'junior'}>
+        <ConfirmContent $isjunior={userType === 'junior'}>
           <div style={{ display: 'flex' }}>
             <ConfirmProfile
               src={data ? data.profile : '/user.png'}
