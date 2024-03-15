@@ -34,7 +34,6 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
       setSameUser(true);
       setFlag(false);
     }
-    console.log(changeNick)
     if (changeNick) {
       const inputForm = document.getElementById(
         'user-nickname',
