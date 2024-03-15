@@ -74,6 +74,10 @@ export const SelectCalendarContainer = styled.div`
       }
     }
   }
+
+  .react-calendar__navigation__label {
+    pointer-events: none;
+  }
 `;
 
 export const SelectCalendarHeader = styled.div`
