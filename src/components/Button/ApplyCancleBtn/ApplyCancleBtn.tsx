@@ -7,7 +7,7 @@ import { ApplyCancleBtnStyle, ACsenior } from './ApplyCancleBtn.styled';
 export default function ApplyCancleBtn(props: CancleBtnProps) {
   const handleClick = () => {
     if (props.cancelModalHandler) props.cancelModalHandler();
-    props.modalHandler();
+    if (props.modalHandler) props.modalHandler();
     if (props.onClick) props.onClick();
   };
   return (

@@ -78,6 +78,7 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
             setFlag(true);
             useAvailability(true);
           } else {
+            setFlag(true);
             useAvailability(false);
           }
         })
