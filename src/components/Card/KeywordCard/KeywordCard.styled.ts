@@ -8,6 +8,7 @@ export const KeywordCardContainer = styled.div`
   background-color: #fff;
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   position: relative;
+  padding-bottom: 8rem;
 
   #keyword-card-lab-name {
     width: max-content;
@@ -24,6 +25,7 @@ export const KeywordCardArrayBox = styled.div`
   width: 90%;
   height: max-content;
   display: flex;
+  flex-wrap: wrap;
   gap: 0.625rem;
   position: absolute;
   top: 3rem;
