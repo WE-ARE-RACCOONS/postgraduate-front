@@ -1,6 +1,6 @@
 'use client';
 import InputForm from '@/components/SingleForm/InputForm/InputForm';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
@@ -99,7 +99,7 @@ function AccountPage() {
 
           <InputForm
             placeholder="xxxx-xxx-xxxxxx"
-            type="number"
+            type="text"
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
           />

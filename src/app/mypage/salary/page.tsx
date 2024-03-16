@@ -99,7 +99,7 @@ function SalaryPage() {
           selected={activeTab === TAB.waiting}
           onClick={() => handleTabClick('waiting')}
         >
-          정산예정
+          정산 예정
         </TapStyle>
         <TapStyle
           selected={activeTab === TAB.done}

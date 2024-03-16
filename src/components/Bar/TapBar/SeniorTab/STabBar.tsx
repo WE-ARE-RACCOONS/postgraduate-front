@@ -115,8 +115,9 @@ function STabBar() {
             {activeTab === TAB.done ? (
               <div
                 style={{
-                  position: 'sticky',
-                  bottom: '4rem',
+                  width: '21.44rem',
+                  position: 'fixed',
+                  bottom: '4.5rem',
                   zIndex: '100',
                 }}
               >
