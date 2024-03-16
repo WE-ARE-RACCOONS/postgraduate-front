@@ -44,25 +44,37 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   const [isActive, setIsActive] = useState(false);
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+    const allBtns = document.querySelectorAll('.smc-btns');
+    if (allBtns.length > 0) {
+      allBtns.forEach((el) => {
+        const btnEl = el as HTMLButtonElement;
+        btnEl.style.backgroundColor = '#F8F9FA';
+        btnEl.style.color = '#3D4044';
+      });
+    }
+
     const button = e.currentTarget;
     const buttonContent = button.textContent;
-    const newClicked = !isActive;
-    setIsActive(newClicked);
+
     if (buttonContent) {
       const match = buttonContent.match(
         /(\d{4})년 (\d{2})월 (\d{2})일 (\d{2})시 (\d{2})분/,
       );
       if (match) {
         const dateSend = `${match[1]}-${match[2]}-${match[3]}-${match[4]}-${match[5]}`;
-        setDate(dateSend);
+        if (date == dateSend) {
+          setDate('');
+        } else {
+          setDate(dateSend);
+          button.style.backgroundColor = '#2FC4B2';
+          button.style.color = '#FFF';
+        }
       } else {
         setDate('');
       }
     } else {
       setDate('');
     }
-    button.style.backgroundColor = newClicked ? '#2FC4B2' : '#F8F9FA';
-    button.style.color = newClicked ? '#FFFFFF' : '#3D4044';
   };
 
   useEffect(() => {
@@ -182,11 +194,14 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               const dataSplit = dateString;
               const dateParts = (dataSplit || '').split('-');
               const dateSenior = `${dateParts[0]}년 ${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
-              const dateSend = `${dateParts[0]}-${dateParts[1]}-${dateParts[2]}-${dateParts[3]}-${dateParts[4]}`;
 
               return (
                 <div key={index}>
-                  <SMCBtn key={index} onClick={handleButtonClick}>
+                  <SMCBtn
+                    className="smc-btns"
+                    key={index}
+                    onClick={handleButtonClick}
+                  >
                     {dateSenior}
                   </SMCBtn>
                 </div>
@@ -197,11 +212,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         <SMSDate>{data && data.dates}</SMSDate>
       )}
       {activeTab === 'waiting' &&
-        (isActive ? (
-          ''
-        ) : (
-          <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>
-        ))}
+        (date ? '' : <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>)}
       <ModalBottomBtn>
         {activeTab === 'waiting' ? (
           <>
@@ -212,7 +223,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               modalHandler={props.modalHandler}
               mentoringId={props.mentoringId}
             />
-            {isActive ? (
+            {date ? (
               <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
             ) : (
               <ModalNClose>멘토링 수락</ModalNClose>

@@ -39,11 +39,12 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {
     e.currentTarget.value = filterInputText(e.currentTarget.value);
     e.currentTarget.value = checkLength(e.currentTarget.value);
+    setFlag(false);
     if (defaultValue && e.currentTarget.value === defaultValue) {
       // 입력한 것이 기존 닉네임과 같으면
       useAvailability(true);
       useNewAvailability(false);
-      setFlag(false);
+      // setFlag(false);
     } else {
       // 입력한 거 저장 및 가용성 false
       //useNewAvailability 은 다르면 true

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   ConfirmBox,
   ConfirmProfile,
@@ -48,6 +48,33 @@ function MentoringApply({ data }: MentoringApplyProps) {
     return `${splittedTime[0]}시간 ${splittedTime[1]}분 `;
   };
 
+  const formatDday = (date: string) => {
+    const mentoringDate = convertDateType(date);
+    const today = new Date();
+
+    const dayDiff = mentoringDate.getDate() - today.getDate();
+    const monthDiff = mentoringDate.getMonth() - today.getMonth();
+    const yearDiff = mentoringDate.getFullYear() - today.getFullYear();
+
+    const finalDiff = dayDiff + monthDiff * 30 + yearDiff * 365;
+
+    if (finalDiff > 0) return `D-${finalDiff}`;
+    if (finalDiff == 0) return `D-day`;
+    if (finalDiff < 0) return `D+${finalDiff}`;
+  };
+
+  const convertDateType = (date: string) => {
+    const parts = date.split('-');
+    const year = parseInt(parts[0]);
+    const month = parseInt(parts[1]) - 1;
+    const day = parseInt(parts[2]);
+    const hour = parseInt(parts[3]);
+    const minute = parseInt(parts[4]);
+
+    const newDate = new Date(year, month, day, hour, minute);
+    return newDate;
+  };
+
   return (
     <div>
       <ConfirmBox>
@@ -87,13 +114,13 @@ function MentoringApply({ data }: MentoringApplyProps) {
 
                   {activeTab === TAB.expected && (
                     <div style={{ display: 'flex', marginTop: '0.5rem' }}>
-                      <STDday>D-20</STDday>
+                      <STDday>{data && formatDday(data.date)}</STDday>
                       <STDDexpect>{dateExpected}</STDDexpect>
                     </div>
                   )}
                   {activeTab === TAB.done && (
                     <div style={{ display: 'flex', marginTop: '0.5rem' }}>
-                      <STDday>D-20</STDday>
+                      <STDday>{data && formatDday(data.date)}</STDday>
                       <STDDexpect>{dateDone}</STDDexpect>
                     </div>
                   )}
