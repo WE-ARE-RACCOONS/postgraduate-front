@@ -45,12 +45,12 @@ function SmentoringSpec(props: ModalMentoringSProps) {
 
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const allBtns = document.querySelectorAll('.smc-btns');
-    if(allBtns.length > 0) {
-      allBtns.forEach(el => {
+    if (allBtns.length > 0) {
+      allBtns.forEach((el) => {
         const btnEl = el as HTMLButtonElement;
         btnEl.style.backgroundColor = '#F8F9FA';
         btnEl.style.color = '#3D4044';
-      })
+      });
     }
 
     const button = e.currentTarget;
@@ -62,7 +62,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
       );
       if (match) {
         const dateSend = `${match[1]}-${match[2]}-${match[3]}-${match[4]}-${match[5]}`;
-        if(date == dateSend) {
+        if (date == dateSend) {
           setDate('');
         } else {
           setDate(dateSend);
@@ -197,7 +197,11 @@ function SmentoringSpec(props: ModalMentoringSProps) {
 
               return (
                 <div key={index}>
-                  <SMCBtn className='smc-btns' key={index} onClick={handleButtonClick}>
+                  <SMCBtn
+                    className="smc-btns"
+                    key={index}
+                    onClick={handleButtonClick}
+                  >
                     {dateSenior}
                   </SMCBtn>
                 </div>
@@ -208,11 +212,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
         <SMSDate>{data && data.dates}</SMSDate>
       )}
       {activeTab === 'waiting' &&
-        (date ? (
-          ''
-        ) : (
-          <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>
-        ))}
+        (date ? '' : <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>)}
       <ModalBottomBtn>
         {activeTab === 'waiting' ? (
           <>

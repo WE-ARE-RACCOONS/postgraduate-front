@@ -56,12 +56,12 @@ function MentoringApply({ data }: MentoringApplyProps) {
     const monthDiff = mentoringDate.getMonth() - today.getMonth();
     const yearDiff = mentoringDate.getFullYear() - today.getFullYear();
 
-    const finalDiff = dayDiff + (monthDiff * 30) + (yearDiff * 365);
-    
-    if(finalDiff > 0) return `D-${finalDiff}`;
-    if(finalDiff == 0) return `D-day`;
-    if(finalDiff < 0) return `D+${finalDiff}`;
-  }
+    const finalDiff = dayDiff + monthDiff * 30 + yearDiff * 365;
+
+    if (finalDiff > 0) return `D-${finalDiff}`;
+    if (finalDiff == 0) return `D-day`;
+    if (finalDiff < 0) return `D+${finalDiff}`;
+  };
 
   const convertDateType = (date: string) => {
     const parts = date.split('-');
@@ -73,7 +73,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
 
     const newDate = new Date(year, month, day, hour, minute);
     return newDate;
-  }
+  };
 
   return (
     <div>
