@@ -27,12 +27,6 @@ function AccountPage() {
   const { getAccessToken, removeTokens } = useAuth();
   const isInputsFilled = accountNumber && bank && accountHolder;
 
-  useEffect(() => {
-    console.log(accountNumber);
-    console.log(bank);
-    console.log(accountHolder);
-  }, [accountNumber, accountHolder, bank]);
-
   const validateInputs = () => {
     const isAccountNumberValid = /^[0-9]+$/.test(accountNumber);
     const isBankNameValid = /^[가-힣]+$/.test(bank);
