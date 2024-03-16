@@ -29,36 +29,22 @@ function SearchResultPage() {
   } = useModal('search-portal');
 
   useEffect(() => {
-    getAccessToken().then((Token) => {
-      if (Token) {
-        const headers = {
-          Authorization: `Bearer ${Token}`,
-        };
-
-        if (searchTerm) {
-          let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
-          if (sort) {
-            url += `&sort=${sort}`;
-          }
-
-          axios
-            .get(url, { headers })
-            .then((res) => {
-              if (findExCode(res.data.code)) {
-                removeTokens();
-                router.replace('/');
-                return;
-              }
-
-              setData(res.data.data.seniorSearchResponses);
-              setLength(res.data.data.seniorSearchResponses.length);
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
+    if (searchTerm) {
+      let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
+      if (sort) {
+        url += `&sort=${sort}`;
       }
-    });
+
+      axios
+        .get(url)
+        .then((res) => {
+          setData(res.data.data.seniorSearchResponses);
+          setLength(res.data.data.seniorSearchResponses.length);
+        })
+        .catch((err) => {
+          console.error(err);
+        });
+    }
   }, [searchTerm]);
 
   return (
