@@ -1,6 +1,6 @@
 'use client';
 import InputForm from '@/components/SingleForm/InputForm/InputForm';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
@@ -26,6 +26,12 @@ function AccountPage() {
   const [data, setData] = useState('');
   const { getAccessToken, removeTokens } = useAuth();
   const isInputsFilled = accountNumber && bank && accountHolder;
+
+  useEffect(() => {
+    console.log(accountNumber);
+    console.log(bank);
+    console.log(accountHolder);
+  }, [accountNumber, accountHolder, bank]);
 
   const validateInputs = () => {
     const isAccountNumberValid = /^[0-9]+$/.test(accountNumber);
@@ -99,7 +105,7 @@ function AccountPage() {
 
           <InputForm
             placeholder="xxxx-xxx-xxxxxx"
-            type="number"
+            type="text"
             value={accountNumber}
             onChange={(e) => setAccountNumber(e.target.value)}
           />
