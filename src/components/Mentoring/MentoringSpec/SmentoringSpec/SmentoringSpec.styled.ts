@@ -50,7 +50,7 @@ export const UserInfo = styled.div`
 export const ModalMentoringBackground = styled.div`
   width: 100%;
   height: 100vh;
-  overflow: auto;
+  // overflow: auto;
   #mmtop {
     color: #212529;
     text-align: center;
@@ -130,6 +130,7 @@ export const ModalBottomBtn = styled.div`
   display: flex;
   margin-bottom: 7rem;
   margin-top: 3rem;
+  padding-bottom: 6rem;
 `;
 export const MMTop = styled.div`
   align-items: center;
