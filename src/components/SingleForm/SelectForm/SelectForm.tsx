@@ -49,8 +49,7 @@ function SelectForm(props: SelectFormProps) {
   useEffect(() => {
     if (selected.length > 0) {
       setFlag(false);
-    }
-    else{
+    } else {
       setFlag(true);
     }
   }, [selected]);
@@ -93,11 +92,13 @@ function SelectForm(props: SelectFormProps) {
           </button>
         </FieldInputFormBox>
       </SelectFormWrapper>
-      {flag ? <button id="field-submit-btn-non">
-        확인
-      </button> : <button id="field-submit-btn" onClick={handleConfirm}>
-        확인
-      </button> }
+      {flag ? (
+        <button id="field-submit-btn-non">확인</button>
+      ) : (
+        <button id="field-submit-btn" onClick={handleConfirm}>
+          확인
+        </button>
+      )}
     </SelectFormContainer>
   );
 }

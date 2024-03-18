@@ -53,8 +53,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   useEffect(() => {
     if (selected.length > 0) {
       setFlag(false);
-    }
-    else{
+    } else {
       setFlag(true);
     }
   }, [selected]);
@@ -102,11 +101,13 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           </KeywordInputFormBox>
         )}
       </KeywordFormWrapper>
-      {flag ?  <button id="keyword-submit-btn-non">
-        확인
-      </button> :  <button id="keyword-submit-btn" onClick={handleConfirm}>
-        확인
-      </button>}
+      {flag ? (
+        <button id="keyword-submit-btn-non">확인</button>
+      ) : (
+        <button id="keyword-submit-btn" onClick={handleConfirm}>
+          확인
+        </button>
+      )}
     </KeywordFormContainer>
   );
 }

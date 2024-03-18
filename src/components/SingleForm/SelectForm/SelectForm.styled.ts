@@ -61,12 +61,12 @@ export const SelectFormContainer = styled.div`
     bottom: 0;
     cursor: pointer;
   }
-  #field-submit-btn-non{
+  #field-submit-btn-non {
     width: 100%;
     height: 3.313rem;
     border: none;
     border-radius: 12px;
-    background-color: #ADB5BD;
+    background-color: #adb5bd;
     color: #fff;
     font-size: 18px;
     font-weight: 700;

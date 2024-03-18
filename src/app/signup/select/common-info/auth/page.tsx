@@ -99,11 +99,11 @@ function AuthPage() {
           <Photo type="auth" handler={setPhoto} />
         )}
         {uploadFlag && (
-          <div style={{marginTop:'0.3rem'}}>
-          <SingleValidator
-            textColor="#FF3347"
-            msg="카메라 버튼을 눌러 사진을 첨부해주세요"
-          />
+          <div style={{ marginTop: '0.3rem' }}>
+            <SingleValidator
+              textColor="#FF3347"
+              msg="카메라 버튼을 눌러 사진을 첨부해주세요"
+            />
           </div>
         )}
       </div>
