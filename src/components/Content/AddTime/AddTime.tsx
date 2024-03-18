@@ -23,9 +23,9 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 16 }, (_, index) => index + 9);
   const minOptions = ['00', '30'];
   const [inputWeek, setInputWeek] = useState('');
-  const [startHour, setStartHour] = useState('0');
+  const [startHour, setStartHour] = useState('9');
   const [startMin, setStartMin] = useState('00');
-  const [endHour, setEndHour] = useState('0');
+  const [endHour, setEndHour] = useState('9');
   const [endMin, setEndMin] = useState('00');
   const [flag, setFlag] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
