@@ -9,11 +9,11 @@ import {
 function SalaryBox(props: SalaryBoxProps) {
   function addCommas(amount: number) {
     if (amount === 0) {
-        return "-";
+      return '-';
     } else {
-        return (amount.toLocaleString('ko-KR')+'원');
+      return amount.toLocaleString('ko-KR') + '원';
     }
-}
+  }
 
   function formatDate(dateStr: string) {
     if (!dateStr) return '';
