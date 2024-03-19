@@ -19,8 +19,6 @@ function Profile(props: ProfileProps) {
   const suggestModal = () => {
     props.modalHandler();
   };
-  console.log(props.profileReg);
-  console.log(props.certifiReg);
   return (
     <ProfileBox>
       <ImageBox>
