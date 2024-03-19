@@ -8,8 +8,12 @@ import {
 
 function SalaryBox(props: SalaryBoxProps) {
   function addCommas(amount: number) {
-    return amount.toLocaleString('ko-KR');
-  }
+    if (amount === 0) {
+        return "-";
+    } else {
+        return (amount.toLocaleString('ko-KR')+'원');
+    }
+}
 
   function formatDate(dateStr: string) {
     if (!dateStr) return '';
@@ -26,7 +30,7 @@ function SalaryBox(props: SalaryBoxProps) {
       <div id="left">
         <SalaryBlock>
           <SalaryDesc>정산 예정액</SalaryDesc>
-          <SalaryValue>{addCommas(props.salaryAmount)}원</SalaryValue>
+          <SalaryValue>{addCommas(props.salaryAmount)}</SalaryValue>
         </SalaryBlock>
       </div>
       <div id="middle"></div>
