@@ -37,22 +37,24 @@ function AproveModal({
           }}
         />
       </APMBoxTop>
-      <APMMid>
-        {certifiReg === 'APPROVE' ? (
-          <>
-            <APMMain>이미 선배 회원으로 승인됐어요.</APMMain>
-            <APMMidub>프로필 등록을 마치면</APMMidub>
-            <APMMidub>멘토링을 진행할 수 있어요.</APMMidub>
-          </>
-        ) : (
-          <>
-            <APMMain>선배 회원 승인 대기 중이에요.</APMMain>
-            <APMMidub>영업일 기준 1~3일 이내로 </APMMidub>
-            <APMMidub>대학원생 선배 회원으로 승인돼요.</APMMidub>
-            <APMMidub>승인되면 카카오 알림톡으로 알려드릴게요!</APMMidub>
-          </>
-        )}
-      </APMMid>
+      <div>
+        <APMMid>
+          {certifiReg === 'APPROVE' ? (
+            <div>
+              <APMMain>이미 선배 회원으로 승인됐어요.</APMMain>
+              <APMMidub>프로필 등록을 마치면</APMMidub>
+              <APMMidub>멘토링을 진행할 수 있어요.</APMMidub>
+            </div>
+          ) : (
+            <div>
+              <APMMain>선배 회원 승인 대기 중이에요.</APMMain>
+              <APMMidub>영업일 기준 1~3일 이내로 </APMMidub>
+              <APMMidub>대학원생 선배 회원으로 승인돼요.</APMMidub>
+              <APMMidub>승인되면 카카오 알림톡으로 알려드릴게요!</APMMidub>
+            </div>
+          )}
+        </APMMid>
+      </div>
       <APMMBottom>
         <APMMBtn onClick={xClick}>확인</APMMBtn>
       </APMMBottom>

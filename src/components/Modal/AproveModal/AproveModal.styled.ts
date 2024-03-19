@@ -10,8 +10,8 @@ export const APMMid = styled.div`
   align-items: center;
   text-align: center;
   position: absolute;
-  top: 4.2rem;
-  left: 13%;
+  margin-left: 2rem;
+  margin-top: 0.6rem;
 `;
 export const APMMBottom = styled.div`
   position: absolute;
@@ -39,9 +39,9 @@ export const APMMidub = styled.div`
 
 export const APMMBtn = styled.button`
   display: flex;
-  margin-left: 0.5rem;
-  width: 20rem;
-  padding: 1rem 3.5rem;
+  margin-left: 1.5rem;
+  width: 17.5rem;
+  padding: 1rem 0rem;
   justify-content: center;
   align-items: center;
   gap: 0.625rem;
