@@ -27,7 +27,7 @@ function SelectedBtn(props: SelectedBtnProps) {
 
   return (
     <StyledSelectedBtn $selected={selected} onClick={handleClick}>
-      {props.btnText}
+      #{props.btnText}
       {selected && (
         <Image id="selected-x-btn" src={selected_x} alt="선택 취소 버튼" />
       )}

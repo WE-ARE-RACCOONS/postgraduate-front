@@ -3,6 +3,7 @@ import styled from 'styled-components';
 export const TypeBtnIcon = styled.button`
   border: none;
   cursor: pointer;
+  background-color: #f8f9fa;
 `;
 export const TypeBtnIconBox = styled.div<{ $choice: boolean }>`
   margin-top: 4.19rem;
