@@ -19,7 +19,8 @@ function Profile(props: ProfileProps) {
   const suggestModal = () => {
     props.modalHandler();
   };
-
+  console.log(props.profileReg)
+  console.log(props.certifiReg)
   return (
     <ProfileBox>
       <ImageBox>
@@ -38,32 +39,32 @@ function Profile(props: ProfileProps) {
             {props.userType == 'junior' ? '후배 회원' : '선배 회원'}
           </ProfileButton>
         </ProfileName>
-        {props.certifiReg !== 'APPROVE' && !props.profileReg && (
-          <div
-            style={{
-              display: 'flex',
-              textAlign: 'center',
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginLeft: '3.5rem',
-            }}
-          >
-            <Image
-              src={warn}
-              alt="warn"
-              width={16}
-              height={16}
-              style={{ marginRight: '0.25rem' }}
-            />
-            <button
-              onClick={suggestModal}
-              id="warn-msg"
-              style={{ border: 'none', backgroundColor: 'white' }}
-            >
-              멘토링 진행불가
-            </button>
-          </div>
-        )}
+        {!(props.certifiReg === 'APPROVE' && props.profileReg) && (
+  <div
+    style={{
+      display: 'flex',
+      textAlign: 'center',
+      justifyContent: 'center',
+      alignItems: 'center',
+      marginLeft: '3.5rem',
+    }}
+  >
+    <Image
+      src={warn}
+      alt="warn"
+      width={16}
+      height={16}
+      style={{ marginRight: '0.25rem' }}
+    />
+    <button
+      onClick={suggestModal}
+      id="warn-msg"
+      style={{ border: 'none', backgroundColor: 'white' }}
+    >
+      멘토링 진행불가
+    </button>
+  </div>
+)}
       </ProfileInfo>
     </ProfileBox>
   );
