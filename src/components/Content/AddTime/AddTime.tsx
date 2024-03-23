@@ -33,7 +33,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const [ableTime, setAbleTime] = useAtom(sAbleTime);
 
   const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
-    if(e.currentTarget.className.includes('active')) {
+    if (e.currentTarget.className.includes('active')) {
       e.currentTarget.className = 'add-time-week-btn';
       setInputWeek('');
       return;

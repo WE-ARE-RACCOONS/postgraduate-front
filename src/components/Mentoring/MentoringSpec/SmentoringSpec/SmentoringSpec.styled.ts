@@ -167,7 +167,7 @@ export const SMCBtn = styled.button`
   align-self: stretch;
   border: none;
   margin-bottom: 0.37rem;
-  color: #3D4044;
+  color: #3d4044;
   cursor: pointer;
 `;
 

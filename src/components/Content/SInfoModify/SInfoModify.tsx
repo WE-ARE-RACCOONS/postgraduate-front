@@ -237,7 +237,14 @@ function SInfoModify({
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
-        <InfoFieldForm $width="95%" type="text" defaultValue={accNumber} onChange={(e) => {setAccNumber(e.currentTarget.value)}} />
+        <InfoFieldForm
+          $width="95%"
+          type="text"
+          defaultValue={accNumber}
+          onChange={(e) => {
+            setAccNumber(e.currentTarget.value);
+          }}
+        />
       </div>
       <div id="bank-and-name-wrapper">
         <div id="bank-form-wrapper">
@@ -254,7 +261,14 @@ function SInfoModify({
         </div>
         <div id="name-form-wrapper">
           <InfoFieldTitle>예금주</InfoFieldTitle>
-          <InfoFieldForm $width="100%" type="text" defaultValue={accHolder} onChange={(e) => {setAccHolder(e.currentTarget.value)}} />
+          <InfoFieldForm
+            $width="100%"
+            type="text"
+            defaultValue={accHolder}
+            onChange={(e) => {
+              setAccHolder(e.currentTarget.value);
+            }}
+          />
         </div>
       </div>
       {flag && (
