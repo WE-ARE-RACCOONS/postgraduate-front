@@ -57,7 +57,7 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
           alt="x_btn"
           width={21}
           height={21}
-          style={{ marginLeft: '70%' }}
+          style={{ marginLeft: '70%', cursor: 'pointer' }}
         />
       </div>
       <BankBox>
