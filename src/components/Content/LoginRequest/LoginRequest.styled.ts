@@ -8,7 +8,7 @@ export const LoginRequestBox = styled.div`
   #Login-guide-msg {
     color: #333;
     text-align: center;
-    font-family: Noto Sans JP;
+    font-family: Pretendard;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
@@ -18,7 +18,7 @@ export const LoginRequestBox = styled.div`
   #Login-guide-suggest {
     color: #868e96;
     text-align: center;
-    font-family: Noto Sans JP;
+    font-family: Pretendard;
     font-size: 1.0625rem;
     font-style: normal;
     font-weight: 400;

@@ -7,7 +7,7 @@ import {
   LoginRequestBtn,
 } from './LoginRequest.styled';
 import Image from 'next/image';
-import x_icon from '../../../../public/x.png';
+import x_icon from '../../../../public/x_gray.png';
 const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
 
 function LoginRequest(props: loginRequestProps) {
@@ -33,9 +33,9 @@ function LoginRequest(props: loginRequestProps) {
           priority
           onClick={xClick}
           style={{
-            width: '2.3rem',
-            height: '2.3rem',
-            margin: '1rem',
+            width: '1.32rem',
+            height: '1.32rem',
+            margin: '1.5rem',
             color: '#CBCFDB',
             cursor: 'pointer',
           }}
