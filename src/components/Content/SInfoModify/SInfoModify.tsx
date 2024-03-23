@@ -53,8 +53,7 @@ function SInfoModify({
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
   const [profileUrl, setProfileUrl] = useState('');
-  const bankname = useAtomValue(bankNameAtom);
-  const [bank, setBank] = useState('');
+  const [bank, setBank] = useAtom(bankNameAtom);
   const [nickName, setNickname] = useAtom(nickname);
   const [fullNum, setPhoneNum] = useAtom(phoneNum);
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
@@ -186,6 +185,12 @@ function SInfoModify({
             console.error(err);
           });
       } else {
+        console.log(nickName);
+        console.log(fullNum);
+        console.log(submitImgUrl);
+        console.log(accNumber);
+        console.log(accHolder);
+        console.log(bank);
         setFlag(true);
         return;
       }
@@ -232,15 +237,15 @@ function SInfoModify({
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
-        <InfoFieldForm $width="95%" type="text" defaultValue={accNumber} />
+        <InfoFieldForm $width="95%" type="text" defaultValue={accNumber} onChange={(e) => {setAccNumber(e.currentTarget.value)}} />
       </div>
       <div id="bank-and-name-wrapper">
         <div id="bank-form-wrapper">
           <InfoFieldTitle>은행명</InfoFieldTitle>
           <ModalBtn
-            $isGet={!bankname}
+            $isGet={!bank}
             type="bankInfo"
-            btnText={bankname ? bankname : '\u00A0\u00A0\u00A0\u00A0'}
+            btnText={bank ? bank : '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}
             onClick={() => {
               setModalType('bank');
@@ -249,7 +254,7 @@ function SInfoModify({
         </div>
         <div id="name-form-wrapper">
           <InfoFieldTitle>예금주</InfoFieldTitle>
-          <InfoFieldForm $width="100%" type="text" defaultValue={accHolder} />
+          <InfoFieldForm $width="100%" type="text" defaultValue={accHolder} onChange={(e) => {setAccHolder(e.currentTarget.value)}} />
         </div>
       </div>
       {flag && (
