@@ -95,7 +95,6 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
     if (Number(hour) < 10) return `0${hour}`;
     if (Number(hour) >= 10) return `${hour}`;
   };
-
   return (
     <AddTimeContainer>
       <div style={{ display: 'flex' }}>

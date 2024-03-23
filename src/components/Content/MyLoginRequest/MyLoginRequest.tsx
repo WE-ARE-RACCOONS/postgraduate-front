@@ -5,6 +5,8 @@ import LoginReq from '../../../../public/LoginReq.png';
 import loginBg from '../../../../public/login-background.png';
 import kakao from '../../../../public/kakao.png';
 import logo from '../../../../public/logo.png';
+import { useSetAtom } from 'jotai';
+import { usePathname } from 'next/navigation';
 import {
   MyLoginRequestBox,
   Logo,
@@ -12,15 +14,19 @@ import {
   MLBoxMiddle,
   MLBoxBottom,
 } from './MyLoginRequest.styled';
+import { prevPathAtom } from '@/stores/signup';
 const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
 
 function MyLoginRequest({ modalHandler }: { modalHandler: () => void }) {
+  const setPrevPath = useSetAtom(prevPathAtom);
+  const currentPath = usePathname();
   const handleClick = () => {
     modalHandler();
     if (typeof window !== undefined) {
       const REDIRECT_URI = window.location.origin + '/login/oauth2/code/kakao';
       const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
       window.location.href = link;
+      setPrevPath(currentPath);
     }
   };
   return (

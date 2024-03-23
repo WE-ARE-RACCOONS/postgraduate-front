@@ -34,6 +34,12 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
       setSameUser(true);
       setFlag(false);
     }
+    if (changeNick) {
+      const inputForm = document.getElementById(
+        'user-nickname',
+      ) as HTMLInputElement;
+      if (inputForm) inputForm.value = changeNick;
+    }
   }, [userNick, defaultValue]);
 
   function checkNickname(e: React.ChangeEvent<HTMLInputElement>) {

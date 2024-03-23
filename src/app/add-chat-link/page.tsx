@@ -117,7 +117,7 @@ function AddChatLinkPage() {
         {chatLink ? (
           <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>
         ) : (
-          <NextAddBtn>다음</NextAddBtn>
+          <NextAddBtn>가입 완료</NextAddBtn>
         )}
       </div>
     </AddChatLinkContainer>
