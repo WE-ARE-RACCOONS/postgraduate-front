@@ -185,12 +185,6 @@ function SInfoModify({
             console.error(err);
           });
       } else {
-        console.log(nickName);
-        console.log(fullNum);
-        console.log(submitImgUrl);
-        console.log(accNumber);
-        console.log(accHolder);
-        console.log(bank);
         setFlag(true);
         return;
       }
