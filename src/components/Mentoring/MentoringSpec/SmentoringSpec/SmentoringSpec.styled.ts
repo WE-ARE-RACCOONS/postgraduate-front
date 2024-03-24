@@ -162,11 +162,12 @@ export const SMCBtn = styled.button`
   margin-left: 1rem;
   padding: 0.5rem 0.75rem;
   flex-direction: column;
-  justify-content: center;
+  // justify-content: center;
   align-items: center;
   align-self: stretch;
   border: none;
   margin-bottom: 0.37rem;
+  color: #3d4044;
   cursor: pointer;
 `;
 

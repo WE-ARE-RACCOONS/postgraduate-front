@@ -33,6 +33,12 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const [ableTime, setAbleTime] = useAtom(sAbleTime);
 
   const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.className.includes('active')) {
+      e.currentTarget.className = 'add-time-week-btn';
+      setInputWeek('');
+      return;
+    }
+
     const weekBtns = document.querySelectorAll('.add-time-week-btn');
     weekBtns.forEach((el) => {
       el.className = 'add-time-week-btn';
@@ -40,6 +46,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
     e.currentTarget.classList.add('active');
     setInputWeek(e.currentTarget.innerText);
   };
+
   useEffect(() => {
     if (inputWeek && startHour && endHour) {
       setActive(true);
