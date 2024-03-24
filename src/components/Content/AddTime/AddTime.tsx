@@ -23,9 +23,9 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 16 }, (_, index) => index + 9);
   const minOptions = ['00', '30'];
   const [inputWeek, setInputWeek] = useState('');
-  const [startHour, setStartHour] = useState('0');
+  const [startHour, setStartHour] = useState('9');
   const [startMin, setStartMin] = useState('00');
-  const [endHour, setEndHour] = useState('0');
+  const [endHour, setEndHour] = useState('9');
   const [endMin, setEndMin] = useState('00');
   const [flag, setFlag] = useState(false);
   const [alertMsg, setAlertMsg] = useState('');
@@ -33,6 +33,12 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const [ableTime, setAbleTime] = useAtom(sAbleTime);
 
   const clickWeekHandler = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (e.currentTarget.className.includes('active')) {
+      e.currentTarget.className = 'add-time-week-btn';
+      setInputWeek('');
+      return;
+    }
+
     const weekBtns = document.querySelectorAll('.add-time-week-btn');
     weekBtns.forEach((el) => {
       el.className = 'add-time-week-btn';
@@ -40,6 +46,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
     e.currentTarget.classList.add('active');
     setInputWeek(e.currentTarget.innerText);
   };
+
   useEffect(() => {
     if (inputWeek && startHour && endHour) {
       setActive(true);
@@ -95,7 +102,6 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
     if (Number(hour) < 10) return `0${hour}`;
     if (Number(hour) >= 10) return `${hour}`;
   };
-
   return (
     <AddTimeContainer>
       <div style={{ display: 'flex' }}>

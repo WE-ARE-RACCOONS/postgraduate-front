@@ -58,9 +58,9 @@ function MentoringApply({ data }: MentoringApplyProps) {
 
     const finalDiff = dayDiff + monthDiff * 30 + yearDiff * 365;
 
-    if (finalDiff > 0) return `D-${finalDiff}`;
+    if (finalDiff > 0) return `D-${Math.abs(finalDiff)}`;
     if (finalDiff == 0) return `D-day`;
-    if (finalDiff < 0) return `D+${finalDiff}`;
+    if (finalDiff < 0) return `D+${Math.abs(finalDiff)}`;
   };
 
   const convertDateType = (date: string) => {

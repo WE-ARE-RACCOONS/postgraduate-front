@@ -8,7 +8,7 @@ function setAuthText(auth: certiRegType) {
     case 'APPROVE':
       return '승인 완료';
     case 'NOT_APPROVE':
-      return '미승인';
+      return '승인 반려';
     case 'WAITING':
       return '승인 대기중';
     default:

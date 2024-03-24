@@ -198,6 +198,7 @@ function EditProfilePage() {
             <TextForm
               placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}
               targetAtom="lab"
+              max={30}
             />
           </BtnBox>
           <BtnBox>

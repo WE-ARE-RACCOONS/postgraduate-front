@@ -11,7 +11,7 @@ export const ModalBackground = styled.div`
 
   @keyframes modalAppear {
     from {
-      top: 45rem;
+      top: 35rem;
       opacity: 0;
     }
     to {
