@@ -94,7 +94,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
               alt="경고상태"
               width={65}
               height={65}
-              style={{ margin: ' 0.5rem 7.5rem' }}
+              style={{ margin: ' 0.5rem 7.5rem' ,marginTop:'1rem'}}
               priority
             />
           )}
