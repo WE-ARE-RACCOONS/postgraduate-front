@@ -13,6 +13,7 @@ import useModal from '@/hooks/useModal';
 import SearchModal from '@/components/Modal/SearchModal';
 import { createPortal } from 'react-dom';
 import findExCode from '@/utils/findExCode';
+import Spinner from '@/components/Spinner';
 
 function SearchResultPage() {
   const { getAccessToken, removeTokens } = useAuth();
@@ -21,6 +22,7 @@ function SearchResultPage() {
   const router = useRouter();
   const [sort, setSort] = useState('');
   const [data, setData] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
   const [length, setLength] = useState('');
   const {
     modal: searchModal,
@@ -29,6 +31,7 @@ function SearchResultPage() {
   } = useModal('search-portal');
 
   useEffect(() => {
+    setIsLoading(true);
     if (searchTerm) {
       let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
       if (sort) {
@@ -38,6 +41,7 @@ function SearchResultPage() {
       axios
         .get(url)
         .then((res) => {
+          setIsLoading(false);
           setData(res.data.data.seniorSearchResponses);
           setLength(res.data.data.seniorSearchResponses.length);
         })
@@ -79,6 +83,11 @@ function SearchResultPage() {
         </SearchFilter>
       </Searchfilter>
       <SearchReasultProfile>
+        {isLoading && (
+          <div id='spinner-container'>
+            <Spinner />
+          </div>
+        )}
         {data && data.length > 0 ? (
           data.map((el, idx) => (
             <div key={idx}>
@@ -126,6 +135,13 @@ const SearchReasultProfile = styled.div`
   width: 100%;
   height: 100%;
   background-color: #f5f5f5;
+  position: relative;
+
+  #spinner-container {
+    width: 3rem;
+    height: 3rem;
+    margin: 3rem auto;
+  }
 `;
 
 export default SearchResultPage;
