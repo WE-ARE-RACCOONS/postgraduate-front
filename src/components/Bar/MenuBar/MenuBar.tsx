@@ -35,7 +35,7 @@ function MenuBar(props: MenubarProps) {
     } else if (pathname === '/mypage') {
       setActiveMenu('mypage');
     }
-  }, [pathname ]);
+  }, [pathname]);
 
   const handleClick = () => {
     if (props.modalHandler) props.modalHandler();
