@@ -6,7 +6,7 @@ import cancelIcon from '../../../public/checkbox_c.png';
 
 type CheckboxProps = {
   checked: boolean;
-  onlyChecked: boolean;
+  onlyChecked?: boolean;
   onChange: (checked: boolean) => void;
   type: 'accept' | 'cancel';
 };
