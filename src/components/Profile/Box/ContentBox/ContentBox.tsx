@@ -28,6 +28,9 @@ const ContentBox = ({
   content: string;
   onClick?: () => void;
 }) => {
+  const authText = setAuthText(certifiReg!);
+  const msgStyle = certifiReg === 'WAITING' ? { color: '#FF9466' } : certifiReg === 'NOT_APPROVE' ? { color: '#FF5757' } : certifiReg === 'APPROVE' ? { color: '#00A0E1' }:{}
+  const msgTextStyle = kind === 'msg' && !profileReg ? { color: '#FF5757' } : {};
   return (
     <ContentWapper onClick={onClick}>
       {content}
@@ -36,10 +39,13 @@ const ContentBox = ({
           (profileReg ? (
             <div id="msg">작성완료</div>
           ) : (
-            <div id="msg">미완성</div>
+            <div id="msg" style={msgTextStyle}>미완성</div>
           ))}
-        {kind === 'auth' &&
-          (certifiReg ? <div id="msg">{setAuthText(certifiReg)}</div> : '')}
+        {kind === 'auth' && certifiReg && (
+        <div id="msg" style={msgStyle}>
+          {authText}
+        </div>
+      )}
         <Image id="arrow" src={arrow} alt="화살표" width={24} height={24} />
       </div>
     </ContentWapper>
