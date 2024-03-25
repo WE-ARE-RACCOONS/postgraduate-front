@@ -27,7 +27,7 @@ function SearchForm(props: SearchFormProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === 'Enter' || e.keyCode == 13) {
       setData();
     }
   };
