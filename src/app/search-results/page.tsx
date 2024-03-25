@@ -45,7 +45,7 @@ function SearchResultPage() {
           console.error(err);
         });
     }
-  }, [searchTerm]);
+  }, [searchTerm, sort]);
 
   return (
     <>
