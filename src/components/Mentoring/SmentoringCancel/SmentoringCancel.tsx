@@ -108,7 +108,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
           </SMCBtnEtc>
         </SMCancelMid>
         <div style={{ marginLeft: '1.45rem', marginTop: '3.5rem' }}>
-          {flag ? (
+          {flag && reason ? (
             <SMCbtnCancelT onClick={cancelMentoring}>거절하기</SMCbtnCancelT>
           ) : (
             <SMCbtnCancelF>거절하기</SMCbtnCancelF>
