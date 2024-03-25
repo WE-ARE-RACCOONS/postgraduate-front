@@ -11,9 +11,11 @@ import { useSetAtom } from 'jotai';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 import Image from 'next/image';
 import search_color from '../../../../public/search2.png';
+import Spinner from '@/components/Spinner';
 function SearchForm(props: SearchFormProps) {
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState<Array<string> | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
   const setSPostGradu = useSetAtom(sPostGraduAtom);
   const setSMajor = useSetAtom(sMajorAtom);
 
@@ -31,6 +33,9 @@ function SearchForm(props: SearchFormProps) {
   };
 
   const setData = () => {
+    setResult(null);
+    setIsLoading(true);
+
     axios
       .get(`${process.env.NEXT_PUBLIC_CAREERNET_URL}`, {
         params:
@@ -55,6 +60,7 @@ function SearchForm(props: SearchFormProps) {
               },
       })
       .then(async (res) => {
+        setIsLoading(false);
         if (props.formType == 'postgradu') {
           const searchData = res.data.dataSearch.content;
           if (searchData.length > 0) {
@@ -151,6 +157,11 @@ function SearchForm(props: SearchFormProps) {
         />
       </TextFieldWrapper>
       <SearchResultWrapper>
+        {!result && isLoading && (
+          <div id='spinner-container'>
+            <Spinner />
+          </div>
+        )}
         {result &&
           result.map((el, idx) => (
             <SearchResult
