@@ -48,6 +48,14 @@ function EditProfilePage() {
     portalElement: timePortalElement,
   } = useModal('senior-mentoring-time-portal');
   const [flag, setFlag] = useState(false);
+  const [labFlag, setLabFlag] = useState(false);
+  const [fieldFlag, setFieldFlag] = useState(false);
+  const [keywordFlag, setKeywordFlag] = useState(false);
+  const [singleFlag, setSingleFlag] = useState(false);
+  const [multiFlag, setMultiFlag] = useState(false);
+  const [recommendFlag, setRecommendFlag] = useState(false);
+  const [chatLinkFlag, setChatLinkFlag] = useState(false);
+  const [timeFlag, setTimeFlag] = useState(false);
   const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
@@ -75,6 +83,55 @@ function EditProfilePage() {
     const resultArray = splittedKeywords.map((str) => '#' + str);
     return resultArray.join(', ');
   };
+
+  function validateLab() {
+    if(sLab.length <= 0) setLabFlag(true);
+    else setLabFlag(false);
+  }
+
+  function validateField() {
+    if(sField.length <= 0) setFieldFlag(true);
+    else setFieldFlag(false);
+  }
+
+  function validateKeyword() {
+    if(sKeyword.length <= 0) setKeywordFlag(true);
+    else setKeywordFlag(false);
+  }
+
+  function validateSingleIntro() {
+    if(singleIntro.length < 10) setSingleFlag(true);
+    else setSingleFlag(false);
+  }
+
+  function validateMultiIntro() {
+    if(multiIntro.length < 50) setMultiFlag(true);
+    else setMultiFlag(false);
+  }
+
+  function validateRecommended() {
+    if(recommended.length < 50) setRecommendFlag(true);
+    else setRecommendFlag(false);
+  }
+
+  function validateChatLink() {
+    if(chatLink.length <= 0) setChatLinkFlag(true);
+    else setChatLinkFlag(false);
+  }
+
+  useEffect(() => { validateLab(); }, [sLab]);
+  useEffect(() => { validateField(); }, [sField]);
+  useEffect(() => { validateKeyword(); }, [sKeyword]);
+  useEffect(() => { validateSingleIntro(); }, [singleIntro]);
+  useEffect(() => { validateMultiIntro(); }, [multiIntro]);
+  useEffect(() => { validateRecommended(); }, [recommended]);
+  useEffect(() => { validateChatLink(); }, [chatLink]);
+  useEffect(() => { validateTime(); }, [timeData]);
+
+  function validateTime() {
+    if(timeData.length < 3) setTimeFlag(true);
+    else setTimeFlag(false);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -193,7 +250,7 @@ function EditProfilePage() {
               <div className="title-with-modify">
                 연구실명&nbsp;<div id="font-color">*</div>
               </div>
-              {flag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
+              {labFlag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
             </MBtnFont>
             <TextForm
               placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}
@@ -205,7 +262,7 @@ function EditProfilePage() {
             <MBtnFont>
               <div className="title-with-modify">
                 연구분야&nbsp;<div id="font-color">*</div>
-                {flag && (
+                {fieldFlag && (
                   <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
                 )}
               </div>
@@ -232,7 +289,7 @@ function EditProfilePage() {
             <MBtnFont>
               <div className="title-with-modify">
                 연구주제&nbsp;<div id="font-color">*</div>
-                {flag && (
+                {keywordFlag && (
                   <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
                 )}
               </div>
@@ -258,7 +315,7 @@ function EditProfilePage() {
         </div>
         <EPTitle>멘토링 정보</EPTitle>
         <ProfileForm
-          flag={flag}
+          flag={singleFlag}
           maxLength={100}
           lineType="single"
           title={PROFILE_TITLE.singleIntroduce}
@@ -268,7 +325,7 @@ function EditProfilePage() {
           changeHandler={setSingleIntro}
         />
         <div style={{ marginLeft: '1rem' }}>
-          {flag && (
+          {singleFlag && (
             <SingleValidator
               msg={'최소 10자 이상 입력해 주세요.'}
               textColor="#FF3347"
@@ -276,7 +333,7 @@ function EditProfilePage() {
           )}
         </div>
         <ProfileForm
-          flag={flag}
+          flag={multiFlag}
           lineType="multi"
           title={PROFILE_TITLE.multiIntroduce}
           placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
@@ -286,7 +343,7 @@ function EditProfilePage() {
           changeHandler={setMultiIntro}
         />
         <div style={{ marginLeft: '1rem' }}>
-          {flag && (
+          {multiFlag && (
             <SingleValidator
               msg={'최소 50자 이상 입력해 주세요.'}
               textColor="#FF3347"
@@ -294,7 +351,7 @@ function EditProfilePage() {
           )}
         </div>
         <ProfileForm
-          flag={flag}
+          flag={recommendFlag}
           lineType="multi"
           title={PROFILE_TITLE.recommendedFor}
           placeholder={PROFILE_PLACEHOLDER.recommendedFor}
@@ -304,7 +361,7 @@ function EditProfilePage() {
           changeHandler={setRecommended}
         />
         <div style={{ marginLeft: '1rem' }}>
-          {flag && (
+          {recommendFlag && (
             <SingleValidator
               msg={'최소 50자 이상 입력해 주세요.'}
               textColor="#FF3347"
@@ -339,7 +396,7 @@ function EditProfilePage() {
             }}
           >
             <div id="setData-title">가능 정기일정</div>
-            {flag && (
+            {timeFlag && (
               <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
             )}
           </div>
