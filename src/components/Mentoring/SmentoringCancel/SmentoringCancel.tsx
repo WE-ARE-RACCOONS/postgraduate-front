@@ -25,7 +25,6 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const [know, setKnow] = useAtom(notKnow);
   const [etc, setEtc] = useAtom(SCEtc);
   const flag = time || know || etc;
-  const [selectedOption, setSelectedOption] = useState('');
   const xClick = () => {
     props.modalHandler();
   };
@@ -81,7 +80,6 @@ function SmentoringCancel(props: ModalMentoringProps) {
           <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
             <CheckBox
               type="cancel"
-              onlyChecked={selectedOption === SENIOR_MENTOR_CANCEL.haveSchedul}
               checked={time}
               onChange={setTime}
             />
@@ -90,7 +88,6 @@ function SmentoringCancel(props: ModalMentoringProps) {
           <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
             <CheckBox
               type="cancel"
-              onlyChecked={selectedOption === SENIOR_MENTOR_CANCEL.dontKnow}
               checked={know}
               onChange={setKnow}
             />
@@ -100,7 +97,6 @@ function SmentoringCancel(props: ModalMentoringProps) {
             <div style={{ display: 'flex' }}>
               <CheckBox
                 type="cancel"
-                onlyChecked={selectedOption === 'etc'}
                 checked={etc}
                 onChange={setEtc}
               />
