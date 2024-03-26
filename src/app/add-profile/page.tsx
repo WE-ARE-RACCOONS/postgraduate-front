@@ -36,6 +36,7 @@ function AddProfilePage() {
   const { modal, modalHandler, portalElement } = useModal(
     'senior-best-case-portal',
   );
+
   const updateBtnSet = () => {
     setButtonAct(
       singleIntro.length > 10 &&
@@ -43,8 +44,13 @@ function AddProfilePage() {
         recommended.length > 50,
     );
   };
+  
   useEffect(() => {
     updateBtnSet();
+
+    if(singleIntro.length > 10 && multiIntro.length > 50 && recommended.length > 50) {
+      setFlag(false);
+    }
   }, [singleIntro, multiIntro, recommended]);
 
   const handleClick = () => {
