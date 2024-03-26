@@ -84,7 +84,7 @@ function SearchResultPage() {
       </Searchfilter>
       <SearchReasultProfile>
         {isLoading && (
-          <div id='spinner-container'>
+          <div id="spinner-container">
             <Spinner />
           </div>
         )}

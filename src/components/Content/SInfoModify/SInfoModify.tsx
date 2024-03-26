@@ -202,7 +202,11 @@ function SInfoModify({
         />
         <Image id="camera-icon" src={camera_icon} alt="카메라 아이콘" />
         <SInfoImgInputBox>
-          <label id="profile-img-label" htmlFor="profile-img" style={{ 'cursor': 'pointer' }}>
+          <label
+            id="profile-img-label"
+            htmlFor="profile-img"
+            style={{ cursor: 'pointer' }}
+          >
             이미지라벨이미지라벨이미지라벨이미지라벨이미지라벨이미지라벨이미지라벨이미지라벨이미지라벨
           </label>
           <input

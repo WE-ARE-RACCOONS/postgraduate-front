@@ -85,51 +85,67 @@ function EditProfilePage() {
   };
 
   function validateLab() {
-    if(sLab.length <= 0) setLabFlag(true);
+    if (sLab.length <= 0) setLabFlag(true);
     else setLabFlag(false);
   }
 
   function validateField() {
-    if(sField.length <= 0) setFieldFlag(true);
+    if (sField.length <= 0) setFieldFlag(true);
     else setFieldFlag(false);
   }
 
   function validateKeyword() {
-    if(sKeyword.length <= 0) setKeywordFlag(true);
+    if (sKeyword.length <= 0) setKeywordFlag(true);
     else setKeywordFlag(false);
   }
 
   function validateSingleIntro() {
-    if(singleIntro.length < 10) setSingleFlag(true);
+    if (singleIntro.length < 10) setSingleFlag(true);
     else setSingleFlag(false);
   }
 
   function validateMultiIntro() {
-    if(multiIntro.length < 50) setMultiFlag(true);
+    if (multiIntro.length < 50) setMultiFlag(true);
     else setMultiFlag(false);
   }
 
   function validateRecommended() {
-    if(recommended.length < 50) setRecommendFlag(true);
+    if (recommended.length < 50) setRecommendFlag(true);
     else setRecommendFlag(false);
   }
 
   function validateChatLink() {
-    if(chatLink.length <= 0) setChatLinkFlag(true);
+    if (chatLink.length <= 0) setChatLinkFlag(true);
     else setChatLinkFlag(false);
   }
 
-  useEffect(() => { validateLab(); }, [sLab]);
-  useEffect(() => { validateField(); }, [sField]);
-  useEffect(() => { validateKeyword(); }, [sKeyword]);
-  useEffect(() => { validateSingleIntro(); }, [singleIntro]);
-  useEffect(() => { validateMultiIntro(); }, [multiIntro]);
-  useEffect(() => { validateRecommended(); }, [recommended]);
-  useEffect(() => { validateChatLink(); }, [chatLink]);
-  useEffect(() => { validateTime(); }, [timeData]);
+  useEffect(() => {
+    validateLab();
+  }, [sLab]);
+  useEffect(() => {
+    validateField();
+  }, [sField]);
+  useEffect(() => {
+    validateKeyword();
+  }, [sKeyword]);
+  useEffect(() => {
+    validateSingleIntro();
+  }, [singleIntro]);
+  useEffect(() => {
+    validateMultiIntro();
+  }, [multiIntro]);
+  useEffect(() => {
+    validateRecommended();
+  }, [recommended]);
+  useEffect(() => {
+    validateChatLink();
+  }, [chatLink]);
+  useEffect(() => {
+    validateTime();
+  }, [timeData]);
 
   function validateTime() {
-    if(timeData.length < 3) setTimeFlag(true);
+    if (timeData.length < 3) setTimeFlag(true);
     else setTimeFlag(false);
   }
 
@@ -250,7 +266,9 @@ function EditProfilePage() {
               <div className="title-with-modify">
                 연구실명&nbsp;<div id="font-color">*</div>
               </div>
-              {labFlag && <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>}
+              {labFlag && (
+                <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>
+              )}
             </MBtnFont>
             <TextForm
               placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}

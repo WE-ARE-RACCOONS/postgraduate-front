@@ -158,7 +158,7 @@ function SearchForm(props: SearchFormProps) {
       </TextFieldWrapper>
       <SearchResultWrapper>
         {!result && isLoading && (
-          <div id='spinner-container'>
+          <div id="spinner-container">
             <Spinner />
           </div>
         )}
