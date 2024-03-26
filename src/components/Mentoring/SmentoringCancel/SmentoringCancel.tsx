@@ -83,7 +83,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
               checked={time}
               onChange={setTime}
             />
-            {SENIOR_MENTOR_CANCEL.haveSchedul}
+            {SENIOR_MENTOR_CANCEL.haveSchedule}
           </SMCBtn>
           <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
             <CheckBox
