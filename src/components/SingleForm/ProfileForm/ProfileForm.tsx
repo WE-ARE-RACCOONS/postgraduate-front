@@ -6,7 +6,6 @@ import {
 import { useEffect, useState } from 'react';
 function ProfileForm(props: ProfileFormProps) {
   const [charCount, setCharCount] = useState(0);
-  const [textData, setTextData] = useState(props.loadStr);
 
   useEffect(() => {
     if (props.loadStr) {
@@ -23,13 +22,9 @@ function ProfileForm(props: ProfileFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     props.changeHandler(e.currentTarget.value);
-
-    const newValue = e.currentTarget.value;
-
-    if (props.maxLength && (newValue.length <= props.maxLength)) {
-      setTextData(newValue);
+    if(props.maxLength && e.currentTarget.value.length > props.maxLength) {
+      e.currentTarget.value = e.currentTarget.value.slice(0, props.maxLength);
     }
-
     setCharCount(e.currentTarget.value.length);
   };
 
@@ -46,7 +41,6 @@ function ProfileForm(props: ProfileFormProps) {
           id="single-profile-form"
           className={`profile-form-${props.formType}`}
           placeholder={props.placeholder}
-          value={textData}
           onChange={(e) => handleChange(e)}
         />
       )}
@@ -56,7 +50,6 @@ function ProfileForm(props: ProfileFormProps) {
           id="multi-profile-form"
           className={`profile-form-${props.formType}`}
           placeholder={props.placeholder}
-          value={textData}
           onChange={(e) => handleChange(e)}
         ></textarea>
       )}
