@@ -22,6 +22,12 @@ export const SearchResultWrapper = styled.div`
   top: 4.6rem;
   left: 50%;
   transform: translateX(-50%);
+
+  #spinner-container {
+    width: 3rem;
+    height: 3rem;
+    margin: 3rem auto;
+  }
 `;
 
 export const SearchResult = styled.div`

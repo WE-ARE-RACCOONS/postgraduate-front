@@ -27,6 +27,7 @@ function ProfileDonePage() {
       </div>
       <div id="profile-done-btn-container">
         <PrevBtn
+          style={{ cursor: 'pointer' }}
           onClick={() => {
             router.push('/');
           }}

@@ -6,6 +6,7 @@ import {
 import { useEffect, useState } from 'react';
 function ProfileForm(props: ProfileFormProps) {
   const [charCount, setCharCount] = useState(0);
+
   useEffect(() => {
     if (props.loadStr) {
       const targetForm = document.querySelector(
@@ -21,6 +22,9 @@ function ProfileForm(props: ProfileFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     props.changeHandler(e.currentTarget.value);
+    if (props.maxLength && e.currentTarget.value.length > props.maxLength) {
+      e.currentTarget.value = e.currentTarget.value.slice(0, props.maxLength);
+    }
     setCharCount(e.currentTarget.value.length);
   };
 

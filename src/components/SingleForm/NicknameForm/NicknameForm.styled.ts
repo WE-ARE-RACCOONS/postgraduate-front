@@ -42,7 +42,7 @@ export const InputBox = styled.div`
 export const InputBtn = styled.button`
   border: none;
   display: inline-flex;
-  width: 3.5rem;
+  width: 3.6rem;
   padding: 0.3125rem 0.725rem;
   align-items: center;
   gap: 0.625rem;
