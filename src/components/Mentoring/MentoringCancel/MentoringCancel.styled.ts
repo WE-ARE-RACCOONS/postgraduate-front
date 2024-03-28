@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 export const MentoringCancelBox = styled.div`
-  margin-bottom: 2rem;
+  margin-bottom: 1.2rem;
   text-align: center;
   align-items: center;
   justify-content: center;

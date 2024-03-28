@@ -18,10 +18,7 @@ function SuggestModal(props: SuggestModalProps) {
     router.push(`/signup/select/common-info/auth`);
   };
   const ProfileinfoHandler = () => {
-    if (props.infoHandler) {
-      props.infoHandler();
-    }
-    props.modalHandler();
+    router.push(`/senior/edit-profile`);
   };
   return (
     <div>
