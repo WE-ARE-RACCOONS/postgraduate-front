@@ -263,6 +263,7 @@ function SInfoModify({
             $width="100%"
             type="text"
             defaultValue={accHolder}
+            maxLength={5}
             onChange={(e) => {
               setAccHolder(e.currentTarget.value);
             }}
