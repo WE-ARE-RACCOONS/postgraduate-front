@@ -43,6 +43,7 @@ function MentoringApply({ data }: MentoringApplyProps) {
   const { getUserType } = useAuth();
   const userType = getUserType();
   const formatRemainTime = (remainTime: string) => {
+    if(!remainTime) return '0시간 0분';
     const splittedTime = remainTime.split('-');
     return `${splittedTime[0]}시간 ${splittedTime[1]}분 `;
   };
@@ -63,7 +64,8 @@ function MentoringApply({ data }: MentoringApplyProps) {
   };
 
   const convertDateType = (date: string) => {
-    const parts = date ? date.split('-') : [];
+    if(!date) return new Date();
+    const parts = date.split('-');
     const year = parseInt(parts[0]);
     const month = parseInt(parts[1]) - 1;
     const day = parseInt(parts[2]);
