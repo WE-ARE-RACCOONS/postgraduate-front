@@ -168,6 +168,7 @@ const SelectedImage = styled.img`
   border-radius: 90%;
 `;
 const PhotoBox = styled.img`
+position: absolute;
   margin: 1.3rem 0;
   margin-left: 7.5rem;
   width: 7.5rem;
