@@ -96,7 +96,7 @@ function TabBar() {
           };
 
           const response = await axios.patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/cancel`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/done`,
             {
               mentoringId: mentoringId,
             },
