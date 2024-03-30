@@ -28,7 +28,7 @@ export const TabWrap = styled.div`
 `;
 export const DateDoneBtn = styled.button`
   background: #00a0e1;
- margin: 0.8rem;
+  margin: 0.8rem;
   display: flex;
   margin-left: 4%;
   align-items: center;

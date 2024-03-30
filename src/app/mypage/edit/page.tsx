@@ -37,7 +37,7 @@ function page() {
   const sameUser = useAtomValue(sameUserAtom);
   const fullNum = useAtomValue(phoneNum);
   useEffect(() => {
-    console.log(fullNum)
+    console.log(fullNum);
     getAccessToken().then((token) => {
       if (token) {
         const headers = {
@@ -105,7 +105,7 @@ function page() {
             `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
             {
               profile: editProfileUrl ? editProfileUrl : profile,
-              nickName: changeNick ? changeNick :myNickName,
+              nickName: changeNick ? changeNick : myNickName,
               phoneNumber: fullNum ? fullNum : phoneNumber,
             },
             {
@@ -168,7 +168,7 @@ const SelectedImage = styled.img`
   border-radius: 90%;
 `;
 const PhotoBox = styled.img`
-position: absolute;
+  position: absolute;
   margin: 1.3rem 0;
   margin-left: 7.5rem;
   width: 7.5rem;

@@ -78,28 +78,16 @@ function SmentoringCancel(props: ModalMentoringProps) {
         </SMCancelTop>
         <SMCancelMid>
           <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
-            <CheckBox
-              type="cancel"
-              checked={time}
-              onChange={setTime}
-            />
+            <CheckBox type="cancel" checked={time} onChange={setTime} />
             {SENIOR_MENTOR_CANCEL.haveSchedule}
           </SMCBtn>
           <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
-            <CheckBox
-              type="cancel"
-              checked={know}
-              onChange={setKnow}
-            />
+            <CheckBox type="cancel" checked={know} onChange={setKnow} />
             {SENIOR_MENTOR_CANCEL.dontKnow}
           </SMCBtn>
           <SMCBtnEtc>
             <div style={{ display: 'flex' }}>
-              <CheckBox
-                type="cancel"
-                checked={etc}
-                onChange={setEtc}
-              />
+              <CheckBox type="cancel" checked={etc} onChange={setEtc} />
               기타
             </div>
             <div style={{ display: 'flex' }}>
@@ -107,7 +95,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
                 style={{
                   border: 'none',
                   fontWeight: '400',
-                  fontSize:'16px',
+                  fontSize: '16px',
                   height: '2rem',
                   width: '20rem',
                   backgroundColor: ' #F8F9FA',

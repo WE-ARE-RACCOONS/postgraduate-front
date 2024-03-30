@@ -14,7 +14,12 @@ function Photo({ handler, type }: PhotoProps) {
         <Image
           src={camera}
           alt="camera"
-          style={{ marginLeft:'12.8rem', width: '32px', height: '32px' ,position: 'absolute'}}
+          style={{
+            marginLeft: '12.8rem',
+            width: '32px',
+            height: '32px',
+            position: 'absolute',
+          }}
         />
       )}
       {type == 'auth' && (

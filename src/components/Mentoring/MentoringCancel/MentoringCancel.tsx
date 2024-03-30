@@ -57,7 +57,6 @@ function MentoringCancel(props: ModalMentoringclProps) {
           }
 
           setData(response.data);
-          console.log(response.data)
           if (response.data.code === 'MT201') {
             setCancelStatus('취소되었습니다');
           } else {
@@ -78,7 +77,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
         '취소 중...'
       ) : (
         <>
-          {cancelStatus ==='취소되었습니다' ? (
+          {cancelStatus === '취소되었습니다' ? (
             <Image
               id="cState"
               src={cState}
@@ -107,23 +106,20 @@ function MentoringCancel(props: ModalMentoringclProps) {
             </MCMain>
             {cancelStatus ? (
               <>
-              {cancelStatus ==='취소되었습니다' ? 
-              <>
-              <MCSub>
-                  환불은 카드사 정책에 따라 영업일 기준 2~3일이 소요됩니다.
-                </MCSub>
-                <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
-                </> 
-                :
-                <>
-                <MCSub>
-                  멘토링 취소가 실패했습니다.
-                </MCSub>
-                <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
-                </>
-                }
-                </>
-               
+                {cancelStatus === '취소되었습니다' ? (
+                  <>
+                    <MCSub>
+                      환불은 카드사 정책에 따라 영업일 기준 2~3일이 소요됩니다.
+                    </MCSub>
+                    <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
+                  </>
+                ) : (
+                  <>
+                    <MCSub>멘토링 취소가 실패했습니다.</MCSub>
+                    <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
+                  </>
+                )}
+              </>
             ) : (
               <>
                 <MCSub>

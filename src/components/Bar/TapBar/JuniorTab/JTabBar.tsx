@@ -29,7 +29,7 @@ import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 import { mentoringIdAtom } from '@/stores/user';
 
-function convertDateType(date : string) {
+function convertDateType(date: string) {
   const parts = date ? date.split('-') : [];
   const year = parseInt(parts[0]);
   const month = parseInt(parts[1]) - 1;
@@ -88,40 +88,39 @@ function TabBar() {
   }, [activeTab]);
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
-      getAccessToken().then(async (Token) => {
-        if (Token) {
-          const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Token}`,
-          };
+    getAccessToken().then(async (Token) => {
+      if (Token) {
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Token}`,
+        };
 
-          const response = await axios.patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/done`,
-            {
-              mentoringId: mentoringId,
-            },
-            { headers },
-          );
+        const response = await axios.patch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/done`,
+          {
+            mentoringId: mentoringId,
+          },
+          { headers },
+        );
 
-          if (findExCode(response.data.code)) {
-            removeTokens();
-            router.replace('/');
-            return;
-          }
-
-          const confirm = response.data;
-          console.log(confirm)
-          localStorage.removeItem('mentoringId');
+        if (findExCode(response.data.code)) {
+          removeTokens();
+          router.replace('/');
+          return;
         }
-      });
+
+        const confirm = response.data;
+        localStorage.removeItem('mentoringId');
+      }
+    });
   };
 
   const renderTabContent = () => {
     return (
       <div>
         {data && data!.length !== 0
-          ? data!.map((el, idx) => { 
-            const mentoringDate = convertDateType(el.date);
+          ? data!.map((el, idx) => {
+              const mentoringDate = convertDateType(el.date);
               const currentDate = new Date();
               const isPast = mentoringDate <= currentDate;
 
@@ -140,25 +139,32 @@ function TabBar() {
                     />
                   )}
                   {activeTab === TAB.expected && (
-                   <div>
-                   {isPast ? (
-                     <DateDoneBtn onClick={() => { 
-                      console.log(el.mentoringId)
-                      localStorage.setItem('mentoringId', el.mentoringId.toString());
-                      mentoConfirmed(); 
-                    }}>멘토링 완료 확정하기</DateDoneBtn>
-                   ) : (
-                     <ModalBtn
-                       type={'show'}
-                       btnText={'내 신청서 보기'}
-                       modalHandler={modalHandler}
-                       onClick={() => {
-                         setModalType('junior');
-                         setSelectedMentoringId(el.mentoringId);
-                       }}
-                     />
-                   )}
-                 </div>
+                    <div>
+                      {isPast ? (
+                        <DateDoneBtn
+                          onClick={() => {
+                            console.log(el.mentoringId);
+                            localStorage.setItem(
+                              'mentoringId',
+                              el.mentoringId.toString(),
+                            );
+                            mentoConfirmed();
+                          }}
+                        >
+                          멘토링 완료 확정하기
+                        </DateDoneBtn>
+                      ) : (
+                        <ModalBtn
+                          type={'show'}
+                          btnText={'내 신청서 보기'}
+                          modalHandler={modalHandler}
+                          onClick={() => {
+                            setModalType('junior');
+                            setSelectedMentoringId(el.mentoringId);
+                          }}
+                        />
+                      )}
+                    </div>
                   )}
                   {activeTab === TAB.done && (
                     <ModalBtn

@@ -83,7 +83,7 @@ function SelectForm(props: SelectFormProps) {
           <input
             id="field-input-form"
             type="text"
-            style={{fontSize:'16px'}}
+            style={{ fontSize: '16px' }}
             placeholder={SELECT_FIELD_TEXT.fieldInputDirection}
             onChange={(e) => setUserInputField(e.currentTarget.value)}
             maxLength={10}

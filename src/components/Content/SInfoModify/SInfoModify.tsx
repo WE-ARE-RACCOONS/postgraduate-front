@@ -23,7 +23,12 @@ import {
   StaticImport,
 } from 'next/dist/shared/lib/get-img-props';
 import { useAtom, useAtomValue } from 'jotai';
-import { changeNickname, nickname, phoneNum, remainPhoneNum } from '@/stores/signup';
+import {
+  changeNickname,
+  nickname,
+  phoneNum,
+  remainPhoneNum,
+} from '@/stores/signup';
 import NextBtn from '@/components/Button/NextBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
 import { bankNameAtom } from '@/stores/bankName';
@@ -60,12 +65,8 @@ function SInfoModify({
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
   const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
   const fullNum = useAtomValue(phoneNum);
-  const [btnAct,setBtnAct] = useState('false')
+  const [btnAct, setBtnAct] = useState('false');
   const { getAccessToken, removeTokens } = useAuth();
-  console.log('1',changeNick)
-  console.log('2',fullNum)
-  console.log('3',inputImg)
-  console.log('3',btnAct)
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) {
@@ -112,7 +113,7 @@ function SInfoModify({
     getAccessToken().then(async (accessTkn) => {
       if (inputImg) {
         const formData = new FormData();
-        setBtnAct('true')
+        setBtnAct('true');
         formData.append('profileFile', inputImg);
 
         if (accessTkn) {
@@ -159,7 +160,7 @@ function SInfoModify({
           .patch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`,
             {
-              nickName: changeNick ? changeNick :nickName,
+              nickName: changeNick ? changeNick : nickName,
               phoneNumber: fullNum ? fullNum : phoneNumber,
               profile: submitImgUrl,
               accountNumber: accNumber,
@@ -246,10 +247,9 @@ function SInfoModify({
           defaultValue={accNumber}
           onChange={(e) => {
             setAccNumber(e.currentTarget.value);
-            if(accNumber !== e.currentTarget.value){
+            if (accNumber !== e.currentTarget.value) {
               setBtnAct('true');
-            }
-            else{
+            } else {
               setBtnAct('false');
             }
           }}
@@ -277,10 +277,9 @@ function SInfoModify({
             maxLength={5}
             onChange={(e) => {
               setAccHolder(e.currentTarget.value);
-              if(accHolder !== e.currentTarget.value){
+              if (accHolder !== e.currentTarget.value) {
                 setBtnAct('true');
-              }
-              else{
+              } else {
                 setBtnAct('false');
               }
             }}
@@ -295,17 +294,22 @@ function SInfoModify({
           />
         </ValidatorBox>
       )}
-     {changeNick !== ''|| fullNum !== ''|| inputImg !== null|| btnAct ==='true' ? (
-  <div id="submit-btn-box">
-    <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
-  </div>
-) : (
-  <div id="submit-btn-box">
-    <NextBtn kind="route-non" btnText="저장하기" onClick={submitHandler} />
-  </div>
-)}
-
-
+      {changeNick !== '' ||
+      fullNum !== '' ||
+      inputImg !== null ||
+      btnAct === 'true' ? (
+        <div id="submit-btn-box">
+          <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
+        </div>
+      ) : (
+        <div id="submit-btn-box">
+          <NextBtn
+            kind="route-non"
+            btnText="저장하기"
+            onClick={submitHandler}
+          />
+        </div>
+      )}
     </SInfoContainer>
   );
 }

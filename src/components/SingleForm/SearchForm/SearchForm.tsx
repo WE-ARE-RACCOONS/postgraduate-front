@@ -144,7 +144,9 @@ function SearchForm(props: SearchFormProps) {
           width={24}
           height={24}
           style={{ marginRight: '0.75rem' }}
-          onClick={() => { setData(); }}
+          onClick={() => {
+            setData();
+          }}
         />
         <TextField
           id="outlined-basic"
