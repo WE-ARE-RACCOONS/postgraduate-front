@@ -29,7 +29,7 @@ import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 
 function convertDateType(date : string) {
-  const parts = date.split('-');
+  const parts = date ? date.split('-') : [];
   const year = parseInt(parts[0]);
   const month = parseInt(parts[1]) - 1;
   const day = parseInt(parts[2]);
@@ -58,7 +58,6 @@ function TabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
-console.log(new Date())
   useEffect(() => {
     getAccessToken().then((Token) => {
       if (Token) {
@@ -86,6 +85,9 @@ console.log(new Date())
       }
     });
   }, [activeTab]);
+  const mentoConfirmed =() =>{
+
+  }
 
   const renderTabContent = () => {
     return (
@@ -113,7 +115,7 @@ console.log(new Date())
                   {activeTab === TAB.expected && (
                    <div>
                    {isPast ? (
-                     <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
+                     <DateDoneBtn onClick={mentoConfirmed}>멘토링 완료 확정하기</DateDoneBtn>
                    ) : (
                      <ModalBtn
                        type={'show'}
