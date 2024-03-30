@@ -91,9 +91,7 @@ console.log(new Date())
     return (
       <div>
         {data && data!.length !== 0
-          ? data!.map((el, idx) => {
-            console.log(new Date(el.date))
-            console.log(el.date)
+          ? data!.map((el, idx) => { 
             const mentoringDate = convertDateType(el.date);
               const currentDate = new Date();
               const isPast = mentoringDate <= currentDate;
