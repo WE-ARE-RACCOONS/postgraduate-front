@@ -27,6 +27,7 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import { mentoringIdAtom } from '@/stores/user';
 
 function convertDateType(date : string) {
   const parts = date ? date.split('-') : [];
@@ -85,9 +86,35 @@ function TabBar() {
       }
     });
   }, [activeTab]);
-  const mentoConfirmed =() =>{
+  const mentoConfirmed = async () => {
+    const mentoringId = localStorage.getItem('mentoringId');
+      getAccessToken().then(async (Token) => {
+        if (Token) {
+          const headers = {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${Token}`,
+          };
 
-  }
+          const response = await axios.patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/cancel`,
+            {
+              mentoringId: mentoringId,
+            },
+            { headers },
+          );
+
+          if (findExCode(response.data.code)) {
+            removeTokens();
+            router.replace('/');
+            return;
+          }
+
+          const confirm = response.data;
+          console.log(confirm)
+          localStorage.removeItem('mentoringId');
+        }
+      });
+  };
 
   const renderTabContent = () => {
     return (
@@ -115,7 +142,11 @@ function TabBar() {
                   {activeTab === TAB.expected && (
                    <div>
                    {isPast ? (
-                     <DateDoneBtn onClick={mentoConfirmed}>멘토링 완료 확정하기</DateDoneBtn>
+                     <DateDoneBtn onClick={() => { 
+                      console.log(el.mentoringId)
+                      localStorage.setItem('mentoringId', el.mentoringId.toString());
+                      mentoConfirmed(); 
+                    }}>멘토링 완료 확정하기</DateDoneBtn>
                    ) : (
                      <ModalBtn
                        type={'show'}
