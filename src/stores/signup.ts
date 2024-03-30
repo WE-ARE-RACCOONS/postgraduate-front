@@ -12,6 +12,7 @@ export const notDuplicate = atom<boolean>(false);
 export const newNotDuplicate = atom<boolean>(false);
 export const sameUserAtom = atom<boolean>(false);
 export const phoneNum = atom<string>('');
+export const remainPhoneNum = atom<string>('');
 export const phoneNumValidation = atom<boolean>(false);
 
 export const socialIdAtom = atom<string>('');
