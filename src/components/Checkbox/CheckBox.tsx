@@ -6,11 +6,12 @@ import cancelIcon from '../../../public/checkbox_c.png';
 
 type CheckboxProps = {
   checked: boolean;
+  onlyChecked?: boolean;
   onChange: (checked: boolean) => void;
   type: 'accept' | 'cancel';
 };
 
-function CheckBox({ checked, onChange, type }: CheckboxProps) {
+function CheckBox({ checked, onChange, onlyChecked, type }: CheckboxProps) {
   return (
     <div
       onClick={() => onChange(!checked)}
