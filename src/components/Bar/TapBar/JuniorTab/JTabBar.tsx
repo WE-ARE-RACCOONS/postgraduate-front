@@ -97,20 +97,21 @@ function TabBar() {
                   )}
                   {activeTab === TAB.expected && (
                     <div>
-                      {new Date() >= new Date(el.date) ? (
-                        <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
-                      ) : (
-                        <ModalBtn
-                          type={'show'}
-                          btnText={'내 신청서 보기'}
-                          modalHandler={modalHandler}
-                          onClick={() => {
-                            setModalType('junior');
-                            setSelectedMentoringId(el.mentoringId);
-                          }}
-                        />
-                      )}
-                    </div>
+                    {el.date && new Date(el.date) <= new Date() && (
+                      <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
+                    )}
+                    {el.date && new Date(el.date) > new Date() && (
+                      <ModalBtn
+                        type={'show'}
+                        btnText={'내 신청서 보기'}
+                        modalHandler={modalHandler}
+                        onClick={() => {
+                          setModalType('junior');
+                          setSelectedMentoringId(el.mentoringId);
+                        }}
+                      />
+                    )}
+                  </div>
                   )}
                   {activeTab === TAB.done && (
                     <ModalBtn
