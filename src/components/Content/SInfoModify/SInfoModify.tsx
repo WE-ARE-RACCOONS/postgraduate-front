@@ -23,7 +23,7 @@ import {
   StaticImport,
 } from 'next/dist/shared/lib/get-img-props';
 import { useAtom, useAtomValue } from 'jotai';
-import { nickname, phoneNum } from '@/stores/signup';
+import { changeNickname, nickname, phoneNum, remainPhoneNum } from '@/stores/signup';
 import NextBtn from '@/components/Button/NextBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
 import { bankNameAtom } from '@/stores/bankName';
@@ -55,10 +55,11 @@ function SInfoModify({
   const [profileUrl, setProfileUrl] = useState('');
   const [bank, setBank] = useAtom(bankNameAtom);
   const [nickName, setNickname] = useAtom(nickname);
-  const [fullNum, setPhoneNum] = useAtom(phoneNum);
+  const [phoneNumber, setPhoneNum] = useAtom(remainPhoneNum);
+  const changeNick = useAtomValue(changeNickname);
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
   const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
-
+  const fullNum = useAtomValue(phoneNum);
   const { getAccessToken, removeTokens } = useAuth();
 
   useEffect(() => {
@@ -141,12 +142,11 @@ function SInfoModify({
       }
 
       if (
-        nickName &&
-        fullNum &&
-        accessTkn &&
-        bank &&
-        submitImgUrl &&
-        accNumber &&
+        changeNick ||
+        fullNum ||
+        bank ||
+        submitImgUrl ||
+        accNumber ||
         accHolder
       ) {
         setFlag(false);
@@ -154,8 +154,8 @@ function SInfoModify({
           .patch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`,
             {
-              nickName: nickName,
-              phoneNumber: fullNum,
+              nickName: changeNick ? changeNick :nickName,
+              phoneNumber: fullNum ? fullNum : phoneNumber,
               profile: submitImgUrl,
               accountNumber: accNumber,
               bank: bank,
@@ -231,7 +231,7 @@ function SInfoModify({
         <NicknameForm defaultValue={nickName} />
       </div>
       <div id="phonenum-form-wrapper">
-        <PhoneNumForm defaultValue={fullNum} />
+        <PhoneNumForm defaultValue={phoneNumber} />
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
