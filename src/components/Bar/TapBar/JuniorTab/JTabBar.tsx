@@ -59,7 +59,9 @@ function TabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
+  const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   useEffect(() => {
+    let prevMentoringInfoLength = 0;
     getAccessToken().then((Token) => {
       if (Token) {
         const headers = {
@@ -79,13 +81,20 @@ function TabBar() {
               return;
             }
             setData(response.data.data.mentoringInfos);
+            const newMentoringInfos = response.data.data.mentoringInfos;
+            const newMentoringInfoLength = newMentoringInfos.length;
+            if (newMentoringInfoLength !== prevMentoringInfoLength) {
+              setData(newMentoringInfos);
+            }
+            setPrevMentoringInfoLength(newMentoringInfoLength);
+
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
       }
     });
-  }, [activeTab]);
+  }, [activeTab , prevMentoringInfoLength]);
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
     getAccessToken().then(async (Token) => {
