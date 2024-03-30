@@ -27,6 +27,17 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+
+function convertDateType(date : string) {
+  const parts = date.split('-');
+  const year = parseInt(parts[0]);
+  const month = parseInt(parts[1]) - 1;
+  const day = parseInt(parts[2]);
+  const hour = parseInt(parts[3]);
+  const minute = parseInt(parts[4]);
+
+  return new Date(year, month, day, hour, minute);
+}
 function TabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
@@ -47,7 +58,7 @@ function TabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
-
+console.log(new Date())
   useEffect(() => {
     getAccessToken().then((Token) => {
       if (Token) {
@@ -81,6 +92,12 @@ function TabBar() {
       <div>
         {data && data!.length !== 0
           ? data!.map((el, idx) => {
+            console.log(new Date(el.date))
+            console.log(el.date)
+            const mentoringDate = convertDateType(el.date);
+              const currentDate = new Date();
+              const isPast = mentoringDate <= currentDate;
+
               return (
                 <MentoringBox key={idx}>
                   <MentoringApply data={el} />
@@ -96,22 +113,21 @@ function TabBar() {
                     />
                   )}
                   {activeTab === TAB.expected && (
-                    <div>
-                    {el.date && new Date(el.date) <= new Date() && (
-                      <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
-                    )}
-                    {el.date && new Date(el.date) > new Date() && (
-                      <ModalBtn
-                        type={'show'}
-                        btnText={'내 신청서 보기'}
-                        modalHandler={modalHandler}
-                        onClick={() => {
-                          setModalType('junior');
-                          setSelectedMentoringId(el.mentoringId);
-                        }}
-                      />
-                    )}
-                  </div>
+                   <div>
+                   {isPast ? (
+                     <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
+                   ) : (
+                     <ModalBtn
+                       type={'show'}
+                       btnText={'내 신청서 보기'}
+                       modalHandler={modalHandler}
+                       onClick={() => {
+                         setModalType('junior');
+                         setSelectedMentoringId(el.mentoringId);
+                       }}
+                     />
+                   )}
+                 </div>
                   )}
                   {activeTab === TAB.done && (
                     <ModalBtn

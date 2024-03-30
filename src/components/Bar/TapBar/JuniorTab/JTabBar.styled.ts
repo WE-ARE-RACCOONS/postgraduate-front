@@ -27,20 +27,24 @@ export const TabWrap = styled.div`
   margin: 0 1.7rem;
 `;
 export const DateDoneBtn = styled.button`
-  width: 19.4375rem;
-  height: 2.375rem;
-  margin-left: 4%;
-  flex-shrink: 0;
-  border-radius: 0.5rem;
   background: #00a0e1;
+ margin: 0.8rem;
+  display: flex;
+  margin-left: 4%;
+  align-items: center;
+  justify-content: center;
+  width: 92%;
+  height: 2.375rem;
   cursor: pointer;
+  border-radius: 0.5rem;
+  border: none;
   color: #fff;
   text-align: center;
   font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 700;
-  line-height: 140%; /* 1.4rem */
+  line-height: 140%;
 `;
 export const TapStyle = styled.div<TapStyleProps>`
   width: 4.9rem;
