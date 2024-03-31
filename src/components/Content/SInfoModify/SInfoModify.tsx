@@ -23,7 +23,12 @@ import {
   StaticImport,
 } from 'next/dist/shared/lib/get-img-props';
 import { useAtom, useAtomValue } from 'jotai';
-import { nickname, phoneNum } from '@/stores/signup';
+import {
+  changeNickname,
+  nickname,
+  phoneNum,
+  remainPhoneNum,
+} from '@/stores/signup';
 import NextBtn from '@/components/Button/NextBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
 import { bankNameAtom } from '@/stores/bankName';
@@ -55,12 +60,13 @@ function SInfoModify({
   const [profileUrl, setProfileUrl] = useState('');
   const [bank, setBank] = useAtom(bankNameAtom);
   const [nickName, setNickname] = useAtom(nickname);
-  const [fullNum, setPhoneNum] = useAtom(phoneNum);
+  const [phoneNumber, setPhoneNum] = useAtom(remainPhoneNum);
+  const changeNick = useAtomValue(changeNickname);
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
   const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
-
+  const fullNum = useAtomValue(phoneNum);
+  const [btnAct, setBtnAct] = useState('false');
   const { getAccessToken, removeTokens } = useAuth();
-
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) {
@@ -107,6 +113,7 @@ function SInfoModify({
     getAccessToken().then(async (accessTkn) => {
       if (inputImg) {
         const formData = new FormData();
+        setBtnAct('true');
         formData.append('profileFile', inputImg);
 
         if (accessTkn) {
@@ -141,12 +148,11 @@ function SInfoModify({
       }
 
       if (
-        nickName &&
-        fullNum &&
-        accessTkn &&
-        bank &&
-        submitImgUrl &&
-        accNumber &&
+        changeNick ||
+        fullNum ||
+        bank ||
+        submitImgUrl ||
+        accNumber ||
         accHolder
       ) {
         setFlag(false);
@@ -154,8 +160,8 @@ function SInfoModify({
           .patch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`,
             {
-              nickName: nickName,
-              phoneNumber: fullNum,
+              nickName: changeNick ? changeNick : nickName,
+              phoneNumber: fullNum ? fullNum : phoneNumber,
               profile: submitImgUrl,
               accountNumber: accNumber,
               bank: bank,
@@ -231,7 +237,7 @@ function SInfoModify({
         <NicknameForm defaultValue={nickName} />
       </div>
       <div id="phonenum-form-wrapper">
-        <PhoneNumForm defaultValue={fullNum} />
+        <PhoneNumForm defaultValue={phoneNumber} />
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
@@ -241,6 +247,11 @@ function SInfoModify({
           defaultValue={accNumber}
           onChange={(e) => {
             setAccNumber(e.currentTarget.value);
+            if (accNumber !== e.currentTarget.value) {
+              setBtnAct('true');
+            } else {
+              setBtnAct('false');
+            }
           }}
         />
       </div>
@@ -263,8 +274,14 @@ function SInfoModify({
             $width="100%"
             type="text"
             defaultValue={accHolder}
+            maxLength={5}
             onChange={(e) => {
               setAccHolder(e.currentTarget.value);
+              if (accHolder !== e.currentTarget.value) {
+                setBtnAct('true');
+              } else {
+                setBtnAct('false');
+              }
             }}
           />
         </div>
@@ -277,9 +294,22 @@ function SInfoModify({
           />
         </ValidatorBox>
       )}
-      <div id="submit-btn-box">
-        <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
-      </div>
+      {changeNick !== '' ||
+      fullNum !== '' ||
+      inputImg !== null ||
+      btnAct === 'true' ? (
+        <div id="submit-btn-box">
+          <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
+        </div>
+      ) : (
+        <div id="submit-btn-box">
+          <NextBtn
+            kind="route-non"
+            btnText="저장하기"
+            onClick={submitHandler}
+          />
+        </div>
+      )}
     </SInfoContainer>
   );
 }

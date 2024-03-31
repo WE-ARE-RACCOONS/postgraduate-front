@@ -95,6 +95,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
                 style={{
                   border: 'none',
                   fontWeight: '400',
+                  fontSize: '16px',
                   height: '2rem',
                   width: '20rem',
                   backgroundColor: ' #F8F9FA',

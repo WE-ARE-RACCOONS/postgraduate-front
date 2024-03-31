@@ -27,6 +27,19 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import { mentoringIdAtom } from '@/stores/user';
+
+function convertDateType(date: string) {
+  if (!date) return new Date();
+  const parts = date.split('-');
+  const year = parseInt(parts[0]);
+  const month = parseInt(parts[1]) - 1;
+  const day = parseInt(parts[2]);
+  const hour = parseInt(parts[3]);
+  const minute = parseInt(parts[4]);
+
+  return new Date(year, month, day, hour, minute);
+}
 function TabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
@@ -47,8 +60,9 @@ function TabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
-
+  const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   useEffect(() => {
+    let prevMentoringInfoLength = 0;
     getAccessToken().then((Token) => {
       if (Token) {
         const headers = {
@@ -68,19 +82,58 @@ function TabBar() {
               return;
             }
             setData(response.data.data.mentoringInfos);
+            const newMentoringInfos = response.data.data.mentoringInfos;
+            const newMentoringInfoLength = newMentoringInfos.length;
+            if (newMentoringInfoLength !== prevMentoringInfoLength) {
+              setData(newMentoringInfos);
+            }
+            setPrevMentoringInfoLength(newMentoringInfoLength);
+
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
       }
     });
-  }, [activeTab]);
+  }, [activeTab , prevMentoringInfoLength]);
+  const mentoConfirmed = async () => {
+    const mentoringId = localStorage.getItem('mentoringId');
+    getAccessToken().then(async (Token) => {
+      if (Token) {
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Token}`,
+        };
+
+        const response = await axios.patch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/done`,
+          {
+            mentoringId: mentoringId,
+          },
+          { headers },
+        );
+
+        if (findExCode(response.data.code)) {
+          removeTokens();
+          router.replace('/');
+          return;
+        }
+
+        const confirm = response.data;
+        localStorage.removeItem('mentoringId');
+      }
+    });
+  };
 
   const renderTabContent = () => {
     return (
       <div>
         {data && data!.length !== 0
           ? data!.map((el, idx) => {
+              const mentoringDate = convertDateType(el.date);
+              const currentDate = new Date();
+              const isPast = mentoringDate <= currentDate;
+
               return (
                 <MentoringBox key={idx}>
                   <MentoringApply data={el} />
@@ -97,8 +150,18 @@ function TabBar() {
                   )}
                   {activeTab === TAB.expected && (
                     <div>
-                      {new Date() >= new Date(el.date) ? (
-                        <DateDoneBtn>멘토링 완료 확정하기</DateDoneBtn>
+                      {isPast ? (
+                        <DateDoneBtn
+                          onClick={() => {
+                            localStorage.setItem(
+                              'mentoringId',
+                              el.mentoringId.toString(),
+                            );
+                            mentoConfirmed();
+                          }}
+                        >
+                          멘토링 완료 확정하기
+                        </DateDoneBtn>
                       ) : (
                         <ModalBtn
                           type={'show'}

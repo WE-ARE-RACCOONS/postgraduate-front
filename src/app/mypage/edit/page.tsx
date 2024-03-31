@@ -11,6 +11,7 @@ import {
   nickname,
   notDuplicate,
   phoneNumValidation,
+  remainPhoneNum,
   sameUserAtom,
 } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
@@ -24,7 +25,7 @@ function page() {
   let editProfileUrl = '';
   const [myNickName, setNickName] = useAtom(nickname);
   const changeNick = useAtomValue(changeNickname);
-  const [phoneNumber, setPhoneNumber] = useAtom(phoneNum);
+  const [phoneNumber, setPhoneNumber] = useAtom(remainPhoneNum);
   const [profile, setprofile] = useState<string | null>(null);
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken, removeTokens } = useAuth();
@@ -34,6 +35,7 @@ function page() {
   const availablePhone = useAtomValue(phoneNumValidation);
   const newAvailability = useAtomValue(newNotDuplicate);
   const sameUser = useAtomValue(sameUserAtom);
+  const fullNum = useAtomValue(phoneNum);
   useEffect(() => {
     getAccessToken().then((token) => {
       if (token) {
@@ -96,15 +98,14 @@ function page() {
             });
         }
       }
-
-      if (editProfileUrl || myNickName || phoneNumber) {
+      if (editProfileUrl || changeNick || fullNum) {
         axios
           .patch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
             {
               profile: editProfileUrl ? editProfileUrl : profile,
-              nickName: myNickName,
-              phoneNumber: phoneNumber,
+              nickName: changeNick ? changeNick : myNickName,
+              phoneNumber: fullNum ? fullNum : phoneNumber,
             },
             {
               headers: {
@@ -166,6 +167,7 @@ const SelectedImage = styled.img`
   border-radius: 90%;
 `;
 const PhotoBox = styled.img`
+  position: absolute;
   margin: 1.3rem 0;
   margin-left: 7.5rem;
   width: 7.5rem;

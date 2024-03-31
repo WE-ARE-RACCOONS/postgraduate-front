@@ -42,7 +42,6 @@ function MentoringApply({ data }: MentoringApplyProps) {
   const dateSalary = `${salParts[1]}월 ${salParts[2]}일`;
   const { getUserType } = useAuth();
   const userType = getUserType();
-
   const formatRemainTime = (remainTime: string) => {
     if (!remainTime) return '0시간 0분';
     const splittedTime = remainTime.split('-');
