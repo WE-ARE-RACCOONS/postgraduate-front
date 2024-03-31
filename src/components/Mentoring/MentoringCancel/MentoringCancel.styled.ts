@@ -49,7 +49,7 @@ export const OkayBtn = styled.button`
   display: flex;
   width: 17rem;
   margin-top: 1.81rem;
-  margin-left: 1rem;
+  margin-left: 0.3rem;
   padding: 1rem 5.8125rem;
   justify-content: center;
   align-items: center;
