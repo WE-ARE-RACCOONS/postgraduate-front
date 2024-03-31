@@ -25,6 +25,7 @@ import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import { socialIdAtom } from '@/stores/signup';
 import ProgressBar from '@/components/Bar/ProgressBar';
+import { detectReload, preventClose } from '@/utils/reloadFun';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -32,15 +33,27 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const currentPath = usePathname();
-  // const pathArr = currentPath.split('/');
-  // const socialId = pathArr[2];
-  const socialId = useAtomValue(socialIdAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
+
+  useEffect(() => {
+    if(detectReload()){
+      router.replace('/signup/select');
+    };
+
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    }
+  }, []);
+
   useEffect(() => {
     if (sPostGradu && sMajor) setFlag(false);
   }, [sPostGradu, sMajor]);
+
   const handleSubmit = () => {
     if (!sPostGradu) {
       setFlag(true);

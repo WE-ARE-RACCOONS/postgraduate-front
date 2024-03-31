@@ -6,7 +6,6 @@ import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useAtomValue } from 'jotai';
 import {
   changeNickname,
-  nickname,
   notDuplicate,
   phoneNum,
   userTypeAtom,
@@ -14,13 +13,30 @@ import {
 import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
 import { useEffect } from 'react';
+import { detectReload, preventClose } from '@/utils/reloadFun';
+import { useRouter } from 'next/navigation';
 
 function CommonInfoPage() {
+  const router = useRouter();
   const userType = useAtomValue(userTypeAtom);
   const userNick = useAtomValue(changeNickname);
   const fullNum = useAtomValue(phoneNum);
   const service = useAtomValue(essential);
   const available = useAtomValue(notDuplicate);
+
+  useEffect(() => {
+    if(detectReload()){
+      router.replace('/signup/select');
+    };
+
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    }
+  }, []);
 
   return (
     <div>
