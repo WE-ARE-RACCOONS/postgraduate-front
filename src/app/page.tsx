@@ -79,9 +79,11 @@ export default function Home() {
     };
 
     window.addEventListener('scroll', infiniteBottom);
+    window.addEventListener('touchmove', infiniteBottom);
 
     return () => {
       window.removeEventListener('scroll', infiniteBottom);
+      window.removeEventListener('touchmove', infiniteBottom);
     };
   }, [page]);
 
