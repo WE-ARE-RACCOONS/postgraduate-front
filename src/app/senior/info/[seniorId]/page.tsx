@@ -27,6 +27,8 @@ function SeniorInfoPage() {
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
   const mySeiorId = useAtomValue(mySeniorId).toString();
+  const koreanCharWidth = 1.2; // 한글 글자 너비로 가정
+
   const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [findSeniorId, setFindSeniorId] = useAtom(enterSeniorId);
   const [info, setInfo] = useState('');
@@ -35,13 +37,14 @@ function SeniorInfoPage() {
   const [major, setMajor] = useState('');
   const [nickName, setNickName] = useState('');
   const [oneLiner, setOneLiner] = useState('');
-  const [postgardu, setPostgradu] = useState('');
+  const [postgradu, setPostgradu] = useState('');
   const [professor, setProfessor] = useState('');
   const [profile, setProfile] = useState('');
   const [target, setTarget] = useState('');
   const [term, setTerm] = useState(40);
   const [times, setTimes] = useState([]);
   const [mine, setMine] = useState('false');
+  const [overWidth, setOverWidth] = useState(false);
   const setTempSubject = useSetAtom(subjectAtom);
   const setTempQuestion = useSetAtom(questionAtom);
   const setFirAbleTime = useSetAtom(firAbleTimeAtom);
@@ -61,8 +64,13 @@ function SeniorInfoPage() {
     setTempQuestion('');
     setFirAbleTime('');
     setSecAbleTime('');
-    setThiAbleTime('');
+    setThiAbleTime(''); 
   }, []);
+
+  useEffect(() => {
+    const totalWidth = 14 * koreanCharWidth * (major.length + postgradu.length + 3);
+    if(totalWidth >= 208) setOverWidth(true);
+  }, [major, postgradu]);
 
   useEffect(() => {
     const seniorId = pathArr[pathArr.length - 1];
@@ -137,13 +145,13 @@ function SeniorInfoPage() {
     <SeniorInfoPageContainer>
       <BackHeader headerText="멘토 선배 소개" />
       <SeniorInfoContentWrapper>
-        <SeniorInfoContent>
+        <SeniorInfoContent $overWidth={overWidth}>
           <div id="profile-card-wrapper">
             <ProfileCard
               profile={profile}
               nickname={nickName}
               term={term}
-              postgradu={postgardu}
+              postgradu={postgradu}
               major={major}
               professor={professor}
             />
@@ -206,7 +214,7 @@ const SeniorInfoContentWrapper = styled.div`
   padding-bottom: 4.5rem;
 `;
 
-const SeniorInfoContent = styled.div`
+const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`
   width: 95%;
   height: auto;
   position: relative;
@@ -216,7 +224,7 @@ const SeniorInfoContent = styled.div`
 
   #profile-card-wrapper {
     width: 100%;
-    height: 7.25rem;
+    height: ${props => props.$overWidth ? '8.25rem' : '7.25rem'};
     margin: 1.5rem 0 0.625rem 0;
   }
 

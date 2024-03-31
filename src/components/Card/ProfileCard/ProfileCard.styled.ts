@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-export const ProfileCardContainer = styled.div`
+export const ProfileCardContainer = styled.div<{ $overWidth: boolean }>`
   width: 100%;
-  height: 7.25rem;
+  height: ${props => props.$overWidth ? '8.25rem' : '7.25rem'};
   border-radius: 16px;
   background-color: #fff;
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
@@ -16,7 +16,7 @@ export const ProfileCardContainer = styled.div`
   }
 `;
 
-export const ProfileCardInfo = styled.div`
+export const ProfileCardInfo = styled.div<{ $overWidth: boolean }>`
   width: 13rem;
   height: 4.7rem;
   position: absolute;
@@ -26,6 +26,7 @@ export const ProfileCardInfo = styled.div`
 
   #profile-card-professor {
     font-size: 14px;
+    margin-top: ${props => props.$overWidth ? '0.875rem' : ''};
   }
 `;
 
