@@ -70,7 +70,7 @@ function SearchForm(props: SearchFormProps) {
             for (let i = 0; i < searchData.length; i++) {
               tempArr.push(searchData[i].schoolName);
             }
-            setResult(tempArr);
+            setResult([...new Set(tempArr)]);
           }
           return;
         }
@@ -114,7 +114,7 @@ function SearchForm(props: SearchFormProps) {
                   });
               }
             }
-            setResult(tempArr);
+            setResult([...new Set(tempArr)]);
           }
         }
         setIsLoading(false);
