@@ -76,8 +76,8 @@ function STabBar() {
               router.replace('/');
               return;
             }
-            setData(response.data.data.mentoringInfos);
-            const newMentoringInfos = response.data.data.mentoringInfos;
+            setData(response.data.data.seniorMentoringInfos);
+            const newMentoringInfos = response.data.data.seniorMentoringInfos;
             const newMentoringInfoLength = newMentoringInfos.length;
             if (newMentoringInfoLength !== prevMentoringInfoLength) {
               setData(newMentoringInfos);
