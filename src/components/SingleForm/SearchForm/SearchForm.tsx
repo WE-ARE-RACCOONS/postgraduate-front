@@ -23,11 +23,14 @@ function SearchForm(props: SearchFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setKeyword(e.currentTarget.value);
-    if (result) setResult(null);
+    if (result) {
+      setResult(null);
+      setIsLoading(false);
+    };
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.keyCode == 13) {
+    if (e.key === 'Enter') {
       setData();
     }
   };
@@ -60,7 +63,6 @@ function SearchForm(props: SearchFormProps) {
               },
       })
       .then(async (res) => {
-        setIsLoading(false);
         if (props.formType == 'postgradu') {
           const searchData = res.data.dataSearch.content;
           if (searchData.length > 0) {
@@ -112,10 +114,10 @@ function SearchForm(props: SearchFormProps) {
                   });
               }
             }
-
             setResult(tempArr);
           }
         }
+        setIsLoading(false);
       })
       .catch((err) => {
         console.error(err);
@@ -124,6 +126,7 @@ function SearchForm(props: SearchFormProps) {
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     props.clickHandler();
+
     if (props.formType == 'postgradu') {
       setSPostGradu(e.currentTarget.innerText);
       return;
@@ -154,7 +157,6 @@ function SearchForm(props: SearchFormProps) {
           style={{ width: '90%', height: '2.25rem', border: 'none' }}
           onChange={(e) => handleChange(e)}
           onKeyDown={(e) => handleKeyDown(e)}
-          onBlur={setData}
         />
       </TextFieldWrapper>
       <SearchResultWrapper>
