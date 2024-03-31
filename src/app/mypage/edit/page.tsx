@@ -37,7 +37,6 @@ function page() {
   const sameUser = useAtomValue(sameUserAtom);
   const fullNum = useAtomValue(phoneNum);
   useEffect(() => {
-    console.log(fullNum);
     getAccessToken().then((token) => {
       if (token) {
         const headers = {

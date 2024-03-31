@@ -30,7 +30,8 @@ import findExCode from '@/utils/findExCode';
 import { mentoringIdAtom } from '@/stores/user';
 
 function convertDateType(date: string) {
-  const parts = date ? date.split('-') : [];
+  if (!date) return new Date();
+  const parts = date.split('-');
   const year = parseInt(parts[0]);
   const month = parseInt(parts[1]) - 1;
   const day = parseInt(parts[2]);
@@ -152,7 +153,6 @@ function TabBar() {
                       {isPast ? (
                         <DateDoneBtn
                           onClick={() => {
-                            console.log(el.mentoringId);
                             localStorage.setItem(
                               'mentoringId',
                               el.mentoringId.toString(),
