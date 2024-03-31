@@ -25,9 +25,9 @@ function CommonInfoPage() {
   const available = useAtomValue(notDuplicate);
 
   useEffect(() => {
-    if(detectReload()){
+    if (detectReload()) {
       router.replace('/signup/select');
-    };
+    }
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -35,7 +35,7 @@ function CommonInfoPage() {
 
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-    }
+    };
   }, []);
 
   return (

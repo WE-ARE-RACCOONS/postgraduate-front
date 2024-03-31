@@ -22,9 +22,9 @@ function AuthPage() {
   const fileName = photo?.name;
 
   useEffect(() => {
-    if(detectReload()){
+    if (detectReload()) {
       router.replace('/signup/select');
-    };
+    }
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -32,7 +32,7 @@ function AuthPage() {
 
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-    }
+    };
   }, []);
 
   const handleClick = () => {

@@ -27,7 +27,7 @@ function SearchForm(props: SearchFormProps) {
     if (result) {
       setResult(null);
       setIsLoading(false);
-    };
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
@@ -68,7 +68,7 @@ function SearchForm(props: SearchFormProps) {
           const searchData = res.data.dataSearch.content;
           const tempArr = [];
           kaistStrArr.forEach((el) => {
-            if(el.includes(keyword)) tempArr.push('카이스트');
+            if (el.includes(keyword)) tempArr.push('카이스트');
           });
 
           if (searchData.length > 0) {
@@ -133,7 +133,8 @@ function SearchForm(props: SearchFormProps) {
     props.clickHandler();
 
     if (props.formType == 'postgradu') {
-      if(e.currentTarget.innerText == '한국과학기술원') setSPostGradu('카이스트');
+      if (e.currentTarget.innerText == '한국과학기술원')
+        setSPostGradu('카이스트');
       else setSPostGradu(e.currentTarget.innerText);
       return;
     }
@@ -153,7 +154,9 @@ function SearchForm(props: SearchFormProps) {
           width={24}
           height={24}
           style={{ marginRight: '0.75rem' }}
-          onClick={() => { setData(); }}
+          onClick={() => {
+            setData();
+          }}
         />
         <TextField
           id="outlined-basic"

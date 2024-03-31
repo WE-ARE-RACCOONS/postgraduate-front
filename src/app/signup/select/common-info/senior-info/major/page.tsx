@@ -37,9 +37,9 @@ function SeniorInfoPage() {
   const sMajor = useAtomValue(sMajorAtom);
 
   useEffect(() => {
-    if(detectReload()){
+    if (detectReload()) {
       router.replace('/signup/select');
-    };
+    }
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -47,7 +47,7 @@ function SeniorInfoPage() {
 
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-    }
+    };
   }, []);
 
   useEffect(() => {

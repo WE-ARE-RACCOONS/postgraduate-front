@@ -26,9 +26,9 @@ function MatchingInfoPage() {
   const [matchingReceive, setMatchingReceive] = useAtom(matchingReceiveAtom);
 
   useEffect(() => {
-    if(detectReload()){
+    if (detectReload()) {
       router.replace('/signup/select');
-    };
+    }
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -36,7 +36,7 @@ function MatchingInfoPage() {
 
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-    }
+    };
   }, []);
 
   const handleMatchingReceive = () => {

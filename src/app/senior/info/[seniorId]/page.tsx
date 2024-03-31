@@ -64,12 +64,13 @@ function SeniorInfoPage() {
     setTempQuestion('');
     setFirAbleTime('');
     setSecAbleTime('');
-    setThiAbleTime(''); 
+    setThiAbleTime('');
   }, []);
 
   useEffect(() => {
-    const totalWidth = 14 * koreanCharWidth * (major.length + postgradu.length + 3);
-    if(totalWidth >= 208) setOverWidth(true);
+    const totalWidth =
+      14 * koreanCharWidth * (major.length + postgradu.length + 3);
+    if (totalWidth >= 208) setOverWidth(true);
   }, [major, postgradu]);
 
   useEffect(() => {
@@ -224,7 +225,7 @@ const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`
 
   #profile-card-wrapper {
     width: 100%;
-    height: ${props => props.$overWidth ? '8.25rem' : '7.25rem'};
+    height: ${(props) => (props.$overWidth ? '8.25rem' : '7.25rem')};
     margin: 1.5rem 0 0.625rem 0;
   }
 

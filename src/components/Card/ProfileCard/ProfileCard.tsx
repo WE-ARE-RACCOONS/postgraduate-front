@@ -15,8 +15,9 @@ function ProfileCard(props: ProfileCardProps) {
   const [overWidth, setOverWidth] = useState(false);
 
   useEffect(() => {
-    const totalWidth = 14 * koreanCharWidth * (props.major.length + props.postgradu.length + 3);
-    if(totalWidth >= 208) setOverWidth(true);
+    const totalWidth =
+      14 * koreanCharWidth * (props.major.length + props.postgradu.length + 3);
+    if (totalWidth >= 208) setOverWidth(true);
   }, []);
 
   return (

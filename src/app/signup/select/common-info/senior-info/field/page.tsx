@@ -11,11 +11,7 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import {
-  changeNickname,
-  phoneNum,
-  socialIdAtom,
-} from '@/stores/signup';
+import { changeNickname, phoneNum, socialIdAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
@@ -58,9 +54,9 @@ function SeniorInfoPage() {
   const sKeyword = useAtomValue(sKeywordAtom);
 
   useEffect(() => {
-    if(detectReload()){
+    if (detectReload()) {
       router.replace('/signup/select');
-    };
+    }
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -68,7 +64,7 @@ function SeniorInfoPage() {
 
     return () => {
       window.removeEventListener('beforeunload', preventClose);
-    }
+    };
   }, []);
 
   useEffect(() => {
