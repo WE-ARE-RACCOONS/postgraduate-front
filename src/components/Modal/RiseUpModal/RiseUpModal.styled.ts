@@ -15,7 +15,7 @@ export const ModalBackground = styled.div`
       opacity: 0;
     }
     to {
-      top: 10rem;
+      top: 7.9rem;
       opacity: 1;
     }
   }
@@ -24,7 +24,7 @@ export const ModalBackground = styled.div`
     width: inherit;
     height: 38rem;
     position: absolute;
-    top: 10rem;
+    top: 7.9rem;
     animation: modalAppear 0.5s ease-out;
     border-radius: 1.9rem 1.9rem 0 0;
     z-index: 1;
