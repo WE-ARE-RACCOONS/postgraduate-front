@@ -35,7 +35,7 @@ function AddTimePage() {
   return (
     <AddTimePageContainer>
       <BackHeader headerText="일정 입력" />
-      <ProgressBar activeNum={1} />
+      <ProgressBar totalNum={3} activeNum={1} />
       <div
         style={{
           marginLeft: '1rem',

@@ -75,7 +75,7 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        <ProgressBar activeNum={0} />
+        <ProgressBar totalNum={4} activeNum={0} />
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>

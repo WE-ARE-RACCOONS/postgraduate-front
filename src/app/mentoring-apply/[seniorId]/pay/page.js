@@ -160,7 +160,7 @@ function MentoringApplyPayPage() {
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
       <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>
       <BackHeader headerText="멘토링 결제 정보" />
-      <ProgressBar activeNum={2} />
+      <ProgressBar totalNum={3} activeNum={2} />
       <MAPContent>
         <MAPTitle id="map-title-senior-info">
           {MENTORING_PAY_TITLE.seniorInfo}
