@@ -8,17 +8,27 @@ import {
 import RoundedImage from '@/components/Image/RoundedImage';
 import user_icon from '../../../../public/user.png';
 import AuthLabeledText from '@/components/Text/AuthLabeledText';
+import { useEffect, useState } from 'react';
 
 function ProfileCard(props: ProfileCardProps) {
+  const koreanCharWidth = 1.2; // 한글 글자 너비로 가정
+  const [overWidth, setOverWidth] = useState(false);
+
+  useEffect(() => {
+    const totalWidth =
+      14 * koreanCharWidth * (props.major.length + props.postgradu.length + 3);
+    if (totalWidth >= 208) setOverWidth(true);
+  }, []);
+
   return (
-    <ProfileCardContainer>
+    <ProfileCardContainer $overWidth={overWidth}>
       <div id="profile-img-wrapper">
         <RoundedImage
           imgSrc={props.profile.includes('http') ? props.profile : user_icon}
           altMsg="대학원 선배 프로필 이미지"
         />
       </div>
-      <ProfileCardInfo>
+      <ProfileCardInfo $overWidth={overWidth}>
         <ProfileCardInfoTop>
           <AuthLabeledText str={props.nickname || '대학원 선배'} />
           <div id="profile-card-mentoring-time">

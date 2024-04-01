@@ -1,9 +1,5 @@
 'use client';
-import ModalBtn from '@/components/Button/ModalBtn';
-import NextBtn from '@/components/Button/NextBtn';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import TextForm from '@/components/SingleForm/TextForm';
-import SingleValidator from '@/components/Validator/SingleValidator';
 import useModal from '@/hooks/useModal';
 import { option } from '@/stores/condition';
 import {
@@ -15,17 +11,11 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import {
-  changeNickname,
-  nickname,
-  phoneNum,
-  socialIdAtom,
-  userTypeAtom,
-} from '@/stores/signup';
+import { changeNickname, phoneNum, socialIdAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
-import { useAtomValue, useSetAtom } from 'jotai';
-import { useRouter, usePathname } from 'next/navigation';
+import { useAtomValue } from 'jotai';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
@@ -33,6 +23,7 @@ import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import findExCode from '@/utils/findExCode';
+import { detectReload, preventClose } from '@/utils/reloadFun';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -61,6 +52,20 @@ function SeniorInfoPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
+
+  useEffect(() => {
+    if (detectReload()) {
+      router.replace('/signup/select');
+    }
+
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
 
   useEffect(() => {
     if (sField && sKeyword) {

@@ -5,22 +5,36 @@ import SingleValidator from '@/components/Validator/SingleValidator';
 import { photoUrlAtom } from '@/stores/senior';
 import axios from 'axios';
 import { useSetAtom } from 'jotai';
-import { usePathname, useRouter } from 'next/navigation';
-import { useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import auth from '../../../../../../public/auth.png';
 import Image from 'next/image';
 import cancel from '../../../../../../public/cancel.png';
 import ProgressBar from '@/components/Bar/ProgressBar';
+import { detectReload, preventClose } from '@/utils/reloadFun';
+
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
   const setphotoUrl = useSetAtom(photoUrlAtom);
-  const currentPath = usePathname();
-  // const pathArr = currentPath.split('/');
-  // const socialId = pathArr[2];
   const router = useRouter();
   const fileName = photo?.name;
+
+  useEffect(() => {
+    if (detectReload()) {
+      router.replace('/signup/select');
+    }
+
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
+
   const handleClick = () => {
     if (photo) {
       setUploadFlag(false);

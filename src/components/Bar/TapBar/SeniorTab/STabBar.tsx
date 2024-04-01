@@ -56,7 +56,7 @@ function STabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
-
+  const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   useEffect(() => {
     getAccessToken().then((Token) => {
       if (Token) {
@@ -76,14 +76,21 @@ function STabBar() {
               router.replace('/');
               return;
             }
-            setData(response.data.data.seniorMentoringInfos);
+            setData(response.data.data.mentoringInfos);
+            const newMentoringInfos = response.data.data.mentoringInfos;
+            const newMentoringInfoLength = newMentoringInfos.length;
+            if (newMentoringInfoLength !== prevMentoringInfoLength) {
+              setData(newMentoringInfos);
+            }
+            setPrevMentoringInfoLength(newMentoringInfoLength);
+
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
       }
     });
-  }, [activeTab]);
+  }, [activeTab,prevMentoringInfoLength]);
 
   const renderTabContent = () => {
     return (
