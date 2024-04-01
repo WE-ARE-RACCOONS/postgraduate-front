@@ -11,7 +11,7 @@ import {
   DoneBtnBox,
   NoMentoring,
 } from './STabBrar.styled';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
@@ -31,6 +31,7 @@ import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import { SMCancelAtom } from '@/stores/condition';
 function STabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
@@ -57,7 +58,11 @@ function STabBar() {
     null,
   );
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
+  const SMCancel = useAtomValue(SMCancelAtom);
   useEffect(() => {
+    if(SMCancel === true){
+      location.reload();
+    }
     getAccessToken().then((Token) => {
       if (Token) {
         const headers = {
