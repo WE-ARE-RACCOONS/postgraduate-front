@@ -24,7 +24,6 @@ import useAuth from '@/hooks/useAuth';
 import { successAtom } from '@/stores/condition';
 function MentoringApplyDonePage() {
   const router = useRouter();
-  const success = useAtomValue(successAtom);
   const paySeniorId = useAtomValue(paySeniorIdAtom);
   const topic =
     typeof window !== 'undefined' ? window.localStorage.getItem('topic') : null;
@@ -48,21 +47,29 @@ function MentoringApplyDonePage() {
     typeof window !== 'undefined'
       ? window.localStorage.getItem('orderId')
       : null;
+  const success =
+      typeof window !== 'undefined'
+        ? window.localStorage.getItem('success')
+        : null;
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      window.localStorage.removeItem('topic');
-      window.localStorage.removeItem('question');
-      window.localStorage.removeItem('firstTime');
-      window.localStorage.removeItem('secondTime');
-      window.localStorage.removeItem('thirdTime');
-      window.localStorage.removeItem('orderId');
+      if (localStorage.getItem('topic') || localStorage.getItem('question') ||
+          localStorage.getItem('firstTime') || localStorage.getItem('secondTime') ||
+          localStorage.getItem('thirdTime') || localStorage.getItem('orderId'))
+        {
+        location.reload();
+        window.localStorage.removeItem('topic');
+        window.localStorage.removeItem('question');
+        window.localStorage.removeItem('firstTime');
+        window.localStorage.removeItem('secondTime');
+        window.localStorage.removeItem('thirdTime');
+        window.localStorage.removeItem('orderId');}
     }
   }, []);
-  // location.reload();
   return (
     <MADContainer>
       <MADContent>
-        {success ? (
+        {success ==='true' ? (
           <>
             <Image id="check-img" src={cState} alt="체크 이미지" />
             <h2>{MENTORING_DONE_TEXT.submitDone}</h2>
@@ -77,7 +84,7 @@ function MentoringApplyDonePage() {
         )}
       </MADContent>
       <MADBtnContainer>
-        {success ? (
+        {success ==='true'? (
           <>
             <div id="mentoring-done-view-msg">
               {MENTORING_DONE_TEXT.viewMsg}
