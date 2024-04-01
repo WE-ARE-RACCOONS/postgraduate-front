@@ -13,6 +13,7 @@ import Image from 'next/image';
 import search_color from '../../../../public/search2.png';
 import Spinner from '@/components/Spinner';
 function SearchForm(props: SearchFormProps) {
+  const kaistStrArr = ['카이스트', 'KAIST'];
   const [keyword, setKeyword] = useState('');
   const [result, setResult] = useState<Array<string> | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -23,11 +24,14 @@ function SearchForm(props: SearchFormProps) {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setKeyword(e.currentTarget.value);
-    if (result) setResult(null);
+    if (result) {
+      setResult(null);
+      setIsLoading(false);
+    }
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === 'Enter' || e.keyCode == 13) {
+    if (e.key === 'Enter') {
       setData();
     }
   };
@@ -60,16 +64,19 @@ function SearchForm(props: SearchFormProps) {
               },
       })
       .then(async (res) => {
-        setIsLoading(false);
         if (props.formType == 'postgradu') {
           const searchData = res.data.dataSearch.content;
+          const tempArr = [];
+          kaistStrArr.forEach((el) => {
+            if (el.includes(keyword)) tempArr.push('카이스트');
+          });
+
           if (searchData.length > 0) {
-            const tempArr = [];
             for (let i = 0; i < searchData.length; i++) {
               tempArr.push(searchData[i].schoolName);
             }
-            setResult(tempArr);
           }
+          setResult([...new Set(tempArr)]);
           return;
         }
 
@@ -112,10 +119,10 @@ function SearchForm(props: SearchFormProps) {
                   });
               }
             }
-
-            setResult(tempArr);
+            setResult([...new Set(tempArr)]);
           }
         }
+        setIsLoading(false);
       })
       .catch((err) => {
         console.error(err);
@@ -124,8 +131,11 @@ function SearchForm(props: SearchFormProps) {
 
   const handleClick = (e: React.MouseEvent<HTMLDivElement>) => {
     props.clickHandler();
+
     if (props.formType == 'postgradu') {
-      setSPostGradu(e.currentTarget.innerText);
+      if (e.currentTarget.innerText == '한국과학기술원')
+        setSPostGradu('카이스트');
+      else setSPostGradu(e.currentTarget.innerText);
       return;
     }
 
@@ -156,7 +166,6 @@ function SearchForm(props: SearchFormProps) {
           style={{ width: '90%', height: '2.25rem', border: 'none' }}
           onChange={(e) => handleChange(e)}
           onKeyDown={(e) => handleKeyDown(e)}
-          onBlur={setData}
         />
       </TextFieldWrapper>
       <SearchResultWrapper>

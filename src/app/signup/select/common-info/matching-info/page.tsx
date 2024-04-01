@@ -13,16 +13,36 @@ import {
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import CheckBox from '@/components/Checkbox';
 import NextBtn from '@/components/Button/NextBtn';
+import { useEffect } from 'react';
+import { detectReload, preventClose } from '@/utils/reloadFun';
+import { useRouter } from 'next/navigation';
 
 function MatchingInfoPage() {
+  const router = useRouter();
   const setDesiredSchool = useSetAtom(desiredSchool);
   const setDesiredField = useSetAtom(desiredField);
   const schoolCharCount = useAtomValue(desiredSchoolLen);
   const fieldCharCount = useAtomValue(desiredFieldLen);
   const [matchingReceive, setMatchingReceive] = useAtom(matchingReceiveAtom);
+
+  useEffect(() => {
+    if (detectReload()) {
+      router.replace('/signup/select');
+    }
+
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
+
   const handleMatchingReceive = () => {
     setMatchingReceive(!matchingReceive);
   };
+
   return (
     <div>
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>

@@ -11,20 +11,20 @@ export const ModalBackground = styled.div`
 
   @keyframes modalAppear {
     from {
-      top: 35rem;
+      top: 38rem;
       opacity: 0;
     }
     to {
-      top: 7.25rem;
+      top: 7.9rem;
       opacity: 1;
     }
   }
 
   .rise-up-modal {
     width: inherit;
-    height: 37.25rem;
+    height: 38rem;
     position: absolute;
-    top: 7.75rem;
+    top: 7.9rem;
     animation: modalAppear 0.5s ease-out;
     border-radius: 1.9rem 1.9rem 0 0;
     z-index: 1;

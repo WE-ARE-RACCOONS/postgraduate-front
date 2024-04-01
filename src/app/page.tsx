@@ -1,7 +1,7 @@
 'use client';
 import MenuBar from '../components/Bar/MenuBar';
 import Login from '../components/kakao/login';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import usePrevPath from '../hooks/usePrevPath';
 import styled from 'styled-components';
 import SeniorProfile from '../components/SeniorProfile/SeniorProfile';
@@ -11,22 +11,16 @@ import SwiperComponent from '../components/Swiper/Swiper';
 import { createPortal } from 'react-dom';
 import useModal from '../hooks/useModal';
 import DimmedModal from '../components/Modal/DimmedModal';
-import Image from 'next/image';
-import search from '../../public/search.png';
-import logo from '../../public/logo.png';
 import SearchModal from '../components/Modal/SearchModal';
-import useAuth from '../hooks/useAuth';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
-import { SeniorProfileData } from '@/types/profile/seniorProfile';
 import { listDataAtom, pageNumAtom } from '@/stores/home';
-import { useRouter } from 'next/router';
 import Footer from '@/components/Footer';
+
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-  // const [data, setData] = useState<Array<SeniorProfileData>>([]);
   const [data, setData] = useAtom(listDataAtom);
   const [page, setPage] = useAtom(pageNumAtom);
   const field = useAtomValue(sfactiveTabAtom);
@@ -79,9 +73,11 @@ export default function Home() {
     };
 
     window.addEventListener('scroll', infiniteBottom);
+    window.addEventListener('touchmove', infiniteBottom);
 
     return () => {
       window.removeEventListener('scroll', infiniteBottom);
+      window.removeEventListener('touchmove', infiniteBottom);
     };
   }, [page]);
 
