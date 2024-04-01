@@ -1,6 +1,6 @@
 'use client';
 import NextBtn from '@/components/Button/NextBtn';
-import { prevPathAtom, userTypeAtom } from '@/stores/signup';
+import { prevPathAtom } from '@/stores/signup';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import party_popper from '../../../../public/party_popper.png';
@@ -11,13 +11,16 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import { useRouter } from 'next/navigation';
 import BackHeader from '@/components/Header/BackHeader';
 import styled from 'styled-components';
+import useAuth from '@/hooks/useAuth';
+
 function SignUpDonePage() {
+  const router = useRouter();
   const prevPath = useAtomValue(prevPathAtom);
-  const userType = useAtomValue(userTypeAtom);
+  const { getUserType } = useAuth();
+  const userType = getUserType();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-profile-portal',
   );
-  const router = useRouter();
 
   return (
     <div>
