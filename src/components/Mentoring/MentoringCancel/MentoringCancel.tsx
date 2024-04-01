@@ -17,10 +17,13 @@ import state from '@/../../public/state.png';
 import cState from '@/../../public/cState.png';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import { useAtom } from 'jotai';
+import { JMCancelAtom } from '@/stores/condition';
 function MentoringCancel(props: ModalMentoringclProps) {
   const [data, setData] = useState<MentoringData[] | null>(null);
   const { getAccessToken, removeTokens } = useAuth();
   const [cancelStatus, setCancelStatus] = useState<string>('');
+  const [JMCancel , setJMCancel] = useAtom(JMCancelAtom)
   const [noCancelText, setNoCancelText] = useState<string>('아니요');
   const [showCancelButton, setShowCancelButton] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
@@ -59,6 +62,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
           setData(response.data);
           if (response.data.code === 'MT201') {
             setCancelStatus('취소되었습니다');
+            setJMCancel(true);
           } else {
             setCancelStatus('취소 실패');
           }
