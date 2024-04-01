@@ -24,6 +24,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const setSKeyword = useSetAtom(sKeywordAtom);
   const [userInputKeyword, setUserInputKeyword] = useState('');
   const [inputCount, setInputCount] = useState(0);
+  
   const handleConfirm = () => {
     if (selected.length == 0) setFlag(true);
     else {
@@ -78,7 +79,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           {totalBtns &&
             totalBtns.map((el, idx) => (
               <SelectedBtn
-                btnText={el}
+                btnText={`#${el}`}
                 selected={selected}
                 selectHandler={setSelected}
                 key={idx}
