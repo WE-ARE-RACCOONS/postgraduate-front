@@ -24,13 +24,15 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const [time, setTime] = useAtom(noTime);
   const [know, setKnow] = useAtom(notKnow);
   const [etc, setEtc] = useAtom(SCEtc);
-  const [SMCancel , setSMCancel] = useAtom(SMCancelAtom)
+  const [SMCancel , setSMCancel] = useAtom(SMCancelAtom);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const flag = time || know || etc;
   const xClick = () => {
     props.modalHandler();
   };
   const cancelMentoring = async () => {
     try {
+      setIsSubmitting(true);
       getAccessToken().then(async (Token) => {
         if (Token) {
           const headers = {
@@ -50,6 +52,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
           );
           // const responseData = await response.json();
           setSMCancel(true);
+          setIsSubmitting(false);
           props.modalHandler();
         }
       });
