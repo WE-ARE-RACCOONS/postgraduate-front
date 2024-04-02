@@ -5,5 +5,5 @@ export const AUTH_DONE_MSG = {
   firGuide: `\'내 프로필 수정\'에서 프로필을 완성하면\n`,
   secGuide: '멘토링을 시작',
   thiGuide: '할 수 있어요.',
-  btnText: '확인했어요'
-}
+  btnText: '확인했어요',
+};

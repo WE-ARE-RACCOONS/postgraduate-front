@@ -48,7 +48,7 @@ export const MProfileBtn = styled.button`
   height: 4rem;
   border: 0;
   border-radius: 0.75rem;
-  background-color: #2FC4B2;
+  background-color: #2fc4b2;
   color: #fff;
   font-size: 1.125rem;
   font-weight: 600;
@@ -57,4 +57,4 @@ export const MProfileBtn = styled.button`
   left: 1rem;
   font-family: Pretendard;
   cursor: pointer;
-`
+`;

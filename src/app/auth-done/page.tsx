@@ -1,9 +1,9 @@
 'use client';
-import styled from "styled-components";
-import Image from "next/image";
+import styled from 'styled-components';
+import Image from 'next/image';
 import cState from '../../../public/cState.png';
-import { AUTH_DONE_MSG } from "@/constants/auth/done";
-import { useRouter } from "next/navigation";
+import { AUTH_DONE_MSG } from '@/constants/auth/done';
+import { useRouter } from 'next/navigation';
 
 function AuthDonePage() {
   const router = useRouter();
@@ -16,20 +16,28 @@ function AuthDonePage() {
     <ADPContainer>
       <div id="auth-done-top-text">{AUTH_DONE_MSG.topText}</div>
       <ADPMidBox>
-        <Image id="auth-done-img" src={cState} alt="완료 이미지" /> 
+        <Image id="auth-done-img" src={cState} alt="완료 이미지" />
         <h2>{AUTH_DONE_MSG.title}</h2>
         <div id="auth-done-desc">{AUTH_DONE_MSG.description}</div>
       </ADPMidBox>
       <ADPBottomBox>
-        <div id="fir-guide-msg" className="guide-msg">{AUTH_DONE_MSG.firGuide}</div>
+        <div id="fir-guide-msg" className="guide-msg">
+          {AUTH_DONE_MSG.firGuide}
+        </div>
         <div id="guide-msg-bottom-line">
-          <div id="sec-guide-msg" className="guide-msg">{AUTH_DONE_MSG.secGuide}</div>
-          <div id="thi-guide-msg" className="guide-msg">{AUTH_DONE_MSG.thiGuide}</div>
+          <div id="sec-guide-msg" className="guide-msg">
+            {AUTH_DONE_MSG.secGuide}
+          </div>
+          <div id="thi-guide-msg" className="guide-msg">
+            {AUTH_DONE_MSG.thiGuide}
+          </div>
         </div>
       </ADPBottomBox>
-      <ADPConfirmBtn onClick={handleClick}>{AUTH_DONE_MSG.btnText}</ADPConfirmBtn>
+      <ADPConfirmBtn onClick={handleClick}>
+        {AUTH_DONE_MSG.btnText}
+      </ADPConfirmBtn>
     </ADPContainer>
-  )
+  );
 }
 
 export default AuthDonePage;
@@ -47,7 +55,7 @@ const ADPContainer = styled.div`
     line-height: 140%;
     letter-spacing: -0.5px;
   }
-`
+`;
 
 const ADPMidBox = styled.div`
   width: 18.375rem;
@@ -70,17 +78,17 @@ const ADPMidBox = styled.div`
   }
 
   #auth-done-desc {
-    color: #868E96;
+    color: #868e96;
     line-height: 140%;
     letter-spacing: -0.5px;
     margin-top: 0.875rem;
   }
-`
+`;
 
 const ADPBottomBox = styled.div`
   width: 21.44rem;
   height: 4.25rem;
-  background-color: #F8F9FA;
+  background-color: #f8f9fa;
   border-radius: 1rem;
   text-align: center;
   position: absolute;
@@ -106,16 +114,16 @@ const ADPBottomBox = styled.div`
   }
 
   #sec-guide-msg {
-    color: #2FC4B2;
+    color: #2fc4b2;
   }
-`
+`;
 
 const ADPConfirmBtn = styled.button`
   width: 21.19rem;
   height: 3.375rem;
   border: 0;
   border-radius: 0.75rem;
-  background-color: #2FC4B2;
+  background-color: #2fc4b2;
   color: #fff;
   font-size: 1.125rem;
   font-weight: 600;
@@ -124,4 +132,4 @@ const ADPConfirmBtn = styled.button`
   left: 50%;
   transform: translateX(-50%);
   cursor: pointer;
-`
+`;

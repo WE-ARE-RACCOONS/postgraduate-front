@@ -64,7 +64,11 @@ function AuthPage() {
 
           if (res.code == 'IMG202') {
             setphotoUrl(res.data.profileUrl);
-            router.push(accessTkn ? '/auth-done' : `/signup/select/common-info/senior-info/major`);
+            router.push(
+              accessTkn
+                ? '/auth-done'
+                : `/signup/select/common-info/senior-info/major`,
+            );
           }
         })
         .catch((err) => {

@@ -65,17 +65,20 @@ function SearchResultPage() {
         }
         url += `&page=${page + 1}`;
 
-        axios.get(url)
-        .then((response) => {
-          const res = response.data;
-          if(res.code == 'SNR200') {
-            setData((data) => [...data, ...res.data.seniorSearchResponses]);
-            setPage((page) => res.data.totalElements / 10 <= page ? page : page + 1);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        axios
+          .get(url)
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR200') {
+              setData((data) => [...data, ...res.data.seniorSearchResponses]);
+              setPage((page) =>
+                res.data.totalElements / 10 <= page ? page : page + 1,
+              );
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
       }
     };
 

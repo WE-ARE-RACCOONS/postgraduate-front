@@ -8,7 +8,8 @@ function SelectedBtn(props: SelectedBtnProps) {
   const [selected, setSelected] = useState(false);
 
   useEffect(() => {
-    if (props.selected.includes(props.btnText.replace('#', ''))) setSelected(true);
+    if (props.selected.includes(props.btnText.replace('#', '')))
+      setSelected(true);
   }, []);
 
   const handleClick = () => {

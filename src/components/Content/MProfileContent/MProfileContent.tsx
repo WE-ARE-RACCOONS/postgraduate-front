@@ -30,14 +30,14 @@ function MProfileContent(props: MProfileContentProps) {
         onClick={xClick}
       />
       <MProfileContainer>
-        <div id='profile-cancle-ask-msg'>{`프로필 등록을\n취소하시겠어요?`}</div>
+        <div id="profile-cancle-ask-msg">{`프로필 등록을\n취소하시겠어요?`}</div>
         <div id="profile-guide-msg">
           프로필을 지금 작성하지 않으면
           <br />
           멘토링을 진행할 수 없어요.
         </div>
       </MProfileContainer>
-      <MProfileBtn id='profile-btn' onClick={handleClick}>
+      <MProfileBtn id="profile-btn" onClick={handleClick}>
         프로필 등록하기
       </MProfileBtn>
     </>
