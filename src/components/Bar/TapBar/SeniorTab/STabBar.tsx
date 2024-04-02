@@ -60,7 +60,7 @@ function STabBar() {
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   const SMCancel = useAtomValue(SMCancelAtom);
   useEffect(() => {
-    if(SMCancel === true){
+    if (SMCancel === true) {
       location.reload();
     }
     getAccessToken().then((Token) => {
@@ -88,14 +88,13 @@ function STabBar() {
               setData(newMentoringInfos);
             }
             setPrevMentoringInfoLength(newMentoringInfoLength);
-
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
       }
     });
-  }, [activeTab,prevMentoringInfoLength]);
+  }, [activeTab, prevMentoringInfoLength]);
 
   const renderTabContent = () => {
     return (

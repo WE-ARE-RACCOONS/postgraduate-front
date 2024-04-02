@@ -48,28 +48,33 @@ function MentoringApplyDonePage() {
       ? window.localStorage.getItem('orderId')
       : null;
   const success =
-      typeof window !== 'undefined'
-        ? window.localStorage.getItem('success')
-        : null;
+    typeof window !== 'undefined'
+      ? window.localStorage.getItem('success')
+      : null;
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      if (localStorage.getItem('topic') || localStorage.getItem('question') ||
-          localStorage.getItem('firstTime') || localStorage.getItem('secondTime') ||
-          localStorage.getItem('thirdTime') || localStorage.getItem('orderId'))
-        {
+      if (
+        localStorage.getItem('topic') ||
+        localStorage.getItem('question') ||
+        localStorage.getItem('firstTime') ||
+        localStorage.getItem('secondTime') ||
+        localStorage.getItem('thirdTime') ||
+        localStorage.getItem('orderId')
+      ) {
         location.reload();
         window.localStorage.removeItem('topic');
         window.localStorage.removeItem('question');
         window.localStorage.removeItem('firstTime');
         window.localStorage.removeItem('secondTime');
         window.localStorage.removeItem('thirdTime');
-        window.localStorage.removeItem('orderId');}
+        window.localStorage.removeItem('orderId');
+      }
     }
   }, []);
   return (
     <MADContainer>
       <MADContent>
-        {success ==='true' ? (
+        {success === 'true' ? (
           <>
             <Image id="check-img" src={cState} alt="체크 이미지" />
             <h2>{MENTORING_DONE_TEXT.submitDone}</h2>
@@ -84,7 +89,7 @@ function MentoringApplyDonePage() {
         )}
       </MADContent>
       <MADBtnContainer>
-        {success ==='true'? (
+        {success === 'true' ? (
           <>
             <div id="mentoring-done-view-msg">
               {MENTORING_DONE_TEXT.viewMsg}

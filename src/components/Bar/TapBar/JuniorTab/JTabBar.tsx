@@ -62,10 +62,10 @@ function TabBar() {
     null,
   );
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
-  const JMCancel = useAtomValue(JMCancelAtom)
+  const JMCancel = useAtomValue(JMCancelAtom);
   useEffect(() => {
     let prevMentoringInfoLength = 0;
-    if(JMCancel === true){
+    if (JMCancel === true) {
       location.reload();
     }
     getAccessToken().then((Token) => {
@@ -93,14 +93,13 @@ function TabBar() {
               setData(newMentoringInfos);
             }
             setPrevMentoringInfoLength(newMentoringInfoLength);
-
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
       }
     });
-  }, [activeTab , prevMentoringInfoLength]);
+  }, [activeTab, prevMentoringInfoLength]);
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
     getAccessToken().then(async (Token) => {

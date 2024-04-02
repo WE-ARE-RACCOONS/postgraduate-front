@@ -128,7 +128,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
             },
           );
           const responseData = await response.json();
-          setIsAccount(responseData.data)
+          setIsAccount(responseData.data);
           if (props.acceptModalHandler) {
             props.acceptModalHandler();
           }

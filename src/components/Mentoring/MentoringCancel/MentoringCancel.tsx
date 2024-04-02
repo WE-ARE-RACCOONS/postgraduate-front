@@ -23,7 +23,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
   const [data, setData] = useState<MentoringData[] | null>(null);
   const { getAccessToken, removeTokens } = useAuth();
   const [cancelStatus, setCancelStatus] = useState<string>('');
-  const [JMCancel , setJMCancel] = useAtom(JMCancelAtom)
+  const [JMCancel, setJMCancel] = useAtom(JMCancelAtom);
   const [noCancelText, setNoCancelText] = useState<string>('아니요');
   const [showCancelButton, setShowCancelButton] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);

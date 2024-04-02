@@ -31,7 +31,7 @@ const PayResultPage = () => {
       ? window.localStorage.getItem('thirdTime')
       : null;
   const { getAccessToken, removeTokens } = useAuth();
-  const successLS = (successValue:boolean) => {
+  const successLS = (successValue: boolean) => {
     if (typeof window !== 'undefined') {
       window.localStorage.setItem('success', successValue.toString());
     }
@@ -87,7 +87,6 @@ const PayResultPage = () => {
         window.localStorage.setItem('orderId', search);
       }
       payHandler();
-      
     }
   }, []);
   return <div>결제 결과 처리 중...</div>;
