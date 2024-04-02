@@ -17,19 +17,22 @@ import useAuth from '@/hooks/useAuth';
 import { SENIOR_MENTOR_CANCEL } from '@/constants/form/sMentoCanelForm';
 import CheckBox from '@/components/Checkbox';
 import { useAtom } from 'jotai';
-import { SCEtc, noTime, notKnow } from '@/stores/condition';
+import { SCEtc, SMCancelAtom, noTime, notKnow } from '@/stores/condition';
 function SmentoringCancel(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [reason, setReason] = useState('');
   const [time, setTime] = useAtom(noTime);
   const [know, setKnow] = useAtom(notKnow);
   const [etc, setEtc] = useAtom(SCEtc);
+  const [SMCancel, setSMCancel] = useAtom(SMCancelAtom);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const flag = time || know || etc;
   const xClick = () => {
     props.modalHandler();
   };
   const cancelMentoring = async () => {
     try {
+      setIsSubmitting(true);
       getAccessToken().then(async (Token) => {
         if (Token) {
           const headers = {
@@ -48,6 +51,8 @@ function SmentoringCancel(props: ModalMentoringProps) {
             },
           );
           // const responseData = await response.json();
+          setSMCancel(true);
+          setIsSubmitting(false);
           props.modalHandler();
         }
       });

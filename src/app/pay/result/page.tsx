@@ -11,7 +11,6 @@ import findExCode from '@/utils/findExCode';
 const PayResultPage = () => {
   const [oderId, setOrderId] = useAtom(orderIdAtom);
   const router = useRouter();
-  const [success, setSuccess] = useAtom(successAtom);
   const searchParams = useSearchParams();
   const topic =
     typeof window !== 'undefined' ? window.localStorage.getItem('topic') : null;
@@ -32,6 +31,11 @@ const PayResultPage = () => {
       ? window.localStorage.getItem('thirdTime')
       : null;
   const { getAccessToken, removeTokens } = useAuth();
+  const successLS = (successValue: boolean) => {
+    if (typeof window !== 'undefined') {
+      window.localStorage.setItem('success', successValue.toString());
+    }
+  };
   const payHandler = () => {
     getAccessToken().then((accessTkn) => {
       const oderId =
@@ -63,9 +67,9 @@ const PayResultPage = () => {
               return;
             }
             if (res.code == 'MT202') {
-              setSuccess(true);
+              successLS(true);
             } else {
-              setSuccess(false);
+              successLS(false);
             }
             router.push('/mentoring-apply/done');
           })
