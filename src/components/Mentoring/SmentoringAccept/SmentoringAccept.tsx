@@ -5,8 +5,11 @@ import { useRouter } from 'next/navigation';
 import accept from '../../../../public/cState.png';
 import { SmentoringAccBox } from './SmentoringAccept.styled';
 import NextBtn from '@/components/Button/NextBtn';
+import { useAtomValue } from 'jotai';
+import { accountAtom } from '@/stores/senior';
 function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
   const router = useRouter();
+  const userAccount = useAtomValue(accountAtom);
   const setAccount = () => {
     router.push('/senior/account');
   };
@@ -33,8 +36,25 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
         </h3>
         <div id="msg-show">내멘토링 진행예정 탭에서 확인할 수 있어요</div>
       </div>
-      <div id="msg-btn">계좌를 등록해야 멘토링 보수를 정산받을 수 있어요</div>
-      <NextBtn kind="route" url="/senior/account" btnText="정산계좌 입력하기" />
+      {userAccount === true ? (
+        <div id="msg-btn">계좌가 이미 등록되어 있어요.</div>
+      ) : (
+        <div id="msg-btn">계좌를 등록해야 멘토링 보수를 정산받을 수 있어요</div>
+      )}
+      {userAccount === true ? (
+        <NextBtn
+          kind="route"
+          onClick={modalHandler}
+          url="/senior/mentoring"
+          btnText="내 멘토링 보러가기"
+        />
+      ) : (
+        <NextBtn
+          kind="route"
+          url="/senior/account"
+          btnText="정산계좌 입력하기"
+        />
+      )}
     </SmentoringAccBox>
   );
 }
