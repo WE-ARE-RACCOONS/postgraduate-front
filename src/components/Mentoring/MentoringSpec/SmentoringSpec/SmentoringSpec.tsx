@@ -28,12 +28,13 @@ import {
 import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 import { activeTabAtom } from '@/stores/tap';
-import { useAtomValue } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
 import { ValidatorBox } from '@/components/Content/AddTime/AddTime.styled';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import { accountAtom } from '@/stores/senior';
 
 function SmentoringSpec(props: ModalMentoringSProps) {
   const router = useRouter();
@@ -42,7 +43,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
   const [date, setDate] = useState('');
   const activeTab = useAtomValue(activeTabAtom);
   const [isActive, setIsActive] = useState(false);
-
+  const [isAccount, setIsAccount] = useAtom(accountAtom);
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const allBtns = document.querySelectorAll('.smc-btns');
     if (allBtns.length > 0) {
@@ -127,6 +128,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
             },
           );
           const responseData = await response.json();
+          setIsAccount(responseData.data);
           if (props.acceptModalHandler) {
             props.acceptModalHandler();
           }

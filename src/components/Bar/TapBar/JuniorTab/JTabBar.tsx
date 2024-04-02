@@ -10,7 +10,7 @@ import {
   MentoringBox,
   DateDoneBtn,
 } from './JTabBar.styled';
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 import { MentoringData } from '@/types/mentoring/mentoring';
@@ -28,6 +28,7 @@ import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 import { mentoringIdAtom } from '@/stores/user';
+import { JMCancelAtom } from '@/stores/condition';
 
 function convertDateType(date: string) {
   if (!date) return new Date();
@@ -61,8 +62,12 @@ function TabBar() {
     null,
   );
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
+  const JMCancel = useAtomValue(JMCancelAtom);
   useEffect(() => {
     let prevMentoringInfoLength = 0;
+    if (JMCancel === true) {
+      location.reload();
+    }
     getAccessToken().then((Token) => {
       if (Token) {
         const headers = {
@@ -88,14 +93,13 @@ function TabBar() {
               setData(newMentoringInfos);
             }
             setPrevMentoringInfoLength(newMentoringInfoLength);
-
           })
           .catch((error) => {
             console.error('Error fetching data:', error);
           });
       }
     });
-  }, [activeTab , prevMentoringInfoLength]);
+  }, [activeTab, prevMentoringInfoLength]);
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
     getAccessToken().then(async (Token) => {
