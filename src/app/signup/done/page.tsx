@@ -12,15 +12,21 @@ import { useRouter } from 'next/navigation';
 import BackHeader from '@/components/Header/BackHeader';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
+import { useEffect, useState } from 'react';
 
 function SignUpDonePage() {
   const router = useRouter();
   const prevPath = useAtomValue(prevPathAtom);
   const { getUserType } = useAuth();
-  const userType = getUserType();
+  const [userType, setUserType] = useState('');
   const { modal, modalHandler, portalElement } = useModal(
     'senior-profile-portal',
   );
+
+  useEffect(() => {
+    const userT = getUserType();
+    if(userT) setUserType(userT);
+  }, []);
 
   return (
     <div>
