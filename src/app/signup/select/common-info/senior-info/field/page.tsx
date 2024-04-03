@@ -211,9 +211,8 @@ function SeniorInfoPage() {
     <>
       <div>
         <BackHeader headerText="정보입력" />
-        <ProgressBar activeNum={1} />
       </div>
-      <ProgressBar activeNum={2} />
+      <ProgressBar totalNum={4} activeNum={3} />
       <SeniorInfoPageContainer>
         <h3>소속 중인 연구실에 대해 알려주세요.</h3>
         <SIFormTitleContainer>

@@ -87,7 +87,7 @@ function MentoringApplySchedulePage() {
   return (
     <MASContainer $timeArr={timeArr}>
       <BackHeader headerText="멘토링 일정 제안" />
-      <ProgressBar activeNum={1} />
+      <ProgressBar totalNum={3} activeNum={1} />
       <div id="senior-schedule-title-wrapper">
         <MASTitle>
           {sNickname}

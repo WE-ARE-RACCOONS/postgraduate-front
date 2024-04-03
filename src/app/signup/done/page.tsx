@@ -1,6 +1,6 @@
 'use client';
 import NextBtn from '@/components/Button/NextBtn';
-import { prevPathAtom, userTypeAtom } from '@/stores/signup';
+import { prevPathAtom } from '@/stores/signup';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import party_popper from '../../../../public/party_popper.png';
@@ -11,13 +11,22 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import { useRouter } from 'next/navigation';
 import BackHeader from '@/components/Header/BackHeader';
 import styled from 'styled-components';
+import useAuth from '@/hooks/useAuth';
+import { useEffect, useState } from 'react';
+
 function SignUpDonePage() {
+  const router = useRouter();
   const prevPath = useAtomValue(prevPathAtom);
-  const userType = useAtomValue(userTypeAtom);
+  const { getUserType } = useAuth();
+  const [userType, setUserType] = useState('');
   const { modal, modalHandler, portalElement } = useModal(
     'senior-profile-portal',
   );
-  const router = useRouter();
+
+  useEffect(() => {
+    const userT = getUserType();
+    if(userT) setUserType(userT);
+  }, []);
 
   return (
     <div>
@@ -30,7 +39,7 @@ function SignUpDonePage() {
           style={{ marginBottom: '0.46rem' }}
           alt="회원가입 축하 이미지"
         />
-        {userType == 'junior' && (
+        {userType && userType == 'junior' && (
           <>
             <h3>회원가입 완료!</h3>
             <DoneFont>
@@ -40,7 +49,7 @@ function SignUpDonePage() {
             </DoneFont>
           </>
         )}
-        {userType == 'senior' && (
+        {userType && userType == 'senior' && (
           <>
             <h3>회원 등록 완료!</h3>
             <DoneFont>
@@ -51,13 +60,13 @@ function SignUpDonePage() {
           </>
         )}
       </div>
-      {userType == 'junior' && (
+      {userType && userType == 'junior' && (
         <div style={{ marginTop: '21%', textAlign: 'center' }}>
           <NextBtn kind="route" url="/" btnText="대학원 선배 둘러보기" />
           <NextBtn kind="prev" url={prevPath} btnText="이전 페이지로 가기" />
         </div>
       )}
-      {userType == 'senior' && (
+      {userType && userType == 'senior' && (
         <>
           <SDoneBottomMsg>
             <div style={{ display: 'flex' }}>

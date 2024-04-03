@@ -96,7 +96,7 @@ function AddProfilePage() {
   return (
     <AddProfilePageContainer>
       <BackHeader headerText="멘토링 소개" />
-      <ProgressBar activeNum={0} />
+      <ProgressBar totalNum={3} activeNum={0} />
       <div style={{ marginTop: '1.25rem', marginLeft: '1rem' }}>
         <h3>{PROFILE_DIRECTION.addProfile}</h3>
         <div id="profile-sub">{PROFILE_SUB_DIRECTION.addProfile}</div>

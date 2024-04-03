@@ -13,13 +13,22 @@ import Image from 'next/image';
 import cancel from '../../../../../../public/cancel.png';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import useAuth from '@/hooks/useAuth';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
+  const { getAccessToken } = useAuth();
+  const [accessTkn, setAccessTkn] = useState<string | null | undefined>('');
   const setphotoUrl = useSetAtom(photoUrlAtom);
   const router = useRouter();
   const fileName = photo?.name;
+
+  useEffect(() => {
+    getAccessToken().then((tkn) => {
+      setAccessTkn(tkn);
+    });
+  }, []);
 
   useEffect(() => {
     if (detectReload()) {
@@ -55,7 +64,11 @@ function AuthPage() {
 
           if (res.code == 'IMG202') {
             setphotoUrl(res.data.profileUrl);
-            router.push(`/signup/select/common-info/senior-info/major`);
+            router.push(
+              accessTkn
+                ? '/auth-done'
+                : `/signup/select/common-info/senior-info/major`,
+            );
           }
         })
         .catch((err) => {
@@ -75,7 +88,7 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        <ProgressBar activeNum={0} />
+        {!accessTkn && <ProgressBar totalNum={4} activeNum={0} />}
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
