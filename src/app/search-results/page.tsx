@@ -4,7 +4,6 @@ import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
-import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
@@ -12,18 +11,18 @@ import SearchDropDown from '@/components/DropDown/SearchDropDown';
 import useModal from '@/hooks/useModal';
 import SearchModal from '@/components/Modal/SearchModal';
 import { createPortal } from 'react-dom';
-import findExCode from '@/utils/findExCode';
 import Spinner from '@/components/Spinner';
+import { SeniorProfileData } from '@/types/profile/seniorProfile';
 
 function SearchResultPage() {
-  const { getAccessToken, removeTokens } = useAuth();
   const searchParams = useSearchParams();
   const searchTerm = searchParams.get('searchTerm');
   const router = useRouter();
   const [sort, setSort] = useState('');
-  const [data, setData] = useState([]);
+  const [data, setData] = useState<Array<SeniorProfileData>>([]);
+  const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
-  const [length, setLength] = useState('');
+  const [length, setLength] = useState(0);
   const {
     modal: searchModal,
     modalHandler: searchModalHandler,
@@ -43,13 +42,54 @@ function SearchResultPage() {
         .then((res) => {
           setIsLoading(false);
           setData(res.data.data.seniorSearchResponses);
-          setLength(res.data.data.seniorSearchResponses.length);
+          setLength(res.data.data.totalElements);
         })
         .catch((err) => {
           console.error(err);
         });
     }
   }, [searchTerm, sort]);
+
+  useEffect(() => {
+    setPage(1);
+  }, [searchTerm]);
+
+  useEffect(() => {
+    const infiniteBottom = () => {
+      let isScrollAtBottom =
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 1;
+      if (isScrollAtBottom) {
+        let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
+        if (sort) {
+          url += `&sort=${sort}`;
+        }
+        url += `&page=${page + 1}`;
+
+        axios
+          .get(url)
+          .then((response) => {
+            const res = response.data;
+            if (res.code == 'SNR200') {
+              setData((data) => [...data, ...res.data.seniorSearchResponses]);
+              setPage((page) =>
+                res.data.totalElements / 10 <= page ? page : page + 1,
+              );
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    };
+
+    window.addEventListener('scroll', infiniteBottom);
+    window.addEventListener('touchmove', infiniteBottom);
+
+    return () => {
+      window.removeEventListener('scroll', infiniteBottom);
+      window.removeEventListener('touchmove', infiniteBottom);
+    };
+  }, [page]);
 
   return (
     <>

@@ -1,7 +1,6 @@
-import x_icon from '../../../../public/x.png';
+import x_icon from '../../../../public/x_gray.png';
 import Image from 'next/image';
-import { MProfileContainer } from './MProfileContent.styled';
-import ClickedBtn from '@/components/Button/ClickedBtn';
+import { MProfileBtn, MProfileContainer } from './MProfileContent.styled';
 import { MProfileContentProps } from '@/types/content/mProfileContent';
 import { useRouter } from 'next/navigation';
 
@@ -15,7 +14,6 @@ function MProfileContent(props: MProfileContentProps) {
 
   const xClick = () => {
     props.modalHandler();
-    router.push('/add-profile');
   };
 
   return (
@@ -25,25 +23,23 @@ function MProfileContent(props: MProfileContentProps) {
         src={x_icon}
         alt="닫기 버튼"
         sizes="(max-width: 600px) 3.rem"
-        width={36}
-        height={36}
-        style={{ marginLeft: '18.25rem', marginTop: '1rem' }}
+        width={21}
+        height={21}
+        style={{ marginLeft: '18.25rem', marginTop: '1rem', cursor: 'pointer' }}
         priority
         onClick={xClick}
       />
       <MProfileContainer>
-        <h3>프로필 등록을 취소하시겠어요?</h3>
+        <div id="profile-cancle-ask-msg">{`프로필 등록을\n취소하시겠어요?`}</div>
         <div id="profile-guide-msg">
-          프로필을 작성하지 않으면
+          프로필을 지금 작성하지 않으면
           <br />
-          멘토링을 진행할 수 없어요
+          멘토링을 진행할 수 없어요.
         </div>
       </MProfileContainer>
-      <ClickedBtn
-        kind="modal"
-        clickHandler={handleClick}
-        btnText="프로필 등록하기"
-      />
+      <MProfileBtn id="profile-btn" onClick={handleClick}>
+        프로필 등록하기
+      </MProfileBtn>
     </>
   );
 }

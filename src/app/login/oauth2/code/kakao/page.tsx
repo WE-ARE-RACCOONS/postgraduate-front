@@ -28,7 +28,6 @@ function KakaoPage() {
       .then((res) => {
         const response = res.data;
         if (response.code == 'AU205') {
-          // router.replace(`/signup/${response.data.socialId}`);
           setSocialId(response.data.socialId);
           router.push('/signup/select');
           return;
@@ -48,10 +47,21 @@ function KakaoPage() {
           router.replace('/');
           return;
         }
+
+        router.replace('/');
       })
       .catch((err) => {
         console.error(err);
+        router.replace('/');
       });
+  }, []);
+
+  useEffect(() => {
+    const loginTimeout = setTimeout(() => {
+      router.replace('/');
+    }, 15000);
+
+    return () => clearTimeout(loginTimeout);
   }, []);
 
   return (

@@ -38,7 +38,7 @@ function MentoringApplyQuestionPage() {
   return (
     <MAQContainer>
       <BackHeader headerText="신청서 작성" />
-      <ProgressBar activeNum={0} />
+      <ProgressBar totalNum={3} activeNum={0} />
       <MQANoticeBox>
         <div id="mentoring-notice-text-box">
           <div id="mentoring-notice-text" className="mentoring-notice">
