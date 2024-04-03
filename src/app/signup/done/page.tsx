@@ -39,7 +39,7 @@ function SignUpDonePage() {
           style={{ marginBottom: '0.46rem' }}
           alt="회원가입 축하 이미지"
         />
-        {userType == 'junior' && (
+        {userType && userType == 'junior' && (
           <>
             <h3>회원가입 완료!</h3>
             <DoneFont>
@@ -49,7 +49,7 @@ function SignUpDonePage() {
             </DoneFont>
           </>
         )}
-        {userType == 'senior' && (
+        {userType && userType == 'senior' && (
           <>
             <h3>회원 등록 완료!</h3>
             <DoneFont>
@@ -60,13 +60,13 @@ function SignUpDonePage() {
           </>
         )}
       </div>
-      {userType == 'junior' && (
+      {userType && userType == 'junior' && (
         <div style={{ marginTop: '21%', textAlign: 'center' }}>
           <NextBtn kind="route" url="/" btnText="대학원 선배 둘러보기" />
           <NextBtn kind="prev" url={prevPath} btnText="이전 페이지로 가기" />
         </div>
       )}
-      {userType == 'senior' && (
+      {userType && userType == 'senior' && (
         <>
           <SDoneBottomMsg>
             <div style={{ display: 'flex' }}>
