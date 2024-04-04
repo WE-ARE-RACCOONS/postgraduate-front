@@ -9,5 +9,6 @@ export interface SeniorProfileData {
   major: string;
   nickName: string;
   postgradu: string;
+  professor: string;
   seniorId: number;
 }

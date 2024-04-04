@@ -29,6 +29,11 @@ export const SeniorProfileInfo = styled.div`
 export const SPmajor = styled.div`
   color: #868e96;
   font-size: 0.75rem;
+  display: flex;
+
+  #professor-str {
+    font-weight: 600;
+  }
 `;
 export const SPnickname = styled.div`
   font-weight: 700;
