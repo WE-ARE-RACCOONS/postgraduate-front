@@ -39,9 +39,7 @@ function SeniorInfoPage() {
   const sKeyword = useAtomValue(sKeywordAtom);
 
   useEffect(() => {
-    if (detectReload()) {
-      router.replace('/signup/select');
-    }
+    detectReload();
 
     (() => {
       window.addEventListener('beforeunload', preventClose);

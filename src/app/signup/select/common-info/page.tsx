@@ -25,13 +25,9 @@ function CommonInfoPage() {
   const available = useAtomValue(notDuplicate);
 
   useEffect(() => {
-    if (detectReload()) {
-      router.replace('/signup/select');
-    }
+    detectReload();
 
-    (() => {
-      window.addEventListener('beforeunload', preventClose);
-    })();
+    window.addEventListener('beforeunload', preventClose);
 
     return () => {
       window.removeEventListener('beforeunload', preventClose);
