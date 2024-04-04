@@ -17,9 +17,10 @@ import {
   matchingReceiveAtom,
 } from '@/stores/matching';
 import findExCode from '@/utils/findExCode';
+import { useEffect, useState } from 'react';
 
 function SignUpBtn() {
-  const socialId = useAtomValue(socialIdAtom);
+  const [socialId, setSocialId] = useState<number | null>(null);
   // const nickName = useAtomValue(nickname);
   const nickName = useAtomValue(changeNickname);
   const phoneNumber = useAtomValue(phoneNum);
@@ -35,6 +36,14 @@ function SignUpBtn() {
     getAccessToken,
     removeTokens,
   } = useAuth();
+
+  useEffect(() => {
+    if(typeof window !== undefined) {
+      const socialId = window.localStorage.getItem('socialId');
+      const socialIdNum = socialId ? parseInt(socialId) : null;
+      setSocialId(socialIdNum);
+    }
+  }, []);
 
   const handleSignUp = () => {
     getAccessToken().then((accessTkn) => {

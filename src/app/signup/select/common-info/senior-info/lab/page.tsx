@@ -11,7 +11,6 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { socialIdAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
@@ -27,10 +26,6 @@ function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const currentPath = usePathname();
-  // const pathArr = currentPath.split('/');
-  // const socialId = pathArr[2];
-  const socialId = useAtomValue(socialIdAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
   const sLab = useAtomValue(sLabAtom);

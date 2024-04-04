@@ -15,19 +15,19 @@ import {
   NSBtn,
   NotSeniorContainer,
 } from './NotSenior.styled';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { socialIdAtom, userTypeAtom } from '@/stores/signup';
-import { userType } from '@/types/user/user';
+import { useAtom } from 'jotai';
+import { userTypeAtom } from '@/stores/signup';
+
 function NotSenior(props: NotSeniorProps) {
-  const socialId = useAtomValue(socialIdAtom);
-  const [userType, setUserType] = useAtom(userTypeAtom);
   const xClick = () => {
     props.modalHandler();
   };
+
   const router = useRouter();
   const seniorJoin = () => {
     router.push(`/signup/select/common-info/auth`);
   };
+  
   return (
     <NotSeniorContainer>
       <NotSeniorBoxTop>
