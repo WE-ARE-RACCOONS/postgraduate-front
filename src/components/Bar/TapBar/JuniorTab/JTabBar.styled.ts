@@ -58,6 +58,7 @@ export const TapStyle = styled.div<TapStyleProps>`
   line-height: 140%;
   border-bottom: ${({ selected }) => (selected ? '2px solid #495565' : 'none')};
   color: ${({ selected }) => (selected ? '#495565' : '#C2CEDE')};
+  cursor: pointer;
 `;
 
 export const MentoringMapBox = styled.div`
@@ -66,3 +67,15 @@ export const MentoringMapBox = styled.div`
 `;
 
 export const MentoringShowBtn = styled.button``;
+
+export const NoMentoring = styled.div`
+  color: #c2cede;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.4rem */
+  display: flex;
+  justify-content: center;
+`;

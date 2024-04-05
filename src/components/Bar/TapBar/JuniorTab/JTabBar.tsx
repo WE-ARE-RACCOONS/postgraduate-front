@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   TapStyle,
-  MentoringShowBtn,
   TabWrap,
   TabResult,
   TabResultContainer,
   MentoringBox,
   DateDoneBtn,
+  NoMentoring,
 } from './JTabBar.styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
@@ -20,14 +20,11 @@ import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
-import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
-import { mentoringIdAtom } from '@/stores/user';
 import { JMCancelAtom } from '@/stores/condition';
 
 function convertDateType(date: string) {
@@ -193,7 +190,8 @@ function TabBar() {
                 </MentoringBox>
               );
             })
-          : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
+          : <NoMentoring>`${TAB_STATE[activeTab]}인 멘토링이 없어요`</NoMentoring>
+        }
       </div>
     );
   };
