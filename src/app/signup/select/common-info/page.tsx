@@ -8,21 +8,21 @@ import {
   changeNickname,
   notDuplicate,
   phoneNum,
+  phoneNumValidation,
   userTypeAtom,
 } from '@/stores/signup';
 import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
-import { useRouter } from 'next/navigation';
 
 function CommonInfoPage() {
-  const router = useRouter();
   const userType = useAtomValue(userTypeAtom);
   const userNick = useAtomValue(changeNickname);
   const fullNum = useAtomValue(phoneNum);
   const service = useAtomValue(essential);
-  const available = useAtomValue(notDuplicate);
+  const nickAvailable = useAtomValue(notDuplicate);
+  const phoneAvailable = useAtomValue(phoneNumValidation);
 
   useEffect(() => {
     detectReload();
@@ -43,7 +43,7 @@ function CommonInfoPage() {
       <NicknameForm />
       <PhoneNumForm />
       <ServiceCondition />
-      {userNick && fullNum && service && available ? (
+      {userNick && fullNum && service && nickAvailable && phoneAvailable ? (
         <NextBtn
           kind="next"
           url={userType == 'junior' ? '/matching-info' : '/auth'}
