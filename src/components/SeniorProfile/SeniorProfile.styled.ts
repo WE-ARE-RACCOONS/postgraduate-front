@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const SeniorProfileBox = styled.div`
-  height: 10rem;
-  padding: 0 1rem;
+  height: max-content;
+  padding: 1rem;
+  padding-top: 0;
   background-color: #f8f9fa;
   border-radius: 1rem;
   margin-bottom: 0.75rem;
