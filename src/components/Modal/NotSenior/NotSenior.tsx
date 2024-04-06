@@ -27,7 +27,7 @@ function NotSenior(props: NotSeniorProps) {
   const seniorJoin = () => {
     router.push(`/signup/select/common-info/auth`);
   };
-  
+
   return (
     <NotSeniorContainer>
       <NotSeniorBoxTop>

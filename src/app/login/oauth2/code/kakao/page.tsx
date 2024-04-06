@@ -29,7 +29,7 @@ function KakaoPage() {
         const response = res.data;
         if (response.code == 'AU205') {
           setSocialId(response.data.socialId);
-          if(typeof window !== undefined) {
+          if (typeof window !== undefined) {
             window.localStorage.setItem('socialId', response.data.socialId);
           }
           router.push('/signup/select');

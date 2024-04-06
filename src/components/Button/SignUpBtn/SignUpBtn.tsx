@@ -42,7 +42,7 @@ function SignUpBtn() {
   } = useAuth();
 
   useEffect(() => {
-    if(typeof window !== undefined) {
+    if (typeof window !== undefined) {
       const socialId = window.localStorage.getItem('socialId');
       const socialIdNum = socialId ? parseInt(socialId) : null;
       setSocialId(socialIdNum);
