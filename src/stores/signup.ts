@@ -17,4 +17,4 @@ export const remainPhoneNum = atom<string>('');
 export const phoneNumValidation = atom<boolean>(false);
 
 export const socialIdAtom = atom<string>('');
-export const certifiRegAtom = atom<certiRegType>('WAITING')
+export const certifiRegAtom = atom<certiRegType>('WAITING');
