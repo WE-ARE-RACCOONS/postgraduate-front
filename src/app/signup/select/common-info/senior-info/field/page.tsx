@@ -39,7 +39,7 @@ function SeniorInfoPage() {
     setUserType,
     removeTokens,
   } = useAuth();
-  const socialId = useAtomValue(socialIdAtom);
+  const [socialId, setSocialId] = useState<number | null>(null);
 
   const phoneNumber = useAtomValue(phoneNum);
   const nickName = useAtomValue(changeNickname);
@@ -54,9 +54,15 @@ function SeniorInfoPage() {
   const sKeyword = useAtomValue(sKeywordAtom);
 
   useEffect(() => {
-    if (detectReload()) {
-      router.replace('/signup/select');
+    if (typeof window !== undefined) {
+      const socialId = window.localStorage.getItem('socialId');
+      const socialIdNum = socialId ? parseInt(socialId) : null;
+      setSocialId(socialIdNum);
     }
+  }, []);
+
+  useEffect(() => {
+    detectReload();
 
     (() => {
       window.addEventListener('beforeunload', preventClose);

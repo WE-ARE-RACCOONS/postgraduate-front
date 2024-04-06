@@ -31,9 +31,7 @@ function AuthPage() {
   }, []);
 
   useEffect(() => {
-    if (detectReload()) {
-      router.replace('/signup/select');
-    }
+    detectReload();
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
