@@ -14,7 +14,7 @@ import { BankColumnItemProps } from '@/types/bank/bank';
 import { Bank } from '@/types/bank/bank';
 import x_btn from '../../../../public/x_gray.png';
 const banks: Bank[] = [
-  { name: BANK_NAME.k, imgSrc: '/Kbank.png' },
+  { name: BANK_NAME.k, imgSrc: '/ku.png' },
   { name: BANK_NAME.n, imgSrc: '/nh.png' },
   { name: BANK_NAME.ky, imgSrc: '/ky.png' },
   { name: BANK_NAME.sc, imgSrc: '/sc.png' },
