@@ -9,7 +9,7 @@ import {
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
-import { SignUpBtnContainer ,SignUpBtnNonContainer} from './SignUpBtn.styled';
+import { SignUpBtnContainer, SignUpBtnNonContainer } from './SignUpBtn.styled';
 import { option } from '@/stores/condition';
 import {
   desiredField,
@@ -125,17 +125,20 @@ function SignUpBtn() {
 
   return (
     <>
-    {schoolCharCount && fieldCharCount ? <>
-      <SignUpBtnContainer onClick={handleSignUp}>
-      가입완료 하기
-    </SignUpBtnContainer>
-    </> : 
-    <>
-    <SignUpBtnNonContainer onClick={handleSignUp}>
-      가입완료 하기
-    </SignUpBtnNonContainer>
+      {schoolCharCount && fieldCharCount ? (
+        <>
+          <SignUpBtnContainer onClick={handleSignUp}>
+            가입완료 하기
+          </SignUpBtnContainer>
+        </>
+      ) : (
+        <>
+          <SignUpBtnNonContainer onClick={handleSignUp}>
+            가입완료 하기
+          </SignUpBtnNonContainer>
+        </>
+      )}
     </>
-  }</>
   );
 }
 
