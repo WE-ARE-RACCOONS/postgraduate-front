@@ -3,12 +3,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   TapStyle,
-  MentoringShowBtn,
   TabWrap,
   TabResult,
   TabResultContainer,
   MentoringBox,
   DateDoneBtn,
+  NoMentoring,
 } from './JTabBar.styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
@@ -20,14 +20,11 @@ import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
-import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
-import { mentoringIdAtom } from '@/stores/user';
 import { JMCancelAtom } from '@/stores/condition';
 
 function convertDateType(date: string) {
@@ -125,6 +122,7 @@ function TabBar() {
 
         const confirm = response.data;
         localStorage.removeItem('mentoringId');
+        location.reload();
       }
     });
   };
@@ -132,68 +130,70 @@ function TabBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data && data!.length !== 0
-          ? data!.map((el, idx) => {
-              const mentoringDate = convertDateType(el.date);
-              const currentDate = new Date();
-              const isPast = mentoringDate <= currentDate;
+        {data && data.length !== 0 ? (
+          data!.map((el, idx) => {
+            const mentoringDate = convertDateType(el.date);
+            const currentDate = new Date();
+            const isPast = mentoringDate < currentDate;
 
-              return (
-                <MentoringBox key={idx}>
-                  <MentoringApply data={el} />
-                  {activeTab === TAB.waiting && (
-                    <ModalBtn
-                      type={'show'}
-                      btnText={'내 신청서 보기'}
-                      modalHandler={modalHandler}
-                      onClick={() => {
-                        setModalType('junior');
-                        setSelectedMentoringId(el.mentoringId);
-                      }}
-                    />
-                  )}
-                  {activeTab === TAB.expected && (
-                    <div>
-                      {isPast ? (
-                        <DateDoneBtn
-                          onClick={() => {
-                            localStorage.setItem(
-                              'mentoringId',
-                              el.mentoringId.toString(),
-                            );
-                            mentoConfirmed();
-                          }}
-                        >
-                          멘토링 완료 확정하기
-                        </DateDoneBtn>
-                      ) : (
-                        <ModalBtn
-                          type={'show'}
-                          btnText={'내 신청서 보기'}
-                          modalHandler={modalHandler}
-                          onClick={() => {
-                            setModalType('junior');
-                            setSelectedMentoringId(el.mentoringId);
-                          }}
-                        />
-                      )}
-                    </div>
-                  )}
-                  {activeTab === TAB.done && (
-                    <ModalBtn
-                      type={'show'}
-                      btnText={'리뷰 작성하기'}
-                      modalHandler={modalHandler}
-                      onClick={() => {
-                        setModalType('junior');
-                        setSelectedMentoringId(el.mentoringId);
-                      }}
-                    />
-                  )}
-                </MentoringBox>
-              );
-            })
-          : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
+            return (
+              <MentoringBox key={idx}>
+                <MentoringApply data={el} />
+                {activeTab === TAB.waiting && (
+                  <ModalBtn
+                    type={'show'}
+                    btnText={'내 신청서 보기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                )}
+                {activeTab === TAB.expected && (
+                  <div>
+                    {isPast ? (
+                      <DateDoneBtn
+                        onClick={() => {
+                          localStorage.setItem(
+                            'mentoringId',
+                            el.mentoringId.toString(),
+                          );
+                          mentoConfirmed();
+                        }}
+                      >
+                        멘토링 완료 확정하기
+                      </DateDoneBtn>
+                    ) : (
+                      <ModalBtn
+                        type={'show'}
+                        btnText={'내 신청서 보기'}
+                        modalHandler={modalHandler}
+                        onClick={() => {
+                          setModalType('junior');
+                          setSelectedMentoringId(el.mentoringId);
+                        }}
+                      />
+                    )}
+                  </div>
+                )}
+                {activeTab === TAB.done && (
+                  <ModalBtn
+                    type={'show'}
+                    btnText={'리뷰 작성하기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                )}
+              </MentoringBox>
+            );
+          })
+        ) : (
+          <NoMentoring>{TAB_STATE[activeTab]}인 멘토링이 없어요</NoMentoring>
+        )}
       </div>
     );
   };

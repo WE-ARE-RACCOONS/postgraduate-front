@@ -54,6 +54,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
           setSMCancel(true);
           setIsSubmitting(false);
           props.modalHandler();
+          location.reload();
         }
       });
     } catch (error) {

@@ -99,7 +99,7 @@ function STabBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data && data!.length !== 0 ? (
+        {data && data.length !== 0 ? (
           <div>
             {data!.map((el, idx) => (
               <MentoringBox key={idx}>

@@ -9,17 +9,20 @@ import {
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
 import { useRouter, usePathname } from 'next/navigation';
-import { SignUpBtnContainer } from './SignUpBtn.styled';
+import { SignUpBtnContainer, SignUpBtnNonContainer } from './SignUpBtn.styled';
 import { option } from '@/stores/condition';
 import {
   desiredField,
+  desiredFieldLen,
   desiredSchool,
+  desiredSchoolLen,
   matchingReceiveAtom,
 } from '@/stores/matching';
 import findExCode from '@/utils/findExCode';
+import { useEffect, useState } from 'react';
 
 function SignUpBtn() {
-  const socialId = useAtomValue(socialIdAtom);
+  const [socialId, setSocialId] = useState<number | null>(null);
   // const nickName = useAtomValue(nickname);
   const nickName = useAtomValue(changeNickname);
   const phoneNumber = useAtomValue(phoneNum);
@@ -27,6 +30,8 @@ function SignUpBtn() {
   const major = useAtomValue(desiredSchool);
   const field = useAtomValue(desiredField);
   const matchingReceive = useAtomValue(matchingReceiveAtom);
+  const schoolCharCount = useAtomValue(desiredSchoolLen);
+  const fieldCharCount = useAtomValue(desiredFieldLen);
   const router = useRouter();
   const {
     setAccessToken,
@@ -35,6 +40,14 @@ function SignUpBtn() {
     getAccessToken,
     removeTokens,
   } = useAuth();
+
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const socialId = window.localStorage.getItem('socialId');
+      const socialIdNum = socialId ? parseInt(socialId) : null;
+      setSocialId(socialIdNum);
+    }
+  }, []);
 
   const handleSignUp = () => {
     getAccessToken().then((accessTkn) => {
@@ -120,9 +133,21 @@ function SignUpBtn() {
   };
 
   return (
-    <SignUpBtnContainer onClick={handleSignUp}>
-      가입완료 하기
-    </SignUpBtnContainer>
+    <>
+      {schoolCharCount && fieldCharCount ? (
+        <>
+          <SignUpBtnContainer onClick={handleSignUp}>
+            가입완료 하기
+          </SignUpBtnContainer>
+        </>
+      ) : (
+        <>
+          <SignUpBtnNonContainer onClick={handleSignUp}>
+            가입완료 하기
+          </SignUpBtnNonContainer>
+        </>
+      )}
+    </>
   );
 }
 
