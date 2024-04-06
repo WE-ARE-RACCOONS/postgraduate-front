@@ -32,6 +32,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
   const handleClick = () => {
     props.modalHandler();
     if (props.onClick) props.onClick();
+    location.reload();
   };
 
   const cancelMentoring = async () => {
