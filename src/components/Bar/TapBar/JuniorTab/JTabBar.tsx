@@ -126,6 +126,7 @@ function TabBar() {
 
         const confirm = response.data;
         localStorage.removeItem('mentoringId');
+        location.reload();
       }
     });
   };
