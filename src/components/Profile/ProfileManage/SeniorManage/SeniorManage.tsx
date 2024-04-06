@@ -35,7 +35,6 @@ function SeniorManage(props: SeniorManageProps) {
   );
   const [socialId, setSocialId] = useAtom(socialIdAtom);
   const setuserTypeAtom = useSetAtom(userTypeAtom);
-
   const {
     modal: modifyModal,
     modalHandler: modifyHandler,
