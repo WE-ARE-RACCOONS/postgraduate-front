@@ -138,7 +138,7 @@ function TabBar() {
           data!.map((el, idx) => {
             const mentoringDate = convertDateType(el.date);
             const currentDate = new Date();
-            const isPast = mentoringDate <= currentDate;
+            const isPast = mentoringDate < currentDate;
 
             return (
               <MentoringBox key={idx}>
