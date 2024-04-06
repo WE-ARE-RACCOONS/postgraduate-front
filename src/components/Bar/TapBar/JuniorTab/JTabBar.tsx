@@ -9,6 +9,7 @@ import {
   TabResultContainer,
   MentoringBox,
   DateDoneBtn,
+  NoMentoring
 } from './JTabBar.styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
@@ -193,7 +194,7 @@ function TabBar() {
                 </MentoringBox>
               );
             })
-          : `${TAB_STATE[activeTab]}인 멘토링이 없어요`}
+          : <NoMentoring>{TAB_STATE[activeTab]}인 멘토링이 없어요</NoMentoring>}
       </div>
     );
   };
