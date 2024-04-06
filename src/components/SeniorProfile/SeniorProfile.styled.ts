@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 
 export const SeniorProfileBox = styled.div`
-  height: 10rem;
-  padding: 0 1rem;
+  height: max-content;
+  padding: 1rem;
+  padding-top: 0;
   background-color: #f8f9fa;
   border-radius: 1rem;
   margin-bottom: 0.75rem;
@@ -29,6 +30,11 @@ export const SeniorProfileInfo = styled.div`
 export const SPmajor = styled.div`
   color: #868e96;
   font-size: 0.75rem;
+  display: flex;
+
+  #professor-str {
+    font-weight: 600;
+  }
 `;
 export const SPnickname = styled.div`
   font-weight: 700;

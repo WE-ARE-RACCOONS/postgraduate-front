@@ -14,10 +14,8 @@ import {
   NSSub,
   NSBtn,
 } from './NotJunior.styled';
-import { useAtom, useAtomValue } from 'jotai';
-import { socialIdAtom, userTypeAtom } from '@/stores/signup';
+
 function NotJunior(props: NotJuniorProps) {
-  const socialId = useAtomValue(socialIdAtom);
   const router = useRouter();
 
   const xClick = () => {

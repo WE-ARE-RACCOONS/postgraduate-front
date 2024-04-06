@@ -23,7 +23,6 @@ import useAuth from '@/hooks/useAuth';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
-import { socialIdAtom } from '@/stores/signup';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 
@@ -37,9 +36,7 @@ function SeniorInfoPage() {
   const sMajor = useAtomValue(sMajorAtom);
 
   useEffect(() => {
-    if (detectReload()) {
-      router.replace('/signup/select');
-    }
+    detectReload();
 
     (() => {
       window.addEventListener('beforeunload', preventClose);

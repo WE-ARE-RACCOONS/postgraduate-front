@@ -11,10 +11,9 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { socialIdAtom } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtomValue } from 'jotai';
-import { useRouter, usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
@@ -22,15 +21,9 @@ import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 
 function SeniorInfoPage() {
-  const [modalType, setModalType] = useState<ModalType>('postgradu');
   const [emptyPart, setEmptyPart] = useState('');
   const [flag, setFlag] = useState(false);
-  const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
   const router = useRouter();
-  const currentPath = usePathname();
-  // const pathArr = currentPath.split('/');
-  // const socialId = pathArr[2];
-  const socialId = useAtomValue(socialIdAtom);
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
   const sLab = useAtomValue(sLabAtom);
@@ -39,9 +32,7 @@ function SeniorInfoPage() {
   const sKeyword = useAtomValue(sKeywordAtom);
 
   useEffect(() => {
-    if (detectReload()) {
-      router.replace('/signup/select');
-    }
+    detectReload();
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -90,7 +81,7 @@ function SeniorInfoPage() {
             <TextForm
               max={10}
               placeholder="지도교수님 성함을 입력해주세요."
-              targetAtom="lab"
+              targetAtom="professor"
             />
           </BtnBox>
           <BtnBox>
@@ -100,7 +91,7 @@ function SeniorInfoPage() {
             <TextForm
               max={30}
               placeholder="연구실 이름을 입력해주세요."
-              targetAtom="professor"
+              targetAtom="lab"
             />
           </BtnBox>
           <div style={{ marginTop: '0.5rem' }}>
