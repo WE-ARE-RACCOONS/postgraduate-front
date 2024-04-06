@@ -4,7 +4,7 @@ import Photo from '@/components/Photo';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { photoUrlAtom } from '@/stores/senior';
 import axios from 'axios';
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -14,6 +14,7 @@ import cancel from '../../../../../../public/cancel.png';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import useAuth from '@/hooks/useAuth';
+import { certifiRegAtom } from '@/stores/signup';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
@@ -23,7 +24,7 @@ function AuthPage() {
   const setphotoUrl = useSetAtom(photoUrlAtom);
   const router = useRouter();
   const fileName = photo?.name;
-
+  const certifiReg = useAtomValue(certifiRegAtom);
   useEffect(() => {
     getAccessToken().then((tkn) => {
       setAccessTkn(tkn);
@@ -47,31 +48,55 @@ function AuthPage() {
       setUploadFlag(false);
       const formData = new FormData();
       formData.append('certificationFile', photo);
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
+      if (certifiReg === 'NOT_APPROVE') {
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
             },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
+          )
+          .then((response) => {
+            const res = response.data;
 
-          if (res.code == 'IMG202') {
-            setphotoUrl(res.data.profileUrl);
-            router.push(
-              accessTkn
-                ? '/auth-done'
-                : `/signup/select/common-info/senior-info/major`,
-            );
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+            if (res.code == 'IMG202') {
+              setphotoUrl(res.data.profileUrl);
+              router.push('/auth-done');
+            }
+          })
+          .catch((error) => {
+            console.error('Error sending PATCH request:', error);
+          });
+      } else {
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
+            formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+
+            if (res.code == 'IMG202') {
+              setphotoUrl(res.data.profileUrl);
+              router.push(
+                accessTkn
+                  ? '/auth-done'
+                  : `/signup/select/common-info/senior-info/major`,
+              );
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
     }
 
     if (!photo) {
