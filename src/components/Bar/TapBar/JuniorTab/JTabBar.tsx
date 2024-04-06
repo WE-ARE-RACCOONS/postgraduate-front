@@ -134,7 +134,7 @@ function TabBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data && data!.length !== 0 ? (
+        {data && data.length !== 0 ? (
           data!.map((el, idx) => {
             const mentoringDate = convertDateType(el.date);
             const currentDate = new Date();
