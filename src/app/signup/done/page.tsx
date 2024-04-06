@@ -25,7 +25,7 @@ function SignUpDonePage() {
 
   useEffect(() => {
     const userT = getUserType();
-    if(userT) setUserType(userT);
+    if (userT) setUserType(userT);
   }, []);
 
   return (

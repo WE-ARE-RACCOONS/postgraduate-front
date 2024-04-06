@@ -24,13 +24,14 @@ import MenuBar from '@/components/Bar/MenuBar';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import findExCode from '@/utils/findExCode';
 import Footer from '@/components/Footer';
+import { certifiRegAtom } from '@/stores/signup';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
   const [profile, setprofile] = useState<string | null>(null);
   const [salaryDate, setSalaryDate] = useState('');
   const [salaryAmount, setSalaryAmount] = useState(0);
-  const [certifiReg, setCertifiReg] = useState<certiRegType>('WAITING');
+  const [certifiReg, setCertifiReg] = useAtom(certifiRegAtom);
   const [profileReg, setProfileReg] = useState(true);
   const [senior, setSenior] = useAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
