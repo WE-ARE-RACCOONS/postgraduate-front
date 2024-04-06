@@ -17,12 +17,6 @@ import auth from '../../../public/auth_mark.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
-  const keywords = [
-    '일이삼사오육칠팔구십일이삼사오육칠',
-    '일이삼사오육칠팔구십일이삼사오육칠',
-    '일이삼사오육칠팔구십일이삼사오육칠',
-  ];
-
   return (
     <SeniorProfileBox>
       <SeniorProfileContent
