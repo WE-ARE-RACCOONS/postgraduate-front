@@ -122,6 +122,7 @@ function TabBar() {
 
         const confirm = response.data;
         localStorage.removeItem('mentoringId');
+        location.reload();
       }
     });
   };
@@ -129,69 +130,70 @@ function TabBar() {
   const renderTabContent = () => {
     return (
       <div>
-        {data && data!.length !== 0
-          ? data!.map((el, idx) => {
-              const mentoringDate = convertDateType(el.date);
-              const currentDate = new Date();
-              const isPast = mentoringDate <= currentDate;
+        {data && data.length !== 0 ? (
+          data!.map((el, idx) => {
+            const mentoringDate = convertDateType(el.date);
+            const currentDate = new Date();
+            const isPast = mentoringDate < currentDate;
 
-              return (
-                <MentoringBox key={idx}>
-                  <MentoringApply data={el} />
-                  {activeTab === TAB.waiting && (
-                    <ModalBtn
-                      type={'show'}
-                      btnText={'내 신청서 보기'}
-                      modalHandler={modalHandler}
-                      onClick={() => {
-                        setModalType('junior');
-                        setSelectedMentoringId(el.mentoringId);
-                      }}
-                    />
-                  )}
-                  {activeTab === TAB.expected && (
-                    <div>
-                      {isPast ? (
-                        <DateDoneBtn
-                          onClick={() => {
-                            localStorage.setItem(
-                              'mentoringId',
-                              el.mentoringId.toString(),
-                            );
-                            mentoConfirmed();
-                          }}
-                        >
-                          멘토링 완료 확정하기
-                        </DateDoneBtn>
-                      ) : (
-                        <ModalBtn
-                          type={'show'}
-                          btnText={'내 신청서 보기'}
-                          modalHandler={modalHandler}
-                          onClick={() => {
-                            setModalType('junior');
-                            setSelectedMentoringId(el.mentoringId);
-                          }}
-                        />
-                      )}
-                    </div>
-                  )}
-                  {activeTab === TAB.done && (
-                    <ModalBtn
-                      type={'show'}
-                      btnText={'리뷰 작성하기'}
-                      modalHandler={modalHandler}
-                      onClick={() => {
-                        setModalType('junior');
-                        setSelectedMentoringId(el.mentoringId);
-                      }}
-                    />
-                  )}
-                </MentoringBox>
-              );
-            })
-          : <NoMentoring>`${TAB_STATE[activeTab]}인 멘토링이 없어요`</NoMentoring>
-        }
+            return (
+              <MentoringBox key={idx}>
+                <MentoringApply data={el} />
+                {activeTab === TAB.waiting && (
+                  <ModalBtn
+                    type={'show'}
+                    btnText={'내 신청서 보기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                )}
+                {activeTab === TAB.expected && (
+                  <div>
+                    {isPast ? (
+                      <DateDoneBtn
+                        onClick={() => {
+                          localStorage.setItem(
+                            'mentoringId',
+                            el.mentoringId.toString(),
+                          );
+                          mentoConfirmed();
+                        }}
+                      >
+                        멘토링 완료 확정하기
+                      </DateDoneBtn>
+                    ) : (
+                      <ModalBtn
+                        type={'show'}
+                        btnText={'내 신청서 보기'}
+                        modalHandler={modalHandler}
+                        onClick={() => {
+                          setModalType('junior');
+                          setSelectedMentoringId(el.mentoringId);
+                        }}
+                      />
+                    )}
+                  </div>
+                )}
+                {activeTab === TAB.done && (
+                  <ModalBtn
+                    type={'show'}
+                    btnText={'리뷰 작성하기'}
+                    modalHandler={modalHandler}
+                    onClick={() => {
+                      setModalType('junior');
+                      setSelectedMentoringId(el.mentoringId);
+                    }}
+                  />
+                )}
+              </MentoringBox>
+            );
+          })
+        ) : (
+          <NoMentoring>{TAB_STATE[activeTab]}인 멘토링이 없어요</NoMentoring>
+        )}
       </div>
     );
   };

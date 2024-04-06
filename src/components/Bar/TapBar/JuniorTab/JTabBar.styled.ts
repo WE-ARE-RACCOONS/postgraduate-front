@@ -21,6 +21,17 @@ export const MentoringBox = styled.div`
   box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   margin: 2.3%;
 `;
+export const NoMentoring = styled.div`
+  color: #c2cede;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1rem;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 140%; /* 1.4rem */
+  display: flex;
+  justify-content: center;
+`;
 export const TabWrap = styled.div`
   display: flex;
   justify-content: space-between;

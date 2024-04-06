@@ -1,3 +1,4 @@
+import { certiRegType } from '@/types/profile/profile';
 import { userType } from '@/types/user/user';
 import { atom } from 'jotai';
 
@@ -16,3 +17,4 @@ export const remainPhoneNum = atom<string>('');
 export const phoneNumValidation = atom<boolean>(false);
 
 export const socialIdAtom = atom<string>('');
+export const certifiRegAtom = atom<certiRegType>('WAITING');
