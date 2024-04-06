@@ -44,9 +44,6 @@ function AuthPage() {
   }, []);
 
   const handleClick = () => {
-    {
-      certifiReg !== 'NOT_APPROVE' ? '' : '';
-    }
     if (photo) {
       setUploadFlag(false);
       const formData = new FormData();
