@@ -78,15 +78,3 @@ export const MentoringMapBox = styled.div`
 `;
 
 export const MentoringShowBtn = styled.button``;
-
-export const NoMentoring = styled.div`
-  color: #c2cede;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1rem;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 140%; /* 1.4rem */
-  display: flex;
-  justify-content: center;
-`;
