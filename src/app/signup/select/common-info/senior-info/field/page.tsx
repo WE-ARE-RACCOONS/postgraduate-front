@@ -121,14 +121,17 @@ function SeniorInfoPage() {
         Authorization: `Bearer ${token}`,
       };
 
-      if (token && 
+      if (
+        token &&
         certification &&
         sMajor &&
         sPostGradu &&
         sProfessor &&
         sLab &&
         sKeyword &&
-        sField) { // 후배 -> 선배 변경
+        sField
+      ) {
+        // 후배 -> 선배 변경
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
@@ -184,7 +187,8 @@ function SeniorInfoPage() {
         sLab &&
         sKeyword &&
         sField
-      ) { // 선배 최초 회원가입
+      ) {
+        // 선배 최초 회원가입
         axios
           .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
             socialId: socialId,
