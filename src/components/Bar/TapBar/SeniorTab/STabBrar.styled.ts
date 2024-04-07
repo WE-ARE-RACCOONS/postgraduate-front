@@ -57,5 +57,5 @@ export const TabResultContainer = styled.div`
 export const TabResult = styled.div`
   border-top: 1px solid #c2cede;
   height: 100%;
-  padding-bottom: 5.5rem;
+  padding-bottom: 7rem;
 `;
