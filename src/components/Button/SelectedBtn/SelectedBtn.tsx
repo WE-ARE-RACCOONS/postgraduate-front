@@ -15,12 +15,12 @@ function SelectedBtn(props: SelectedBtnProps) {
   const handleClick = () => {
     if (selected == true) {
       props.selectHandler(
-        props.selected.filter((item) => item !== props.btnText),
+        props.selected.filter((item) => item !== props.btnText.replace('#', '')),
       );
     }
 
     if (selected == false) {
-      props.selectHandler([...props.selected, props.btnText]);
+      props.selectHandler([...props.selected, props.btnText.replace('#', '')]);
     }
 
     setSelected(!selected);
