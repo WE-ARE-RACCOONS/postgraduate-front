@@ -40,8 +40,12 @@ function AuthPage() {
     const entriesNavTiming = entries as PerformanceNavigationTiming;
 
     if (entriesNavTiming.type == 'reload') {
-      if(!accessTkn) window.location.href = window.location.origin + '/signup/select'; // 선배 최초 회원가입
-      else window.location.href = window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환 or 선배 재인증
+      if (!accessTkn)
+        window.location.href =
+          window.location.origin + '/signup/select'; // 선배 최초 회원가입
+      else
+        window.location.href =
+          window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환 or 선배 재인증
     }
 
     (() => {
@@ -66,7 +70,7 @@ function AuthPage() {
             {
               headers: {
                 'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${accessTkn}`
+                Authorization: `Bearer ${accessTkn}`,
               },
             },
           )
@@ -118,7 +122,9 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {(userType && userType == 'senior') && <ProgressBar totalNum={4} activeNum={0} />}
+        {userType && userType == 'senior' && (
+          <ProgressBar totalNum={4} activeNum={0} />
+        )}
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>

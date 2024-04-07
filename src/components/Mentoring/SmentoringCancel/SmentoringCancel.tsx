@@ -31,14 +31,14 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const selected = time || know || etc;
 
   useEffect(() => {
-    if(reason == SENIOR_MENTOR_CANCEL.dontKnow) {
+    if (reason == SENIOR_MENTOR_CANCEL.dontKnow) {
       setTime(false);
       setKnow(true);
       setEtc(false);
       return;
     }
 
-    if(reason == SENIOR_MENTOR_CANCEL.haveSchedule) {
+    if (reason == SENIOR_MENTOR_CANCEL.haveSchedule) {
       setTime(true);
       setKnow(false);
       setEtc(false);
@@ -48,18 +48,17 @@ function SmentoringCancel(props: ModalMentoringProps) {
     setTime(false);
     setKnow(false);
     setEtc(true);
-
   }, [reason]);
 
   useEffect(() => {
-    if(!selected) {
+    if (!selected) {
       setFlag(false);
       return;
     }
 
-    if(reason) {
-      if(reason == SENIOR_MENTOR_CANCEL.otherTitle) {
-        if(otherReason) {
+    if (reason) {
+      if (reason == SENIOR_MENTOR_CANCEL.otherTitle) {
+        if (otherReason) {
           setFlag(true);
           return;
         }
@@ -96,7 +95,10 @@ function SmentoringCancel(props: ModalMentoringProps) {
               method: 'PATCH',
               headers,
               body: JSON.stringify({
-                reason: reason == SENIOR_MENTOR_CANCEL.otherTitle ? otherReason : reason,
+                reason:
+                  reason == SENIOR_MENTOR_CANCEL.otherTitle
+                    ? otherReason
+                    : reason,
               }),
             },
           );
@@ -127,7 +129,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
             height: '2rem',
             marginLeft: '17.7rem',
             marginTop: '0.5rem',
-            cursor: 'pointer'
+            cursor: 'pointer',
           }}
         />
         <SMCancelTop>
@@ -135,16 +137,24 @@ function SmentoringCancel(props: ModalMentoringProps) {
           <div id="refusewarn">{SENIOR_MENTOR_CANCEL.refuseWarn}</div>
         </SMCancelTop>
         <SMCancelMid>
-          <SMCBtn className='reason-group' onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
+          <SMCBtn
+            className="reason-group"
+            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+          >
             <CheckBox type="cancel" checked={time} onChange={setTime} />
             {SENIOR_MENTOR_CANCEL.haveSchedule}
           </SMCBtn>
-          <SMCBtn className='reason-group' onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
+          <SMCBtn
+            className="reason-group"
+            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+          >
             <CheckBox type="cancel" checked={know} onChange={setKnow} />
             {SENIOR_MENTOR_CANCEL.dontKnow}
           </SMCBtn>
-          <SMCBtnEtc onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
-            <div className='reason-group' style={{ display: 'flex' }}>
+          <SMCBtnEtc
+            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+          >
+            <div className="reason-group" style={{ display: 'flex' }}>
               <CheckBox type="cancel" checked={etc} onChange={setEtc} />
               {SENIOR_MENTOR_CANCEL.otherTitle}
             </div>

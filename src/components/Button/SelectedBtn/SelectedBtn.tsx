@@ -15,7 +15,9 @@ function SelectedBtn(props: SelectedBtnProps) {
   const handleClick = () => {
     if (selected == true) {
       props.selectHandler(
-        props.selected.filter((item) => item !== props.btnText.replace('#', '')),
+        props.selected.filter(
+          (item) => item !== props.btnText.replace('#', ''),
+        ),
       );
     }
 
