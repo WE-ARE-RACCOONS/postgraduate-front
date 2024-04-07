@@ -25,6 +25,7 @@ function AuthPage() {
   const router = useRouter();
   const fileName = photo?.name;
   const certifiReg = useAtomValue(certifiRegAtom);
+
   useEffect(() => {
     getAccessToken().then((tkn) => {
       setAccessTkn(tkn);
@@ -56,6 +57,7 @@ function AuthPage() {
             {
               headers: {
                 'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${accessTkn}`
               },
             },
           )
@@ -107,7 +109,7 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {!accessTkn && <ProgressBar totalNum={4} activeNum={0} />}
+        {(certifiReg !== 'NOT_APPROVE') && <ProgressBar totalNum={4} activeNum={0} />}
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
