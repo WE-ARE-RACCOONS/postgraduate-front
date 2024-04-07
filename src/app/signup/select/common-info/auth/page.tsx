@@ -19,20 +19,30 @@ import { certifiRegAtom } from '@/stores/signup';
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
-  const { getAccessToken } = useAuth();
+  const { getAccessToken, getUserType } = useAuth();
   const [accessTkn, setAccessTkn] = useState<string | null | undefined>('');
+  const [userType, setUserType] = useState('');
   const setphotoUrl = useSetAtom(photoUrlAtom);
   const router = useRouter();
   const fileName = photo?.name;
   const certifiReg = useAtomValue(certifiRegAtom);
+
   useEffect(() => {
     getAccessToken().then((tkn) => {
       setAccessTkn(tkn);
     });
+    const userT = getUserType();
+    if (userT) setUserType(userT);
   }, []);
 
   useEffect(() => {
-    detectReload();
+    const entries = performance.getEntriesByType('navigation')[0];
+    const entriesNavTiming = entries as PerformanceNavigationTiming;
+
+    if (entriesNavTiming.type == 'reload') {
+      if(!accessTkn) window.location.href = window.location.origin + '/signup/select'; // 선배 최초 회원가입
+      else window.location.href = window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환 or 선배 재인증
+    }
 
     (() => {
       window.addEventListener('beforeunload', preventClose);
@@ -48,7 +58,7 @@ function AuthPage() {
       setUploadFlag(false);
       const formData = new FormData();
       formData.append('certificationFile', photo);
-      if (certifiReg === 'NOT_APPROVE') {
+      if (certifiReg === 'NOT_APPROVE' || (accessTkn && userType == 'senior')) {
         axios
           .patch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
@@ -56,6 +66,7 @@ function AuthPage() {
             {
               headers: {
                 'Content-Type': 'multipart/form-data',
+                Authorization: `Bearer ${accessTkn}`
               },
             },
           )
@@ -107,7 +118,7 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {!accessTkn && <ProgressBar totalNum={4} activeNum={0} />}
+        {(userType && userType == 'senior') && <ProgressBar totalNum={4} activeNum={0} />}
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
