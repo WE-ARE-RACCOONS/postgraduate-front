@@ -6,11 +6,11 @@ interface TapStyleProps {
 
 export const TabResult = styled.div`
   border-top: 1px solid #c2cede;
-  height: 100%;
-  padding-bottom: 7rem;
+  height: auto;
+  padding-bottom: 4rem;
 `;
 export const TabResultContainer = styled.div`
-  height: 100vh;
+  height: auto;
   background-color: #f8f9fa;
 `;
 export const MentoringBox = styled.div`
