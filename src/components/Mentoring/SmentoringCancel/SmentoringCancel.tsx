@@ -24,12 +24,61 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const [time, setTime] = useAtom(noTime);
   const [know, setKnow] = useAtom(notKnow);
   const [etc, setEtc] = useAtom(SCEtc);
+  const [otherReason, setOtherReason] = useState(''); // '기타'의 경우 상세 이유
+  const [flag, setFlag] = useState(false);
   const [SMCancel, setSMCancel] = useAtom(SMCancelAtom);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const flag = time || know || etc;
+  const selected = time || know || etc;
+
+  useEffect(() => {
+    if (reason == SENIOR_MENTOR_CANCEL.dontKnow) {
+      setTime(false);
+      setKnow(true);
+      setEtc(false);
+      return;
+    }
+
+    if (reason == SENIOR_MENTOR_CANCEL.haveSchedule) {
+      setTime(true);
+      setKnow(false);
+      setEtc(false);
+      return;
+    }
+
+    setTime(false);
+    setKnow(false);
+    setEtc(true);
+  }, [reason]);
+
+  useEffect(() => {
+    if (!selected) {
+      setFlag(false);
+      return;
+    }
+
+    if (reason) {
+      if (reason == SENIOR_MENTOR_CANCEL.otherTitle) {
+        if (otherReason) {
+          setFlag(true);
+          return;
+        }
+
+        setFlag(false);
+        return;
+      }
+
+      setFlag(true);
+      return;
+    } else {
+      setFlag(false);
+      return;
+    }
+  }, [selected, reason, otherReason]);
+
   const xClick = () => {
     props.modalHandler();
   };
+
   const cancelMentoring = async () => {
     try {
       setIsSubmitting(true);
@@ -46,7 +95,10 @@ function SmentoringCancel(props: ModalMentoringProps) {
               method: 'PATCH',
               headers,
               body: JSON.stringify({
-                reason: reason,
+                reason:
+                  reason == SENIOR_MENTOR_CANCEL.otherTitle
+                    ? otherReason
+                    : reason,
               }),
             },
           );
@@ -61,6 +113,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
       console.error('Error cancelling mentoring:', error);
     }
   };
+
   return (
     <SMCBgContainer>
       <SModalMentoringBackground>
@@ -76,6 +129,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
             height: '2rem',
             marginLeft: '17.7rem',
             marginTop: '0.5rem',
+            cursor: 'pointer',
           }}
         />
         <SMCancelTop>
@@ -83,18 +137,26 @@ function SmentoringCancel(props: ModalMentoringProps) {
           <div id="refusewarn">{SENIOR_MENTOR_CANCEL.refuseWarn}</div>
         </SMCancelTop>
         <SMCancelMid>
-          <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
+          <SMCBtn
+            className="reason-group"
+            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+          >
             <CheckBox type="cancel" checked={time} onChange={setTime} />
             {SENIOR_MENTOR_CANCEL.haveSchedule}
           </SMCBtn>
-          <SMCBtn onClick={(e) => setReason(e.currentTarget.textContent ?? '')}>
+          <SMCBtn
+            className="reason-group"
+            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+          >
             <CheckBox type="cancel" checked={know} onChange={setKnow} />
             {SENIOR_MENTOR_CANCEL.dontKnow}
           </SMCBtn>
-          <SMCBtnEtc>
-            <div style={{ display: 'flex' }}>
+          <SMCBtnEtc
+            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+          >
+            <div className="reason-group" style={{ display: 'flex' }}>
               <CheckBox type="cancel" checked={etc} onChange={setEtc} />
-              기타
+              {SENIOR_MENTOR_CANCEL.otherTitle}
             </div>
             <div style={{ display: 'flex' }}>
               <input
@@ -108,13 +170,13 @@ function SmentoringCancel(props: ModalMentoringProps) {
                 }}
                 type="text"
                 placeholder={SENIOR_MENTOR_CANCEL.other}
-                onChange={(e) => setReason(e.target.value)}
+                onChange={(e) => setOtherReason(e.target.value)}
               ></input>
             </div>
           </SMCBtnEtc>
         </SMCancelMid>
         <div style={{ marginLeft: '1.45rem', marginTop: '3.5rem' }}>
-          {flag && reason ? (
+          {flag ? (
             <SMCbtnCancelT onClick={cancelMentoring}>거절하기</SMCbtnCancelT>
           ) : (
             <SMCbtnCancelF>거절하기</SMCbtnCancelF>
