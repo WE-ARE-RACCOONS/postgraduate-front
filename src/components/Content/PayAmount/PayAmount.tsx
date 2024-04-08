@@ -1,10 +1,14 @@
-import { PAY_AMOUNT_MODAL } from "@/constants/pay/payAmount";
-import { PayAmountBtnBox, PayAmountContainer, PayAmountDescBox } from "./PayAmount.styled";
-import Image from "next/image";
+import { PAY_AMOUNT_MODAL } from '@/constants/pay/payAmount';
+import {
+  PayAmountBtnBox,
+  PayAmountContainer,
+  PayAmountDescBox,
+} from './PayAmount.styled';
+import Image from 'next/image';
 import pay_amount from '../../../../public/pay_amount.png';
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useRouter } from 'next/navigation';
 
-function PayAmount({ modalHandler } : { modalHandler: () => void }) {
+function PayAmount({ modalHandler }: { modalHandler: () => void }) {
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -12,13 +16,13 @@ function PayAmount({ modalHandler } : { modalHandler: () => void }) {
 
   const prevClick = () => {
     modalHandler();
-  }
+  };
 
   const nextClick = () => {
     router.push(`/mentoring-apply/${seniorId}/schedule`);
-  }
+  };
 
-  return(
+  return (
     <PayAmountContainer>
       <div id="pay-amount-title">{PAY_AMOUNT_MODAL.title}</div>
       <Image id="pay-amount-img" src={pay_amount} alt="19,900원 금액 사진" />
@@ -30,11 +34,23 @@ function PayAmount({ modalHandler } : { modalHandler: () => void }) {
         </div>
       </PayAmountDescBox>
       <PayAmountBtnBox>
-        <button className="pay-amount-btn" id="pay-amount-prev-btn" onClick={prevClick}>{PAY_AMOUNT_MODAL.prevBtn}</button>
-        <button className="pay-amount-btn" id="pay-amount-next-btn" onClick={nextClick}>{PAY_AMOUNT_MODAL.nextBtn}</button>
+        <button
+          className="pay-amount-btn"
+          id="pay-amount-prev-btn"
+          onClick={prevClick}
+        >
+          {PAY_AMOUNT_MODAL.prevBtn}
+        </button>
+        <button
+          className="pay-amount-btn"
+          id="pay-amount-next-btn"
+          onClick={nextClick}
+        >
+          {PAY_AMOUNT_MODAL.nextBtn}
+        </button>
       </PayAmountBtnBox>
     </PayAmountContainer>
-  )
+  );
 }
 
 export default PayAmount;

@@ -45,7 +45,7 @@ export default function RootLayout({
             <div id="senior-auth-portal"></div>
             <div id="mentoring-login-portal"></div>
             <div id="change-junior-portal"></div>
-            <div id='pay-amount-portal'></div>
+            <div id="pay-amount-portal"></div>
           </StyledComponentsRegistry>
         </Providers>
       </body>

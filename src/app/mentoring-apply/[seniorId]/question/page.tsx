@@ -76,7 +76,10 @@ function MentoringApplyQuestionPage() {
       </MAQNextBtn>
       {modal && portalElement
         ? createPortal(
-            <ShortRiseUpModal modalHandler={modalHandler} modalType='payAmount' />,
+            <ShortRiseUpModal
+              modalHandler={modalHandler}
+              modalType="payAmount"
+            />,
             portalElement,
           )
         : null}

@@ -1,3 +1,3 @@
-import ShortRiseUpModal from "./ShortRiseUpModal";
+import ShortRiseUpModal from './ShortRiseUpModal';
 
 export default ShortRiseUpModal;

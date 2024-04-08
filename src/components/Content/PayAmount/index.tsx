@@ -1,3 +1,3 @@
-import PayAmount from "./PayAmount";
+import PayAmount from './PayAmount';
 
 export default PayAmount;

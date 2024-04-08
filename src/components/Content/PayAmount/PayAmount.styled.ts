@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from 'styled-components';
 
 export const PayAmountContainer = styled.div`
   width: 21rem;
@@ -24,7 +24,7 @@ export const PayAmountContainer = styled.div`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;
 
 export const PayAmountDescBox = styled.div`
   width: max-content;
@@ -44,9 +44,9 @@ export const PayAmountDescBox = styled.div`
 
   #pay-amount-bold {
     font-weight: 600;
-    color: #FF3347;
+    color: #ff3347;
   }
-`
+`;
 
 export const PayAmountBtnBox = styled.div`
   width: 21rem;
@@ -61,17 +61,17 @@ export const PayAmountBtnBox = styled.div`
     height: inherit;
     border-radius: 0.75rem;
     border: 0;
-    color: #FFF;
+    color: #fff;
     font-size: 1.125rem;
     font-weight: 600;
     cursor: pointer;
   }
 
   #pay-amount-prev-btn {
-    background-color: #969FA3;
+    background-color: #969fa3;
   }
 
   #pay-amount-next-btn {
-    background-color: #2FC4B2;
+    background-color: #2fc4b2;
   }
-`
+`;
