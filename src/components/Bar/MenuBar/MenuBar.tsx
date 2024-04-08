@@ -28,7 +28,7 @@ function MenuBar(props: MenubarProps) {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) setToken(accessTkn);
     });
-  
+
     switch (pathname) {
       case '/':
         setActiveMenu('home');
@@ -45,7 +45,6 @@ function MenuBar(props: MenubarProps) {
         break;
     }
   }, [pathname]);
-  
 
   const handleClick = () => {
     if (props.modalHandler) props.modalHandler();
