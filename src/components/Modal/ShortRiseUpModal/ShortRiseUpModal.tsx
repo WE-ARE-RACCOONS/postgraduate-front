@@ -7,7 +7,7 @@ function ShortRiseUpModal(props: ShortRiseUpModalProps) {
     <ModalBackground onClick={props.modalHandler}>
       <div className="short-rise-up-modal" onClick={(e) => e.stopPropagation()}>
         {(props.modalType == 'payAmount') && (
-          <PayAmount />
+          <PayAmount modalHandler={props.modalHandler} />
         )}
       </div>
     </ModalBackground>
