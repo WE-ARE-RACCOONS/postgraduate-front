@@ -1,21 +1,25 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import BackHeader from '@/components/Header/BackHeader';
+import ShortRiseUpModal from '@/components/Modal/ShortRiseUpModal';
 import TextareaForm from '@/components/SingleForm/TextareaForm';
 import {
   MENTORING_NOTICE,
   MENTORING_QUESTION,
 } from '@/constants/form/cMentoringApply';
+import useModal from '@/hooks/useModal';
 import { questionAtom, subjectAtom } from '@/stores/mentoring';
 import { useAtomValue } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
 function MentoringApplyQuestionPage() {
   const [active, setActive] = useState(false);
   const subject = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
+  const { modal, portalElement, modalHandler } = useModal('pay-amount-portal');
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
@@ -31,8 +35,9 @@ function MentoringApplyQuestionPage() {
   }, [subject, question]);
 
   const clickHandler = () => {
-    if (subject.length > 9 && question.length > 9)
-      router.push(`/mentoring-apply/${seniorId}/schedule`);
+    // if (subject.length > 9 && question.length > 9)
+    //   router.push(`/mentoring-apply/${seniorId}/schedule`);
+    if (subject.length > 9 && question.length > 9) modalHandler();
   };
 
   return (
@@ -75,6 +80,12 @@ function MentoringApplyQuestionPage() {
       <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>
         다음으로
       </MAQNextBtn>
+      {modal && portalElement
+        ? createPortal(
+            <ShortRiseUpModal modalHandler={modalHandler} modalType='payAmount' />,
+            portalElement,
+          )
+        : null}
     </MAQContainer>
   );
 }
