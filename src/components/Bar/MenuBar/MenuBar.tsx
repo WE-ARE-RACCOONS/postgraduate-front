@@ -28,14 +28,24 @@ function MenuBar(props: MenubarProps) {
     getAccessToken().then((accessTkn) => {
       if (accessTkn) setToken(accessTkn);
     });
-    if (pathname === '/') {
-      setActiveMenu('home');
-    } else if (pathname === '/junior/mentoring' || '/senior/mentoring') {
-      setActiveMenu('mentoring');
-    } else if (pathname === '/mypage') {
-      setActiveMenu('mypage');
+  
+    switch (pathname) {
+      case '/':
+        setActiveMenu('home');
+        break;
+      case '/junior/mentoring':
+      case '/senior/mentoring':
+        setActiveMenu('mentoring');
+        break;
+      case '/mypage':
+        setActiveMenu('mypage');
+        break;
+      default:
+        // Handle default case if needed
+        break;
     }
   }, [pathname]);
+  
 
   const handleClick = () => {
     if (props.modalHandler) props.modalHandler();
