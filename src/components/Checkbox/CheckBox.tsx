@@ -11,7 +11,7 @@ type CheckboxProps = {
   type: 'accept' | 'cancel';
 };
 
-function CheckBox({ checked, onChange, onlyChecked, type }: CheckboxProps) {
+function CheckBox({ checked, onChange, type }: CheckboxProps) {
   return (
     <div
       onClick={() => onChange(!checked)}

@@ -36,21 +36,30 @@ export const SPmajor = styled.div`
     font-weight: 600;
   }
 `;
+
 export const SPnickname = styled.div`
   font-weight: 700;
   color: #212529;
   padding: 0.18rem 0;
 `;
+
 export const SPField = styled.div`
   font-size: 0.75rem;
 `;
+
 export const Skeyword = styled.div`
+  width: 19rem;
   display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 0;
 `;
+
 export const Keyword = styled.div`
+  height: 1.75rem;
   padding: 0.31rem 0.63rem;
   border-radius: 0.25rem;
   background-color: rgba(47, 196, 178, 0.1);
   margin-left: 0.25rem;
   font-size: 0.75rem;
+  white-space: nowrap;
 `;

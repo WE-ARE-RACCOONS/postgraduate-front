@@ -54,7 +54,8 @@ export const StyledMSBtn = styled.button`
 export const SInfoBtn = styled.button<SInfoBtnProps>`
   color: ${(props) => (props.$isGet ? '#ADB5BD' : '#212529')};
   margin-top: 0.5rem;
-  height: 3.1875rem;
+  min-height: 3.1875rem;
+  height: max-content;
   width: 97%;
   flex-shrink: 0;
   border-radius: 0.5rem;
