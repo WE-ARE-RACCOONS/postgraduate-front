@@ -10,7 +10,6 @@ import {
 import useModal from '@/hooks/useModal';
 import { questionAtom, subjectAtom } from '@/stores/mentoring';
 import { useAtomValue } from 'jotai';
-import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
@@ -20,10 +19,7 @@ function MentoringApplyQuestionPage() {
   const subject = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
   const { modal, portalElement, modalHandler } = useModal('pay-amount-portal');
-  const router = useRouter();
-  const currentPath = usePathname();
-  const pathArr = currentPath.split('/');
-  const seniorId = pathArr[2];
+
   if (typeof window !== 'undefined') {
     window.localStorage.setItem('topic', subject);
     window.localStorage.setItem('question', question);
@@ -35,8 +31,6 @@ function MentoringApplyQuestionPage() {
   }, [subject, question]);
 
   const clickHandler = () => {
-    // if (subject.length > 9 && question.length > 9)
-    //   router.push(`/mentoring-apply/${seniorId}/schedule`);
     if (subject.length > 9 && question.length > 9) modalHandler();
   };
 
