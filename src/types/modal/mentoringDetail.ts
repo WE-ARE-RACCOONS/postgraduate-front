@@ -4,6 +4,7 @@ export interface ModalMentoringProps {
   modalHandler: () => void;
   cancelModalHandler?: () => void;
   acceptModalHandler?: () => void;
+  successHandler?:() => void;
   mentoringId: number;
   onClick?: () => void;
 }

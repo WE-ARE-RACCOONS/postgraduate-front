@@ -5,7 +5,7 @@ import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import { SENIOR_MENTOR_CANCEL } from '@/constants/form/sMentoCanelForm';
 import CheckBox from '@/components/Checkbox';
 import { useAtom } from 'jotai';
-import { SCEtc, SMCancelAtom, noTime, notKnow } from '@/stores/condition';
+import { SCEtc, SMCancelAtom, SMCancelSuccessAtom, noTime, notKnow } from '@/stores/condition';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import {
@@ -18,6 +18,9 @@ import {
   SMCbtnCancelT,
   SMCbtnCancelF,
 } from './SmentoringCancel.styled';
+import useModal from '@/hooks/useModal';
+import { createPortal } from 'react-dom';
+import DimmedModal from '@/components/Modal/DimmedModal';
 
 function SmentoringCancel(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
@@ -30,6 +33,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const [SMCancel, setSMCancel] = useAtom(SMCancelAtom);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useAtom(SMCancelSuccessAtom);
   const selected = time || know || etc;
   const [submittingText, setSubmittingText] = useState('');
 
@@ -55,7 +59,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
   }, [loading, isSubmitting]);
 
   const xClick = () => {
-    props.modalHandler();
+   props.modalHandler();
   };
 
   const cancelMentoring = async () => {
@@ -79,18 +83,29 @@ function SmentoringCancel(props: ModalMentoringProps) {
             },
             { headers }
           );
+          console.log('Server Response:', response.data);
           setSMCancel(true);
           setLoading(false);
           setIsSubmitting(false);
-          props.modalHandler();
-          location.reload();
+          if (response.data.code ==='MT201'){
+            setSuccess(true);
+            props.modalHandler();
+            if(props.successHandler){
+              props.successHandler();
+            }
+          }else{
+            setSuccess(false);
+            props.modalHandler();
+            if(props.successHandler){
+              props.successHandler();
+            }
+          }
         }
       } catch (error) {
         console.error('Error cancelling mentoring:', error);
       }
     }, 1000);
   };
-
   return (
     <SMCBgContainer>
         <SModalMentoringBackground>
@@ -168,9 +183,9 @@ function SmentoringCancel(props: ModalMentoringProps) {
           </>
       )}
         </SModalMentoringBackground>
-      
     </SMCBgContainer>
   );
+  
 }
 
 export default SmentoringCancel;

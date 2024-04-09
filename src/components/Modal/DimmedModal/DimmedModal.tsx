@@ -12,6 +12,7 @@ import AproveModal from '../AproveModal/AproveModal';
 import NotJunior from '@/components/NotJunior/NotJunior';
 import MentoringLogin from '@/components/Content/MentoringLogin';
 import ChangeJunior from '@/components/Content/ChangeJunior';
+import SuccessFail from '@/components/Content/SuccessFail/SuccessFail';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer onClick={props.modalHandler}>
@@ -32,6 +33,7 @@ function DimmedModal(props: DimmedModalProps) {
           <SmentoringCancel
             mentoringId={props.mentoringId || 0}
             modalHandler={props.modalHandler}
+            successHandler={props.successHandler}
           />
         )}
         {props.modalType == 'juniorCancelMent' && (
@@ -60,6 +62,9 @@ function DimmedModal(props: DimmedModalProps) {
         )}
         {props.modalType == 'changeJunior' && (
           <ChangeJunior modalHandler={props.modalHandler} />
+        )}
+         {props.modalType == 'mentoring-cancel-success' && (
+          <SuccessFail modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>
     </DimmedBgContainer>

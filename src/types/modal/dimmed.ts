@@ -10,7 +10,8 @@ export type DimmedModalType =
   | 'authAproveMsg'
   | 'notJunior'
   | 'mentoringLogin'
-  | 'changeJunior';
+  | 'changeJunior'
+  |'mentoring-cancel-success';
 
 export interface DimmedModalProps {
   certifiReg?: string;
@@ -18,4 +19,5 @@ export interface DimmedModalProps {
   modalHandler: () => void;
   mentoringId?: number;
   infoHandler?: () => void;
+  successHandler? :() => void;
 }

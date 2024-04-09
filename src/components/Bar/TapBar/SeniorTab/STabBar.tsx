@@ -54,6 +54,11 @@ function STabBar() {
     modalHandler: acceptModalHandler,
     portalElement: acceptPortalElement,
   } = useModal('senior-mentoring-accept');
+  const {
+    modal: successModal,
+    modalHandler: successModalHandler,
+    portalElement: successPortalElement,
+  } = useModal('mentoring-cancel-success');
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
@@ -185,6 +190,7 @@ function STabBar() {
         ? createPortal(
             <SmentoringCancel
               modalHandler={cancelModalHandler}
+              successHandler={successModalHandler}
               mentoringId={selectedMentoringId || 0}
             />,
             cancelPortalElement,
@@ -197,6 +203,15 @@ function STabBar() {
               modalHandler={acceptModalHandler}
             />,
             acceptPortalElement,
+          )
+        : null}
+        {successModal && cancelPortalElement
+        ? createPortal(
+            <DimmedModal
+              modalType="mentoring-cancel-success"
+              modalHandler={successModalHandler}
+            />,
+            cancelPortalElement,
           )
         : null}
     </div>
