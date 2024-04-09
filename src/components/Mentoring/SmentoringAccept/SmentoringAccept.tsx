@@ -13,6 +13,10 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
   const setAccount = () => {
     router.push('/senior/account');
   };
+  const acceptClick =()=>{
+    modalHandler();
+    location.reload();
+  }
   return (
     <SmentoringAccBox>
       <Image
@@ -44,7 +48,7 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
       {userAccount === true ? (
         <NextBtn
           kind="route"
-          onClick={modalHandler}
+          onClick={acceptClick}
           url="/senior/mentoring"
           btnText="내 멘토링 보러가기"
         />
