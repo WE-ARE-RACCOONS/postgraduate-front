@@ -57,7 +57,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
         const response = await axios.patch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}/cancel`,
           { mentoringId: props.mentoringId },
-          { headers }
+          { headers },
         );
 
         if (findExCode(response.data.code)) {
@@ -93,7 +93,10 @@ function MentoringCancel(props: ModalMentoringclProps) {
             alt={cancelStatus === '취소되었습니다' ? '확인상태' : '경고상태'}
             width={65}
             height={65}
-            style={{ margin: '0.5rem 7.5rem', marginTop: cancelStatus === '취소되었습니다' ? '' : '1rem' }}
+            style={{
+              margin: '0.5rem 7.5rem',
+              marginTop: cancelStatus === '취소되었습니다' ? '' : '1rem',
+            }}
             priority
           />
           <MentoringCancelBox>

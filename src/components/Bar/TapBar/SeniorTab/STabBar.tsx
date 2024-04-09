@@ -205,7 +205,7 @@ function STabBar() {
             acceptPortalElement,
           )
         : null}
-        {successModal && cancelPortalElement
+      {successModal && cancelPortalElement
         ? createPortal(
             <DimmedModal
               modalType="mentoring-cancel-success"

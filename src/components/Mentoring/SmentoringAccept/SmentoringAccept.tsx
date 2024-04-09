@@ -13,10 +13,10 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
   const setAccount = () => {
     router.push('/senior/account');
   };
-  const acceptClick =()=>{
+  const acceptClick = () => {
     modalHandler();
     location.reload();
-  }
+  };
   return (
     <SmentoringAccBox>
       <Image

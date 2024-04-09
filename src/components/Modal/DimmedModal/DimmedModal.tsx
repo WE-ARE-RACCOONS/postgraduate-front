@@ -63,7 +63,7 @@ function DimmedModal(props: DimmedModalProps) {
         {props.modalType == 'changeJunior' && (
           <ChangeJunior modalHandler={props.modalHandler} />
         )}
-         {props.modalType == 'mentoring-cancel-success' && (
+        {props.modalType == 'mentoring-cancel-success' && (
           <SuccessFail modalHandler={props.modalHandler} />
         )}
       </DimmedMdContainer>

@@ -1,4 +1,3 @@
-
 import styled from 'styled-components';
 export const OkayBtn = styled.button`
   display: flex;
@@ -22,8 +21,8 @@ export const OkayBtn = styled.button`
   line-height: normal;
 `;
 export const SuccessMid = styled.div`
-text-align: center;
-color: #333;
+  text-align: center;
+  color: #333;
   text-align: center;
   font-family: Noto Sans JP;
   font-size: 1.25rem;
