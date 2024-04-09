@@ -41,8 +41,8 @@ function AuthPage() {
 
     if (entriesNavTiming.type == 'reload') {
       if (!accessTkn)
-        window.location.href =
-          window.location.origin + '/signup/select'; // 선배 최초 회원가입
+        window.location.href = window.location.origin + '/signup/select';
+      // 선배 최초 회원가입
       else
         window.location.href =
           window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환 or 선배 재인증
