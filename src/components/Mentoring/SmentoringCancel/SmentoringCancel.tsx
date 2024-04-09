@@ -88,14 +88,11 @@ function SmentoringCancel(props: ModalMentoringProps) {
       } catch (error) {
         console.error('Error cancelling mentoring:', error);
       }
-    }, 2000);
+    }, 1000);
   };
 
   return (
     <SMCBgContainer>
-      {loading || isSubmitting ? (
-        <div style={{ textAlign: 'center' }}>거절 중입니다...</div>
-      ) : (
         <SModalMentoringBackground>
           <Image
             id="x-icon"
@@ -112,7 +109,11 @@ function SmentoringCancel(props: ModalMentoringProps) {
               cursor: 'pointer',
             }}
           />
-          <SMCancelTop>
+          {loading || isSubmitting ? (
+        <div style={{ textAlign: 'center' }}>거절 중입니다...</div>
+      ) : (
+        <>
+<SMCancelTop>
             <h3>{SENIOR_MENTOR_CANCEL.whyRefuse}</h3>
             <div id="refusewarn">{SENIOR_MENTOR_CANCEL.refuseWarn}</div>
           </SMCancelTop>
@@ -164,10 +165,14 @@ function SmentoringCancel(props: ModalMentoringProps) {
               <SMCbtnCancelF>거절하기</SMCbtnCancelF>
             )}
           </div>
-        </SModalMentoringBackground>
+          </>
       )}
+        </SModalMentoringBackground>
+      
     </SMCBgContainer>
   );
 }
 
 export default SmentoringCancel;
+
+
