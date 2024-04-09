@@ -94,7 +94,6 @@ function SmentoringCancel(props: ModalMentoringProps) {
             },
             { headers },
           );
-          console.log('Server Response:', response.data);
           setSMCancel(true);
           setLoading(false);
           setIsSubmitting(false);
