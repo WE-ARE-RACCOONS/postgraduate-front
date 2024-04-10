@@ -54,7 +54,14 @@ function CustomerCenter() {
   return (
     <CustomerCenterBox>
       <TitleComponent title="고객센터"></TitleComponent>
-      <ContentComponent content="문의하기"></ContentComponent>
+      <ContentComponent content="문의하기" onClick={() => {
+            if (typeof window !== undefined)
+              window.open(
+                process.env.NEXT_PUBLIC_KAKAO_CHANNEL,
+                '_blank',
+                'noopener, noreferrer',
+              );
+          }}></ContentComponent>
       {isLogin && (
         <ContentComponent
           content="로그아웃"
