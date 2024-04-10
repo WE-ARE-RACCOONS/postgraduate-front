@@ -1,10 +1,10 @@
-import useAuth from "@/hooks/useAuth";
-import axios from "axios";
-import type { InternalAxiosRequestConfig } from 'axios'
-import { useRouter } from "next/navigation";
+import useAuth from '@/hooks/useAuth';
+import axios from 'axios';
+import type { InternalAxiosRequestConfig } from 'axios';
+import { useRouter } from 'next/navigation';
 
 const instance = axios.create({
-  baseURL: process.env.NEXT_PUBLIC_SERVER_URL
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
 instance.interceptors.request.use(
@@ -13,7 +13,8 @@ instance.interceptors.request.use(
     const accessTkn = getAccessToken();
     const router = useRouter();
 
-    if(!accessTkn) { // refresh token까지 만료된 경우
+    if (!accessTkn) {
+      // refresh token까지 만료된 경우
       removeTokens();
       router.replace('/');
     } else {
@@ -25,7 +26,7 @@ instance.interceptors.request.use(
   (error) => {
     console.error(error);
     return Promise.reject(error);
-  }
-)
+  },
+);
 
 export default instance;

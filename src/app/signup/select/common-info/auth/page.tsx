@@ -63,12 +63,13 @@ function AuthPage() {
       const formData = new FormData();
       formData.append('certificationFile', photo);
 
-      if (certifiReg === 'NOT_APPROVE' || (accessTkn && userType == 'senior')) { // 선배 재인증
+      if (certifiReg === 'NOT_APPROVE' || (accessTkn && userType == 'senior')) {
+        // 선배 재인증
         let reAuthImg = ''; // S3에서 반환된 인증 이미지 url
 
         await axios
           .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
             formData,
             {
               headers: {
@@ -87,7 +88,7 @@ function AuthPage() {
             console.error(error);
           });
 
-        if(reAuthImg) {
+        if (reAuthImg) {
           axios
             .patch(
               `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
@@ -109,8 +110,8 @@ function AuthPage() {
               console.error('Error sending PATCH request:', error);
             });
         }
-
-      } else { // 선배 회원가입 및 후배->선배 전환
+      } else {
+        // 선배 회원가입 및 후배->선배 전환
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
@@ -147,7 +148,9 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {userType && userType == 'senior' ? '' : (
+        {userType && userType == 'senior' ? (
+          ''
+        ) : (
           <ProgressBar totalNum={4} activeNum={0} />
         )}
       </div>
