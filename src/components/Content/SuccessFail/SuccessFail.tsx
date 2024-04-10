@@ -5,14 +5,11 @@ import Image from 'next/image';
 import acceptImage from '../../../../public/cState.png';
 import acceptNonImage from '../../../../public/cState_n.png';
 import { OkayBtn, SuccessMid } from './SuccessFail.styled';
-interface SuccessModalProps {
-  modalHandler: () => void;
-}
 
-function SuccessFail(props: SuccessModalProps) {
+function SuccessFail({ modalHandler } : { modalHandler: () => void }) {
   const success = useAtomValue(SMCancelSuccessAtom);
   const handleModalClose = () => {
-    props.modalHandler();
+    modalHandler();
     location.reload();
   };
   return (

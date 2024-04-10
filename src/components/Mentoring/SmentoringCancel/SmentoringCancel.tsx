@@ -187,7 +187,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
                   {submittingText}
                 </SMCbtnCancelT>
               ) : (
-                <SMCbtnCancelF>거절하기</SMCbtnCancelF>
+                <SMCbtnCancelF>{submittingText}</SMCbtnCancelF>
               )}
             </div>
           </>
