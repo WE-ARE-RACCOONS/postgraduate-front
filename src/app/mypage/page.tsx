@@ -5,7 +5,7 @@ import CustomerCenter from '../../components/Profile/ProfileStateChange/Customer
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import NotLmypage from '../../components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
@@ -14,8 +14,6 @@ import DimmedModal from '../../components/Modal/DimmedModal';
 
 import { userType } from '../../types/user/user';
 import SalaryBox from '../../components/Box/SalaryBox';
-import { useRouter } from 'next/navigation';
-import { certiRegType } from '../../types/profile/profile';
 import { mySeniorId } from '../../stores/senior';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
@@ -76,7 +74,6 @@ function MyPage() {
   const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [accessTkn, setAccessTkn] = useState('');
   const [userType, setUserType] = useState('');
-  const router = useRouter();
 
   useEffect(() => {
     const userT = getUserType();
@@ -98,7 +95,7 @@ function MyPage() {
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();
-              router.push('/');
+              location.reload();
               return;
             }
 
@@ -117,7 +114,7 @@ function MyPage() {
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();
-              router.push('/');
+              location.reload();
               return;
             }
 
