@@ -12,7 +12,7 @@ import auth from '../../../../../../public/auth.png';
 import Image from 'next/image';
 import cancel from '../../../../../../public/cancel.png';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import { detectReload, preventClose } from '@/utils/reloadFun';
+import { preventClose } from '@/utils/reloadFun';
 import useAuth from '@/hooks/useAuth';
 import { certifiRegAtom } from '@/stores/signup';
 
@@ -57,20 +57,23 @@ function AuthPage() {
     };
   }, []);
 
-  const handleClick = () => {
+  const handleClick = async () => {
     if (photo) {
       setUploadFlag(false);
       const formData = new FormData();
       formData.append('certificationFile', photo);
+
       if (certifiReg === 'NOT_APPROVE' || (accessTkn && userType == 'senior')) {
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
+        // 선배 재인증
+        let reAuthImg = ''; // S3에서 반환된 인증 이미지 url
+
+        await axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
             formData,
             {
               headers: {
                 'Content-Type': 'multipart/form-data',
-                Authorization: `Bearer ${accessTkn}`,
               },
             },
           )
@@ -78,14 +81,37 @@ function AuthPage() {
             const res = response.data;
 
             if (res.code == 'IMG202') {
-              setphotoUrl(res.data.profileUrl);
-              router.push('/auth-done');
+              reAuthImg = res.data.profileUrl;
             }
           })
           .catch((error) => {
-            console.error('Error sending PATCH request:', error);
+            console.error(error);
           });
+
+        if (reAuthImg) {
+          axios
+            .patch(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
+              {
+                certification: reAuthImg,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${accessTkn}`,
+                },
+              },
+            )
+            .then((response) => {
+              const res = response.data;
+
+              if (res.code == 'SNR201') router.push('/auth-done');
+            })
+            .catch((error) => {
+              console.error('Error sending PATCH request:', error);
+            });
+        }
       } else {
+        // 선배 회원가입 및 후배->선배 전환
         axios
           .post(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
@@ -122,7 +148,9 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {userType && userType == 'senior' && (
+        {userType && userType == 'senior' ? (
+          ''
+        ) : (
           <ProgressBar totalNum={4} activeNum={0} />
         )}
       </div>
