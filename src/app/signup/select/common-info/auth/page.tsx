@@ -122,7 +122,7 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {userType && userType == 'senior' && (
+        {userType && userType == 'senior' ? '' : (
           <ProgressBar totalNum={4} activeNum={0} />
         )}
       </div>
