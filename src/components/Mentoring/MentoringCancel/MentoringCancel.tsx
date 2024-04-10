@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
 import { ModalMentoringclProps } from '@/types/modal/mentoringDetail';
@@ -11,7 +11,6 @@ import {
   MCMain,
   MCSub,
 } from './MentoringCancel.styled';
-import { useEffect, useState } from 'react';
 import Image from 'next/image';
 import state from '@/../../public/state.png';
 import cState from '@/../../public/cState.png';
@@ -19,17 +18,26 @@ import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 import { useAtom } from 'jotai';
 import { JMCancelAtom } from '@/stores/condition';
+
 function MentoringCancel(props: ModalMentoringclProps) {
   const [data, setData] = useState<MentoringData[] | null>(null);
   const { getAccessToken, removeTokens } = useAuth();
   const [cancelStatus, setCancelStatus] = useState<string>('');
   const [JMCancel, setJMCancel] = useAtom(JMCancelAtom);
-  const [noCancelText, setNoCancelText] = useState<string>('아니요');
-  const [showCancelButton, setShowCancelButton] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(false);
+  const [cancelLoading, setCancelLoading] = useState<boolean>(false);
   const router = useRouter();
 
-  const handleClick = () => {
+  const handleSuccess = () => {
+    setCancelStatus('취소되었습니다');
+    setJMCancel(true);
+  };
+
+  const handleError = () => {
+    setCancelStatus('취소 실패');
+  };
+
+  const handleModalClose = () => {
     props.modalHandler();
     if (props.onClick) props.onClick();
     location.reload();
@@ -38,37 +46,29 @@ function MentoringCancel(props: ModalMentoringclProps) {
   const cancelMentoring = async () => {
     try {
       setLoading(true);
+      setCancelLoading(false);
+      const Token = await getAccessToken();
+      if (Token) {
+        const headers = {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${Token}`,
+        };
 
-      getAccessToken().then(async (Token) => {
-        if (Token) {
-          const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Token}`,
-          };
+        const response = await axios.patch(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}/cancel`,
+          { mentoringId: props.mentoringId },
+          { headers },
+        );
 
-          const response = await axios.patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}/cancel`,
-            {
-              mentoringId: props.mentoringId,
-            },
-            { headers },
-          );
-
-          if (findExCode(response.data.code)) {
-            removeTokens();
-            router.replace('/');
-            return;
-          }
-
-          setData(response.data);
-          if (response.data.code === 'MT201') {
-            setCancelStatus('취소되었습니다');
-            setJMCancel(true);
-          } else {
-            setCancelStatus('취소 실패');
-          }
+        if (findExCode(response.data.code)) {
+          removeTokens();
+          router.replace('/');
+          return;
         }
-      });
+
+        setData(response.data);
+        response.data.code === 'MT201' ? handleSuccess() : handleError();
+      }
     } catch (error) {
       console.error(error);
     } finally {
@@ -76,52 +76,48 @@ function MentoringCancel(props: ModalMentoringclProps) {
     }
   };
 
+  const cancelHandleClick = () => {
+    setCancelLoading(true);
+    setTimeout(cancelMentoring, 2000);
+  };
+
   return (
     <div style={{ textAlign: 'center', justifyContent: 'center' }}>
-      {loading ? (
+      {loading || cancelLoading ? (
         '취소 중...'
       ) : (
         <>
-          {cancelStatus === '취소되었습니다' ? (
-            <Image
-              id="cState"
-              src={cState}
-              alt="확인상태"
-              width={65}
-              height={65}
-              style={{ margin: '0.5rem 7.5rem ' }}
-              priority
-            />
-          ) : (
-            <Image
-              id="state"
-              src={state}
-              alt="경고상태"
-              width={65}
-              height={65}
-              style={{ margin: ' 0.5rem 7.5rem', marginTop: '1rem' }}
-              priority
-            />
-          )}
+          <Image
+            id={cancelStatus === '취소되었습니다' ? 'cState' : 'state'}
+            src={cancelStatus === '취소되었습니다' ? cState : state}
+            alt={cancelStatus === '취소되었습니다' ? '확인상태' : '경고상태'}
+            width={65}
+            height={65}
+            style={{
+              margin: '0.5rem 7.5rem',
+              marginTop: cancelStatus === '취소되었습니다' ? '' : '1rem',
+            }}
+            priority
+          />
           <MentoringCancelBox>
             <MCMain>
               {cancelStatus
                 ? `${cancelStatus}`
                 : '멘토링 신청을 취소하시겠어요?'}
             </MCMain>
-            {cancelStatus ? (
+            {cancelStatus || loading ? (
               <>
                 {cancelStatus === '취소되었습니다' ? (
                   <>
                     <MCSub>
                       환불은 카드사 정책에 따라 영업일 기준 2~3일이 소요됩니다.
                     </MCSub>
-                    <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
+                    <OkayBtn onClick={handleModalClose}>확인했어요</OkayBtn>
                   </>
                 ) : (
                   <>
                     <MCSub>멘토링 취소가 실패했습니다.</MCSub>
-                    <OkayBtn onClick={() => handleClick()}>확인했어요</OkayBtn>
+                    <OkayBtn onClick={handleModalClose}>확인했어요</OkayBtn>
                   </>
                 )}
               </>
@@ -131,8 +127,8 @@ function MentoringCancel(props: ModalMentoringclProps) {
                   반복되는 신청 취소시 멘토링 매칭에 불이익이 있을 수 있습니다.
                 </MCSub>
                 <div style={{ display: 'flex', marginTop: '1.8rem' }}>
-                  <CancelBtn onClick={cancelMentoring}>취소</CancelBtn>
-                  <NoCancelBtn onClick={() => handleClick()}>닫기</NoCancelBtn>
+                  <CancelBtn onClick={cancelHandleClick}>취소</CancelBtn>
+                  <NoCancelBtn onClick={handleModalClose}>닫기</NoCancelBtn>
                 </div>
               </>
             )}

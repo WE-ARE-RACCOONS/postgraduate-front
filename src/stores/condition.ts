@@ -11,3 +11,4 @@ export const SCEtc = atom<boolean>(false);
 export const successAtom = atom<boolean>(false);
 export const JMCancelAtom = atom<boolean>(false);
 export const SMCancelAtom = atom<boolean>(false);
+export const SMCancelSuccessAtom = atom<boolean>(false);
