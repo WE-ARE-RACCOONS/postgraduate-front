@@ -1,6 +1,19 @@
-'use client';
-import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
+import useAuth from '@/hooks/useAuth';
+import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
+import { SENIOR_MENTOR_CANCEL } from '@/constants/form/sMentoCanelForm';
+import CheckBox from '@/components/Checkbox';
+import { useAtom } from 'jotai';
+import {
+  SCEtc,
+  SMCancelAtom,
+  SMCancelSuccessAtom,
+  noTime,
+  notKnow,
+} from '@/stores/condition';
+import Image from 'next/image';
+import x_icon from '../../../../public/x.png';
 import {
   SMCancelTop,
   SMCancelMid,
@@ -11,13 +24,10 @@ import {
   SMCbtnCancelT,
   SMCbtnCancelF,
 } from './SmentoringCancel.styled';
-import x_icon from '../../../../public/x.png';
-import Image from 'next/image';
-import useAuth from '@/hooks/useAuth';
-import { SENIOR_MENTOR_CANCEL } from '@/constants/form/sMentoCanelForm';
-import CheckBox from '@/components/Checkbox';
-import { useAtom } from 'jotai';
-import { SCEtc, SMCancelAtom, noTime, notKnow } from '@/stores/condition';
+import useModal from '@/hooks/useModal';
+import { createPortal } from 'react-dom';
+import DimmedModal from '@/components/Modal/DimmedModal';
+
 function SmentoringCancel(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
   const [reason, setReason] = useState('');
@@ -28,27 +38,10 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const [flag, setFlag] = useState(false);
   const [SMCancel, setSMCancel] = useAtom(SMCancelAtom);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useAtom(SMCancelSuccessAtom);
   const selected = time || know || etc;
-
-  useEffect(() => {
-    if (reason == SENIOR_MENTOR_CANCEL.dontKnow) {
-      setTime(false);
-      setKnow(true);
-      setEtc(false);
-      return;
-    }
-
-    if (reason == SENIOR_MENTOR_CANCEL.haveSchedule) {
-      setTime(true);
-      setKnow(false);
-      setEtc(false);
-      return;
-    }
-
-    setTime(false);
-    setKnow(false);
-    setEtc(true);
-  }, [reason]);
+  const [submittingText, setSubmittingText] = useState('');
 
   useEffect(() => {
     if (!selected) {
@@ -57,63 +50,72 @@ function SmentoringCancel(props: ModalMentoringProps) {
     }
 
     if (reason) {
-      if (reason == SENIOR_MENTOR_CANCEL.otherTitle) {
-        if (otherReason) {
-          setFlag(true);
-          return;
-        }
-
+      if (reason === SENIOR_MENTOR_CANCEL.otherTitle && !otherReason) {
         setFlag(false);
         return;
       }
-
       setFlag(true);
-      return;
     } else {
       setFlag(false);
-      return;
     }
   }, [selected, reason, otherReason]);
+
+  useEffect(() => {
+    setSubmittingText(
+      loading || isSubmitting ? '거절 중입니다...' : '거절하기',
+    );
+  }, [loading, isSubmitting]);
 
   const xClick = () => {
     props.modalHandler();
   };
 
   const cancelMentoring = async () => {
-    try {
-      setIsSubmitting(true);
-      getAccessToken().then(async (Token) => {
+    if (loading || isSubmitting) return;
+    setLoading(true);
+    setIsSubmitting(true);
+
+    setTimeout(async () => {
+      try {
+        const Token = await getAccessToken();
         if (Token) {
           const headers = {
             'Content-Type': 'application/json',
             Authorization: `Bearer ${Token}`,
           };
 
-          const response = await fetch(
+          const response = await axios.patch(
             `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/refuse`,
             {
-              method: 'PATCH',
-              headers,
-              body: JSON.stringify({
-                reason:
-                  reason == SENIOR_MENTOR_CANCEL.otherTitle
-                    ? otherReason
-                    : reason,
-              }),
+              reason:
+                reason === SENIOR_MENTOR_CANCEL.otherTitle
+                  ? otherReason
+                  : reason,
             },
+            { headers },
           );
-          // const responseData = await response.json();
           setSMCancel(true);
+          setLoading(false);
           setIsSubmitting(false);
-          props.modalHandler();
-          location.reload();
+          if (response.data.code === 'MT201') {
+            setSuccess(true);
+            props.modalHandler();
+            if (props.successHandler) {
+              props.successHandler();
+            }
+          } else {
+            setSuccess(false);
+            props.modalHandler();
+            if (props.successHandler) {
+              props.successHandler();
+            }
+          }
         }
-      });
-    } catch (error) {
-      console.error('Error cancelling mentoring:', error);
-    }
+      } catch (error) {
+        console.error('Error cancelling mentoring:', error);
+      }
+    }, 1000);
   };
-
   return (
     <SMCBgContainer>
       <SModalMentoringBackground>
@@ -132,56 +134,64 @@ function SmentoringCancel(props: ModalMentoringProps) {
             cursor: 'pointer',
           }}
         />
-        <SMCancelTop>
-          <h3>{SENIOR_MENTOR_CANCEL.whyRefuse}</h3>
-          <div id="refusewarn">{SENIOR_MENTOR_CANCEL.refuseWarn}</div>
-        </SMCancelTop>
-        <SMCancelMid>
-          <SMCBtn
-            className="reason-group"
-            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
-          >
-            <CheckBox type="cancel" checked={time} onChange={setTime} />
-            {SENIOR_MENTOR_CANCEL.haveSchedule}
-          </SMCBtn>
-          <SMCBtn
-            className="reason-group"
-            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
-          >
-            <CheckBox type="cancel" checked={know} onChange={setKnow} />
-            {SENIOR_MENTOR_CANCEL.dontKnow}
-          </SMCBtn>
-          <SMCBtnEtc
-            onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
-          >
-            <div className="reason-group" style={{ display: 'flex' }}>
-              <CheckBox type="cancel" checked={etc} onChange={setEtc} />
-              {SENIOR_MENTOR_CANCEL.otherTitle}
+        {loading || isSubmitting ? (
+          <div style={{ textAlign: 'center' }}>거절 중입니다...</div>
+        ) : (
+          <>
+            <SMCancelTop>
+              <h3>{SENIOR_MENTOR_CANCEL.whyRefuse}</h3>
+              <div id="refusewarn">{SENIOR_MENTOR_CANCEL.refuseWarn}</div>
+            </SMCancelTop>
+            <SMCancelMid>
+              <SMCBtn
+                className="reason-group"
+                onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+              >
+                <CheckBox type="cancel" checked={time} onChange={setTime} />
+                {SENIOR_MENTOR_CANCEL.haveSchedule}
+              </SMCBtn>
+              <SMCBtn
+                className="reason-group"
+                onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+              >
+                <CheckBox type="cancel" checked={know} onChange={setKnow} />
+                {SENIOR_MENTOR_CANCEL.dontKnow}
+              </SMCBtn>
+              <SMCBtnEtc
+                onClick={(e) => setReason(e.currentTarget.textContent ?? '')}
+              >
+                <div className="reason-group" style={{ display: 'flex' }}>
+                  <CheckBox type="cancel" checked={etc} onChange={setEtc} />
+                  {SENIOR_MENTOR_CANCEL.otherTitle}
+                </div>
+                <div style={{ display: 'flex' }}>
+                  <input
+                    style={{
+                      border: 'none',
+                      fontWeight: '400',
+                      fontSize: '16px',
+                      height: '2rem',
+                      width: '20rem',
+                      backgroundColor: ' #F8F9FA',
+                    }}
+                    type="text"
+                    placeholder={SENIOR_MENTOR_CANCEL.other}
+                    onChange={(e) => setOtherReason(e.target.value)}
+                  ></input>
+                </div>
+              </SMCBtnEtc>
+            </SMCancelMid>
+            <div style={{ marginLeft: '1.45rem', marginTop: '3.5rem' }}>
+              {flag ? (
+                <SMCbtnCancelT onClick={cancelMentoring}>
+                  {submittingText}
+                </SMCbtnCancelT>
+              ) : (
+                <SMCbtnCancelF>{submittingText}</SMCbtnCancelF>
+              )}
             </div>
-            <div style={{ display: 'flex' }}>
-              <input
-                style={{
-                  border: 'none',
-                  fontWeight: '400',
-                  fontSize: '16px',
-                  height: '2rem',
-                  width: '20rem',
-                  backgroundColor: ' #F8F9FA',
-                }}
-                type="text"
-                placeholder={SENIOR_MENTOR_CANCEL.other}
-                onChange={(e) => setOtherReason(e.target.value)}
-              ></input>
-            </div>
-          </SMCBtnEtc>
-        </SMCancelMid>
-        <div style={{ marginLeft: '1.45rem', marginTop: '3.5rem' }}>
-          {flag ? (
-            <SMCbtnCancelT onClick={cancelMentoring}>거절하기</SMCbtnCancelT>
-          ) : (
-            <SMCbtnCancelF>거절하기</SMCbtnCancelF>
-          )}
-        </div>
+          </>
+        )}
       </SModalMentoringBackground>
     </SMCBgContainer>
   );
