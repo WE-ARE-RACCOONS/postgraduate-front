@@ -5,17 +5,14 @@ import RoundedImage from '@/components/Image/RoundedImage';
 import styled from 'styled-components';
 import user_icon from '../../../../../public/user.png';
 import AuthLabeledText from '@/components/Text/AuthLabeledText';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 import '../../../../components/JQ/loader';
 import {
   PhoneNumberAtom,
-  firAbleTimeAtom,
   paySeniorIdAtom,
   questionAtom,
-  secAbleTimeAtom,
   seniorNickname,
   subjectAtom,
-  thiAbleTimeAtom,
   userIdAtom,
 } from '@/stores/mentoring';
 import {
@@ -34,6 +31,7 @@ import Script from 'next/script';
 import $ from 'jquery';
 import { TEMRS_LINK } from '@/constants/terms/terms';
 import findExCode from '@/utils/findExCode';
+import GoogleAnalytics from '@/components/GA/GA';
 
 function MentoringApplyPayPage() {
   const [nickName, setNickName] = useAtom(seniorNickname);
@@ -156,151 +154,158 @@ function MentoringApplyPayPage() {
   }, [dataLoaded, nickName, userId, PhoneNumber]);
 
   return (
-    <MAPContainer>
-      <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
-      <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>
-      <BackHeader headerText="멘토링 결제 정보" />
-      <ProgressBar totalNum={3} activeNum={2} />
-      <MAPContent>
-        <MAPTitle id="map-title-senior-info">
-          {MENTORING_PAY_TITLE.seniorInfo}
-        </MAPTitle>
-        <MAPBox>
-          <MAPInfoWrapper>
-            <RoundedImage
-              imgSrc={profile ? profile : user_icon}
-              altMsg="대학원생 프로필 이미지"
-            />
-            <div id="map-info-text">
-              <div id="map-info-postgradu-major">
-                <div id="map-info-postgradu">{postgradu}&nbsp;</div>
-                <div id="map-info-major">{major}</div>
-              </div>
-              <AuthLabeledText str={`${nickName}님`} />
-              <div id="map-info-lab">{lab}</div>
-            </div>
-          </MAPInfoWrapper>
-        </MAPBox>
-        <MAPBox>
-          <MAPTimeWrapper>
-            <MAPTitle>{MENTORING_PAY_TITLE.schedule}</MAPTitle>
-            <div id="map-time-list">
-              <ol>
-                <li>
-                  <div className="map-text">
-                    첫{MENTORING_PAY_ETC_TEXT.nthSchedule}
-                  </div>
-                  <div className="map-value">{formatTime(firstTime)}</div>
-                </li>
-                <li>
-                  <div className="map-text">
-                    두{MENTORING_PAY_ETC_TEXT.nthSchedule}
-                  </div>
-                  <div className="map-value">{formatTime(secondTime)}</div>
-                </li>
-                <li>
-                  <div className="map-text">
-                    세{MENTORING_PAY_ETC_TEXT.nthSchedule}
-                  </div>
-                  <div className="map-value">{formatTime(thirdTime)}</div>
-                </li>
-              </ol>
-            </div>
-          </MAPTimeWrapper>
-        </MAPBox>
-        <MAPBox>
-          <MAPPayAmountWrapper>
-            <MAPTitle>{MENTORING_PAY_TITLE.payAmount}</MAPTitle>
-            <div id="map-pay-time-container">
-              <div className="map-text">
-                {MENTORING_PAY_PAYMENT_TEXT.timeText}
-              </div>
-              <div className="map-value">
-                {MENTORING_PAY_PAYMENT_TEXT.timeValue}
-              </div>
-            </div>
-            <div id="map-pay-amount-container">
-              <div id="map-pay-amount-text">
-                {MENTORING_PAY_PAYMENT_TEXT.amountText}
-              </div>
-              <div id="map-pay-amount-value">
-                {MENTORING_PAY_PAYMENT_TEXT.amountValue}
-              </div>
-            </div>
-          </MAPPayAmountWrapper>
-        </MAPBox>
-        <MAPBox>
-          <MAPPayMethodWrapper>
-            <MAPTitle>{MENTORING_PAY_TITLE.payMethod}</MAPTitle>
-            <div id="map-pay-method-container">
-              <Image
-                id="map-pay-method-check"
-                src={mint_check}
-                alt="체크 표시"
+    <>
+      <GoogleAnalytics />
+      <MAPContainer>
+        <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
+        <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>
+        <BackHeader headerText="멘토링 결제 정보" />
+        <ProgressBar totalNum={3} activeNum={2} />
+        <MAPContent>
+          <MAPTitle id="map-title-senior-info">
+            {MENTORING_PAY_TITLE.seniorInfo}
+          </MAPTitle>
+          <MAPBox>
+            <MAPInfoWrapper>
+              <RoundedImage
+                imgSrc={profile ? profile : user_icon}
+                altMsg="대학원생 프로필 이미지"
               />
-              <div id="map-pay-method-text">
-                {MENTORING_PAY_PAYMENT_TEXT.methodText}
+              <div id="map-info-text">
+                <div id="map-info-postgradu-major">
+                  <div id="map-info-postgradu">{postgradu}&nbsp;</div>
+                  <div id="map-info-major">{major}</div>
+                </div>
+                <AuthLabeledText str={`${nickName}님`} />
+                <div id="map-info-lab">{lab}</div>
               </div>
-            </div>
-          </MAPPayMethodWrapper>
-        </MAPBox>
-        <MAPNoticeWrapper>
-          <MAPTitle>{MENTORING_PAY_TITLE.notice}</MAPTitle>
-          <ul>
-            <li>{MENTORING_PAY_NOTICE_TEXT.scheduleChange}</li>
-            <li>{MENTORING_PAY_NOTICE_TEXT.reject}</li>
-            <li>{MENTORING_PAY_NOTICE_TEXT.cancelChange}</li>
-            <li>{MENTORING_PAY_NOTICE_TEXT.noResponse}</li>
-          </ul>
-        </MAPNoticeWrapper>
-        <MAPPolicyWrapper>
-          <MAPTitle>{MENTORING_PAY_TITLE.noShow}</MAPTitle>
+            </MAPInfoWrapper>
+          </MAPBox>
+          <MAPBox>
+            <MAPTimeWrapper>
+              <MAPTitle>{MENTORING_PAY_TITLE.schedule}</MAPTitle>
+              <div id="map-time-list">
+                <ol>
+                  <li>
+                    <div className="map-text">
+                      첫{MENTORING_PAY_ETC_TEXT.nthSchedule}
+                    </div>
+                    <div className="map-value">{formatTime(firstTime)}</div>
+                  </li>
+                  <li>
+                    <div className="map-text">
+                      두{MENTORING_PAY_ETC_TEXT.nthSchedule}
+                    </div>
+                    <div className="map-value">{formatTime(secondTime)}</div>
+                  </li>
+                  <li>
+                    <div className="map-text">
+                      세{MENTORING_PAY_ETC_TEXT.nthSchedule}
+                    </div>
+                    <div className="map-value">{formatTime(thirdTime)}</div>
+                  </li>
+                </ol>
+              </div>
+            </MAPTimeWrapper>
+          </MAPBox>
+          <MAPBox>
+            <MAPPayAmountWrapper>
+              <MAPTitle>{MENTORING_PAY_TITLE.payAmount}</MAPTitle>
+              <div id="map-pay-time-container">
+                <div className="map-text">
+                  {MENTORING_PAY_PAYMENT_TEXT.timeText}
+                </div>
+                <div className="map-value">
+                  {MENTORING_PAY_PAYMENT_TEXT.timeValue}
+                </div>
+              </div>
+              <div id="map-pay-amount-container">
+                <div id="map-pay-amount-text">
+                  {MENTORING_PAY_PAYMENT_TEXT.amountText}
+                </div>
+                <div id="map-pay-amount-value">
+                  {MENTORING_PAY_PAYMENT_TEXT.amountValue}
+                </div>
+              </div>
+            </MAPPayAmountWrapper>
+          </MAPBox>
+          <MAPBox>
+            <MAPPayMethodWrapper>
+              <MAPTitle>{MENTORING_PAY_TITLE.payMethod}</MAPTitle>
+              <div id="map-pay-method-container">
+                <Image
+                  id="map-pay-method-check"
+                  src={mint_check}
+                  alt="체크 표시"
+                />
+                <div id="map-pay-method-text">
+                  {MENTORING_PAY_PAYMENT_TEXT.methodText}
+                </div>
+              </div>
+            </MAPPayMethodWrapper>
+          </MAPBox>
+          <MAPNoticeWrapper>
+            <MAPTitle>{MENTORING_PAY_TITLE.notice}</MAPTitle>
+            <ul>
+              <li>{MENTORING_PAY_NOTICE_TEXT.scheduleChange}</li>
+              <li>{MENTORING_PAY_NOTICE_TEXT.reject}</li>
+              <li>{MENTORING_PAY_NOTICE_TEXT.cancelChange}</li>
+              <li>{MENTORING_PAY_NOTICE_TEXT.noResponse}</li>
+            </ul>
+          </MAPNoticeWrapper>
+          <MAPPolicyWrapper>
+            <MAPTitle>{MENTORING_PAY_TITLE.noShow}</MAPTitle>
+            <button
+              className="policy-more-detail"
+              onClick={() => {
+                if (typeof window !== undefined)
+                  window.open(
+                    TEMRS_LINK.noShowPolicy,
+                    '_blank',
+                    'noopener, noreferrer',
+                  );
+              }}
+            >
+              자세히 알아보기
+            </button>
+          </MAPPolicyWrapper>
+          <MAPPolicyWrapper>
+            <MAPTitle>{MENTORING_PAY_TITLE.refund}</MAPTitle>
+            <button
+              className="policy-more-detail"
+              onClick={() => {
+                if (typeof window !== undefined)
+                  window.open(
+                    TEMRS_LINK.refundPolicy,
+                    '_blank',
+                    'noopener, noreferrer',
+                  );
+              }}
+            >
+              자세히 알아보기
+            </button>
+          </MAPPolicyWrapper>
+        </MAPContent>
+        <MAPBtnContainer>
           <button
-            className="policy-more-detail"
+            id="map-prev-btn"
+            className="map-btn"
             onClick={() => {
-              if (typeof window !== undefined)
-                window.open(
-                  TEMRS_LINK.noShowPolicy,
-                  '_blank',
-                  'noopener, noreferrer',
-                );
+              router.back();
             }}
           >
-            자세히 알아보기
+            이전
           </button>
-        </MAPPolicyWrapper>
-        <MAPPolicyWrapper>
-          <MAPTitle>{MENTORING_PAY_TITLE.refund}</MAPTitle>
           <button
-            className="policy-more-detail"
-            onClick={() => {
-              if (typeof window !== undefined)
-                window.open(
-                  TEMRS_LINK.refundPolicy,
-                  '_blank',
-                  'noopener, noreferrer',
-                );
-            }}
+            id="requsetPayplePay"
+            className="map-btn"
+            onClick={payHandler}
           >
-            자세히 알아보기
+            결제하기
           </button>
-        </MAPPolicyWrapper>
-      </MAPContent>
-      <MAPBtnContainer>
-        <button
-          id="map-prev-btn"
-          className="map-btn"
-          onClick={() => {
-            router.back();
-          }}
-        >
-          이전
-        </button>
-        <button id="requsetPayplePay" className="map-btn" onClick={payHandler}>
-          결제하기
-        </button>
-      </MAPBtnContainer>
-    </MAPContainer>
+        </MAPBtnContainer>
+      </MAPContainer>
+    </>
   );
 }
 
