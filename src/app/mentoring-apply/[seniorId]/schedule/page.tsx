@@ -1,6 +1,7 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import TimeListBox from '@/components/Box/TimeListBox';
+import GoogleAnalytics from '@/components/GA/GA';
 import BackHeader from '@/components/Header/BackHeader';
 import SelectTime from '@/components/SelectTime';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
@@ -85,58 +86,61 @@ function MentoringApplySchedulePage() {
   };
 
   return (
-    <MASContainer $timeArr={timeArr}>
-      <BackHeader headerText="멘토링 일정 제안" />
-      <ProgressBar totalNum={3} activeNum={1} />
-      <div id="senior-schedule-title-wrapper">
-        <MASTitle>
-          {sNickname}
-          {MENTORING_SCHEDULE.sScheduleTitle}
-        </MASTitle>
-      </div>
-      <div id="senior-schedule-subtitle-wrapper">
-        <MASSubtitle>{MENTORING_SCHEDULE.sScheduleSubtitle}</MASSubtitle>
-      </div>
-      <div id="time-list-box-wrapper">
-        <TimeListBox timeArr={timeArr} />
-      </div>
-      <div id="senior-select-title-wrapper">
-        <MASTitle>{MENTORING_SCHEDULE.selectTitle}</MASTitle>
-      </div>
-      <div id="senior-select-subtitle-wrapper">
-        <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
-      </div>
-      <div id="select-time-container">
-        <SelectTime
-          numStr="첫"
-          targetAtom={firAbleTimeAtom}
-          checkTrigger={clickTrigger}
-        />
-        <SelectTime
-          numStr="두"
-          targetAtom={secAbleTimeAtom}
-          checkTrigger={clickTrigger}
-        />
-        <SelectTime
-          numStr="세"
-          targetAtom={thiAbleTimeAtom}
-          checkTrigger={clickTrigger}
-        />
-      </div>
-      <MASBtnContainer $timeArr={timeArr}>
-        <button
-          className="mas-btn prev-btn"
-          onClick={() => {
-            router.back();
-          }}
-        >
-          이전
-        </button>
-        <button className="mas-btn next-btn" onClick={nextBtnClickHandler}>
-          다음
-        </button>
-      </MASBtnContainer>
-    </MASContainer>
+    <>
+      <GoogleAnalytics />
+      <MASContainer $timeArr={timeArr}>
+        <BackHeader headerText="멘토링 일정 제안" />
+        <ProgressBar totalNum={3} activeNum={1} />
+        <div id="senior-schedule-title-wrapper">
+          <MASTitle>
+            {sNickname}
+            {MENTORING_SCHEDULE.sScheduleTitle}
+          </MASTitle>
+        </div>
+        <div id="senior-schedule-subtitle-wrapper">
+          <MASSubtitle>{MENTORING_SCHEDULE.sScheduleSubtitle}</MASSubtitle>
+        </div>
+        <div id="time-list-box-wrapper">
+          <TimeListBox timeArr={timeArr} />
+        </div>
+        <div id="senior-select-title-wrapper">
+          <MASTitle>{MENTORING_SCHEDULE.selectTitle}</MASTitle>
+        </div>
+        <div id="senior-select-subtitle-wrapper">
+          <MASSubtitle>{MENTORING_SCHEDULE.selectSubtitle}</MASSubtitle>
+        </div>
+        <div id="select-time-container">
+          <SelectTime
+            numStr="첫"
+            targetAtom={firAbleTimeAtom}
+            checkTrigger={clickTrigger}
+          />
+          <SelectTime
+            numStr="두"
+            targetAtom={secAbleTimeAtom}
+            checkTrigger={clickTrigger}
+          />
+          <SelectTime
+            numStr="세"
+            targetAtom={thiAbleTimeAtom}
+            checkTrigger={clickTrigger}
+          />
+        </div>
+        <MASBtnContainer $timeArr={timeArr}>
+          <button
+            className="mas-btn prev-btn"
+            onClick={() => {
+              router.back();
+            }}
+          >
+            이전
+          </button>
+          <button className="mas-btn next-btn" onClick={nextBtnClickHandler}>
+            다음
+          </button>
+        </MASBtnContainer>
+      </MASContainer>
+    </>
   );
 }
 

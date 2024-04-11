@@ -6,6 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import junior from '../../../../public/junior.png';
 import senior from '../../../../public/senior.png';
+import GoogleAnalytics from '@/components/GA/GA';
 function SelectPage() {
   const router = useRouter();
   const currentPath = usePathname();
@@ -14,6 +15,7 @@ function SelectPage() {
   };
   return (
     <div>
+      <GoogleAnalytics />
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="회원가입" kind="home" />
       </div>

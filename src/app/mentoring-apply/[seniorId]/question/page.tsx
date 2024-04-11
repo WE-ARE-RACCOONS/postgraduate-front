@@ -1,5 +1,6 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
+import GoogleAnalytics from '@/components/GA/GA';
 import BackHeader from '@/components/Header/BackHeader';
 import ShortRiseUpModal from '@/components/Modal/ShortRiseUpModal';
 import TextareaForm from '@/components/SingleForm/TextareaForm';
@@ -35,55 +36,58 @@ function MentoringApplyQuestionPage() {
   };
 
   return (
-    <MAQContainer>
-      <BackHeader headerText="신청서 작성" />
-      <ProgressBar totalNum={3} activeNum={0} />
-      <MQANoticeBox>
-        <div id="mentoring-notice-text-box">
-          <div id="mentoring-notice-text" className="mentoring-notice">
-            {MENTORING_NOTICE.noticeText}
+    <>
+      <GoogleAnalytics />
+      <MAQContainer>
+        <BackHeader headerText="신청서 작성" />
+        <ProgressBar totalNum={3} activeNum={0} />
+        <MQANoticeBox>
+          <div id="mentoring-notice-text-box">
+            <div id="mentoring-notice-text" className="mentoring-notice">
+              {MENTORING_NOTICE.noticeText}
+            </div>
+            <div id="mentoring-send-text" className="mentoring-notice">
+              {MENTORING_NOTICE.sendText}
+            </div>
+            <div id="mentoring-alert-text" className="mentoring-notice">
+              {MENTORING_NOTICE.alertText}
+            </div>
           </div>
-          <div id="mentoring-send-text" className="mentoring-notice">
-            {MENTORING_NOTICE.sendText}
-          </div>
-          <div id="mentoring-alert-text" className="mentoring-notice">
-            {MENTORING_NOTICE.alertText}
-          </div>
+        </MQANoticeBox>
+        <div id="mentoring-subject-form-wrapper">
+          <TextareaForm
+            title={MENTORING_QUESTION.subjectTitle}
+            placeholder={MENTORING_QUESTION.subjectPlaceholder}
+            minCount={10}
+            maxCount={500}
+            targetAtom={subjectAtom}
+            alertMsg={MENTORING_QUESTION.subjectAlert}
+          />
         </div>
-      </MQANoticeBox>
-      <div id="mentoring-subject-form-wrapper">
-        <TextareaForm
-          title={MENTORING_QUESTION.subjectTitle}
-          placeholder={MENTORING_QUESTION.subjectPlaceholder}
-          minCount={10}
-          maxCount={500}
-          targetAtom={subjectAtom}
-          alertMsg={MENTORING_QUESTION.subjectAlert}
-        />
-      </div>
-      <div id="mentoring-question-form-wrapper">
-        <TextareaForm
-          title={MENTORING_QUESTION.questionTitle}
-          placeholder={MENTORING_QUESTION.questionPlaceholder}
-          minCount={10}
-          maxCount={500}
-          targetAtom={questionAtom}
-          alertMsg={MENTORING_QUESTION.questionAlert}
-        />
-      </div>
-      <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>
-        다음으로
-      </MAQNextBtn>
-      {modal && portalElement
-        ? createPortal(
-            <ShortRiseUpModal
-              modalHandler={modalHandler}
-              modalType="payAmount"
-            />,
-            portalElement,
-          )
-        : null}
-    </MAQContainer>
+        <div id="mentoring-question-form-wrapper">
+          <TextareaForm
+            title={MENTORING_QUESTION.questionTitle}
+            placeholder={MENTORING_QUESTION.questionPlaceholder}
+            minCount={10}
+            maxCount={500}
+            targetAtom={questionAtom}
+            alertMsg={MENTORING_QUESTION.questionAlert}
+          />
+        </div>
+        <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>
+          다음으로
+        </MAQNextBtn>
+        {modal && portalElement
+          ? createPortal(
+              <ShortRiseUpModal
+                modalHandler={modalHandler}
+                modalType="payAmount"
+              />,
+              portalElement,
+            )
+          : null}
+      </MAQContainer>
+    </>
   );
 }
 

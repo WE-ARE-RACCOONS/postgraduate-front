@@ -15,6 +15,7 @@ import ProgressBar from '@/components/Bar/ProgressBar';
 import { preventClose } from '@/utils/reloadFun';
 import useAuth from '@/hooks/useAuth';
 import { certifiRegAtom } from '@/stores/signup';
+import GoogleAnalytics from '@/components/GA/GA';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
@@ -146,6 +147,7 @@ function AuthPage() {
   };
   return (
     <div>
+      <GoogleAnalytics />
       <div>
         <BackHeader headerText="인증하기" />
         {userType && userType == 'senior' ? (

@@ -11,7 +11,7 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { changeNickname, phoneNum, socialIdAtom } from '@/stores/signup';
+import { changeNickname, phoneNum } from '@/stores/signup';
 import { ModalType } from '@/types/modal/riseUp';
 import axios from 'axios';
 import { useAtomValue } from 'jotai';
@@ -24,6 +24,7 @@ import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import findExCode from '@/utils/findExCode';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import GoogleAnalytics from '@/components/GA/GA';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -227,6 +228,7 @@ function SeniorInfoPage() {
 
   return (
     <>
+      <GoogleAnalytics />
       <div>
         <BackHeader headerText="정보입력" />
       </div>
