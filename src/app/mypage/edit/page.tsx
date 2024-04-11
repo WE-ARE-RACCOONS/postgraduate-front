@@ -151,7 +151,7 @@ function page() {
       )}
       <NicknameForm defaultValue={myNickName} />
       <PhoneNumForm defaultValue={phoneNumber} />
-      {(newAvailability && availability) || (sameUser && availablePhone) ? (
+      {(newAvailability && availability) || (sameUser && availablePhone) ||(selectpPhotoUrl) ? (
         <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
       ) : (
         <ProfileSetBtnNon>저장하기</ProfileSetBtnNon>
