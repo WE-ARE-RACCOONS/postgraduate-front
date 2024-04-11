@@ -12,7 +12,7 @@ export const MENTORING_PAY_PAYMENT_TEXT = {
   timeText: '멘토링 시간',
   timeValue: '30분',
   amountText: '총 결제 금액',
-  amountValue: '20,000원',
+  amountValue: '19,900원',
   methodText: '신용/체크카드',
 };
 
