@@ -16,6 +16,7 @@ import NextBtn from '@/components/Button/NextBtn';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { useRouter } from 'next/navigation';
+import GoogleAnalytics from '@/components/GA/GA';
 
 function MatchingInfoPage() {
   const router = useRouter();
@@ -43,6 +44,7 @@ function MatchingInfoPage() {
 
   return (
     <div>
+      <GoogleAnalytics />
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="회원가입" />
       </div>

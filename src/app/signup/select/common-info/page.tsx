@@ -15,6 +15,7 @@ import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import GoogleAnalytics from '@/components/GA/GA';
 
 function CommonInfoPage() {
   const userType = useAtomValue(userTypeAtom);
@@ -36,6 +37,7 @@ function CommonInfoPage() {
 
   return (
     <div>
+      <GoogleAnalytics />
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="회원가입" />
       </div>

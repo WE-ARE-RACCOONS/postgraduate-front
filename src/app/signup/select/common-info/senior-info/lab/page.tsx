@@ -2,7 +2,6 @@
 import NextBtn from '@/components/Button/NextBtn';
 import TextForm from '@/components/SingleForm/TextForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import useModal from '@/hooks/useModal';
 import {
   sFieldAtom,
   sKeywordAtom,
@@ -11,7 +10,6 @@ import {
   sPostGraduAtom,
   sProfessorAtom,
 } from '@/stores/senior';
-import { ModalType } from '@/types/modal/riseUp';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -19,6 +17,7 @@ import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import GoogleAnalytics from '@/components/GA/GA';
 
 function SeniorInfoPage() {
   const [emptyPart, setEmptyPart] = useState('');
@@ -67,6 +66,7 @@ function SeniorInfoPage() {
 
   return (
     <>
+      <GoogleAnalytics />
       <div>
         <BackHeader headerText="정보입력" />
         <ProgressBar totalNum={4} activeNum={2} />
