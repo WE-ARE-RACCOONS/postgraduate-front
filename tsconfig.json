@@ -27,7 +27,8 @@
     "**/*.ts",
     "**/*.tsx",
     ".next/types/**/*.ts",
-    "src/app/mentoring-apply/[seniorId]/pay/page.js"
-, "src/components/GA/GA.jsx"  ],
+    "src/app/mentoring-apply/[seniorId]/pay/page.js",
+    "src/components/GA/GA.jsx"
+  ],
   "exclude": ["node_modules"]
 }

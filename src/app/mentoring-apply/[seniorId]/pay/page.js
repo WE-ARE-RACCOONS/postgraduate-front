@@ -296,7 +296,11 @@ function MentoringApplyPayPage() {
           >
             이전
           </button>
-          <button id="requsetPayplePay" className="map-btn" onClick={payHandler}>
+          <button
+            id="requsetPayplePay"
+            className="map-btn"
+            onClick={payHandler}
+          >
             결제하기
           </button>
         </MAPBtnContainer>

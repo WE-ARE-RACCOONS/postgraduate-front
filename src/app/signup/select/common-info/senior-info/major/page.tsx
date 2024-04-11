@@ -4,12 +4,9 @@ import NextBtn from '@/components/Button/NextBtn';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import useModal from '@/hooks/useModal';
-import {
-  sMajorAtom,
-  sPostGraduAtom,
-} from '@/stores/senior';
+import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 import { ModalType } from '@/types/modal/riseUp';
-import { useAtomValue} from 'jotai';
+import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
