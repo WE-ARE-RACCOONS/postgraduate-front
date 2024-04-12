@@ -135,8 +135,8 @@ function MentoringApplyPayPage() {
           //내 번호 넣으면 알림톡 감
           obj.PCD_PAYER_HP = PhoneNumber;
           obj.PCD_PAY_GOODS = nickName;
-          obj.PCD_PAY_TOTAL = '19900';
-          // obj.PCD_PAY_TOTAL = '20000';
+          obj.PCD_PAY_TOTAL =
+            process.env.NODE_ENV == 'development' || 'test' ? '101' : '19900';
           obj.PCD_PAY_ISTAX = 'Y';
           obj.PCD_PAY_TAXTOTAL = '10';
           obj.clientKey = window.location.hostname.includes('localhost')
