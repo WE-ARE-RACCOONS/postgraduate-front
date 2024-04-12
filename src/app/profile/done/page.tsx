@@ -39,7 +39,7 @@ function ProfileDonePage() {
         </PrevBtn>
         <NextAddBtnSet
           onClick={() => {
-            router.push('/mypage');
+            router.push(`/senior/info/${seniorId}`);
           }}
         >
           내 프로필 확인하기
