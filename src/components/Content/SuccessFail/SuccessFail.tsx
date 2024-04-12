@@ -6,7 +6,7 @@ import acceptImage from '../../../../public/cState.png';
 import acceptNonImage from '../../../../public/cState_n.png';
 import { OkayBtn, SuccessMid } from './SuccessFail.styled';
 
-function SuccessFail({ modalHandler } : { modalHandler: () => void }) {
+function SuccessFail({ modalHandler }: { modalHandler: () => void }) {
   const success = useAtomValue(SMCancelSuccessAtom);
   const handleModalClose = () => {
     modalHandler();

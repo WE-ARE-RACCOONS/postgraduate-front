@@ -298,7 +298,7 @@ function SInfoModify({
           />
         </ValidatorBox>
       )}
-      {changeNick !== '' && (newAvailability && availability)||
+      {(changeNick !== '' && newAvailability && availability) ||
       fullNum !== '' ||
       inputImg !== null ||
       btnAct === 'true' ? (

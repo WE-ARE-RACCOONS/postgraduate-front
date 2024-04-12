@@ -151,7 +151,9 @@ function page() {
       )}
       <NicknameForm defaultValue={myNickName} />
       <PhoneNumForm defaultValue={phoneNumber} />
-      {(newAvailability && availability) || (sameUser && availablePhone) ||(selectpPhotoUrl) ? (
+      {(newAvailability && availability) ||
+      (sameUser && availablePhone) ||
+      selectpPhotoUrl ? (
         <ProfileSetBtn onClick={handleClick}>저장하기</ProfileSetBtn>
       ) : (
         <ProfileSetBtnNon>저장하기</ProfileSetBtnNon>
@@ -160,7 +162,7 @@ function page() {
   );
 }
 const SelectedImage = styled.img`
-position: absolute;
+  position: absolute;
   margin: 1.3rem 0;
   margin-left: 7.5rem;
   width: 7.5rem;
