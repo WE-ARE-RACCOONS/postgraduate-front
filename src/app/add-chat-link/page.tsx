@@ -31,7 +31,7 @@ function AddChatLinkPage() {
   const [flag, setFlag] = useState(false);
   const router = useRouter();
   const { getAccessToken } = useAuth();
-  const [seniorId , setSeniorId] = useAtom(mySeniorId);
+  const [seniorId, setSeniorId] = useAtom(mySeniorId);
   useEffect(() => {
     if (chatLink) {
       const targetForm = document.querySelector(
@@ -69,7 +69,7 @@ function AddChatLinkPage() {
             )
             .then((response) => {
               const res = response.data;
-              
+
               if (res.code == 'SNR201') {
                 setSeniorId(res.data.seniorId);
                 router.push('/profile/done');
