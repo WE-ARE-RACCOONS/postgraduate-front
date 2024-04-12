@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import Providers from '@/components/Provider/providers';
 import StyledComponentsRegistry from '@/lib/registry';
+import GTMAnalytics from '@/components/GA/GTM';
 
 export const metadata: Metadata = {
   title: '김선배',
@@ -19,6 +20,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
+        <GTMAnalytics />
         <Providers>
           <StyledComponentsRegistry>
             {children}
