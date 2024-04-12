@@ -23,7 +23,8 @@ const PayplePayment = () => {
         obj.PCD_PAYER_HP = '01012345678';
         // obj.PCD_PAYER_EMAIL = 'dev@payple.kr';
         obj.PCD_PAY_GOODS = '멘토링 선배 닉네임';
-        obj.PCD_PAY_TOTAL = (process.env.NODE_ENV == 'development' || 'test') ? '101' : '19900';
+        obj.PCD_PAY_TOTAL =
+          process.env.NODE_ENV == 'development' || 'test' ? '101' : '19900';
         obj.PCD_PAY_ISTAX = 'Y';
         obj.PCD_PAY_TAXTOTAL = '10';
         obj.clientKey = PAPLE_CLIENT_KEY;

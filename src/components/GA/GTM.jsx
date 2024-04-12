@@ -1,11 +1,15 @@
-import Script from "next/script";
+import Script from 'next/script';
 
 function GTMAnalytics() {
   return (
     <>
       {/* <!-- Google Tag Manager (noscript) --> */}
       <noscript>
-        <iframe src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`} height="0" width="0"></iframe>
+        <iframe
+          src={`https://www.googletagmanager.com/ns.html?id=${process.env.NEXT_PUBLIC_GTM_ID}`}
+          height="0"
+          width="0"
+        ></iframe>
       </noscript>
       {/* <!-- End Google Tag Manager (noscript) --> */}
       {/* <!-- Google Tag Manager --> */}
@@ -16,7 +20,7 @@ function GTMAnalytics() {
       })(window,document,'script','dataLayer',"${process.env.NEXT_PUBLIC_GTM_ID}");`}</Script>
       {/* <!-- End Google Tag Manager --> */}
     </>
-  )
+  );
 }
 
 export default GTMAnalytics;
