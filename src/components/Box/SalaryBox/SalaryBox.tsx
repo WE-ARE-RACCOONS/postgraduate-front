@@ -5,6 +5,7 @@ import {
   SalaryDesc,
   SalaryValue,
 } from './SalaryBox.styled';
+import { useState } from 'react';
 
 function SalaryBox(props: SalaryBoxProps) {
   function addCommas(amount: number) {
@@ -16,13 +17,14 @@ function SalaryBox(props: SalaryBoxProps) {
   }
 
   function formatDate(dateStr: string) {
-    if (!dateStr) return '';
-
-    const splitDate = dateStr.split('-');
-    const month = parseInt(splitDate[1]);
-    const date = splitDate[2];
-
-    return `${month}월 ${date}일`;
+    if (props.salaryAmount === 0) {
+      return '-';
+    } else {
+      const splitDate = dateStr.split('-');
+      const month = parseInt(splitDate[1]);
+      const date = splitDate[2];
+      return `${month}월 ${date}일`;
+    }
   }
 
   return (
