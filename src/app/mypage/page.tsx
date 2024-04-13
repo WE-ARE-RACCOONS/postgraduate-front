@@ -86,7 +86,7 @@ function MyPage() {
 
     const entries = performance.getEntriesByType('navigation')[0];
     const entriesNavTiming = entries as PerformanceNavigationTiming;
-  
+
     console.log(entriesNavTiming.type);
   }, []);
 
