@@ -11,12 +11,10 @@ export const ModalBackground = styled.div`
 
   @keyframes modalAppear {
     from {
-      top: 30rem;
-      opacity: 0;
+      transform: translateY(100%);
     }
     to {
-      top: 18.6rem;
-      opacity: 1;
+      transform: translateY(0);
     }
   }
 
