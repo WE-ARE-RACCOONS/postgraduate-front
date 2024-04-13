@@ -73,7 +73,7 @@ function SignUpBtn() {
 
               if (findExCode(res.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
 

@@ -154,7 +154,7 @@ function SeniorInfoPage() {
 
             if (findExCode(response.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 

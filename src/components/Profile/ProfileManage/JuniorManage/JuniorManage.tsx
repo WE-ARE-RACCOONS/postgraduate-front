@@ -39,7 +39,7 @@ function JuniorManage(props: NotSeniorProps) {
 
           if (findExCode(response.data.code)) {
             removeTokens();
-            router.replace('/');
+            location.reload();
             return;
           }
 
@@ -76,7 +76,7 @@ function JuniorManage(props: NotSeniorProps) {
 
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 

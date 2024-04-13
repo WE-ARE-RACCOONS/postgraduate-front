@@ -60,7 +60,7 @@ function AccountPage() {
             .then((response) => {
               if (findExCode(response.data.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
               setData(response.data);

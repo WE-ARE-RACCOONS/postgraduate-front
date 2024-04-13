@@ -167,7 +167,7 @@ function EditProfilePage() {
 
                 if (findExCode(res.code)) {
                   removeTokens();
-                  router.replace('/');
+                  location.reload();
                   return;
                 }
 
@@ -241,7 +241,7 @@ function EditProfilePage() {
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
             router.back();
