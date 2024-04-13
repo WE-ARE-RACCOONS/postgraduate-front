@@ -7,9 +7,12 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import party_popper from '../../../../public/party_popper.png';
 import { useRouter } from 'next/navigation';
+import { useAtomValue } from 'jotai';
+import { mySeniorId } from '@/stores/senior';
 
 function ProfileDonePage() {
   const router = useRouter();
+  const seniorId = useAtomValue(mySeniorId);
 
   return (
     <ProfileDonePageContainer>
@@ -36,7 +39,7 @@ function ProfileDonePage() {
         </PrevBtn>
         <NextAddBtnSet
           onClick={() => {
-            router.push('/mypage');
+            router.push(`/senior/info/${seniorId}`);
           }}
         >
           내 프로필 확인하기

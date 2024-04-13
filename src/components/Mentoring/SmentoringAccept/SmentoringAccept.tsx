@@ -25,7 +25,7 @@ function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {
         alt="닫기 버튼"
         sizes="(max-width: 600px) 3.rem"
         priority
-        onClick={modalHandler}
+        onClick={acceptClick}
       />
       <div style={{ textAlign: 'center' }}>
         <Image

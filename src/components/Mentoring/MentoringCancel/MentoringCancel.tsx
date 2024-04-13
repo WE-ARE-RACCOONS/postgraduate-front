@@ -95,7 +95,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
             height={65}
             style={{
               margin: '0.5rem 7.5rem',
-              marginTop: cancelStatus === '취소되었습니다' ? '' : '1rem',
+              marginTop: cancelStatus === '취소되었습니다' ? '1rem' : '1rem',
             }}
             priority
           />

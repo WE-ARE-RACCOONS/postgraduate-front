@@ -25,7 +25,9 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 import {
   changeNickname,
+  newNotDuplicate,
   nickname,
+  notDuplicate,
   phoneNum,
   remainPhoneNum,
 } from '@/stores/signup';
@@ -65,6 +67,8 @@ function SInfoModify({
   const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
   const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
   const fullNum = useAtomValue(phoneNum);
+  const newAvailability = useAtomValue(newNotDuplicate);
+  const availability = useAtomValue(notDuplicate);
   const [btnAct, setBtnAct] = useState('false');
   const { getAccessToken, removeTokens } = useAuth();
   useEffect(() => {
@@ -294,7 +298,7 @@ function SInfoModify({
           />
         </ValidatorBox>
       )}
-      {changeNick !== '' ||
+      {(changeNick !== '' && newAvailability && availability) ||
       fullNum !== '' ||
       inputImg !== null ||
       btnAct === 'true' ? (
