@@ -23,6 +23,7 @@ import RiseUpModal from '@/components/Modal/RiseUpModal';
 import findExCode from '@/utils/findExCode';
 import Footer from '@/components/Footer';
 import { certifiRegAtom } from '@/stores/signup';
+import { useRouter } from 'next/navigation';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -74,6 +75,7 @@ function MyPage() {
   const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [accessTkn, setAccessTkn] = useState('');
   const [userType, setUserType] = useState('');
+  const router = useRouter();
 
   useEffect(() => {
     const userT = getUserType();
@@ -81,6 +83,11 @@ function MyPage() {
     getAccessToken().then((userTkn) => {
       if (userTkn) setAccessTkn(userTkn);
     });
+
+    const entries = performance.getEntriesByType('navigation')[0];
+    const entriesNavTiming = entries as PerformanceNavigationTiming;
+
+    console.log(entriesNavTiming.type);
   }, []);
 
   useEffect(() => {

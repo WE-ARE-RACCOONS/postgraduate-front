@@ -65,7 +65,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
 
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 

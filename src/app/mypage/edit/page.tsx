@@ -49,7 +49,7 @@ function page() {
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 
@@ -86,7 +86,7 @@ function page() {
               const res = response.data;
               if (findExCode(res.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
               if (res.code == 'IMG202') {
@@ -117,7 +117,7 @@ function page() {
             const res = response.data;
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
             if (res.code == 'UR201') {

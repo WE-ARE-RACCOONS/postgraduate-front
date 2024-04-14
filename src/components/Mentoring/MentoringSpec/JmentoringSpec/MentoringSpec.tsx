@@ -78,7 +78,7 @@ function MentoringSpec(props: ModalMentoringProps) {
             .then((response) => {
               if (findExCode(response.data.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
 

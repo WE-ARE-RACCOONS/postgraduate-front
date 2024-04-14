@@ -39,7 +39,7 @@ function SalaryPage() {
             .then((res) => {
               if (findExCode(res.data.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
               if (res.data.code == 'SLR200') {
@@ -54,7 +54,7 @@ function SalaryPage() {
             .then((res) => {
               if (findExCode(res.data.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
               if (res.data.code == 'SLR200') {

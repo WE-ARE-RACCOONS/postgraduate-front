@@ -111,7 +111,7 @@ function MentoringApplyPayPage() {
 
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
           })
