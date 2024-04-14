@@ -189,6 +189,7 @@ function SInfoModify({
             if (res.code == 'SNR201') {
               modalHandler();
               setSubmitFlag(!submitFlag);
+              location.reload();
             }
           })
           .catch((err) => {

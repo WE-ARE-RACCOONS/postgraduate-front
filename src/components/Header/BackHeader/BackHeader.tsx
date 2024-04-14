@@ -5,8 +5,9 @@ import { useRouter } from 'next/navigation';
 interface BackHeaderProps {
   headerText: string;
   kind?: string;
+  modalHandler?: () => void;
 }
-function BackHeader({ headerText, kind }: BackHeaderProps) {
+function BackHeader({ headerText, kind, modalHandler }: BackHeaderProps) {
   const router = useRouter();
 
   return (
@@ -18,6 +19,10 @@ function BackHeader({ headerText, kind }: BackHeaderProps) {
         onClick={() => {
           if (kind === 'home') {
             router.push('/');
+          } else if (kind === 'modal') {
+            if (modalHandler) {
+              modalHandler();
+            }
           } else {
             router.back();
           }
