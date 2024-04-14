@@ -160,7 +160,11 @@ function SearchForm(props: SearchFormProps) {
         />
         <TextField
           id="outlined-basic"
-          label={props.formType == 'postgradu' ? '대학원명' : '학과'}
+          label={
+            props.formType == 'postgradu'
+              ? '대학원명을 검색해주세요'
+              : '학과를 검색해주세요'
+          }
           variant="outlined"
           size="small"
           style={{ width: '90%', height: '2.25rem', border: 'none' }}

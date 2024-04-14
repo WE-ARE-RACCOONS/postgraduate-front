@@ -62,7 +62,7 @@ function MentoringCancel(props: ModalMentoringclProps) {
 
         if (findExCode(response.data.code)) {
           removeTokens();
-          router.replace('/');
+          location.reload();
           return;
         }
 

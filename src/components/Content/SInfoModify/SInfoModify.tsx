@@ -85,7 +85,7 @@ function SInfoModify({
 
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 
@@ -137,7 +137,7 @@ function SInfoModify({
 
               if (findExCode(res.code)) {
                 removeTokens();
-                router.replace('/');
+                location.reload();
                 return;
               }
 
@@ -182,7 +182,7 @@ function SInfoModify({
 
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 

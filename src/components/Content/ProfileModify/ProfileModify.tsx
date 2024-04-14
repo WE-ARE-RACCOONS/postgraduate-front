@@ -65,21 +65,21 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
 
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
 
             if (res.code == 'SNR200') {
-              setChatLink(res.data.chatLink);
+              setChatLink(res.data.chatLink ? res.data.chatLink : '');
               setField(res.data.field);
               const totalArr = dedupeInTotalField(res.data.field);
               setTotalField(totalArr);
-              setInfo(res.data.info);
+              setInfo(res.data.info ? res.data.info : '');
               setKeyword(res.data.keyword.join(','));
               setLab(res.data.lab);
-              setOneLiner(res.data.oneLiner);
-              setTarget(res.data.target);
-              setTimes(res.data.times);
+              setOneLiner(res.data.oneLiner ? res.data.oneLiner : '');
+              setTarget(res.data.target ? res.data.target : '');
+              setTimes(res.data.times ? res.data.times : []);
             }
           })
           .catch((err) => {
@@ -207,7 +207,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.introduce}</FieldTitle>
           <FieldForm
-            defaultValue={info}
+            defaultValue={info ? info : ''}
             type="text"
             onChange={(e) => setInfo(e.currentTarget.value)}
           />
@@ -215,7 +215,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.target}</FieldTitle>
           <FieldForm
-            defaultValue={target}
+            defaultValue={target ? target : ''}
             type="text"
             onChange={(e) => setTarget(e.currentTarget.value)}
           />
@@ -223,7 +223,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
         <FieldBox>
           <FieldTitle>{MODIFY_DIRECTION.chatLink}</FieldTitle>
           <FieldForm
-            defaultValue={chatLink}
+            defaultValue={chatLink ? chatLink : ''}
             type="text"
             onChange={(e) => setChatLink(e.currentTarget.value)}
           />

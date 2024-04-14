@@ -80,7 +80,7 @@ function TabBar() {
           .then((response) => {
             if (findExCode(response.data.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
             setData(response.data.data.mentoringInfos);
@@ -116,7 +116,7 @@ function TabBar() {
 
         if (findExCode(response.data.code)) {
           removeTokens();
-          router.replace('/');
+          location.reload();
           return;
         }
 

@@ -63,7 +63,7 @@ const PayResultPage = () => {
             const res = response.data;
             if (findExCode(res.code)) {
               removeTokens();
-              router.replace('/');
+              location.reload();
               return;
             }
             if (res.code == 'MT202') {
