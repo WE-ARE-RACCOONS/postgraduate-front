@@ -13,7 +13,11 @@ import BackHeader from '@/components/Header/BackHeader';
 function MBestCaseContent({ modalHandler }: { modalHandler: () => void }) {
   return (
     <MBestCaseContainer>
-      <BackHeader headerText="프로필 예시" kind='modal' modalHandler={modalHandler}/>
+      <BackHeader
+        headerText="프로필 예시"
+        kind="modal"
+        modalHandler={modalHandler}
+      />
       <Image src={bestCase} alt="bestCase" width={360} height={885} />
     </MBestCaseContainer>
   );
