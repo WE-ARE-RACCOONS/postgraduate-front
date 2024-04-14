@@ -10,7 +10,6 @@ function page() {
   const router = useRouter();
   const moneHandler = () => {
     router.push('/senior/mentoring');
-    location.reload();
   };
   return (
     <div>
