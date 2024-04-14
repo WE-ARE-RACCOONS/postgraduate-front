@@ -176,17 +176,17 @@ function EditProfilePage() {
                   if (!tempFields.includes(el)) tempFields.push(el);
                 });
 
-                setTimeData(res.data.times);
+                setTimeData(res.data.times ? res.data.times: []);
                 setTotalField(tempFields);
                 setSelectedField(res.data.field);
                 setTotalKeyword(res.data.keyword);
                 setSelectedKeyword(res.data.keyword);
                 setSfield(res.data.field.join(','));
                 setSkeyword(res.data.keyword.join(','));
-                setChatLink(res.data.chatLink);
-                setMultiIntro(res.data.info);
-                setSingleIntro(res.data.oneLiner);
-                setRecommended(res.data.target);
+                setChatLink(res.data.chatLink ? res.data.chatLink : '');
+                setMultiIntro(res.data.info ? res.data.info : '');
+                setSingleIntro(res.data.oneLiner ? res.data.oneLiner : '');
+                setRecommended(res.data.target ? res.data.target : '');
                 setSlab(res.data.lab);
               })
               .catch((err) => {
@@ -375,7 +375,7 @@ function EditProfilePage() {
           placeholder={PROFILE_PLACEHOLDER.recommendedFor}
           maxLength={1000}
           formType="recommendedFor"
-          loadStr={recommended}
+          loadStr={recommended ? recommended : ''}
           changeHandler={setRecommended}
         />
         <div style={{ marginLeft: '1rem' }}>
@@ -396,7 +396,7 @@ function EditProfilePage() {
             </div>
           </div>
           <input
-            defaultValue={chatLink}
+            defaultValue={chatLink ? chatLink : ''}
             type="text"
             id="add-chat-link-form"
             placeholder={PROFILE_PLACEHOLDER.addChatLink}
@@ -419,7 +419,7 @@ function EditProfilePage() {
             )}
           </div>
           <SetDataBox>
-            {timeData.length > 0 ? (
+            {(timeData && timeData.length > 0) ? (
               <>
                 {timeData &&
                   timeData.map((el, idx) => (
