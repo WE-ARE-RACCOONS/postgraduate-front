@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import acceptImage from '../../../../public/cState.png';
 import acceptNonImage from '../../../../public/state.png';
-import { OkayBtn, SuccessTop ,MCSub} from './SuccessFail.styled';
+import { OkayBtn, SuccessTop, MCSub } from './SuccessFail.styled';
 
 function SuccessFail({ modalHandler }: { modalHandler: () => void }) {
   const success = useAtomValue(SMCancelSuccessAtom);
@@ -25,9 +25,9 @@ function SuccessFail({ modalHandler }: { modalHandler: () => void }) {
             />
           </div>
           <div style={{}}>
-          <SuccessTop>거절 성공</SuccessTop>
-          <MCSub>멘토링 거절에 성공했습니다.</MCSub>
-          <OkayBtn onClick={handleModalClose}>확인했어요</OkayBtn>
+            <SuccessTop>거절 성공</SuccessTop>
+            <MCSub>멘토링 거절에 성공했습니다.</MCSub>
+            <OkayBtn onClick={handleModalClose}>확인했어요</OkayBtn>
           </div>
         </>
       ) : (
