@@ -9,7 +9,7 @@ function GoogleAnalytics() {
         window.dataLayer.push(arguments);
       }
       gtag('js', new Date());
-      gtag('config', process.env.NEXT_PUBLIC_GTM_ID);
+      gtag('config', process.env.NEXT_PUBLIC_GA4_ID);
     }
   }, []);
 
