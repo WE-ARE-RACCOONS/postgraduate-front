@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 function GoogleAnalytics() {
   useEffect(() => {
-    if (process.env.NODE_ENV == 'production') {
+    if (window.location.hostname.includes('kimseonbae')) {
       window.dataLayer = window.dataLayer || [];
       function gtag() {
         window.dataLayer.push(arguments);
