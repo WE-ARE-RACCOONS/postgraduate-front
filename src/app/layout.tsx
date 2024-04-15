@@ -20,7 +20,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <GTMAnalytics />
+        {/* <GTMAnalytics /> */}
         <Providers>
           <StyledComponentsRegistry>
             {children}
