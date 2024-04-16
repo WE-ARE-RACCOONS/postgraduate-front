@@ -15,7 +15,7 @@ function SelectPage() {
   };
   return (
     <div>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="회원가입" kind="home" />
       </div>

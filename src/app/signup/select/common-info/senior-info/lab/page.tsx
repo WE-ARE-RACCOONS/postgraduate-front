@@ -66,7 +66,7 @@ function SeniorInfoPage() {
 
   return (
     <>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="정보입력" />
         <ProgressBar totalNum={4} activeNum={2} />
