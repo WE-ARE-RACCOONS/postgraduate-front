@@ -228,7 +228,7 @@ function SeniorInfoPage() {
 
   return (
     <>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="정보입력" />
       </div>

@@ -154,7 +154,7 @@ function MentoringApplyPayPage() {
 
   return (
     <>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <MAPContainer>
         <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
         <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>

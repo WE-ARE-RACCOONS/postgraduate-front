@@ -147,7 +147,7 @@ function AuthPage() {
   };
   return (
     <div>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="인증하기" />
         {userType && userType == 'senior' ? (
