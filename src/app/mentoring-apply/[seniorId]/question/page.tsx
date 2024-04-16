@@ -37,7 +37,7 @@ function MentoringApplyQuestionPage() {
 
   return (
     <>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <MAQContainer>
         <BackHeader headerText="신청서 작성" />
         <ProgressBar totalNum={3} activeNum={0} />

@@ -87,7 +87,7 @@ function MentoringApplySchedulePage() {
 
   return (
     <>
-      <GoogleAnalytics />
+      {/* <GoogleAnalytics /> */}
       <MASContainer $timeArr={timeArr}>
         <BackHeader headerText="멘토링 일정 제안" />
         <ProgressBar totalNum={3} activeNum={1} />
