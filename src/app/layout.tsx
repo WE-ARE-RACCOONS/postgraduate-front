@@ -21,7 +21,7 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        {/* <GTMAnalytics /> */}
+        <GTMAnalytics />
         <GoogleAnalytics />
         <Providers>
           <StyledComponentsRegistry>
