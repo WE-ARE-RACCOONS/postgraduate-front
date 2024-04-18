@@ -176,7 +176,7 @@ function EditProfilePage() {
                   if (!tempFields.includes(el)) tempFields.push(el);
                 });
 
-                setTimeData(res.data.times ? res.data.times: []);
+                setTimeData(res.data.times ? res.data.times : []);
                 setTotalField(tempFields);
                 setSelectedField(res.data.field);
                 setTotalKeyword(res.data.keyword);
@@ -419,7 +419,7 @@ function EditProfilePage() {
             )}
           </div>
           <SetDataBox>
-            {(timeData && timeData.length > 0) ? (
+            {timeData && timeData.length > 0 ? (
               <>
                 {timeData &&
                   timeData.map((el, idx) => (

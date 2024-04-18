@@ -187,11 +187,11 @@ function TabBar() {
                       setModalType('junior');
                       setSelectedMentoringId(el.mentoringId);
                       if (typeof window !== undefined)
-                      window.open(
-                        REVIEW_FORM_URL,
-                        '_blank',
-                        'noopener, noreferrer',
-                      );
+                        window.open(
+                          REVIEW_FORM_URL,
+                          '_blank',
+                          'noopener, noreferrer',
+                        );
                     }}
                   />
                 )}
