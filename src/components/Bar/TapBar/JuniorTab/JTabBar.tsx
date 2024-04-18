@@ -26,6 +26,7 @@ import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 import { JMCancelAtom } from '@/stores/condition';
+import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
 
 function convertDateType(date: string) {
   if (!date) return new Date();
@@ -185,6 +186,12 @@ function TabBar() {
                     onClick={() => {
                       setModalType('junior');
                       setSelectedMentoringId(el.mentoringId);
+                      if (typeof window !== undefined)
+                        window.open(
+                          REVIEW_FORM_URL,
+                          '_blank',
+                          'noopener, noreferrer',
+                        );
                     }}
                   />
                 )}
