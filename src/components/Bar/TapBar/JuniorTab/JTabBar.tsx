@@ -180,14 +180,18 @@ function TabBar() {
                   </div>
                 )}
                 {activeTab === TAB.done && (
-                  <StyledSModalBtn onClick={() => {
+                  <StyledSModalBtn
+                    onClick={() => {
                       if (typeof window !== undefined)
                         window.open(
                           REVIEW_FORM_URL,
                           '_blank',
                           'noopener, noreferrer',
                         );
-                  }}>리뷰 작성하기</StyledSModalBtn>
+                    }}
+                  >
+                    리뷰 작성하기
+                  </StyledSModalBtn>
                 )}
               </MentoringBox>
             );
