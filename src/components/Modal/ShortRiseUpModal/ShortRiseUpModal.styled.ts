@@ -22,7 +22,7 @@ export const ModalBackground = styled.div`
     width: inherit;
     height: 18rem;
     position: absolute;
-    top: 18.6rem;
+    bottom: 0;
     animation: modalAppear 0.5s ease-out;
     border-radius: 1.9rem 1.9rem 0 0;
     z-index: 1;
