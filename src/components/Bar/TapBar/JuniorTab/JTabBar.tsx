@@ -27,6 +27,7 @@ import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
+import { StyledSModalBtn } from '@/components/Button/ModalBtn/ModalBtn.styled';
 
 function convertDateType(date: string) {
   if (!date) return new Date();
@@ -179,13 +180,8 @@ function TabBar() {
                   </div>
                 )}
                 {activeTab === TAB.done && (
-                  <ModalBtn
-                    type={'show'}
-                    btnText={'리뷰 작성하기'}
-                    modalHandler={modalHandler}
+                  <StyledSModalBtn
                     onClick={() => {
-                      setModalType('junior');
-                      setSelectedMentoringId(el.mentoringId);
                       if (typeof window !== undefined)
                         window.open(
                           REVIEW_FORM_URL,
@@ -193,7 +189,9 @@ function TabBar() {
                           'noopener, noreferrer',
                         );
                     }}
-                  />
+                  >
+                    리뷰 작성하기
+                  </StyledSModalBtn>
                 )}
               </MentoringBox>
             );
