@@ -11,7 +11,6 @@ import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '../../components/Modal/FullModal';
 import DimmedModal from '../../components/Modal/DimmedModal';
-
 import { userType } from '../../types/user/user';
 import SalaryBox from '../../components/Box/SalaryBox';
 import { mySeniorId } from '../../stores/senior';
@@ -112,7 +111,7 @@ function MyPage() {
 
       if (userType == 'senior') {
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/b`, { headers })
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();
