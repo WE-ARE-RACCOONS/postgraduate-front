@@ -83,11 +83,6 @@ function MyPage() {
     getAccessToken().then((userTkn) => {
       if (userTkn) setAccessTkn(userTkn);
     });
-
-    const entries = performance.getEntriesByType('navigation')[0];
-    const entriesNavTiming = entries as PerformanceNavigationTiming;
-
-    console.log(entriesNavTiming.type);
   }, []);
 
   useEffect(() => {
