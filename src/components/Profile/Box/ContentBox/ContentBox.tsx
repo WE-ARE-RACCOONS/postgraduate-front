@@ -12,7 +12,7 @@ function setAuthText(auth: certiRegType) {
     case 'WAITING':
       return '승인 대기중';
     case 'NONE':
-      return '인증 필요';
+      return '인증필요';
     default:
       return '';
   }
