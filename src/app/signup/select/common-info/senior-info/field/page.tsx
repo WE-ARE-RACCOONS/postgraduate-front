@@ -24,7 +24,6 @@ import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import findExCode from '@/utils/findExCode';
 import { detectReload, preventClose } from '@/utils/reloadFun';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -228,11 +227,10 @@ function SeniorInfoPage() {
 
   return (
     <>
-      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="정보입력" />
       </div>
-      <ProgressBar totalNum={4} activeNum={3} />
+      <ProgressBar totalNum={3} activeNum={2} />
       <SeniorInfoPageContainer>
         <h3>소속 중인 연구실에 대해 알려주세요.</h3>
         <SIFormTitleContainer>
