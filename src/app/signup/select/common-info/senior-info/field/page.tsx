@@ -123,7 +123,6 @@ function SeniorInfoPage() {
 
       if (
         token &&
-        certification &&
         sMajor &&
         sPostGradu &&
         sProfessor &&
@@ -134,7 +133,7 @@ function SeniorInfoPage() {
         // 후배 -> 선배 변경
         axios
           .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change/b`,
             {
               major: sMajor,
               postgradu: sPostGradu,
@@ -142,7 +141,6 @@ function SeniorInfoPage() {
               lab: sLab,
               field: sField,
               keyword: sKeyword,
-              certification: certification,
             },
             {
               headers,
@@ -180,7 +178,6 @@ function SeniorInfoPage() {
         socialId &&
         phoneNumber &&
         nickName &&
-        certification &&
         sMajor &&
         sPostGradu &&
         sProfessor &&
@@ -190,7 +187,7 @@ function SeniorInfoPage() {
       ) {
         // 선배 최초 회원가입
         axios
-          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
+          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup/b`, {
             socialId: socialId,
             phoneNumber: phoneNumber,
             nickName: nickName,
@@ -201,7 +198,6 @@ function SeniorInfoPage() {
             lab: sLab,
             field: sField,
             keyword: sKeyword,
-            certification: certification,
           })
           .then((res) => {
             const response = res.data;
