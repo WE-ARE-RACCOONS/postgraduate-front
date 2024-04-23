@@ -247,7 +247,7 @@ function EditProfilePage() {
             router.back();
           })
           .catch(function (error) {
-            console.log(error);
+            console.error(error);
           });
       }
     });
