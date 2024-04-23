@@ -18,3 +18,4 @@ export const phoneNumValidation = atom<boolean>(false);
 
 export const socialIdAtom = atom<string>('');
 export const certifiRegAtom = atom<certiRegType>('WAITING');
+export const profileRegAtom = atom<boolean>(false);

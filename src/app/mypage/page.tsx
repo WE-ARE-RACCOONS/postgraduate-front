@@ -21,7 +21,7 @@ import MenuBar from '@/components/Bar/MenuBar';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import findExCode from '@/utils/findExCode';
 import Footer from '@/components/Footer';
-import { certifiRegAtom } from '@/stores/signup';
+import { certifiRegAtom, profileRegAtom } from '@/stores/signup';
 import { useRouter } from 'next/navigation';
 
 function MyPage() {
@@ -30,7 +30,7 @@ function MyPage() {
   const [salaryDate, setSalaryDate] = useState('');
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useAtom(certifiRegAtom);
-  const [profileReg, setProfileReg] = useState(true);
+  const [profileReg, setProfileReg] = useAtom(profileRegAtom);
   const [senior, setSenior] = useAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',

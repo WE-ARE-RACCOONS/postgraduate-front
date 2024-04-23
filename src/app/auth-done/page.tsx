@@ -1,14 +1,21 @@
 'use client';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
 import Image from 'next/image';
 import cState from '../../../public/cState.png';
 import { AUTH_DONE_MSG } from '@/constants/auth/done';
 import { useRouter } from 'next/navigation';
+import { useAtomValue } from 'jotai';
+import { profileRegAtom } from '@/stores/signup';
 
 function AuthDonePage() {
   const router = useRouter();
+  const profileReg = useAtomValue(profileRegAtom);
 
-  function handleClick() {
+  function handleRegister() {
+    router.push('/senior/edit-profile');
+  }
+
+  function handleConfirm() {
     router.push('/mypage');
   }
 
@@ -20,22 +27,33 @@ function AuthDonePage() {
         <h2>{AUTH_DONE_MSG.title}</h2>
         <div id="auth-done-desc">{AUTH_DONE_MSG.description}</div>
       </ADPMidBox>
-      <ADPBottomBox>
-        <div id="fir-guide-msg" className="guide-msg">
-          {AUTH_DONE_MSG.firGuide}
-        </div>
-        <div id="guide-msg-bottom-line">
-          <div id="sec-guide-msg" className="guide-msg">
-            {AUTH_DONE_MSG.secGuide}
+      {!profileReg && (
+        <ADPBottomBox>
+          <div id="fir-guide-msg" className="guide-msg">
+            {AUTH_DONE_MSG.firGuide}
           </div>
-          <div id="thi-guide-msg" className="guide-msg">
-            {AUTH_DONE_MSG.thiGuide}
+          <div id="guide-msg-bottom-line">
+            <div id="sec-guide-msg" className="guide-msg">
+              {AUTH_DONE_MSG.secGuide}
+            </div>
+            <div id="thi-guide-msg" className="guide-msg">
+              {AUTH_DONE_MSG.thiGuide}
+            </div>
           </div>
-        </div>
-      </ADPBottomBox>
-      <ADPConfirmBtn onClick={handleClick}>
-        {AUTH_DONE_MSG.btnText}
-      </ADPConfirmBtn>
+        </ADPBottomBox>
+      )}
+      {profileReg ? (
+        <ADPConfirmBtn onClick={handleConfirm} $isFull={profileReg}>
+          {AUTH_DONE_MSG.btnText}
+        </ADPConfirmBtn>
+      ) : (
+        <ADPBtnContainer>
+          <button id='profile-register-btn' onClick={handleRegister}>{AUTH_DONE_MSG.profileBtn}</button>
+          <ADPConfirmBtn onClick={handleConfirm} $isFull={profileReg}>
+            {AUTH_DONE_MSG.btnText}
+          </ADPConfirmBtn>
+        </ADPBtnContainer>
+      )}
     </ADPContainer>
   );
 }
@@ -102,7 +120,7 @@ const ADPBottomBox = styled.div`
   }
 
   #guide-msg-bottom-line {
-    width: 10rem;
+    width: 14rem;
     height: 1.375rem;
     display: flex;
     margin: 0 auto;
@@ -118,8 +136,32 @@ const ADPBottomBox = styled.div`
   }
 `;
 
-const ADPConfirmBtn = styled.button`
-  width: 21.19rem;
+const ADPBtnContainer = styled.div`
+  width: 21.44rem;
+  height: 3.375rem;
+  display: flex;
+  justify-content: space-between;
+  position: absolute;
+  top: 40.125rem;
+  left: 50%;
+  transform: translateX(-50%);
+
+  #profile-register-btn {
+    width: 10.69rem;
+    height: 3.375rem;
+    border: 0;
+    border-radius: 0.75rem;
+    background-color: #ADB5BD;
+    color: #fff;
+    font-size: 1.125rem;
+    font-weight: 600;
+    letter-spacing: -1px;
+    cursor: pointer;
+  }
+`
+
+const ADPConfirmBtn = styled.button<{ $isFull: boolean }>`
+  width: ${props => props.$isFull ? '21.19rem' : '9.94rem'};
   height: 3.375rem;
   border: 0;
   border-radius: 0.75rem;
@@ -127,9 +169,13 @@ const ADPConfirmBtn = styled.button`
   color: #fff;
   font-size: 1.125rem;
   font-weight: 600;
-  position: absolute;
-  top: 40.125rem;
-  left: 50%;
-  transform: translateX(-50%);
+  position: relative;
+
+  ${props => props.$isFull && css`
+    position: absolute;
+    top: 40.125rem;
+    left: 50%;
+    transform: translateX(-50%);
+  `}
   cursor: pointer;
 `;
