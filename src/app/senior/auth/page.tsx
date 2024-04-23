@@ -8,15 +8,13 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import auth from '../../../../../../public/auth.png';
+import auth from '../../../../public/auth.png';
 import Image from 'next/image';
-import cancel from '../../../../../../public/cancel.png';
-import ProgressBar from '@/components/Bar/ProgressBar';
-import { preventClose } from '@/utils/reloadFun';
+import cancel from '../../../../public/cancel.png';
 import useAuth from '@/hooks/useAuth';
 import { certifiRegAtom } from '@/stores/signup';
 
-function AuthPage() {
+function SeniorAuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
   const [photo, setPhoto] = useState<File | null>(null);
   const { getAccessToken, getUserType } = useAuth();
@@ -29,32 +27,20 @@ function AuthPage() {
 
   useEffect(() => {
     getAccessToken().then((tkn) => {
+      if (!tkn) {
+        // 알림톡으로 들어와서 토큰 없을 시, 로그인으로 이동
+        const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
+        const REDIRECT_URI =
+          window.location.origin + '/login/oauth2/code/kakao';
+        const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+        window.location.href = link;
+        return;
+      }
+
       setAccessTkn(tkn);
     });
     const userT = getUserType();
     if (userT) setUserType(userT);
-  }, []);
-
-  useEffect(() => {
-    const entries = performance.getEntriesByType('navigation')[0];
-    const entriesNavTiming = entries as PerformanceNavigationTiming;
-
-    if (entriesNavTiming.type == 'reload') {
-      if (!accessTkn)
-        window.location.href = window.location.origin + '/signup/select';
-      // 선배 최초 회원가입
-      else
-        window.location.href =
-          window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환
-    }
-
-    (() => {
-      window.addEventListener('beforeunload', preventClose);
-    })();
-
-    return () => {
-      window.removeEventListener('beforeunload', preventClose);
-    };
   }, []);
 
   const handleClick = async () => {
@@ -63,8 +49,9 @@ function AuthPage() {
       const formData = new FormData();
       formData.append('certificationFile', photo);
 
-      // 선배 회원가입 및 후배->선배 전환
-      axios
+      let reAuthImg = ''; // S3에서 반환된 인증 이미지 url
+
+      await axios
         .post(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
           formData,
@@ -78,13 +65,35 @@ function AuthPage() {
           const res = response.data;
 
           if (res.code == 'IMG202') {
-            setphotoUrl(res.data.profileUrl);
-            router.push(`/signup/select/common-info/senior-info/major`);
+            reAuthImg = res.data.profileUrl;
           }
         })
-        .catch((err) => {
-          console.error(err);
+        .catch((error) => {
+          console.error(error);
         });
+
+      if (reAuthImg) {
+        axios
+          .patch(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
+            {
+              certification: reAuthImg,
+            },
+            {
+              headers: {
+                Authorization: `Bearer ${accessTkn}`,
+              },
+            },
+          )
+          .then((response) => {
+            const res = response.data;
+
+            if (res.code == 'SNR201') router.push('/auth-done');
+          })
+          .catch((error) => {
+            console.error('Error sending PATCH request:', error);
+          });
+      }
     }
 
     if (!photo) {
@@ -101,11 +110,6 @@ function AuthPage() {
     <div>
       <div>
         <BackHeader headerText="인증하기" />
-        {userType && userType == 'senior' ? (
-          ''
-        ) : (
-          <ProgressBar totalNum={4} activeNum={0} />
-        )}
       </div>
       <div style={{ marginLeft: '1rem' }}>
         <h3 style={{ marginTop: '1.25rem' }}>대학원생임을 인증해주세요!</h3>
@@ -157,7 +161,9 @@ function AuthPage() {
     </div>
   );
 }
-export default AuthPage;
+
+export default SeniorAuthPage;
+
 const AuthFont = styled.div`
   color: #212529;
   font-family: Pretendard;
@@ -186,6 +192,7 @@ const APhotoIn = styled.div`
   line-height: 140%; /* 1.05rem */
   letter-spacing: -0.03125rem;
 `;
+
 const AuthComment = styled.div`
   padding: 0.7rem 1rem;
   margin-top: 2.3rem;
@@ -194,6 +201,7 @@ const AuthComment = styled.div`
   flex-shrink: 0;
   border-radius: 1rem;
   background: #f8f9fa;
+
   #auth-msg {
     color: #868e96;
     font-family: Pretendard;
@@ -204,6 +212,7 @@ const AuthComment = styled.div`
     letter-spacing: -0.03125rem;
     padding: 0.3rem 0;
   }
+
   #auth-msg-color {
     margin-left: 1.25rem;
     color: #2fc4b2;
@@ -215,6 +224,7 @@ const AuthComment = styled.div`
     letter-spacing: -0.03125rem;
   }
 `;
+
 const AuthBtn = styled.button<{ $getPhoto: boolean }>`
   color: #fff;
   text-align: center;
@@ -236,6 +246,7 @@ const AuthBtn = styled.button<{ $getPhoto: boolean }>`
   background: ${(props) => (props.$getPhoto ? '#2FC4B2' : '#DEE2E6')};
   cursor: ${(props) => (props.$getPhoto ? 'pointer' : 'default')};
 `;
+
 const AuthImgBox = styled.div`
   height: 4.625rem;
   width: inherit;
