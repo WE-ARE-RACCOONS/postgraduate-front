@@ -21,8 +21,12 @@ export default function RootLayout({
   return (
     <html lang="ko">
       <body>
-        <GTMAnalytics />
-        <GoogleAnalytics />
+        {process.env.NEXT_PUBLIC_GTM_ID ? (
+          <GTMAnalytics />
+        ) : (<></>)}
+        {process.env.NEXT_PUBLIC_GA4_ID ? (
+          <GoogleAnalytics />
+        ) : (<></>)}
         <Providers>
           <StyledComponentsRegistry>
             {children}
