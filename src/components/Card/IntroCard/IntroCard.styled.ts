@@ -18,12 +18,16 @@ export const IntroCardOneLiner = styled.div`
   margin-bottom: 1.25rem;
 `;
 
-export const IntroCardTextBox = styled.div`
+export const IntroCardTextBox = styled.div<{ $isFull: boolean }>`
   width: 90%;
   height: max-content;
   min-height: 6.5rem;
   border-radius: 4px;
+  border-width: 2px;
+  border-style: solid;
+  border-color: ${props => props.$isFull ? 'transparent' : 'rgba(47, 196, 178, 0.3)'};
   background-color: #f8f9fa;
+  letter-spacing: -0.5px;
   font-size: 15px;
   padding: 0.75rem;
   margin-bottom: 2.5rem;

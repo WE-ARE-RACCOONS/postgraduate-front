@@ -40,7 +40,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
   useEffect(() => {
     if (seniorId !== 0) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/b`)
         .then((response) => {
           const res = response.data;
           if (res.code == 'EX400') {
@@ -69,13 +69,6 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
         });
     }
   }, [seniorId]);
-
-  const keywords = [
-    '연구실 주제 키워드1',
-    '연구실 주제 키워드2',
-    '연구실 주제',
-    '연구실 임시 주제 키워드입니다.',
-  ];
 
   return (
     <SMPContainer>
