@@ -122,6 +122,12 @@ function SelectCalendar(props: SelectCalendarProps) {
     if (selectedDate) {
       // @ts-ignore
       const weekDay = getKeyByValue(weekObj, selectedDate.getDay());
+
+      if(timeArr.length == 0) {
+        setAbleTimeList(splitTimeRange('09:00', '24:30'));
+        return;
+      }
+
       let ableDay = false;
       timeArr.forEach((el) => {
         if (el.day == weekDay) {
