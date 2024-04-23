@@ -58,7 +58,7 @@ function page() {
             setprofile(res.data.data.profile);
           })
           .catch(function (error) {
-            console.log(error);
+            console.error(error);
           });
       }
     });

@@ -104,7 +104,7 @@ function MyPage() {
             setprofile(res.data.data.profile);
           })
           .catch(function (error) {
-            console.log(error);
+            console.error(error);
           });
         return;
       }
@@ -126,7 +126,7 @@ function MyPage() {
             setSenior(res.data.data.seniorId);
           })
           .catch(function (error) {
-            console.log(error);
+            console.error(error);
           });
 
         axios
