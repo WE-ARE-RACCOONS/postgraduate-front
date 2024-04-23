@@ -26,9 +26,13 @@ function IntroCard(props: IntroCardProps) {
       <IntroCardOneLiner>
         {props.oneLiner ? `\"${props.oneLiner}\"` : EMPTY_SENIOR_INFO.oneLiner}
       </IntroCardOneLiner>
-      <IntroCardTextBox $isFull={!!props.info}>{props.info || EMPTY_SENIOR_INFO.info}</IntroCardTextBox>
+      <IntroCardTextBox $isFull={!!props.info}>
+        {props.info || EMPTY_SENIOR_INFO.info}
+      </IntroCardTextBox>
       <IntroCardTextDesc>이런 분들에게 추천드려요.</IntroCardTextDesc>
-      <IntroCardTextBox $isFull={!!props.target}>{props.target || EMPTY_SENIOR_INFO.info}</IntroCardTextBox>
+      <IntroCardTextBox $isFull={!!props.target}>
+        {props.target || EMPTY_SENIOR_INFO.info}
+      </IntroCardTextBox>
       <IntroCardTextDesc>멘토링 가능 일정</IntroCardTextDesc>
       {props.times &&
         props.times.map((el, idx) => (
@@ -37,7 +41,9 @@ function IntroCard(props: IntroCardProps) {
           </IntroCardTimeBox>
         ))}
       {props.times.length == 0 && (
-        <IntroCardTextBox $isFull={props.times.length > 0}>{EMPTY_SENIOR_INFO.times}</IntroCardTextBox>
+        <IntroCardTextBox $isFull={props.times.length > 0}>
+          {EMPTY_SENIOR_INFO.times}
+        </IntroCardTextBox>
       )}
     </IntroCardContainer>
   );

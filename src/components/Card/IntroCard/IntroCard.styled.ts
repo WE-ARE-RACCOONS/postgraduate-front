@@ -25,7 +25,8 @@ export const IntroCardTextBox = styled.div<{ $isFull: boolean }>`
   border-radius: 4px;
   border-width: 2px;
   border-style: solid;
-  border-color: ${props => props.$isFull ? 'transparent' : 'rgba(47, 196, 178, 0.3)'};
+  border-color: ${(props) =>
+    props.$isFull ? 'transparent' : 'rgba(47, 196, 178, 0.3)'};
   background-color: #f8f9fa;
   letter-spacing: -0.5px;
   font-size: 15px;

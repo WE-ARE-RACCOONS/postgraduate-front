@@ -123,7 +123,7 @@ function SelectCalendar(props: SelectCalendarProps) {
       // @ts-ignore
       const weekDay = getKeyByValue(weekObj, selectedDate.getDay());
 
-      if(timeArr.length == 0) {
+      if (timeArr.length == 0) {
         setAbleTimeList(splitTimeRange('09:00', '24:30'));
         return;
       }

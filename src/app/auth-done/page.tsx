@@ -48,7 +48,9 @@ function AuthDonePage() {
         </ADPConfirmBtn>
       ) : (
         <ADPBtnContainer>
-          <button id='profile-register-btn' onClick={handleRegister}>{AUTH_DONE_MSG.profileBtn}</button>
+          <button id="profile-register-btn" onClick={handleRegister}>
+            {AUTH_DONE_MSG.profileBtn}
+          </button>
           <ADPConfirmBtn onClick={handleConfirm} $isFull={profileReg}>
             {AUTH_DONE_MSG.btnText}
           </ADPConfirmBtn>
@@ -151,17 +153,17 @@ const ADPBtnContainer = styled.div`
     height: 3.375rem;
     border: 0;
     border-radius: 0.75rem;
-    background-color: #ADB5BD;
+    background-color: #adb5bd;
     color: #fff;
     font-size: 1.125rem;
     font-weight: 600;
     letter-spacing: -1px;
     cursor: pointer;
   }
-`
+`;
 
 const ADPConfirmBtn = styled.button<{ $isFull: boolean }>`
-  width: ${props => props.$isFull ? '21.19rem' : '9.94rem'};
+  width: ${(props) => (props.$isFull ? '21.19rem' : '9.94rem')};
   height: 3.375rem;
   border: 0;
   border-radius: 0.75rem;
@@ -171,11 +173,13 @@ const ADPConfirmBtn = styled.button<{ $isFull: boolean }>`
   font-weight: 600;
   position: relative;
 
-  ${props => props.$isFull && css`
-    position: absolute;
-    top: 40.125rem;
-    left: 50%;
-    transform: translateX(-50%);
-  `}
+  ${(props) =>
+    props.$isFull &&
+    css`
+      position: absolute;
+      top: 40.125rem;
+      left: 50%;
+      transform: translateX(-50%);
+    `}
   cursor: pointer;
 `;

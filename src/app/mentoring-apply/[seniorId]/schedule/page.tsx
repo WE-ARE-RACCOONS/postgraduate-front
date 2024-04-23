@@ -98,7 +98,11 @@ function MentoringApplySchedulePage() {
           </MASTitle>
         </div>
         <div id="senior-schedule-subtitle-wrapper">
-          <MASSubtitle>{timeArr.length == 0 ? MENTORING_SCHEDULE.sEmptyScheduleSubtitle : MENTORING_SCHEDULE.sScheduleSubtitle}</MASSubtitle>
+          <MASSubtitle>
+            {timeArr.length == 0
+              ? MENTORING_SCHEDULE.sEmptyScheduleSubtitle
+              : MENTORING_SCHEDULE.sScheduleSubtitle}
+          </MASSubtitle>
         </div>
         <div id="time-list-box-wrapper">
           <TimeListBox timeArr={timeArr} />

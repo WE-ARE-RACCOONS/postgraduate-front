@@ -17,7 +17,8 @@ export const MENTORING_SCHEDULE = {
   sScheduleTitle: '의 멘토링 가능 일정',
   sScheduleSubtitle:
     '대학원 선배가 제시한 일정이에요. 이 시간 안에서 제시해주세요!',
-  sEmptyScheduleSubtitle: '아직 일정이 등록되지 않은 선배예요. 먼저 시간을 제시해주세요!',
+  sEmptyScheduleSubtitle:
+    '아직 일정이 등록되지 않은 선배예요. 먼저 시간을 제시해주세요!',
   selectTitle: '30분 멘토링이 가능한 일정 3개를 선택해주세요!',
   selectSubtitle: '3개의 일정 중 대학원 선배가 하나를 골라 일정이 확정됩니다.',
   selectPlaceholder: '번째 일정을 선택해주세요.',
