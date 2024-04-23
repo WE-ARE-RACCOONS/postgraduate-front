@@ -8,11 +8,9 @@ import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import auth from '../../../../../../public/auth.png';
+import auth from '../../../../public/auth.png';
 import Image from 'next/image';
-import cancel from '../../../../../../public/cancel.png';
-import ProgressBar from '@/components/Bar/ProgressBar';
-import { preventClose } from '@/utils/reloadFun';
+import cancel from '../../../../public/cancel.png';
 import useAuth from '@/hooks/useAuth';
 import { certifiRegAtom } from '@/stores/signup';
 
