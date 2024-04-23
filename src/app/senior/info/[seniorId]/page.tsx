@@ -227,6 +227,7 @@ const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`
     width: 100%;
     height: ${(props) => (props.$overWidth ? '8.25rem' : '7.25rem')};
     margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
   #keyword-card-wrapper {

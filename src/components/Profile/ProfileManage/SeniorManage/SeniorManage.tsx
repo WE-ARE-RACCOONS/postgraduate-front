@@ -67,7 +67,7 @@ function SeniorManage(props: SeniorManageProps) {
       props.AmodalHandler();
     }
     if (props.certifiReg === 'NOT_APPROVE') {
-      router.push(`/signup/select/common-info/auth`);
+      router.push(`/senior/auth`);
     }
     if (props.certifiReg === 'WAITING') {
       props.AmodalHandler();
