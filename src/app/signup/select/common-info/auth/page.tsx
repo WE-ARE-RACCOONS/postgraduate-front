@@ -15,7 +15,6 @@ import ProgressBar from '@/components/Bar/ProgressBar';
 import { preventClose } from '@/utils/reloadFun';
 import useAuth from '@/hooks/useAuth';
 import { certifiRegAtom } from '@/stores/signup';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
@@ -46,7 +45,7 @@ function AuthPage() {
       // 선배 최초 회원가입
       else
         window.location.href =
-          window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환 or 선배 재인증
+          window.location.origin + '/signup/select/common-info/auth'; // 후배 -> 선배 전환
     }
 
     (() => {
@@ -64,77 +63,28 @@ function AuthPage() {
       const formData = new FormData();
       formData.append('certificationFile', photo);
 
-      if (certifiReg === 'NOT_APPROVE' || (accessTkn && userType == 'senior')) {
-        // 선배 재인증
-        let reAuthImg = ''; // S3에서 반환된 인증 이미지 url
-
-        await axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
+      // 선배 회원가입 및 후배->선배 전환
+      axios
+        .post(
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
+          formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
             },
-          )
-          .then((response) => {
-            const res = response.data;
+          },
+        )
+        .then((response) => {
+          const res = response.data;
 
-            if (res.code == 'IMG202') {
-              reAuthImg = res.data.profileUrl;
-            }
-          })
-          .catch((error) => {
-            console.error(error);
-          });
-
-        if (reAuthImg) {
-          axios
-            .patch(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
-              {
-                certification: reAuthImg,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${accessTkn}`,
-                },
-              },
-            )
-            .then((response) => {
-              const res = response.data;
-
-              if (res.code == 'SNR201') router.push('/auth-done');
-            })
-            .catch((error) => {
-              console.error('Error sending PATCH request:', error);
-            });
-        }
-      } else {
-        // 선배 회원가입 및 후배->선배 전환
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
-            formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-              },
-            },
-          )
-          .then((response) => {
-            const res = response.data;
-
-            if (res.code == 'IMG202') {
-              setphotoUrl(res.data.profileUrl);
-              router.push(`/signup/select/common-info/senior-info/major`);
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
+          if (res.code == 'IMG202') {
+            setphotoUrl(res.data.profileUrl);
+            router.push(`/signup/select/common-info/senior-info/major`);
+          }
+        })
+        .catch((err) => {
+          console.error(err);
+        });
     }
 
     if (!photo) {
@@ -142,12 +92,13 @@ function AuthPage() {
       return;
     }
   };
+
   const handleCancelClick = () => {
     setPhoto(null);
   };
+
   return (
     <div>
-      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="인증하기" />
         {userType && userType == 'senior' ? (
