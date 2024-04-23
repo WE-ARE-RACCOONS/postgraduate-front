@@ -11,4 +11,5 @@ export interface SeniorProfileData {
   postgradu: string;
   professor: string;
   seniorId: number;
+  certification: boolean;
 }
