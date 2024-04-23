@@ -32,7 +32,7 @@ function SearchResultPage() {
   useEffect(() => {
     setIsLoading(true);
     if (searchTerm) {
-      let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
+      let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search/b?find=${searchTerm}`;
       if (sort) {
         url += `&sort=${sort}`;
       }
@@ -59,7 +59,7 @@ function SearchResultPage() {
       let isScrollAtBottom =
         window.innerHeight + window.scrollY >= document.body.offsetHeight - 1;
       if (isScrollAtBottom) {
-        let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
+        let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search/b?find=${searchTerm}`;
         if (sort) {
           url += `&sort=${sort}`;
         }

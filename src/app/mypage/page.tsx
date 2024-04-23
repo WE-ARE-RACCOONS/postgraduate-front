@@ -11,7 +11,6 @@ import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
 import FullModal from '../../components/Modal/FullModal';
 import DimmedModal from '../../components/Modal/DimmedModal';
-
 import { userType } from '../../types/user/user';
 import SalaryBox from '../../components/Box/SalaryBox';
 import { mySeniorId } from '../../stores/senior';
@@ -22,7 +21,7 @@ import MenuBar from '@/components/Bar/MenuBar';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import findExCode from '@/utils/findExCode';
 import Footer from '@/components/Footer';
-import { certifiRegAtom } from '@/stores/signup';
+import { certifiRegAtom, profileRegAtom } from '@/stores/signup';
 import { useRouter } from 'next/navigation';
 
 function MyPage() {
@@ -31,7 +30,7 @@ function MyPage() {
   const [salaryDate, setSalaryDate] = useState('');
   const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useAtom(certifiRegAtom);
-  const [profileReg, setProfileReg] = useState(true);
+  const [profileReg, setProfileReg] = useAtom(profileRegAtom);
   const [senior, setSenior] = useAtom(mySeniorId);
   const { modal, modalHandler, portalElement } = useModal(
     'login-request-full-portal',
@@ -83,11 +82,6 @@ function MyPage() {
     getAccessToken().then((userTkn) => {
       if (userTkn) setAccessTkn(userTkn);
     });
-
-    const entries = performance.getEntriesByType('navigation')[0];
-    const entriesNavTiming = entries as PerformanceNavigationTiming;
-
-    console.log(entriesNavTiming.type);
   }, []);
 
   useEffect(() => {
@@ -117,7 +111,7 @@ function MyPage() {
 
       if (userType == 'senior') {
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/b`, { headers })
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();

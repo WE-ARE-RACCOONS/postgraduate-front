@@ -11,6 +11,8 @@ function setAuthText(auth: certiRegType) {
       return '승인 반려';
     case 'WAITING':
       return '승인 대기중';
+    case 'NONE':
+      return '인증필요';
     default:
       return '';
   }
@@ -36,6 +38,8 @@ const ContentBox = ({
       ? { color: '#FF5757' }
       : certifiReg === 'APPROVE'
       ? { color: '#00A0E1' }
+      : certifiReg === 'NONE'
+      ? { color: '#FF5757' }
       : {};
   const msgTextStyle =
     kind === 'msg' && !profileReg ? { color: '#FF5757' } : {};

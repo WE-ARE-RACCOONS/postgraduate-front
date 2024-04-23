@@ -43,7 +43,7 @@ function MentoringApplySchedulePage() {
       if (accessTkn) {
         axios
           .get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times/b`,
             {
               headers: {
                 Authorization: `Bearer ${accessTkn}`,
@@ -98,7 +98,11 @@ function MentoringApplySchedulePage() {
           </MASTitle>
         </div>
         <div id="senior-schedule-subtitle-wrapper">
-          <MASSubtitle>{MENTORING_SCHEDULE.sScheduleSubtitle}</MASSubtitle>
+          <MASSubtitle>
+            {timeArr.length == 0
+              ? MENTORING_SCHEDULE.sEmptyScheduleSubtitle
+              : MENTORING_SCHEDULE.sScheduleSubtitle}
+          </MASSubtitle>
         </div>
         <div id="time-list-box-wrapper">
           <TimeListBox timeArr={timeArr} />

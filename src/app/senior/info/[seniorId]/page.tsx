@@ -41,7 +41,7 @@ function SeniorInfoPage() {
   const [professor, setProfessor] = useState('');
   const [profile, setProfile] = useState('');
   const [target, setTarget] = useState('');
-  const [term, setTerm] = useState(40);
+  const [term, setTerm] = useState(30);
   const [times, setTimes] = useState([]);
   const [mine, setMine] = useState('false');
   const [overWidth, setOverWidth] = useState(false);
@@ -80,7 +80,7 @@ function SeniorInfoPage() {
     getAccessToken().then((accessTkn) => {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/b`,
           accessTkn
             ? { headers: { Authorization: `Bearer ${accessTkn}` } }
             : {},
@@ -227,6 +227,7 @@ const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`
     width: 100%;
     height: ${(props) => (props.$overWidth ? '8.25rem' : '7.25rem')};
     margin-top: 1.5rem;
+    margin-bottom: 0.5rem;
   }
 
   #keyword-card-wrapper {
