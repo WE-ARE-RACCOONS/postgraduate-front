@@ -47,7 +47,7 @@ function SalaryPage() {
               }
             })
             .catch(function (error) {
-              console.log(error);
+              console.error(error);
             });
           axios
             .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
