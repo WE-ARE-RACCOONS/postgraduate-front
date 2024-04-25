@@ -31,7 +31,6 @@ import Script from 'next/script';
 import $ from 'jquery';
 import { TEMRS_LINK } from '@/constants/terms/terms';
 import findExCode from '@/utils/findExCode';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function MentoringApplyPayPage() {
   const [nickName, setNickName] = useAtom(seniorNickname);
@@ -154,10 +153,9 @@ function MentoringApplyPayPage() {
 
   return (
     <>
-      {/* <GoogleAnalytics /> */}
       <MAPContainer>
         <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
-        <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>
+        <Script src={process.env.NEXT_PUBLIC_KR_PAYPLE_URL}></Script>
         <BackHeader headerText="멘토링 결제 정보" />
         <ProgressBar totalNum={3} activeNum={2} />
         <MAPContent>

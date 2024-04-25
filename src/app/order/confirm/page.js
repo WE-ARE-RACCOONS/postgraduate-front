@@ -2,10 +2,7 @@
 import { useEffect } from 'react';
 import Script from 'next/script';
 import $ from 'jquery';
-import { useRouter } from 'next/navigation';
-import { ACTION } from 'next/dist/client/components/app-router-headers';
 const PayplePayment = () => {
-  const router = useRouter();
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
   useEffect(() => {
     $(document).ready(() => {
@@ -36,7 +33,7 @@ const PayplePayment = () => {
   return (
     <div>
       <Script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></Script>
-      <Script src="https://democpay.payple.kr/js/v1/payment.js"></Script>
+      <Script src={process.env.NEXT_PUBLIC_KR_PAYPLE_URL}></Script>
       {/* Your button to trigger Payple payment */}
       <button id="requsetPayplePay">페이플 국내결제</button>
     </div>
