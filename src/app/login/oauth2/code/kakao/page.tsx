@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { socialIdAtom } from '@/stores/signup';
 import Spinner from '@/components/Spinner';
 import styled from 'styled-components';
