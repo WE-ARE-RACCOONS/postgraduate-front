@@ -2,6 +2,7 @@
 import { useEffect } from 'react';
 import Script from 'next/script';
 import $ from 'jquery';
+
 const PayplePayment = () => {
   const PAPLE_CLIENT_KEY = process.env.NEXT_PUBLIC_PAPLE_CLIENT_KEY;
   useEffect(() => {
