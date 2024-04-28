@@ -153,9 +153,9 @@ function MentoringSpec(props: ModalMentoringProps) {
         </ConfirmContent>
       </MApplyBox>
       <div style={{ display: 'flex', padding: '1.56rem 1rem' }}>
-        <MMainFont>신청 일정</MMainFont>
+        <MMainFont>신청 일정&nbsp;</MMainFont>
         <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <MsubFont>3개의 일정중 하나로 확정 됩니다</MsubFont>
+          <MsubFont>3개의 일정 중 하나로 확정 됩니다</MsubFont>
         </div>
       </div>
       <div>

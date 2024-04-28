@@ -6,6 +6,7 @@ import {
   IntroCardTextDesc,
   IntroCardTimeBox,
 } from './IntroCard.styled';
+import { EMPTY_SENIOR_INFO } from '@/constants/profile/emptySenior';
 
 function IntroCard(props: IntroCardProps) {
   const setAmOrPm = (time: number) => {
@@ -23,11 +24,15 @@ function IntroCard(props: IntroCardProps) {
   return (
     <IntroCardContainer>
       <IntroCardOneLiner>
-        {props.oneLiner ? `\"${props.oneLiner}\"` : '"잘 부탁드립니다!"'}
+        {props.oneLiner ? `\"${props.oneLiner}\"` : EMPTY_SENIOR_INFO.oneLiner}
       </IntroCardOneLiner>
-      <IntroCardTextBox>{props.info || ''}</IntroCardTextBox>
+      <IntroCardTextBox $isFull={!!props.info}>
+        {props.info || EMPTY_SENIOR_INFO.info}
+      </IntroCardTextBox>
       <IntroCardTextDesc>이런 분들에게 추천드려요.</IntroCardTextDesc>
-      <IntroCardTextBox>{props.target || ''}</IntroCardTextBox>
+      <IntroCardTextBox $isFull={!!props.target}>
+        {props.target || EMPTY_SENIOR_INFO.info}
+      </IntroCardTextBox>
       <IntroCardTextDesc>멘토링 가능 일정</IntroCardTextDesc>
       {props.times &&
         props.times.map((el, idx) => (
@@ -35,6 +40,11 @@ function IntroCard(props: IntroCardProps) {
             {el.day}요일 {formatTime(el.startTime, el.endTime)}
           </IntroCardTimeBox>
         ))}
+      {props.times.length == 0 && (
+        <IntroCardTextBox $isFull={props.times.length > 0}>
+          {EMPTY_SENIOR_INFO.times}
+        </IntroCardTextBox>
+      )}
     </IntroCardContainer>
   );
 }

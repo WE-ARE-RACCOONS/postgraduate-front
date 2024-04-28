@@ -88,7 +88,7 @@ function MentoringApplyPayPage() {
       if (accessTkn) {
         axios
           .get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/profile`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/profile/b`,
             {
               headers: {
                 Authorization: `Bearer ${accessTkn}`,

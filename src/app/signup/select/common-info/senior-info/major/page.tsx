@@ -14,7 +14,6 @@ import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -59,10 +58,9 @@ function SeniorInfoPage() {
 
   return (
     <>
-      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="정보입력" />
-        <ProgressBar totalNum={4} activeNum={1} />
+        <ProgressBar totalNum={3} activeNum={0} />
       </div>
       <SeniorInfoPageContainer>
         <SICBox>

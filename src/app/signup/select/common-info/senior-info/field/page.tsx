@@ -24,7 +24,6 @@ import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import findExCode from '@/utils/findExCode';
 import { detectReload, preventClose } from '@/utils/reloadFun';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -124,7 +123,6 @@ function SeniorInfoPage() {
 
       if (
         token &&
-        certification &&
         sMajor &&
         sPostGradu &&
         sProfessor &&
@@ -135,7 +133,7 @@ function SeniorInfoPage() {
         // 후배 -> 선배 변경
         axios
           .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change/b`,
             {
               major: sMajor,
               postgradu: sPostGradu,
@@ -143,7 +141,6 @@ function SeniorInfoPage() {
               lab: sLab,
               field: sField,
               keyword: sKeyword,
-              certification: certification,
             },
             {
               headers,
@@ -181,7 +178,6 @@ function SeniorInfoPage() {
         socialId &&
         phoneNumber &&
         nickName &&
-        certification &&
         sMajor &&
         sPostGradu &&
         sProfessor &&
@@ -191,7 +187,7 @@ function SeniorInfoPage() {
       ) {
         // 선배 최초 회원가입
         axios
-          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
+          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup/b`, {
             socialId: socialId,
             phoneNumber: phoneNumber,
             nickName: nickName,
@@ -202,7 +198,6 @@ function SeniorInfoPage() {
             lab: sLab,
             field: sField,
             keyword: sKeyword,
-            certification: certification,
           })
           .then((res) => {
             const response = res.data;
@@ -228,11 +223,10 @@ function SeniorInfoPage() {
 
   return (
     <>
-      {/* <GoogleAnalytics /> */}
       <div>
         <BackHeader headerText="정보입력" />
       </div>
-      <ProgressBar totalNum={4} activeNum={3} />
+      <ProgressBar totalNum={3} activeNum={2} />
       <SeniorInfoPageContainer>
         <h3>소속 중인 연구실에 대해 알려주세요.</h3>
         <SIFormTitleContainer>
