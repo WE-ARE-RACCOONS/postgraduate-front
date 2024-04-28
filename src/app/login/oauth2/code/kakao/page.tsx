@@ -20,7 +20,7 @@ function KakaoPage() {
       .post(
         window.location.hostname.includes('localhost')
           ? `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/dev/login/KAKAO`
-          : `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login/KAKAO/b`,
+          : `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login/KAKAO`,
         {
           code: code,
         },
