@@ -1,6 +1,6 @@
 import { userType } from '../user/user';
 
-export type certiRegType = 'NOT_APPROVE' | 'WAITING' | 'APPROVE';
+export type certiRegType = 'NOT_APPROVE' | 'WAITING' | 'APPROVE' | 'NONE';
 
 export interface ProfileProps {
   profile: string;

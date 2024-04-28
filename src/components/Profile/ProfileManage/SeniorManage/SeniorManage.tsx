@@ -63,14 +63,13 @@ function SeniorManage(props: SeniorManageProps) {
   };
 
   const MyAuth = () => {
-    if (props.certifiReg === 'APPROVE') {
+    if (props.certifiReg === 'APPROVE' || props.certifiReg === 'WAITING') {
       props.AmodalHandler();
+      return;
     }
-    if (props.certifiReg === 'NOT_APPROVE') {
+    if (props.certifiReg === 'NOT_APPROVE' || props.certifiReg === 'NONE') {
       router.push(`/senior/auth`);
-    }
-    if (props.certifiReg === 'WAITING') {
-      props.AmodalHandler();
+      return;
     }
   };
 

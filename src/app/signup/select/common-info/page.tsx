@@ -37,7 +37,6 @@ function CommonInfoPage() {
 
   return (
     <div>
-      {/* <GoogleAnalytics /> */}
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="회원가입" />
       </div>
@@ -48,7 +47,7 @@ function CommonInfoPage() {
       {userNick && fullNum && service && nickAvailable && phoneAvailable ? (
         <NextBtn
           kind="next"
-          url={userType == 'junior' ? '/matching-info' : '/auth'}
+          url={userType == 'junior' ? '/matching-info' : '/senior-info/major'}
           btnText="다음으로"
         />
       ) : (

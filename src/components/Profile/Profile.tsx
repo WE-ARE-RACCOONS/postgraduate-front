@@ -37,7 +37,7 @@ function Profile(props: ProfileProps) {
             {props.userType == 'junior' ? '후배 회원' : '선배 회원'}
           </ProfileButton>
         </ProfileName>
-        {props.userType == 'senior' &&
+        {/* {props.userType == 'senior' &&
           !(props.certifiReg === 'APPROVE' && props.profileReg) && (
             <div
               style={{
@@ -63,7 +63,7 @@ function Profile(props: ProfileProps) {
                 멘토링 진행불가
               </button>
             </div>
-          )}
+          )} */}
       </ProfileInfo>
     </ProfileBox>
   );
