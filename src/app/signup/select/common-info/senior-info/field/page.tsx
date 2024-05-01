@@ -105,7 +105,7 @@ function SeniorInfoPage() {
   const goChatLink = () => {
     router.push('/add-chat-link');
     return;
-  }
+  };
 
   /* 기존 회원가입 함수 주석 처리
   const handleSubmit = () => {
@@ -264,10 +264,7 @@ function SeniorInfoPage() {
             <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>
           )}
         </SIFormBox>
-        <SignupSubmitBtn
-          $ableSubmit={ableSubmit}
-          onClick={goChatLink}
-        >
+        <SignupSubmitBtn $ableSubmit={ableSubmit} onClick={goChatLink}>
           다음으로
         </SignupSubmitBtn>
         {modal && portalElement

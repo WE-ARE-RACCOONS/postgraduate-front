@@ -9,7 +9,13 @@ import {
   PROFILE_SUB_DIRECTION,
 } from '@/constants/form/cProfileForm';
 import useAuth from '@/hooks/useAuth';
-import { mySeniorId, sAbleTime, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from '@/stores/senior';
+import {
+  mySeniorId,
+  sAbleTime,
+  sMultiIntroduce,
+  sRecommendedFor,
+  sSingleIntroduce,
+} from '@/stores/senior';
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
@@ -25,7 +31,6 @@ function AddTimePage() {
   const [seniorId, setSeniorId] = useAtom(mySeniorId);
   const router = useRouter();
   const { getAccessToken } = useAuth();
-
 
   const handleClick = () => {
     if (ableTime.length < 3) {
@@ -74,7 +79,7 @@ function AddTimePage() {
       });
       return;
     }
-  }
+  };
 
   return (
     <AddTimePageContainer>
@@ -108,10 +113,14 @@ function AddTimePage() {
           이전
         </PrevBtn>
         {ableTime.length >= 3 ? (
-          <NextAddBtnSet onClick={() => {
-            handleClick();
-            handleSubmit();
-          }}>완료</NextAddBtnSet>
+          <NextAddBtnSet
+            onClick={() => {
+              handleClick();
+              handleSubmit();
+            }}
+          >
+            완료
+          </NextAddBtnSet>
         ) : (
           <NextAddBtn onClick={handleClick}>완료</NextAddBtn>
         )}

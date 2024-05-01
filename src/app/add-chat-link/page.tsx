@@ -41,7 +41,13 @@ function AddChatLinkPage() {
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [flag, setFlag] = useState(false);
   const router = useRouter();
-  const { getAccessToken, setAccessToken, setRefreshToken, setUserType, removeTokens } = useAuth();
+  const {
+    getAccessToken,
+    setAccessToken,
+    setRefreshToken,
+    setUserType,
+    removeTokens,
+  } = useAuth();
   const [socialId, setSocialId] = useState<number | null>(null);
   const phoneNumber = useAtomValue(phoneNum);
   const nickName = useAtomValue(changeNickname);
@@ -154,7 +160,7 @@ function AddChatLinkPage() {
               lab: sLab,
               field: sField,
               keyword: sKeyword,
-              chatLink: chatLink
+              chatLink: chatLink,
             },
             {
               headers,
@@ -213,7 +219,7 @@ function AddChatLinkPage() {
             lab: sLab,
             field: sField,
             keyword: sKeyword,
-            chatLink: chatLink
+            chatLink: chatLink,
           })
           .then((res) => {
             const response = res.data;
@@ -235,7 +241,7 @@ function AddChatLinkPage() {
           });
       }
     });
-  }
+  };
 
   return (
     <AddChatLinkContainer>
@@ -276,7 +282,12 @@ function AddChatLinkPage() {
           <NextAddBtn>가입 완료</NextAddBtn>
         )}
       </div> */}
-      <SubmitBtn $ableSubmit={!!chatLink} onClick={!!chatLink ? handleSubmit : () => {}}>가입 완료</SubmitBtn>
+      <SubmitBtn
+        $ableSubmit={!!chatLink}
+        onClick={!!chatLink ? handleSubmit : () => {}}
+      >
+        가입 완료
+      </SubmitBtn>
     </AddChatLinkContainer>
   );
 }
@@ -310,7 +321,7 @@ const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
   justify-content: center;
   align-items: center;
   border-radius: 0.75rem;
-  background-color: ${props => props.$ableSubmit ? '#2FC4B2' : '#dee2e6'};
+  background-color: ${(props) => (props.$ableSubmit ? '#2FC4B2' : '#dee2e6')};
   border: none;
   color: #fff;
   text-align: center;
@@ -322,8 +333,8 @@ const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
   bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
-  cursor: ${props => props.$ableSubmit ? 'pointer' : 'default'};
-`
+  cursor: ${(props) => (props.$ableSubmit ? 'pointer' : 'default')};
+`;
 
 const NextAddBtnSet = styled.button`
   display: flex;
