@@ -8,16 +8,24 @@ import {
   PROFILE_PLACEHOLDER,
   PROFILE_SUB_DIRECTION,
 } from '@/constants/form/cProfileForm';
-import { sAbleTime } from '@/stores/senior';
-import { useAtom } from 'jotai';
+import useAuth from '@/hooks/useAuth';
+import { mySeniorId, sAbleTime, sMultiIntroduce, sRecommendedFor, sSingleIntroduce } from '@/stores/senior';
+import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
+import axios from 'axios';
 
 function AddTimePage() {
+  const oneLiner = useAtomValue(sSingleIntroduce);
+  const info = useAtomValue(sMultiIntroduce);
+  const target = useAtomValue(sRecommendedFor);
   const [ableTime, setAbleTime] = useAtom(sAbleTime);
   const [flag, setFlag] = useState(false);
+  const [seniorId, setSeniorId] = useAtom(mySeniorId);
   const router = useRouter();
+  const { getAccessToken } = useAuth();
+
 
   const handleClick = () => {
     if (ableTime.length < 3) {
@@ -25,17 +33,53 @@ function AddTimePage() {
       return;
     }
 
-    if (ableTime.length >= 3) {
-      setFlag(false);
-      router.push('add-chat-link');
+    // if (ableTime.length >= 3) {
+    //   setFlag(false);
+    //   router.push('add-chat-link');
+    //   return;
+    // }
+  };
+
+  const handleSubmit = () => {
+    if (info && oneLiner && target && ableTime.length >= 3) {
+      getAccessToken().then((accessTkn) => {
+        if (accessTkn) {
+          axios
+            .patch(
+              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`,
+              {
+                info: info,
+                target: target,
+                times: ableTime,
+                oneLiner: oneLiner,
+              },
+              {
+                headers: {
+                  Authorization: `Bearer ${accessTkn}`,
+                },
+              },
+            )
+            .then((response) => {
+              const res = response.data;
+
+              if (res.code == 'SNR201') {
+                setSeniorId(res.data.seniorId);
+                router.push('/profile/done');
+              }
+            })
+            .catch((err) => {
+              console.error(err);
+            });
+        }
+      });
       return;
     }
-  };
+  }
 
   return (
     <AddTimePageContainer>
       <BackHeader headerText="일정 입력" />
-      <ProgressBar totalNum={3} activeNum={1} />
+      <ProgressBar totalNum={2} activeNum={1} />
       <div
         style={{
           marginLeft: '1rem',
@@ -64,9 +108,9 @@ function AddTimePage() {
           이전
         </PrevBtn>
         {ableTime.length >= 3 ? (
-          <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>
+          <NextAddBtnSet onClick={handleSubmit}>완료</NextAddBtnSet>
         ) : (
-          <NextAddBtn onClick={handleClick}>다음</NextAddBtn>
+          <NextAddBtn onClick={handleClick}>완료</NextAddBtn>
         )}
       </div>
     </AddTimePageContainer>
