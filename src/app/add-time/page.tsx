@@ -108,7 +108,10 @@ function AddTimePage() {
           이전
         </PrevBtn>
         {ableTime.length >= 3 ? (
-          <NextAddBtnSet onClick={handleSubmit}>완료</NextAddBtnSet>
+          <NextAddBtnSet onClick={() => {
+            handleClick();
+            handleSubmit();
+          }}>완료</NextAddBtnSet>
         ) : (
           <NextAddBtn onClick={handleClick}>완료</NextAddBtn>
         )}
