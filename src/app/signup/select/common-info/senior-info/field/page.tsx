@@ -107,6 +107,7 @@ function SeniorInfoPage() {
     return;
   }
 
+  /* 기존 회원가입 함수 주석 처리
   const handleSubmit = () => {
     if (!sField) {
       setFlag(true);
@@ -225,6 +226,7 @@ function SeniorInfoPage() {
       }
     });
   };
+  */
 
   return (
     <>
