@@ -252,4 +252,3 @@ const AuthImgBox = styled.div`
   width: inherit;
   text-align: center;
 `;
-

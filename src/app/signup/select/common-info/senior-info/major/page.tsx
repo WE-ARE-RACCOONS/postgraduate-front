@@ -60,7 +60,7 @@ function SeniorInfoPage() {
     <>
       <div>
         <BackHeader headerText="정보입력" />
-        <ProgressBar totalNum={3} activeNum={0} />
+        <ProgressBar totalNum={4} activeNum={0} />
       </div>
       <SeniorInfoPageContainer>
         <SICBox>

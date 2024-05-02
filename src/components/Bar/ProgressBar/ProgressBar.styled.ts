@@ -19,6 +19,6 @@ export const StepperContainer = styled.div`
 `;
 
 export const StepperTab = styled.div<{ $totalNum: number }>`
-  width: ${(props) => (props.$totalNum == 3 ? '33.3%' : '25%')};
+  width: calc(100% / ${(props) => props.$totalNum});
   height: 0.5rem;
 `;

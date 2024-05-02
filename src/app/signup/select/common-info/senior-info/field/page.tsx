@@ -102,6 +102,12 @@ function SeniorInfoPage() {
     return resultArray.join(', ');
   };
 
+  const goChatLink = () => {
+    router.push('/add-chat-link');
+    return;
+  };
+
+  /* 기존 회원가입 함수 주석 처리
   const handleSubmit = () => {
     if (!sField) {
       setFlag(true);
@@ -220,13 +226,14 @@ function SeniorInfoPage() {
       }
     });
   };
+  */
 
   return (
     <>
       <div>
         <BackHeader headerText="정보입력" />
       </div>
-      <ProgressBar totalNum={3} activeNum={2} />
+      <ProgressBar totalNum={4} activeNum={2} />
       <SeniorInfoPageContainer>
         <h3>소속 중인 연구실에 대해 알려주세요.</h3>
         <SIFormTitleContainer>
@@ -257,12 +264,8 @@ function SeniorInfoPage() {
             <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>
           )}
         </SIFormBox>
-        <SignupSubmitBtn
-          $ableSubmit={ableSubmit}
-          id="signup-submit-btn"
-          onClick={handleSubmit}
-        >
-          가입완료
+        <SignupSubmitBtn $ableSubmit={ableSubmit} onClick={goChatLink}>
+          다음으로
         </SignupSubmitBtn>
         {modal && portalElement
           ? createPortal(
