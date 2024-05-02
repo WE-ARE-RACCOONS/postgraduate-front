@@ -8,14 +8,24 @@ import {
   PROFILE_SUB_DIRECTION,
 } from '@/constants/form/cProfileForm';
 import useAuth from '@/hooks/useAuth';
+import { option } from '@/stores/condition';
 import {
   mySeniorId,
   sAbleTime,
   sChatLink,
+  sFieldAtom,
+  sKeywordAtom,
+  sLabAtom,
+  sMajorAtom,
   sMultiIntroduce,
+  sPostGraduAtom,
+  sProfessorAtom,
   sRecommendedFor,
   sSingleIntroduce,
 } from '@/stores/senior';
+import { changeNickname, phoneNum } from '@/stores/signup';
+import findExCode from '@/utils/findExCode';
+import { detectReload, preventClose } from '@/utils/reloadFun';
 import axios from 'axios';
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
@@ -23,15 +33,32 @@ import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 function AddChatLinkPage() {
-  const oneLiner = useAtomValue(sSingleIntroduce);
-  const info = useAtomValue(sMultiIntroduce);
-  const target = useAtomValue(sRecommendedFor);
-  const times = useAtomValue(sAbleTime);
+  // const oneLiner = useAtomValue(sSingleIntroduce);
+  // const info = useAtomValue(sMultiIntroduce);
+  // const target = useAtomValue(sRecommendedFor);
+  // const times = useAtomValue(sAbleTime);
+
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [flag, setFlag] = useState(false);
   const router = useRouter();
-  const { getAccessToken } = useAuth();
-  const [seniorId, setSeniorId] = useAtom(mySeniorId);
+  const {
+    getAccessToken,
+    setAccessToken,
+    setRefreshToken,
+    setUserType,
+    removeTokens,
+  } = useAuth();
+  const [socialId, setSocialId] = useState<number | null>(null);
+  const phoneNumber = useAtomValue(phoneNum);
+  const nickName = useAtomValue(changeNickname);
+  const marketingReceive = useAtomValue(option);
+  const sPostGradu = useAtomValue(sPostGraduAtom);
+  const sMajor = useAtomValue(sMajorAtom);
+  const sLab = useAtomValue(sLabAtom);
+  const sProfessor = useAtomValue(sProfessorAtom);
+  const sField = useAtomValue(sFieldAtom);
+  const sKeyword = useAtomValue(sKeywordAtom);
+
   useEffect(() => {
     if (chatLink) {
       const targetForm = document.querySelector(
@@ -42,6 +69,27 @@ function AddChatLinkPage() {
     }
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== undefined) {
+      const socialId = window.localStorage.getItem('socialId');
+      const socialIdNum = socialId ? parseInt(socialId) : null;
+      setSocialId(socialIdNum);
+    }
+  }, []);
+
+  useEffect(() => {
+    detectReload();
+
+    (() => {
+      window.addEventListener('beforeunload', preventClose);
+    })();
+
+    return () => {
+      window.removeEventListener('beforeunload', preventClose);
+    };
+  }, []);
+
+  /* // 기존 프로필 등록에서의 함수 주석 처리
   const handleClick = () => {
     if (!chatLink) {
       setFlag(true);
@@ -83,11 +131,122 @@ function AddChatLinkPage() {
       return;
     }
   };
+  */
+
+  const handleSubmit = () => {
+    getAccessToken().then((token) => {
+      const headers = {
+        Authorization: `Bearer ${token}`,
+      };
+
+      if (
+        token &&
+        sMajor &&
+        sPostGradu &&
+        sProfessor &&
+        sLab &&
+        sKeyword &&
+        sField &&
+        chatLink
+      ) {
+        // 후배 -> 선배 변경
+        axios
+          .post(
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
+            {
+              major: sMajor,
+              postgradu: sPostGradu,
+              professor: sProfessor,
+              lab: sLab,
+              field: sField,
+              keyword: sKeyword,
+              chatLink: chatLink,
+            },
+            {
+              headers,
+            },
+          )
+          .then((res) => {
+            const response = res.data;
+
+            if (findExCode(response.code)) {
+              removeTokens();
+              location.reload();
+              return;
+            }
+
+            if (response.code == 'SNR202') {
+              setAccessToken({
+                token: response.data.accessToken,
+                expires: response.data.accessExpiration,
+              });
+              setRefreshToken({
+                token: response.data.refreshToken,
+                expires: response.data.refreshExpiration,
+              });
+              setUserType(response.data.role);
+              router.push('/signup/done');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+
+      if (
+        !token &&
+        socialId &&
+        phoneNumber &&
+        nickName &&
+        sMajor &&
+        sPostGradu &&
+        sProfessor &&
+        sLab &&
+        sKeyword &&
+        sField &&
+        chatLink
+      ) {
+        // 선배 최초 회원가입
+        axios
+          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
+            socialId: socialId,
+            phoneNumber: phoneNumber,
+            nickName: nickName,
+            marketingReceive: marketingReceive,
+            major: sMajor,
+            postgradu: sPostGradu,
+            professor: sProfessor,
+            lab: sLab,
+            field: sField,
+            keyword: sKeyword,
+            chatLink: chatLink,
+          })
+          .then((res) => {
+            const response = res.data;
+            if (response.code == 'SNR202') {
+              setAccessToken({
+                token: response.data.accessToken,
+                expires: response.data.accessExpiration,
+              });
+              setRefreshToken({
+                token: response.data.refreshToken,
+                expires: response.data.refreshExpiration,
+              });
+              setUserType(response.data.role);
+              router.push('/signup/done');
+            }
+          })
+          .catch((err) => {
+            console.error(err);
+          });
+      }
+    });
+  };
 
   return (
     <AddChatLinkContainer>
       <BackHeader headerText="링크 입력" />
-      <ProgressBar totalNum={3} activeNum={2} />
+      <ProgressBar totalNum={4} activeNum={3} />
       <h3 id="add-chat-link-direction">{PROFILE_DIRECTION.addChatLink}</h3>
       <div id="add-chat-link-sub-direction">
         {PROFILE_SUB_DIRECTION.addChatLink}
@@ -109,7 +268,7 @@ function AddChatLinkPage() {
           msg="오픈채팅방 링크를 입력해주세요"
         />
       )}
-      <div id="add-chat-link-btn-container">
+      {/* <div id="add-chat-link-btn-container">
         <PrevBtn
           onClick={() => {
             router.back();
@@ -122,12 +281,19 @@ function AddChatLinkPage() {
         ) : (
           <NextAddBtn>가입 완료</NextAddBtn>
         )}
-      </div>
+      </div> */}
+      <SubmitBtn
+        $ableSubmit={!!chatLink}
+        onClick={!!chatLink ? handleSubmit : () => {}}
+      >
+        가입 완료
+      </SubmitBtn>
     </AddChatLinkContainer>
   );
 }
 
 export default AddChatLinkPage;
+
 const NextAddBtn = styled.button`
   display: flex;
   width: 55%;
@@ -147,6 +313,29 @@ const NextAddBtn = styled.button`
   font-weight: 700;
   line-height: normal;
 `;
+
+const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
+  width: 21.44rem;
+  height: 3.375rem;
+  padding: 1rem 0;
+  justify-content: center;
+  align-items: center;
+  border-radius: 0.75rem;
+  background-color: ${(props) => (props.$ableSubmit ? '#2FC4B2' : '#dee2e6')};
+  border: none;
+  color: #fff;
+  text-align: center;
+  font-family: Pretendard;
+  font-size: 1.125rem;
+  font-style: normal;
+  font-weight: 700;
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  cursor: ${(props) => (props.$ableSubmit ? 'pointer' : 'default')};
+`;
+
 const NextAddBtnSet = styled.button`
   display: flex;
   width: 55%;
@@ -191,8 +380,9 @@ const PrevBtn = styled.button`
 
 const AddChatLinkContainer = styled.div`
   width: inherit;
-  height: 100%;
+  height: 100vh;
   white-space: pre-line;
+  position: relative;
 
   #add-chat-link-direction {
     margin-left: 1rem;
@@ -206,6 +396,7 @@ const AddChatLinkContainer = styled.div`
     line-height: 140%; /* 1.75rem */
     letter-spacing: -0.03125rem;
   }
+
   #add-chat-link-sub-direction {
     margin-left: 1rem;
     color: #212529;
@@ -239,13 +430,14 @@ const AddChatLinkContainer = styled.div`
 
     &::placeholder {
       color: #adb5bd;
-      font-family: 'Noto Sans JP';
+      font-family: 'Pretendard';
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
     }
   }
+
   #add-chat-link-btn-container {
     display: flex;
     position: absolute;
