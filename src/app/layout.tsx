@@ -4,13 +4,15 @@ import Providers from '@/components/Provider/providers';
 import StyledComponentsRegistry from '@/lib/registry';
 import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
+import { SERVICE_METADATA } from '@/constants/meta/metaData';
 
 export const metadata: Metadata = {
-  title: '김선배',
-  description: '후배 멘티와 대학원생 멘토를 매칭하는 서비스!',
+  title: SERVICE_METADATA.title,
+  description: SERVICE_METADATA.description,
   icons: {
     icon: '/favicon.ico',
   },
+  keywords: SERVICE_METADATA.keywords
 };
 
 export default function RootLayout({
