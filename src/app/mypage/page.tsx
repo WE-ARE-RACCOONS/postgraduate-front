@@ -111,7 +111,7 @@ function MyPage() {
 
       if (userType == 'senior') {
         axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/b`, { headers })
+          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
           .then((res) => {
             if (findExCode(res.data.code)) {
               removeTokens();

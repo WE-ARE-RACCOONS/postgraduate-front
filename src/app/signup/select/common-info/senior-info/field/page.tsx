@@ -139,7 +139,7 @@ function SeniorInfoPage() {
         // 후배 -> 선배 변경
         axios
           .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change/b`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
             {
               major: sMajor,
               postgradu: sPostGradu,
@@ -193,7 +193,7 @@ function SeniorInfoPage() {
       ) {
         // 선배 최초 회원가입
         axios
-          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup/b`, {
+          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
             socialId: socialId,
             phoneNumber: phoneNumber,
             nickName: nickName,

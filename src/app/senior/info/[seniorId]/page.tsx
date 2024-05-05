@@ -80,7 +80,7 @@ function SeniorInfoPage() {
     getAccessToken().then((accessTkn) => {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/b`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,
           accessTkn
             ? { headers: { Authorization: `Bearer ${accessTkn}` } }
             : {},
