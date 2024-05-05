@@ -43,7 +43,7 @@ function MentoringApplySchedulePage() {
       if (accessTkn) {
         axios
           .get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times/b`,
+            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/times`,
             {
               headers: {
                 Authorization: `Bearer ${accessTkn}`,
