@@ -40,7 +40,7 @@ function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
   useEffect(() => {
     if (seniorId !== 0) {
       axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}/b`)
+        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`)
         .then((response) => {
           const res = response.data;
           if (res.code == 'EX400') {

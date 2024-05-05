@@ -31,7 +31,7 @@ export default function Home() {
     if (field && postgradu) {
       axios
         .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field/b?field=${field}&postgradu=${postgradu}`,
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
         )
         .then((res) => {
           setData(res.data.data.seniorSearchResponses);
@@ -53,7 +53,7 @@ export default function Home() {
           .get(
             `${
               process.env.NEXT_PUBLIC_SERVER_URL
-            }/senior/field/b?field=${field}&postgradu=${postgradu}&page=${
+            }/senior/field?field=${field}&postgradu=${postgradu}&page=${
               page + 1
             }`,
           )
