@@ -1,7 +1,6 @@
 'use client';
 import ClickedBtn from '@/components/Button/ClickedBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
-import NextBtn from '@/components/Button/NextBtn';
 import BackHeader from '@/components/Header/BackHeader';
 import FullModal from '@/components/Modal/FullModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
@@ -15,7 +14,6 @@ import {
 import useAuth from '@/hooks/useAuth';
 import useModal from '@/hooks/useModal';
 import {
-  mySeniorId,
   sAbleTime,
   sChatLink,
   sFieldAtom,
@@ -29,15 +27,15 @@ import {
   totalFieldAtom,
   totalKeywordAtom,
 } from '@/stores/senior';
-import { TimeType } from '@/types/card/introCard';
 import { ModalType } from '@/types/modal/riseUp';
 import findExCode from '@/utils/findExCode';
 import axios from 'axios';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -152,6 +150,16 @@ function EditProfilePage() {
   useEffect(() => {
     const fetchData = async () => {
       getAccessToken().then(async (token) => {
+        if (!token) {
+          // 알림톡으로 들어와서 토큰 없을 시, 로그인으로 이동
+          const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
+          const REDIRECT_URI =
+            window.location.origin + '/login/oauth2/code/kakao';
+          const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+          window.location.href = link;
+          return;
+        }
+
         if (token) {
           try {
             const headers = {
