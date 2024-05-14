@@ -12,7 +12,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  keywords: SERVICE_METADATA.keywords
+  keywords: SERVICE_METADATA.keywords,
 };
 
 export default function RootLayout({
