@@ -38,6 +38,7 @@ function SignUpBtn() {
     setRefreshToken,
     setUserType,
     getAccessToken,
+    getUserType,
     removeTokens,
   } = useAuth();
 
@@ -53,7 +54,8 @@ function SignUpBtn() {
     getAccessToken().then((accessTkn) => {
       // 선배 -> 후배 변경 회원
       if (accessTkn) {
-        if (major && field) {
+        const userT = getUserType();
+        if ((userT == 'senior') && major && field) {
           axios
             .post(
               `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/change`,
