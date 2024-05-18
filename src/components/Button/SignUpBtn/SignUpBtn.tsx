@@ -55,12 +55,12 @@ function SignUpBtn() {
       // 선배 -> 후배 변경 회원
       if (accessTkn) {
         const userT = getUserType();
-        if(userT == 'junior') {
+        if (userT == 'junior') {
           router.push('/');
           return;
         }
 
-        if ((userT == 'senior') && major && field) {
+        if (userT == 'senior' && major && field) {
           axios
             .post(
               `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/change`,
