@@ -66,10 +66,10 @@ function MatchingInfoPage() {
           charCount={schoolCharCount}
         />
         <MatchingForm
-          title="희망 연구분야"
+          title="희망 연구분야/교수님"
           isRequired={false}
-          maxLength={50}
-          placeholder={`예시)나노 소재/디스플레이/ 반도체소자`}
+          maxLength={60}
+          placeholder={`예시)나노 소재/홍길동 교수님\n반도체 소자/아무개 교수님`}
           handler={setDesiredField}
           charCount={fieldCharCount}
         />
