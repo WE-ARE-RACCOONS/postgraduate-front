@@ -55,7 +55,7 @@ function MatchingInfoPage() {
         <MIFont>
           찾고 있는 대학원 선배에 대해 알려주시면
           <br />
-          김선배가 딱 맞는 선배가 있을 때 문자 드려요!
+          김선배가 딱 맞는 선배가 있을 때 알림톡을 드려요!
         </MIFont>
         <MatchingForm
           title="희망 대학원/학과"
@@ -85,7 +85,7 @@ function MatchingInfoPage() {
             checked={matchingReceive}
             onChange={handleMatchingReceive}
           />
-          <MILabel>(선택) 나에게 맞는 멘토링을 문자로 추천 받아볼래요!</MILabel>
+          <MILabel>(선택) 나에게 맞는 선배를 알림톡으로 받아볼래요!</MILabel>
         </div>
         {schoolCharCount && fieldCharCount ? (
           <SignUpBtn />
