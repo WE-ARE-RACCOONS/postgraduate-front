@@ -23,7 +23,7 @@ function FieldTapBar() {
           selected={fpActiveTab === SFTAB.ALL}
           onClick={() => handleTabClick(SFTAB.ALL)}
         >
-          전체보기
+          전체분야
         </TapStyle>
         <TapStyle
           selected={fpActiveTab === SFTAB.AI}
