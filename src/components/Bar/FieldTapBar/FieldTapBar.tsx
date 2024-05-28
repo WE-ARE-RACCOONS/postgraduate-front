@@ -18,6 +18,13 @@ function FieldTapBar() {
   return (
     <div>
       <div style={{ display: 'flex' }}>
+      <TapStyle
+      style={{marginRight:'0.6rem'}}
+          selected={fpActiveTab === SFTAB.ALL}
+          onClick={() => handleTabClick(SFTAB.ALL)}
+        >
+          전체보기
+        </TapStyle>
         <TapStyle
           selected={fpActiveTab === SFTAB.AI}
           onClick={() => handleTabClick(SFTAB.AI)}
