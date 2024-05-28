@@ -4,5 +4,5 @@ import { TAB, SFTAB, SMTAB } from '@/constants/tab/ctap';
 
 export const activeTabAtom = atom<tapType>(TAB.waiting);
 
-export const sfactiveTabAtom = atom<sftapType>(SFTAB.AI);
+export const sfactiveTabAtom = atom<sftapType>(SFTAB.ALL);
 export const suactiveTabAtom = atom<sftapType>(SMTAB.ALL);

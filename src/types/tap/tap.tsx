@@ -6,6 +6,7 @@ export type tapType =
   | typeof TAB.done;
 
 export type sftapType =
+  | typeof SFTAB.ALL
   | typeof SFTAB.AI
   | typeof SFTAB.CD
   | typeof SFTAB.BI
