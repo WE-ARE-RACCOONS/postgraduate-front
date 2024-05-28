@@ -15,7 +15,7 @@ export const STAB_STATE: { [key: string]: string } = {
 };
 
 export const SFTAB = {
-  ALL:'all',
+  ALL: 'all',
   AI: '인공지능',
   CD: '반도체',
   BI: '바이오',

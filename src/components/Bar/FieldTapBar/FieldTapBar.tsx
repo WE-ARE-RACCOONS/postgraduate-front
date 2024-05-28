@@ -18,8 +18,8 @@ function FieldTapBar() {
   return (
     <div>
       <div style={{ display: 'flex' }}>
-      <TapStyle
-      style={{marginRight:'0.6rem'}}
+        <TapStyle
+          style={{ marginRight: '0.6rem' }}
           selected={fpActiveTab === SFTAB.ALL}
           onClick={() => handleTabClick(SFTAB.ALL)}
         >
