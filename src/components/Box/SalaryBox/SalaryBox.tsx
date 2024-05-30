@@ -44,13 +44,27 @@ function SalaryBox(props: SalaryBoxProps) {
       <div id="middle"></div>
       <div id="right">
         <TooltipBox $showTip={showTip}>
-          <Image id='tooltip-img' src={tooltip} alt='툴팁 말풍선' />
-          <div id='tooltip-text'>정산은 매주 목요일에 이루어져요.</div>
+          <Image id="tooltip-img" src={tooltip} alt="툴팁 말풍선" />
+          <div id="tooltip-text">정산은 매주 목요일에 이루어져요.</div>
         </TooltipBox>
         <SalaryBlock>
-          <div style={{ width: '6.5rem', height: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+          <div
+            style={{
+              width: '6.5rem',
+              height: '1.25rem',
+              display: 'flex',
+              justifyContent: 'space-between',
+              alignItems: 'center',
+            }}
+          >
             <SalaryDesc>다음 정산 예정일</SalaryDesc>
-            <InfoMark onClick={() => {setShowTip(!showTip)}}>?</InfoMark>
+            <InfoMark
+              onClick={() => {
+                setShowTip(!showTip);
+              }}
+            >
+              ?
+            </InfoMark>
           </div>
           <SalaryValue>{formatDate(props.salaryDate)}</SalaryValue>
         </SalaryBlock>

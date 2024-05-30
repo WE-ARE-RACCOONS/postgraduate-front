@@ -79,7 +79,7 @@ export const InfoMark = styled.div`
   border-radius: 50%;
   font-size: 10px;
   cursor: pointer;
-`
+`;
 
 export const TooltipBox = styled.div<{ $showTip: boolean }>`
   width: 6.25rem;
@@ -87,7 +87,7 @@ export const TooltipBox = styled.div<{ $showTip: boolean }>`
   position: absolute;
   left: 15.39rem;
   bottom: 3.44rem;
-  opacity: ${props => (props.$showTip) ? '1' : '0'};
+  opacity: ${(props) => (props.$showTip ? '1' : '0')};
 
   #tooltip-img {
     width: 6.25rem;
@@ -105,4 +105,4 @@ export const TooltipBox = styled.div<{ $showTip: boolean }>`
     left: 50%;
     transform: translateX(-50%);
   }
-`
+`;
