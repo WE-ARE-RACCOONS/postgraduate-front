@@ -1,11 +1,12 @@
 import { SalaryBoxProps } from '@/types/box/salaryBox';
 import {
+  InfoMark,
   SalaryBlock,
   SalaryBoxContainer,
   SalaryDesc,
   SalaryValue,
 } from './SalaryBox.styled';
-import { useState } from 'react';
+import { Fragment } from 'react';
 
 function SalaryBox(props: SalaryBoxProps) {
   function addCommas(amount: number) {
@@ -38,7 +39,10 @@ function SalaryBox(props: SalaryBoxProps) {
       <div id="middle"></div>
       <div id="right">
         <SalaryBlock>
-          <SalaryDesc>다음 정산 예정일</SalaryDesc>
+          <div style={{ width: '6.5rem', height: '1.25rem', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+            <SalaryDesc>다음 정산 예정일</SalaryDesc>
+            <InfoMark>?</InfoMark>
+          </div>
           <SalaryValue>{formatDate(props.salaryDate)}</SalaryValue>
         </SalaryBlock>
       </div>

@@ -15,6 +15,7 @@ export const SalaryBoxContainer = styled.div`
     border: 1px solid #dee2e6;
     margin-top: 1rem;
   }
+
   #left {
     width: 50%;
     display: flex;
@@ -23,6 +24,7 @@ export const SalaryBoxContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
+
   #right {
     width: 50%;
     display: flex;
@@ -67,3 +69,12 @@ export const SalaryValue = styled.div`
   line-height: 140%; /* 1.575rem */
   letter-spacing: -0.03125rem;
 `;
+
+export const InfoMark = styled.div`
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1px solid #495565;
+  border-radius: 50%;
+  font-size: 10px;
+  cursor: pointer;
+`
