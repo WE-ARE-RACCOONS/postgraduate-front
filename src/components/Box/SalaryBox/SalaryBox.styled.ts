@@ -81,12 +81,13 @@ export const InfoMark = styled.div`
   cursor: pointer;
 `
 
-export const TooltipBox = styled.div`
+export const TooltipBox = styled.div<{ $showTip: boolean }>`
   width: 6.25rem;
   height: 2.19rem;
   position: absolute;
   left: 15.39rem;
   bottom: 3.44rem;
+  opacity: ${props => (props.$showTip) ? '1' : '0'};
 
   #tooltip-img {
     width: 6.25rem;
