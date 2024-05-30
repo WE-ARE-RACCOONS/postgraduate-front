@@ -115,7 +115,7 @@ export default function Home() {
         )}
       </HomeProfileLayer>
       <FooterWrapper>
-      <Footer />
+        <Footer />
       </FooterWrapper>
       <MenuBarWrapper>
         <MenuBar modalHandler={modalHandler} />
@@ -184,6 +184,4 @@ const MenuBarWrapper = styled.div`
   width: inherit;
   z-index: 1;
 `;
-const FooterWrapper = styled.div`
-
-`
+const FooterWrapper = styled.div``;
