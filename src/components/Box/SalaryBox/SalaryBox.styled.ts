@@ -8,6 +8,8 @@ export const SalaryBoxContainer = styled.div`
   background-color: #f8f9fa;
   display: flex;
   margin-left: 1rem;
+  position: relative;
+
   #middle {
     width: 0rem;
     height: 3.18rem;
@@ -77,4 +79,29 @@ export const InfoMark = styled.div`
   border-radius: 50%;
   font-size: 10px;
   cursor: pointer;
+`
+
+export const TooltipBox = styled.div`
+  width: 6.25rem;
+  height: 2.19rem;
+  position: absolute;
+  left: 15.39rem;
+  bottom: 3.44rem;
+
+  #tooltip-img {
+    width: 6.25rem;
+    height: 2.19rem;
+    position: absolute;
+    left: 0;
+  }
+
+  #tooltip-text {
+    width: 4.69rem;
+    height: 1.25rem;
+    font-size: 9px;
+    position: absolute;
+    top: 0.3rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `
