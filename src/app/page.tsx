@@ -114,7 +114,9 @@ export default function Home() {
           <div>해당하는 선배가 없어요</div>
         )}
       </HomeProfileLayer>
+      <FooterWrapper>
       <Footer />
+      </FooterWrapper>
       <MenuBarWrapper>
         <MenuBar modalHandler={modalHandler} />
       </MenuBarWrapper>
@@ -182,3 +184,6 @@ const MenuBarWrapper = styled.div`
   width: inherit;
   z-index: 1;
 `;
+const FooterWrapper = styled.div`
+
+`
