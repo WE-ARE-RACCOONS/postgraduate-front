@@ -8,6 +8,8 @@ export const SalaryBoxContainer = styled.div`
   background-color: #f8f9fa;
   display: flex;
   margin-left: 1rem;
+  position: relative;
+
   #middle {
     width: 0rem;
     height: 3.18rem;
@@ -15,6 +17,7 @@ export const SalaryBoxContainer = styled.div`
     border: 1px solid #dee2e6;
     margin-top: 1rem;
   }
+
   #left {
     width: 50%;
     display: flex;
@@ -23,6 +26,7 @@ export const SalaryBoxContainer = styled.div`
     justify-content: center;
     align-items: center;
   }
+
   #right {
     width: 50%;
     display: flex;
@@ -66,4 +70,39 @@ export const SalaryValue = styled.div`
   font-weight: 700;
   line-height: 140%; /* 1.575rem */
   letter-spacing: -0.03125rem;
+`;
+
+export const InfoMark = styled.div`
+  width: 0.75rem;
+  height: 0.75rem;
+  border: 1px solid #495565;
+  border-radius: 50%;
+  font-size: 10px;
+  cursor: pointer;
+`;
+
+export const TooltipBox = styled.div<{ $showTip: boolean }>`
+  width: 6.25rem;
+  height: 2.19rem;
+  position: absolute;
+  left: 15.39rem;
+  bottom: 3.44rem;
+  opacity: ${(props) => (props.$showTip ? '1' : '0')};
+
+  #tooltip-img {
+    width: 6.25rem;
+    height: 2.19rem;
+    position: absolute;
+    left: 0;
+  }
+
+  #tooltip-text {
+    width: 4.69rem;
+    height: 1.25rem;
+    font-size: 9px;
+    position: absolute;
+    top: 0.3rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
 `;
