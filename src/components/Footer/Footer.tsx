@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import footer from '../../../public/footer.png';
+import { TEMRS_LINK } from '@/constants/terms/terms';
 
 function Footer() {
   return (
@@ -16,7 +17,7 @@ function Footer() {
           target="_blank"
           alt="이용약관"
           title="이용약관"
-          href="https://drive.google.com/file/d/1dbwxYelqqHrISAnsaaKysXD3TigerEIj/view?usp=sharing"
+          href={TEMRS_LINK.termsOfUse}
           coords="9,145,81,163"
           shape="rect"
         />
@@ -24,7 +25,7 @@ function Footer() {
           target="_blank"
           alt="개인정보"
           title="개인정보"
-          href="https://drive.google.com/file/d/1Ae4raDbSSRRbVEKG8_8gSVLCQ-8Zrfti/view?usp=sharing"
+          href={TEMRS_LINK.privacyStatement}
           coords="94,145,166,164"
           shape="rect"
         />

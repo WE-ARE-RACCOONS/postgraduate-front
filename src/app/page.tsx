@@ -184,4 +184,3 @@ const MenuBarWrapper = styled.div`
   width: inherit;
   z-index: 1;
 `;
-const FooterWrapper = styled.div``;
