@@ -53,9 +53,9 @@ function SignUpDonePage() {
           <>
             <h3>회원 등록 완료!</h3>
             <DoneFont>
-              영업일 기준 48시간 안에 선배 회원으로 승인돼요
+              선배회원으로 회원가입이 완료되어
               <br />
-              승인되면 카카오 알림톡으로 알려드릴게요!
+              후배회원이 멘토링을 신청할 수 있어요!
             </DoneFont>
           </>
         )}
@@ -71,10 +71,10 @@ function SignUpDonePage() {
           <SDoneBottomMsg>
             <div style={{ display: 'flex' }}>
               <div>
-                대학원 선배 프로필을 등록해야
+                후배회원의 신뢰를 위해
                 <br />
                 <div style={{ display: 'flex', marginLeft: '0.5rem' }}>
-                  <div id="sdone-msg-color">멘토링을 시작</div>할 수 있어요.
+                  <div id="sdone-msg-color">대학원 인증 절차</div>가 필요해요.
                 </div>
               </div>
             </div>
@@ -89,15 +89,15 @@ function SignUpDonePage() {
           >
             <ClickedBtn
               kind="out"
-              clickHandler={modalHandler}
+              clickHandler={() => { router.push('/'); }}
               btnText="다음에 할게요"
             />
             <ClickedBtn
               kind="profileAdd"
               clickHandler={() => {
-                router.push('/add-profile');
+                router.push('/senior/auth');
               }}
-              btnText="프로필 등록하기"
+              btnText="대학원생 인증하기"
             />
           </div>
         </>
