@@ -89,7 +89,9 @@ function SignUpDonePage() {
           >
             <ClickedBtn
               kind="out"
-              clickHandler={() => { router.push('/'); }}
+              clickHandler={() => {
+                router.push('/');
+              }}
               btnText="다음에 할게요"
             />
             <ClickedBtn
