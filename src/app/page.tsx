@@ -114,7 +114,7 @@ export default function Home() {
           <div>해당하는 선배가 없어요</div>
         )}
       </HomeProfileLayer>
-        <Footer />
+      <Footer />
       <MenuBarWrapper>
         <MenuBar modalHandler={modalHandler} />
       </MenuBarWrapper>
