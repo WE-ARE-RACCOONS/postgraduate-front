@@ -34,7 +34,11 @@ function SeniorProfile({ data }: SeniorProfileProps) {
           </SPmajor>
           <SPnickname>
             {data.nickName ? data.nickName : ''}
-            <Image src={auth} alt="auth" width={16} height={16} />
+            {data.certification ? (
+              <Image src={auth} alt="auth" width={16} height={16} />
+            ) : (
+              ''
+            )}
           </SPnickname>
           <SPField>{data.lab ? data.lab : ''}</SPField>
         </SeniorProfileInfo>
