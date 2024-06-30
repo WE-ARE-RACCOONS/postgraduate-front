@@ -109,7 +109,7 @@ function SeniorInfoPage() {
             setTarget(res.data.target);
             setTerm(res.data.term);
             setTimes(res.data.times);
-            setCertification(res.data.certification)
+            setCertification(res.data.certification);
           }
         })
         .catch((err) => {
