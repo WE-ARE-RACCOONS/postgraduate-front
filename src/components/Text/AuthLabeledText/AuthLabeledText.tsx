@@ -10,10 +10,8 @@ function AuthLabeledText({ str, certification }: Props) {
   return (
     <AuthLabeledContainer>
       <div id="auth-labeled-str">{str}</div>
-      {certification ? (
+      {certification && (
         <Image id="auth-mark-icon" src={auth_mark} alt="대학원생 인증 마크" />
-      ) : (
-        ''
       )}
     </AuthLabeledContainer>
   );
