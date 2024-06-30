@@ -88,6 +88,7 @@ function SeniorInfoPage() {
         )
         .then((response) => {
           const res = response.data;
+          console.log(res.data.certification)
 
           if (findExCode(res.code)) {
             removeTokens();
