@@ -18,7 +18,7 @@ function ProfileCard(props: ProfileCardProps) {
     const totalWidth =
       14 * koreanCharWidth * (props.major.length + props.postgradu.length + 3);
     if (totalWidth >= 208) setOverWidth(true);
-  }, [props.certification]);
+  }, []);
 
   return (
     <ProfileCardContainer $overWidth={overWidth}>
