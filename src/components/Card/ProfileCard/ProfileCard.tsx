@@ -30,7 +30,10 @@ function ProfileCard(props: ProfileCardProps) {
       </div>
       <ProfileCardInfo $overWidth={overWidth}>
         <ProfileCardInfoTop>
-          <AuthLabeledText str={props.nickname || '대학원 선배'} />
+          <AuthLabeledText
+            str={props.nickname || '대학원 선배'}
+            certification={props.certification}
+          />
           <div id="profile-card-mentoring-time">
             <div id="mentoring-time-desc">멘토링 시간&nbsp;</div>
             <div id="mentoring-time-term">{props.term}분</div>
