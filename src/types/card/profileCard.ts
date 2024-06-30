@@ -5,4 +5,5 @@ export interface ProfileCardProps {
   postgradu: string;
   major: string;
   professor: string;
+  certification:boolean;
 }
