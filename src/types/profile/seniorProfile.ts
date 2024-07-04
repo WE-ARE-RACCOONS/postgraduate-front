@@ -13,3 +13,8 @@ export interface SeniorProfileData {
   seniorId: number;
   certification: boolean;
 }
+
+export interface ProfileAuthProps {
+  str: string;
+  certification?: boolean;
+}

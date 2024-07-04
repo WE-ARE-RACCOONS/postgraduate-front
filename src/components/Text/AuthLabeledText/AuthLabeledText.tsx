@@ -1,13 +1,10 @@
 import { AuthLabeledContainer } from './AuthLabeled.styled';
 import Image from 'next/image';
 import auth_mark from '../../../../public/auth_mark.png';
+import { ProfileAuthProps } from '@/types/profile/seniorProfile';
 
-interface Props {
-  str: string;
-  certification?: boolean;
-}
 
-function AuthLabeledText({ str, certification }: Props) {
+function AuthLabeledText({ str, certification }: ProfileAuthProps) {
   return (
     <AuthLabeledContainer>
       <div id="auth-labeled-str">{str}</div>
