@@ -4,7 +4,7 @@ import auth_mark from '../../../../public/auth_mark.png';
 
 interface Props {
   str: string;
-  certification: boolean;
+  certification?: boolean;
 }
 
 function AuthLabeledText({ str, certification }: Props) {
