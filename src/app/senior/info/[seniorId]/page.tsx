@@ -50,6 +50,7 @@ function SeniorInfoPage() {
   const setFirAbleTime = useSetAtom(firAbleTimeAtom);
   const setSecAbleTime = useSetAtom(secAbleTimeAtom);
   const setThiAbleTime = useSetAtom(thiAbleTimeAtom);
+  const [certification, setCertification] = useState(Boolean);
   const { modal, modalHandler, portalElement } = useModal(
     'mentoring-login-portal',
   );
@@ -108,6 +109,7 @@ function SeniorInfoPage() {
             setTarget(res.data.target);
             setTerm(res.data.term);
             setTimes(res.data.times);
+            setCertification(res.data.certification);
           }
         })
         .catch((err) => {
@@ -155,6 +157,7 @@ function SeniorInfoPage() {
               postgradu={postgradu}
               major={major}
               professor={professor}
+              certification={certification}
             />
           </div>
           <div id="keyword-card-wrapper">
