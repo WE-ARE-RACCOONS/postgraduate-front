@@ -3,7 +3,6 @@ import Image from 'next/image';
 import auth_mark from '../../../../public/auth_mark.png';
 import { ProfileAuthProps } from '@/types/profile/seniorProfile';
 
-
 function AuthLabeledText({ str, certification }: ProfileAuthProps) {
   return (
     <AuthLabeledContainer>
