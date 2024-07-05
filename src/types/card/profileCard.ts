@@ -1,4 +1,5 @@
 export interface ProfileCardProps {
+  certification: boolean;
   profile: string;
   nickname: string;
   term: number;
