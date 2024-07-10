@@ -25,9 +25,9 @@ export const SFTAB = {
 
 export const SMTAB = {
   ALL: 'all',
-  SEO: '서울대',
-  YEO: '연세대',
-  KO: '고려대',
+  SEO: '서울대학교',
+  YEO: '연세대학교',
+  KO: '고려대학교',
   KY: '카이스트',
   OT: 'others',
 };

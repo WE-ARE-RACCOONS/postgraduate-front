@@ -17,4 +17,6 @@ export type smtapType =
   | typeof SMTAB.ALL
   | typeof SMTAB.SEO
   | typeof SMTAB.YEO
+  | typeof SMTAB.KY
+  | typeof SMTAB.KO
   | typeof SMTAB.OT;
