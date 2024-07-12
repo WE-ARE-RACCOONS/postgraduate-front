@@ -34,6 +34,7 @@ export const IntroCardTextBox = styled.div<{ $isFull: boolean }>`
   margin-bottom: 2.5rem;
   white-space: pre-wrap;
   word-wrap: break-word;
+  line-height: 130%;
 `;
 
 export const IntroCardTextDesc = styled.div`
