@@ -30,6 +30,7 @@ export const NoMentoring = styled.div`
   line-height: 140%; /* 1.4rem */
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 `;
 export const DoneBtnBox = styled.div`
   width: 19.4375rem;
@@ -56,6 +57,7 @@ export const TabResultContainer = styled.div`
 `;
 export const TabResult = styled.div`
   border-top: 1px solid #c2cede;
+  min-height: 100vh;
   height: auto;
   padding-bottom: 4rem;
 `;

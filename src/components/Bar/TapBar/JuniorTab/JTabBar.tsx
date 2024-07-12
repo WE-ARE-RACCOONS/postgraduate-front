@@ -28,6 +28,7 @@ import findExCode from '@/utils/findExCode';
 import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
 import { StyledSModalBtn } from '@/components/Button/ModalBtn/ModalBtn.styled';
+import MentoringNotYet from '@/components/MentoringNotYet';
 
 function convertDateType(date: string) {
   if (!date) return new Date();
@@ -197,7 +198,7 @@ function TabBar() {
             );
           })
         ) : (
-          <NoMentoring>{TAB_STATE[activeTab]}인 멘토링이 없어요</NoMentoring>
+          <MentoringNotYet />
         )}
       </div>
     );
