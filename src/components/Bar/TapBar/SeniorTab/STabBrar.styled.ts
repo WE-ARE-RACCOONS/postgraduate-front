@@ -30,6 +30,7 @@ export const NoMentoring = styled.div`
   line-height: 140%; /* 1.4rem */
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 `;
 export const DoneBtnBox = styled.div`
   width: 19.4375rem;
