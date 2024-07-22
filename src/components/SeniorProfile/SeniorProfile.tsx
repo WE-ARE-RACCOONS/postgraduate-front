@@ -26,20 +26,20 @@ function SeniorProfile({ data }: SeniorProfileProps) {
       >
         <SeniorProfileImg src={data.profile ? data.profile : ''} />
         <SeniorProfileInfo>
+          <SPnickname>
+            {data.nickName ? data.nickName : ''}&nbsp;
+            {data.certification ? (
+              <Image src={auth} alt="auth" width={14} height={14} />
+            ) : (
+              ''
+            )}
+          </SPnickname>
           <SPmajor>
             {data.postgradu ? data.postgradu : ''}&nbsp;
             <div id="professor-str">
               {data.professor ? `${data.professor}교수님` : ''}
             </div>
           </SPmajor>
-          <SPnickname>
-            {data.nickName ? data.nickName : ''}
-            {data.certification ? (
-              <Image src={auth} alt="auth" width={16} height={16} />
-            ) : (
-              ''
-            )}
-          </SPnickname>
           <SPField>{data.lab ? data.lab : ''}</SPField>
         </SeniorProfileInfo>
       </SeniorProfileContent>
