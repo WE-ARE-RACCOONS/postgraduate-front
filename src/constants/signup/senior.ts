@@ -1,3 +1,9 @@
+export const SENIOR_SELECT = {
+  iconText: '선배 아이콘',
+  typeDesc: '멘토링을 하는',
+  userType: '대학원생 선배',
+};
+
 export const SENIOR_MAJOR = {
   seniorInfoTitle: '선배 정보를 입력해주세요.',
   seniorInfoUsage: '입력한 정보는 멘토링 매칭에 이용됩니다.',

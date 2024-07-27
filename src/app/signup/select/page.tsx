@@ -7,6 +7,9 @@ import styled from 'styled-components';
 import junior from '../../../../public/junior.png';
 import senior from '../../../../public/senior.png';
 import GoogleAnalytics from '@/components/GA/GA';
+import { SIGNUP_COMMON } from '@/constants/signup/common';
+import { JUNIOR_SELECT } from '@/constants/signup/junior';
+import { SENIOR_SELECT } from '@/constants/signup/senior';
 function SelectPage() {
   const router = useRouter();
   const currentPath = usePathname();
@@ -20,27 +23,28 @@ function SelectPage() {
         <BackHeader headerText="회원가입" kind="home" />
       </div>
       <div style={{ margin: '1.6rem 1rem' }}>
-        <h3>회원 유형 선택</h3>
+        <h3>{SIGNUP_COMMON.selectTitle}</h3>
         <SignUpFont>
-          가입하시려는 회원의 유형을 선택해주세요. <br />
-          한쪽을 선택해도, 이후 마이페이지에서 전환 가능해요.
+          {SIGNUP_COMMON.selectDesc}
+          <br />
+          {SIGNUP_COMMON.convertDesc}
         </SignUpFont>
         <TypeBtnWrapper>
           <TypeBtn
             iconAlt="junior-icon"
             iconSrc={junior.src}
-            iconText="후배 아이콘"
-            typeDesc={`멘토링을 받는`}
-            typeDescColor={`대학생 후배`}
+            iconText={JUNIOR_SELECT.iconText}
+            typeDesc={JUNIOR_SELECT.typeDesc}
+            typeDescColor={JUNIOR_SELECT.userType}
             typeDescS={`회원가입`}
             userType="junior"
           />
           <TypeBtn
             iconAlt="senior-icon"
             iconSrc={senior.src}
-            iconText="선배 아이콘"
-            typeDesc={`멘토링을 하는`}
-            typeDescColor={`대학원생 선배`}
+            iconText={SENIOR_SELECT.iconText}
+            typeDesc={SENIOR_SELECT.typeDesc}
+            typeDescColor={SENIOR_SELECT.userType}
             typeDescS={`회원가입`}
             userType="senior"
           />
