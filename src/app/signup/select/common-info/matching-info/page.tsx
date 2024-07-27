@@ -16,7 +16,6 @@ import NextBtn from '@/components/Button/NextBtn';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { useRouter } from 'next/navigation';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function MatchingInfoPage() {
   const router = useRouter();
@@ -44,7 +43,6 @@ function MatchingInfoPage() {
 
   return (
     <div>
-      {/* <GoogleAnalytics /> */}
       <div style={{ boxShadow: '0px 4px 8px 0px rgba(0, 0, 0, 0.10)' }}>
         <BackHeader headerText="회원가입" />
       </div>
@@ -87,7 +85,7 @@ function MatchingInfoPage() {
           />
           <MILabel>(선택) 나에게 맞는 선배를 알림톡으로 받아볼래요!</MILabel>
         </div>
-        {schoolCharCount && fieldCharCount ? (
+        {(matchingReceive ? schoolCharCount && fieldCharCount : true) ? (
           <SignUpBtn />
         ) : (
           <NextBtn kind="route-non-matching" btnText="가입완료 하기" />
