@@ -17,6 +17,7 @@ import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import { SENIOR_LAB } from '@/constants/signup/senior';
 
 function SeniorInfoPage() {
   const [emptyPart, setEmptyPart] = useState('');
@@ -71,24 +72,24 @@ function SeniorInfoPage() {
       </div>
       <SeniorInfoPageContainer>
         <BtnContainer>
-          <h3>연구실 정보를 알려주세요.</h3>
+          <h3>{SENIOR_LAB.labTitle}</h3>
           <BtnBox>
             <MBtnFont>
-              지도교수님&nbsp;<div id="font-color">*</div>
+              {SENIOR_LAB.professor}&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
               max={10}
-              placeholder="지도교수님 성함을 입력해주세요."
+              placeholder={SENIOR_LAB.professorPlaceholder}
               targetAtom="professor"
             />
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              연구실명&nbsp;<div id="font-color">*</div>
+              {SENIOR_LAB.lab}&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <TextForm
               max={30}
-              placeholder="연구실 이름을 입력해주세요."
+              placeholder={SENIOR_LAB.labPlaceholder}
               targetAtom="lab"
             />
           </BtnBox>

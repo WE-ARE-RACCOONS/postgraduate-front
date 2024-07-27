@@ -14,6 +14,7 @@ import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import { SENIOR_MAJOR } from '@/constants/signup/senior';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -64,21 +65,21 @@ function SeniorInfoPage() {
       </div>
       <SeniorInfoPageContainer>
         <SICBox>
-          <h3>선배 정보를 입력해주세요</h3>
-          <div id="info-content-msg">
-            입력한 정보는 멘토링 매칭에 이용됩니다.
-          </div>
+          <h3>{SENIOR_MAJOR.seniorInfoTitle}</h3>
+          <div id="info-content-msg">{SENIOR_MAJOR.seniorInfoUsage}</div>
         </SICBox>
         <BtnContainer>
-          <h3>대학원 정보를 알려주세요.</h3>
+          <h3>{SENIOR_MAJOR.graduateSchoolTitle}</h3>
           <BtnBox>
             <MBtnFont>
-              대학원&nbsp;<div id="font-color">*</div>
+              {SENIOR_MAJOR.graduateSchool}&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <ModalBtn
               $isGet={!sPostGradu}
               type="seniorInfo"
-              btnText={sPostGradu ? sPostGradu : '대학원을 선택해주세요.'}
+              btnText={
+                sPostGradu ? sPostGradu : SENIOR_MAJOR.graduateSchoolPlaceholder
+              }
               modalHandler={modalHandler}
               onClick={() => {
                 setModalType('postgradu');
@@ -87,12 +88,12 @@ function SeniorInfoPage() {
           </BtnBox>
           <BtnBox>
             <MBtnFont>
-              학과&nbsp;<div id="font-color">*</div>
+              {SENIOR_MAJOR.major}&nbsp;<div id="font-color">*</div>
             </MBtnFont>
             <ModalBtn
               $isGet={!sMajor}
               type="seniorInfo"
-              btnText={sMajor ? sMajor : '학과를 선택해주세요.'}
+              btnText={sMajor ? sMajor : SENIOR_MAJOR.majorPlaceholder}
               modalHandler={modalHandler}
               onClick={() => {
                 setModalType('major');
