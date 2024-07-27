@@ -39,7 +39,7 @@ function SelectPage() {
             iconAlt="senior-icon"
             iconSrc={senior.src}
             iconText="선배 아이콘"
-            typeDesc={`멘토링을 받는`}
+            typeDesc={`멘토링을 하는`}
             typeDescColor={`대학원생 선배`}
             typeDescS={`회원가입`}
             userType="senior"
