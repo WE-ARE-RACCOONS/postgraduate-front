@@ -24,6 +24,7 @@ import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import findExCode from '@/utils/findExCode';
 import { detectReload, preventClose } from '@/utils/reloadFun';
+import { SENIOR_FIELD } from '@/constants/signup/senior';
 
 function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
@@ -235,30 +236,34 @@ function SeniorInfoPage() {
       </div>
       <ProgressBar totalNum={4} activeNum={2} />
       <SeniorInfoPageContainer>
-        <h3>소속 중인 연구실에 대해 알려주세요.</h3>
+        <h3>{SENIOR_FIELD.fieldTitle}</h3>
         <SIFormTitleContainer>
           <SIFormTitle>
-            <div className="si-form-title-text">연구분야&nbsp;</div>
+            <div className="si-form-title-text">{SENIOR_FIELD.field}&nbsp;</div>
             <div className="si-form-title-star">*</div>
           </SIFormTitle>
           {sField && <SIModifyBtn onClick={fieldHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sField ? true : false}>
           <div className="si-form-select-text">
-            {sField ? formatField(sField) : `선택된 연구분야가 없습니다.`}
+            {sField ? formatField(sField) : SENIOR_FIELD.fieldPlaceholder}
           </div>
           {!sField && <SIAddBtn onClick={fieldHandler}>+ 추가하기</SIAddBtn>}
         </SIFormBox>
         <SIFormTitleContainer>
           <SIFormTitle>
-            <div className="si-form-title-text">연구주제&nbsp;</div>
+            <div className="si-form-title-text">
+              {SENIOR_FIELD.keyword}&nbsp;
+            </div>
             <div className="si-form-title-star">*</div>
           </SIFormTitle>
           {sKeyword && <SIModifyBtn onClick={keywordHandler}>수정</SIModifyBtn>}
         </SIFormTitleContainer>
         <SIFormBox $isNotEmpty={sKeyword ? true : false}>
           <div className="si-form-select-text">
-            {sKeyword ? formatKeyword(sKeyword) : '선택된 연구주제가 없습니다.'}
+            {sKeyword
+              ? formatKeyword(sKeyword)
+              : SENIOR_FIELD.keywordPlaceholder}
           </div>
           {!sKeyword && (
             <SIAddBtn onClick={keywordHandler}>+ 추가하기</SIAddBtn>

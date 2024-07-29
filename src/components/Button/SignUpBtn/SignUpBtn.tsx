@@ -141,7 +141,7 @@ function SignUpBtn() {
 
   return (
     <>
-      {schoolCharCount && fieldCharCount ? (
+      {(matchingReceive ? schoolCharCount && fieldCharCount : true) ? (
         <>
           <SignUpBtnContainer onClick={handleSignUp}>
             가입완료 하기
