@@ -57,7 +57,7 @@ function SearchResultPage() {
   useEffect(() => {
     const infiniteBottom = () => {
       let isScrollAtBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 1;
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
       if (isScrollAtBottom) {
         let url = `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/search?find=${searchTerm}`;
         if (sort) {
@@ -83,11 +83,9 @@ function SearchResultPage() {
     };
 
     window.addEventListener('scroll', infiniteBottom);
-    window.addEventListener('touchmove', infiniteBottom);
 
     return () => {
       window.removeEventListener('scroll', infiniteBottom);
-      window.removeEventListener('touchmove', infiniteBottom);
     };
   }, [page]);
 

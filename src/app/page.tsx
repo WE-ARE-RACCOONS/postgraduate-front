@@ -47,7 +47,7 @@ export default function Home() {
 
     const infiniteBottom = () => {
       let isScrollAtBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight;
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
       if (isScrollAtBottom) {
         axios
           .get(
@@ -73,11 +73,9 @@ export default function Home() {
     };
 
     window.addEventListener('scroll', infiniteBottom);
-    window.addEventListener('touchmove', infiniteBottom);
 
     return () => {
       window.removeEventListener('scroll', infiniteBottom);
-      window.removeEventListener('touchmove', infiniteBottom);
     };
   }, [page]);
 
