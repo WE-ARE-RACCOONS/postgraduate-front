@@ -41,7 +41,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
           <SPmajor>
             {data.postgradu ? `[${data.postgradu}]`: ''}&nbsp;
             <div id="professor-str">
-              {data.professor ? `${data.professor} 교수` : ''}
+              {data.professor ? `${data.professor} 교수님` : ''}
             </div>
           </SPmajor>
           <SPField>{data.lab ? data.lab : ''}</SPField>
