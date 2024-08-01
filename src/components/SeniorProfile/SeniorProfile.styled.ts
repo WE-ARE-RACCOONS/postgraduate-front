@@ -45,8 +45,8 @@ export const SPnickname = styled.div`
   padding: 0.1rem 0;
   font-size: 1.12rem;
   display: flex;
-  #nickname-str{
-    color: #64686C;
+  #nickname-str {
+    color: #64686c;
     font-weight: 400;
     font-size: 0.75rem;
     margin-top: 0.3rem;
@@ -75,5 +75,5 @@ export const Keyword = styled.div`
   white-space: nowrap;
 `;
 export const SPWrapper = styled.div`
-display: flex;
-`
+  display: flex;
+`;
