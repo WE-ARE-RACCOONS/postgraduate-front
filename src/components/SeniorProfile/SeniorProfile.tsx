@@ -15,7 +15,7 @@ import {
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import { useRouter } from 'next/navigation';
 import auth from '../../../public/auth_mark.png';
-import arrow from '../../../public/right-arrow.png';
+import arrow from '../../../public/arrow-right-bold.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
