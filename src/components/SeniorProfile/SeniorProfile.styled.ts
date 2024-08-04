@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 
 export const SeniorProfileBox = styled.div`
-  height: max-content;
-  padding: 1rem;
+  height: 9.58rem;
+  padding: 0.97rem;
   padding-top: 0;
+  padding-bottom: 0;
   background-color: #f8f9fa;
   border-radius: 1rem;
   margin-bottom: 0.75rem;
@@ -11,15 +12,16 @@ export const SeniorProfileBox = styled.div`
 `;
 
 export const SeniorProfileContent = styled.div`
-  width: 85%;
-  height: 7.1rem;
+  width: 93%;
   display: flex;
 `;
 export const SeniorProfileImg = styled.img`
   width: 4.8rem;
   height: 4.8rem;
   border-radius: 90px;
-  margin: 1rem;
+  margin-top: 1.1rem;
+  margin-bottom: 0.9rem;
+  margin-right: 0.66rem;
 `;
 
 export const SeniorProfileInfo = styled.div`
@@ -28,30 +30,39 @@ export const SeniorProfileInfo = styled.div`
 `;
 
 export const SPmajor = styled.div`
-  color: #868e96;
-  font-size: 0.75rem;
+  color: #555555;
   display: flex;
-
+  font-weight: 600;
+  font-size: 1rem;
   #professor-str {
     font-weight: 600;
   }
 `;
 
 export const SPnickname = styled.div`
-  font-weight: 700;
-  color: #212529;
-  padding: 0.18rem 0;
+  font-weight: 600;
+  color: #333537;
+  padding: 0.1rem 0;
+  font-size: 1.12rem;
+  display: flex;
+  #nickname-str {
+    color: #64686c;
+    font-weight: 400;
+    font-size: 0.75rem;
+    margin-top: 0.3rem;
+  }
 `;
 
 export const SPField = styled.div`
+  color: #212529;
   font-size: 0.75rem;
+  margin-top: 0.1rem;
 `;
 
 export const Skeyword = styled.div`
   width: 19rem;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem 0;
 `;
 
 export const Keyword = styled.div`
@@ -62,4 +73,7 @@ export const Keyword = styled.div`
   margin-left: 0.25rem;
   font-size: 0.75rem;
   white-space: nowrap;
+`;
+export const SPWrapper = styled.div`
+  display: flex;
 `;
