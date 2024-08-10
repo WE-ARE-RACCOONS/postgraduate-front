@@ -110,6 +110,10 @@ function JuniorManage(props: NotSeniorProps) {
         content="대학원 선배 회원으로 변경"
         onClick={handleClick}
       />
+      <ContentComponent
+        content="탈퇴하기"
+        onClick={() => router.push('/signout')}
+      />
     </JuniorManageContainer>
   );
 }
