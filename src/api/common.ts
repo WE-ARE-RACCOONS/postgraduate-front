@@ -3,11 +3,11 @@ import axios from 'axios';
 import type { InternalAxiosRequestConfig } from 'axios';
 import { useRouter } from 'next/navigation';
 
-const instance = axios.create({
+export const clientFetch = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
-instance.interceptors.request.use(
+clientFetch.interceptors.request.use(
   (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
     const { getAccessToken, removeTokens } = useAuth();
     const accessTkn = getAccessToken();
@@ -28,5 +28,3 @@ instance.interceptors.request.use(
     return Promise.reject(error);
   },
 );
-
-export default instance;
