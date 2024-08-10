@@ -17,6 +17,7 @@
     "@mui/styled-engine-sc": "^6.0.0-alpha.6",
     "@tanstack/react-query": "4.36.1",
     "@tanstack/react-query-devtools": "4.36.1",
+    "@toss/use-funnel": "^1.4.0",
     "@typescript-eslint/eslint-plugin": "6.0.0",
     "@typescript-eslint/parser": "6.0.0",
     "axios": "^1.6.0",
