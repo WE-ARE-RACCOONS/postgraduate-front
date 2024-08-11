@@ -2,6 +2,7 @@
 import useFunnel from '@/hooks/useFunnel';
 import { SignOutInfoProvider } from '@/app/signout/signoutContext';
 
+import { SignOutInfo } from '@/app/signout/(components)/signout-info';
 import { SignOutHeader } from '@/app/signout/(components)/Header';
 
 const signOutSteps = [
@@ -20,7 +21,6 @@ export default function SignOut() {
     <main>
       <SignOutInfoProvider>
         <SignOutHeader onClick={() => prevStep()} />
-        <h1>회원 탈퇴</h1>
         <SignoutFunnel steps={signOutSteps} step="signout_info">
           <SignoutFunnel.Step name={'signout_info'}>
             <div>회원 탈퇴 공지</div>
@@ -29,10 +29,7 @@ export default function SignOut() {
             </button>
           </SignoutFunnel.Step>
           <SignoutFunnel.Step name={'signout_type_select'}>
-            <div>회원 유형 선택</div>
-            <button onClick={() => setSignoutStep('signout_reason')}>
-              다음
-            </button>
+            <SignOutInfo onClick={() => setSignoutStep('signout_reason')} />
           </SignoutFunnel.Step>
           <SignoutFunnel.Step name={'signout_reason'}>
             <div>회원 탈퇴 이유</div>

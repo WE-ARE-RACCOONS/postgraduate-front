@@ -1,30 +1,32 @@
 import styled from 'styled-components';
 import Image from 'next/image';
-import back_arrow from '/public/arrow.png';
+import back_arrow from '/public/signoutarrow.png';
 
 export function SignOutHeader({ onClick }: { onClick: () => void }) {
   return (
-    <header style={{ height: '3.5rem' }} onClick={onClick}>
-      <Image
-        src={back_arrow}
-        alt="뒤로가기 화살표"
-        width={24}
-        height={24}
-        style={{ color: '#2FC4B2', cursor: 'pointer' }}
-      />
-      <div>로그아웃</div>
-    </header>
+    <HeaderContainer onClick={onClick}>
+      <Image src={back_arrow} alt="뒤로가기 화살표" width={6} height={12} />
+      <div>회원 탈퇴</div>
+    </HeaderContainer>
   );
 }
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   width: inherit;
-  height: 3.5rem;
-  position: relative;
-  height: 1.6rem;
-  font-size: 20px;
-  font-weight: 700;
+  margin: 20px auto;
+  height: 56px;
   display: flex;
   align-items: center;
-  gap: 15px;
+  border-bottom: 1px solid #e0e0e0;
+  padding-left: 0.75rem;
+
+  > img {
+    margin-right: 0.5rem;
+    cursor: pointer;
+  }
+
+  > div {
+    font-size: 16px;
+    font-weight: 700;
+  }
 `;
