@@ -2,6 +2,7 @@
 import useFunnel from '@/hooks/useFunnel';
 import { SignOutInfoProvider } from '@/app/signout/signoutContext';
 
+import { SignOutInfo } from '@/app/signout/(components)/signout-info';
 import { SignOutTypeSelect } from '@/app/signout/(components)/signout-type-select';
 import { SignOutHeader } from '@/app/signout/(components)/Header';
 
@@ -22,12 +23,10 @@ export default function SignOut() {
       <SignOutInfoProvider>
         <SignOutHeader onClick={() => prevStep()} />
         <SignoutFunnel steps={signOutSteps} step="signout_info">
-          //TODO - 회원 탈퇴 문구와 함께 UI 수정 필요
           <SignoutFunnel.Step name={'signout_info'}>
-            <div>회원 탈퇴 공지</div>
-            <button onClick={() => setSignoutStep('signout_type_select')}>
-              다음
-            </button>
+            <SignOutInfo
+              onClick={() => setSignoutStep('signout_type_select')}
+            />
           </SignoutFunnel.Step>
           <SignoutFunnel.Step name={'signout_type_select'}>
             <SignOutTypeSelect
