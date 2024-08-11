@@ -1,7 +1,7 @@
 import { Children, ReactElement, ReactNode, isValidElement } from 'react';
 export interface FunnelProps<Steps extends StepArray> {
-  steps: Steps;
-  step: Steps[number];
+  steps?: Steps;
+  step?: Steps[number];
   children: ReactElement | Array<ReactElement>;
 }
 
@@ -18,7 +18,7 @@ function Funnel<Steps extends StepArray>({
 }: FunnelProps<Steps>): ReactElement {
   const targetStep = Children.toArray(children)
     .filter(isValidElement<StepProps<Steps>>)
-    .filter((i) => steps.includes(i.props.name ?? ''));
+    .filter((i) => steps?.includes(i.props.name ?? ''));
 
   const target = targetStep.find((child) => child.props.name === step);
 

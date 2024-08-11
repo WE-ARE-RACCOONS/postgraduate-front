@@ -1,10 +1,4 @@
-import {
-  Children,
-  ReactElement,
-  ReactNode,
-  isValidElement,
-  useState,
-} from 'react';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Funnel from './Funnel';
 
@@ -32,27 +26,43 @@ interface RouterFunnelStep<Steps extends StepArray> {
 interface FunnelOptions<Steps extends StepArray> {
   initialStep?: Steps[number];
   stepQueryKey?: string;
+  stepChangeType?: 'push' | 'replace';
 }
 
 function useFunnel<Steps extends StepArray>(
   steps: Steps,
   options: FunnelOptions<Steps> = {
     initialStep: steps[0],
+    stepChangeType: 'push',
   },
 ): [
   RouteFunnel<Steps> & { Step: RouterFunnelStep<Steps> },
   (step: Steps[number]) => void,
+  () => void,
 ] {
-  const [currentStep, setCurrentStep] = useState(options.initialStep);
-  const activeStepIndex = steps.findIndex((s) => s === currentStep);
   const router = useRouter();
   const searchParams = useSearchParams();
-
+  const getCurrentStep = () => {
+    return (
+      searchParams.get(options.stepQueryKey as string) ?? options.initialStep
+    );
+  };
+  const [currentStep, setCurrentStep] = useState(() => getCurrentStep());
+  const activeStepIndex = steps.findIndex((s) => s === currentStep);
   const updateStep = (step: Steps[number]) => {
     setCurrentStep(step);
     const searchParam = new URLSearchParams(searchParams);
     searchParam.set(options.stepQueryKey ?? 'step', step);
-    router.push(`?${searchParam}`);
+    if (options.stepChangeType === 'push') router.push(`?${searchParam}`);
+    else {
+      router.replace(`?${searchParam}`);
+    }
+  };
+
+  const prevStep = () => {
+    if (currentStep && activeStepIndex > 0) {
+      updateStep(steps[activeStepIndex - 1]);
+    }
   };
 
   const FunnelComponent: RouteFunnel<Steps> = (props) => {
@@ -70,7 +80,7 @@ function useFunnel<Steps extends StepArray>(
     return <></>;
   };
 
-  return [Object.assign(FunnelComponent, { Step }), updateStep];
+  return [Object.assign(FunnelComponent, { Step }), updateStep, prevStep];
 }
 
 export default useFunnel;
