@@ -25,7 +25,7 @@ interface SignOutInfoContextType {
 const SignOutInfoContext = createContext<SignOutInfoContextType>({
   signOutInfo: {
     isJunior: false,
-    signOutReason: 'ETC',
+    signOutReason: 'DIS_SATISFACTION',
   },
   setSignOutInfo: null,
 });

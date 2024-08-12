@@ -2,14 +2,11 @@
 import useFunnel from '@/hooks/useFunnel';
 import { SignOutInfoProvider } from '@/app/signout/signoutContext';
 
-import ProgressBar from '@/components/Bar/ProgressBar';
 import { SignOutReason } from '@/app/signout/(components)/signout-reason';
 import { SignOutInfo } from '@/app/signout/(components)/signout-info';
 import { SignOutTypeSelect } from '@/app/signout/(components)/signout-type-select';
 import { SignOutHeader } from '@/app/signout/(components)/Header';
-import { useEffect } from 'react';
 
-type SignOutStep = (typeof signOutSteps)[number];
 const signOutSteps = [
   'signout_info',
   'signout_type_select',
@@ -42,7 +39,7 @@ export default function SignOut() {
             />
           </SignoutFunnel.Step>
           <SignoutFunnel.Step name={'signout_reason'}>
-            <SignOutReason />
+            <SignOutReason onClick={() => setSignoutStep('signout_finish')} />
           </SignoutFunnel.Step>
           <SignoutFunnel.Step name={'signout_finish'}>
             <div>탈퇴완료</div>
