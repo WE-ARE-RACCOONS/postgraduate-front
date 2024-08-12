@@ -19,12 +19,16 @@ interface SignOutInfo {
 
 interface SignOutInfoContextType {
   signOutInfo: SignOutInfo | null;
-  setSignOutInfo: Dispatch<SetStateAction<SignOutInfo | null>>;
+  setSignOutInfo: Dispatch<SetStateAction<SignOutInfo | null>> | null;
 }
 
-const SignOutInfoContext = createContext<SignOutInfoContextType | undefined>(
-  undefined,
-);
+const SignOutInfoContext = createContext<SignOutInfoContextType>({
+  signOutInfo: {
+    isJunior: false,
+    signOutReason: 'ETC',
+  },
+  setSignOutInfo: null,
+});
 
 function SignOutInfoProvider({ children }: { children: ReactNode }) {
   const [signOutInfo, setSignOutInfo] = useState<SignOutInfo | null>(null);

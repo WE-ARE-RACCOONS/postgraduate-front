@@ -1,4 +1,4 @@
-export const SIGNOUT_REASON_JUNIOR = {
+export const SIGNOUT_REASON_SENIOR = {
   PRIVACY: '개인정보 문제',
   REVENUE: '수익창출의 어려움',
   FEW_JUNIOR: '다양하지 않은 후배 풀',
@@ -6,7 +6,7 @@ export const SIGNOUT_REASON_JUNIOR = {
   ETC: '기타',
 };
 
-export const SIGNOUT_REASON_SENIOR = {
+export const SIGNOUT_REASON_JUNIOR = {
   PRIVACY: '개인정보 문제',
   EXPENSE: '비용 문제',
   FEW_SENIOR: '다양하지 않은 선배 풀',

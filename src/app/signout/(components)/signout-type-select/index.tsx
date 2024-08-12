@@ -11,7 +11,7 @@ export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
   const isJunior = signOutInfo?.isJunior;
 
   return (
-    <SignOutInfoContainer>
+    <SignOutInfoContainer className="stepper-tab">
       <h1>회원 유형 선택</h1>
       <div className="image_container">
         <StyledImage
@@ -21,7 +21,7 @@ export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
           alt="대학생 후배 탈퇴"
           isSelected={isJunior ?? false}
           onClick={() =>
-            setSignOutInfo({
+            setSignOutInfo?.({
               signOutReason: 'ETC',
               isJunior: true,
             })
@@ -34,7 +34,7 @@ export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
           src={SignOutSeniorImage}
           alt="대학원 선배 탈퇴"
           onClick={() => {
-            setSignOutInfo({
+            setSignOutInfo?.({
               signOutReason: 'ETC',
               isJunior: false,
             });
@@ -42,7 +42,11 @@ export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
         />
       </div>
       <div className="nextBtn_container">
-        <NextBtn kind={'route'} btnText="다음으로" onClick={onClick} />
+        <NextBtn
+          kind={typeof isJunior !== 'undefined' ? 'route' : 'route-non'}
+          btnText="다음으로"
+          onClick={onClick}
+        />
       </div>
     </SignOutInfoContainer>
   );
@@ -56,6 +60,7 @@ export const SignOutInfoContainer = styled.div`
 
   > h1 {
     font-size: 20px;
+    margin-left: 24px;
     font-weight: bold;
     color: #212529;
   }
@@ -67,8 +72,7 @@ export const SignOutInfoContainer = styled.div`
     margin-right: auto;
     gap: 5px;
     align-items: flex-end;
-    justify-content: center;
-    width: 80%;
+    width: 90%;
     cursor: pointer;
   }
 
