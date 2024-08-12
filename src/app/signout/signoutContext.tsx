@@ -20,6 +20,7 @@ interface SignOutInfo {
 interface SignOutInfoContextType {
   signOutInfo: SignOutInfo | null;
   setSignOutInfo: Dispatch<SetStateAction<SignOutInfo | null>> | null;
+  getSignOutReasonMessage: () => string;
 }
 
 const SignOutInfoContext = createContext<SignOutInfoContextType>({
@@ -27,16 +28,31 @@ const SignOutInfoContext = createContext<SignOutInfoContextType>({
     isJunior: false,
     signOutReason: 'DIS_SATISFACTION',
   },
+  getSignOutReasonMessage: () => '',
   setSignOutInfo: null,
 });
 
 function SignOutInfoProvider({ children }: { children: ReactNode }) {
   const [signOutInfo, setSignOutInfo] = useState<SignOutInfo | null>(null);
 
+  const getSignOutReasonMessage = () => {
+    if (signOutInfo?.isJunior) {
+      return SIGNOUT_REASON_JUNIOR[
+        signOutInfo.signOutReason as keyof typeof SIGNOUT_REASON_JUNIOR
+      ];
+    } else if (signOutInfo) {
+      return SIGNOUT_REASON_SENIOR[
+        signOutInfo.signOutReason as keyof typeof SIGNOUT_REASON_SENIOR
+      ];
+    }
+    return '';
+  };
+
   const value = useMemo(() => {
     return {
       signOutInfo,
       setSignOutInfo,
+      getSignOutReasonMessage,
     };
   }, [signOutInfo]);
 

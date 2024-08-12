@@ -22,7 +22,7 @@ export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
           isSelected={isJunior ?? false}
           onClick={() =>
             setSignOutInfo?.({
-              signOutReason: 'ETC',
+              signOutReason: 'DIS_SATISFACTION',
               isJunior: true,
             })
           }
@@ -35,7 +35,7 @@ export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
           alt="대학원 선배 탈퇴"
           onClick={() => {
             setSignOutInfo?.({
-              signOutReason: 'ETC',
+              signOutReason: 'DIS_SATISFACTION',
               isJunior: false,
             });
           }}

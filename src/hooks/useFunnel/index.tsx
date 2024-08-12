@@ -39,16 +39,20 @@ function useFunnel<Steps extends StepArray>(
   RouteFunnel<Steps> & { Step: RouterFunnelStep<Steps> },
   (step: Steps[number]) => void,
   () => void,
+  number,
 ] {
   const router = useRouter();
   const searchParams = useSearchParams();
+
   const getCurrentStep = () => {
     return (
       searchParams.get(options.stepQueryKey as string) ?? options.initialStep
     );
   };
+
   const [currentStep, setCurrentStep] = useState(() => getCurrentStep());
   const activeStepIndex = steps.findIndex((s) => s === currentStep);
+
   const updateStep = (step: Steps[number]) => {
     setCurrentStep(step);
     const searchParam = new URLSearchParams(searchParams);
@@ -82,7 +86,12 @@ function useFunnel<Steps extends StepArray>(
     return <></>;
   };
 
-  return [Object.assign(FunnelComponent, { Step }), updateStep, prevStep];
+  return [
+    Object.assign(FunnelComponent, { Step }),
+    updateStep,
+    prevStep,
+    activeStepIndex,
+  ];
 }
 
 export default useFunnel;
