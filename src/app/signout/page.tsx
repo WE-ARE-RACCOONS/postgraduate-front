@@ -1,5 +1,6 @@
 'use client';
 import useFunnel from '@/hooks/useFunnel';
+import instance from '@/api/api';
 import { SignOutInfoProvider } from '@/app/signout/signoutContext';
 
 import { SignOutFinish } from '@/app/signout/(components)/signout-finish';
@@ -23,10 +24,6 @@ export default function SignOut() {
       stepChangeType: 'replace',
     } as const,
   );
-  const _handleSignOutFinish = () => {
-    //회원탈퇴 FLow
-    //회원탈퇴 API -> 토큰 제거 -> 버튼에 GA이벤트..?
-  };
 
   return (
     <main>
@@ -48,7 +45,7 @@ export default function SignOut() {
             <SignOutReason onClick={() => setSignoutStep('signout_finish')} />
           </SignoutFunnel.Step>
           <SignoutFunnel.Step name={'signout_finish'}>
-            <SignOutFinish onClick={_handleSignOutFinish} />
+            <SignOutFinish />
           </SignoutFunnel.Step>
         </SignoutFunnel>
       </SignOutInfoProvider>

@@ -26,7 +26,7 @@ interface SignOutInfoContextType {
 const SignOutInfoContext = createContext<SignOutInfoContextType>({
   signOutInfo: {
     isJunior: false,
-    signOutReason: 'DIS_SATISFACTION',
+    signOutReason: 'ETC',
   },
   getSignOutReasonMessage: () => '',
   setSignOutInfo: null,
@@ -54,7 +54,7 @@ function SignOutInfoProvider({ children }: { children: ReactNode }) {
       setSignOutInfo,
       getSignOutReasonMessage,
     };
-  }, [signOutInfo]);
+  }, [signOutInfo?.isJunior, signOutInfo?.signOutReason, signOutInfo?.etc]);
 
   return (
     <SignOutInfoContext.Provider value={value}>

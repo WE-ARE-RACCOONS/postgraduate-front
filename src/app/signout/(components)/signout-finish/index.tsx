@@ -4,8 +4,24 @@ import styled from 'styled-components';
 import Image from 'next/image';
 import { SignOutInfoContainer } from '@/app/signout/(components)/signout-type-select';
 import SignOutImage from '/public/signout.png';
+import { useSignOutInfo } from '@/app/signout/signoutContext';
 import NextBtn from '@/components/Button/NextBtn';
-export function SignOutFinish({ onClick }: { onClick: () => void }) {
+import instance from '@/api/api';
+export function SignOutFinish() {
+  const { signOutInfo } = useSignOutInfo();
+  const _handleSignOutFinish = async () => {
+    //회원탈퇴 FLow
+    //mutate로 바꿔야 함
+    //회원탈퇴 API -> 토큰 제거 -> 버튼에 GA이벤트..?
+    if (signOutInfo) {
+      await instance
+        .post('/auth/signout', {
+          reason: signOutInfo.signOutReason,
+          etc: signOutInfo.etc,
+        })
+        .then((res) => console.log(res));
+    }
+  };
   return (
     <SignOutInfoContainer className="stepper-tab">
       <FinishImageWrapper>
@@ -15,8 +31,7 @@ export function SignOutFinish({ onClick }: { onClick: () => void }) {
         <NextBtn
           kind={'route'}
           btnText="회원탈퇴완료"
-          onClick={onClick}
-          url="/"
+          onClick={_handleSignOutFinish}
         />
       </div>
     </SignOutInfoContainer>

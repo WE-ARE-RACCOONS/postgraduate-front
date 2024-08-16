@@ -23,7 +23,6 @@ export function SignOutReason({ onClick }: { onClick: () => void }) {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [etcLength, setETCLength] = useState<number>(0);
 
-  console.log(getSignOutReasonMessage());
   const signOutReasons = signOutInfo?.isJunior
     ? Object.entries(SIGNOUT_REASON_JUNIOR)
     : Object.entries(SIGNOUT_REASON_SENIOR);
@@ -79,7 +78,14 @@ export function SignOutReason({ onClick }: { onClick: () => void }) {
               maxLength={500}
               placeholder="자유롭게 입력해주세요"
               charCount={etcLength}
-              handler={(v) => setETCLength(v.length)}
+              handler={(v) => {
+                setETCLength(v.length);
+                setSignOutInfo?.({
+                  isJunior: signOutInfo.isJunior,
+                  signOutReason: 'ETC',
+                  etc: v + '',
+                });
+              }}
             />
           )}
         </ReasonContainer>
