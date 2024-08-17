@@ -2,7 +2,7 @@ import CredentialsProvider from 'next-auth/providers/credentials';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
 
-//TODO: 카카오 로그인 연결 필요
+//TODO: 카카오 로그인 연결 필요, 콘솔제거 필요
 export const authOptions: NextAuthOptions = {
   providers: [
     KakaoProvider({
@@ -12,14 +12,24 @@ export const authOptions: NextAuthOptions = {
   ],
 
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user, account }) {
+      console.log({
+        clientId: process.env.KAKAO_CLIENT_ID as string,
+        clientSecret: process.env.KAKAO_CLIENT_SECRET as string,
+      });
+      console.log('token -> ', token);
+      console.log('user => ', user);
+      console.log('account => ', account);
       if (user) {
       }
 
-      return token;
+      return { token, user, account };
     },
 
     async session({ session, token }) {
+      console.log('session =>', session);
+
+      console.log('session token =>', token);
       return session;
     },
   },
@@ -30,7 +40,9 @@ export const authOptions: NextAuthOptions = {
 
   secret: process.env.AUTH_SECRET,
 
-  pages: {},
+  pages: {
+    signIn: '/',
+  },
 };
 
 const handler = NextAuth(authOptions);
