@@ -1,4 +1,4 @@
-import { clientFetch } from '@/api/common';
+import { apiFetch } from '@/api/common';
 import { ResponseModel } from '@/api/model';
 
 export interface SeniorInfoResponse extends ResponseModel {
@@ -39,7 +39,7 @@ export interface SeniorInfoResponse extends ResponseModel {
     outLinter: string;
 
     /**
-     * 가능 정기일정
+     * 시간
      */
     times: {
       day: string;
@@ -50,4 +50,6 @@ export interface SeniorInfoResponse extends ResponseModel {
 }
 
 export const seniorInfoGetFetch = () =>
-  clientFetch.get<SeniorInfoResponse>('/senior/me/profile');
+  apiFetch<SeniorInfoResponse>('/senior/me/profile', {
+    method: 'GET',
+  });

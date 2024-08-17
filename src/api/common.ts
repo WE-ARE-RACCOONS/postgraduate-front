@@ -58,15 +58,16 @@ const createApiFetch = ({ getSession }: CreateApiFetchParamsType) => {
 
 // 클라이언트 사이드용 함수
 export const clientApiFetch = createApiFetch({
-  getSession: () => {
-    const session = getSession();
+  getSession: async () => {
+    const session = await getSession();
+
     return Promise.resolve(session);
   },
 });
 
 // 서버 사이드용 함수
 export const serverApiFetch = createApiFetch({
-  getSession: () => getServerSession(authOptions),
+  getSession: async () => await getServerSession(authOptions),
 });
 
 // 환경에 따라 적절한 함수를 선택하는 래퍼 함수
