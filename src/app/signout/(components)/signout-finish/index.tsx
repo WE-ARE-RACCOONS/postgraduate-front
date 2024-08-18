@@ -40,6 +40,6 @@ export function SignOutFinish() {
 
 const FinishImageWrapper = styled.div`
   display: flex;
-  margin: 229px auto;
+  margin: 150px auto;
   justify-content: center;
 `;
