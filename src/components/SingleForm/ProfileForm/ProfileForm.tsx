@@ -6,7 +6,7 @@ import {
 } from './ProfileForm.styled';
 
 const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
-  (props, ref) => {
+  (props, _ref) => {
     const [charCount, setCharCount] = useState(0);
 
     useEffect(() => {
@@ -49,7 +49,10 @@ const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
             className={`profile-form-${props.formType}`}
             placeholder={props.placeholder}
             {...props?.register}
-            onChange={handleChange}
+            onChange={(e) => {
+              props.register?.onChange(e);
+              handleChange(e);
+            }}
           />
         )}
         {props.lineType === 'multi' && (
@@ -58,7 +61,10 @@ const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
             className={`profile-form-${props.formType}`}
             placeholder={props.placeholder}
             {...props?.register}
-            onChange={handleChange}
+            onChange={(e) => {
+              props.register?.onChange(e);
+              handleChange(e);
+            }}
           ></textarea>
         )}
       </ProfileFormContainer>

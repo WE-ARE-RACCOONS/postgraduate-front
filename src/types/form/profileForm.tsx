@@ -1,6 +1,7 @@
 import { PrimitiveAtom, SetStateAction } from 'jotai';
-import { ComponentPropsWithRef } from 'react';
-import { RegisterOptions, UseFormRegisterReturn } from 'react-hook-form';
+import { ChangeEvent } from 'react';
+
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 type SetAtom<Args extends any[], Result> = (...args: Args) => Result;
 
@@ -8,7 +9,7 @@ type SetAtom<Args extends any[], Result> = (...args: Args) => Result;
 export type lineType = 'single' | 'multi';
 export type profileFormType = 'singleIntro' | 'multiIntro' | 'recommendedFor';
 
-export interface ProfileFormProps extends ComponentPropsWithRef<'input'> {
+export interface ProfileFormProps {
   flag: boolean;
   lineType: lineType;
   title: string;
@@ -16,5 +17,7 @@ export interface ProfileFormProps extends ComponentPropsWithRef<'input'> {
   loadStr: string;
   formType: profileFormType;
   changeHandler?: SetAtom<[SetStateAction<string>], void>;
-  register?:UseFormRegisterReturn
+  register?: UseFormRegisterReturn;
+  placeholder?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }

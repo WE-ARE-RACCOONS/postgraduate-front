@@ -44,7 +44,7 @@ function AddProfilePage() {
       multiIntro,
       recommended,
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   useEffect(() => {
@@ -55,7 +55,9 @@ function AddProfilePage() {
     'senior-best-case-portal',
   );
   const hasErrors =
-    errors.multiIntro || errors.recommended || errors.singleIntro;
+    errors.multiIntro?.message ||
+    errors.recommended?.message ||
+    errors.singleIntro?.message;
 
   const handleClick = async () => {
     if (hasErrors) {
@@ -138,13 +140,12 @@ function AddProfilePage() {
         >
           이전
         </PrevBtn>
-        {!hasErrors ? (
-          <NextAddBtnSet onClick={handleSubmit(handleClick)}>
-            다음
-          </NextAddBtnSet>
-        ) : (
-          <NextAddBtn onClick={handleSubmit(handleClick)}>다음</NextAddBtn>
-        )}
+        <NextAddBtnSet
+          onClick={handleSubmit(handleClick)}
+          hasError={hasErrors?.length > 0}
+        >
+          다음
+        </NextAddBtnSet>
       </div>
       {modal && portalElement
         ? createPortal(
@@ -209,27 +210,7 @@ const ShowProfBtn = styled.button`
   border: none;
   cursor: pointer;
 `;
-const NextAddBtn = styled.button`
-  display: flex;
-  width: 57%;
-  padding: 1rem 0rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  margin-left: 0.4rem;
-  border-radius: 0.75rem;
-  background: #dee2e6;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  cursor: pointer;
-`;
-const NextAddBtnSet = styled.button`
+const NextAddBtnSet = styled.button<{ hasError: boolean | undefined }>`
   display: flex;
   width: 57%;
   padding: 1rem 0rem;
@@ -238,7 +219,7 @@ const NextAddBtnSet = styled.button`
   gap: 0.625rem;
   margin-left: 0.4rem;
   border: none;
-  background: #2fc4b2;
+  background: ${({ hasError }) => (hasError ? '#dee2e6;' : '#2fc4b2')};
   border-radius: 0.75rem;
   color: #fff;
   text-align: center;
