@@ -10,7 +10,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import FullModal from '@/components/Modal/FullModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { useForm } from 'react-hook-form';
+import { FieldError, useForm } from 'react-hook-form';
 import {
   PROFILE_DIRECTION,
   PROFILE_PLACEHOLDER,
@@ -55,9 +55,7 @@ function AddProfilePage() {
     'senior-best-case-portal',
   );
   const hasErrors =
-    errors.multiIntro?.message ||
-    errors.recommended?.message ||
-    errors.singleIntro?.message;
+    errors.multiIntro || errors.recommended || errors.singleIntro;
 
   const handleClick = async () => {
     if (hasErrors) {
@@ -140,10 +138,7 @@ function AddProfilePage() {
         >
           이전
         </PrevBtn>
-        <NextAddBtnSet
-          onClick={handleSubmit(handleClick)}
-          hasError={hasErrors?.length > 0}
-        >
+        <NextAddBtnSet onClick={handleSubmit(handleClick)} hasError={hasErrors}>
           다음
         </NextAddBtnSet>
       </div>
@@ -210,7 +205,7 @@ const ShowProfBtn = styled.button`
   border: none;
   cursor: pointer;
 `;
-const NextAddBtnSet = styled.button<{ hasError: boolean | undefined }>`
+const NextAddBtnSet = styled.button<{ hasError: FieldError | undefined }>`
   display: flex;
   width: 57%;
   padding: 1rem 0rem;
