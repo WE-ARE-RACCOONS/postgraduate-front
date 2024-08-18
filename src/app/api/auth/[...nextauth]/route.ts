@@ -1,8 +1,8 @@
-import CredentialsProvider from 'next-auth/providers/credentials';
 import NextAuth, { NextAuthOptions } from 'next-auth';
 import KakaoProvider from 'next-auth/providers/kakao';
+import { kakaoAuthPostFetch } from '@/api/auth/kakaoAuthPostFetch';
+import { redirect } from 'next/navigation';
 
-//TODO: 카카오 로그인 연결 필요, 콘솔제거 필요
 export const authOptions: NextAuthOptions = {
   providers: [
     KakaoProvider({
@@ -13,29 +13,56 @@ export const authOptions: NextAuthOptions = {
 
   callbacks: {
     async jwt({ token, user, account }) {
-      console.log({
-        clientId: process.env.KAKAO_CLIENT_ID as string,
-        clientSecret: process.env.KAKAO_CLIENT_SECRET as string,
-      });
-      console.log('token -> ', token);
-      console.log('user => ', user);
-      console.log('account => ', account);
-      if (user) {
+      if (account) {
+        try {
+          const {
+            data: { code, data },
+          } = await kakaoAuthPostFetch({
+            accessToken: account.access_token as string,
+          });
+
+          if (code === 'AU204') {
+            const {
+              accessToken,
+              accessExpiration,
+              refreshToken,
+              refreshExpiration,
+              role,
+            } = data;
+
+            token.accessToken = accessToken;
+            token.accessExpiration = accessExpiration;
+            token.refreshToken = refreshToken;
+            token.refreshExpiration = refreshExpiration;
+            token.role = role;
+          }
+        } catch (error) {
+          console.error(error);
+
+          redirect('/'); //TODO: 무한 루프 돌면 말씀주세요..
+        }
       }
 
-      return { token, user, account };
+      return token;
     },
 
     async session({ session, token }) {
-      console.log('session =>', session);
+      session.accessToken = token.accessToken;
+      session.refreshToken = token.refreshToken;
+      session.accessExpiration = token.accessExpiration;
+      session.refreshExpiration = token.refreshExpiration;
+      session.role = token.role;
 
-      console.log('session token =>', token);
       return session;
     },
   },
 
   session: {
     strategy: 'jwt',
+  },
+
+  jwt: {
+    secret: process.env.AUTH_SECRET,
   },
 
   secret: process.env.AUTH_SECRET,

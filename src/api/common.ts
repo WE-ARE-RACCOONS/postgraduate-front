@@ -75,9 +75,9 @@ export const apiFetch = <T>(
   input: URL | RequestInfo,
   init?: RequestInit,
 ): Promise<{ data: T; status: number }> => {
-  if (typeof window === undefined) {
-    return serverApiFetch<T>(input, init);
-  } else {
+  if (typeof window !== 'undefined') {
     return clientApiFetch<T>(input, init);
+  } else {
+    return serverApiFetch<T>(input, init);
   }
 };
