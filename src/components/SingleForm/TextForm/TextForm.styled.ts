@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-export const TextFormEl = styled.input`
+export const Input = styled.input`
   margin-top: 0.5rem;
   width: 97%;
   height: 3.1875rem;
@@ -10,6 +10,7 @@ export const TextFormEl = styled.input`
   padding: 0.88rem;
   font-family: Pretendard;
   font-size: 16px;
+
   ::placeholder {
     color: #adb5bd;
     font-family: Pretendard;

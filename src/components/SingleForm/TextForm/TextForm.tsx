@@ -1,5 +1,5 @@
 import { TextFormProps } from '@/types/form/textForm';
-import { TextFormEl } from './TextForm.styled';
+import { Input } from './TextForm.styled';
 import { useAtom } from 'jotai';
 import { sKeywordAtom, sLabAtom, sProfessorAtom } from '@/stores/senior';
 import { PrimitiveAtom } from 'jotai';
@@ -36,7 +36,7 @@ function TextForm(props: TextFormProps) {
   };
 
   return (
-    <TextFormEl
+    <Input
       type="text"
       placeholder={props.placeholder}
       onChange={handleChange}
