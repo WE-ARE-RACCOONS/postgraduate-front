@@ -1,4 +1,7 @@
 import { PrimitiveAtom, SetStateAction } from 'jotai';
+import { ChangeEvent } from 'react';
+
+import { UseFormRegisterReturn } from 'react-hook-form';
 
 type SetAtom<Args extends any[], Result> = (...args: Args) => Result;
 
@@ -11,8 +14,10 @@ export interface ProfileFormProps {
   lineType: lineType;
   title: string;
   maxLength?: number; // lineType이 'multi'인 경우에만 들어옴
-  placeholder: string;
   loadStr: string;
   formType: profileFormType;
-  changeHandler: SetAtom<[SetStateAction<string>], void>;
+  changeHandler?: SetAtom<[SetStateAction<string>], void>;
+  register?: UseFormRegisterReturn;
+  placeholder?: string;
+  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }

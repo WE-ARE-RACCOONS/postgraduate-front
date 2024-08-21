@@ -1,12 +1,16 @@
 'use client';
+
 import ProgressBar from '@/components/Bar/ProgressBar';
-import ClickedBtn from '@/components/Button/ClickedBtn';
-import NextBtn from '@/components/Button/NextBtn';
+
+import { addProfileSchema } from '@/app/add-profile/schema';
 import BackHeader from '@/components/Header/BackHeader';
-import DimmedModal from '@/components/Modal/DimmedModal';
+
+import { FieldError, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import FullModal from '@/components/Modal/FullModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
+
 import {
   PROFILE_DIRECTION,
   PROFILE_PLACEHOLDER,
@@ -21,7 +25,6 @@ import {
 } from '@/stores/senior';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
@@ -29,68 +32,33 @@ function AddProfilePage() {
   const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
-  const [flag, setFlag] = useState(false);
-  const [alertMsg, setAlertMsg] = useState('');
+  const {
+    register,
+    trigger,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    resolver: yupResolver(addProfileSchema),
+    defaultValues: {
+      singleIntro,
+      multiIntro,
+      recommended,
+    },
+    mode: 'onChange',
+  });
+
   const router = useRouter();
-  const [buttonAct, setButtonAct] = useState(false);
   const { modal, modalHandler, portalElement } = useModal(
     'senior-best-case-portal',
   );
+  const hasErrors =
+    errors.multiIntro || errors.recommended || errors.singleIntro;
 
-  const updateBtnSet = () => {
-    setButtonAct(
-      singleIntro.length >= 10 &&
-        multiIntro.length >= 50 &&
-        recommended.length >= 50,
-    );
-  };
-
-  useEffect(() => {
-    updateBtnSet();
-
-    if (
-      singleIntro.length >= 10 &&
-      multiIntro.length >= 50 &&
-      recommended.length >= 50
-    ) {
-      setFlag(false);
-    }
-  }, [singleIntro, multiIntro, recommended]);
-
-  const handleClick = () => {
-    if (!singleIntro) {
-      showAlert('한줄소개를 입력해주세요');
+  const handleClick = async () => {
+    if (hasErrors) {
       return;
     }
-
-    if (!multiIntro) {
-      showAlert('자기소개를 입력해주세요');
-      return;
-    }
-
-    if (!recommended) {
-      showAlert('추천대상을 입력해주세요');
-      return;
-    }
-
-    if (multiIntro.length < 50) {
-      showAlert('자기소개를 50자 이상 작성해주세요');
-      return;
-    }
-    if (recommended.length < 50) {
-      showAlert('추천대상을 50자 이상 작성해주세요');
-      return;
-    }
-
-    setFlag(false);
     router.push('/add-time');
-    return;
-  };
-
-  const showAlert = (msg: string) => {
-    setAlertMsg(msg);
-    setFlag(true);
-    return;
   };
 
   return (
@@ -102,35 +70,37 @@ function AddProfilePage() {
         <div id="profile-sub">{PROFILE_SUB_DIRECTION.addProfile}</div>
       </div>
       <ProfileForm
-        flag={flag}
+        flag={false ?? errors.singleIntro}
         lineType="single"
         title={PROFILE_TITLE.singleIntroduce}
         placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
         formType="singleIntro"
         maxLength={100}
         loadStr={singleIntro}
-        changeHandler={setSingleIntro}
+        register={register('singleIntro')}
+        changeHandler={(e) => setSingleIntro(e)}
       />
-      <div style={{ marginLeft: '1rem' }}>
-        {flag && (
-          <SingleValidator
-            msg={'최소 10자 이상 입력해 주세요.'}
-            textColor="#FF3347"
-          />
-        )}
-      </div>
+
+      {errors.singleIntro && (
+        <SingleValidator
+          msg={errors.singleIntro.message ?? ''}
+          textColor="#FF3347"
+        />
+      )}
       <ProfileForm
-        flag={flag}
+        flag={false ?? errors.multiIntro}
         lineType="multi"
         title={PROFILE_TITLE.multiIntroduce}
         placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
         maxLength={1000}
         formType="multiIntro"
         loadStr={multiIntro}
-        changeHandler={setMultiIntro}
+        register={register('multiIntro')}
+        changeHandler={(e) => setMultiIntro(e)}
       />
+
       <div style={{ marginLeft: '1rem' }}>
-        {flag && (
+        {errors.multiIntro && (
           <SingleValidator
             msg={'최소 50자 이상 입력해 주세요.'}
             textColor="#FF3347"
@@ -138,17 +108,18 @@ function AddProfilePage() {
         )}
       </div>
       <ProfileForm
-        flag={flag}
+        flag={false ?? errors.recommended}
         lineType="multi"
         title={PROFILE_TITLE.recommendedFor}
         placeholder={PROFILE_PLACEHOLDER.recommendedFor}
         maxLength={1000}
         formType="recommendedFor"
         loadStr={recommended}
-        changeHandler={setRecommended}
+        register={register('recommended')}
+        changeHandler={(e) => setRecommended(e)}
       />
       <div style={{ marginLeft: '1rem' }}>
-        {flag && (
+        {errors.recommended && (
           <SingleValidator
             msg={'최소 50자 이상 입력해 주세요.'}
             textColor="#FF3347"
@@ -164,11 +135,9 @@ function AddProfilePage() {
         >
           이전
         </PrevBtn>
-        {buttonAct ? (
-          <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>
-        ) : (
-          <NextAddBtn onClick={handleClick}>다음</NextAddBtn>
-        )}
+        <NextAddBtnSet onClick={handleSubmit(handleClick)} hasError={hasErrors}>
+          다음
+        </NextAddBtnSet>
       </div>
       {modal && portalElement
         ? createPortal(
@@ -233,27 +202,7 @@ const ShowProfBtn = styled.button`
   border: none;
   cursor: pointer;
 `;
-const NextAddBtn = styled.button`
-  display: flex;
-  width: 57%;
-  padding: 1rem 0rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  margin-left: 0.4rem;
-  border-radius: 0.75rem;
-  background: #dee2e6;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  cursor: pointer;
-`;
-const NextAddBtnSet = styled.button`
+const NextAddBtnSet = styled.button<{ hasError: FieldError | undefined }>`
   display: flex;
   width: 57%;
   padding: 1rem 0rem;
@@ -262,7 +211,7 @@ const NextAddBtnSet = styled.button`
   gap: 0.625rem;
   margin-left: 0.4rem;
   border: none;
-  background: #2fc4b2;
+  background: ${({ hasError }) => (hasError ? '#dee2e6;' : '#2fc4b2')};
   border-radius: 0.75rem;
   color: #fff;
   text-align: center;
