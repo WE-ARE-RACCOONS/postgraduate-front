@@ -1,16 +1,16 @@
 'use client';
 
-import { useEffect } from 'react';
 import ProgressBar from '@/components/Bar/ProgressBar';
 
 import { addProfileSchema } from '@/app/add-profile/schema';
 import BackHeader from '@/components/Header/BackHeader';
 
+import { FieldError, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import FullModal from '@/components/Modal/FullModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { FieldError, useForm } from 'react-hook-form';
+
 import {
   PROFILE_DIRECTION,
   PROFILE_PLACEHOLDER,
@@ -47,9 +47,6 @@ function AddProfilePage() {
     mode: 'onChange',
   });
 
-  useEffect(() => {
-    trigger();
-  }, []);
   const router = useRouter();
   const { modal, modalHandler, portalElement } = useModal(
     'senior-best-case-portal',
