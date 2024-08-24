@@ -16,11 +16,11 @@ import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import { useRouter } from 'next/navigation';
 import auth from '../../../public/auth_mark.png';
 import arrow from '../../../public/arrow-right-bold.png';
-function SeniorProfile({ data }: SeniorProfileProps) {
+function SeniorProfile({ data, className }: SeniorProfileProps) {
   const router = useRouter();
 
   return (
-    <SeniorProfileBox>
+    <SeniorProfileBox className={className}>
       <SPWrapper>
         <SeniorProfileContent
           onClick={() => {
@@ -39,7 +39,8 @@ function SeniorProfile({ data }: SeniorProfileProps) {
               )}
             </SPnickname>
             <SPmajor>
-              {data.postgradu ? `[${data.postgradu.replace('학교', '')}]` : ''}&nbsp;
+              {data.postgradu ? `[${data.postgradu.replace('학교', '')}]` : ''}
+              &nbsp;
               <div id="professor-str">
                 {data.professor ? `${data.professor} 교수님` : ''}
               </div>

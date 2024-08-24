@@ -1,12 +1,17 @@
 'use client';
-import React from 'react';
+import React, { ComponentPropsWithoutRef } from 'react';
 import { TapStyle } from './FieldTapBar.styled';
 import { sftapType } from '@/types/tap/tap';
 import { sfactiveTabAtom } from '@/stores/tap';
 import { useAtom, useSetAtom } from 'jotai';
 import { SFTAB } from '@/constants/tab/ctap';
 import { pageNumAtom } from '@/stores/home';
-function FieldTapBar() {
+
+interface FieldTapBarProps {
+  className?: string;
+  onClick?: () => void;
+}
+function FieldTapBar(props: FieldTapBarProps) {
   const [fpActiveTab, setFpActiveTab] = useAtom(sfactiveTabAtom);
   const setPageNum = useSetAtom(pageNumAtom);
 
@@ -19,9 +24,13 @@ function FieldTapBar() {
     <div>
       <div style={{ display: 'flex' }}>
         <TapStyle
+          className={props.className}
           style={{ marginRight: '0.6rem' }}
           selected={fpActiveTab === SFTAB.ALL}
-          onClick={() => handleTabClick(SFTAB.ALL)}
+          onClick={() => {
+            handleTabClick(SFTAB.ALL);
+            props?.onClick?.();
+          }}
         >
           전체분야
         </TapStyle>

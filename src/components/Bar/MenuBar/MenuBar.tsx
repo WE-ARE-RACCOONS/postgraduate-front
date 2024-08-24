@@ -90,6 +90,7 @@ function MenuBar(props: MenubarProps) {
       </MenuBox>
       {token ? (
         <MenuBox
+          className="tutorial_mentoring"
           onClick={() => {
             setActiveMenu('mentoring');
             router.push(mentoringPath);
@@ -124,6 +125,7 @@ function MenuBar(props: MenubarProps) {
         </MenuBox>
       ) : (
         <MenuBox
+          className="tutorial_mentoring"
           onClick={() => {
             setActiveMenu('mentoring');
             handleClick();

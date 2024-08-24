@@ -21,6 +21,7 @@ function UnivTapBar() {
         <TapStyle
           selected={fuActiveTab === SMTAB.ALL}
           onClick={() => handleTabClick(SMTAB.ALL)}
+          className="tutorial_school"
         >
           전체선택
         </TapStyle>
