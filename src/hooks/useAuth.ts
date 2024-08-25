@@ -39,7 +39,6 @@ function useAuth() {
 
   /** ADMIN | USER | SENIOR 값에 맞춰 user type 세팅 */
   function setUserType(serverType: string) {
-    console.log(serverType);
     switch (serverType) {
       case USER_TYPE.admin:
         localStorage.setItem('userType', 'admin');

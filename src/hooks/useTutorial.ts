@@ -12,7 +12,7 @@ function useTutorial() {
   const setTutorialFinish = async () => {
     const userType = getUserType();
 
-    if (!userType || userType !== 'junior') {
+    if (!userType || userType !== 'junior' || isTutorialFinish) {
       return;
     }
     setTutorialStepOpen(true);
