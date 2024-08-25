@@ -103,7 +103,7 @@ export default function Home() {
         <SwiperComponent />
       </HomeBannerLayer>
       <HomeFieldLayer>
-        <FieldTapBar className="tutorial_major" />
+        <FieldTapBar />
       </HomeFieldLayer>
       <HomeUnivLayer>
         <UnivTapBar />
@@ -112,7 +112,7 @@ export default function Home() {
         {data && data.length > 0 ? (
           data.map((el, idx) => (
             <div key={idx}>
-              <SeniorProfile data={el} className="tutorial_card" />
+              <SeniorProfile data={el} />
             </div>
           ))
         ) : (

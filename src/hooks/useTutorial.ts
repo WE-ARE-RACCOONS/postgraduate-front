@@ -1,11 +1,11 @@
-import { useSetAtom } from 'jotai';
+import { useSetAtom, useAtom } from 'jotai';
 import useAuth from '@/hooks/useAuth';
 import { useTour } from '@reactour/tour';
 import { isTutorialFinished } from '@/stores/signup';
 import instance from '@/api/api';
 import { useEffect } from 'react';
 function useTutorial() {
-  const setTutorialFinished = useSetAtom(isTutorialFinished);
+  const [isTutorialFinish, setTutorialFinished] = useAtom(isTutorialFinished);
   const { setIsOpen: setTutorialStepOpen } = useTour();
   const { getUserType } = useAuth();
 

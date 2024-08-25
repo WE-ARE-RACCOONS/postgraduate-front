@@ -7,11 +7,7 @@ import { useAtom, useSetAtom } from 'jotai';
 import { SFTAB } from '@/constants/tab/ctap';
 import { pageNumAtom } from '@/stores/home';
 
-interface FieldTapBarProps {
-  className?: string;
-  onClick?: () => void;
-}
-function FieldTapBar(props: FieldTapBarProps) {
+function FieldTapBar() {
   const [fpActiveTab, setFpActiveTab] = useAtom(sfactiveTabAtom);
   const setPageNum = useSetAtom(pageNumAtom);
 
@@ -24,12 +20,11 @@ function FieldTapBar(props: FieldTapBarProps) {
     <div>
       <div style={{ display: 'flex' }}>
         <TapStyle
-          className={props.className}
+          className="tutorial_major"
           style={{ marginRight: '0.6rem' }}
           selected={fpActiveTab === SFTAB.ALL}
           onClick={() => {
             handleTabClick(SFTAB.ALL);
-            props?.onClick?.();
           }}
         >
           전체분야

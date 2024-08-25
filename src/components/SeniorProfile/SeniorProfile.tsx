@@ -16,11 +16,11 @@ import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import { useRouter } from 'next/navigation';
 import auth from '../../../public/auth_mark.png';
 import arrow from '../../../public/arrow-right-bold.png';
-function SeniorProfile({ data, className }: SeniorProfileProps) {
+function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
   return (
-    <SeniorProfileBox className={className}>
+    <SeniorProfileBox className="tutorial_card">
       <SPWrapper>
         <SeniorProfileContent
           onClick={() => {

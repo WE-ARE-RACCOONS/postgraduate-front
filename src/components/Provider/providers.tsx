@@ -16,7 +16,7 @@ const StepText = styled.p<StepTextProps>`
   margin: ${({ margin }) => margin || '0'};
   font-weight: ${({ bold }) => (bold ? '600' : 'normal')};
   line-height: 20px;
-  color: #333537;
+  color: #ffffff;
   padding: 0;
 `;
 const tourSteps = [
@@ -86,10 +86,13 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         styles={{
           close: (base) => ({
             ...base,
-            color: '#333537',
+            color: '#ffffff',
           }),
           popover: (base) => ({
             ...base,
+            color: '#2fc4b2',
+            background: 'none',
+            boxShadow: 'none',
             '--reactour-accent': '#2FC4B2',
           }),
           maskWrapper: (base) => ({
@@ -110,6 +113,10 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           button: (base) => ({
             ...base,
             color: '#ffffff',
+          }),
+          maskRect: (base) => ({
+            ...base,
+            background: 'none',
           }),
         }}
         disableKeyboardNavigation
