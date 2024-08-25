@@ -13,17 +13,22 @@ import DimmedModal from '../components/Modal/DimmedModal';
 import SearchModal from '../components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { isTutorialFinished } from '@/stores/signup';
 import { useTour } from '@reactour/tour';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import { listDataAtom, pageNumAtom } from '@/stores/home';
 import Footer from '@/components/Footer';
 
+import useTutorial from '@/hooks/useTutorial';
+
 export default function Home() {
-  const { setIsOpen: setTutorialOpen } = useTour();
   const { setCurrentPath } = usePrevPath();
   const [data, setData] = useAtom(listDataAtom);
   const [page, setPage] = useAtom(pageNumAtom);
+  const a = useTutorial();
+  console.log(a);
+  const setTutorialFinish = useSetAtom(isTutorialFinished);
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
@@ -98,10 +103,7 @@ export default function Home() {
         <SwiperComponent />
       </HomeBannerLayer>
       <HomeFieldLayer>
-        <FieldTapBar
-          className="tutorial_major"
-          onClick={() => setTutorialOpen(true)}
-        />
+        <FieldTapBar className="tutorial_major" />
       </HomeFieldLayer>
       <HomeUnivLayer>
         <UnivTapBar />

@@ -5,13 +5,20 @@ import { TourProvider } from '@reactour/tour';
 import { Provider as JotaiProvider } from 'jotai';
 import styled from 'styled-components';
 
-const StepText = styled.p`
-  font-size: ${({ size }) => size || '12px'};
-  margin-bottom: ${({ margin }) => margin || '0'};
-  font-weight: ${({ bold }) => (bold ? '500' : 'normal')};
-  line-height: 20px;
-`;
+interface StepTextProps {
+  size?: string;
+  margin?: string;
+  bold?: boolean;
+}
 
+const StepText = styled.p<StepTextProps>`
+  font-size: ${({ size }) => size || '12px'};
+  margin: ${({ margin }) => margin || '0'};
+  font-weight: ${({ bold }) => (bold ? '600' : 'normal')};
+  line-height: 20px;
+  color: #333537;
+  padding: 0;
+`;
 const tourSteps = [
   {
     selector: '.tutorial_major',
@@ -79,7 +86,7 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         styles={{
           close: (base) => ({
             ...base,
-            display: 'none',
+            color: '#333537',
           }),
           popover: (base) => ({
             ...base,

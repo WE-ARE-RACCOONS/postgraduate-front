@@ -5,9 +5,11 @@ import { SetTokenProps } from '@/types/user/user';
 import axios from 'axios';
 import { useAtom } from 'jotai';
 import { useCookies } from 'react-cookie';
+import { Cookies } from 'react-cookie';
 
 function useAuth() {
-  const [cookies, setCookie, removeCookie] = useCookies(['refresh_token']);
+  const cookies = new Cookies();
+  const refresh_token = cookies.get('refreshToken');
   // const [accessTkn, setAccessTkn] = useAtom(accessTokenAtom);
   // const [accessExp, setAccessExp] = useAtom(accessExpireAtom);
   // const [type, setType] = useAtom(userTypeAtom);
@@ -29,11 +31,15 @@ function useAuth() {
   /** cookie에 refresh token 값 및 만료 시간 저장 */
   function setRefreshToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
-    setCookie('refresh_token', props.token, { path: '/', expires });
+    cookies.set('refresh_token', props.token, {
+      path: '/',
+      expires,
+    });
   }
 
   /** ADMIN | USER | SENIOR 값에 맞춰 user type 세팅 */
   function setUserType(serverType: string) {
+    console.log(serverType);
     switch (serverType) {
       case USER_TYPE.admin:
         localStorage.setItem('userType', 'admin');
@@ -84,8 +90,8 @@ function useAuth() {
 
   /** refresh token 반환 */
   function getRefreshToken() {
-    if (cookies.refresh_token) {
-      return cookies.refresh_token;
+    if (refresh_token) {
+      return refresh_token;
     }
     return '';
   }
@@ -182,7 +188,9 @@ function useAuth() {
         localStorage.removeItem('userType');
       }
 
-      removeCookie('refresh_token', { path: '/' });
+      cookies.remove('refresh_token', {
+        path: '/',
+      });
     }
   }
 
