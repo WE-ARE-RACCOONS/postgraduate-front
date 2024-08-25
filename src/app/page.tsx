@@ -26,9 +26,7 @@ export default function Home() {
   const { setCurrentPath } = usePrevPath();
   const [data, setData] = useAtom(listDataAtom);
   const [page, setPage] = useAtom(pageNumAtom);
-  const a = useTutorial();
-  console.log(a);
-  const setTutorialFinish = useSetAtom(isTutorialFinished);
+  const { isTutorialFinish } = useTutorial();
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);

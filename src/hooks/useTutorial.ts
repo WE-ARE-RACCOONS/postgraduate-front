@@ -24,7 +24,7 @@ function useTutorial() {
   useEffect(() => {
     setTutorialFinish();
   }, []);
-  return {};
+  return { isTutorialFinish };
 }
 
 export default useTutorial;
