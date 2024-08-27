@@ -16,6 +16,8 @@
     "@hookform/resolvers": "^3.9.0",
     "@mui/material": "^5.14.18",
     "@mui/styled-engine-sc": "^6.0.0-alpha.6",
+    "@reactour/mask": "^1.1.0",
+    "@reactour/tour": "^3.7.0",
     "@tanstack/react-query": "4.36.1",
     "@tanstack/react-query-devtools": "4.36.1",
     "@typescript-eslint/eslint-plugin": "6.0.0",

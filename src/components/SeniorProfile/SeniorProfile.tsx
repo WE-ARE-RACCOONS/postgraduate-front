@@ -20,7 +20,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
   return (
-    <SeniorProfileBox>
+    <SeniorProfileBox className="tutorial_card">
       <SPWrapper>
         <SeniorProfileContent
           onClick={() => {
@@ -39,7 +39,8 @@ function SeniorProfile({ data }: SeniorProfileProps) {
               )}
             </SPnickname>
             <SPmajor>
-              {data.postgradu ? `[${data.postgradu.replace('학교', '')}]` : ''}&nbsp;
+              {data.postgradu ? `[${data.postgradu.replace('학교', '')}]` : ''}
+              &nbsp;
               <div id="professor-str">
                 {data.professor ? `${data.professor} 교수님` : ''}
               </div>

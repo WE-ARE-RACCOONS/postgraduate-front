@@ -1,5 +1,6 @@
 export interface SeniorProfileProps {
   data: SeniorProfileData;
+  className?: string;
 }
 
 export interface SeniorProfileData {

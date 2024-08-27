@@ -6,12 +6,13 @@ import { useRouter } from 'next/navigation';
 import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
 import { useAtom, useSetAtom } from 'jotai';
-import { socialIdAtom } from '@/stores/signup';
+import { socialIdAtom, isTutorialFinished } from '@/stores/signup';
 import Spinner from '@/components/Spinner';
 import styled from 'styled-components';
 
 function KakaoPage() {
   const setSocialId = useSetAtom(socialIdAtom);
+  const setTutorialFinished = useSetAtom(isTutorialFinished);
   const router = useRouter();
   const { setAccessToken, setRefreshToken, setUserType } = useAuth();
   useEffect(() => {
@@ -47,6 +48,7 @@ function KakaoPage() {
             expires: response.data.refreshExpiration,
           });
           setUserType(response.data.role);
+          setTutorialFinished(response.data.isTutorial);
 
           router.replace('/');
           return;

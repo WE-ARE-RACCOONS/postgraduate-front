@@ -8,15 +8,16 @@ const instance = axios.create({
 });
 
 instance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
+  async (
+    config: InternalAxiosRequestConfig,
+  ): Promise<InternalAxiosRequestConfig> => {
     const { getAccessToken, removeTokens } = useAuth();
-    const accessTkn = getAccessToken();
-    const router = useRouter();
+    const accessTkn = await getAccessToken();
 
-    if (!accessTkn) {
+    if (!accessTkn && typeof window !== 'undefined') {
       // refresh token까지 만료된 경우
       removeTokens();
-      router.replace('/');
+      window.location.href = '/';
     } else {
       config.headers.Authorization = `Bearer ${accessTkn}`;
     }

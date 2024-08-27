@@ -1,6 +1,5 @@
 'use client';
 import MenuBar from '../components/Bar/MenuBar';
-import Login from '../components/kakao/login';
 import { useEffect } from 'react';
 import usePrevPath from '../hooks/usePrevPath';
 import styled from 'styled-components';
@@ -14,15 +13,21 @@ import DimmedModal from '../components/Modal/DimmedModal';
 import SearchModal from '../components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
-import { useAtom, useAtomValue } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { isTutorialFinished } from '@/stores/signup';
+import { useTour } from '@reactour/tour';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import { listDataAtom, pageNumAtom } from '@/stores/home';
 import Footer from '@/components/Footer';
+
+import useTutorial from '@/hooks/useTutorial';
 
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
   const [data, setData] = useAtom(listDataAtom);
   const [page, setPage] = useAtom(pageNumAtom);
+  const { isTutorialFinish } = useTutorial();
+
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
@@ -137,23 +142,7 @@ const HomeLayer = styled.div`
   height: inherit;
   padding-bottom: 3.5rem;
 `;
-const Logo = styled.div`
-  display: flex;
-  .none-name {
-    font-size: 1.3rem;
-  }
-  .bold-name {
-    font-size: 1.3rem;
-    font-weight: 700;
-  }
-`;
-const HomeTopLayer = styled.div`
-  height: 4rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 1rem;
-`;
+
 const HomeBannerLayer = styled.div`
   height: 6.7rem;
   padding: 0 1rem;
