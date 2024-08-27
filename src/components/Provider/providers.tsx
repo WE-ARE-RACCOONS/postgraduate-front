@@ -1,6 +1,7 @@
 'use client';
 import Image from 'next/image';
-import TutorialButtonImage from '../../../public/tutorial_bottom.png';
+import ArrowRight from '../../../public/right_white.png';
+import ArrowLeft from '../../../public/left_white.png';
 import { TourProvider } from '@reactour/tour';
 import { Provider as JotaiProvider } from 'jotai';
 import styled from 'styled-components';
@@ -12,7 +13,7 @@ interface StepTextProps {
 }
 
 const StepText = styled.p<StepTextProps>`
-  font-size: ${({ size }) => size || '12px'};
+  font-size: ${({ size }) => size || '14px'};
   margin: ${({ margin }) => margin || '0'};
   font-weight: ${({ bold }) => (bold ? '600' : 'normal')};
   line-height: 20px;
@@ -24,9 +25,9 @@ const tourSteps = [
     selector: '.tutorial_major',
     content: (
       <div>
-        <StepText size="12px">대학원 김선배에 있는</StepText>
-        <StepText size="12px">모든 선배들을 확인할 수 있어요.</StepText>
-        <StepText size="14px" margin="5px 0" bold>
+        <StepText size="14px">대학원 김선배에 있는</StepText>
+        <StepText size="14px">모든 선배들을 확인할 수 있어요.</StepText>
+        <StepText size="16px" margin={'5px 0'} bold>
           선배 전공분야 확인
         </StepText>
       </div>
@@ -37,11 +38,11 @@ const tourSteps = [
     selector: '.tutorial_school',
     content: (
       <div>
-        <StepText size="14px" margin="5px 0" bold>
+        <StepText size="16px" margin="5px 0" bold>
           선배 학교 확인
         </StepText>
-        <StepText size="12px">대학원 김선배에 있는</StepText>
-        <StepText size="12px">모든 선배들을 확인할 수 있어요.</StepText>
+        <StepText size="14px">대학원 김선배에 있는</StepText>
+        <StepText size="14px">모든 선배들을 확인할 수 있어요.</StepText>
       </div>
     ),
     position: 'right' as const,
@@ -50,13 +51,13 @@ const tourSteps = [
     selector: '.tutorial_card',
     content: (
       <div>
-        <StepText size="14px" margin="5px 0" bold>
+        <StepText size="16px" margin="5px 0" bold>
           선배 프로필
         </StepText>
-        <StepText size="12px">
+        <StepText size="14px">
           내가 원하는 선배가 어떤 것을 연구하는지,
         </StepText>
-        <StepText size="12px">보다 자세한 정보를 확인할 수 있어요.</StepText>
+        <StepText size="14px">보다 자세한 정보를 확인할 수 있어요.</StepText>
       </div>
     ),
     position: 'bottom' as const,
@@ -65,9 +66,9 @@ const tourSteps = [
     selector: '.tutorial_mentoring',
     content: (
       <div>
-        <StepText size="12px">내가 진행하거나</StepText>
-        <StepText size="12px">진행한 멘토링을 확인할 수 있어요.</StepText>
-        <StepText size="14px" margin="5px 0" bold>
+        <StepText size="14px">내가 진행하거나</StepText>
+        <StepText size="14px">진행한 멘토링을 확인할 수 있어요.</StepText>
+        <StepText size="16px" margin="5px 0" bold>
           내 멘토링
         </StepText>
       </div>
@@ -113,6 +114,8 @@ export default function Providers({ children }: { children: React.ReactNode }) {
           button: (base) => ({
             ...base,
             color: '#ffffff',
+            svg: '#ffffff',
+            stroke: '#ffffff',
           }),
           maskRect: (base) => ({
             ...base,
@@ -121,6 +124,32 @@ export default function Providers({ children }: { children: React.ReactNode }) {
         }}
         disableKeyboardNavigation
         steps={tourSteps}
+        nextButton={(props) => (
+          <Image
+            src={ArrowRight}
+            alt="튜토리얼_다음버튼"
+            width={30}
+            height={30}
+            onClick={() => props.setCurrentStep(props.currentStep + 1)}
+            style={{
+              cursor: 'pointer',
+            }}
+            {...props}
+          />
+        )}
+        prevButton={(props) => (
+          <Image
+            src={ArrowLeft}
+            alt="튜토리얼_이전버튼"
+            width={30}
+            height={30}
+            onClick={() => props.setCurrentStep(props.currentStep - 1)}
+            style={{
+              cursor: 'pointer',
+            }}
+            {...props}
+          />
+        )}
       >
         {children}
       </TourProvider>
