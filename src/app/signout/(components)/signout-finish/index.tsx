@@ -7,7 +7,9 @@ import SignOutImage from '/public/signout.png';
 import { useSignOutInfo } from '@/app/signout/signoutContext';
 import NextBtn from '@/components/Button/NextBtn';
 import instance from '@/api/api';
+import { useRouter } from 'next/navigation';
 export function SignOutFinish() {
+  const router = useRouter();
   const { signOutInfo } = useSignOutInfo();
   const _handleSignOutFinish = async () => {
     //회원탈퇴 FLow
@@ -15,12 +17,21 @@ export function SignOutFinish() {
     //회원탈퇴 API -> 토큰 제거 -> 버튼에 GA이벤트..?
     if (signOutInfo) {
       await instance
-        .post('/auth/signout', {
+        .post('/auth/signout/KAKAO', {
           reason: signOutInfo.signOutReason,
           etc: signOutInfo.etc,
         })
-        .then((res) => console.log(res));
+        .then((res) => {
+          _deleteAuthContent();
+          router.push('/');
+        });
     }
+  };
+
+  const _deleteAuthContent = () => {
+    localStorage.removeItem('accessToken');
+    localStorage.removeItem('accessExpire');
+    localStorage.removeItem('userType');
   };
   return (
     <SignOutInfoContainer className="stepper-tab">
