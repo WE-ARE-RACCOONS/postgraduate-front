@@ -11,7 +11,8 @@ export type FullModalType =
   | 'senior-mentoring-time'
   | 'senior-mentoring-spec'
   | 'select-date-calendar'
-  | 'junior-mentoring-spec';
+  | 'junior-mentoring-spec'
+  | 'account-reactive';
 
 export interface FullModalProps {
   modalType: FullModalType;
