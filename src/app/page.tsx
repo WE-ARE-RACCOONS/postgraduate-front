@@ -7,20 +7,19 @@ import SeniorProfile from '../components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '../components/Bar/FieldTapBar/FieldTapBar';
 import UnivTapBar from '../components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '../components/Swiper/Swiper';
-import { createPortal } from 'react-dom';
 import useModal from '../hooks/useModal';
 import DimmedModal from '../components/Modal/DimmedModal';
 import SearchModal from '../components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
 import axios from 'axios';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { isTutorialFinished } from '@/stores/signup';
-import { useTour } from '@reactour/tour';
+
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import { listDataAtom, pageNumAtom } from '@/stores/home';
 import Footer from '@/components/Footer';
 
 import useTutorial from '@/hooks/useTutorial';
+import { overlay } from 'overlay-kit';
 
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
@@ -84,15 +83,9 @@ export default function Home() {
     };
   }, [page]);
 
-  const { modal, modalHandler, portalElement } = useModal(
-    'login-request-portal',
-  );
+  const { modal, modalHandler } = useModal('');
 
-  const {
-    modal: searchModal,
-    modalHandler: searchModalHandler,
-    portalElement: searchPortalElement,
-  } = useModal('search-portal');
+  const { modal: searchModal, modalHandler: searchModalHandler } = useModal('');
 
   return (
     <HomeLayer>
@@ -121,17 +114,29 @@ export default function Home() {
       <MenuBarWrapper>
         <MenuBar modalHandler={modalHandler} />
       </MenuBarWrapper>
-      {modal && portalElement
-        ? createPortal(
-            <DimmedModal modalType="notuser" modalHandler={modalHandler} />,
-            portalElement,
-          )
+
+      {modal
+        ? overlay.open(({ unmount }) => {
+            return (
+              <DimmedModal
+                modalType="notuser"
+                modalHandler={() => {
+                  unmount();
+                }}
+              />
+            );
+          })
         : ''}
-      {searchModal && searchPortalElement
-        ? createPortal(
-            <SearchModal modalHandler={searchModalHandler} />,
-            searchPortalElement,
-          )
+      {searchModal
+        ? overlay.open(({ unmount }) => {
+            return (
+              <SearchModal
+                modalHandler={() => {
+                  unmount();
+                }}
+              />
+            );
+          })
         : ''}
     </HomeLayer>
   );

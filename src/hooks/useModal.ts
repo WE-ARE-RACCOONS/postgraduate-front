@@ -6,7 +6,11 @@ function useModal(portalId: string) {
   const [portalElement, setPortalElement] = useState<Element | null>(null);
 
   useEffect(() => {
-    setPortalElement(document.getElementById(portalId));
+    const portalIdEl = document.getElementById(portalId);
+    if (!portalIdEl) {
+      return;
+    }
+    setPortalElement(portalIdEl);
   }, [modal]);
 
   const modalHandler = () => {
