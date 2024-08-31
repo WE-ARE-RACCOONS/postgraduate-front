@@ -1,5 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
-import { seniorInfoGetFetch } from '@/api/senior/me/seniorInfoGetFetch';
+import {
+  seniorInfoGetFetch,
+  SeniorInfoResponse,
+} from '@/api/senior/me/seniorInfoGetFetch';
 import { objectCompact } from '@/utils/objectCompact';
 
 /**
@@ -24,7 +27,9 @@ export const useSeniorProfileQuery = () =>
         field,
         times,
         ...objectCompact(rest),
-      };
+      } as PropType<SeniorInfoResponse, 'data'>;
     },
     enabled: typeof window !== 'undefined',
+    retry: false,
+    throwOnError: false,
   });
