@@ -57,14 +57,23 @@ function KakaoPage() {
         setSocialId(socialId);
         localStorage.setItem('socialId', socialId);
         if (isDelete) {
-          overlay.open(({}) => {
-            return (
-              <FullModal modalType="account-reactive" modalHandler={() => {}} />
-            );
-          });
-        }
+          const agreeActivateAccount = await overlay.openAsync<boolean>(
+            ({ isOpen, close }) => {
+              return (
+                <div>
+                  <button onClick={() => close(true)}>네</button>
+                  <button onClick={() => close(false)}>아니오</button>
+                </div>
+              );
+            },
+          );
 
-        alert(kakaoAuthFetchRes.data.isDelete);
+          if (agreeActivateAccount) {
+            alert('동의');
+          } else {
+            alert('비동의');
+          }
+        }
       } catch (error) {
         console.error(error);
       }
