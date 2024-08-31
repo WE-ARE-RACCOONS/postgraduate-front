@@ -1,73 +1,76 @@
 'use client';
 
-import React from 'react';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
-import { useAtom, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { socialIdAtom, isTutorialFinished } from '@/stores/signup';
 import Spinner from '@/components/Spinner';
 import styled from 'styled-components';
+import { kakaoAuthFetch } from '@/api/auth/login/kakaoAuthFetch';
+import { overlay } from 'overlay-kit';
+import FullModal from '@/components/Modal/FullModal';
 
 function KakaoPage() {
   const setSocialId = useSetAtom(socialIdAtom);
   const setTutorialFinished = useSetAtom(isTutorialFinished);
   const router = useRouter();
   const { setAccessToken, setRefreshToken, setUserType } = useAuth();
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    axios
-      .post(
-        window.location.hostname.includes('localhost')
-          ? `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/dev/login/KAKAO`
-          : `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/login/KAKAO`,
-        {
-          code: code,
-        },
-      )
-      .then((res) => {
-        const response = res.data;
-        if (response.code == 'AU205') {
-          setSocialId(response.data.socialId);
-          if (typeof window !== undefined) {
-            window.localStorage.setItem('socialId', response.data.socialId);
-          }
-          router.push('/signup/select');
-          return;
-        }
 
-        if (response.code == 'AU204') {
+    const fetchKakaoData = async () => {
+      try {
+        const { data: kakaoAuthFetchRes } = await kakaoAuthFetch({
+          code: code ?? '',
+        });
+
+        const {
+          accessExpiration,
+          accessToken,
+          refreshToken,
+          role,
+          isTutorial,
+          refreshExpiration,
+          socialId,
+          isDelete,
+        } = kakaoAuthFetchRes.data;
+
+        if (kakaoAuthFetchRes.code === 'AU204') {
           setAccessToken({
-            token: response.data.accessToken,
-            expires: response.data.accessExpiration,
+            token: accessToken,
+            expires: accessExpiration,
           });
           setRefreshToken({
-            token: response.data.refreshToken,
-            expires: response.data.refreshExpiration,
+            token: refreshToken,
+            expires: refreshExpiration,
           });
-          setUserType(response.data.role);
-          setTutorialFinished(response.data.isTutorial);
-
+          setUserType(role);
+          setTutorialFinished(isTutorial);
           router.replace('/');
           return;
+          //재가입 여부 입력 받을 때까지 지연
         }
 
-        router.replace('/');
-      })
-      .catch((err) => {
-        console.error(err);
-        router.replace('/');
-      });
-  }, []);
+        setSocialId(socialId);
+        localStorage.setItem('socialId', socialId);
+        if (isDelete) {
+          overlay.open(({}) => {
+            return (
+              <FullModal modalType="account-reactive" modalHandler={() => {}} />
+            );
+          });
+        }
 
-  useEffect(() => {
-    const loginTimeout = setTimeout(() => {
-      router.replace('/');
-    }, 15000);
+        alert(kakaoAuthFetchRes.data.isDelete);
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    return () => clearTimeout(loginTimeout);
+    fetchKakaoData();
   }, []);
 
   return (
