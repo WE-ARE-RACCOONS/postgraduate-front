@@ -29,10 +29,13 @@ const createApiFetch = ({ getSession }: CreateApiFetchParamsType) => {
             if (!config[1].headers) {
               config[1].headers = {};
             }
-
-            // Headers 객체를 변환하여 Authorization 헤더 추가
             const headers = new Headers(config[1].headers);
-            headers.set('Authorization', `Bearer ${session.accessToken}`);
+
+            if (session.accessToken) {
+              // Headers 객체를 변환하여 Authorization 헤더 추가
+              headers.set('Authorization', `Bearer ${session.accessToken}`);
+            }
+
             config[1].headers = Object.fromEntries(headers.entries());
           }
 
