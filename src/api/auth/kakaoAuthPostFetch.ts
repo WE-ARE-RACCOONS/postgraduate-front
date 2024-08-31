@@ -43,7 +43,7 @@ export interface KakaoAuthResponse extends ResponseModel {
 }
 
 /**
- * next-auth kakao login
+ * next-auth kakao login < 백 서버로 요청 >
  */
 export const kakaoAuthPostFetch = (params: KakaoAuthPostFetchParams) =>
   apiFetch<KakaoAuthResponse>('/auth/login/token/KAKAO', {
