@@ -113,12 +113,11 @@ const DropDownContainer = styled.div`
   font-weight: normal;
   justify-content: space-between;
   align-items: center;
-  margin: 10px auto;
   cursor: pointer;
   color: #3e3e3e;
   border: 1px solid #ccc;
   border-radius: 6px;
-  width: 350px;
+  width: 325px;
   margin: 25px auto;
 `;
 

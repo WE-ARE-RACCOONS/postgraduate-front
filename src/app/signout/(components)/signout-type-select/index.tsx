@@ -78,7 +78,6 @@ export const SignOutInfoContainer = styled.div`
 
   > .nextBtn_container {
     margin-top: auto;
-    margin-bottom: 100px;
   }
 `;
 
