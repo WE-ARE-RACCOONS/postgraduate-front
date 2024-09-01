@@ -2,7 +2,7 @@ import instance from '@/api/api';
 import { ResponseModel } from '@/api/model';
 import axios from 'axios';
 
-interface KakaoAuthFetchResponse extends ResponseModel {
+export interface KakaoAuthFetchResponse extends ResponseModel {
   data: {
     accessToken: string;
     accessExpiration: number;

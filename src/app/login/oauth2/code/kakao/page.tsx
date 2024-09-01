@@ -10,6 +10,7 @@ import styled from 'styled-components';
 import { kakaoAuthFetch } from '@/api/auth/login/kakaoAuthFetch';
 import { overlay } from 'overlay-kit';
 import FullModal from '@/components/Modal/FullModal';
+import { rejoinPatchFetch } from '@/api/auth/rejoin/rejoinPatchFetch';
 
 function KakaoPage() {
   const setSocialId = useSetAtom(socialIdAtom);
@@ -61,7 +62,27 @@ function KakaoPage() {
             ({ isOpen, close }) => {
               return (
                 <div>
-                  <button onClick={() => close(true)}>네</button>
+                  <button
+                    onClick={async () =>
+                      await rejoinPatchFetch({
+                        socialId,
+                        rejoin: true,
+                      }).then((res) => {
+                        setAccessToken({
+                          token: accessToken,
+                          expires: accessExpiration,
+                        });
+                        setRefreshToken({
+                          token: refreshToken,
+                          expires: refreshExpiration,
+                        });
+                        setUserType(role);
+                        setTutorialFinished(isTutorial);
+                      })
+                    }
+                  >
+                    네
+                  </button>
                   <button onClick={() => close(false)}>아니오</button>
                 </div>
               );
