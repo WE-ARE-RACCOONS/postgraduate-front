@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
+import AccountReactivation from '@/components/Content/AccountReactivation';
 import { useSetAtom } from 'jotai';
 import { socialIdAtom, isTutorialFinished } from '@/stores/signup';
 import { overlay } from 'overlay-kit';
@@ -9,6 +10,7 @@ import {
   kakaoAuthFetch,
 } from '@/api/auth/login/kakaoAuthFetch';
 import { rejoinPatchFetch } from '@/api/auth/rejoin/rejoinPatchFetch';
+import FullModal from '@/components/Modal/FullModal';
 
 const useKakaoLogin = () => {
   const setSocialId = useSetAtom(socialIdAtom);
@@ -55,28 +57,21 @@ const useKakaoLogin = () => {
         if (isDelete) {
           const agreeActivateAccount = await overlay.openAsync<boolean>(
             ({ close, unmount }) => (
-              <div>
-                <button
-                  onClick={async () => {
-                    const res = await rejoinPatchFetch({
-                      socialId,
-                      rejoin: true,
-                    });
-                    setUserContext(res.data);
-                  }}
-                >
-                  네
-                </button>
-                <button
-                  onClick={async () => {
-                    await rejoinPatchFetch({ socialId, rejoin: false });
-                    close(false);
-                    unmount();
-                  }}
-                >
-                  아니오
-                </button>
-              </div>
+              <FullModal
+                modalType="account-reactive"
+                modalHandler={async () => {
+                  const res = await rejoinPatchFetch({
+                    socialId,
+                    rejoin: true,
+                  });
+                  setUserContext(res.data);
+                }}
+                cancelModalHandler={async () => {
+                  await rejoinPatchFetch({ socialId, rejoin: false });
+                  close(false);
+                  unmount();
+                }}
+              />
             ),
           );
           if (!agreeActivateAccount) {
