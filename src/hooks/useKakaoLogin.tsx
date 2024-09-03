@@ -71,7 +71,6 @@ const useKakaoLogin = () => {
                     () => {
                       close(false);
                       unmount();
-                      router.push('/');
                     },
                   );
                 }}
