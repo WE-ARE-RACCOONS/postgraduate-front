@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 import NextBtn from '@/components/Button/NextBtn';
 
+import { BtnStyleNon } from '@/components/Button/NextBtn/NextBtn.styled';
 interface AccountReactivationProps {
   onActive?: () => void;
   onNonActive?: () => void;
@@ -50,7 +51,7 @@ function AccountReactivation({
         비활성화가 중단됩니다.
       </div>
       <NextBtn kind="route" btnText="재활성화합니다." onClick={onActive} />
-      <NextBtn kind="route-non" btnText="아니오." onClick={onNonActive} />
+      <BtnStyleNon onClick={onNonActive}>아니오.</BtnStyleNon>
     </Container>
   );
 }

@@ -67,9 +67,13 @@ const useKakaoLogin = () => {
                   setUserContext(res.data);
                 }}
                 cancelModalHandler={async () => {
-                  await rejoinPatchFetch({ socialId, rejoin: false });
-                  close(false);
-                  unmount();
+                  await rejoinPatchFetch({ socialId, rejoin: false }).then(
+                    () => {
+                      close(false);
+                      unmount();
+                      router.push('/');
+                    },
+                  );
                 }}
               />
             ),
