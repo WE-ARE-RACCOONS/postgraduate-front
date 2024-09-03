@@ -56,7 +56,7 @@ export const SignOutInfoContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100vh;
+  height: 80vh;
 
   > h1 {
     font-size: 20px;

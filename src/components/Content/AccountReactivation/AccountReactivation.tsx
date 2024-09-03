@@ -9,7 +9,7 @@ interface AccountReactivationProps {
 
 const Container = styled.div`
   width: 100%;
-  height: 100vh; /* 전체 화면 높이에 맞춤 */
+  height: 100vh;
   padding: 20px;
   display: flex;
   justify-content: center;
