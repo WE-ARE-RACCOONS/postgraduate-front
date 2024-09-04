@@ -11,12 +11,19 @@ import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/
 import SelectCalendar from '@/components/Content/SelectCalendar';
 import { firAbleTimeAtom } from '@/stores/mentoring';
 import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
+import AccountReactivation from '@/components/Content/AccountReactivation';
 function FullModal(props: FullModalProps) {
   return (
     <>
       <FullModalContainer>
         {props.modalType == 'best-case' && (
           <MBestCaseContent modalHandler={props.modalHandler} />
+        )}
+        {props.modalType === 'account-reactive' && (
+          <AccountReactivation
+            onActive={props.modalHandler}
+            onNonActive={props.cancelModalHandler}
+          />
         )}
         {props.modalType == 'login-request' && (
           <MyLoginRequest modalHandler={props.modalHandler} />

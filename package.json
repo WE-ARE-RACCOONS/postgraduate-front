@@ -29,6 +29,7 @@
     "jotai": "^2.5.1",
     "jquery": "^3.7.1",
     "next": "13.5.4",
+    "overlay-kit": "^1.4.1",
     "prettier": "3.0.3",
     "react": "18.2.0",
     "react-calendar": "^4.7.0",
