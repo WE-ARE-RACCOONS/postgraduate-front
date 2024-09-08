@@ -7,6 +7,7 @@ import useModal from '@/hooks/useModal';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtomValue } from 'jotai';
+import { overlay } from 'overlay-kit';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';

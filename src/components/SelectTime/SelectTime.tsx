@@ -8,19 +8,19 @@ import {
 } from './SelectTime.styled';
 import Image from 'next/image';
 import down_arrow from '../../../public/arrow-down.png';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
-import FullModal from '../Modal/FullModal';
 import { useAtomValue } from 'jotai';
 import { useEffect, useState } from 'react';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
+import useFullModal from '@/hooks/useFullModal';
 
 function SelectTime(props: SelectTimeProps) {
   const targetAtomValue = useAtomValue(props.targetAtom);
   const [thisFlag, setThisFlag] = useState(false);
-  const { modal, modalHandler, portalElement } = useModal(
-    'select-date-calendar',
-  );
+
+  const { openModal: openSelectDateCalendarModal } = useFullModal({
+    modalType: 'select-date-calendar',
+    modalHandler: () => {},
+  });
   const [inputValue, setInputValue] = useState(
     `${props.numStr}${MENTORING_SCHEDULE.selectPlaceholder}`,
   );
@@ -60,21 +60,14 @@ function SelectTime(props: SelectTimeProps) {
 
   return (
     <SelectTimeWrapper>
-      <SelectTimeContainer onClick={modalHandler} $alertFlag={thisFlag}>
+      <SelectTimeContainer
+        onClick={openSelectDateCalendarModal}
+        $alertFlag={thisFlag}
+      >
         <SelectTimeContent>
           <SelectTimeText className="disabled">{inputValue}</SelectTimeText>
           <Image id="down-arrow" src={down_arrow} alt="아래 화살표" />
         </SelectTimeContent>
-        {modal && portalElement
-          ? createPortal(
-              <FullModal
-                modalType="select-date-calendar"
-                modalHandler={modalHandler}
-                targetAtom={props.targetAtom}
-              />,
-              portalElement,
-            )
-          : null}
       </SelectTimeContainer>
       {thisFlag && (
         <SelectTimeValidator>일정이 선택되지 않았습니다.</SelectTimeValidator>

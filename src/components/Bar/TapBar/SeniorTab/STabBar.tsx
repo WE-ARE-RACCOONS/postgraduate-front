@@ -3,12 +3,10 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import {
   TapStyle,
-  MentoringMapBox,
   TabWrap,
   TabResultContainer,
   TabResult,
   MentoringBox,
-  DoneBtnBox,
   NoMentoring,
 } from './STabBrar.styled';
 import { useAtom, useAtomValue } from 'jotai';
@@ -21,16 +19,14 @@ import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
 import { createPortal } from 'react-dom';
-import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
-import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import FullModal from '@/components/Modal/FullModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import useFullModal from '@/hooks/useFullModal';
 import { SMCancelAtom } from '@/stores/condition';
 function STabBar() {
   const router = useRouter();
@@ -40,20 +36,24 @@ function STabBar() {
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
+
+  const { openModal: openSeniorMentoringSpecModal } = useFullModal({
+    modalType: 'senior-mentoring-spec',
+    modalHandler: () => {},
+  });
+
+  const { openModal: openAcceptMentoringModal } = useFullModal({
+    modalHandler: () => {},
+    modalType: 'accept-mentoring',
+  });
   const { getAccessToken, removeTokens } = useAuth();
-  const { modal, modalHandler, portalElement } = useModal(
-    'senior-mentoring-detail',
-  );
+
   const {
     modal: cancelModal,
     modalHandler: cancelModalHandler,
     portalElement: cancelPortalElement,
   } = useModal('senior-mentoring-cancel');
-  const {
-    modal: acceptModal,
-    modalHandler: acceptModalHandler,
-    portalElement: acceptPortalElement,
-  } = useModal('senior-mentoring-accept');
+
   const {
     modal: successModal,
     modalHandler: successModalHandler,
@@ -117,7 +117,7 @@ function STabBar() {
                         ? '신청서 보고 수락하기'
                         : '신청서 보기'
                     }
-                    modalHandler={modalHandler}
+                    modalHandler={openSeniorMentoringSpecModal}
                     onClick={() => {
                       setModalType('senior');
                       setSelectedMentoringId(el.mentoringId);
@@ -174,18 +174,7 @@ function STabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-      {modal && portalElement
-        ? createPortal(
-            <FullModal
-              modalType="senior-mentoring-spec"
-              modalHandler={modalHandler}
-              cancelModalHandler={cancelModalHandler}
-              acceptModalHandler={acceptModalHandler}
-              mentoringId={selectedMentoringId || 0}
-            />,
-            portalElement,
-          )
-        : null}
+
       {cancelModal && cancelPortalElement
         ? createPortal(
             <SmentoringCancel
@@ -196,15 +185,7 @@ function STabBar() {
             cancelPortalElement,
           )
         : null}
-      {acceptModal && acceptPortalElement
-        ? createPortal(
-            <FullModal
-              modalType="accept-mentoring"
-              modalHandler={acceptModalHandler}
-            />,
-            acceptPortalElement,
-          )
-        : null}
+
       {successModal && cancelPortalElement
         ? createPortal(
             <DimmedModal

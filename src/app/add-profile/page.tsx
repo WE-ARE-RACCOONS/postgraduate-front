@@ -7,7 +7,6 @@ import BackHeader from '@/components/Header/BackHeader';
 
 import { FieldError, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import FullModal from '@/components/Modal/FullModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
 
@@ -17,7 +16,6 @@ import {
   PROFILE_SUB_DIRECTION,
   PROFILE_TITLE,
 } from '@/constants/form/cProfileForm';
-import useModal from '@/hooks/useModal';
 import {
   sMultiIntroduce,
   sRecommendedFor,
@@ -25,16 +23,19 @@ import {
 } from '@/stores/senior';
 import { useAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import useFullModal from '@/hooks/useFullModal';
 
 function AddProfilePage() {
+  const { openModal } = useFullModal({
+    modalType: 'best-case',
+    modalHandler: () => {},
+  });
   const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const {
     register,
-    trigger,
     handleSubmit,
     formState: { errors },
   } = useForm({
@@ -48,9 +49,7 @@ function AddProfilePage() {
   });
 
   const router = useRouter();
-  const { modal, modalHandler, portalElement } = useModal(
-    'senior-best-case-portal',
-  );
+
   const hasErrors =
     errors.multiIntro || errors.recommended || errors.singleIntro;
 
@@ -126,7 +125,7 @@ function AddProfilePage() {
           />
         )}
       </div>
-      <ShowProfBtn onClick={modalHandler}>프로필 예시 보기</ShowProfBtn>
+      <ShowProfBtn onClick={openModal}>프로필 예시 보기</ShowProfBtn>
       <div style={{ display: 'flex', marginTop: '2rem' }}>
         <PrevBtn
           onClick={() => {
@@ -139,12 +138,6 @@ function AddProfilePage() {
           다음
         </NextAddBtnSet>
       </div>
-      {modal && portalElement
-        ? createPortal(
-            <FullModal modalType="best-case" modalHandler={modalHandler} />,
-            portalElement,
-          )
-        : null}
     </AddProfilePageContainer>
   );
 }

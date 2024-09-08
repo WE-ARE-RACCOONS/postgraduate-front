@@ -34,17 +34,19 @@ import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
 
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
   const [modalType, setModalType] = useState<ModalType>('postgradu');
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
-  const {
-    modal: timeModal,
-    modalHandler: timeModalHandler,
-    portalElement: timePortalElement,
-  } = useModal('senior-mentoring-time-portal');
+
+  const { openModal: openSeniorMentoringTimeModal } = useFullModal({
+    modalHandler: () => {},
+    modalType: 'senior-mentoring-time',
+  });
+
   const [flag, setFlag] = useState(false);
   const [labFlag, setLabFlag] = useState(false);
   const [fieldFlag, setFieldFlag] = useState(false);
@@ -452,7 +454,7 @@ function EditProfilePage() {
                 >
                   <div
                     id="setData-btn"
-                    onClick={timeModalHandler}
+                    onClick={openSeniorMentoringTimeModal}
                     style={{ cursor: 'pointer' }}
                   >
                     추가하기
@@ -462,7 +464,7 @@ function EditProfilePage() {
             ) : (
               <SetDataForm>
                 <div id="setDataF-msg">입력된 정기 일정이 없습니다.</div>
-                <div id="setData-btn" onClick={timeModalHandler}>
+                <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
                   + 추가하기
                 </div>
               </SetDataForm>
@@ -485,15 +487,6 @@ function EditProfilePage() {
         ? createPortal(
             <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
             portalElement,
-          )
-        : null}
-      {timeModal && timePortalElement
-        ? createPortal(
-            <FullModal
-              modalType="senior-mentoring-time"
-              modalHandler={timeModalHandler}
-            />,
-            timePortalElement,
           )
         : null}
     </div>

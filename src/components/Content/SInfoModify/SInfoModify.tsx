@@ -34,12 +34,14 @@ import {
 import NextBtn from '@/components/Button/NextBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
 import { bankNameAtom } from '@/stores/bankName';
+import { overlay } from 'overlay-kit';
 import { ModalType } from '@/types/modal/riseUp';
 import useModal from '@/hooks/useModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { createPortal } from 'react-dom';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import useFullModal from '@/hooks/useFullModal';
 
 function SInfoModify({
   modalHandler,
@@ -48,13 +50,8 @@ function SInfoModify({
   bModalHandler: () => void;
   modalHandler: () => void;
 }) {
-  const router = useRouter();
   const [flag, setFlag] = useState(false);
-  const {
-    modal: BModal,
-    modalHandler: BModalHandler,
-    portalElement: BPotalElement,
-  } = useModal('senior-info-portal');
+
   const [modalType, setModalType] = useState<ModalType>('bank');
   const [submitFlag, setSubmitFlag] = useState(false);
   const [accHolder, setAccHolder] = useState('');
@@ -269,6 +266,10 @@ function SInfoModify({
             btnText={bank ? bank : '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}
             onClick={() => {
+              overlay.open(({ unmount }) => {
+                return <RiseUpModal modalHandler={unmount} modalType="bank" />;
+              });
+              bModalHandler();
               setModalType('bank');
             }}
           />

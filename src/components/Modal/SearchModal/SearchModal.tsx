@@ -8,7 +8,7 @@ export default function SearchModal(props: SearchModalProps) {
   const ModalClick = () => {
     props.modalHandler();
   };
-  console.log(props.modalHandler);
+
   return (
     <SearchModalBgBox onClick={ModalClick}>
       <SearchModalInput onClick={(e) => e.stopPropagation()}>

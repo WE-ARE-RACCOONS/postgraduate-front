@@ -9,7 +9,6 @@ import { useAtom } from 'jotai';
 import NotLmypage from '../../components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '../../hooks/useModal';
 import { createPortal } from 'react-dom';
-import FullModal from '../../components/Modal/FullModal';
 import DimmedModal from '../../components/Modal/DimmedModal';
 import { userType } from '../../types/user/user';
 import SalaryBox from '../../components/Box/SalaryBox';
@@ -23,6 +22,7 @@ import findExCode from '@/utils/findExCode';
 import Footer from '@/components/Footer';
 import { certifiRegAtom, profileRegAtom } from '@/stores/signup';
 import { useRouter } from 'next/navigation';
+import useFullModal from '@/hooks/useFullModal';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -32,9 +32,7 @@ function MyPage() {
   const [certifiReg, setCertifiReg] = useAtom(certifiRegAtom);
   const [profileReg, setProfileReg] = useAtom(profileRegAtom);
   const [senior, setSenior] = useAtom(mySeniorId);
-  const { modal, modalHandler, portalElement } = useModal(
-    'login-request-full-portal',
-  );
+
   const {
     modal: BModal,
     modalHandler: BModalHandler,
@@ -55,21 +53,22 @@ function MyPage() {
     modalHandler: suggestModalHandler,
     portalElement: suggesPortalElement,
   } = useModal('suggest-mypage-portal');
-  const {
-    modal: infoModal,
-    modalHandler: infoHandler,
-    portalElement: infoPortalElement,
-  } = useModal('senior-info-modify-portal');
+
   const {
     modal: authModal,
     modalHandler: authHandler,
     portalElement: authPortalElement,
   } = useModal('senior-auth-portal');
-  const {
-    modal: loginRequestModal,
-    modalHandler: loginRequestHandler,
-    portalElement: loginRequestElement,
-  } = useModal('login-request-portal');
+
+  const { openModal: openSeniorInfoModifyModal } = useFullModal({
+    modalType: 'senior-info-modify',
+    modalHandler: () => {},
+  });
+
+  const { openModal: openLoginRequestModal } = useFullModal({
+    modalType: 'login-request',
+    modalHandler: () => {},
+  });
 
   const { getAccessToken, getUserType, removeTokens } = useAuth();
   const [accessTkn, setAccessTkn] = useState('');
@@ -178,7 +177,7 @@ function MyPage() {
           />
         </div>
       ) : (
-        <NotLmypage modalHandler={modalHandler}></NotLmypage>
+        <NotLmypage modalHandler={openLoginRequestModal}></NotLmypage>
       )}
       <div
         style={{
@@ -191,13 +190,7 @@ function MyPage() {
         <CustomerCenter />
         <Footer />
       </div>
-      <MenuBar modalHandler={loginRequestHandler} />
-      {modal && portalElement
-        ? createPortal(
-            <FullModal modalType="login-request" modalHandler={modalHandler} />,
-            portalElement,
-          )
-        : ''}
+      <MenuBar modalHandler={openLoginRequestModal} />
       {seniorChangemodal && seniorChangePortalElement
         ? createPortal(
             <DimmedModal
@@ -217,21 +210,13 @@ function MyPage() {
         ? createPortal(
             <DimmedModal
               modalType="mypageSuggest"
-              infoHandler={infoHandler}
+              infoHandler={openSeniorInfoModifyModal}
               modalHandler={suggestModalHandler}
             />,
             suggesPortalElement,
           )
         : ''}
-      {infoModal && infoPortalElement
-        ? createPortal(
-            <FullModal
-              modalType="senior-info-modify"
-              modalHandler={infoHandler}
-            />,
-            infoPortalElement,
-          )
-        : null}
+
       {BModal && BPotalElement
         ? createPortal(
             <RiseUpModal modalHandler={BModalHandler} modalType={'bank'} />,
@@ -246,15 +231,6 @@ function MyPage() {
               modalHandler={authHandler}
             />,
             authPortalElement,
-          )
-        : null}
-      {loginRequestModal && loginRequestElement
-        ? createPortal(
-            <DimmedModal
-              modalType="notuser"
-              modalHandler={loginRequestHandler}
-            />,
-            loginRequestElement,
           )
         : null}
     </div>
