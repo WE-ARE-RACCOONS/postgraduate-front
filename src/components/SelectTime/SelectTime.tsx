@@ -19,7 +19,7 @@ function SelectTime(props: SelectTimeProps) {
 
   const { openModal: openSelectDateCalendarModal } = useFullModal({
     modalType: 'select-date-calendar',
-    modalHandler: () => {},
+    targetAtom: props.targetAtom,
   });
   const [inputValue, setInputValue] = useState(
     `${props.numStr}${MENTORING_SCHEDULE.selectPlaceholder}`,

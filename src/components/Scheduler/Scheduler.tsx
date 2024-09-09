@@ -17,7 +17,6 @@ function Scheduler() {
 
   const { openModal: openSeniorMentoringTimeModal } = useFullModal({
     modalType: 'senior-mentoring-time',
-    modalHandler: () => {},
   });
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
