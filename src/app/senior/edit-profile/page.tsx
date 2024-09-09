@@ -43,7 +43,6 @@ function EditProfilePage() {
   const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
 
   const { openModal: openSeniorMentoringTimeModal } = useFullModal({
-    modalHandler: () => {},
     modalType: 'senior-mentoring-time',
   });
 

@@ -44,7 +44,6 @@ function convertDateType(date: string) {
 function TabBar() {
   const { openModal: openJuniorMentoringSpecModal } = useFullModal({
     modalType: 'junior-mentoring-spec',
-    modalHandler: () => {},
   });
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');

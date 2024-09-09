@@ -29,7 +29,6 @@ import useFullModal from '@/hooks/useFullModal';
 function AddProfilePage() {
   const { openModal } = useFullModal({
     modalType: 'best-case',
-    modalHandler: () => {},
   });
   const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);

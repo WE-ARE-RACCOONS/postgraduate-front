@@ -39,12 +39,10 @@ function STabBar() {
 
   const { openModal: openSeniorMentoringSpecModal } = useFullModal({
     modalType: 'senior-mentoring-spec',
-    modalHandler: () => {},
   });
 
   const { openModal: openAcceptMentoringModal } = useFullModal({
     modalHandler: () => {},
-    modalType: 'accept-mentoring',
   });
   const { getAccessToken, removeTokens } = useAuth();
 

@@ -62,12 +62,10 @@ function MyPage() {
 
   const { openModal: openSeniorInfoModifyModal } = useFullModal({
     modalType: 'senior-info-modify',
-    modalHandler: () => {},
   });
 
   const { openModal: openLoginRequestModal } = useFullModal({
     modalType: 'login-request',
-    modalHandler: () => {},
   });
 
   const { getAccessToken, getUserType, removeTokens } = useAuth();

@@ -6,7 +6,7 @@ import { useState } from 'react';
 interface UseFullModalProps extends FullModalProps {
   overlayId?: string;
 }
-const useFullModal = ({ ...props }: UseFullModalProps) => {
+const useFullModal = ({ ...props }: Partial<UseFullModalProps>) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const openModal = () => {
@@ -16,7 +16,7 @@ const useFullModal = ({ ...props }: UseFullModalProps) => {
         return (
           <FullModal
             {...props}
-            modalType={props.modalType}
+            modalType={props?.modalType ?? 'best-case'}
             modalHandler={() => {
               if (props.modalHandler) {
                 props.modalHandler();
