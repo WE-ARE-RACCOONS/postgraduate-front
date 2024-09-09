@@ -1,27 +1,20 @@
 import {
-  SeniorManageAuthBox,
   SeniorManageContainer,
   SeniorManageContentContainer,
-  SeniorManageAuthValue,
 } from './SeniorManage.styled';
 import ContentComponent from '../../Box/ContentBox';
 import TitleComponent from '../../Box/TitleBox';
 import { SeniorManageProps } from '@/types/profile/seniorManage';
-import { certiRegType } from '@/types/profile/profile';
+
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
-import FullModal from '@/components/Modal/FullModal';
-import DimmedModal from '@/components/Modal/DimmedModal';
 import Router, { useRouter } from 'next/navigation';
-import { mySeniorId } from '@/stores/senior';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import { userType } from '@/types/user/user';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
 import findExCode from '@/utils/findExCode';
 import useFullModal from '@/hooks/useFullModal';
-import { useEffect } from 'react';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
   const {
@@ -37,12 +30,11 @@ function SeniorManage(props: SeniorManageProps) {
 
   const { openModal: _openSeniorMyProfileModal } = useFullModal({
     modalType: 'senior-my-profile',
-    modalHandler: () => {},
   });
 
   const { openModal: openSeniorInfoModifyModal } = useFullModal({
     modalType: 'senior-info-modify',
-    modalHandler: () => {},
+    bModalHandler: props.modalHandler,
   });
 
   const {
