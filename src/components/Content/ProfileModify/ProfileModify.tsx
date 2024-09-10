@@ -15,8 +15,6 @@ import SingleValidator from '@/components/Validator/SingleValidator';
 import ClickedBtn from '@/components/Button/ClickedBtn';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtom } from 'jotai';
@@ -104,7 +102,7 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
     overlay.open(({ unmount }) => {
       return (
         <RiseUpModal
-          modalType="keyword"
+          modalType="field"
           modalHandler={() => {
             unmount();
           }}

@@ -15,6 +15,7 @@ import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
 import findExCode from '@/utils/findExCode';
 import useFullModal from '@/hooks/useFullModal';
+import DimmedModal from '@/components/Modal/DimmedModal';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
   const {

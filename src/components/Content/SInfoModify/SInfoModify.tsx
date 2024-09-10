@@ -7,7 +7,6 @@ import {
   ValidatorBox,
 } from './SInfoModify.styled';
 import x_icon from '../../../../public/x.png';
-import user_icon from '../../../../public/user.png';
 import camera_icon from '../../../../public/camera.png';
 import Image from 'next/image';
 import RoundedImage from '@/components/Image/RoundedImage';
@@ -15,13 +14,8 @@ import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useEffect, useRef, useState } from 'react';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import ClickedBtn from '@/components/Button/ClickedBtn';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import {
-  StaticImageData,
-  StaticImport,
-} from 'next/dist/shared/lib/get-img-props';
 import { useAtom, useAtomValue } from 'jotai';
 import {
   changeNickname,
@@ -36,12 +30,8 @@ import ModalBtn from '@/components/Button/ModalBtn';
 import { bankNameAtom } from '@/stores/bankName';
 import { overlay } from 'overlay-kit';
 import { ModalType } from '@/types/modal/riseUp';
-import useModal from '@/hooks/useModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import { createPortal } from 'react-dom';
-import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
-import useFullModal from '@/hooks/useFullModal';
 
 function SInfoModify({
   modalHandler,
@@ -266,11 +256,17 @@ function SInfoModify({
             btnText={bank ? bank : '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}
             onClick={() => {
-              overlay.open(({ unmount }) => {
-                return <RiseUpModal modalHandler={unmount} modalType="bank" />;
-              });
-              bModalHandler();
               setModalType('bank');
+              overlay.open(({ unmount, close }) => {
+                return (
+                  <RiseUpModal
+                    modalHandler={() => {
+                      unmount();
+                    }}
+                    modalType="bank"
+                  />
+                );
+              });
             }}
           />
         </div>

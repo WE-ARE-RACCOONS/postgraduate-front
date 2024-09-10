@@ -37,12 +37,8 @@ function STabBar() {
     setActiveTab(tabIndex);
   };
 
-  const { openModal: openSeniorMentoringSpecModal } = useFullModal({
-    modalType: 'senior-mentoring-spec',
-  });
-
   const { openModal: openAcceptMentoringModal } = useFullModal({
-    modalHandler: () => {},
+    modalType: 'accept-mentoring',
   });
   const { getAccessToken, removeTokens } = useAuth();
 
@@ -61,6 +57,14 @@ function STabBar() {
     null,
   );
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
+
+  const { openModal: openSeniorMentoringSpecModal } = useFullModal({
+    modalType: 'senior-mentoring-spec',
+    mentoringId: selectedMentoringId ?? 0,
+    cancelModalHandler: cancelModalHandler,
+    acceptModalHandler: openAcceptMentoringModal,
+  });
+
   const SMCancel = useAtomValue(SMCancelAtom);
   useEffect(() => {
     if (SMCancel === true) {
