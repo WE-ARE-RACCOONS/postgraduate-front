@@ -261,6 +261,7 @@ function SInfoModify({
                 return (
                   <RiseUpModal
                     modalHandler={() => {
+                      close();
                       unmount();
                     }}
                     modalType="bank"

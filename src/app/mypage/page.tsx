@@ -23,6 +23,7 @@ import Footer from '@/components/Footer';
 import { certifiRegAtom, profileRegAtom } from '@/stores/signup';
 import { useRouter } from 'next/navigation';
 import useFullModal from '@/hooks/useFullModal';
+import { overlay } from 'overlay-kit';
 
 function MyPage() {
   const [nickName, setnickName] = useState<string | null>(null);
@@ -215,12 +216,6 @@ function MyPage() {
           )
         : ''}
 
-      {BModal && BPotalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={BModalHandler} modalType={'bank'} />,
-            BPotalElement,
-          )
-        : null}
       {authModal && authPortalElement
         ? createPortal(
             <DimmedModal
