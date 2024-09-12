@@ -25,31 +25,43 @@ export const SeniorProfileImg = styled.img`
 `;
 
 export const SeniorProfileInfo = styled.div`
-  height: 4rem;
-  margin-top: 1.5rem;
+  height: 74px;
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 `;
 
 export const SPmajor = styled.div`
   color: #555555;
   display: flex;
+  flex-direction: column;
   font-weight: 600;
+  font-size: 16px;
   font-size: 1rem;
-  #professor-str {
+
+  .professor-str {
+    margin-top: 3px;
+    line-height: 20px;
+    font-size: 14px;
     font-weight: 600;
+  }
+  span {
+    line-height: 20px;
+    font-size: 14px;
+    font-weight: 400;
   }
 `;
 
 export const SPnickname = styled.div`
-  font-weight: 600;
-  color: #333537;
+  font-weight: 700;
+  line-height: 16.8px;
+  color: #21b1a0;
   padding: 0.1rem 0;
-  font-size: 1.12rem;
+  font-size: 12px;
   display: flex;
   #nickname-str {
-    color: #64686c;
-    font-weight: 400;
-    font-size: 0.75rem;
-    margin-top: 0.3rem;
+    font-weight: 500;
   }
 `;
 
@@ -69,7 +81,8 @@ export const Keyword = styled.div`
   height: 1.75rem;
   padding: 0.31rem 0.63rem;
   border-radius: 0.25rem;
-  background-color: rgba(47, 196, 178, 0.1);
+
+  background: rgba(124, 143, 141, 0.1);
   margin-left: 0.25rem;
   font-size: 0.75rem;
   white-space: nowrap;
