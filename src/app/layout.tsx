@@ -33,7 +33,6 @@ export default function RootLayout({
               <div id="junior-mentoring-cancel"></div>
               <div id="senior-profile-portal"></div>
               <div id="login-request-full-portal"></div>
-              <div id="search-portal"></div>
               <div id="senior-request-portal"></div>
               <div id="junior-request-portal"></div>
               <div id="profile-modify-portal"></div>

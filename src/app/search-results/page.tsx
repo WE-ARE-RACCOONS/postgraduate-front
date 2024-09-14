@@ -8,9 +8,7 @@ import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
 import SearchDropDown from '@/components/DropDown/SearchDropDown';
-import useModal from '@/hooks/useModal';
 import SearchModal from '@/components/Modal/SearchModal';
-import { createPortal } from 'react-dom';
 import Spinner from '@/components/Spinner';
 import { SeniorProfileData } from '@/types/profile/seniorProfile';
 
@@ -23,11 +21,6 @@ function SearchResultPage() {
   const [page, setPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
   const [length, setLength] = useState(0);
-  const {
-    modal: searchModal,
-    modalHandler: searchModalHandler,
-    portalElement: searchPortalElement,
-  } = useModal('search-portal');
 
   useEffect(() => {
     setIsLoading(true);
@@ -110,9 +103,6 @@ function SearchResultPage() {
             }}
           />
         </SearchReasultOut>
-        <SearchReasultTerm onClick={searchModalHandler}>
-          {searchTerm}
-        </SearchReasultTerm>
       </SearchReasult>
       <Searchfilter>
         <SearchFcount>총 {length}건</SearchFcount>
@@ -136,12 +126,6 @@ function SearchResultPage() {
           <div>해당하는 선배가 없어요</div>
         )}
       </SearchReasultProfile>
-      {searchModal && searchPortalElement
-        ? createPortal(
-            <SearchModal modalHandler={searchModalHandler} />,
-            searchPortalElement,
-          )
-        : ''}
     </>
   );
 }
