@@ -1,26 +1,21 @@
 import {
-  SeniorManageAuthBox,
   SeniorManageContainer,
   SeniorManageContentContainer,
-  SeniorManageAuthValue,
 } from './SeniorManage.styled';
 import ContentComponent from '../../Box/ContentBox';
 import TitleComponent from '../../Box/TitleBox';
 import { SeniorManageProps } from '@/types/profile/seniorManage';
-import { certiRegType } from '@/types/profile/profile';
+
 import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
-import FullModal from '@/components/Modal/FullModal';
-import DimmedModal from '@/components/Modal/DimmedModal';
 import Router, { useRouter } from 'next/navigation';
-import { mySeniorId } from '@/stores/senior';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import { userType } from '@/types/user/user';
 import { socialIdAtom, userTypeAtom } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
-import { useEffect } from 'react';
 import findExCode from '@/utils/findExCode';
+import useFullModal from '@/hooks/useFullModal';
+import DimmedModal from '@/components/Modal/DimmedModal';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
   const {
@@ -30,26 +25,25 @@ function SeniorManage(props: SeniorManageProps) {
     setRefreshToken,
     removeTokens,
   } = useAuth();
-  const { modal, modalHandler, portalElement } = useModal(
-    'senior-my-profile-portal',
-  );
+
   const [socialId, setSocialId] = useAtom(socialIdAtom);
   const setuserTypeAtom = useSetAtom(userTypeAtom);
-  const {
-    modal: modifyModal,
-    modalHandler: modifyHandler,
-    portalElement: modifyPortal,
-  } = useModal('profile-modify-portal');
+
+  const { openModal: _openSeniorMyProfileModal } = useFullModal({
+    modalType: 'senior-my-profile',
+  });
+
+  const { openModal: openSeniorInfoModifyModal } = useFullModal({
+    modalType: 'senior-info-modify',
+    bModalHandler: props.modalHandler,
+  });
+
   const {
     modal: setJModal,
     modalHandler: juniorHandler,
     portalElement: juniorPortal,
   } = useModal('junior-request-portal');
-  const {
-    modal: infoModal,
-    modalHandler: infoHandler,
-    portalElement: infoPortal,
-  } = useModal('senior-info-modify-portal');
+
   const {
     modal: registerModal,
     modalHandler: registerHandler,
@@ -167,7 +161,10 @@ function SeniorManage(props: SeniorManageProps) {
     <SeniorManageContainer>
       <SeniorManageContentContainer>
         <TitleComponent title="계정 관리" />
-        <ContentComponent content="계정 설정" onClick={infoHandler} />
+        <ContentComponent
+          content="계정 설정"
+          onClick={openSeniorInfoModifyModal}
+        />
         <ContentComponent content="내 프로필 보기" onClick={MyprofHandler} />
 
         <ContentComponent
@@ -195,34 +192,7 @@ function SeniorManage(props: SeniorManageProps) {
           onClick={changeJunior}
         />
       </SeniorManageContentContainer>
-      {modal && portalElement
-        ? createPortal(
-            <FullModal
-              modalType="senior-my-profile"
-              modalHandler={modalHandler}
-            />,
-            portalElement,
-          )
-        : null}
-      {modifyModal && modifyPortal
-        ? createPortal(
-            <FullModal
-              modalType="profile-modify"
-              modalHandler={modifyHandler}
-            />,
-            modifyPortal,
-          )
-        : null}
-      {infoModal && infoPortal
-        ? createPortal(
-            <FullModal
-              modalType="senior-info-modify"
-              modalHandler={infoHandler}
-              bModalHandler={props.modalHandler}
-            />,
-            infoPortal,
-          )
-        : null}
+
       {registerModal && registerPortal
         ? createPortal(
             <DimmedModal

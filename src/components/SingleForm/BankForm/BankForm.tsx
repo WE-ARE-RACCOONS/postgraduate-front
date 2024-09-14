@@ -43,8 +43,8 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
   const [bank, setBank] = useAtom(bankNameAtom);
 
   const handleClick = (selectedBank: string) => {
-    setBank(selectedBank);
     clickHandler();
+    setBank(selectedBank);
   };
 
   return (
@@ -52,7 +52,9 @@ function BankForm({ clickHandler }: { clickHandler: () => void }) {
       <div style={{ display: 'flex' }}>
         <h3>은행선택</h3>
         <Image
-          onClick={clickHandler}
+          onClick={(e) => {
+            clickHandler();
+          }}
           src={x_btn}
           alt="x_btn"
           width={21}

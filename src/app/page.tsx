@@ -7,7 +7,6 @@ import SeniorProfile from '../components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '../components/Bar/FieldTapBar/FieldTapBar';
 import UnivTapBar from '../components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '../components/Swiper/Swiper';
-import useModal from '../hooks/useModal';
 import DimmedModal from '../components/Modal/DimmedModal';
 import SearchModal from '../components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
@@ -83,13 +82,15 @@ export default function Home() {
     };
   }, [page]);
 
-  const { modal, modalHandler } = useModal('');
-
-  const { modal: searchModal, modalHandler: searchModalHandler } = useModal('');
-
   return (
     <HomeLayer>
-      <LogoLayer modalHandler={searchModalHandler} />
+      <LogoLayer
+        modalHandler={() => {
+          overlay.open(({ unmount }) => {
+            return <SearchModal modalHandler={() => unmount()} />;
+          });
+        }}
+      />
       <HomeBannerLayer>
         <SwiperComponent />
       </HomeBannerLayer>
@@ -112,32 +113,19 @@ export default function Home() {
       </HomeProfileLayer>
       <Footer />
       <MenuBarWrapper>
-        <MenuBar modalHandler={modalHandler} />
+        <MenuBar
+          modalHandler={() => {
+            overlay.open(({ unmount }) => {
+              return (
+                <DimmedModal
+                  modalType="notuser"
+                  modalHandler={() => unmount()}
+                />
+              );
+            });
+          }}
+        />
       </MenuBarWrapper>
-
-      {modal
-        ? overlay.open(({ unmount }) => {
-            return (
-              <DimmedModal
-                modalType="notuser"
-                modalHandler={() => {
-                  unmount();
-                }}
-              />
-            );
-          })
-        : ''}
-      {searchModal
-        ? overlay.open(({ unmount }) => {
-            return (
-              <SearchModal
-                modalHandler={() => {
-                  unmount();
-                }}
-              />
-            );
-          })
-        : ''}
     </HomeLayer>
   );
 }

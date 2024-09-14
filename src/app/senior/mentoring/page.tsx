@@ -3,19 +3,16 @@ import STapBar from '@/components/Bar/TapBar/SeniorTab/STabBar';
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
-import { createPortal } from 'react-dom';
-import useModal from '@/hooks/useModal';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import MenuBar from '@/components/Bar/MenuBar';
 import SearchModal from '@/components/Modal/SearchModal';
+import { overlay } from 'overlay-kit';
 
 function SeniorMentoringPage() {
-  const {
-    modal: searchModal,
-    modalHandler: searchModalHandler,
-    portalElement: searchPortalElement,
-  } = useModal('search-portal');
   const { getAccessToken } = useAuth();
+  const openSearchModal = () => {
+    overlay.open(({ unmount }) => <SearchModal modalHandler={unmount} />);
+  };
 
   useEffect(() => {
     getAccessToken().then((tkn) => {
@@ -33,17 +30,11 @@ function SeniorMentoringPage() {
 
   return (
     <div style={{ width: 'inherit', height: 'inherit' }}>
-      <LogoLayer modalHandler={searchModalHandler} />
+      <LogoLayer modalHandler={openSearchModal} />
       <STapBar />
       <MenuBarWrapper>
-        <MenuBar modalHandler={searchModalHandler} />
+        <MenuBar modalHandler={openSearchModal} />
       </MenuBarWrapper>
-      {searchModal && searchPortalElement
-        ? createPortal(
-            <SearchModal modalHandler={searchModalHandler} />,
-            searchPortalElement,
-          )
-        : ''}
     </div>
   );
 }

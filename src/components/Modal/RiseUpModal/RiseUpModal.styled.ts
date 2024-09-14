@@ -7,7 +7,6 @@ export const ModalBackground = styled.div`
   transform: translateY(-50%);
   width: 360px;
   height: 100vh;
-  z-index: 2;
 
   @keyframes modalAppear {
     from {

@@ -22,9 +22,9 @@ import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 import { createPortal } from 'react-dom';
 import DimmedModal from '@/components/Modal/DimmedModal';
-import FullModal from '@/components/Modal/FullModal';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import useFullModal from '@/hooks/useFullModal';
 import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
 import { StyledSModalBtn } from '@/components/Button/ModalBtn/ModalBtn.styled';
@@ -42,6 +42,9 @@ function convertDateType(date: string) {
   return new Date(year, month, day, hour, minute);
 }
 function TabBar() {
+  const { openModal: openJuniorMentoringSpecModal } = useFullModal({
+    modalType: 'junior-mentoring-spec',
+  });
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -50,9 +53,7 @@ function TabBar() {
     setActiveTab(tabIndex);
   };
   const { getAccessToken, removeTokens } = useAuth();
-  const { modal, modalHandler, portalElement } = useModal(
-    'junior-mentoring-detail',
-  );
+
   const {
     modal: cancelModal,
     modalHandler: cancelModalHandler,
@@ -146,7 +147,7 @@ function TabBar() {
                   <ModalBtn
                     type={'show'}
                     btnText={'내 신청서 보기'}
-                    modalHandler={modalHandler}
+                    modalHandler={openJuniorMentoringSpecModal}
                     onClick={() => {
                       setModalType('junior');
                       setSelectedMentoringId(el.mentoringId);
@@ -171,7 +172,7 @@ function TabBar() {
                       <ModalBtn
                         type={'show'}
                         btnText={'내 신청서 보기'}
-                        modalHandler={modalHandler}
+                        modalHandler={openJuniorMentoringSpecModal}
                         onClick={() => {
                           setModalType('junior');
                           setSelectedMentoringId(el.mentoringId);
@@ -229,17 +230,7 @@ function TabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-      {modal && portalElement
-        ? createPortal(
-            <FullModal
-              modalType="junior-mentoring-spec"
-              modalHandler={modalHandler}
-              cancelModalHandler={cancelModalHandler}
-              mentoringId={selectedMentoringId || 0}
-            />,
-            portalElement,
-          )
-        : null}
+
       {cancelModal && cancelPortalElement
         ? createPortal(
             <DimmedModal
