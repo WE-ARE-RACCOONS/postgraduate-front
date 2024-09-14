@@ -7,7 +7,6 @@ import SeniorProfile from '../components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '../components/Bar/FieldTapBar/FieldTapBar';
 import UnivTapBar from '../components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '../components/Swiper/Swiper';
-import useModal from '../hooks/useModal';
 import DimmedModal from '../components/Modal/DimmedModal';
 import SearchModal from '../components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
