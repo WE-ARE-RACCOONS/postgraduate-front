@@ -83,13 +83,15 @@ export default function Home() {
     };
   }, [page]);
 
-  const { modal, modalHandler } = useModal('');
-
-  const { modal: searchModal, modalHandler: searchModalHandler } = useModal('');
-
   return (
     <HomeLayer>
-      <LogoLayer modalHandler={searchModalHandler} />
+      <LogoLayer
+        modalHandler={() => {
+          overlay.open(({ unmount }) => {
+            return <SearchModal modalHandler={() => unmount()} />;
+          });
+        }}
+      />
       <HomeBannerLayer>
         <SwiperComponent />
       </HomeBannerLayer>
@@ -112,32 +114,19 @@ export default function Home() {
       </HomeProfileLayer>
       <Footer />
       <MenuBarWrapper>
-        <MenuBar modalHandler={modalHandler} />
+        <MenuBar
+          modalHandler={() => {
+            overlay.open(({ unmount }) => {
+              return (
+                <DimmedModal
+                  modalType="notuser"
+                  modalHandler={() => unmount()}
+                />
+              );
+            });
+          }}
+        />
       </MenuBarWrapper>
-
-      {modal
-        ? overlay.open(({ unmount }) => {
-            return (
-              <DimmedModal
-                modalType="notuser"
-                modalHandler={() => {
-                  unmount();
-                }}
-              />
-            );
-          })
-        : ''}
-      {searchModal
-        ? overlay.open(({ unmount }) => {
-            return (
-              <SearchModal
-                modalHandler={() => {
-                  unmount();
-                }}
-              />
-            );
-          })
-        : ''}
     </HomeLayer>
   );
 }
