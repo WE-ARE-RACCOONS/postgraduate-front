@@ -24,9 +24,6 @@ import {
   SMCbtnCancelT,
   SMCbtnCancelF,
 } from './SmentoringCancel.styled';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
-import DimmedModal from '@/components/Modal/DimmedModal';
 
 function SmentoringCancel(props: ModalMentoringProps) {
   const { getAccessToken } = useAuth();
