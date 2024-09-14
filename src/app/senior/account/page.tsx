@@ -15,9 +15,10 @@ import { createPortal } from 'react-dom';
 import { useAtomValue } from 'jotai';
 import { bankNameAtom } from '@/stores/bankName';
 import findExCode from '@/utils/findExCode';
+import { overlay } from 'overlay-kit';
 function AccountPage() {
   const router = useRouter();
-  const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
+
   const [modalType, setModalType] = useState<ModalType>('bank');
   const [flag, setFlag] = useState(false);
   const [accountNumber, setAccountNumber] = useState('');
@@ -81,6 +82,12 @@ function AccountPage() {
     }
   };
 
+  const openRiseUpModal = () => {
+    overlay.open(({ unmount }) => {
+      return <RiseUpModal modalHandler={unmount} modalType={modalType} />;
+    });
+  };
+
   return (
     <SAContent>
       <BackHeader headerText="정산 정보 입력" />
@@ -112,7 +119,7 @@ function AccountPage() {
             $isGet={!bank}
             type="bankInfo"
             btnText={bank ? bank : '은행을 선택해주세요.'}
-            modalHandler={modalHandler}
+            modalHandler={openRiseUpModal}
             onClick={() => {
               setModalType('bank');
             }}
@@ -141,12 +148,6 @@ function AccountPage() {
       ) : (
         <SABtnF>완료</SABtnF>
       )}
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
     </SAContent>
   );
 }

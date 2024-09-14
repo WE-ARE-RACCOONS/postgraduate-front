@@ -36,11 +36,11 @@ import React, { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
+import { overlay } from 'overlay-kit';
 
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
   const [modalType, setModalType] = useState<ModalType>('postgradu');
-  const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
 
   const { openModal: openSeniorMentoringTimeModal } = useFullModal({
     modalType: 'senior-mentoring-time',
@@ -264,6 +264,12 @@ function EditProfilePage() {
     setFlag(true);
   };
 
+  const openRiseUpModal = () => {
+    overlay.open(({ unmount }) => {
+      return <RiseUpModal modalHandler={unmount} modalType={modalType} />;
+    });
+  };
+
   return (
     <div>
       <BackHeader headerText="프로필 정보" />
@@ -297,7 +303,7 @@ function EditProfilePage() {
                 className="modify-btn"
                 onClick={() => {
                   setModalType('field');
-                  modalHandler();
+                  openRiseUpModal();
                 }}
               >
                 수정
@@ -306,7 +312,7 @@ function EditProfilePage() {
             <ModalBtn
               type="seniorInfo"
               btnText={sField ? formatField(sField) : '연구분야*'}
-              modalHandler={modalHandler}
+              modalHandler={openRiseUpModal}
               onClick={() => {
                 setModalType('field');
               }}
@@ -324,7 +330,7 @@ function EditProfilePage() {
                 className="modify-btn"
                 onClick={() => {
                   setModalType('keyword');
-                  modalHandler();
+                  openRiseUpModal();
                 }}
               >
                 수정
@@ -333,7 +339,7 @@ function EditProfilePage() {
             <ModalBtn
               type="seniorInfo"
               btnText={sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'}
-              modalHandler={modalHandler}
+              modalHandler={openRiseUpModal}
               onClick={() => {
                 setModalType('keyword');
               }}
@@ -482,12 +488,6 @@ function EditProfilePage() {
           )}
         </div>
       </EditPContainer>
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
     </div>
   );
 }

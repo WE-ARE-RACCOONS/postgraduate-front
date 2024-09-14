@@ -29,7 +29,6 @@ export default function RootLayout({
           <StyledComponentsRegistry>
             <OverlayKitProvider>
               {children}
-              <div id="senior-info-portal"></div>
               <div id="junior-mentoring-cancel"></div>
               <div id="senior-profile-portal"></div>
               <div id="login-request-full-portal"></div>
