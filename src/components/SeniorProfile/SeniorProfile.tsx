@@ -7,18 +7,18 @@ import {
   SeniorProfileInfo,
   SPmajor,
   SPnickname,
-  SPField,
   Skeyword,
   Keyword,
   SPWrapper,
 } from './SeniorProfile.styled';
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import { useRouter } from 'next/navigation';
+import { SeniorProfileKeyWordMaxLength } from '@/components/SeniorProfile/constant';
 import auth from '../../../public/auth_mark.png';
-import arrow from '../../../public/arrow-right-bold.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
+  console.log(data);
   return (
     <SeniorProfileBox className="tutorial_card">
       <SPWrapper>
@@ -30,8 +30,8 @@ function SeniorProfile({ data }: SeniorProfileProps) {
           <SeniorProfileImg src={data.profile ? data.profile : ''} />
           <SeniorProfileInfo>
             <SPnickname>
-              {data.nickName ? data.nickName : ''}&nbsp;
-              <div id="nickname-str">선배님&nbsp;</div>
+              {data.nickName ? data.nickName : ''}
+              <div id="nickname-str">&nbsp;선배님&nbsp;</div>
               {data.certification ? (
                 <Image src={auth} alt="auth" width={16} height={16} />
               ) : (
@@ -39,28 +39,31 @@ function SeniorProfile({ data }: SeniorProfileProps) {
               )}
             </SPnickname>
             <SPmajor>
-              {data.postgradu ? `[${data.postgradu.replace('학교', '')}]` : ''}
-              &nbsp;
-              <div id="professor-str">
-                {data.professor ? `${data.professor} 교수님` : ''}
+              <div>
+                {data.postgradu
+                  ? `[${data.postgradu.replace('학교', '')}]`
+                  : ''}{' '}
+                {data.lab}
+              </div>
+
+              <div className="professor-str">
+                {data.professor} &nbsp;<span>교수님</span>
               </div>
             </SPmajor>
-            <SPField>{data.lab ? data.lab : ''}</SPField>
           </SeniorProfileInfo>
         </SeniorProfileContent>
-        <Image
-          src={arrow}
-          alt="arrow"
-          width={13}
-          height={24}
-          style={{ marginTop: '3.9rem' }}
-        />
       </SPWrapper>
       <Skeyword>
         {data.keyword &&
-          data.keyword.map((keyword, index) => (
-            <Keyword key={index}>{keyword}</Keyword>
-          ))}
+          data.keyword
+            .map((keyword, index) => <Keyword key={index}>{keyword}</Keyword>)
+            .splice(0, SeniorProfileKeyWordMaxLength)}
+
+        {data.keyword.length > SeniorProfileKeyWordMaxLength && (
+          <Keyword key={data.keyword.toLocaleString()}>
+            +{data.keyword.length - SeniorProfileKeyWordMaxLength}
+          </Keyword>
+        )}
       </Skeyword>
     </SeniorProfileBox>
   );

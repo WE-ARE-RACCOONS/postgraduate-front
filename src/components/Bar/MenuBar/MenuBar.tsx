@@ -7,10 +7,10 @@ import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
 import home from '../../../../public/home.png';
 import mentor from '@/../../public/mentor.png';
-import mentorA from '@/../../public/mentoring-act.png';
+import mentorA from '@/../../public/mentoring-act.svg';
 import homeA from '@/../../public/home-act.png';
 import my from '@/../../public/my.png';
-import myA from '@/../../public/mypage-act.png';
+import myA from '@/../../public/myA.svg';
 import { useEffect, useState } from 'react';
 import { menuBarAtom } from '@/stores/home';
 function MenuBar(props: MenubarProps) {
