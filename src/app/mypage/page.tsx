@@ -44,9 +44,7 @@ function MyPage() {
     modalHandler: seiorChangemodalHandler,
     portalElement: seniorChangePortalElement,
   } = useModal('senior-request-portal');
-  const openSearchModal = () => {
-    overlay.open(({ unmount }) => <SearchModal modalHandler={unmount} />);
-  };
+
   const {
     modal: suggestModal,
     modalHandler: suggestModalHandler,
@@ -144,7 +142,13 @@ function MyPage() {
     <div
       style={{ backgroundColor: '#F8F9FA', width: 'inherit', height: '100vh' }}
     >
-      <LogoLayer modalHandler={openSearchModal} />
+      <LogoLayer
+        modalHandler={() => {
+          overlay.open(({ unmount }) => {
+            return <SearchModal modalHandler={unmount} />;
+          });
+        }}
+      />
       {accessTkn ? (
         <div style={{ backgroundColor: '#F8F9FA', marginTop: '1rem' }}>
           <Profile

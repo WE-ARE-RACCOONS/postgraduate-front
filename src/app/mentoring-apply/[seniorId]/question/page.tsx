@@ -8,18 +8,16 @@ import {
   MENTORING_NOTICE,
   MENTORING_QUESTION,
 } from '@/constants/form/cMentoringApply';
-import useModal from '@/hooks/useModal';
 import { questionAtom, subjectAtom } from '@/stores/mentoring';
 import { useAtomValue } from 'jotai';
+import { overlay } from 'overlay-kit';
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
 
 function MentoringApplyQuestionPage() {
   const [active, setActive] = useState(false);
   const subject = useAtomValue(subjectAtom);
   const question = useAtomValue(questionAtom);
-  const { modal, portalElement, modalHandler } = useModal('pay-amount-portal');
 
   if (typeof window !== 'undefined') {
     window.localStorage.setItem('topic', subject);
@@ -32,7 +30,13 @@ function MentoringApplyQuestionPage() {
   }, [subject, question]);
 
   const clickHandler = () => {
-    if (subject.length > 9 && question.length > 9) modalHandler();
+    if (subject.length > 9 && question.length > 9) {
+      overlay.open(({ unmount }) => {
+        return (
+          <ShortRiseUpModal modalType="payAmount" modalHandler={unmount} />
+        );
+      });
+    }
   };
 
   return (
@@ -77,15 +81,6 @@ function MentoringApplyQuestionPage() {
         <MAQNextBtn onClick={clickHandler} className={active ? 'active' : ''}>
           다음으로
         </MAQNextBtn>
-        {modal && portalElement
-          ? createPortal(
-              <ShortRiseUpModal
-                modalHandler={modalHandler}
-                modalType="payAmount"
-              />,
-              portalElement,
-            )
-          : null}
       </MAQContainer>
     </>
   );

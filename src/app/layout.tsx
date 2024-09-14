@@ -29,13 +29,10 @@ export default function RootLayout({
           <StyledComponentsRegistry>
             <OverlayKitProvider>
               {children}
-              <div id="senior-info-portal"></div>
               <div id="junior-mentoring-cancel"></div>
               <div id="senior-profile-portal"></div>
-              <div id="login-request-full-portal"></div>
               <div id="senior-request-portal"></div>
               <div id="junior-request-portal"></div>
-              <div id="profile-modify-portal"></div>
               <div id="senior-mentoring-cancel"></div>
               <div id="senior-profile-not-registered"></div>
               <div id="suggest-mypage-portal"></div>
@@ -43,7 +40,6 @@ export default function RootLayout({
               <div id="mentoring-login-portal"></div>
               <div id="change-junior-portal"></div>
               <div id=" mentoring-cancel-success"></div>
-              <div id="pay-amount-portal"></div>
             </OverlayKitProvider>
           </StyledComponentsRegistry>
         </Providers>
@@ -51,3 +47,4 @@ export default function RootLayout({
     </html>
   );
 }
+

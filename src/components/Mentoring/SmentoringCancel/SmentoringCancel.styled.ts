@@ -63,7 +63,7 @@ export const SMCBgContainer = styled.div`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 0;
   background-color: rgba(39, 39, 39, 0.48);
 `;
 export const SMCbtnCancelT = styled.button`
