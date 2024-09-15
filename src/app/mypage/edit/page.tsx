@@ -19,6 +19,7 @@ import Photo from '@/components/Photo';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import BackHeader from '@/components/Header/BackHeader';
+import { userInfoFetch } from '@/api/user/info/useInfoFetch';
 import findExCode from '@/utils/findExCode';
 function page() {
   const [photoUrl, setPhotoUrl] = useState<File | null>(null);
@@ -30,39 +31,23 @@ function page() {
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
   const { getAccessToken, removeTokens } = useAuth();
   const router = useRouter();
-  const [nickAvail, setNickAvail] = useState(false);
+
   const availability = useAtomValue(notDuplicate);
   const availablePhone = useAtomValue(phoneNumValidation);
   const newAvailability = useAtomValue(newNotDuplicate);
   const sameUser = useAtomValue(sameUserAtom);
   const fullNum = useAtomValue(phoneNum);
   useEffect(() => {
-    getAccessToken().then((token) => {
-      if (token) {
-        const headers = {
-          Authorization: `Bearer ${token}`,
-        };
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`, {
-            headers,
-          })
-          .then((res) => {
-            if (findExCode(res.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            setNickName(res.data.data.nickName);
-            setPhoneNumber(res.data.data.phoneNumber);
-            setprofile(res.data.data.profile);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
+    userInfoFetch().then((res) => {
+      if (findExCode(res.data.code)) {
+        removeTokens();
+        location.reload();
       }
+      const { nickName, profile } = res.data.data;
+      setNickName(nickName);
+      setprofile(profile);
     });
-  });
+  }, []);
 
   const handleClick = async () => {
     getAccessToken().then(async (token) => {
