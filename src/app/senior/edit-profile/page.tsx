@@ -12,7 +12,6 @@ import {
   PROFILE_TITLE,
 } from '@/constants/form/cProfileForm';
 import useAuth from '@/hooks/useAuth';
-import useModal from '@/hooks/useModal';
 import {
   sAbleTime,
   sChatLink,
@@ -33,14 +32,12 @@ import axios from 'axios';
 import { useAtom, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
 
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
-  const [modalType, setModalType] = useState<ModalType>('postgradu');
 
   const { openModal: openSeniorMentoringTimeModal } = useFullModal({
     modalType: 'senior-mentoring-time',
@@ -264,7 +261,7 @@ function EditProfilePage() {
     setFlag(true);
   };
 
-  const openRiseUpModal = () => {
+  const openRiseUpModal = (modalType: 'field' | 'keyword') => {
     overlay.open(({ unmount }) => {
       return <RiseUpModal modalHandler={unmount} modalType={modalType} />;
     });
@@ -302,8 +299,7 @@ function EditProfilePage() {
               <button
                 className="modify-btn"
                 onClick={() => {
-                  setModalType('field');
-                  openRiseUpModal();
+                  openRiseUpModal('field');
                 }}
               >
                 수정
@@ -312,10 +308,7 @@ function EditProfilePage() {
             <ModalBtn
               type="seniorInfo"
               btnText={sField ? formatField(sField) : '연구분야*'}
-              modalHandler={openRiseUpModal}
-              onClick={() => {
-                setModalType('field');
-              }}
+              modalHandler={() => openRiseUpModal('field')}
             />
           </BtnBox>
           <BtnBox>
@@ -329,8 +322,7 @@ function EditProfilePage() {
               <button
                 className="modify-btn"
                 onClick={() => {
-                  setModalType('keyword');
-                  openRiseUpModal();
+                  openRiseUpModal('keyword');
                 }}
               >
                 수정
@@ -339,10 +331,7 @@ function EditProfilePage() {
             <ModalBtn
               type="seniorInfo"
               btnText={sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'}
-              modalHandler={openRiseUpModal}
-              onClick={() => {
-                setModalType('keyword');
-              }}
+              modalHandler={() => openRiseUpModal('keyword')}
             />
           </BtnBox>
         </div>
