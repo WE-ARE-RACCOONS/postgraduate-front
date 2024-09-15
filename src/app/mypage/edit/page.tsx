@@ -68,7 +68,7 @@ function page() {
       });
 
       if (data.code === 'UR201') {
-        router.push('/mypage');
+        router.replace('/mypage');
       }
     }
   };

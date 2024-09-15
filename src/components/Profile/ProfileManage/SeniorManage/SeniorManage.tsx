@@ -11,13 +11,18 @@ import { createPortal } from 'react-dom';
 import Router, { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import { socialIdAtom, userTypeAtom } from '@/stores/signup';
+import {
+  isTutorialFinished,
+  socialIdAtom,
+  userTypeAtom,
+} from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
 import findExCode from '@/utils/findExCode';
 import useFullModal from '@/hooks/useFullModal';
 import DimmedModal from '@/components/Modal/DimmedModal';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
+  const setTutorialStatus = useSetAtom(isTutorialFinished);
   const {
     getAccessToken,
     setUserType,
@@ -141,6 +146,7 @@ function SeniorManage(props: SeniorManageProps) {
                 expires: res.data.refreshExpiration,
               });
               setUserType(res.data.role);
+              setTutorialStatus(res.data.isTutorial);
 
               router.replace('/');
               return;

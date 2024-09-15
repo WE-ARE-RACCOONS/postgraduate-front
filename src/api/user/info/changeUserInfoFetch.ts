@@ -11,6 +11,14 @@ interface ChangeUserInfoFetchRequest {
   phoneNumber?: string;
 }
 
-export const changeUserInfo = async ({}: ChangeUserInfoFetchRequest) => {
-  return await instance.patch<ChangeUserInfoFetchResponse>('/user/me/info');
+export const changeUserInfo = async ({
+  profile,
+  nickName,
+  phoneNumber,
+}: ChangeUserInfoFetchRequest) => {
+  return await instance.patch<ChangeUserInfoFetchResponse>('/user/me/info', {
+    profile,
+    nickName,
+    phoneNumber,
+  });
 };
