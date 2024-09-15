@@ -279,10 +279,10 @@ function EditProfilePage() {
           <BtnBox>
             <MBtnFont>
               <div className="title-with-modify">
-                연구실명&nbsp;<div id="font-color">*</div>
+                연구실 이름&nbsp;<div id="font-color">*</div>
               </div>
               {labFlag && (
-                <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>
+                <div id="warn-msg">&nbsp;연구실 이름을 입력해주세요</div>
               )}
             </MBtnFont>
             <TextForm
@@ -294,7 +294,7 @@ function EditProfilePage() {
           <BtnBox>
             <MBtnFont>
               <div className="title-with-modify">
-                연구분야&nbsp;<div id="font-color">*</div>
+                연구 분야&nbsp;<div id="font-color">*</div>
                 {fieldFlag && (
                   <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
                 )}
@@ -321,7 +321,7 @@ function EditProfilePage() {
           <BtnBox>
             <MBtnFont>
               <div className="title-with-modify">
-                연구주제&nbsp;<div id="font-color">*</div>
+                연구 주제&nbsp;<div id="font-color">*</div>
                 {keywordFlag && (
                   <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
                 )}
@@ -403,7 +403,7 @@ function EditProfilePage() {
         </div>
         <EPMentoring>
           <div>
-            <div id="mentoring-title">카카오톡 오픈 채팅방 링크</div>
+            <div id="mentoring-title">연락 방법</div>
             <div id="mentoring-sub">
               매칭된 후배와 대화할 오픈채팅 방이에요.
               <br />
@@ -428,7 +428,7 @@ function EditProfilePage() {
               marginLeft: '1rem',
             }}
           >
-            <div id="setData-title">가능 정기일정</div>
+            <div id="setData-title">가능한 멘토링 일정</div>
             {timeFlag && (
               <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
             )}
@@ -468,7 +468,7 @@ function EditProfilePage() {
               </>
             ) : (
               <SetDataForm>
-                <div id="setDataF-msg">입력된 정기 일정이 없습니다.</div>
+                <div id="setDataF-msg">가능한 일정을 3개 이상 알려주세요.</div>
                 <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
                   + 추가하기
                 </div>
@@ -547,7 +547,7 @@ const SetDataForm = styled.div`
   #setDataF-msg {
     color: #adb5bd;
     font-family: 'Noto Sans JP';
-    font-size: 1rem;
+    font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

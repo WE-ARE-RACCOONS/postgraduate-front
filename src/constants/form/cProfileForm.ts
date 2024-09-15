@@ -16,9 +16,9 @@ export const PROFILE_SUB_DIRECTION = {
 };
 
 export const PROFILE_TITLE = {
-  singleIntroduce: '한줄 소개',
+  singleIntroduce: '한 줄 소개',
   multiIntroduce: '자기소개',
-  recommendedFor: '추천대상',
+  recommendedFor: '이런 후배에게 추천해요',
 };
 
 export const PROFILE_PLACEHOLDER = {
@@ -29,7 +29,7 @@ export const PROFILE_PLACEHOLDER = {
     '추천하는 멘토링 주제나 대학원 후배의 특성을 알려주세요 (최소 50자)',
   addTime:
     '예시)\n월요일 오후 03:00 ~ 오후 04:20\n화요일 오전 11:00 ~ 오후 02:20',
-  addChatLink: '채팅방을 생성해 링크를 붙여넣어 주세요.',
+  addChatLink: '카카오톡 오픈 채팅방 링크를 공유해 주새요.',
 };
 
 export const WEEK_ARRAY = ['일', '월', '화', '수', '목', '금', '토'];
