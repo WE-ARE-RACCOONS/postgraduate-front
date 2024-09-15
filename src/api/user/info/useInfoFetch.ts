@@ -6,9 +6,10 @@ interface UserInfoFetchResponse extends ResponseModel {
   data: {
     nickName: string;
     profile: string;
+    phoneNumber: string;
   };
 }
 
 export const userInfoFetch = async () => {
-  return await instance.get<UserInfoFetchResponse>('/user/me');
+  return await instance.get<UserInfoFetchResponse>('/user/me/info');
 };

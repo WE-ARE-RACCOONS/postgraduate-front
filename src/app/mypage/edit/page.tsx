@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import { postUserProfileImage } from '@/api/user/_images/postUserProfileImage';
+import { changeUserInfo } from '@/api/user/info/changeUserInfoFetch';
 import { useAtom, useAtomValue } from 'jotai';
 import {
   changeNickname,
@@ -27,9 +28,9 @@ function page() {
   const [myNickName, setNickName] = useAtom(nickname);
   const changeNick = useAtomValue(changeNickname);
   const [phoneNumber, setPhoneNumber] = useAtom(remainPhoneNum);
-  const [profile, setprofile] = useState<string | null>(null);
+  const [profile, setprofile] = useState<string>('');
   const selectpPhotoUrl = photoUrl ? URL.createObjectURL(photoUrl) : '';
-  const { getAccessToken, removeTokens } = useAuth();
+  const { removeTokens } = useAuth();
   const router = useRouter();
 
   const availability = useAtomValue(notDuplicate);
@@ -50,70 +51,26 @@ function page() {
   }, []);
 
   const handleClick = async () => {
-    getAccessToken().then(async (token) => {
-      if (photoUrl) {
-        const formData = new FormData();
-        formData.append('profileFile', photoUrl);
+    if (photoUrl) {
+      const { data } = await postUserProfileImage({
+        profileFile: photoUrl,
+      });
+      if (data.code === 'IMG202') {
+        editProfileUrl = data.data.profileUrl;
+      }
+    }
 
-        if (token) {
-          await axios
-            .post(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
-              formData,
-              {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  Authorization: `Bearer ${token}`,
-                },
-              },
-            )
-            .then((response) => {
-              const res = response.data;
-              if (findExCode(res.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
-              if (res.code == 'IMG202') {
-                editProfileUrl = res.data.profileUrl;
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
+    if (editProfileUrl || changeNick || fullNum) {
+      const { data } = await changeUserInfo({
+        profile: editProfileUrl ? editProfileUrl : profile,
+        nickName: changeNick ? changeNick : myNickName,
+        phoneNumber: fullNum ? fullNum : phoneNumber,
+      });
+
+      if (data.code === 'UR201') {
+        router.push('/mypage');
       }
-      if (editProfileUrl || changeNick || fullNum) {
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/user/me/info`,
-            {
-              profile: editProfileUrl ? editProfileUrl : profile,
-              nickName: changeNick ? changeNick : myNickName,
-              phoneNumber: fullNum ? fullNum : phoneNumber,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          )
-          .then((response) => {
-            const res = response.data;
-            if (findExCode(res.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-            if (res.code == 'UR201') {
-              router.push('/mypage');
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-    });
+    }
   };
 
   return (
