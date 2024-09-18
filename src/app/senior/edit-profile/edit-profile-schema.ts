@@ -15,22 +15,26 @@ const scheduleSchema = yup.object().shape({
 });
 
 export const editProfileSchema = yup.object({
-  lab: yup.string().required('연구실 이름을 입력해주세요').min(1),
+  lab: yup
+    .string()
+    .min(1, '연구실 이름을 입력해주세요')
+    .required('연구실 이름을 입력해주세요')
+    .max(20),
   field: yup.string().required('최소 1개 이상 선택해주세요').min(1),
   keyword: yup.string().required('최소 1개 이상 입력해주세요').min(1),
   singleIntro: yup
     .string()
-    .required()
+    .required('최소 10자 이상 작성해주세요.')
     .min(10, '최소 10자 이상 작성해주세요.')
     .max(100, '100자 이내로 입력해주세요'),
   multiIntro: yup
     .string()
-    .required()
+    .required('최소 50자 이상 작성해주세요.')
     .min(50, '최소 50자 이상 작성해주세요.')
     .max(1000, '1000자 이내로 입력해주세요.'),
   recommended: yup
     .string()
-    .required()
+    .required('최소 50자 이상 작성해주세요.')
     .min(50, '최소 50자 이상 작성해주세요.')
     .max(1000, '1000자 이내로 입력해주세요.'),
   chatLink: yup.string().required().min(1),
