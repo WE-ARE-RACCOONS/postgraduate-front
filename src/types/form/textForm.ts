@@ -1,7 +1,11 @@
+import { ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react';
+import { UseFormRegisterReturn } from 'react-hook-form';
+
 export type TextFormTargetAtom = 'lab' | 'professor' | 'keyword';
 
 export interface TextFormProps {
-  placeholder: string;
   targetAtom: string;
+  placeholder: string;
   max?: number;
+  register?: UseFormRegisterReturn;
 }

@@ -4,6 +4,7 @@ import {
   ProfileFormContainer,
   ProfileTitleContainer,
 } from './ProfileForm.styled';
+import { register } from 'module';
 
 const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
   (props, _ref) => {
@@ -36,7 +37,7 @@ const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
     };
 
     return (
-      <ProfileFormContainer $flag={props.flag}>
+      <ProfileFormContainer $flag={props.flag ?? false}>
         <ProfileTitleContainer>
           <div>{props.title}</div>
           <div id="char-count">

@@ -4,6 +4,9 @@ import ModalBtn from '@/components/Button/ModalBtn';
 import BackHeader from '@/components/Header/BackHeader';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
+
+import { getDefaultStore } from 'jotai';
+import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
 import TextForm from '@/components/SingleForm/TextForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
@@ -34,10 +37,11 @@ import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
 import { editProfileSchema } from '@/app/senior/edit-profile/edit-profile-schema';
-import { useForm } from 'react-hook-form';
+import { useForm, FormProvider } from 'react-hook-form';
 import { seniorProfileFetch } from '@/api/user/profile/getSeniorProfile';
 
 import { updateSeniorProfile } from '@/api/user/profile/updateSeniorProfile';
+import { yupResolver } from '@hookform/resolvers/yup';
 
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
@@ -46,24 +50,29 @@ function EditProfilePage() {
     modalType: 'senior-mentoring-time',
   });
 
+  const editProfileMethod = useForm({
+    resolver: yupResolver(editProfileSchema),
+    mode: 'onBlur',
+  });
+
+  const {
+    register,
+    trigger,
+    handleSubmit,
+    setError,
+    watch,
+    formState: { errors },
+  } = editProfileMethod;
   const [flag, setFlag] = useState(false);
-  const [labFlag, setLabFlag] = useState(false);
-  const [fieldFlag, setFieldFlag] = useState(false);
-  const [keywordFlag, setKeywordFlag] = useState(false);
-  const [singleFlag, setSingleFlag] = useState(false);
-  const [multiFlag, setMultiFlag] = useState(false);
-  const [recommendFlag, setRecommendFlag] = useState(false);
-  const [chatLinkFlag, setChatLinkFlag] = useState(false);
-  const [timeFlag, setTimeFlag] = useState(false);
   const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
   const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
   const [recommended, setRecommended] = useAtom(sRecommendedFor);
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [sField, setSfield] = useAtom(sFieldAtom);
   const [totalField, setTotalField] = useAtom(totalFieldAtom);
-  const setSelectedField = useSetAtom(selectedFieldAtom);
-  const setTotalKeyword = useSetAtom(totalKeywordAtom);
-  const setSelectedKeyword = useSetAtom(selectedKeywordAtom);
+  const [selectedField, setSelectedField] = useAtom(selectedFieldAtom);
+  const [totalKeyword, setTotalKeyword] = useAtom(totalKeywordAtom);
+  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom);
   const [sLab, setSlab] = useAtom(sLabAtom);
   const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
   const [timeData, setTimeData] = useAtom(sAbleTime);
@@ -83,403 +92,330 @@ function EditProfilePage() {
     return resultArray.join(', ');
   };
 
-  function validateLab() {
-    if (sLab.length <= 0) setLabFlag(true);
-    else setLabFlag(false);
-  }
-
-  function validateField() {
-    if (sField.length <= 0) setFieldFlag(true);
-    else setFieldFlag(false);
-  }
-
-  function validateKeyword() {
-    if (sKeyword.length <= 0) setKeywordFlag(true);
-    else setKeywordFlag(false);
-  }
-
-  function validateSingleIntro() {
-    if (singleIntro.length < 10) setSingleFlag(true);
-    else setSingleFlag(false);
-  }
-
-  function validateMultiIntro() {
-    if (multiIntro.length < 50) setMultiFlag(true);
-    else setMultiFlag(false);
-  }
-
-  function validateRecommended() {
-    if (recommended.length < 50) setRecommendFlag(true);
-    else setRecommendFlag(false);
-  }
-
-  function validateChatLink() {
-    if (chatLink.length <= 0) setChatLinkFlag(true);
-    else setChatLinkFlag(false);
-  }
-
   useEffect(() => {
-    validateLab();
-  }, [sLab]);
-  useEffect(() => {
-    validateField();
-  }, [sField]);
-  useEffect(() => {
-    validateKeyword();
-  }, [sKeyword]);
-  useEffect(() => {
-    validateSingleIntro();
-  }, [singleIntro]);
-  useEffect(() => {
-    validateMultiIntro();
-  }, [multiIntro]);
-  useEffect(() => {
-    validateRecommended();
-  }, [recommended]);
-  useEffect(() => {
-    validateChatLink();
-  }, [chatLink]);
-  useEffect(() => {
-    validateTime();
-  }, [timeData]);
+    /*const redirectToLogin = async () => {
+      const token = await getAccessToken();
+      if (!token) {
+        const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
+        const REDIRECT_URI = `${window.location.origin}/login/oauth2/code/kakao`;
+        const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+        window.location.href = link;
+        return null;
+      }
+      return token;
+    };*/
 
-  function validateTime() {
-    if (timeData.length < 3) setTimeFlag(true);
-    else setTimeFlag(false);
-  }
-
-  useEffect(() => {
     const fetchData = async () => {
-      getAccessToken().then(async (token) => {
-        if (!token) {
-          // 알림톡으로 들어와서 토큰 없을 시, 로그인으로 이동
-          const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
-          const REDIRECT_URI =
-            window.location.origin + '/login/oauth2/code/kakao';
-          const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-          window.location.href = link;
-          return;
-        }
+      //  const token = await redirectToLogin();
 
-        if (token) {
-          try {
-            const headers = {
-              Authorization: `Bearer ${token}`,
-            };
+      const token = await getAccessToken();
+      if (!token) return;
 
-            axios
-              .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
-                headers,
-              })
-              .then((response) => {
-                const res = response.data;
+      try {
+        const { data } = await seniorProfileFetch();
+        const seniorProfileData = data.data;
 
-                if (findExCode(res.code)) {
-                  removeTokens();
-                  location.reload();
-                  return;
-                }
+        const tempFields = [...totalField];
 
-                const tempFields = [...totalField];
-                res.data.field.forEach((el: string) => {
-                  if (!tempFields.includes(el)) tempFields.push(el);
-                });
-
-                setTimeData(res.data.times ? res.data.times : []);
-                setTotalField(tempFields);
-                setSelectedField(res.data.field);
-                setTotalKeyword(res.data.keyword);
-                setSelectedKeyword(res.data.keyword);
-                setSfield(res.data.field.join(','));
-                setSkeyword(res.data.keyword.join(','));
-                setChatLink(res.data.chatLink ? res.data.chatLink : '');
-                setMultiIntro(res.data.info ? res.data.info : '');
-                setSingleIntro(res.data.oneLiner ? res.data.oneLiner : '');
-                setRecommended(res.data.target ? res.data.target : '');
-                setSlab(res.data.lab);
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          } catch (error) {
-            console.error(error);
+        seniorProfileData.field.forEach((el) => {
+          if (!tempFields.includes(el)) {
+            tempFields.push(el);
           }
-        }
-      });
+        });
+
+        setTimeData(seniorProfileData.times || []);
+        setTotalField(tempFields);
+        setSelectedField(seniorProfileData.field);
+        setTotalKeyword(seniorProfileData.keyword);
+        setSelectedKeyword(seniorProfileData.keyword);
+        setSfield(seniorProfileData.field.join(','));
+        setSkeyword(seniorProfileData.keyword.join(','));
+        setChatLink(seniorProfileData.chatLink || '');
+        setMultiIntro(seniorProfileData.info || '');
+        setSingleIntro(seniorProfileData.oneLiner || '');
+        setRecommended(seniorProfileData.target || '');
+        setSlab(seniorProfileData.lab);
+      } catch (error) {
+        console.error(error);
+      }
     };
 
     fetchData();
   }, []);
 
-  const handleClick = () => {
-    const areConditionsMet =
-      singleIntro.length >= 10 &&
-      multiIntro.length >= 50 &&
-      recommended.length >= 50;
+  const handleClick = async () => {
+    const isValid = await trigger();
 
-    getAccessToken().then((token) => {
-      if (
-        token &&
-        areConditionsMet &&
-        chatLink &&
-        timeData.length >= 3 &&
-        sField &&
-        sKeyword &&
-        sLab
-      ) {
-        setFlag(false);
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-            {
-              lab: sLab,
-              keyword: sKeyword,
-              info: multiIntro,
-              target: recommended,
-              chatLink: chatLink,
-              field: sField,
-              oneLiner: singleIntro,
-              times: timeData,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          )
-          .then((res) => {
-            if (findExCode(res.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-            router.back();
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-      }
-    });
-
-    setFlag(true);
+    if (isValid) {
+      await updateSeniorProfile({
+        lab: sLab,
+        keyword: sKeyword,
+        info: multiIntro,
+        target: recommended,
+        chatLink: chatLink,
+        field: sField,
+        oneLiner: singleIntro,
+        times: timeData,
+      });
+      setFlag(true);
+    }
   };
 
   const openRiseUpModal = (modalType: 'field' | 'keyword') => {
     overlay.open(({ unmount }) => {
-      return <RiseUpModal modalHandler={unmount} modalType={modalType} />;
+      if (modalType === 'keyword' && !sKeyword) {
+        trigger('keyword');
+      }
+      trigger('field');
+      return (
+        <FormProvider {...editProfileMethod}>
+          <RiseUpModal
+            modalHandler={() => {
+              unmount();
+            }}
+            modalType={modalType}
+          />
+        </FormProvider>
+      );
     });
   };
 
+  console.log(watch('keyword'));
+
   return (
     <div>
-      <BackHeader headerText="프로필 정보" />
-      <EditPContainer>
-        <EPTitle>프로필 정보</EPTitle>
-        <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
-          <BtnBox>
-            <MBtnFont>
-              <div className="title-with-modify">
-                연구실 이름&nbsp;<div id="font-color">*</div>
-              </div>
-              {labFlag && (
-                <div id="warn-msg">&nbsp;연구실 이름을 입력해주세요</div>
-              )}
-            </MBtnFont>
-            <TextForm
-              placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}
-              targetAtom="lab"
-              max={30}
-            />
-          </BtnBox>
-          <BtnBox>
-            <MBtnFont>
-              <div className="title-with-modify">
-                연구 분야&nbsp;<div id="font-color">*</div>
-                {fieldFlag && (
-                  <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(() => handleClick());
+        }}
+      >
+        <BackHeader headerText="프로필 정보" />
+        <EditPContainer>
+          <EPTitle>프로필 정보</EPTitle>
+          <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
+            <BtnBox>
+              <MBtnFont>
+                <div className="title-with-modify">
+                  연구실 이름&nbsp;<div id="font-color">*</div>
+                </div>
+                {errors.lab?.message && (
+                  <div id="warn-msg">&nbsp; {errors.lab.message}</div>
                 )}
-              </div>
-              <button
-                className="modify-btn"
-                onClick={() => {
-                  openRiseUpModal('field');
+              </MBtnFont>
+              <TextFormEl
+                placeholder={sLab ? sLab : '모바일 임베디드 시스템 연구실'}
+                defaultValue={sLab}
+                {...register('lab')}
+                onBlur={(e) => {
+                  setSlab(e.target.value);
+                  trigger('lab');
                 }}
-              >
-                수정
-              </button>
-            </MBtnFont>
-            <ModalBtn
-              type="seniorInfo"
-              btnText={sField ? formatField(sField) : '연구분야*'}
-              modalHandler={() => openRiseUpModal('field')}
-            />
-          </BtnBox>
-          <BtnBox>
-            <MBtnFont>
-              <div className="title-with-modify">
-                연구 주제&nbsp;<div id="font-color">*</div>
-                {keywordFlag && (
-                  <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
-                )}
-              </div>
-              <button
-                className="modify-btn"
-                onClick={() => {
-                  openRiseUpModal('keyword');
-                }}
-              >
-                수정
-              </button>
-            </MBtnFont>
-            <ModalBtn
-              type="seniorInfo"
-              btnText={sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'}
-              modalHandler={() => openRiseUpModal('keyword')}
-            />
-          </BtnBox>
-        </div>
-        <EPTitle>멘토링 정보</EPTitle>
-        <ProfileForm
-          flag={singleFlag}
-          maxLength={100}
-          lineType="single"
-          title={PROFILE_TITLE.singleIntroduce}
-          placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
-          formType="singleIntro"
-          loadStr={singleIntro}
-          changeHandler={setSingleIntro}
-        />
-        <div style={{ marginLeft: '1rem' }}>
-          {singleFlag && (
-            <SingleValidator
-              msg={'최소 10자 이상 입력해 주세요.'}
-              textColor="#FF3347"
-            />
-          )}
-        </div>
-        <ProfileForm
-          flag={multiFlag}
-          lineType="multi"
-          title={PROFILE_TITLE.multiIntroduce}
-          placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
-          maxLength={1000}
-          formType="multiIntro"
-          loadStr={multiIntro}
-          changeHandler={setMultiIntro}
-        />
-        <div style={{ marginLeft: '1rem' }}>
-          {multiFlag && (
-            <SingleValidator
-              msg={'최소 50자 이상 입력해 주세요.'}
-              textColor="#FF3347"
-            />
-          )}
-        </div>
-        <ProfileForm
-          flag={recommendFlag}
-          lineType="multi"
-          title={PROFILE_TITLE.recommendedFor}
-          placeholder={PROFILE_PLACEHOLDER.recommendedFor}
-          maxLength={1000}
-          formType="recommendedFor"
-          loadStr={recommended ? recommended : ''}
-          changeHandler={setRecommended}
-        />
-        <div style={{ marginLeft: '1rem' }}>
-          {recommendFlag && (
-            <SingleValidator
-              msg={'최소 50자 이상 입력해 주세요.'}
-              textColor="#FF3347"
-            />
-          )}
-        </div>
-        <EPMentoring>
-          <div>
-            <div id="mentoring-title">연락 방법</div>
-            <div id="mentoring-sub">
-              매칭된 후배와 대화할 오픈채팅 방이에요.
-              <br />
-              비대면 회의 링크나 급한 공지를 전달해요.
-            </div>
-          </div>
-          <input
-            defaultValue={chatLink ? chatLink : ''}
-            type="text"
-            id="add-chat-link-form"
-            placeholder={PROFILE_PLACEHOLDER.addChatLink}
-            onChange={(e) => {
-              setChatLink(e.currentTarget.value);
-            }}
-          />
-        </EPMentoring>
-        <SetData>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginLeft: '1rem',
-            }}
-          >
-            <div id="setData-title">가능한 멘토링 일정</div>
-            {timeFlag && (
-              <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
-            )}
-          </div>
-          <SetDataBox>
-            {timeData && timeData.length > 0 ? (
-              <>
-                {timeData &&
-                  timeData.map((el, idx) => (
-                    <IntroCardTimeBox key={idx}>
-                      {el.day}요일 {el.startTime} ~ {el.endTime}
-                      <div
-                        id="delete"
-                        onClick={() => clickHandler(idx)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        삭제
-                      </div>
-                    </IntroCardTimeBox>
-                  ))}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginTop: '0.5rem',
+              />
+            </BtnBox>
+            <BtnBox>
+              <MBtnFont>
+                <div className="title-with-modify">
+                  연구 분야&nbsp;<div id="font-color">*</div>
+                  {errors.field?.message && (
+                    <div id="warn-msg">&nbsp;{errors.field.message}</div>
+                  )}
+                </div>
+                <button
+                  className="modify-btn"
+                  onClick={() => {
+                    openRiseUpModal('field');
                   }}
                 >
-                  <div
-                    id="setData-btn"
-                    onClick={openSeniorMentoringTimeModal}
-                    style={{ cursor: 'pointer' }}
-                  >
-                    추가하기
-                  </div>
+                  수정
+                </button>
+              </MBtnFont>
+              <ModalBtn
+                type="seniorInfo"
+                btnText={sField ? formatField(sField) : '연구분야*'}
+                modalHandler={() => openRiseUpModal('field')}
+              />
+            </BtnBox>
+            <BtnBox>
+              <MBtnFont>
+                <div className="title-with-modify">
+                  연구 주제&nbsp;<div id="font-color">*</div>
+                  {errors.keyword?.message && (
+                    <div id="warn-msg">&nbsp;{errors.keyword.message}</div>
+                  )}
                 </div>
-              </>
-            ) : (
-              <SetDataForm>
-                <div id="setDataF-msg">가능한 일정을 3개 이상 알려주세요.</div>
-                <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
-                  + 추가하기
-                </div>
-              </SetDataForm>
+                <button
+                  className="modify-btn"
+                  onClick={() => {
+                    openRiseUpModal('keyword');
+                  }}
+                >
+                  수정
+                </button>
+              </MBtnFont>
+              <ModalBtn
+                type="seniorInfo"
+                btnText={
+                  sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'
+                }
+                modalHandler={() => openRiseUpModal('keyword')}
+              />
+            </BtnBox>
+          </div>
+          <EPTitle>멘토링 정보</EPTitle>
+          <ProfileForm
+            flag={
+              typeof errors?.singleIntro?.message !== 'undefined'
+                ? errors?.singleIntro?.message?.length > 0
+                : false
+            }
+            maxLength={100}
+            lineType="single"
+            title={PROFILE_TITLE.singleIntroduce}
+            placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
+            formType="singleIntro"
+            loadStr={singleIntro}
+            changeHandler={setSingleIntro}
+            {...register('singleIntro')}
+          />
+          <div style={{ marginLeft: '1rem' }}>
+            {errors.singleIntro?.message && (
+              <SingleValidator
+                msg={errors.singleIntro.message}
+                textColor="#FF3347"
+              />
             )}
-          </SetDataBox>
-        </SetData>
-        <div style={{ marginTop: '3.94rem', marginLeft: '1rem' }}>
-          {chatLink && timeData.length >= 3 ? (
-            <ClickedBtn btnText="저장" kind="save" clickHandler={handleClick} />
-          ) : (
-            <ClickedBtn
-              btnText="저장"
-              kind="save-non"
-              clickHandler={handleClick}
+          </div>
+          <ProfileForm
+            flag={errors.multiIntro?.message}
+            lineType="multi"
+            title={PROFILE_TITLE.multiIntroduce}
+            placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
+            maxLength={1000}
+            formType="multiIntro"
+            loadStr={multiIntro}
+            changeHandler={setMultiIntro}
+          />
+          <div style={{ marginLeft: '1rem' }}>
+            {errors.multiIntro?.message && (
+              <SingleValidator
+                msg={errors.multiIntro.message}
+                textColor="#FF3347"
+              />
+            )}
+          </div>
+          <ProfileForm
+            flag={errors.recommended?.message}
+            lineType="multi"
+            title={PROFILE_TITLE.recommendedFor}
+            placeholder={PROFILE_PLACEHOLDER.recommendedFor}
+            maxLength={1000}
+            formType="recommendedFor"
+            loadStr={recommended ? recommended : ''}
+            changeHandler={setRecommended}
+          />
+          <div style={{ marginLeft: '1rem' }}>
+            {errors.recommended?.message && (
+              <SingleValidator
+                msg={errors.recommended.message}
+                textColor="#FF3347"
+              />
+            )}
+          </div>
+          <EPMentoring>
+            <div>
+              <div id="mentoring-title">연락 방법</div>
+              <div id="mentoring-sub">
+                매칭된 후배와 대화할 오픈채팅 방이에요.
+                <br />
+                비대면 회의 링크나 급한 공지를 전달해요.
+              </div>
+            </div>
+            <input
+              defaultValue={chatLink ? chatLink : ''}
+              type="text"
+              id="add-chat-link-form"
+              placeholder={PROFILE_PLACEHOLDER.addChatLink}
+              onChange={(e) => {
+                setChatLink(e.currentTarget.value);
+              }}
             />
-          )}
-        </div>
-      </EditPContainer>
+          </EPMentoring>
+          <SetData>
+            <div
+              style={{
+                display: 'flex',
+                alignItems: 'center',
+                marginLeft: '1rem',
+              }}
+            >
+              <div id="setData-title">가능한 멘토링 일정</div>
+              {errors.timeData?.message && (
+                <div id="setData-warn">{errors.timeData.message}</div>
+              )}
+            </div>
+            <SetDataBox>
+              {timeData && timeData.length > 0 ? (
+                <>
+                  {timeData &&
+                    timeData.map((el, idx) => (
+                      <IntroCardTimeBox key={idx}>
+                        {el.day}요일 {el.startTime} ~ {el.endTime}
+                        <div
+                          id="delete"
+                          onClick={() => clickHandler(idx)}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          삭제
+                        </div>
+                      </IntroCardTimeBox>
+                    ))}
+                  <div
+                    style={{
+                      display: 'flex',
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                      marginTop: '0.5rem',
+                    }}
+                  >
+                    <div
+                      id="setData-btn"
+                      onClick={openSeniorMentoringTimeModal}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      추가하기
+                    </div>
+                  </div>
+                </>
+              ) : (
+                <SetDataForm>
+                  <div id="setDataF-msg">
+                    가능한 일정을 3개 이상 알려주세요.
+                  </div>
+                  <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
+                    + 추가하기
+                  </div>
+                </SetDataForm>
+              )}
+            </SetDataBox>
+          </SetData>
+          <div style={{ marginTop: '3.94rem', marginLeft: '1rem' }}>
+            {chatLink && timeData.length >= 3 ? (
+              <ClickedBtn
+                btnText="저장"
+                kind="save"
+                clickHandler={handleClick}
+              />
+            ) : (
+              <ClickedBtn
+                btnText="저장"
+                kind="save-non"
+                clickHandler={handleClick}
+              />
+            )}
+          </div>
+        </EditPContainer>
+      </form>
     </div>
   );
 }
