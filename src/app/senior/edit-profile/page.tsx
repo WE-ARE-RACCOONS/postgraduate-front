@@ -2,7 +2,6 @@
 import ClickedBtn from '@/components/Button/ClickedBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
 import BackHeader from '@/components/Header/BackHeader';
-import FullModal from '@/components/Modal/FullModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 import TextForm from '@/components/SingleForm/TextForm';
@@ -26,7 +25,6 @@ import {
   totalFieldAtom,
   totalKeywordAtom,
 } from '@/stores/senior';
-import { ModalType } from '@/types/modal/riseUp';
 import findExCode from '@/utils/findExCode';
 import axios from 'axios';
 import { useAtom, useSetAtom } from 'jotai';
@@ -35,6 +33,11 @@ import React, { useEffect, useState } from 'react';
 import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
+import { editProfileSchema } from '@/app/senior/edit-profile/edit-profile-schema';
+import { useForm } from 'react-hook-form';
+import { seniorProfileFetch } from '@/api/user/profile/getSeniorProfile';
+
+import { updateSeniorProfile } from '@/api/user/profile/updateSeniorProfile';
 
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
