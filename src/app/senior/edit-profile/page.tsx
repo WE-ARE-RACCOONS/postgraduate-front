@@ -92,6 +92,7 @@ function EditProfilePage() {
     return resultArray.join(', ');
   };
 
+  console.log(errors.field);
   useEffect(() => {
     /*const redirectToLogin = async () => {
       const token = await getAccessToken();
@@ -162,11 +163,20 @@ function EditProfilePage() {
   };
 
   const openRiseUpModal = (modalType: 'field' | 'keyword') => {
-    overlay.open(({ unmount }) => {
-      if (modalType === 'keyword' && !sKeyword) {
-        trigger('keyword');
-      }
+    if (modalType === 'field' && selectedField.length === 0) {
       trigger('field');
+    }
+
+    if (
+      modalType === 'keyword' &&
+      selectedField.length === 0 &&
+      totalKeyword.length === 0
+    ) {
+      trigger('field');
+      trigger('keyword');
+    }
+
+    overlay.open(({ unmount }) => {
       return (
         <FormProvider {...editProfileMethod}>
           <RiseUpModal
@@ -179,8 +189,6 @@ function EditProfilePage() {
       );
     });
   };
-
-  console.log(watch('keyword'));
 
   return (
     <div>
@@ -217,8 +225,8 @@ function EditProfilePage() {
               <MBtnFont>
                 <div className="title-with-modify">
                   연구 분야&nbsp;<div id="font-color">*</div>
-                  {errors.field?.message && (
-                    <div id="warn-msg">&nbsp;{errors.field.message}</div>
+                  {selectedField.length === 0 && (
+                    <div id="warn-msg">&nbsp;{errors?.field?.message}</div>
                   )}
                 </div>
                 <button

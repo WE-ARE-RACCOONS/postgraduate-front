@@ -14,12 +14,7 @@ function useTutorial() {
     const userType = getUserType();
     const accessToken = await getAccessToken();
 
-    if (
-      !userType ||
-      userType !== 'junior' ||
-      isTutorialFinish ||
-      (accessToken && userType === 'junior')
-    ) {
+    if (!userType || userType !== 'junior' || isTutorialFinish) {
       return;
     }
 
