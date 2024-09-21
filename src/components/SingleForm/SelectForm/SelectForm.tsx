@@ -16,6 +16,7 @@ function SelectForm(props: SelectFormProps) {
   const {
     register,
     watch,
+    setError,
     setValue,
     formState: { errors },
   } = useFormContext();
@@ -48,7 +49,7 @@ function SelectForm(props: SelectFormProps) {
             <div id="field-text">{SELECT_FIELD_TEXT.fieldText}</div>
             <div id="field-star">*</div>
           </div>
-          {selected.length === 0 && (
+          {errors?.field?.message && (
             <div id="field-alert">{SELECT_FIELD_TEXT.fieldAlert}</div>
           )}
         </div>
@@ -63,7 +64,7 @@ function SelectForm(props: SelectFormProps) {
                 selected={selected}
                 selectHandler={(newSelected) => {
                   setSelected(newSelected);
-                  setSField(selected.join(','));
+                  setSField(newSelected.join(','));
                 }}
                 key={idx}
               />

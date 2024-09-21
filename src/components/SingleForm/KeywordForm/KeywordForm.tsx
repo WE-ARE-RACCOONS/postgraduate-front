@@ -19,6 +19,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const {
     register,
     watch,
+    setError,
     setValue,
     formState: { errors },
   } = useFormContext();
@@ -27,7 +28,7 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const setSKeyword = useSetAtom(sKeywordAtom);
   const [inputCount, setInputCount] = useState(0);
   const handleConfirm = () => {
-    setSKeyword(selected.join(','));
+    setSKeyword(() => selected.join(','));
     clickHandler();
   };
 

@@ -19,5 +19,9 @@ export interface ProfileFormProps {
   changeHandler?: SetAtom<[SetStateAction<string>], void>;
   register?: UseFormRegisterReturn;
   placeholder?: string;
+  errorMessage?: string;
   onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onBlur?: (
+    e: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>,
+  ) => void;
 }
