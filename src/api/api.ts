@@ -1,7 +1,6 @@
 import useAuth from '@/hooks/useAuth';
-import axios from 'axios';
-import type { InternalAxiosRequestConfig } from 'axios';
-import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
+import axios, { InternalAxiosRequestConfig } from 'axios';
 
 const instance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
@@ -15,9 +14,9 @@ instance.interceptors.request.use(
     const accessTkn = await getAccessToken();
 
     if (!accessTkn && typeof window !== 'undefined') {
-      // refresh token까지 만료된 경우
       removeTokens();
       window.location.href = '/';
+      return Promise.reject(new Error('Access token is missing')); // 에러 반환
     } else {
       config.headers.Authorization = `Bearer ${accessTkn}`;
     }
@@ -25,7 +24,24 @@ instance.interceptors.request.use(
     return config;
   },
   (error) => {
-    console.error(error);
+    console.error('Request error:', error);
+    return Promise.reject(error);
+  },
+);
+
+instance.interceptors.response.use(
+  (res) => {
+    const { removeTokens } = useAuth();
+    if (findExCode(res.data.code)) {
+      removeTokens();
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
+    }
+    return res;
+  },
+  (error) => {
+    console.error('Response error:', error);
     return Promise.reject(error);
   },
 );

@@ -90,13 +90,14 @@ export const SelectFormWrapper = styled.div`
 
 export const FieldInputFormBox = styled.div`
   width: 100%;
-  height: 3.19rem;
+  height: 44px;
   border-radius: 8px;
   border: 1px solid #c2cede;
   background: #fff;
   margin-top: 0.625rem;
   padding: 1rem 0.5rem;
   display: flex;
+  font-size: 13px;
   justify-content: space-between;
 
   #field-input-form {
@@ -106,8 +107,10 @@ export const FieldInputFormBox = styled.div`
 
   #field-input-form::placeholder {
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 13px;
     color: #adb5bd;
+
+    height: 44px;
   }
 
   #field-input-form:focus {

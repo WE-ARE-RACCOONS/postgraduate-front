@@ -4,6 +4,8 @@ import {
   ProfileFormContainer,
   ProfileTitleContainer,
 } from './ProfileForm.styled';
+import { register } from 'module';
+import SingleValidator from '@/components/Validator/SingleValidator';
 
 const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
   (props, _ref) => {
@@ -36,36 +38,53 @@ const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
     };
 
     return (
-      <ProfileFormContainer $flag={props.flag}>
+      <ProfileFormContainer $flag={props.flag ?? false}>
         <ProfileTitleContainer>
           <div>{props.title}</div>
-          <div id="char-count">
-            {charCount} / {props.maxLength || 0} 자
-          </div>
         </ProfileTitleContainer>
         {props.lineType === 'single' && (
-          <textarea
-            id="single-profile-form"
-            className={`profile-form-${props.formType}`}
-            placeholder={props.placeholder}
-            {...props?.register}
-            onChange={(e) => {
-              props.register?.onChange(e);
-              handleChange(e);
-            }}
-          />
+          <div>
+            <textarea
+              id="single-profile-form"
+              className={`profile-form-${props.formType}`}
+              placeholder={props.placeholder}
+              {...props?.register}
+              onChange={(e) => {
+                props.register?.onChange(e);
+                handleChange(e);
+              }}
+            />
+            <div id="char-count">
+              <div>
+                {charCount} / {props.maxLength || 0}
+              </div>
+              {props.errorMessage && (
+                <SingleValidator msg={props.errorMessage} textColor="#FF5757" />
+              )}
+            </div>
+          </div>
         )}
         {props.lineType === 'multi' && (
-          <textarea
-            id="multi-profile-form"
-            className={`profile-form-${props.formType}`}
-            placeholder={props.placeholder}
-            {...props?.register}
-            onChange={(e) => {
-              props.register?.onChange(e);
-              handleChange(e);
-            }}
-          ></textarea>
+          <div>
+            <textarea
+              id="multi-profile-form"
+              className={`profile-form-${props.formType}`}
+              placeholder={props.placeholder}
+              {...props?.register}
+              onChange={(e) => {
+                handleChange(e);
+              }}
+            ></textarea>
+
+            <div id="char-count">
+              <div>
+                {charCount} / {props.maxLength || 0}
+              </div>
+              {props.errorMessage && (
+                <SingleValidator msg={props.errorMessage} textColor="#FF5757" />
+              )}
+            </div>
+          </div>
         )}
       </ProfileFormContainer>
     );

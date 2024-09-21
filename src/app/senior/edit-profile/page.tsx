@@ -2,73 +2,65 @@
 import ClickedBtn from '@/components/Button/ClickedBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
 import BackHeader from '@/components/Header/BackHeader';
-import FullModal from '@/components/Modal/FullModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
-import TextForm from '@/components/SingleForm/TextForm';
-import SingleValidator from '@/components/Validator/SingleValidator';
+
+import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
 import {
   PROFILE_PLACEHOLDER,
   PROFILE_TITLE,
 } from '@/constants/form/cProfileForm';
-import useAuth from '@/hooks/useAuth';
-import useModal from '@/hooks/useModal';
-import {
-  sAbleTime,
-  sChatLink,
-  sFieldAtom,
-  sKeywordAtom,
-  sLabAtom,
-  sMultiIntroduce,
-  sRecommendedFor,
-  sSingleIntroduce,
-  selectedFieldAtom,
-  selectedKeywordAtom,
-  totalFieldAtom,
-  totalKeywordAtom,
-} from '@/stores/senior';
-import { ModalType } from '@/types/modal/riseUp';
-import findExCode from '@/utils/findExCode';
-import axios from 'axios';
-import { useAtom, useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+
 import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
+import { editProfileSchema } from '@/app/senior/edit-profile/edit-profile-schema';
+import { useForm, FormProvider } from 'react-hook-form';
+
+import { yupResolver } from '@hookform/resolvers/yup';
+import useSEdit from '@/hooks/useSEdit';
+import { useEffect, useState } from 'react';
 
 function EditProfilePage() {
-  const { getAccessToken, removeTokens } = useAuth();
-  const [modalType, setModalType] = useState<ModalType>('postgradu');
-
   const { openModal: openSeniorMentoringTimeModal } = useFullModal({
     modalType: 'senior-mentoring-time',
   });
 
-  const [flag, setFlag] = useState(false);
-  const [labFlag, setLabFlag] = useState(false);
-  const [fieldFlag, setFieldFlag] = useState(false);
-  const [keywordFlag, setKeywordFlag] = useState(false);
-  const [singleFlag, setSingleFlag] = useState(false);
-  const [multiFlag, setMultiFlag] = useState(false);
-  const [recommendFlag, setRecommendFlag] = useState(false);
-  const [chatLinkFlag, setChatLinkFlag] = useState(false);
-  const [timeFlag, setTimeFlag] = useState(false);
-  const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
-  const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
-  const [recommended, setRecommended] = useAtom(sRecommendedFor);
-  const [chatLink, setChatLink] = useAtom(sChatLink);
-  const [sField, setSfield] = useAtom(sFieldAtom);
-  const [totalField, setTotalField] = useAtom(totalFieldAtom);
-  const setSelectedField = useSetAtom(selectedFieldAtom);
-  const setTotalKeyword = useSetAtom(totalKeywordAtom);
-  const setSelectedKeyword = useSetAtom(selectedKeywordAtom);
-  const [sLab, setSlab] = useAtom(sLabAtom);
-  const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
-  const [timeData, setTimeData] = useAtom(sAbleTime);
-  const router = useRouter();
+  const editProfileMethod = useForm({
+    resolver: yupResolver(editProfileSchema),
+    mode: 'all',
+  });
 
+  const {
+    register,
+    trigger,
+    setValue,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = editProfileMethod;
+
+  const {
+    singleIntro,
+    setSingleIntro,
+    multiIntro,
+    setMultiIntro,
+    recommended,
+    setRecommended,
+    chatLink,
+    setChatLink,
+    sField,
+    allFieldValid,
+    sLab,
+    setSlab,
+    sKeyword,
+    timeData,
+    setTimeData,
+    checkAllFieldIsValid,
+    handleClickConfirmBtn,
+  } = useSEdit();
+
+  const [_allFieldState, _setAllFieldState] = useState(checkAllFieldIsValid());
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
   };
@@ -83,429 +75,250 @@ function EditProfilePage() {
     return resultArray.join(', ');
   };
 
-  function validateLab() {
-    if (sLab.length <= 0) setLabFlag(true);
-    else setLabFlag(false);
-  }
-
-  function validateField() {
-    if (sField.length <= 0) setFieldFlag(true);
-    else setFieldFlag(false);
-  }
-
-  function validateKeyword() {
-    if (sKeyword.length <= 0) setKeywordFlag(true);
-    else setKeywordFlag(false);
-  }
-
-  function validateSingleIntro() {
-    if (singleIntro.length < 10) setSingleFlag(true);
-    else setSingleFlag(false);
-  }
-
-  function validateMultiIntro() {
-    if (multiIntro.length < 50) setMultiFlag(true);
-    else setMultiFlag(false);
-  }
-
-  function validateRecommended() {
-    if (recommended.length < 50) setRecommendFlag(true);
-    else setRecommendFlag(false);
-  }
-
-  function validateChatLink() {
-    if (chatLink.length <= 0) setChatLinkFlag(true);
-    else setChatLinkFlag(false);
-  }
-
-  useEffect(() => {
-    validateLab();
-  }, [sLab]);
-  useEffect(() => {
-    validateField();
-  }, [sField]);
-  useEffect(() => {
-    validateKeyword();
-  }, [sKeyword]);
-  useEffect(() => {
-    validateSingleIntro();
-  }, [singleIntro]);
-  useEffect(() => {
-    validateMultiIntro();
-  }, [multiIntro]);
-  useEffect(() => {
-    validateRecommended();
-  }, [recommended]);
-  useEffect(() => {
-    validateChatLink();
-  }, [chatLink]);
-  useEffect(() => {
-    validateTime();
-  }, [timeData]);
-
-  function validateTime() {
-    if (timeData.length < 3) setTimeFlag(true);
-    else setTimeFlag(false);
-  }
-
-  useEffect(() => {
-    const fetchData = async () => {
-      getAccessToken().then(async (token) => {
-        if (!token) {
-          // 알림톡으로 들어와서 토큰 없을 시, 로그인으로 이동
-          const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
-          const REDIRECT_URI =
-            window.location.origin + '/login/oauth2/code/kakao';
-          const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-          window.location.href = link;
-          return;
-        }
-
-        if (token) {
-          try {
-            const headers = {
-              Authorization: `Bearer ${token}`,
-            };
-
-            axios
-              .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`, {
-                headers,
-              })
-              .then((response) => {
-                const res = response.data;
-
-                if (findExCode(res.code)) {
-                  removeTokens();
-                  location.reload();
-                  return;
-                }
-
-                const tempFields = [...totalField];
-                res.data.field.forEach((el: string) => {
-                  if (!tempFields.includes(el)) tempFields.push(el);
-                });
-
-                setTimeData(res.data.times ? res.data.times : []);
-                setTotalField(tempFields);
-                setSelectedField(res.data.field);
-                setTotalKeyword(res.data.keyword);
-                setSelectedKeyword(res.data.keyword);
-                setSfield(res.data.field.join(','));
-                setSkeyword(res.data.keyword.join(','));
-                setChatLink(res.data.chatLink ? res.data.chatLink : '');
-                setMultiIntro(res.data.info ? res.data.info : '');
-                setSingleIntro(res.data.oneLiner ? res.data.oneLiner : '');
-                setRecommended(res.data.target ? res.data.target : '');
-                setSlab(res.data.lab);
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          } catch (error) {
-            console.error(error);
-          }
-        }
-      });
-    };
-
-    fetchData();
-  }, []);
-
-  const handleClick = () => {
-    const areConditionsMet =
-      singleIntro.length >= 10 &&
-      multiIntro.length >= 50 &&
-      recommended.length >= 50;
-
-    getAccessToken().then((token) => {
-      if (
-        token &&
-        areConditionsMet &&
-        chatLink &&
-        timeData.length >= 3 &&
-        sField &&
-        sKeyword &&
-        sLab
-      ) {
-        setFlag(false);
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/profile`,
-            {
-              lab: sLab,
-              keyword: sKeyword,
-              info: multiIntro,
-              target: recommended,
-              chatLink: chatLink,
-              field: sField,
-              oneLiner: singleIntro,
-              times: timeData,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${token}`,
-              },
-            },
-          )
-          .then((res) => {
-            if (findExCode(res.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-            router.back();
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-      }
-    });
-
-    setFlag(true);
-  };
-
-  const openRiseUpModal = () => {
+  const openRiseUpModal = (modalType: 'field' | 'keyword') => {
     overlay.open(({ unmount }) => {
-      return <RiseUpModal modalHandler={unmount} modalType={modalType} />;
+      if (sField === '') {
+        trigger('field');
+      }
+      if (modalType === 'keyword' && sKeyword === '') {
+        trigger('keyword');
+      }
+
+      return (
+        <FormProvider {...editProfileMethod}>
+          <RiseUpModal
+            modalHandler={() => {
+              unmount();
+              if (modalType === 'keyword') {
+                setValue('keyword', '');
+              }
+              if (modalType === 'field') {
+                setValue('field', '');
+              }
+            }}
+            modalType={modalType}
+          />
+        </FormProvider>
+      );
     });
   };
 
   return (
     <div>
-      <BackHeader headerText="프로필 정보" />
-      <EditPContainer>
-        <EPTitle>프로필 정보</EPTitle>
-        <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
-          <BtnBox>
-            <MBtnFont>
-              <div className="title-with-modify">
-                연구실명&nbsp;<div id="font-color">*</div>
-              </div>
-              {labFlag && (
-                <div id="warn-msg">&nbsp;연구실명을 입력해주세요</div>
-              )}
-            </MBtnFont>
-            <TextForm
-              placeholder={sLab ? sLab : '연구실 이름을 입력해주세요.'}
-              targetAtom="lab"
-              max={30}
-            />
-          </BtnBox>
-          <BtnBox>
-            <MBtnFont>
-              <div className="title-with-modify">
-                연구분야&nbsp;<div id="font-color">*</div>
-                {fieldFlag && (
-                  <div id="warn-msg">&nbsp;최소 1개 이상 선택해주세요</div>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          handleSubmit(() => handleClickConfirmBtn());
+        }}
+      >
+        <BackHeader headerText="프로필 정보" />
+        <EditPContainer>
+          <div style={{ marginLeft: '1rem' }}>
+            <BtnBox>
+              <MBtnFont>
+                <div className="title-with-modify">연구실 이름</div>
+                {errors.lab?.message && (
+                  <div id="warn-msg">&nbsp; {errors.lab.message}</div>
                 )}
-              </div>
-              <button
-                className="modify-btn"
-                onClick={() => {
-                  setModalType('field');
-                  openRiseUpModal();
+              </MBtnFont>
+              <TextFormEl
+                placeholder={sLab ? sLab : '모바일 임베디드 시스템 연구실'}
+                defaultValue={sLab}
+                {...register('lab')}
+                onBlur={(e) => {
+                  setSlab(e.target.value);
+                  trigger('lab');
                 }}
-              >
-                수정
-              </button>
-            </MBtnFont>
-            <ModalBtn
-              type="seniorInfo"
-              btnText={sField ? formatField(sField) : '연구분야*'}
-              modalHandler={openRiseUpModal}
-              onClick={() => {
-                setModalType('field');
-              }}
-            />
-          </BtnBox>
-          <BtnBox>
-            <MBtnFont>
-              <div className="title-with-modify">
-                연구주제&nbsp;<div id="font-color">*</div>
-                {keywordFlag && (
-                  <div id="warn-msg">&nbsp;최소 1개 이상 입력해주세요</div>
-                )}
-              </div>
-              <button
-                className="modify-btn"
-                onClick={() => {
-                  setModalType('keyword');
-                  openRiseUpModal();
-                }}
-              >
-                수정
-              </button>
-            </MBtnFont>
-            <ModalBtn
-              type="seniorInfo"
-              btnText={sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'}
-              modalHandler={openRiseUpModal}
-              onClick={() => {
-                setModalType('keyword');
-              }}
-            />
-          </BtnBox>
-        </div>
-        <EPTitle>멘토링 정보</EPTitle>
-        <ProfileForm
-          flag={singleFlag}
-          maxLength={100}
-          lineType="single"
-          title={PROFILE_TITLE.singleIntroduce}
-          placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
-          formType="singleIntro"
-          loadStr={singleIntro}
-          changeHandler={setSingleIntro}
-        />
-        <div style={{ marginLeft: '1rem' }}>
-          {singleFlag && (
-            <SingleValidator
-              msg={'최소 10자 이상 입력해 주세요.'}
-              textColor="#FF3347"
-            />
-          )}
-        </div>
-        <ProfileForm
-          flag={multiFlag}
-          lineType="multi"
-          title={PROFILE_TITLE.multiIntroduce}
-          placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
-          maxLength={1000}
-          formType="multiIntro"
-          loadStr={multiIntro}
-          changeHandler={setMultiIntro}
-        />
-        <div style={{ marginLeft: '1rem' }}>
-          {multiFlag && (
-            <SingleValidator
-              msg={'최소 50자 이상 입력해 주세요.'}
-              textColor="#FF3347"
-            />
-          )}
-        </div>
-        <ProfileForm
-          flag={recommendFlag}
-          lineType="multi"
-          title={PROFILE_TITLE.recommendedFor}
-          placeholder={PROFILE_PLACEHOLDER.recommendedFor}
-          maxLength={1000}
-          formType="recommendedFor"
-          loadStr={recommended ? recommended : ''}
-          changeHandler={setRecommended}
-        />
-        <div style={{ marginLeft: '1rem' }}>
-          {recommendFlag && (
-            <SingleValidator
-              msg={'최소 50자 이상 입력해 주세요.'}
-              textColor="#FF3347"
-            />
-          )}
-        </div>
-        <EPMentoring>
-          <div>
-            <div id="mentoring-title">카카오톡 오픈 채팅방 링크</div>
-            <div id="mentoring-sub">
-              매칭된 후배와 대화할 오픈채팅 방이에요.
-              <br />
-              비대면 회의 링크나 급한 공지를 전달해요.
-            </div>
+              />
+            </BtnBox>
+            <BtnBox>
+              <MBtnFont>
+                <div className="title-with-modify">
+                  연구 분야
+                  {!sField && (
+                    <div id="warn-msg">&nbsp;{errors?.field?.message}</div>
+                  )}
+                </div>
+              </MBtnFont>
+              <ModalBtn
+                type="seniorInfo"
+                btnText={
+                  sField ? formatField(sField) : '인공지능, 반도체, 바이오'
+                }
+                modalHandler={() => openRiseUpModal('field')}
+              />
+            </BtnBox>
+            <BtnBox>
+              <MBtnFont>
+                <div className="title-with-modify">
+                  연구 주제
+                  {!sKeyword && (
+                    <div id="warn-msg">&nbsp;{errors?.keyword?.message}</div>
+                  )}
+                </div>
+              </MBtnFont>
+              <ModalBtn
+                type="seniorInfo"
+                btnText={
+                  sKeyword
+                    ? formatKeyword(sKeyword)
+                    : '#인공지능, #반도체, #바이오'
+                }
+                modalHandler={() => openRiseUpModal('keyword')}
+              />
+            </BtnBox>
           </div>
-          <input
-            defaultValue={chatLink ? chatLink : ''}
-            type="text"
-            id="add-chat-link-form"
-            placeholder={PROFILE_PLACEHOLDER.addChatLink}
-            onChange={(e) => {
-              setChatLink(e.currentTarget.value);
-            }}
+
+          <ProfileForm
+            flag={!!errors?.singleIntro?.message}
+            maxLength={100}
+            lineType="single"
+            title={PROFILE_TITLE.singleIntroduce}
+            placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
+            formType="singleIntro"
+            loadStr={singleIntro}
+            register={register('singleIntro')}
+            changeHandler={(e) => setSingleIntro(e)}
+            errorMessage={errors?.singleIntro?.message}
           />
-        </EPMentoring>
-        <SetData>
-          <div
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              marginLeft: '1rem',
+
+          <ProfileForm
+            flag={!!errors.multiIntro?.message}
+            lineType="multi"
+            title={PROFILE_TITLE.multiIntroduce}
+            placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
+            maxLength={1000}
+            formType="multiIntro"
+            loadStr={multiIntro}
+            register={register('multiIntro')}
+            changeHandler={(e) => setMultiIntro(e)}
+            errorMessage={errors?.multiIntro?.message}
+          />
+
+          <ProfileForm
+            flag={!!errors.recommended?.message}
+            lineType="multi"
+            title={PROFILE_TITLE.recommendedFor}
+            placeholder={PROFILE_PLACEHOLDER.recommendedFor}
+            maxLength={1000}
+            formType="recommendedFor"
+            loadStr={recommended ? recommended : ''}
+            register={register('recommended')}
+            changeHandler={(e) => {
+              setRecommended(e);
             }}
-          >
-            <div id="setData-title">가능 정기일정</div>
-            {timeFlag && (
-              <div id="setData-warn">최소 3개 이상 일정을 추가해주세요</div>
-            )}
-          </div>
-          <SetDataBox>
-            {timeData && timeData.length > 0 ? (
-              <>
-                {timeData &&
-                  timeData.map((el, idx) => (
-                    <IntroCardTimeBox key={idx}>
-                      {el.day}요일 {el.startTime} ~ {el.endTime}
-                      <div
-                        id="delete"
-                        onClick={() => clickHandler(idx)}
-                        style={{ cursor: 'pointer' }}
-                      >
-                        삭제
-                      </div>
-                    </IntroCardTimeBox>
-                  ))}
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    justifyContent: 'center',
-                    marginTop: '0.5rem',
-                  }}
-                >
+            errorMessage={errors?.recommended?.message}
+          />
+
+          <EPMentoring>
+            <div>
+              <div id="mentoring-title">연락 방법</div>
+            </div>
+            <input
+              defaultValue={chatLink ? chatLink : ''}
+              type="text"
+              id="add-chat-link-form"
+              placeholder={PROFILE_PLACEHOLDER.addChatLink}
+              {...register('chatLink')}
+              onChange={(e) => {
+                setChatLink(e.currentTarget.value);
+              }}
+            />
+          </EPMentoring>
+          <SetData>
+            <div
+              style={{
+                marginLeft: '1rem',
+              }}
+            >
+              <div id="setData-title">가능한 멘토링 일정</div>
+              {errors.timeData?.message && (
+                <div id="setData-warn">{errors.timeData.message}</div>
+              )}
+            </div>
+            <SetDataBox>
+              {timeData && timeData.length > 0 ? (
+                <>
+                  {timeData &&
+                    timeData.map((el, idx) => (
+                      <IntroCardTimeBox key={idx}>
+                        {el.day}요일 {el.startTime} ~ {el.endTime}
+                        <div
+                          id="delete"
+                          onClick={() => clickHandler(idx)}
+                          style={{ cursor: 'pointer' }}
+                        >
+                          삭제
+                        </div>
+                      </IntroCardTimeBox>
+                    ))}
+
                   <div
                     id="setData-btn"
                     onClick={openSeniorMentoringTimeModal}
                     style={{ cursor: 'pointer' }}
                   >
-                    추가하기
+                    추가
                   </div>
-                </div>
-              </>
+                </>
+              ) : (
+                <SetDataForm {...register('timeData')}>
+                  <div id="setDataF-msg">
+                    가능한 일정을 3개 이상 알려주세요.
+                  </div>
+                  <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
+                    + 추가
+                  </div>
+                </SetDataForm>
+              )}
+            </SetDataBox>
+          </SetData>
+          <div style={{ marginTop: '3.94rem', marginLeft: '1rem' }}>
+            {allFieldValid ? (
+              <ClickedBtn
+                btnText="저장"
+                kind="save"
+                clickHandler={handleClickConfirmBtn}
+              />
             ) : (
-              <SetDataForm>
-                <div id="setDataF-msg">입력된 정기 일정이 없습니다.</div>
-                <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
-                  + 추가하기
-                </div>
-              </SetDataForm>
+              <ClickedBtn
+                btnText="저장"
+                kind="save-non"
+                clickHandler={() => {}}
+              />
             )}
-          </SetDataBox>
-        </SetData>
-        <div style={{ marginTop: '3.94rem', marginLeft: '1rem' }}>
-          {chatLink && timeData.length >= 3 ? (
-            <ClickedBtn btnText="저장" kind="save" clickHandler={handleClick} />
-          ) : (
-            <ClickedBtn
-              btnText="저장"
-              kind="save-non"
-              clickHandler={handleClick}
-            />
-          )}
-        </div>
-      </EditPContainer>
+          </div>
+        </EditPContainer>
+      </form>
     </div>
   );
 }
 
 export default EditProfilePage;
 
-const EditPContainer = styled.div``;
+const EditPContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
 const SetDataBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   #setData-btn {
-    display: inline-flex;
+    display: flex;
     padding: 0.3125rem 0.625rem;
     align-items: center;
+    min-width: 50px;
+    height: 40px;
     gap: 0.25rem;
+    justify-content: center;
     border-radius: 0.25rem;
     background: #495565;
     color: #fff;
     font-family: Pretendard;
-    font-size: 0.75rem;
+    font-size: 13px;
     font-style: normal;
     font-weight: 700;
     line-height: 1.125rem; /* 150% */
@@ -535,19 +348,22 @@ const IntroCardTimeBox = styled.div`
 `;
 const SetDataForm = styled.div`
   margin-left: 1rem;
+  margin-top: 0.5rem;
   padding: 0 0.75rem;
   width: 93%;
-  height: 3.1875rem;
+  height: 44px;
   flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 0.5rem;
-  background: #f8f9fa;
+  background: white;
+  border: 1px solid #dcdfe4;
   #setDataF-msg {
-    color: #adb5bd;
+    color: #a6abb0;
     font-family: 'Noto Sans JP';
-    font-size: 1rem;
+    font-size: 0.875rem;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -567,7 +383,6 @@ const SetData = styled.div`
   #setData-title {
     color: #212529;
     font-family: Pretendard;
-    font-size: 1rem;
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 1.4rem */
@@ -579,11 +394,13 @@ const MBtnFont = styled.div`
   display: flex;
   justify-content: space-between;
   color: #212529;
-  font-family: Noto Sans JP;
-  font-size: 0.875rem;
+  font-family: Pretendard;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
+  margin-bottom: 0.31rem;
   line-height: normal;
+
   #font-color {
     color: #00a0e1;
     font-family: Noto Sans JP;
@@ -624,23 +441,25 @@ const EPTitle = styled.div`
   letter-spacing: -0.03125rem;
 `;
 const BtnBox = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.8rem;
+  margin-bottom: 1.8rem;
 `;
 const EPMentoring = styled.div`
   margin-left: 1rem;
   #add-chat-link-form {
     width: 95%;
-    height: 3.1875rem;
+    height: 44px;
     flex-shrink: 0;
     border-radius: 0.5rem;
-    border: 1px solid #c2cede;
+    border: 1px solid #dcdfe4;
     background: #fff;
+    font-size: 13px;
     padding: 0.87rem 0.96rem;
 
     &::placeholder {
       color: #adb5bd;
       font-family: 'Noto Sans JP';
-      font-size: 1rem;
+      font-size: 13px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;

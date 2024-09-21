@@ -16,20 +16,21 @@ export const PROFILE_SUB_DIRECTION = {
 };
 
 export const PROFILE_TITLE = {
-  singleIntroduce: '한줄 소개',
+  singleIntroduce: '한 줄 소개',
   multiIntroduce: '자기소개',
-  recommendedFor: '추천대상',
+  recommendedFor: '이런 후배에게 추천해요',
 };
 
 export const PROFILE_PLACEHOLDER = {
-  singleIntroduce: '본인을 한 줄로 소개해주세요',
+  singleIntroduce:
+    '안녕하세요. 000관련 연구를 하고 있는 대학원생입니다.\n진지하게 조언해 드리겠습니다!',
   multiIntroduce:
-    '스스로를 소개해주세요.\n출신 학부, 현재 연구 중인 내용, 자신있게 설명할 수 있는 분야 등을 알려주시면 좋아요 (최소 50자)',
+    '출신 학부 / 현재 진행 중인 연구 / 대학원 선택 배경 / 필요한 스펙 등 후배 회원에게 멘토링이 가능한 카테고리에 대해 알려주세요.(최소 50자)',
   recommendedFor:
-    '추천하는 멘토링 주제나 대학원 후배의 특성을 알려주세요 (최소 50자)',
+    '본 멘토링에 적합한 후배 회원은 어떤 고민을 가진 후배 회원일지 알려주세요.\n예시)\n- 대학원 컨택 방법에 대해 알고 싶은 분\n- 상위 대학원 입시에 관심 있는 분\n- 연구실 생활에 대해 알고 싶은 분',
   addTime:
     '예시)\n월요일 오후 03:00 ~ 오후 04:20\n화요일 오전 11:00 ~ 오후 02:20',
-  addChatLink: '채팅방을 생성해 링크를 붙여넣어 주세요.',
+  addChatLink: '카카오톡 오픈 채팅방 링크를 공유해 주새요.',
 };
 
 export const WEEK_ARRAY = ['일', '월', '화', '수', '목', '금', '토'];
