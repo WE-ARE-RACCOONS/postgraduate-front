@@ -1,5 +1,5 @@
-import instance from '@/api/api';
 import { KakaoAuthFetchResponse } from '@/api/auth/login/kakaoAuthFetch';
+import axios from 'axios';
 
 interface RejoinFetchRequest {
   socialId: string;
@@ -10,8 +10,11 @@ export const rejoinPatchFetch = async ({
   socialId,
   rejoin,
 }: RejoinFetchRequest) => {
-  return await instance.patch<KakaoAuthFetchResponse>('/auth/rejoin/KAKAO', {
-    socialId,
-    rejoin,
-  });
+  return await axios.patch<KakaoAuthFetchResponse>(
+    `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/rejoin/KAKAO`,
+    {
+      socialId,
+      rejoin,
+    },
+  );
 };

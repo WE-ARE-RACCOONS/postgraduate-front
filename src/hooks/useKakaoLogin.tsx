@@ -27,7 +27,7 @@ const useKakaoLogin = () => {
       isTutorial,
       refreshExpiration,
       socialId,
-    } = userRes.data;
+    } = userRes?.data;
 
     setAccessToken({ token: accessToken, expires: accessExpiration });
     setRefreshToken({ token: refreshToken, expires: refreshExpiration });
@@ -50,7 +50,7 @@ const useKakaoLogin = () => {
 
         if (kakaoAuthFetchRes.code === 'AU204') {
           setUserContext(kakaoAuthFetchRes);
-          router.replace('/');
+          router.push('/');
           return;
         }
 
@@ -63,8 +63,14 @@ const useKakaoLogin = () => {
                   const res = await rejoinPatchFetch({
                     socialId,
                     rejoin: true,
+                  }).then((res) => {
+                    if (res.data.code === 'EX300') {
+                      router.push('/');
+                    }
+                    setUserContext(res.data);
+                    router.push('/');
+                    unmount();
                   });
-                  setUserContext(res.data);
                 }}
                 cancelModalHandler={async () => {
                   await rejoinPatchFetch({ socialId, rejoin: false }).then(
