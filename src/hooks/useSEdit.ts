@@ -18,8 +18,6 @@ import { useAtom } from 'jotai';
 import { seniorProfileFetch } from '@/api/user/profile/getSeniorProfile';
 import { useRouter } from 'next/navigation';
 import { updateSeniorProfile } from '@/api/user/profile/updateSeniorProfile';
-import { UseFormSetValue, UseFormTrigger } from 'react-hook-form';
-import { editProfileSchema } from '@/app/senior/edit-profile/edit-profile-schema';
 
 const useSEdit = () => {
   const [allFieldValid, setAllFieldValid] = useState(false);

@@ -4,9 +4,6 @@ import SearchForm from '@/components/SingleForm/SearchForm';
 import SelectForm from '@/components/SingleForm/SelectForm';
 import KeywordForm from '@/components/SingleForm/KeywordForm/KeywordForm';
 import BankForm from '@/components/SingleForm/BankForm';
-import { useForm, FormProvider } from 'react-hook-form';
-import { editProfileSchema } from '@/app/senior/edit-profile/edit-profile-schema';
-import { yupResolver } from '@hookform/resolvers/yup';
 
 function RiseUpModal(props: RiseUpModalProps) {
   return (
