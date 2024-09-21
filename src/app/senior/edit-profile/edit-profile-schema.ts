@@ -18,8 +18,7 @@ export const editProfileSchema = yup.object({
   lab: yup
     .string()
     .min(1, '연구실 이름을 입력해주세요')
-    .required('연구실 이름을 입력해주세요')
-    .max(20),
+    .required('연구실 이름을 입력해주세요'),
   field: yup.string().required('최소 1개 이상 선택해주세요').min(1),
   keyword: yup.string().required('최소 1개 이상 입력해주세요').min(1),
   singleIntro: yup
