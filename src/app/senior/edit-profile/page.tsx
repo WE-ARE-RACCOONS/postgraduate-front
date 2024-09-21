@@ -5,83 +5,62 @@ import BackHeader from '@/components/Header/BackHeader';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 
-import { getDefaultStore } from 'jotai';
 import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
-import TextForm from '@/components/SingleForm/TextForm';
-import SingleValidator from '@/components/Validator/SingleValidator';
 import {
   PROFILE_PLACEHOLDER,
   PROFILE_TITLE,
 } from '@/constants/form/cProfileForm';
-import useAuth from '@/hooks/useAuth';
-import {
-  sAbleTime,
-  sChatLink,
-  sFieldAtom,
-  sKeywordAtom,
-  sLabAtom,
-  sMultiIntroduce,
-  sRecommendedFor,
-  sSingleIntroduce,
-  selectedFieldAtom,
-  selectedKeywordAtom,
-  totalFieldAtom,
-  totalKeywordAtom,
-} from '@/stores/senior';
-import findExCode from '@/utils/findExCode';
-import axios from 'axios';
-import { useAtom, useSetAtom } from 'jotai';
-import { useRouter } from 'next/navigation';
-import React, { useEffect, useState } from 'react';
+
 import useFullModal from '@/hooks/useFullModal';
 import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
 import { editProfileSchema } from '@/app/senior/edit-profile/edit-profile-schema';
 import { useForm, FormProvider } from 'react-hook-form';
-import { seniorProfileFetch } from '@/api/user/profile/getSeniorProfile';
 
-import { updateSeniorProfile } from '@/api/user/profile/updateSeniorProfile';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { getImgProps } from 'next/dist/shared/lib/get-img-props';
+import useSEdit from '@/hooks/useSEdit';
+import { useEffect, useState } from 'react';
 
 function EditProfilePage() {
-  const { getAccessToken, removeTokens } = useAuth();
-
   const { openModal: openSeniorMentoringTimeModal } = useFullModal({
     modalType: 'senior-mentoring-time',
   });
 
   const editProfileMethod = useForm({
     resolver: yupResolver(editProfileSchema),
-    mode: 'onBlur',
+    mode: 'all',
   });
 
   const {
     register,
     trigger,
     setValue,
-    control,
     handleSubmit,
-    resetField,
-    setError,
     watch,
     formState: { errors },
   } = editProfileMethod;
-  const [flag, setFlag] = useState(false);
-  const [singleIntro, setSingleIntro] = useAtom(sSingleIntroduce);
-  const [multiIntro, setMultiIntro] = useAtom(sMultiIntroduce);
-  const [recommended, setRecommended] = useAtom(sRecommendedFor);
-  const [chatLink, setChatLink] = useAtom(sChatLink);
-  const [sField, setSfield] = useAtom(sFieldAtom);
-  const [totalField, setTotalField] = useAtom(totalFieldAtom);
-  const [selectedField, setSelectedField] = useAtom(selectedFieldAtom);
-  const [totalKeyword, setTotalKeyword] = useAtom(totalKeywordAtom);
-  const [selectedKeyword, setSelectedKeyword] = useAtom(selectedKeywordAtom);
-  const [sLab, setSlab] = useAtom(sLabAtom);
-  const [sKeyword, setSkeyword] = useAtom(sKeywordAtom);
-  const [timeData, setTimeData] = useAtom(sAbleTime);
-  const router = useRouter();
 
+  const {
+    singleIntro,
+    setSingleIntro,
+    multiIntro,
+    setMultiIntro,
+    recommended,
+    setRecommended,
+    chatLink,
+    setChatLink,
+    sField,
+    allFieldValid,
+    sLab,
+    setSlab,
+    sKeyword,
+    timeData,
+    setTimeData,
+    checkAllFieldIsValid,
+    handleClickConfirmBtn,
+  } = useSEdit();
+
+  const [_allFieldState, _setAllFieldState] = useState(checkAllFieldIsValid());
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
   };
@@ -96,74 +75,6 @@ function EditProfilePage() {
     return resultArray.join(', ');
   };
 
-  useEffect(() => {
-    /*const redirectToLogin = async () => {
-      const token = await getAccessToken();
-      if (!token) {
-        const REST_API_KEY = process.env.NEXT_PUBLIC_REST_API_KEY;
-        const REDIRECT_URI = `${window.location.origin}/login/oauth2/code/kakao`;
-        const link = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
-        window.location.href = link;
-        return null;
-      }
-      return token;
-    };*/
-
-    const fetchData = async () => {
-      //  const token = await redirectToLogin();
-
-      const token = await getAccessToken();
-      if (!token) return;
-
-      try {
-        const { data } = await seniorProfileFetch();
-        const seniorProfileData = data.data;
-
-        const tempFields = [...totalField];
-
-        seniorProfileData.field.forEach((el) => {
-          if (!tempFields.includes(el)) {
-            tempFields.push(el);
-          }
-        });
-
-        setTimeData(seniorProfileData.times || []);
-        setTotalField(tempFields);
-        setSelectedField(seniorProfileData.field);
-        setTotalKeyword(seniorProfileData.keyword);
-        setSelectedKeyword(seniorProfileData.keyword);
-        setSfield(seniorProfileData.field.join(','));
-        setSkeyword(seniorProfileData.keyword.join(','));
-        setChatLink(seniorProfileData.chatLink || '');
-        setMultiIntro(seniorProfileData.info || '');
-        setSingleIntro(seniorProfileData.oneLiner || '');
-        setRecommended(seniorProfileData.target || '');
-        setSlab(seniorProfileData.lab);
-      } catch (error) {
-        console.error(error);
-      }
-    };
-
-    fetchData();
-  }, []);
-
-  const handleClick = async () => {
-    const isValid = await trigger();
-
-    if (isValid) {
-      await updateSeniorProfile({
-        lab: sLab,
-        keyword: sKeyword,
-        info: multiIntro,
-        target: recommended,
-        chatLink: chatLink,
-        field: sField,
-        oneLiner: singleIntro,
-        times: timeData,
-      });
-      setFlag(true);
-    }
-  };
   const openRiseUpModal = (modalType: 'field' | 'keyword') => {
     overlay.open(({ unmount }) => {
       if (sField === '') {
@@ -191,14 +102,13 @@ function EditProfilePage() {
       );
     });
   };
-  console.log(errors), watch('singleIntro');
 
   return (
     <div>
       <form
         onSubmit={(e) => {
           e.preventDefault();
-          handleSubmit(() => handleClick());
+          handleSubmit(() => handleClickConfirmBtn());
         }}
       >
         <BackHeader headerText="프로필 정보" />
@@ -267,8 +177,8 @@ function EditProfilePage() {
             placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
             formType="singleIntro"
             loadStr={singleIntro}
-            onChange={(e) => setSingleIntro(e.target.value)}
             register={register('singleIntro')}
+            changeHandler={(e) => setSingleIntro(e)}
             errorMessage={errors?.singleIntro?.message}
           />
 
@@ -280,8 +190,8 @@ function EditProfilePage() {
             maxLength={1000}
             formType="multiIntro"
             loadStr={multiIntro}
-            onChange={(e) => setMultiIntro(e.target.value)}
             register={register('multiIntro')}
+            changeHandler={(e) => setMultiIntro(e)}
             errorMessage={errors?.multiIntro?.message}
           />
 
@@ -293,8 +203,10 @@ function EditProfilePage() {
             maxLength={1000}
             formType="recommendedFor"
             loadStr={recommended ? recommended : ''}
-            onChange={(e) => setRecommended(e.target.value)}
             register={register('recommended')}
+            changeHandler={(e) => {
+              setRecommended(e);
+            }}
             errorMessage={errors?.recommended?.message}
           />
 
@@ -355,24 +267,24 @@ function EditProfilePage() {
                     가능한 일정을 3개 이상 알려주세요.
                   </div>
                   <div id="setData-btn" onClick={openSeniorMentoringTimeModal}>
-                    + 추가하기
+                    + 추가
                   </div>
                 </SetDataForm>
               )}
             </SetDataBox>
           </SetData>
           <div style={{ marginTop: '3.94rem', marginLeft: '1rem' }}>
-            {chatLink && timeData.length >= 3 ? (
+            {allFieldValid ? (
               <ClickedBtn
                 btnText="저장"
                 kind="save"
-                clickHandler={handleClick}
+                clickHandler={handleClickConfirmBtn}
               />
             ) : (
               <ClickedBtn
                 btnText="저장"
                 kind="save-non"
-                clickHandler={handleClick}
+                clickHandler={() => {}}
               />
             )}
           </div>
@@ -398,7 +310,7 @@ const SetDataBox = styled.div`
     display: flex;
     padding: 0.3125rem 0.625rem;
     align-items: center;
-    width: 50px;
+    min-width: 50px;
     height: 40px;
     gap: 0.25rem;
     justify-content: center;
