@@ -42,6 +42,7 @@ import { seniorProfileFetch } from '@/api/user/profile/getSeniorProfile';
 
 import { updateSeniorProfile } from '@/api/user/profile/updateSeniorProfile';
 import { yupResolver } from '@hookform/resolvers/yup';
+import { getImgProps } from 'next/dist/shared/lib/get-img-props';
 
 function EditProfilePage() {
   const { getAccessToken, removeTokens } = useAuth();
@@ -58,7 +59,10 @@ function EditProfilePage() {
   const {
     register,
     trigger,
+    setValue,
+    control,
     handleSubmit,
+    resetField,
     setError,
     watch,
     formState: { errors },
@@ -92,7 +96,6 @@ function EditProfilePage() {
     return resultArray.join(', ');
   };
 
-  console.log(errors.field);
   useEffect(() => {
     /*const redirectToLogin = async () => {
       const token = await getAccessToken();
@@ -161,27 +164,26 @@ function EditProfilePage() {
       setFlag(true);
     }
   };
-
   const openRiseUpModal = (modalType: 'field' | 'keyword') => {
-    if (modalType === 'field' && selectedField.length === 0) {
-      trigger('field');
-    }
-
-    if (
-      modalType === 'keyword' &&
-      selectedField.length === 0 &&
-      totalKeyword.length === 0
-    ) {
-      trigger('field');
-      trigger('keyword');
-    }
-
     overlay.open(({ unmount }) => {
+      if (sField === '') {
+        trigger('field');
+      }
+      if (modalType === 'keyword' && sKeyword === '') {
+        trigger('keyword');
+      }
+
       return (
         <FormProvider {...editProfileMethod}>
           <RiseUpModal
             modalHandler={() => {
               unmount();
+              if (modalType === 'keyword') {
+                setValue('keyword', '');
+              }
+              if (modalType === 'field') {
+                setValue('field', '');
+              }
             }}
             modalType={modalType}
           />
@@ -189,6 +191,7 @@ function EditProfilePage() {
       );
     });
   };
+  console.log(errors), watch('singleIntro');
 
   return (
     <div>
@@ -200,13 +203,10 @@ function EditProfilePage() {
       >
         <BackHeader headerText="프로필 정보" />
         <EditPContainer>
-          <EPTitle>프로필 정보</EPTitle>
-          <div style={{ marginBottom: '2.62rem', marginLeft: '1rem' }}>
+          <div style={{ marginLeft: '1rem' }}>
             <BtnBox>
               <MBtnFont>
-                <div className="title-with-modify">
-                  연구실 이름&nbsp;<div id="font-color">*</div>
-                </div>
+                <div className="title-with-modify">연구실 이름</div>
                 {errors.lab?.message && (
                   <div id="warn-msg">&nbsp; {errors.lab.message}</div>
                 )}
@@ -224,126 +224,90 @@ function EditProfilePage() {
             <BtnBox>
               <MBtnFont>
                 <div className="title-with-modify">
-                  연구 분야&nbsp;<div id="font-color">*</div>
-                  {selectedField.length === 0 && (
+                  연구 분야
+                  {!sField && (
                     <div id="warn-msg">&nbsp;{errors?.field?.message}</div>
                   )}
                 </div>
-                <button
-                  className="modify-btn"
-                  onClick={() => {
-                    openRiseUpModal('field');
-                  }}
-                >
-                  수정
-                </button>
               </MBtnFont>
               <ModalBtn
                 type="seniorInfo"
-                btnText={sField ? formatField(sField) : '연구분야*'}
+                btnText={
+                  sField ? formatField(sField) : '인공지능, 반도체, 바이오'
+                }
                 modalHandler={() => openRiseUpModal('field')}
               />
             </BtnBox>
             <BtnBox>
               <MBtnFont>
                 <div className="title-with-modify">
-                  연구 주제&nbsp;<div id="font-color">*</div>
-                  {errors.keyword?.message && (
-                    <div id="warn-msg">&nbsp;{errors.keyword.message}</div>
+                  연구 주제
+                  {!sKeyword && (
+                    <div id="warn-msg">&nbsp;{errors?.keyword?.message}</div>
                   )}
                 </div>
-                <button
-                  className="modify-btn"
-                  onClick={() => {
-                    openRiseUpModal('keyword');
-                  }}
-                >
-                  수정
-                </button>
               </MBtnFont>
               <ModalBtn
                 type="seniorInfo"
                 btnText={
-                  sKeyword ? formatKeyword(sKeyword) : '연구 주제 키워드*'
+                  sKeyword
+                    ? formatKeyword(sKeyword)
+                    : '#인공지능, #반도체, #바이오'
                 }
                 modalHandler={() => openRiseUpModal('keyword')}
               />
             </BtnBox>
           </div>
-          <EPTitle>멘토링 정보</EPTitle>
+
           <ProfileForm
-            flag={
-              typeof errors?.singleIntro?.message !== 'undefined'
-                ? errors?.singleIntro?.message?.length > 0
-                : false
-            }
+            flag={!!errors?.singleIntro?.message}
             maxLength={100}
             lineType="single"
             title={PROFILE_TITLE.singleIntroduce}
             placeholder={PROFILE_PLACEHOLDER.singleIntroduce}
             formType="singleIntro"
             loadStr={singleIntro}
-            changeHandler={setSingleIntro}
-            {...register('singleIntro')}
+            onChange={(e) => setSingleIntro(e.target.value)}
+            register={register('singleIntro')}
+            errorMessage={errors?.singleIntro?.message}
           />
-          <div style={{ marginLeft: '1rem' }}>
-            {errors.singleIntro?.message && (
-              <SingleValidator
-                msg={errors.singleIntro.message}
-                textColor="#FF3347"
-              />
-            )}
-          </div>
+
           <ProfileForm
-            flag={errors.multiIntro?.message}
+            flag={!!errors.multiIntro?.message}
             lineType="multi"
             title={PROFILE_TITLE.multiIntroduce}
             placeholder={PROFILE_PLACEHOLDER.multiIntroduce}
             maxLength={1000}
             formType="multiIntro"
             loadStr={multiIntro}
-            changeHandler={setMultiIntro}
+            onChange={(e) => setMultiIntro(e.target.value)}
+            register={register('multiIntro')}
+            errorMessage={errors?.multiIntro?.message}
           />
-          <div style={{ marginLeft: '1rem' }}>
-            {errors.multiIntro?.message && (
-              <SingleValidator
-                msg={errors.multiIntro.message}
-                textColor="#FF3347"
-              />
-            )}
-          </div>
+
           <ProfileForm
-            flag={errors.recommended?.message}
+            flag={!!errors.recommended?.message}
             lineType="multi"
             title={PROFILE_TITLE.recommendedFor}
             placeholder={PROFILE_PLACEHOLDER.recommendedFor}
             maxLength={1000}
             formType="recommendedFor"
             loadStr={recommended ? recommended : ''}
-            changeHandler={setRecommended}
+            onChange={(e) => setRecommended(e.target.value)}
+            register={register('recommended')}
+            errorMessage={errors?.recommended?.message}
           />
-          <div style={{ marginLeft: '1rem' }}>
-            {errors.recommended?.message && (
-              <SingleValidator
-                msg={errors.recommended.message}
-                textColor="#FF3347"
-              />
-            )}
-          </div>
+
           <EPMentoring>
             <div>
               <div id="mentoring-title">연락 방법</div>
-              <div id="mentoring-sub">
-                매칭된 후배와 대화할 오픈채팅 방이에요.
-                <br />
-                비대면 회의 링크나 급한 공지를 전달해요.
-              </div>
             </div>
             <input
               defaultValue={chatLink ? chatLink : ''}
               type="text"
               id="add-chat-link-form"
               placeholder={PROFILE_PLACEHOLDER.addChatLink}
+              {...register('chatLink')}
               onChange={(e) => {
                 setChatLink(e.currentTarget.value);
               }}
@@ -352,8 +316,6 @@ function EditProfilePage() {
           <SetData>
             <div
               style={{
-                display: 'flex',
-                alignItems: 'center',
                 marginLeft: '1rem',
               }}
             >
@@ -378,25 +340,17 @@ function EditProfilePage() {
                         </div>
                       </IntroCardTimeBox>
                     ))}
+
                   <div
-                    style={{
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      marginTop: '0.5rem',
-                    }}
+                    id="setData-btn"
+                    onClick={openSeniorMentoringTimeModal}
+                    style={{ cursor: 'pointer' }}
                   >
-                    <div
-                      id="setData-btn"
-                      onClick={openSeniorMentoringTimeModal}
-                      style={{ cursor: 'pointer' }}
-                    >
-                      추가하기
-                    </div>
+                    추가
                   </div>
                 </>
               ) : (
-                <SetDataForm>
+                <SetDataForm {...register('timeData')}>
                   <div id="setDataF-msg">
                     가능한 일정을 3개 이상 알려주세요.
                   </div>
@@ -430,18 +384,29 @@ function EditProfilePage() {
 
 export default EditProfilePage;
 
-const EditPContainer = styled.div``;
+const EditPContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+`;
 const SetDataBox = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   #setData-btn {
-    display: inline-flex;
+    display: flex;
     padding: 0.3125rem 0.625rem;
     align-items: center;
+    width: 50px;
+    height: 40px;
     gap: 0.25rem;
+    justify-content: center;
     border-radius: 0.25rem;
     background: #495565;
     color: #fff;
     font-family: Pretendard;
-    font-size: 0.75rem;
+    font-size: 13px;
     font-style: normal;
     font-weight: 700;
     line-height: 1.125rem; /* 150% */
@@ -471,19 +436,22 @@ const IntroCardTimeBox = styled.div`
 `;
 const SetDataForm = styled.div`
   margin-left: 1rem;
+  margin-top: 0.5rem;
   padding: 0 0.75rem;
   width: 93%;
-  height: 3.1875rem;
+  height: 44px;
   flex-shrink: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-radius: 0.5rem;
-  background: #f8f9fa;
+  background: white;
+  border: 1px solid #dcdfe4;
   #setDataF-msg {
-    color: #adb5bd;
+    color: #a6abb0;
     font-family: 'Noto Sans JP';
     font-size: 0.875rem;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -503,7 +471,6 @@ const SetData = styled.div`
   #setData-title {
     color: #212529;
     font-family: Pretendard;
-    font-size: 1rem;
     font-style: normal;
     font-weight: 700;
     line-height: 140%; /* 1.4rem */
@@ -515,11 +482,13 @@ const MBtnFont = styled.div`
   display: flex;
   justify-content: space-between;
   color: #212529;
-  font-family: Noto Sans JP;
-  font-size: 0.875rem;
+  font-family: Pretendard;
+  font-size: 1rem;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
+  margin-bottom: 0.31rem;
   line-height: normal;
+
   #font-color {
     color: #00a0e1;
     font-family: Noto Sans JP;
@@ -560,23 +529,25 @@ const EPTitle = styled.div`
   letter-spacing: -0.03125rem;
 `;
 const BtnBox = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.8rem;
+  margin-bottom: 1.8rem;
 `;
 const EPMentoring = styled.div`
   margin-left: 1rem;
   #add-chat-link-form {
     width: 95%;
-    height: 3.1875rem;
+    height: 44px;
     flex-shrink: 0;
     border-radius: 0.5rem;
-    border: 1px solid #c2cede;
+    border: 1px solid #dcdfe4;
     background: #fff;
+    font-size: 13px;
     padding: 0.87rem 0.96rem;
 
     &::placeholder {
       color: #adb5bd;
       font-family: 'Noto Sans JP';
-      font-size: 1rem;
+      font-size: 13px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
