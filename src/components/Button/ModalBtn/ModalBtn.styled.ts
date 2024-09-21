@@ -18,7 +18,7 @@ export const StyledSModalBtn = styled.button`
   align-items: center;
   justify-content: center;
   width: 92%;
-  height: 2.375rem;
+  height: 44px;
   cursor: pointer;
   border-radius: 0.5rem;
   background: #2fc4b2;
@@ -54,22 +54,22 @@ export const StyledMSBtn = styled.button`
 export const SInfoBtn = styled.button<SInfoBtnProps>`
   color: ${(props) => (props.$isGet ? '#ADB5BD' : '#212529')};
   margin-top: 0.5rem;
-  height: 3.1875rem;
+  height: 44px;
   width: 97%;
   flex-shrink: 0;
   border-radius: 0.5rem;
-  border: 1px solid #c2cede;
-  background: #f8f9fa;
+  border: 0.8px solid #dcdfe4;
   padding: 0.8rem;
+  background-color: white;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
   font-family: Pretendard;
-  font-size: 1rem;
+  font-size: 13px;
   font-style: normal;
   font-weight: 400;
   line-height: normal;
-  color: #495565;
+  color: #a6abb0;
   cursor: pointer;
 `;

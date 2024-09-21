@@ -3,22 +3,35 @@ import styled from 'styled-components';
 export const ProfileFormContainer = styled.div<{ $flag: boolean }>`
   width: inherit;
   height: max-content;
+  color: #464c51;
   margin-left: 1rem;
-  margin-top: 1.56rem;
-
+  margin-top: 1.7rem;
+  #char-count {
+    color: #868e96;
+    display: flex;
+    width: 95%;
+    justify-content: space-between;
+    font-family: 'Spoqa Han Sans Neo';
+    font-size: 0.75rem;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 1.125rem;
+    letter-spacing: -0.0375rem;
+    text-align: right;
+  }
   #single-profile-form {
-    height: 4.125rem;
+    height: 85px;
     width: 94%;
     border-radius: 0.25rem;
-    border: 1px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
+    border: 0.8px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
     padding: 0.5rem;
     resize: none;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 13px;
     &::placeholder {
-      color: #adb5bd;
+      color: #a6abb0;
       font-family: Pretendard;
-      font-size: 16px;
+      font-size: 13px;
       font-style: normal;
       font-weight: 400;
       line-height: 1.5rem;
@@ -34,12 +47,12 @@ export const ProfileFormContainer = styled.div<{ $flag: boolean }>`
     border: 1px solid ${(props) => (props.$flag ? '#FF5757' : '#DFDFDF')};
     padding: 0.5rem;
     font-family: Pretendard;
-    font-size: 16px;
+    font-size: 13px;
 
     &::placeholder {
-      color: #adb5bd;
+      color: #a6abb0;
       font-family: Pretendard;
-      font-size: 1rem;
+      font-size: 13px;
       font-style: normal;
       font-weight: 400;
       line-height: 1.5rem;
@@ -61,14 +74,4 @@ export const ProfileTitleContainer = styled.div`
   margin-bottom: 0.31rem;
   display: flex;
   justify-content: space-between;
-  #char-count {
-    color: #868e96;
-    text-align: justify;
-    font-family: 'Spoqa Han Sans Neo';
-    font-size: 0.75rem;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 1.125rem;
-    letter-spacing: -0.0375rem;
-  }
 `;
