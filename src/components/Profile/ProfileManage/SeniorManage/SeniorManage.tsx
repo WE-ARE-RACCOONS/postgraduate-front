@@ -10,6 +10,7 @@ import useModal from '@/hooks/useModal';
 import { createPortal } from 'react-dom';
 import Router, { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
+import useDimmedModal from '@/hooks/useDimmedModal';
 import axios from 'axios';
 import {
   isTutorialFinished,
@@ -43,17 +44,13 @@ function SeniorManage(props: SeniorManageProps) {
     bModalHandler: props.modalHandler,
   });
 
-  const {
-    modal: setJModal,
-    modalHandler: juniorHandler,
-    portalElement: juniorPortal,
-  } = useModal('junior-request-portal');
+  const { openModal: openNotRegisteredModal } = useDimmedModal({
+    modalType: 'notRegistered',
+  });
 
-  const {
-    modal: registerModal,
-    modalHandler: registerHandler,
-    portalElement: registerPortal,
-  } = useModal('senior-profile-not-registered');
+  const { openModal: openNotJuniorModal } = useDimmedModal({
+    modalType: 'notJunior',
+  });
 
   const MyprofHandler = () => {
     if (checkRegister()) {
@@ -75,7 +72,7 @@ function SeniorManage(props: SeniorManageProps) {
   const checkRegister = () => {
     if (props.profileReg) return true;
     if (!props.profileReg) {
-      registerHandler();
+      openNotRegisteredModal();
       return false;
     }
   };
@@ -105,7 +102,7 @@ function SeniorManage(props: SeniorManageProps) {
 
           if (response.data.data.possible == false) {
             setSocialId(response.data.data.socialId);
-            juniorHandler();
+            openNotJuniorModal();
           }
         }
       });
@@ -198,22 +195,6 @@ function SeniorManage(props: SeniorManageProps) {
           onClick={changeJunior}
         />
       </SeniorManageContentContainer>
-
-      {registerModal && registerPortal
-        ? createPortal(
-            <DimmedModal
-              modalType="notRegistered"
-              modalHandler={registerHandler}
-            />,
-            registerPortal,
-          )
-        : null}
-      {setJModal && juniorPortal
-        ? createPortal(
-            <DimmedModal modalType="notJunior" modalHandler={juniorHandler} />,
-            juniorPortal,
-          )
-        : null}
     </SeniorManageContainer>
   );
 }

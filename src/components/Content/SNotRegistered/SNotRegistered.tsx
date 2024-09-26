@@ -20,6 +20,7 @@ function SNotRegistered({ modalHandler }: { modalHandler: () => void }) {
       <PNRBtn
         onClick={() => {
           router.push('/add-profile');
+          modalHandler();
         }}
       >
         {PROFILE_NOT_REGISTERED.btnText}
