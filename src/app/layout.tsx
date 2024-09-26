@@ -30,7 +30,6 @@ export default function RootLayout({
             <OverlayKitProvider>
               {children}
               <div id="junior-mentoring-cancel"></div>
-              <div id="senior-profile-portal"></div>
               <div id="senior-request-portal"></div>
               <div id="junior-request-portal"></div>
               <div id="senior-mentoring-cancel"></div>
