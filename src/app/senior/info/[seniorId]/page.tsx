@@ -3,9 +3,7 @@ import IntroCard from '@/components/Card/IntroCard';
 import KeywordCard from '@/components/Card/KeywordCard';
 import ProfileCard from '@/components/Card/ProfileCard';
 import BackHeader from '@/components/Header/BackHeader';
-import DimmedModal from '@/components/Modal/DimmedModal';
 import useAuth from '@/hooks/useAuth';
-import useModal from '@/hooks/useModal';
 import {
   firAbleTimeAtom,
   questionAtom,
@@ -19,8 +17,9 @@ import axios from 'axios';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+
+import useDimmedModal from '@/hooks/useDimmedModal';
 
 function SeniorInfoPage() {
   const router = useRouter();
@@ -51,14 +50,10 @@ function SeniorInfoPage() {
   const setSecAbleTime = useSetAtom(secAbleTimeAtom);
   const setThiAbleTime = useSetAtom(thiAbleTimeAtom);
   const [certification, setCertification] = useState(Boolean);
-  const { modal, modalHandler, portalElement } = useModal(
-    'mentoring-login-portal',
-  );
-  const {
-    modal: cjModal,
-    modalHandler: cjModalHandler,
-    portalElement: cjPortalEl,
-  } = useModal('change-junior-portal');
+
+  const { openModal: openChangeJuniorModal } = useDimmedModal({
+    modalType: 'changeJunior',
+  });
 
   useEffect(() => {
     setTempSubject('');
@@ -67,6 +62,10 @@ function SeniorInfoPage() {
     setSecAbleTime('');
     setThiAbleTime('');
   }, []);
+
+  const { openModal: openMentoringNotLoginModal } = useDimmedModal({
+    modalType: 'mentoringLogin',
+  });
 
   useEffect(() => {
     const totalWidth =
@@ -131,11 +130,11 @@ function SeniorInfoPage() {
 
         if (userType == 'senior') {
           // 후배 회원 전환 요청 모달 출현
-          cjModalHandler();
+          openChangeJuniorModal();
         }
       } else {
         // 로그인 요청 모달 출현
-        modalHandler();
+        openMentoringNotLoginModal();
       }
     });
   };
@@ -182,24 +181,6 @@ function SeniorInfoPage() {
           </MentoringApplyBtn>
         </>
       )}
-      {modal && portalElement
-        ? createPortal(
-            <DimmedModal
-              modalType="mentoringLogin"
-              modalHandler={modalHandler}
-            />,
-            portalElement,
-          )
-        : ''}
-      {cjModal && cjPortalEl
-        ? createPortal(
-            <DimmedModal
-              modalType="changeJunior"
-              modalHandler={cjModalHandler}
-            />,
-            cjPortalEl,
-          )
-        : ''}
     </SeniorInfoPageContainer>
   );
 }
