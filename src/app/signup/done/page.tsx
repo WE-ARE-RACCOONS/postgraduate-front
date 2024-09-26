@@ -5,9 +5,6 @@ import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import party_popper from '../../../../public/party_popper.png';
 import ClickedBtn from '@/components/Button/ClickedBtn';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
-import DimmedModal from '@/components/Modal/DimmedModal';
 import { useRouter } from 'next/navigation';
 import BackHeader from '@/components/Header/BackHeader';
 import styled from 'styled-components';
@@ -19,9 +16,6 @@ function SignUpDonePage() {
   const prevPath = useAtomValue(prevPathAtom);
   const { getUserType } = useAuth();
   const [userType, setUserType] = useState('');
-  const { modal, modalHandler, portalElement } = useModal(
-    'senior-profile-portal',
-  );
 
   useEffect(() => {
     const userT = getUserType();
@@ -104,15 +98,6 @@ function SignUpDonePage() {
           </div>
         </>
       )}
-      {modal && portalElement
-        ? createPortal(
-            <DimmedModal
-              modalType="postgraduProfile"
-              modalHandler={modalHandler}
-            />,
-            portalElement,
-          )
-        : null}
     </div>
   );
 }

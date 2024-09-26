@@ -84,7 +84,7 @@ const useKakaoLogin = () => {
             ),
           );
           if (!agreeActivateAccount) {
-            router.push('/signup/select');
+            router.push('/');
           }
         }
       } catch (error) {

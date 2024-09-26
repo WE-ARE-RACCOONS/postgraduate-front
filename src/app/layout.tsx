@@ -30,15 +30,10 @@ export default function RootLayout({
             <OverlayKitProvider>
               {children}
               <div id="junior-mentoring-cancel"></div>
-              <div id="senior-profile-portal"></div>
               <div id="senior-request-portal"></div>
-              <div id="junior-request-portal"></div>
               <div id="senior-mentoring-cancel"></div>
-              <div id="senior-profile-not-registered"></div>
               <div id="suggest-mypage-portal"></div>
               <div id="senior-auth-portal"></div>
-              <div id="mentoring-login-portal"></div>
-              <div id="change-junior-portal"></div>
               <div id=" mentoring-cancel-success"></div>
             </OverlayKitProvider>
           </StyledComponentsRegistry>
@@ -47,4 +42,3 @@ export default function RootLayout({
     </html>
   );
 }
-

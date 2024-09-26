@@ -9,6 +9,7 @@ function ChangeJunior({ modalHandler }: { modalHandler: () => void }) {
 
   const handleClick = () => {
     router.push('/mypage');
+    modalHandler();
   };
 
   return (
