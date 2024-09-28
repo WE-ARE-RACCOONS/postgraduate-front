@@ -4,6 +4,7 @@ import {
   SeniorInfoResponse,
 } from '@/api/senior/me/seniorInfoGetFetch';
 import { objectCompact } from '@/utils/objectCompact';
+import { v4 as uuidv4 } from 'uuid';
 
 /**
  * 내가 senior 일 때, 정보수정 페이지 진입 시 유저정보 조회
@@ -22,10 +23,14 @@ export const useSeniorProfileQuery = () =>
 
       const { keyword, field, times, ...rest } = response.data.data;
 
+      console.log('서버데이터', times);
       return {
         keyword,
         field,
-        times,
+        times: [...times].map((item) => ({
+          ...item,
+          id: uuidv4(),
+        })),
         ...objectCompact(rest),
       } as PropType<SeniorInfoResponse, 'data'>;
     },

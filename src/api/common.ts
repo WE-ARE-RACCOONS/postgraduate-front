@@ -12,8 +12,13 @@ const createApiFetch = ({ getSession }: CreateApiFetchParamsType) => {
     input: URL | RequestInfo,
     init?: RequestInit,
   ): Promise<{ data: T; status: number }> => {
+    const baseUrl =
+      init && (init.method === 'GET' || init.method === 'POST')
+        ? process.env.NEXT_PUBLIC_SERVER_URL || process.env.SERVER_URL
+        : 'http://localhost:3000';
+
     return returnFetch({
-      baseUrl: process.env.NEXT_PUBLIC_SERVER_URL || process.env.SERVER_URL,
+      baseUrl,
       headers: {
         Accept: 'application/json',
         'Content-Type': 'application/json',
@@ -39,10 +44,13 @@ const createApiFetch = ({ getSession }: CreateApiFetchParamsType) => {
             config[1].headers = Object.fromEntries(headers.entries());
           }
 
+          console.log(config);
+
           return config;
         },
 
         response: async (response: Response) => {
+          console.log(response);
           const responseBody = await response.json();
 
           return new Response(JSON.stringify(responseBody), {
@@ -50,12 +58,13 @@ const createApiFetch = ({ getSession }: CreateApiFetchParamsType) => {
           });
         },
       },
-    })(input, init).then((response) =>
-      response.json().then((data: T) => ({
+    })(input, init).then(async (response) => {
+      console.log(input, init, response);
+      return await response.json().then((data: T) => ({
         data,
         status: response.status,
-      })),
-    );
+      }));
+    });
   };
 };
 

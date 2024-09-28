@@ -31,7 +31,7 @@ function BackHeader({ headerText, kind }: BackHeaderProps) {
         />
       </div>
 
-      <div className="text-center basis-4/6 w-max h-6 text-[20px] font-semibold">
+      <div className="text-center basis-4/6 w-max h-6 text-[20px] font-[500]">
         {headerText}
       </div>
       <div className="basis-1/6"></div>

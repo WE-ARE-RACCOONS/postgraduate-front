@@ -6,6 +6,7 @@ import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import QueryProvider from '@/services/providers';
+import { ModalStack } from '@/components/ModalStack';
 
 export const metadata: Metadata = {
   title: SERVICE_METADATA.title,
@@ -23,12 +24,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="ko">
-      <body>
+      <body className="body">
         <QueryProvider>
           {process.env.NEXT_PUBLIC_GTM_ID ? <GTMAnalytics /> : <></>}
           {process.env.NEXT_PUBLIC_GA4_ID ? <GoogleAnalytics /> : <></>}
           <Providers>
             <StyledComponentsRegistry>
+              <ModalStack />
               {children}
               <div id="senior-info-portal"></div>
               <div id="junior-mentoring-detail"></div>

@@ -36,12 +36,13 @@ export interface SeniorInfoResponse extends ResponseModel {
     /**
      * 한줄 소개
      */
-    outLinter: string;
+    oneLiner: string;
 
     /**
      * 시간
      */
     times: {
+      id: string;
       day: string;
       startTime: string;
       endTime: string;

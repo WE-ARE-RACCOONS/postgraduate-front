@@ -10,11 +10,17 @@ body {
   margin: 0 auto;
   background-color: #fff;
   font-family: 'Pretendard';
+  position: inherit !important;
 }
 * {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+body[data-scroll-locked] {
+  position: inherit !important;
+  padding: 0 !important;
 }
 
 @font-face {
