@@ -2,22 +2,39 @@ import styled from 'styled-components';
 
 export const ProfileCardContainer = styled.div<{ $overWidth: boolean }>`
   width: 100%;
-  height: ${(props) => (props.$overWidth ? '8.25rem' : '7.25rem')};
+  height: ${(props) => (props.$overWidth ? '10rem' : '8rem')};
   background-color: #fff;
   position: relative;
 
   #profile-img-wrapper {
     position: absolute;
-    top: 50%;
+    top: 30%;
     left: 1rem;
     transform: translateY(-50%);
+  }
+
+  #profile-card-one-linear {
+    font-size: 13px;
+    line-height: 15px;
+    color: #6d747e;
+    position: absolute;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 13rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
   }
 `;
 
 export const ProfileCardInfo = styled.div<{ $overWidth: boolean }>`
   max-width: 13rem;
   position: absolute;
-  top: 50%;
+  top: 30%;
   right: 2rem;
   transform: translateY(-50%);
 
@@ -66,4 +83,7 @@ export const ProfileCardInfoMid = styled.div`
   gap: 5px;
   font-weight: 700;
   color: #212529;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;

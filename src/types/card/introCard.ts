@@ -5,7 +5,6 @@ export type TimeType = {
 };
 
 export interface IntroCardProps {
-  oneLiner: string;
   info: string;
   target: string;
   times: Array<TimeType>;

@@ -51,6 +51,7 @@ function ProfileCard(props: ProfileCardProps) {
           <span>교수님</span>
         </div>
       </ProfileCardInfo>
+      <div id="profile-card-one-linear">{props.oneLinear ?? '한 줄 소개'}</div>
     </ProfileCardContainer>
   );
 }

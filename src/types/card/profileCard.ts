@@ -7,4 +7,5 @@ export interface ProfileCardProps {
   major: string;
   professor: string;
   lab: string;
+  oneLinear: string;
 }

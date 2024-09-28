@@ -10,13 +10,6 @@ export const IntroCardContainer = styled.div`
   padding: 1.5rem 0 3rem 1.25rem;
 `;
 
-export const IntroCardOneLiner = styled.div`
-  width: 88%;
-  height: max-content;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-`;
-
 export const IntroCardTextBox = styled.div<{ $isFull: boolean }>`
   width: 90%;
   height: max-content;
