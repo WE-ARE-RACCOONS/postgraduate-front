@@ -17,11 +17,10 @@ export const ProfileCardContainer = styled.div<{ $overWidth: boolean }>`
 `;
 
 export const ProfileCardInfo = styled.div<{ $overWidth: boolean }>`
-  width: 13rem;
-  height: 4.7rem;
+  max-width: 13rem;
   position: absolute;
   top: 50%;
-  right: 1rem;
+  right: 2rem;
   transform: translateY(-50%);
 
   #profile-card-professor {
@@ -35,23 +34,26 @@ export const ProfileCardInfoTop = styled.div`
   height: 1.57rem;
   display: flex;
   justify-content: space-between;
+  align-items: center;
   margin-bottom: 0.5rem;
 
   #profile-card-mentoring-time {
     width: max-content;
     height: 1.125rem;
+    align-items: center;
     font-size: 12px;
-    font-weight: 700;
     display: flex;
     line-height: 1.125rem;
   }
 
   #mentoring-time-desc {
-    color: #868e96;
+    color: #6d747e;
+    font-weight: 500;
   }
 
   #mentoring-time-term {
-    color: #2fc4b2;
+    color: #212529;
+    font-weight: 600;
   }
 `;
 
