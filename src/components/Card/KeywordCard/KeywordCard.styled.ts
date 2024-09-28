@@ -1,20 +1,19 @@
 import styled from 'styled-components';
 
 export const KeywordCardContainer = styled.div`
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
   height: auto;
   border-radius: 16px;
   background-color: #fff;
-  margin-top: 10px;
   position: relative;
   padding: 1.2rem 1rem;
 
   #keyword-card-lab-name {
     width: max-content;
-    height: 1.25rem;
     font-size: 14px;
     font-weight: 700;
-    margin-bottom: 0.55rem;
+    margin-bottom: 24px;
   }
 `;
 
@@ -38,5 +37,5 @@ export const KeywordCardEl = styled.div`
   font-size: 12px;
   white-space: nowrap;
   border-radius: 4px;
-  background-color: rgba(47, 196, 178, 0.1);
+  background-color: rgba(124, 143, 141, 0.1);
 `;

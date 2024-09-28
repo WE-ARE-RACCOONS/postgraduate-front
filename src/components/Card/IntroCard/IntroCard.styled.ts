@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const IntroCardContainer = styled.div`
-  width: 100%;
+  width: 95%;
+  margin: 28px auto;
   height: max-content;
   min-height: 7.25rem;
   margin-top: 15px;
