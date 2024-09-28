@@ -2,24 +2,21 @@ import useAuth from '@/hooks/useAuth';
 import findExCode from '@/utils/findExCode';
 import axios, { InternalAxiosRequestConfig } from 'axios';
 
-const instance = axios.create({
+const withAuthInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
-instance.interceptors.request.use(
+const withOutAuthInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+});
+withAuthInstance.interceptors.request.use(
   async (
     config: InternalAxiosRequestConfig,
   ): Promise<InternalAxiosRequestConfig> => {
-    const { getAccessToken, removeTokens } = useAuth();
+    const { getAccessToken } = useAuth();
     const accessTkn = await getAccessToken();
 
-    if (!accessTkn && typeof window !== 'undefined') {
-      removeTokens();
-      window.location.href = '/';
-      return Promise.reject(new Error('Access token is missing')); // 에러 반환
-    } else {
-      config.headers.Authorization = `Bearer ${accessTkn}`;
-    }
+    config.headers.Authorization = `Bearer ${accessTkn}`;
 
     return config;
   },
@@ -29,7 +26,7 @@ instance.interceptors.request.use(
   },
 );
 
-instance.interceptors.response.use(
+withAuthInstance.interceptors.response.use(
   (res) => {
     const { removeTokens } = useAuth();
     if (findExCode(res.data.code)) {
@@ -46,4 +43,4 @@ instance.interceptors.response.use(
   },
 );
 
-export default instance;
+export { withAuthInstance, withOutAuthInstance };

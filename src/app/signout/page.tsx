@@ -1,6 +1,5 @@
 'use client';
 import useFunnel from '@/hooks/useFunnel';
-import instance from '@/api/api';
 import { SignOutInfoProvider } from '@/app/signout/signoutContext';
 
 import { SignOutFinish } from '@/app/signout/(components)/signout-finish';

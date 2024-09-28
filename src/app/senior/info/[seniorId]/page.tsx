@@ -11,6 +11,7 @@ import {
   subjectAtom,
   thiAbleTimeAtom,
 } from '@/stores/mentoring';
+import { getDetailSeniorInfoFetch } from '@/api/senior/[id]/getDetailSeniorInfo';
 import { enterSeniorId, mySeniorId } from '@/stores/senior';
 import findExCode from '@/utils/findExCode';
 import axios from 'axios';
@@ -19,19 +20,20 @@ import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import findSuccessCode from '@/utils/findSuccessCode';
 import useDimmedModal from '@/hooks/useDimmedModal';
 
-function SeniorInfoPage() {
+import type { TimeObj } from '@/types/scheduler/scheduler';
+function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
   const router = useRouter();
   const currentPath = usePathname();
   const pathArr = currentPath.split('/');
-  const mySeiorId = useAtomValue(mySeniorId).toString();
   const koreanCharWidth = 1.2; // 한글 글자 너비로 가정
 
-  const { getAccessToken, getUserType, removeTokens } = useAuth();
+  const { getUserType } = useAuth();
   const [findSeniorId, setFindSeniorId] = useAtom(enterSeniorId);
   const [info, setInfo] = useState('');
-  const [keyword, setKeyword] = useState([]);
+  const [keyword, setKeyword] = useState<string[]>([]);
   const [lab, setLab] = useState('');
   const [major, setMajor] = useState('');
   const [nickName, setNickName] = useState('');
@@ -41,8 +43,8 @@ function SeniorInfoPage() {
   const [profile, setProfile] = useState('');
   const [target, setTarget] = useState('');
   const [term, setTerm] = useState(30);
-  const [times, setTimes] = useState([]);
-  const [mine, setMine] = useState('false');
+  const [times, setTimes] = useState<TimeObj[]>([]);
+  const [mine, setMine] = useState(false);
   const [overWidth, setOverWidth] = useState(false);
   const setTempSubject = useSetAtom(subjectAtom);
   const setTempQuestion = useSetAtom(questionAtom);
@@ -55,6 +57,10 @@ function SeniorInfoPage() {
     modalType: 'changeJunior',
   });
 
+  const { openModal: openMentoringNotLoginModal } = useDimmedModal({
+    modalType: 'mentoringLogin',
+  });
+
   useEffect(() => {
     setTempSubject('');
     setTempQuestion('');
@@ -63,10 +69,6 @@ function SeniorInfoPage() {
     setThiAbleTime('');
   }, []);
 
-  const { openModal: openMentoringNotLoginModal } = useDimmedModal({
-    modalType: 'mentoringLogin',
-  });
-
   useEffect(() => {
     const totalWidth =
       14 * koreanCharWidth * (major.length + postgradu.length + 3);
@@ -74,69 +76,61 @@ function SeniorInfoPage() {
   }, [major, postgradu]);
 
   useEffect(() => {
-    const seniorId = pathArr[pathArr.length - 1];
-    setFindSeniorId(seniorId);
+    const fetchSeniorInfo = async () => {
+      setFindSeniorId(params.seniorId);
+      const { data: seniorInfoFetchRes } = await getDetailSeniorInfoFetch({
+        seniorId: params.seniorId,
+      });
+      if (findSuccessCode(seniorInfoFetchRes.code)) {
+        const {
+          isMine,
+          info,
+          keyword,
+          lab,
+          major,
+          nickName,
+          oneLiner,
+          postgradu,
+          professor,
+          profile,
+          term,
+          times,
+          certification,
+        } = seniorInfoFetchRes.data;
 
-    getAccessToken().then((accessTkn) => {
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${seniorId}`,
-          accessTkn
-            ? { headers: { Authorization: `Bearer ${accessTkn}` } }
-            : {},
-        )
-        .then((response) => {
-          const res = response.data;
+        setMine(isMine);
+        setInfo(info);
+        setKeyword(keyword);
+        setLab(lab);
+        setMajor(major);
+        setNickName(nickName);
+        setOneLiner(oneLiner);
+        setPostgradu(postgradu);
+        setProfessor(professor);
+        setProfile(profile);
+        setTarget(target);
+        setTerm(term);
+        setTimes(times);
+        setCertification(certification);
+      }
 
-          if (findExCode(res.code)) {
-            removeTokens();
-            location.reload();
-            return;
-          }
-
-          if (res.code == 'SNR200') {
-            setMine(res.data.isMine);
-            setInfo(res.data.info);
-            setKeyword(res.data.keyword);
-            setLab(res.data.lab);
-            setMajor(res.data.major);
-            setNickName(res.data.nickName);
-            setOneLiner(res.data.oneLiner);
-            setPostgradu(res.data.postgradu);
-            setProfessor(res.data.professor);
-            setProfile(res.data.profile);
-            setTarget(res.data.target);
-            setTerm(res.data.term);
-            setTimes(res.data.times);
-            setCertification(res.data.certification);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    });
+      if (findExCode(seniorInfoFetchRes.code)) {
+        //FIXME - 에러처리
+      }
+    };
+    fetchSeniorInfo();
   }, []);
 
   const applyHandler = () => {
-    getAccessToken().then((accessTkn) => {
-      if (accessTkn) {
-        const userType = getUserType();
+    const userType = getUserType();
 
-        if (userType == 'junior') {
-          const seniorId = pathArr[pathArr.length - 1];
-          router.push(`/mentoring-apply/${seniorId}/question`);
-          return;
-        }
-
-        if (userType == 'senior') {
-          // 후배 회원 전환 요청 모달 출현
-          openChangeJuniorModal();
-        }
-      } else {
-        // 로그인 요청 모달 출현
-        openMentoringNotLoginModal();
-      }
-    });
+    if (userType === 'junior') {
+      router.push(`/mentoring-apply/${params.seniorId}/question`);
+    } else if (userType === 'senior') {
+      openChangeJuniorModal();
+    } else {
+      openMentoringNotLoginModal();
+    }
   };
 
   const editHandler = () => {

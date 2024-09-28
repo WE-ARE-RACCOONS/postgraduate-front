@@ -1,4 +1,4 @@
-import instance from '@/api/api';
+import { withAuthInstance } from '@/api/api';
 import { ResponseModel } from '@/api/model';
 import { TimeObj } from '@/types/scheduler/scheduler';
 
@@ -29,7 +29,7 @@ export const updateSeniorProfile = async ({
   oneLiner,
   times,
 }: UpdateSeniorProfileRequest) => {
-  return await instance.patch<UpdateSeniorProfileResponse>(
+  return await withAuthInstance.patch<UpdateSeniorProfileResponse>(
     '/senior/me/profile',
     {
       lab,
