@@ -1,3 +1,5 @@
+import { string } from 'yup';
+
 export interface ResponseModel {
   code: SuccessStatusType | ErrorStatusType;
   message: string;
@@ -48,7 +50,6 @@ export type SuccessStatusType =
   | 'SLR203'
   | 'ADM200'
   | 'ADM201';
-
 /**
  * 에러 코드
  * @see https://www.notion.so/240430-c0e2fd72f06b45028e8e463d6faa32f9
@@ -87,3 +88,41 @@ export type ErrorStatusType =
   | 'EX200'
   | 'EX201'
   | 'EX202';
+
+const allErrorStatusTypes = [
+  'EX1000',
+  'EX900',
+  'EX901',
+  'EX902',
+  'EX903',
+  'EX904',
+  'EX800',
+  'EX801',
+  'EX802',
+  'EX700',
+  'EX701',
+  'EX702',
+  'EX703',
+  'EX704',
+  'EX705',
+  'EX706',
+  'EX600',
+  'EX601',
+  'EX500',
+  'EX501',
+  'EX400',
+  'EX401',
+  'EX402',
+  'EX403',
+  'EX404',
+  'EX405',
+  'EX406',
+  'EX300',
+  'EX301',
+  'EX302',
+  'EX200',
+  'EX201',
+  'EX202',
+] as const;
+
+export const errorStatusSchema = string().oneOf(allErrorStatusTypes);
