@@ -3,9 +3,7 @@ import styled from 'styled-components';
 export const ProfileCardContainer = styled.div<{ $overWidth: boolean }>`
   width: 100%;
   height: ${(props) => (props.$overWidth ? '8.25rem' : '7.25rem')};
-  border-radius: 16px;
   background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   position: relative;
 
   #profile-img-wrapper {
@@ -25,7 +23,10 @@ export const ProfileCardInfo = styled.div<{ $overWidth: boolean }>`
 
   #profile-card-professor {
     font-size: 14px;
-    margin-top: ${(props) => (props.$overWidth ? '0.875rem' : '')};
+    margin-top: 3px;
+    #professor-name {
+      font-weight: 600;
+    }
   }
 `;
 
@@ -60,8 +61,9 @@ export const ProfileCardInfoTop = styled.div`
 export const ProfileCardInfoMid = styled.div`
   width: 13rem;
   height: 1.25rem;
-  font-size: 14px;
+  font-size: 15px;
   display: flex;
-  justify-content: space-between;
-  color: #868e96;
+  gap: 5px;
+  font-weight: 700;
+  color: #212529;
 `;

@@ -5,7 +5,7 @@ export const KeywordCardContainer = styled.div`
   height: auto;
   border-radius: 16px;
   background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
+  margin-top: 10px;
   position: relative;
   padding: 1.2rem 1rem;
 

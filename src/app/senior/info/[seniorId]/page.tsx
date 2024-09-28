@@ -144,6 +144,7 @@ function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
         <SeniorInfoContent $overWidth={overWidth}>
           <div id="profile-card-wrapper">
             <ProfileCard
+              lab={lab}
               profile={profile}
               nickname={nickName}
               term={term}
@@ -188,9 +189,9 @@ const SeniorInfoPageContainer = styled.div`
 const SeniorInfoContentWrapper = styled.div`
   width: inherit;
   height: auto;
-  background-color: #f1f3f5;
   position: relative;
   padding-bottom: 4.5rem;
+  background-color: #f8f9fb;
 `;
 
 const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`

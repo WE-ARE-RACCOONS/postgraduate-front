@@ -4,9 +4,8 @@ export const IntroCardContainer = styled.div`
   width: 100%;
   height: max-content;
   min-height: 7.25rem;
-  border-radius: 16px;
+  margin-top: 15px;
   background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
   position: relative;
   padding: 1.5rem 0 3rem 1.25rem;
 `;
