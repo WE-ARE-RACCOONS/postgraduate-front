@@ -1,4 +1,4 @@
-import instance from '@/api/api';
+import { withAuthInstance } from '@/api/api';
 import { ResponseModel } from '@/api/model';
 
 interface ChangeUserInfoFetchResponse extends ResponseModel {
@@ -16,9 +16,12 @@ export const changeUserInfo = async ({
   nickName,
   phoneNumber,
 }: ChangeUserInfoFetchRequest) => {
-  return await instance.patch<ChangeUserInfoFetchResponse>('/user/me/info', {
-    profile,
-    nickName,
-    phoneNumber,
-  });
+  return await withAuthInstance.patch<ChangeUserInfoFetchResponse>(
+    '/user/me/info',
+    {
+      profile,
+      nickName,
+      phoneNumber,
+    },
+  );
 };

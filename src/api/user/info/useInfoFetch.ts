@@ -1,4 +1,4 @@
-import instance from '@/api/api';
+import { withAuthInstance } from '@/api/api';
 
 import { ResponseModel } from '@/api/model';
 
@@ -11,5 +11,5 @@ interface UserInfoFetchResponse extends ResponseModel {
 }
 
 export const userInfoFetch = async () => {
-  return await instance.get<UserInfoFetchResponse>('/user/me/info');
+  return await withAuthInstance.get<UserInfoFetchResponse>('/user/me/info');
 };

@@ -1,6 +1,5 @@
-export default function findExCode(code: string) {
-  const targetCode = ['EX200', 'EX201', 'EX300', 'EX903'];
+import { errorStatusSchema } from '@/api/model';
 
-  if (targetCode.includes(code)) return true;
-  else return false;
+export default function findExCode(code: string) {
+  return errorStatusSchema.isValidSync(code);
 }

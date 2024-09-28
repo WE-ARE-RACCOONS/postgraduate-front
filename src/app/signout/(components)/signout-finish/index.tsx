@@ -6,7 +6,7 @@ import { SignOutInfoContainer } from '@/app/signout/(components)/signout-type-se
 import SignOutImage from '/public/signout.png';
 import { useSignOutInfo } from '@/app/signout/signoutContext';
 import NextBtn from '@/components/Button/NextBtn';
-import instance from '@/api/api';
+import { withAuthInstance } from '@/api/api';
 import { useRouter } from 'next/navigation';
 export function SignOutFinish() {
   const router = useRouter();
@@ -16,7 +16,7 @@ export function SignOutFinish() {
     //mutate로 바꿔야 함
     //회원탈퇴 API -> 토큰 제거 -> 버튼에 GA이벤트..?
     if (signOutInfo) {
-      await instance
+      await withAuthInstance
         .post('/auth/signout/KAKAO', {
           reason: signOutInfo.signOutReason,
           etc: signOutInfo.etc,

@@ -1,4 +1,4 @@
-import instance from '@/api/api';
+import { withAuthInstance } from '@/api/api';
 import { ResponseModel } from '@/api/model';
 
 interface SeniorProfileFetchResponse extends ResponseModel {
@@ -21,5 +21,7 @@ interface Time {
 }
 
 export const seniorProfileFetch = async () => {
-  return await instance.get<SeniorProfileFetchResponse>('/senior/me/profile');
+  return await withAuthInstance.get<SeniorProfileFetchResponse>(
+    '/senior/me/profile',
+  );
 };

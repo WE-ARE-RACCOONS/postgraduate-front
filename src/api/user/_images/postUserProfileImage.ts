@@ -1,4 +1,4 @@
-import instance from '@/api/api';
+import { withAuthInstance } from '@/api/api';
 import { ResponseModel } from '@/api/model';
 
 interface PostUserProfileImageResponse extends ResponseModel {
@@ -17,7 +17,7 @@ export const postUserProfileImage = async ({
   const formData = new FormData();
   formData.append('profileFile', profileFile);
 
-  return await instance.post<PostUserProfileImageResponse>(
+  return await withAuthInstance.post<PostUserProfileImageResponse>(
     '/image/upload/profile',
     formData,
   );
