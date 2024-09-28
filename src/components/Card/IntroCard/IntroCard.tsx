@@ -25,7 +25,7 @@ function IntroCard(props: IntroCardProps) {
       <IntroCardTextBox $isFull={!!props.info}>
         {props.info || EMPTY_SENIOR_INFO.info}
       </IntroCardTextBox>
-      <IntroCardTextDesc>이런 분들에게 추천드려요.</IntroCardTextDesc>
+      <IntroCardTextDesc>이런 후배에게 추천해요</IntroCardTextDesc>
       <IntroCardTextBox $isFull={!!props.target}>
         {props.target || EMPTY_SENIOR_INFO.info}
       </IntroCardTextBox>
