@@ -16,7 +16,7 @@ function ProfileCard(props: ProfileCardProps) {
 
   useEffect(() => {
     const totalWidth =
-      14 * koreanCharWidth * (props.major.length + props.postgradu.length + 3);
+      14 * koreanCharWidth * (props.lab.length + props.postgradu.length + 3);
     if (totalWidth >= 208) setOverWidth(true);
   }, []);
 
@@ -31,7 +31,7 @@ function ProfileCard(props: ProfileCardProps) {
       <ProfileCardInfo $overWidth={overWidth}>
         <ProfileCardInfoTop>
           <AuthLabeledText
-            str={props.nickname || '대학원 선배'}
+            str={`${props.nickname} 선배님` || '대학원 선배'}
             certification={props.certification}
           />
           <div id="profile-card-mentoring-time">
@@ -40,16 +40,20 @@ function ProfileCard(props: ProfileCardProps) {
           </div>
         </ProfileCardInfoTop>
         <ProfileCardInfoMid>
-          <div>
-            {props.postgradu ? `${props.postgradu} 대학원` : '익명 대학원'}
-            &nbsp;
-          </div>
-          <div>{props.major ? props.major : '익명 학과'}</div>
+          <div>{`[${props.postgradu.replaceAll('학교', '')}]`}</div>
+
+          <div>{props.lab}</div>
         </ProfileCardInfoMid>
         <div id="profile-card-professor">
-          {props.professor ? `${props.professor} 교수님` : '익명 교수님'}
+          <span id="professor-name">
+            {props.professor ? `${props.professor} ` : '익명 '}
+          </span>
+          <span>교수님</span>
         </div>
       </ProfileCardInfo>
+      <div id="profile-card-one-linear">
+        "{props.oneLinear ?? '한 줄 소개'}"
+      </div>
     </ProfileCardContainer>
   );
 }

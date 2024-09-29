@@ -8,7 +8,7 @@ import {
 function KeywordCard(props: KeywordCardProps) {
   return (
     <KeywordCardContainer>
-      <div id="keyword-card-lab-name">{props.lab || '연구실 이름'}</div>
+      <div id="keyword-card-lab-name">연구분야</div>
       <KeywordCardArrayBox>
         {props.keyword &&
           props.keyword.length > 0 &&

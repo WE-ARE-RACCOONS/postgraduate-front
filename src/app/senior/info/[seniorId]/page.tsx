@@ -24,6 +24,7 @@ import findSuccessCode from '@/utils/findSuccessCode';
 import useDimmedModal from '@/hooks/useDimmedModal';
 
 import type { TimeObj } from '@/types/scheduler/scheduler';
+
 function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
   const router = useRouter();
   const currentPath = usePathname();
@@ -144,6 +145,8 @@ function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
         <SeniorInfoContent $overWidth={overWidth}>
           <div id="profile-card-wrapper">
             <ProfileCard
+              oneLinear={oneLiner}
+              lab={lab}
               profile={profile}
               nickname={nickName}
               term={term}
@@ -157,12 +160,7 @@ function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
             <KeywordCard lab={lab} keyword={keyword} />
           </div>
           <div id="intro-card-wrapper">
-            <IntroCard
-              oneLiner={oneLiner}
-              info={info}
-              target={target}
-              times={times}
-            />
+            <IntroCard info={info} target={target} times={times} />
           </div>
         </SeniorInfoContent>
       </SeniorInfoContentWrapper>
@@ -188,13 +186,13 @@ const SeniorInfoPageContainer = styled.div`
 const SeniorInfoContentWrapper = styled.div`
   width: inherit;
   height: auto;
-  background-color: #f1f3f5;
   position: relative;
   padding-bottom: 4.5rem;
+  background-color: #f8f9fb;
 `;
 
 const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`
-  width: 95%;
+  width: 100%;
   height: auto;
   position: relative;
   display: flex;
@@ -204,14 +202,12 @@ const SeniorInfoContent = styled.div<{ $overWidth: boolean }>`
   #profile-card-wrapper {
     width: 100%;
     height: ${(props) => (props.$overWidth ? '8.25rem' : '7.25rem')};
-    margin-top: 1.5rem;
-    margin-bottom: 0.5rem;
   }
 
   #keyword-card-wrapper {
     width: 100%;
+    margin-top: 28px;
     height: auto;
-    margin-bottom: 0.625rem;
   }
 
   #intro-card-wrapper {

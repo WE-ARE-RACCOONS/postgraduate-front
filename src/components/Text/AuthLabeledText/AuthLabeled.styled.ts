@@ -5,22 +5,21 @@ export const AuthLabeledContainer = styled.div`
   height: 1.5rem;
   display: flex;
   position: relative;
+  display: flex;
+  align-items: center;
+  gap: 3px;
 
   #auth-labeled-str {
     width: max-content;
-    height: 1.5rem;
-    line-height: 1.5rem;
-    margin-right: 1.5rem;
-    font-size: 18px;
+    height: 20px;
+    line-height: 19px;
+    font-size: 14px;
     font-weight: 700;
+    color: #21b1a0;
   }
 
   #auth-mark-icon {
     width: 1rem;
     height: 1rem;
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
   }
 `;
