@@ -5,27 +5,28 @@ export const KeywordCardContainer = styled.div`
   margin: 0 auto;
   height: auto;
   border-radius: 16px;
-  background-color: #fff;
+  background: #f8f8f8;
   position: relative;
-  padding: 1.2rem 1rem;
 
   #keyword-card-lab-name {
-    width: max-content;
+    width: 100%;
     font-size: 14px;
     font-weight: 700;
-    margin-bottom: 24px;
+    margin-bottom: 10px;
   }
 `;
 
 export const KeywordCardArrayBox = styled.div`
-  width: 90%;
+  width: 100%;
+  min-width: 330px;
+  border-radius: 15px;
   height: auto;
+  padding: 1.2rem;
+  background: #fff;
   min-height: 4.125rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.625rem;
-  top: 3rem;
-  left: 1rem;
 `;
 
 export const KeywordCardEl = styled.div`

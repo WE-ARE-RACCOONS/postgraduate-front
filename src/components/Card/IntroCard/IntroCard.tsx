@@ -22,6 +22,7 @@ function IntroCard(props: IntroCardProps) {
 
   return (
     <IntroCardContainer>
+      <IntroCardTextDesc>자기소개</IntroCardTextDesc>
       <IntroCardTextBox $isFull={!!props.info}>
         {props.info || EMPTY_SENIOR_INFO.info}
       </IntroCardTextBox>
