@@ -5,7 +5,7 @@ export const ModalBackground = styled.div`
   top: 50%;
   background: rgba(0, 0, 0, 0.7);
   transform: translateY(-50%);
-  width: 360px;
+  width: 100%;
   height: 100vh;
 
   @keyframes modalAppear {

@@ -16,7 +16,6 @@ function SelectForm(props: SelectFormProps) {
   const {
     register,
     watch,
-    setError,
     setValue,
     formState: { errors },
   } = useFormContext();
@@ -44,18 +43,16 @@ function SelectForm(props: SelectFormProps) {
     <SelectFormContainer>
       <SelectFormWrapper>
         <h3 id="select-field-title">{SELECT_FIELD_TEXT.fieldTitle}</h3>
-        <div id="select-field-subtitle">
-          <div id="select-field-subtitle-text">
-            <div id="field-text">{SELECT_FIELD_TEXT.fieldText}</div>
-            <div id="field-star">*</div>
-          </div>
-          {errors?.field?.message && (
-            <div id="field-alert">{SELECT_FIELD_TEXT.fieldAlert}</div>
-          )}
-        </div>
+
         <div id="select-field-direction">
-          {SELECT_FIELD_TEXT.fieldDirection}
+          <div>{SELECT_FIELD_TEXT.fieldDirection}</div>
+          <div id="select-field-subtitle">
+            {errors?.field?.message && (
+              <div id="field-alert">*{SELECT_FIELD_TEXT.fieldAlert}</div>
+            )}
+          </div>
         </div>
+
         <SelectFormBtnContainer>
           {totalBtns &&
             totalBtns.map((el, idx) => (
@@ -71,17 +68,21 @@ function SelectForm(props: SelectFormProps) {
             ))}
         </SelectFormBtnContainer>
         <FieldInputFormBox>
-          <input id="field-input-form" {...register('field')} />
+          <input
+            id="field-input-form"
+            placeholder={SELECT_FIELD_TEXT.placeholder}
+            {...register('field')}
+          />
           <button id="field-input-btn" onClick={handleAddOtherField}>
             {SELECT_FIELD_TEXT.fieldInputBtnText}
           </button>
         </FieldInputFormBox>
       </SelectFormWrapper>
       {selected.length === 0 ? (
-        <button id="field-submit-btn-non">확인</button>
+        <button id="field-submit-btn-non">저장</button>
       ) : (
         <button id="field-submit-btn" onClick={handleConfirm}>
-          확인
+          저장
         </button>
       )}
     </SelectFormContainer>
