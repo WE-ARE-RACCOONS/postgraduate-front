@@ -24,7 +24,7 @@ import findSuccessCode from '@/utils/findSuccessCode';
 import useDimmedModal from '@/hooks/useDimmedModal';
 
 import type { TimeObj } from '@/types/scheduler/scheduler';
-import { getImgProps } from 'next/dist/shared/lib/get-img-props';
+
 function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
   const router = useRouter();
   const currentPath = usePathname();
