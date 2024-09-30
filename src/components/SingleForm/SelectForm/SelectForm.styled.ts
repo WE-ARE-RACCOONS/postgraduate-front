@@ -4,6 +4,7 @@ export const SelectFormContainer = styled.div`
   width: 90%;
   margin: 0 auto;
   height: 70%;
+  overflow: hidden;
   position: absolute;
   top: 2rem;
   color: #464c51;
@@ -38,6 +39,19 @@ export const SelectFormContainer = styled.div`
     letter-spacing: -0.5px;
     margin-bottom: 0.125rem;
   }
+  .field-close-btn {
+    width: 100%;
+    height: 3.313rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #fff;
+    color: #6d747e;
+    font-size: 18px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+  }
 
   #field-submit-btn {
     width: 100%;
@@ -49,7 +63,7 @@ export const SelectFormContainer = styled.div`
     font-size: 18px;
     font-weight: 700;
     position: absolute;
-    bottom: 0;
+    bottom: 3.5rem;
     cursor: pointer;
   }
   #field-submit-btn-non {
@@ -62,7 +76,7 @@ export const SelectFormContainer = styled.div`
     font-size: 18px;
     font-weight: 700;
     position: absolute;
-    bottom: 0;
+    bottom: 3.5rem;
     cursor: pointer;
   }
 `;

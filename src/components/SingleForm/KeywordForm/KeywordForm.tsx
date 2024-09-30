@@ -87,6 +87,13 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
           저장
         </button>
       )}
+      <button
+        className="keyword-close-btn"
+        type="button"
+        onClick={clickHandler}
+      >
+        닫기
+      </button>
     </KeywordFormContainer>
   );
 }

@@ -56,7 +56,20 @@ export const KeywordFormContainer = styled.div`
     border-radius: 12px;
     background-color: #2fc4b2;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
+    font-weight: 700;
+    position: absolute;
+    bottom: 0;
+    cursor: pointer;
+  }
+  .keyword-close-btn {
+    width: 100%;
+    height: 3.313rem;
+    border: none;
+    border-radius: 12px;
+    background-color: #fff;
+    color: #6d747e;
+    font-size: 16px;
     font-weight: 700;
     position: absolute;
     bottom: 0;
@@ -69,10 +82,10 @@ export const KeywordFormContainer = styled.div`
     border-radius: 12px;
     background-color: #adb5bd;
     color: #fff;
-    font-size: 18px;
+    font-size: 16px;
     font-weight: 700;
     position: absolute;
-    bottom: 0;
+    bottom: 3.5rem;
     cursor: pointer;
   }
 `;

@@ -85,6 +85,9 @@ function SelectForm(props: SelectFormProps) {
           저장
         </button>
       )}
+      <button className="field-close-btn" onClick={props.clickHandler}>
+        닫기
+      </button>
     </SelectFormContainer>
   );
 }
