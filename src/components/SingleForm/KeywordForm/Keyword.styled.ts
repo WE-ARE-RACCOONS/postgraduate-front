@@ -104,6 +104,8 @@ export const KeywordFormWrapper = styled.div`
 
 export const KeywordInputFormBox = styled.div`
   width: 100%;
+  font-size: 13px;
+  height: 44px;
   border-radius: 8px;
   border: 1px solid #dcdfe4;
   background: #fff;
