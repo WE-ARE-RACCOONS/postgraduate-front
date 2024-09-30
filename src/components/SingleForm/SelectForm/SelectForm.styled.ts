@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
 export const SelectFormContainer = styled.div`
-  width: 20rem;
+  width: 90%;
+  margin: 0 auto;
   height: 70%;
   position: absolute;
   top: 2rem;
@@ -68,7 +69,6 @@ export const SelectFormContainer = styled.div`
 
 export const SelectFormBtnContainer = styled.div`
   width: 100%;
-  height: max-content;
 `;
 
 export const SelectFormWrapper = styled.div`

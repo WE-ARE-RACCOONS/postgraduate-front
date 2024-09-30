@@ -10,6 +10,8 @@ export const KeywordFormContainer = styled.div`
 
   h3 {
     margin-bottom: 1rem;
+    font-size: 16px;
+    color: #020202;
   }
 
   #select-keyword-subtitle {
@@ -18,7 +20,7 @@ export const KeywordFormContainer = styled.div`
     font-size: 14px;
     display: flex;
     justify-content: space-between;
-    margin-bottom: 0.375rem;
+    margin-bottom: 7px;
 
     #select-keyword-subtitle-text {
       width: 3.7rem;
@@ -39,13 +41,12 @@ export const KeywordFormContainer = styled.div`
 
   #select-keyword-direction {
     width: 18.5rem;
-    height: 2.5rem;
-    color: #868e96;
-    font-size: 14px;
+    color: #464c51;
+    font-size: 13px;
     flex-wrap: pre;
     line-height: 140%;
     letter-spacing: -0.5px;
-    margin-bottom: 0.125rem;
+    margin-bottom: 7px;
   }
 
   #keyword-submit-btn {
@@ -61,7 +62,7 @@ export const KeywordFormContainer = styled.div`
     bottom: 0;
     cursor: pointer;
   }
-  #keyword-submit-btn-non {
+  .keyword-submit-btn-non {
     width: 100%;
     height: 3.313rem;
     border: none;
@@ -90,9 +91,8 @@ export const KeywordFormWrapper = styled.div`
 
 export const KeywordInputFormBox = styled.div`
   width: 100%;
-  height: 3.19rem;
   border-radius: 8px;
-  border: 1px solid #c2cede;
+  border: 1px solid #dcdfe4;
   background: #fff;
   margin-top: 0.625rem;
   padding: 1rem 0.5rem;

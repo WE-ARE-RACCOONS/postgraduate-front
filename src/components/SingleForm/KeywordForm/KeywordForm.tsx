@@ -14,6 +14,7 @@ import {
 import { SELECT_KEYWORD_TEXT } from '@/constants/keyword/keyword';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 import { useFormContext } from 'react-hook-form';
+import NextBtn from '@/components/Button/NextBtn';
 
 function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const {
@@ -45,18 +46,15 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
     <KeywordFormContainer>
       <KeywordFormWrapper>
         <h3 id="select-keyword-title">{SELECT_KEYWORD_TEXT.keywordTitle}</h3>
-        <div id="select-keyword-subtitle">
-          <div id="select-keyword-subtitle-text">
-            <div id="keyword-text">{SELECT_KEYWORD_TEXT.keywordText}</div>
-            <div id="keyword-star">*</div>
-          </div>
-          {errors?.keyword && (
-            <div id="keyword-alert">{SELECT_KEYWORD_TEXT.keywordAlert}</div>
-          )}
-        </div>
         <div id="select-keyword-direction">
           {SELECT_KEYWORD_TEXT.keywordDirection}
         </div>
+        <div id="select-keyword-subtitle">
+          {errors?.keyword && (
+            <div id="keyword-alert">*{SELECT_KEYWORD_TEXT.keywordAlert}</div>
+          )}
+        </div>
+
         <KeywordFormBtnContainer>
           {totalBtns &&
             totalBtns.map((el, idx) => (
@@ -70,7 +68,12 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
         </KeywordFormBtnContainer>
         {selected.length < 6 && (
           <KeywordInputFormBox>
-            <input id="keyword-input-form" {...register('keyword')} max={20} />
+            <input
+              id="keyword-input-form"
+              placeholder={SELECT_KEYWORD_TEXT.placeholder}
+              {...register('keyword')}
+              max={20}
+            />
             <button id="keyword-input-btn" onClick={addKeyword}>
               {SELECT_KEYWORD_TEXT.keywordInputBtnText}
             </button>
@@ -78,10 +81,10 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
         )}
       </KeywordFormWrapper>
       {selected.length === 0 ? (
-        <button id="keyword-submit-btn-non">확인</button>
+        <button className="keyword-submit-btn-non">저장</button>
       ) : (
         <button id="keyword-submit-btn" onClick={handleConfirm}>
-          확인
+          저장
         </button>
       )}
     </KeywordFormContainer>
