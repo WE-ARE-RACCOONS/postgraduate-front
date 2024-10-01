@@ -16,11 +16,11 @@ export function SignOutInfo({ onClick }: { onClick: () => void }) {
         </div>
 
         <div>
-          3. 탈퇴 후에는 같은 휴대전화 번호로 일정 기간 동안 재가입이
-          제한됩니다. 회원 탈퇴를 신중히 진행해주세요.
+          3. 탈퇴 후에는 같은 계정으로 30일 동안 재가입이 제한됩니다. 회원
+          탈퇴를 신중히 진행해주세요.
         </div>
 
-        <div>4. 탈퇴 후 15일 이내 재가입이 가능합니다.</div>
+        <div>4. 탈퇴 후 15일 이내 로그인 시 재활성화가 가능합니다.</div>
       </SignOutInfoContent>
       <div className="nextBtn_container">
         <NextBtn kind={'route'} btnText="다음으로" onClick={onClick} />

@@ -18,7 +18,6 @@ import auth from '../../../public/auth_mark.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
-  console.log(data);
   return (
     <SeniorProfileBox className="tutorial_card">
       <SPWrapper>
