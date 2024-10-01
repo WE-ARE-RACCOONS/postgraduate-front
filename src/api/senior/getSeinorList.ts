@@ -31,16 +31,15 @@ export const getSeniorList = async ({
   postgradu,
 }: GetSeniorListRequest) => {
   try {
-    return await withOutAuthInstance.get<GetSeniorListResponse>(
-      '/senior/field',
-      {
+    return (
+      await withOutAuthInstance.get<GetSeniorListResponse>('/senior/field', {
         params: {
           field,
           page,
           postgradu,
         },
-      },
-    );
+      })
+    ).data;
   } catch (e) {
     throw e;
   }

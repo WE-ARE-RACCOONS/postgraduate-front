@@ -8,7 +8,7 @@ export const useGetSeniorListQuery = (field: string, postgradu: string) => {
     queryFn: ({ pageParam = 1 }) =>
       getSeniorList({ field, postgradu, page: pageParam }),
     getNextPageParam: (lastPage, allPages) => {
-      const totalPages = lastPage.data.data.totalElements;
+      const totalPages = lastPage.data.totalElements;
       const nextPage = allPages.length + 1;
       return nextPage <= totalPages ? nextPage : undefined;
     },
