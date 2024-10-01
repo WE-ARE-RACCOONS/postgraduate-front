@@ -10,11 +10,10 @@ import SwiperComponent from '../components/Swiper/Swiper';
 import DimmedModal from '../components/Modal/DimmedModal';
 import SearchModal from '../components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '../stores/tap';
-import axios from 'axios';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtomValue } from 'jotai';
 
+import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
-import { listDataAtom, pageNumAtom } from '@/stores/home';
 import Footer from '@/components/Footer';
 
 import useTutorial from '@/hooks/useTutorial';
@@ -22,65 +21,42 @@ import { overlay } from 'overlay-kit';
 
 export default function Home() {
   const { setCurrentPath } = usePrevPath();
-  const [data, setData] = useAtom(listDataAtom);
-  const [page, setPage] = useAtom(pageNumAtom);
   const { isTutorialFinish } = useTutorial();
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
-  useEffect(() => {
-    setPage(1);
-    if (field && postgradu) {
-      axios
-        .get(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/field?field=${field}&postgradu=${postgradu}`,
-        )
-        .then((res) => {
-          setData(res.data.data.seniorSearchResponses);
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
-  }, [field, postgradu]);
+  const {
+    data: seniorListData,
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useGetSeniorListQuery(field, postgradu);
 
   useEffect(() => {
     setCurrentPath();
 
-    const infiniteBottom = () => {
-      let isScrollAtBottom =
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 5;
-      if (isScrollAtBottom) {
-        axios
-          .get(
-            `${
-              process.env.NEXT_PUBLIC_SERVER_URL
-            }/senior/field?field=${field}&postgradu=${postgradu}&page=${
-              page + 1
-            }`,
-          )
-          .then((response) => {
-            const res = response.data;
-            if (res.code == 'SNR200') {
-              setData((data) => [...data, ...res.data.seniorSearchResponses]);
-              setPage((page) =>
-                res.data.totalElements / 10 <= page ? page : page + 1,
-              );
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
+    const handleScroll = () => {
+      if (
+        window.innerHeight + window.scrollY >= document.body.offsetHeight - 5 &&
+        hasNextPage &&
+        !isFetchingNextPage
+      ) {
+        fetchNextPage();
       }
     };
 
-    window.addEventListener('scroll', infiniteBottom);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
-      window.removeEventListener('scroll', infiniteBottom);
+      window.removeEventListener('scroll', handleScroll);
     };
-  }, [page]);
+  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
+
+  const seniorList =
+    seniorListData?.pages.flatMap(
+      (page) => page.data.data.seniorSearchResponses,
+    ) || [];
 
   return (
     <HomeLayer>
@@ -101,8 +77,8 @@ export default function Home() {
         <UnivTapBar />
       </HomeUnivLayer>
       <HomeProfileLayer>
-        {data && data.length > 0 ? (
-          data.map((el, idx) => (
+        {seniorList.length > 0 ? (
+          seniorList.map((el, idx) => (
             <div key={idx}>
               <SeniorProfile data={el} />
             </div>

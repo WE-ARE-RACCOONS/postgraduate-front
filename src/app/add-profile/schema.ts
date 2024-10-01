@@ -28,7 +28,6 @@ export const validateAddProfileError = async (data: AddProfile) => {
     await addProfileSchema.validate(data);
   } catch (e) {
     if (e instanceof ValidationError) {
-      console.log(e);
       throw e;
     }
   }

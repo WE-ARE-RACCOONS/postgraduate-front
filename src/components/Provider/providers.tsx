@@ -5,6 +5,7 @@ import ArrowLeft from '../../../public/left_white.png';
 import { TourProvider } from '@reactour/tour';
 import { Provider as JotaiProvider } from 'jotai';
 import styled from 'styled-components';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 
 interface StepTextProps {
   size?: string;
@@ -77,82 +78,86 @@ const tourSteps = [
   },
 ];
 
+const queryClient = new QueryClient();
+
 export default function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <JotaiProvider>
-      <TourProvider
-        position={'top'}
-        showNavigation
-        scrollSmooth
-        styles={{
-          close: (base) => ({
-            ...base,
-            color: '#ffffff',
-          }),
-          popover: (base) => ({
-            ...base,
-            color: '#2fc4b2',
-            background: 'none',
-            boxShadow: 'none',
-            '--reactour-accent': '#2FC4B2',
-          }),
-          maskWrapper: (base) => ({
-            ...base,
-            background: 'none',
-          }),
-          controls: (base) => ({
-            ...base,
-            background: 'none',
-          }),
-          badge: (base) => ({
-            ...base,
-            opacity: 0,
-          }),
-          dot: (base) => ({
-            ...base,
-          }),
-          button: (base) => ({
-            ...base,
-            color: '#ffffff',
-            svg: '#ffffff',
-            stroke: '#ffffff',
-          }),
-          maskRect: (base) => ({
-            ...base,
-            background: 'none',
-          }),
-        }}
-        disableKeyboardNavigation
-        steps={tourSteps}
-        nextButton={(props) => (
-          <Image
-            src={ArrowRight}
-            alt="튜토리얼_다음버튼"
-            width={30}
-            height={30}
-            onClick={() => props.setCurrentStep(props.currentStep + 1)}
-            style={{
-              cursor: 'pointer',
-            }}
-            {...props}
-          />
-        )}
-        prevButton={(props) => (
-          <Image
-            src={ArrowLeft}
-            alt="튜토리얼_이전버튼"
-            width={30}
-            height={30}
-            onClick={() => props.setCurrentStep(props.currentStep - 1)}
-            style={{
-              cursor: 'pointer',
-            }}
-            {...props}
-          />
-        )}
-      >
-        {children}
-      </TourProvider>
-    </JotaiProvider>
+    <QueryClientProvider client={queryClient}>
+      <JotaiProvider>
+        <TourProvider
+          position={'top'}
+          showNavigation
+          scrollSmooth
+          styles={{
+            close: (base) => ({
+              ...base,
+              color: '#ffffff',
+            }),
+            popover: (base) => ({
+              ...base,
+              color: '#2fc4b2',
+              background: 'none',
+              boxShadow: 'none',
+              '--reactour-accent': '#2FC4B2',
+            }),
+            maskWrapper: (base) => ({
+              ...base,
+              background: 'none',
+            }),
+            controls: (base) => ({
+              ...base,
+              background: 'none',
+            }),
+            badge: (base) => ({
+              ...base,
+              opacity: 0,
+            }),
+            dot: (base) => ({
+              ...base,
+            }),
+            button: (base) => ({
+              ...base,
+              color: '#ffffff',
+              svg: '#ffffff',
+              stroke: '#ffffff',
+            }),
+            maskRect: (base) => ({
+              ...base,
+              background: 'none',
+            }),
+          }}
+          disableKeyboardNavigation
+          steps={tourSteps}
+          nextButton={(props) => (
+            <Image
+              src={ArrowRight}
+              alt="튜토리얼_다음버튼"
+              width={30}
+              height={30}
+              onClick={() => props.setCurrentStep(props.currentStep + 1)}
+              style={{
+                cursor: 'pointer',
+              }}
+              {...props}
+            />
+          )}
+          prevButton={(props) => (
+            <Image
+              src={ArrowLeft}
+              alt="튜토리얼_이전버튼"
+              width={30}
+              height={30}
+              onClick={() => props.setCurrentStep(props.currentStep - 1)}
+              style={{
+                cursor: 'pointer',
+              }}
+              {...props}
+            />
+          )}
+        >
+          {children}
+        </TourProvider>
+      </JotaiProvider>
+    </QueryClientProvider>
   );
 }
