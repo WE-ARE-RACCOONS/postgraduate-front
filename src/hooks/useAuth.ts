@@ -1,10 +1,8 @@
+'use client';
 import { USER_TYPE } from '@/constants/user/cUser';
-import { userTypeAtom } from '@/stores/signup';
-import { accessExpireAtom, accessTokenAtom } from '@/stores/user';
 import { SetTokenProps } from '@/types/user/user';
 import axios from 'axios';
-import { useAtom } from 'jotai';
-import { useCookies } from 'react-cookie';
+
 import { Cookies } from 'react-cookie';
 
 function useAuth() {
