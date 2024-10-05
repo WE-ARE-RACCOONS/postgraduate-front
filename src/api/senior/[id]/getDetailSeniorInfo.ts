@@ -10,6 +10,7 @@ interface SeniorInfoResponse extends ResponseModel {
     certification: boolean;
     nickName: string;
     term: number;
+    target: string;
     profile: string;
     postgradu: string;
     major: string;
@@ -31,7 +32,7 @@ export interface TimeObj {
 export const getDetailSeniorInfoFetch = async ({
   seniorId,
 }: SeniorInfoRequest) => {
-  return await withOutAuthInstance.get<SeniorInfoResponse>(
-    `/senior/${seniorId}`,
-  );
+  return (
+    await withOutAuthInstance.get<SeniorInfoResponse>(`/senior/${seniorId}`)
+  ).data.data;
 };
