@@ -41,8 +41,24 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: '대학원 김선배',
+    description:
+      '예비 대학원생과 실제 랩실에 있는 대학원생을 매칭해주는 서비스',
+    url: 'https://develop.dttx948lk1tf.amplifyapp.com',
+    logo: 'https://develop.dttx948lk1tf.amplifyapp.com/og.png',
+  };
+
   return (
     <html lang="ko">
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body>
         {process.env.NEXT_PUBLIC_GTM_ID ? <GTMAnalytics /> : <></>}
         {process.env.NEXT_PUBLIC_GA4_ID ? <GoogleAnalytics /> : <></>}
