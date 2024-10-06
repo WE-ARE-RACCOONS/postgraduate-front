@@ -185,7 +185,6 @@ const ShowProfBtn = styled.button`
   background: #495565;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;

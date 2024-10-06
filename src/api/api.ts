@@ -34,6 +34,8 @@ withAuthInstance.interceptors.response.use(
       if (typeof window !== 'undefined') {
         window.location.reload();
       }
+
+      throw new Error(`에러메시지 : ${res.data.message}`);
     }
     return res;
   },

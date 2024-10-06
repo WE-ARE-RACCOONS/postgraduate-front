@@ -1,9 +1,10 @@
-import { Hydrate, QueryClient, dehydrate } from '@tanstack/react-query';
+import { Hydrate, dehydrate } from '@tanstack/react-query';
 import { getSeniorList } from '@/api/senior/getSeinorList';
 import { SeniorList } from '@/components/SeniorList';
+import getQueryClient from '@/utils/getQueryClient';
 
 export default async function Home() {
-  const queryClient = new QueryClient();
+  const queryClient = getQueryClient();
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['seniorList'],
     queryFn: () => getSeniorList({ field: 'all', postgradu: 'all', page: 1 }),
