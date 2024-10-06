@@ -4,6 +4,7 @@ import Providers from '@/components/Provider/providers';
 import StyledComponentsRegistry from '@/lib/registry';
 import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
+import { Viewport } from 'next/dist/lib/metadata/types/extra-types';
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
 
@@ -17,6 +18,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: '/',
     languages: {
+      ko: '/',
       'en-US': '/en-US',
       'de-DE': '/de-DE',
     },
@@ -34,6 +36,12 @@ export const metadata: Metadata = {
     ],
   },
   keywords: SERVICE_METADATA.keywords,
+  viewport: {
+    width: 'device-width',
+    initialScale: 1,
+    maximumScale: 1,
+    userScalable: false,
+  },
 };
 
 export default function RootLayout({
