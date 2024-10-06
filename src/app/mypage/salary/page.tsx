@@ -37,11 +37,6 @@ function SalaryPage() {
               headers,
             })
             .then((res) => {
-              if (findExCode(res.data.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
               if (res.data.code == 'SLR200') {
                 setData(res.data.data.salaryDetails);
               }
@@ -52,11 +47,6 @@ function SalaryPage() {
           axios
             .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
             .then((res) => {
-              if (findExCode(res.data.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
               if (res.data.code == 'SLR200') {
                 setSalaryDate(res.data.data.salaryDate);
                 setSalaryAmount(res.data.data.salaryAmount);

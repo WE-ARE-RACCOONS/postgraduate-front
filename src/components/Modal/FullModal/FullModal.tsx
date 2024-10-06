@@ -1,7 +1,7 @@
 import { FullModalProps } from '@/types/modal/full';
 import { FullModalContainer } from './FullModal.styled';
 import MBestCaseContent from '@/components/Content/MBestCaseContent';
-import MyLoginRequest from '@/components/Content/MyLoginRequest/MyLoginRequest';
+import LoginRequest from '@/components/Content/LoginRequest/LoginRequest';
 import SeniorMyProfile from '@/components/Content/SeniorMyProfile';
 import ProfileModify from '@/components/Content/ProfileModify';
 import SmentoringAccept from '@/components/Mentoring/SmentoringAccept/SmentoringAccept';
@@ -28,7 +28,7 @@ function FullModal(props: FullModalProps) {
               />
             );
           case 'login-request':
-            return <MyLoginRequest modalHandler={props.modalHandler} />;
+            return <LoginRequest modalHandler={props.modalHandler} />;
           case 'senior-my-profile':
             return <SeniorMyProfile modalHandler={props.modalHandler} />;
           case 'junior-mentoring-spec':
