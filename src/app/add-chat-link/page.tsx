@@ -328,7 +328,6 @@ const NextAddBtnSet = styled.button`
   border-radius: 0.75rem;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -348,7 +347,6 @@ const PrevBtn = styled.button`
   border: none;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -368,7 +366,6 @@ const AddChatLinkContainer = styled.div`
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
     color: #212529;
-    font-family: Pretendard;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
@@ -379,7 +376,6 @@ const AddChatLinkContainer = styled.div`
   #add-chat-link-sub-direction {
     margin-left: 1rem;
     color: #212529;
-    font-family: Pretendard;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
@@ -409,7 +405,6 @@ const AddChatLinkContainer = styled.div`
 
     &::placeholder {
       color: #adb5bd;
-      font-family: 'Pretendard';
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;
