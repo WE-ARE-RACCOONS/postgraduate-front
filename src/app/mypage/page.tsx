@@ -3,11 +3,12 @@ import Profile from '../../components/Profile';
 import ProfileManage from '../../components/Profile/ProfileManage';
 import CustomerCenter from '../../components/Profile/ProfileStateChange/CustomerCenter';
 import React, { useEffect, useState } from 'react';
-import axios from 'axios';
 import useAuth from '../../hooks/useAuth';
+import { useGetSalaryAmountQuery } from '@/hooks/query/useGetSalaryAmount';
 import { useAtom } from 'jotai';
 import NotLmypage from '../../components/NotLogin/NotLmypage/NotLmypage';
 import useModal from '../../hooks/useModal';
+import { useGetMyInfoQuery } from '@/hooks/query/useGetMyInfo';
 import { createPortal } from 'react-dom';
 import DimmedModal from '../../components/Modal/DimmedModal';
 import { userType } from '../../types/user/user';
@@ -17,22 +18,28 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import MenuBar from '@/components/Bar/MenuBar';
-import RiseUpModal from '@/components/Modal/RiseUpModal';
-import findExCode from '@/utils/findExCode';
 import Footer from '@/components/Footer';
 import { certifiRegAtom, profileRegAtom } from '@/stores/signup';
-import { useRouter } from 'next/navigation';
+
 import useFullModal from '@/hooks/useFullModal';
 import { overlay } from 'overlay-kit';
+import useDimmedModal from '@/hooks/useDimmedModal';
 
 function MyPage() {
-  const [nickName, setnickName] = useState<string | null>(null);
-  const [profile, setprofile] = useState<string | null>(null);
-  const [salaryDate, setSalaryDate] = useState('');
-  const [salaryAmount, setSalaryAmount] = useState(0);
   const [certifiReg, setCertifiReg] = useAtom(certifiRegAtom);
   const [profileReg, setProfileReg] = useAtom(profileRegAtom);
   const [senior, setSenior] = useAtom(mySeniorId);
+  const [userT, setUserT] = useState<string | null>(null);
+
+  const { getUserType } = useAuth();
+  useEffect(() => {
+    setUserT(getUserType());
+  }, []);
+
+  const isJunior = getUserType() === 'junior' ? true : false;
+
+  const { data, isLoading, error } = useGetMyInfoQuery({ isJunior });
+  const { data: salaryData } = useGetSalaryAmountQuery();
 
   const {
     modal: BModal,
@@ -61,82 +68,20 @@ function MyPage() {
     modalType: 'senior-info-modify',
   });
 
-  const { openModal: openLoginRequestModal } = useFullModal({
-    modalType: 'login-request',
+  const { openModal: openLoginRequestModal } = useDimmedModal({
+    modalType: 'notuser',
   });
 
-  const { getAccessToken, getUserType, removeTokens } = useAuth();
-  const [accessTkn, setAccessTkn] = useState('');
-  const [userType, setUserType] = useState('');
-  const router = useRouter();
-
   useEffect(() => {
-    const userT = getUserType();
-    if (userT) setUserType(userT);
-    getAccessToken().then((userTkn) => {
-      if (userTkn) setAccessTkn(userTkn);
-    });
-  }, []);
-
-  useEffect(() => {
-    if (accessTkn) {
-      const headers = {
-        Authorization: `Bearer ${accessTkn}`,
-      };
-
-      if (userType == 'junior') {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/me`, { headers })
-          .then((res) => {
-            if (findExCode(res.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            setnickName(res.data.data.nickName);
-            setprofile(res.data.data.profile);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-        return;
-      }
-
-      if (userType == 'senior') {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me`, { headers })
-          .then((res) => {
-            if (findExCode(res.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            setnickName(res.data.data.nickName);
-            setprofile(res.data.data.profile);
-            setCertifiReg(res.data.data.certificationRegister);
-            setProfileReg(res.data.data.profileRegister);
-            setSenior(res.data.data.seniorId);
-          })
-          .catch(function (error) {
-            console.error(error);
-          });
-
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
-          .then((res) => {
-            if (res.data.code == 'SLR200') {
-              setSalaryDate(res.data.data.salaryDate);
-              setSalaryAmount(res.data.data.salaryAmount);
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
+    if (data) {
+      setCertifiReg(data?.certificationRegister);
+      setProfileReg(data?.profileRegister);
+      setSenior(data?.seniorId);
     }
-  }, [accessTkn, userType]);
+  }, [data]);
+
+  const nickName = data?.nickName;
+  const profile = data?.profile;
 
   return (
     <div
@@ -149,26 +94,29 @@ function MyPage() {
           });
         }}
       />
-      {accessTkn ? (
+      {userT ? (
         <div style={{ backgroundColor: '#F8F9FA', marginTop: '1rem' }}>
           <Profile
-            profile={profile ? profile : ''}
-            nickName={nickName ? nickName : ''}
-            userType={userType ? (userType as userType) : 'junior'}
+            profile={profile || ''}
+            nickName={nickName || ''}
+            userType={userT as userType}
             profileReg={profileReg}
             certifiReg={certifiReg}
             modalHandler={suggestModalHandler}
           />
-          {userType == 'senior' && (
+          {userT === 'senior' && (
             <div style={{ backgroundColor: 'white' }}>
-              <SalaryBox salaryDate={salaryDate} salaryAmount={salaryAmount} />
+              <SalaryBox
+                salaryDate={salaryData?.data?.salaryDate ?? ''}
+                salaryAmount={salaryData?.data?.salaryAmount ?? 0}
+              />
               <div style={{ marginTop: '0.5rem' }}>
                 <AccountShowBtn />
               </div>
             </div>
           )}
           <ProfileManage
-            userType={userType ? (userType as userType) : 'junior'}
+            userType={userT as userType}
             certifiReg={certifiReg}
             profileReg={profileReg}
             modalHandler={seiorChangemodalHandler}
@@ -184,7 +132,7 @@ function MyPage() {
         style={{
           backgroundColor: '#F8F9FA',
           marginTop: '1rem',
-          paddingBottom: userType == 'senior' ? '4rem' : '',
+          paddingBottom: userT === 'senior' ? '4rem' : '',
           border: 'none',
         }}
       >
