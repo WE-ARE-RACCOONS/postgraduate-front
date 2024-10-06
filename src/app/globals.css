@@ -12,21 +12,3 @@ body {
   padding: 0;
   margin: 0;
 }
-
-@font-face {
-  font-family: 'Pretendard';
-  font-style: bold;
-  font-weight: 700;
-  src:
-    local('Pretendard'),
-    url(../../public/fonts/Pretendard-Bold.woff2) format('woff2');
-}
-
-@font-face {
-  font-family: 'Pretendard';
-  font-style: normal;
-  font-weight: 400;
-  src:
-    local('Pretendard'),
-    url(../../public/fonts/Pretendard-ExtraLight.woff2) format('woff2');
-}

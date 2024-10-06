@@ -18,6 +18,6 @@ export const phoneNumValidation = atom<boolean>(false);
 
 export const socialIdAtom = atom<string>('');
 //Query로 마이그레이션 필요
-export const isTutorialFinished = atom<boolean>(false);
+export const isTutorialFinished = atom<boolean>(true);
 export const certifiRegAtom = atom<certiRegType>('WAITING');
 export const profileRegAtom = atom<boolean>(false);

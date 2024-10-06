@@ -294,26 +294,6 @@ function AddChatLinkPage() {
 
 export default AddChatLinkPage;
 
-const NextAddBtn = styled.button`
-  display: flex;
-  width: 55%;
-  padding: 1rem 0rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  margin-left: 0.4rem;
-  border-radius: 0.75rem;
-  background: #dee2e6;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
 const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
   width: 21.44rem;
   height: 3.375rem;
@@ -325,7 +305,6 @@ const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
   border: none;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;

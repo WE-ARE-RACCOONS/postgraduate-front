@@ -1,8 +1,10 @@
 'use client';
-import IntroCard from '@/components/Card/IntroCard';
-import KeywordCard from '@/components/Card/KeywordCard';
-import ProfileCard from '@/components/Card/ProfileCard';
-import BackHeader from '@/components/Header/BackHeader';
+import dynamic from 'next/dynamic';
+
+const IntroCard = dynamic(() => import('@/components/Card/IntroCard'));
+const KeywordCard = dynamic(() => import('@/components/Card/KeywordCard'));
+const ProfileCard = dynamic(() => import('@/components/Card/ProfileCard'));
+const BackHeader = dynamic(() => import('@/components/Header/BackHeader'));
 import useAuth from '@/hooks/useAuth';
 
 import { usePathname, useRouter } from 'next/navigation';
@@ -16,7 +18,6 @@ import { useGetSeniorInfoQuery } from '@/hooks/query/useGetSeniorInfo';
 export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
   const router = useRouter();
   const currentPath = usePathname();
-  const pathArr = currentPath.split('/');
   const koreanCharWidth = 1.2;
 
   const { data } = useGetSeniorInfoQuery({ seniorId: params.seniorId });
