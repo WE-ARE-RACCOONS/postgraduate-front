@@ -4,6 +4,7 @@ import { getSeniorList } from '@/api/senior/getSeinorList';
 export const useGetSeniorListQuery = (field: string, postgradu: string) => {
   return useInfiniteQuery({
     suspense: true,
+    useErrorBoundary: true,
     queryKey: ['seniorList', field, postgradu],
     queryFn: ({ pageParam = 1 }) =>
       getSeniorList({ field, postgradu, page: pageParam }),
