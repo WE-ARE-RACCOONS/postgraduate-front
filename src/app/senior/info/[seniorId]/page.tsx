@@ -12,9 +12,33 @@ export default async function SeniorDetailInfoPage({
     queryKey: ['seniorInfo', params.seniorId],
     queryFn: () => getDetailSeniorInfoFetch({ seniorId: params.seniorId }),
   });
+
+  const seniorData = await getDetailSeniorInfoFetch({
+    seniorId: params.seniorId,
+  });
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: seniorData.nickName,
+    description: seniorData.oneLiner,
+    memberOf: {
+      '@type': 'Organization',
+      name: seniorData.lab,
+    },
+    jobTitle: seniorData.info,
+    image: seniorData.profile,
+  };
+
   return (
-    <Hydrate state={dehydrate(queryClient)}>
-      <SeniorInfoPage params={params} />
-    </Hydrate>
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      <Hydrate state={dehydrate(queryClient)}>
+        <SeniorInfoPage params={params} />
+      </Hydrate>
+    </>
   );
 }
