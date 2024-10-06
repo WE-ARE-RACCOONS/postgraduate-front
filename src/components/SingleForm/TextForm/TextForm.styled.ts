@@ -8,11 +8,9 @@ export const TextFormEl = styled.input`
   border: 0.8px solid #dcdfe4;
   background: #fff;
   padding: 0.88rem;
-  font-family: Pretendard;
   font-size: 13px;
   ::placeholder {
     color: #a6abb0;
-    font-family: Pretendard;
     font-size: 13px;
     font-style: normal;
     font-weight: 400;

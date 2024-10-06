@@ -120,7 +120,6 @@ export const KeywordInputFormBox = styled.div`
   }
 
   #keyword-input-form::placeholder {
-    font-family: Pretendard;
     font-size: 16px;
     color: #adb5bd;
   }

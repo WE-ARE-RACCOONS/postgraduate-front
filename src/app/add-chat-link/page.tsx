@@ -294,26 +294,6 @@ function AddChatLinkPage() {
 
 export default AddChatLinkPage;
 
-const NextAddBtn = styled.button`
-  display: flex;
-  width: 55%;
-  padding: 1rem 0rem;
-  justify-content: center;
-  align-items: center;
-  gap: 0.625rem;
-  margin-left: 0.4rem;
-  border-radius: 0.75rem;
-  background: #dee2e6;
-  border: none;
-  color: #fff;
-  text-align: center;
-  font-family: Pretendard;
-  font-size: 1.125rem;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-`;
-
 const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
   width: 21.44rem;
   height: 3.375rem;
@@ -325,7 +305,6 @@ const SubmitBtn = styled.div<{ $ableSubmit: boolean }>`
   border: none;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -349,7 +328,6 @@ const NextAddBtnSet = styled.button`
   border-radius: 0.75rem;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -369,7 +347,6 @@ const PrevBtn = styled.button`
   border: none;
   color: #fff;
   text-align: center;
-  font-family: Pretendard;
   font-size: 1.125rem;
   font-style: normal;
   font-weight: 700;
@@ -389,7 +366,6 @@ const AddChatLinkContainer = styled.div`
     margin-top: 1.25rem;
     margin-bottom: 0.5rem;
     color: #212529;
-    font-family: Pretendard;
     font-size: 1.25rem;
     font-style: normal;
     font-weight: 700;
@@ -400,7 +376,6 @@ const AddChatLinkContainer = styled.div`
   #add-chat-link-sub-direction {
     margin-left: 1rem;
     color: #212529;
-    font-family: Pretendard;
     font-size: 0.875rem;
     font-style: normal;
     font-weight: 400;
@@ -430,7 +405,6 @@ const AddChatLinkContainer = styled.div`
 
     &::placeholder {
       color: #adb5bd;
-      font-family: 'Pretendard';
       font-size: 1rem;
       font-style: normal;
       font-weight: 400;

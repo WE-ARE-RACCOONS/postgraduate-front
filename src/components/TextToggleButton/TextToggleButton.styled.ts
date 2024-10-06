@@ -11,7 +11,6 @@ export const TextToggleBtnBox = styled.div`
   border-radius: 0.25rem;
   background: #f8f9fa;
   color: #3d4044;
-  font-family: Pretendard;
   font-size: 1rem;
   font-style: normal;
   font-weight: 400;
