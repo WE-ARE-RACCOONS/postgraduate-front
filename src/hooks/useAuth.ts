@@ -8,9 +8,6 @@ import { Cookies } from 'react-cookie';
 function useAuth() {
   const cookies = new Cookies();
   const refresh_token = cookies.get('refreshToken');
-  // const [accessTkn, setAccessTkn] = useAtom(accessTokenAtom);
-  // const [accessExp, setAccessExp] = useAtom(accessExpireAtom);
-  // const [type, setType] = useAtom(userTypeAtom);
 
   /** 초 단위 만료 시간 Date 객체로 반환 */
   function calculateExpires(expires: number) {
@@ -21,9 +18,11 @@ function useAuth() {
 
   /** localStorage에 access token 값 및 만료 시간 저장 */
   function setAccessToken(props: SetTokenProps) {
-    const expires = calculateExpires(props.expires);
-    localStorage.setItem('accessToken', props.token);
-    localStorage.setItem('accessExpire', expires.toString());
+    if (typeof window !== 'undefined') {
+      const expires = calculateExpires(props.expires);
+      localStorage.setItem('accessToken', props.token);
+      localStorage.setItem('accessExpire', expires.toString());
+    }
   }
 
   /** cookie에 refresh token 값 및 만료 시간 저장 */
@@ -37,6 +36,9 @@ function useAuth() {
 
   /** ADMIN | USER | SENIOR 값에 맞춰 user type 세팅 */
   function setUserType(serverType: string) {
+    if (typeof window === 'undefined') {
+      return;
+    }
     switch (serverType) {
       case USER_TYPE.admin:
         localStorage.setItem('userType', 'admin');
@@ -54,8 +56,11 @@ function useAuth() {
 
   /** access token 또는 재로그인 필요 여부 반환 */
   async function getAccessToken() {
+    if (typeof window === 'undefined') {
+      return '';
+    }
+
     if (
-      typeof window !== 'undefined' &&
       localStorage.hasOwnProperty('accessToken') &&
       localStorage.hasOwnProperty('accessExpire')
     ) {
@@ -65,8 +70,7 @@ function useAuth() {
       if (isExpired(accessExp)) {
         if (getRefreshToken()) {
           await reissueToken();
-          const accessTkn = localStorage.getItem('accessToken');
-          return accessTkn;
+          return localStorage.getItem('accessToken');
         } else {
           removeTokens();
           return '';
@@ -77,8 +81,7 @@ function useAuth() {
     } else {
       if (getRefreshToken()) {
         await reissueToken();
-        const accessTkn = localStorage.getItem('accessToken');
-        return accessTkn;
+        return localStorage.getItem('accessToken');
       } else {
         return '';
       }
@@ -95,10 +98,10 @@ function useAuth() {
 
   /** user type 반환 */
   function getUserType() {
-    if (
-      typeof window !== undefined &&
-      localStorage.hasOwnProperty('userType')
-    ) {
+    if (typeof window === 'undefined') {
+      return '';
+    }
+    if (localStorage.hasOwnProperty('userType')) {
       return localStorage.getItem('userType');
     } else {
       return '';
@@ -115,31 +118,6 @@ function useAuth() {
   /** 토큰 재발급 하는 함수 */
   async function reissueToken() {
     try {
-      // axios
-      //   .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`, null, {
-      //     headers: {
-      //       Authorization: `Bearer ${getRefreshToken()}`,
-      //     },
-      //   })
-      //   .then(async (res) => {
-      //     const response = res.data;
-      //     // code 값에 따라 세팅하는 조건문 추가
-      //     if (response.code && response.code == 'AU201') {
-      //       setAccessToken({
-      //         token: response.data.accessToken,
-      //         expires: response.data.accessExpiration,
-      //       });
-      //       setRefreshToken({
-      //         token: response.data.refreshToken,
-      //         expires: response.data.refreshExpiration,
-      //       });
-      //       setUserType(response.data.role);
-      //     }
-      //   })
-      //   .catch((err) => {
-      //     console.error(err);
-      //   });
-
       const response = await axios.post(
         `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/refresh`,
         null,
@@ -172,7 +150,7 @@ function useAuth() {
 
   /** 로그아웃 등 토큰 지우는 함수 */
   function removeTokens() {
-    if (typeof window !== undefined) {
+    if (typeof window !== 'undefined') {
       if (localStorage.hasOwnProperty('accessToken')) {
         localStorage.removeItem('accessToken');
       }
