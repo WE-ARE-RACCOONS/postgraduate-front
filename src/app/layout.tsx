@@ -6,11 +6,32 @@ import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
+
 export const metadata: Metadata = {
   title: SERVICE_METADATA.title,
   description: SERVICE_METADATA.description,
   icons: {
     icon: '/favicon.ico',
+  },
+  metadataBase: new URL('https://develop.dttx948lk1tf.amplifyapp.com'),
+  alternates: {
+    canonical: '/',
+    languages: {
+      'en-US': '/en-US',
+      'de-DE': '/de-DE',
+    },
+  },
+  openGraph: {
+    title: '대학원 김선배',
+    description:
+      '예비 대학원생과 실제 랩실에 있는 대학원생을 매칭해주는 대학원 김선배입니다.',
+    images: [
+      {
+        url: `/og.png`,
+        width: 800,
+        height: 600,
+      },
+    ],
   },
   keywords: SERVICE_METADATA.keywords,
 };
