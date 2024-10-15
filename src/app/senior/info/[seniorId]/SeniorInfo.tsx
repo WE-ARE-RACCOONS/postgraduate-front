@@ -17,7 +17,7 @@ import { useGetSeniorInfoQuery } from '@/hooks/query/useGetSeniorInfo';
 
 export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
   const router = useRouter();
-  const currentPath = usePathname();
+
   const koreanCharWidth = 1.2;
 
   const { data } = useGetSeniorInfoQuery({ seniorId: params.seniorId });
