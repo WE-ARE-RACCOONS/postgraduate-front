@@ -20,5 +20,10 @@ export const postUserProfileImage = async ({
   return await withAuthInstance.post<PostUserProfileImageResponse>(
     '/image/upload/profile',
     formData,
+    {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    },
   );
 };
