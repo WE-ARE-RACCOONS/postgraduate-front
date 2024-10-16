@@ -1,5 +1,5 @@
 import { ResponseModel } from '@/api/model';
-import { withOutAuthInstance } from '@/api/api';
+import { withAuthInstance, withOutAuthInstance } from '@/api/api';
 
 interface SeniorInfoRequest {
   seniorId: string;
@@ -32,6 +32,11 @@ export interface TimeObj {
 export const getDetailSeniorInfoFetch = async ({
   seniorId,
 }: SeniorInfoRequest) => {
+  if (typeof window !== 'undefined' && window.localStorage) {
+    return (
+      await withAuthInstance.get<SeniorInfoResponse>(`/senior/${seniorId}`)
+    ).data.data;
+  }
   return (
     await withOutAuthInstance.get<SeniorInfoResponse>(`/senior/${seniorId}`)
   ).data.data;

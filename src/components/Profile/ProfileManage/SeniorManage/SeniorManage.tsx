@@ -6,8 +6,6 @@ import ContentComponent from '../../Box/ContentBox';
 import TitleComponent from '../../Box/TitleBox';
 import { SeniorManageProps } from '@/types/profile/seniorManage';
 
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
 import Router, { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
 import useDimmedModal from '@/hooks/useDimmedModal';

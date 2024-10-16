@@ -17,11 +17,8 @@ import {
   sKeywordAtom,
   sLabAtom,
   sMajorAtom,
-  sMultiIntroduce,
   sPostGraduAtom,
   sProfessorAtom,
-  sRecommendedFor,
-  sSingleIntroduce,
 } from '@/stores/senior';
 import { changeNickname, phoneNum } from '@/stores/signup';
 import findExCode from '@/utils/findExCode';
