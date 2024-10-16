@@ -5,11 +5,12 @@ const IntroCard = dynamic(() => import('@/components/Card/IntroCard'));
 const KeywordCard = dynamic(() => import('@/components/Card/KeywordCard'));
 const ProfileCard = dynamic(() => import('@/components/Card/ProfileCard'));
 const BackHeader = dynamic(() => import('@/components/Header/BackHeader'));
+import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
 
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import styled from 'styled-components';
+
 import { ErrorBoundary } from 'react-error-boundary';
 
 import useDimmedModal from '@/hooks/useDimmedModal';
@@ -20,7 +21,9 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
 
   const koreanCharWidth = 1.2;
 
-  const { data } = useGetSeniorInfoQuery({ seniorId: params.seniorId });
+  const { data, isLoading } = useGetSeniorInfoQuery({
+    seniorId: params.seniorId,
+  });
 
   const { getUserType } = useAuth();
 
@@ -111,11 +114,9 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
         {isMine ? (
           <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
         ) : (
-          <>
-            <MentoringApplyBtn onClick={applyHandler}>
-              멘토링 신청
-            </MentoringApplyBtn>
-          </>
+          <MentoringApplyBtn onClick={applyHandler}>
+            멘토링 신청
+          </MentoringApplyBtn>
         )}
       </SeniorInfoPageContainer>
     </ErrorBoundary>
