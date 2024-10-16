@@ -21,9 +21,13 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
 
   const koreanCharWidth = 1.2;
 
-  const { data, isLoading } = useGetSeniorInfoQuery({
+  const { data, isLoading, refetch } = useGetSeniorInfoQuery({
     seniorId: params.seniorId,
   });
+
+  useEffect(() => {
+    refetch();
+  }, []);
 
   const { getUserType } = useAuth();
 
