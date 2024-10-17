@@ -76,23 +76,21 @@ function NicknameForm({ defaultValue }: { defaultValue?: string }) {
 
   // 원래 닉네임과 바뀐 닉네임이 다를때만 유효성 검사
   function checkDuplicate() {
-    if (changeNick.length > 0 && changeNick !== defaultValue) {
-      const params = { nickName: changeNick };
-      axios
-        .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
-        .then((res) => {
-          if (res.data.data) {
-            setFlag(true);
-            useAvailability(true);
-          } else {
-            setFlag(true);
-            useAvailability(false);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
-    }
+    const params = { nickName: changeNick };
+    axios
+      .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/user/nickname`, { params })
+      .then((res) => {
+        if (res.data.data) {
+          setFlag(true);
+          useAvailability(true);
+        } else {
+          setFlag(true);
+          useAvailability(false);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   return (

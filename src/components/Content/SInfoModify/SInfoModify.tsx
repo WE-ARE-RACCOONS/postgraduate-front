@@ -4,18 +4,17 @@ import {
   SInfoContainer,
   SInfoImgBox,
   SInfoImgInputBox,
-  ValidatorBox,
 } from './SInfoModify.styled';
 import x_icon from '../../../../public/x.png';
 import camera_icon from '../../../../public/camera.png';
+import { useGetSeniorMyAccountQuery } from '@/hooks/query/useGetSeniorMyAccount';
 import Image from 'next/image';
 import RoundedImage from '@/components/Image/RoundedImage';
 import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
-import { useEffect, useRef, useState } from 'react';
-import SingleValidator from '@/components/Validator/SingleValidator';
-import useAuth from '@/hooks/useAuth';
-import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { useChangeSeniorAccount } from '@/hooks/mutations/useChangeSeniorAccount';
+import { usePostProfileImage } from '@/hooks/mutations/usePostProfileImage';
 import { useAtom, useAtomValue } from 'jotai';
 import {
   changeNickname,
@@ -23,6 +22,7 @@ import {
   nickname,
   notDuplicate,
   phoneNum,
+  phoneNumValidation,
   remainPhoneNum,
 } from '@/stores/signup';
 import NextBtn from '@/components/Button/NextBtn';
@@ -31,7 +31,6 @@ import { bankNameAtom } from '@/stores/bankName';
 import { overlay } from 'overlay-kit';
 import { ModalType } from '@/types/modal/riseUp';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import findExCode from '@/utils/findExCode';
 
 function SInfoModify({
   modalHandler,
@@ -40,57 +39,23 @@ function SInfoModify({
   bModalHandler: () => void;
   modalHandler: () => void;
 }) {
-  const [flag, setFlag] = useState(false);
+  const { data } = useGetSeniorMyAccountQuery();
+  const { mutate: changeImage } = usePostProfileImage();
+  const { mutate: updateSeniorAccount } = useChangeSeniorAccount();
 
   const [modalType, setModalType] = useState<ModalType>('bank');
-  const [submitFlag, setSubmitFlag] = useState(false);
+
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
-  const [profileUrl, setProfileUrl] = useState('');
   const [bank, setBank] = useAtom(bankNameAtom);
-  const [nickName, setNickname] = useAtom(nickname);
-  const [phoneNumber, setPhoneNum] = useAtom(remainPhoneNum);
+
   const changeNick = useAtomValue(changeNickname);
-  const [inputImg, setInputImg] = useState<File | null>(null); // 사용자가 등록한 파일
-  const [imgUrl, setImgUrl] = useState<string>(''); // 사용자가 등록한 파일 URL(미리보기용)
+  const [inputImg, setInputImg] = useState<File | null>(null);
+  const [imgUrl, setImgUrl] = useState<string>('');
   const fullNum = useAtomValue(phoneNum);
   const newAvailability = useAtomValue(newNotDuplicate);
   const availability = useAtomValue(notDuplicate);
-  const [btnAct, setBtnAct] = useState('false');
-  const { getAccessToken, removeTokens } = useAuth();
-  useEffect(() => {
-    getAccessToken().then((accessTkn) => {
-      if (accessTkn) {
-        axios
-          .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`, {
-            headers: {
-              Authorization: `Bearer ${accessTkn}`,
-            },
-          })
-          .then((response) => {
-            const res = response.data;
-
-            if (findExCode(res.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            if (res.code == 'SNR200') {
-              setAccHolder(res.data.accountHolder || '');
-              setAccNumber(res.data.accountNumber || '');
-              setBank(res.data.bank || '');
-              setNickname(res.data.nickName || '');
-              setPhoneNum(res.data.phoneNumber || '');
-              setProfileUrl(res.data.profile || '');
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-    });
-  }, [submitFlag]);
+  const phoneAvailability = useAtomValue(phoneNumValidation);
 
   useEffect(() => {
     if (inputImg) {
@@ -98,96 +63,54 @@ function SInfoModify({
     }
   }, [inputImg]);
 
+  useEffect(() => {
+    setAccHolder(data?.data?.accountHolder || '');
+    setAccNumber(data?.data?.accountNumber || '');
+    setBank(data?.data?.bank || '');
+  }, [data]);
+
   const submitHandler = async () => {
-    let submitImgUrl = profileUrl ? profileUrl : '';
+    let submitImgUrl = data?.data?.profile;
 
-    getAccessToken().then(async (accessTkn) => {
-      if (inputImg) {
-        const formData = new FormData();
-        setBtnAct('true');
-        formData.append('profileFile', inputImg);
+    if (inputImg) {
+      changeImage(
+        {
+          profileFile: inputImg,
+        },
+        {
+          onSuccess: ({ data }) => {
+            submitImgUrl = data.data.profileUrl;
+          },
+        },
+      );
+    }
 
-        if (accessTkn) {
-          await axios
-            .post(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/profile`,
-              formData,
-              {
-                headers: {
-                  'Content-Type': 'multipart/form-data',
-                  Authorization: `Bearer ${accessTkn}`,
-                },
-              },
-            )
-            .then((response) => {
-              const res = response.data;
-
-              if (findExCode(res.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
-
-              if (res.code == 'IMG202') {
-                submitImgUrl = res.data.profileUrl;
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
-      }
-
-      if (
-        changeNick ||
-        fullNum ||
-        bank ||
-        submitImgUrl ||
-        accNumber ||
-        accHolder
-      ) {
-        setFlag(false);
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/account`,
-            {
-              nickName: changeNick ? changeNick : nickName,
-              phoneNumber: fullNum ? fullNum : phoneNumber,
-              profile: submitImgUrl,
-              accountNumber: accNumber,
-              bank: bank,
-              accountHolder: accHolder,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessTkn}`,
-              },
-            },
-          )
-          .then((response) => {
-            const res = response.data;
-
-            if (findExCode(res.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            if (res.code == 'SNR201') {
-              modalHandler();
-              setSubmitFlag(!submitFlag);
-              location.reload();
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      } else {
-        setFlag(true);
-        return;
-      }
+    updateSeniorAccount({
+      nickName: changeNick ? changeNick : data?.data?.nickName || '',
+      phoneNumber: fullNum || data?.data?.phoneNumber || '',
+      profile: submitImgUrl || '',
+      accountNumber: accNumber || data?.data?.accountNumber + '',
+      bank: bank || data?.data?.bank + '',
+      accountHolder: accHolder || data?.data?.accountHolder + '',
     });
   };
+
+  const isAccountNumberChanged = accNumber !== data?.data?.accountNumber;
+  const isAccountHolderChanged = accHolder !== data?.data?.accountHolder;
+  const isBankChanged = bank !== data?.data?.bank;
+
+  const isPhoneNumberValid = phoneAvailability;
+  const isNicknameAvailable =
+    changeNick !== '' && newAvailability && availability;
+  const isImageUploaded = inputImg !== null;
+
+  const isFormValid =
+    isPhoneNumberValid ||
+    isNicknameAvailable ||
+    isImageUploaded ||
+    isAccountNumberChanged ||
+    isAccountHolderChanged ||
+    isBankChanged;
 
   return (
     <SInfoContainer>
@@ -195,7 +118,7 @@ function SInfoModify({
       <SInfoImgBox>
         <RoundedImage
           kind="big"
-          imgSrc={imgUrl ? imgUrl : profileUrl}
+          imgSrc={imgUrl ? imgUrl : data?.data?.profile || ''}
           altMsg="계정 프로필 사진"
         />
         <Image id="camera-icon" src={camera_icon} alt="카메라 아이콘" />
@@ -226,24 +149,19 @@ function SInfoModify({
         onClick={modalHandler}
       />
       <div id="nickname-form-wrapper">
-        <NicknameForm defaultValue={nickName} />
+        <NicknameForm defaultValue={data?.data?.nickName} />
       </div>
       <div id="phonenum-form-wrapper">
-        <PhoneNumForm defaultValue={phoneNumber} />
+        <PhoneNumForm defaultValue={data?.data?.phoneNumber} />
       </div>
       <div id="account-form-wrapper">
         <InfoFieldTitle>계좌번호</InfoFieldTitle>
         <InfoFieldForm
           $width="95%"
           type="text"
-          defaultValue={accNumber}
+          value={accNumber}
           onChange={(e) => {
             setAccNumber(e.currentTarget.value);
-            if (accNumber !== e.currentTarget.value) {
-              setBtnAct('true');
-            } else {
-              setBtnAct('false');
-            }
           }}
         />
       </div>
@@ -251,9 +169,9 @@ function SInfoModify({
         <div id="bank-form-wrapper">
           <InfoFieldTitle>은행명</InfoFieldTitle>
           <ModalBtn
-            $isGet={!bank}
+            $isGet={!data?.data?.bank}
             type="bankInfo"
-            btnText={bank ? bank : '\u00A0\u00A0\u00A0\u00A0'}
+            btnText={bank || '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}
             onClick={() => {
               setModalType('bank');
@@ -276,43 +194,22 @@ function SInfoModify({
           <InfoFieldForm
             $width="100%"
             type="text"
-            defaultValue={accHolder}
+            value={accHolder}
             maxLength={5}
             onChange={(e) => {
               setAccHolder(e.currentTarget.value);
-              if (accHolder !== e.currentTarget.value) {
-                setBtnAct('true');
-              } else {
-                setBtnAct('false');
-              }
             }}
           />
         </div>
       </div>
-      {flag && (
-        <ValidatorBox>
-          <SingleValidator
-            textColor="#FF3347"
-            msg="입력하지 않은 내용이 있습니다."
-          />
-        </ValidatorBox>
-      )}
-      {(changeNick !== '' && newAvailability && availability) ||
-      fullNum !== '' ||
-      inputImg !== null ||
-      btnAct === 'true' ? (
-        <div id="submit-btn-box">
-          <NextBtn kind="route" btnText="저장하기" onClick={submitHandler} />
-        </div>
-      ) : (
-        <div id="submit-btn-box">
-          <NextBtn
-            kind="route-non"
-            btnText="저장하기"
-            onClick={submitHandler}
-          />
-        </div>
-      )}
+
+      <div id="submit-btn-box">
+        <NextBtn
+          kind={isFormValid ? 'route' : 'route-non'}
+          btnText="저장하기"
+          onClick={submitHandler}
+        />
+      </div>
     </SInfoContainer>
   );
 }
