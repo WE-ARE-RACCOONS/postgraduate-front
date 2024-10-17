@@ -14,7 +14,6 @@ import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useEffect, useState } from 'react';
 import { useChangeSeniorAccount } from '@/hooks/mutations/useChangeSeniorAccount';
-
 import { usePostProfileImage } from '@/hooks/mutations/usePostProfileImage';
 import { useAtom, useAtomValue } from 'jotai';
 import {
@@ -48,7 +47,6 @@ function SInfoModify({
 
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
-
   const [bank, setBank] = useAtom(bankNameAtom);
 
   const changeNick = useAtomValue(changeNickname);
@@ -64,6 +62,12 @@ function SInfoModify({
       setImgUrl(URL.createObjectURL(inputImg));
     }
   }, [inputImg]);
+
+  useEffect(() => {
+    setAccHolder(data?.data?.accountHolder || '');
+    setAccNumber(data?.data?.accountNumber || '');
+    setBank(data?.data?.bank || '');
+  }, [data]);
 
   const submitHandler = async () => {
     let submitImgUrl = data?.data?.profile;
@@ -82,14 +86,18 @@ function SInfoModify({
     }
 
     updateSeniorAccount({
-      nickName: changeNick ? changeNick : data?.data?.nickName + '',
-      phoneNumber: fullNum ? fullNum : data?.data?.phoneNumber + '',
-      profile: submitImgUrl + '',
-      accountNumber: accNumber ?? data?.data?.accountNumber,
-      bank: bank ?? data?.data?.bank,
-      accountHolder: accHolder ?? data?.data?.accountHolder,
+      nickName: changeNick ? changeNick : data?.data?.nickName || '',
+      phoneNumber: fullNum || data?.data?.phoneNumber || '',
+      profile: submitImgUrl || '',
+      accountNumber: accNumber || data?.data?.accountNumber + '',
+      bank: bank || data?.data?.bank + '',
+      accountHolder: accHolder || data?.data?.accountHolder + '',
     });
   };
+
+  const isAccountNumberChanged = accNumber !== data?.data?.accountNumber;
+  const isAccountHolderChanged = accHolder !== data?.data?.accountHolder;
+  const isBankChanged = bank !== data?.data?.bank;
 
   const isPhoneNumberValid = phoneAvailability;
   const isNicknameAvailable =
@@ -97,7 +105,12 @@ function SInfoModify({
   const isImageUploaded = inputImg !== null;
 
   const isFormValid =
-    isPhoneNumberValid || isNicknameAvailable || isImageUploaded;
+    isPhoneNumberValid ||
+    isNicknameAvailable ||
+    isImageUploaded ||
+    isAccountNumberChanged ||
+    isAccountHolderChanged ||
+    isBankChanged;
 
   return (
     <SInfoContainer>
@@ -105,7 +118,7 @@ function SInfoModify({
       <SInfoImgBox>
         <RoundedImage
           kind="big"
-          imgSrc={imgUrl ? imgUrl : data?.data?.profile + ''}
+          imgSrc={imgUrl ? imgUrl : data?.data?.profile || ''}
           altMsg="계정 프로필 사진"
         />
         <Image id="camera-icon" src={camera_icon} alt="카메라 아이콘" />
@@ -146,7 +159,7 @@ function SInfoModify({
         <InfoFieldForm
           $width="95%"
           type="text"
-          defaultValue={data?.data?.accountNumber}
+          value={accNumber}
           onChange={(e) => {
             setAccNumber(e.currentTarget.value);
           }}
@@ -158,7 +171,7 @@ function SInfoModify({
           <ModalBtn
             $isGet={!data?.data?.bank}
             type="bankInfo"
-            btnText={bank ?? '\u00A0\u00A0\u00A0\u00A0'}
+            btnText={bank || '\u00A0\u00A0\u00A0\u00A0'}
             modalHandler={bModalHandler}
             onClick={() => {
               setModalType('bank');
@@ -181,7 +194,7 @@ function SInfoModify({
           <InfoFieldForm
             $width="100%"
             type="text"
-            defaultValue={data?.data?.accountHolder}
+            value={accHolder}
             maxLength={5}
             onChange={(e) => {
               setAccHolder(e.currentTarget.value);
