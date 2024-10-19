@@ -6,7 +6,6 @@ export const useGetSeniorMyAccountQuery = () => {
   return useQuery({
     queryKey: ['getSeniorMyAccount'],
     queryFn: getSenoirMyAccount,
-    staleTime: Infinity,
     useErrorBoundary: true,
     suspense: true,
   });

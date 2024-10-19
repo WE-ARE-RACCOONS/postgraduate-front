@@ -74,6 +74,7 @@ export const SPField = styled.div`
 export const Skeyword = styled.div`
   width: 19rem;
   display: flex;
+  align-items: center;
   flex-wrap: wrap;
 `;
 
@@ -81,7 +82,8 @@ export const Keyword = styled.div`
   height: 1.75rem;
   padding: 0.31rem 0.63rem;
   border-radius: 0.25rem;
-
+  display: flex;
+  align-items: center;
   background: rgba(124, 143, 141, 0.1);
   margin-left: 0.25rem;
   font-size: 0.75rem;
