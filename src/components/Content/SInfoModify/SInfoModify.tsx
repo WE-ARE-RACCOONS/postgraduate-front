@@ -41,6 +41,9 @@ function SInfoModify({
   const { data } = useGetSeniorMyAccountQuery();
   const { mutate: changeImage } = usePostProfileImage();
   const { mutate: updateSeniorAccount } = useChangeSeniorAccount();
+  const { data } = useGetSeniorMyAccountQuery();
+  const { mutate: changeImage } = usePostProfileImage();
+  const { mutate: updateSeniorAccount } = useChangeSeniorAccount();
 
   const [modalType, setModalType] = useState<ModalType>('bank');
   const router = useRouter();
@@ -49,12 +52,16 @@ function SInfoModify({
   const [accNumber, setAccNumber] = useState('');
   const [bank, setBank] = useAtom(bankNameAtom);
 
+
   const changeNick = useAtomValue(changeNickname);
+  const [inputImg, setInputImg] = useState<File | null>(null);
+  const [imgUrl, setImgUrl] = useState<string>('');
   const [inputImg, setInputImg] = useState<File | null>(null);
   const [imgUrl, setImgUrl] = useState<string>('');
   const fullNum = useAtomValue(phoneNum);
   const newAvailability = useAtomValue(newNotDuplicate);
   const availability = useAtomValue(notDuplicate);
+  const phoneAvailability = useAtomValue(phoneNumValidation);
   const phoneAvailability = useAtomValue(phoneNumValidation);
 
   useEffect(() => {
@@ -120,12 +127,30 @@ function SInfoModify({
     isAccountHolderChanged ||
     isBankChanged;
 
+  const isAccountNumberChanged = accNumber !== data?.data?.accountNumber;
+  const isAccountHolderChanged = accHolder !== data?.data?.accountHolder;
+  const isBankChanged = bank !== data?.data?.bank;
+
+  const isPhoneNumberValid = phoneAvailability;
+  const isNicknameAvailable =
+    changeNick !== '' && newAvailability && availability;
+  const isImageUploaded = inputImg !== null;
+
+  const isFormValid =
+    isPhoneNumberValid ||
+    isNicknameAvailable ||
+    isImageUploaded ||
+    isAccountNumberChanged ||
+    isAccountHolderChanged ||
+    isBankChanged;
+
   return (
     <SInfoContainer>
       <h3 style={{ textAlign: 'center', marginTop: '1rem' }}>계정 설정</h3>
       <SInfoImgBox>
         <RoundedImage
           kind="big"
+          imgSrc={imgUrl ? imgUrl : data?.data?.profile || ''}
           imgSrc={imgUrl ? imgUrl : data?.data?.profile || ''}
           altMsg="계정 프로필 사진"
         />
