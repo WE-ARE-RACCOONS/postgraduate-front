@@ -10,6 +10,7 @@ import camera_icon from '../../../../public/camera.png';
 import { useGetSeniorMyAccountQuery } from '@/hooks/query/useGetSeniorMyAccount';
 import Image from 'next/image';
 import RoundedImage from '@/components/Image/RoundedImage';
+import { useRouter } from 'next/navigation';
 import NicknameForm from '@/components/SingleForm/NicknameForm';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
 import { useEffect, useState } from 'react';
@@ -19,11 +20,9 @@ import { useAtom, useAtomValue } from 'jotai';
 import {
   changeNickname,
   newNotDuplicate,
-  nickname,
   notDuplicate,
   phoneNum,
   phoneNumValidation,
-  remainPhoneNum,
 } from '@/stores/signup';
 import NextBtn from '@/components/Button/NextBtn';
 import ModalBtn from '@/components/Button/ModalBtn';
@@ -44,6 +43,7 @@ function SInfoModify({
   const { mutate: updateSeniorAccount } = useChangeSeniorAccount();
 
   const [modalType, setModalType] = useState<ModalType>('bank');
+  const router = useRouter();
 
   const [accHolder, setAccHolder] = useState('');
   const [accNumber, setAccNumber] = useState('');
@@ -52,6 +52,7 @@ function SInfoModify({
   const changeNick = useAtomValue(changeNickname);
   const [inputImg, setInputImg] = useState<File | null>(null);
   const [imgUrl, setImgUrl] = useState<string>('');
+
   const fullNum = useAtomValue(phoneNum);
   const newAvailability = useAtomValue(newNotDuplicate);
   const availability = useAtomValue(notDuplicate);
@@ -85,14 +86,22 @@ function SInfoModify({
       );
     }
 
-    updateSeniorAccount({
-      nickName: changeNick ? changeNick : data?.data?.nickName || '',
-      phoneNumber: fullNum || data?.data?.phoneNumber || '',
-      profile: submitImgUrl || '',
-      accountNumber: accNumber || data?.data?.accountNumber + '',
-      bank: bank || data?.data?.bank + '',
-      accountHolder: accHolder || data?.data?.accountHolder + '',
-    });
+    updateSeniorAccount(
+      {
+        nickName: changeNick ? changeNick : data?.data?.nickName || '',
+        phoneNumber: fullNum || data?.data?.phoneNumber || '',
+        profile: submitImgUrl || '',
+        accountNumber: accNumber || data?.data?.accountNumber + '',
+        bank: bank || data?.data?.bank + '',
+        accountHolder: accHolder || data?.data?.accountHolder + '',
+      },
+      {
+        onSuccess: () => {
+          modalHandler();
+          router.push('/mypage');
+        },
+      },
+    );
   };
 
   const isAccountNumberChanged = accNumber !== data?.data?.accountNumber;
@@ -182,7 +191,7 @@ function SInfoModify({
                       close();
                       unmount();
                     }}
-                    modalType="bank"
+                    modalType={modalType}
                   />
                 );
               });

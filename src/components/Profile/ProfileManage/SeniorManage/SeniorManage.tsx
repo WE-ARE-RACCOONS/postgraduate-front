@@ -7,31 +7,28 @@ import TitleComponent from '../../Box/TitleBox';
 import { SeniorManageProps } from '@/types/profile/seniorManage';
 
 import Router, { useRouter } from 'next/navigation';
-import useAuth from '@/hooks/useAuth';
+
 import useDimmedModal from '@/hooks/useDimmedModal';
-import axios from 'axios';
+import { useGetMySeniorRole } from '@/hooks/query/useGetMySeniorRole';
+import { usePostRenewUserToken } from '@/hooks/mutations/usePostRenewToken';
+
 import {
   isTutorialFinished,
   socialIdAtom,
   userTypeAtom,
 } from '@/stores/signup';
 import { useAtom, useSetAtom } from 'jotai';
-import findExCode from '@/utils/findExCode';
+
 import useFullModal from '@/hooks/useFullModal';
-import DimmedModal from '@/components/Modal/DimmedModal';
+
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
-  const setTutorialStatus = useSetAtom(isTutorialFinished);
-  const {
-    getAccessToken,
-    setUserType,
-    setAccessToken,
-    setRefreshToken,
-    removeTokens,
-  } = useAuth();
 
-  const [socialId, setSocialId] = useAtom(socialIdAtom);
+  const { mutate: renewUserToken } = usePostRenewUserToken();
+  const [_socialId, setSocialId] = useAtom(socialIdAtom);
   const setuserTypeAtom = useSetAtom(userTypeAtom);
+
+  const { data: mySeniorRole } = useGetMySeniorRole();
 
   const { openModal: _openSeniorMyProfileModal } = useFullModal({
     modalType: 'senior-my-profile',
@@ -76,82 +73,14 @@ function SeniorManage(props: SeniorManageProps) {
   };
 
   const changeJunior = async () => {
-    try {
-      getAccessToken().then(async (Token) => {
-        if (Token) {
-          const headers = {
-            Authorization: `Bearer ${Token}`,
-          };
-          const response = await axios.get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/me/role`,
-            { headers },
-          );
-
-          if (findExCode(response.data.code)) {
-            removeTokens();
-            location.reload();
-            return;
-          }
-
-          if (response.data.data.possible == true) {
-            setuserTypeAtom('junior');
-            renewJuniorToken();
-          }
-
-          if (response.data.data.possible == false) {
-            setSocialId(response.data.data.socialId);
-            openNotJuniorModal();
-          }
-        }
-      });
-    } catch (error) {
-      console.error('Error fetching data from the server:', error);
+    if (mySeniorRole?.data.possible) {
+      setuserTypeAtom('junior');
+      renewUserToken();
+      router.replace('/');
+    } else {
+      setSocialId(mySeniorRole?.data.socialId + '');
+      openNotJuniorModal();
     }
-  };
-
-  const renewJuniorToken = () => {
-    getAccessToken().then((accessTkn) => {
-      if (accessTkn) {
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/user/token`,
-            {},
-            {
-              headers: {
-                Authorization: `Bearer ${accessTkn}`,
-              },
-            },
-          )
-          .then((response) => {
-            const res = response.data;
-
-            if (findExCode(res.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            if (res.code == 'AU202') {
-              setAccessToken({
-                token: res.data.accessToken,
-                expires: res.data.accessExpiration,
-              });
-              setRefreshToken({
-                token: res.data.refreshToken,
-                expires: res.data.refreshExpiration,
-              });
-              setUserType(res.data.role);
-              setTutorialStatus(res.data.isTutorial);
-
-              router.replace('/');
-              return;
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-    });
   };
 
   const editProf = () => {
