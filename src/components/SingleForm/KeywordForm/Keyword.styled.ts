@@ -58,21 +58,17 @@ export const KeywordFormContainer = styled.div`
     color: #fff;
     font-size: 16px;
     font-weight: 700;
-    position: absolute;
-    bottom: 0;
     cursor: pointer;
   }
   .keyword-close-btn {
     width: 100%;
-    height: 3.313rem;
+    height: 50px;
     border: none;
     border-radius: 12px;
     background-color: #fff;
     color: #6d747e;
     font-size: 16px;
     font-weight: 700;
-    position: absolute;
-    bottom: 0;
     cursor: pointer;
   }
   .keyword-submit-btn-non {
@@ -105,7 +101,6 @@ export const KeywordFormWrapper = styled.div`
 export const KeywordInputFormBox = styled.div`
   width: 100%;
   font-size: 13px;
-  height: 44px;
   border-radius: 8px;
   border: 1px solid #dcdfe4;
   background: #fff;

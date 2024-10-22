@@ -15,8 +15,9 @@ withAuthInstance.interceptors.request.use(
   ): Promise<InternalAxiosRequestConfig> => {
     const { getAccessToken } = useAuth();
     const accessTkn = await getAccessToken();
-
-    config.headers.Authorization = `Bearer ${accessTkn}`;
+    if (accessTkn) {
+      config.headers.Authorization = `Bearer ${accessTkn}`;
+    }
 
     return config;
   },

@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import useAuth from '@/hooks/useAuth';
-import AccountReactivation from '@/components/Content/AccountReactivation';
 import { useSetAtom } from 'jotai';
 import { socialIdAtom, isTutorialFinished } from '@/stores/signup';
 import { overlay } from 'overlay-kit';
@@ -11,6 +10,7 @@ import {
 } from '@/api/auth/login/kakaoAuthFetch';
 import { rejoinPatchFetch } from '@/api/auth/rejoin/rejoinPatchFetch';
 import FullModal from '@/components/Modal/FullModal';
+import findExCode from '@/utils/findExCode';
 
 const useKakaoLogin = () => {
   const setSocialId = useSetAtom(socialIdAtom);
@@ -50,6 +50,12 @@ const useKakaoLogin = () => {
 
         if (kakaoAuthFetchRes.code === 'AU204') {
           setUserContext(kakaoAuthFetchRes);
+          router.push('/');
+          return;
+        }
+
+        if (findExCode(kakaoAuthFetchRes.code)) {
+          alert('탈퇴 후 15일에서 30일 사이에는 로그인이 불가능합니다.');
           router.push('/');
           return;
         }
