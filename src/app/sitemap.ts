@@ -7,9 +7,6 @@ export default async function sitemap() {
     );
     const data = await response.json();
 
-    if (data.code === 'SNR200') {
-      seniorIds = data.data.seniorIds;
-    }
     const sitemap: SitemapFile[] = [
       {
         url: 'https://kimseonbae.com',
