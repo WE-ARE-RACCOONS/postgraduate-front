@@ -14,7 +14,7 @@ export const metadata: Metadata = {
   icons: {
     icon: '/favicon.ico',
   },
-  metadataBase: new URL('https://develop.dttx948lk1tf.amplifyapp.com'),
+  metadataBase: new URL('https://www.kimseonbae.com'),
   alternates: {
     canonical: '/',
     languages: {
