@@ -34,7 +34,7 @@ function page() {
   const router = useRouter();
 
   const availability = useAtomValue(notDuplicate);
-  const availablePhone = useAtomValue(phoneNumValidation);
+  const [availablePhone, setAvailablePhone] = useAtom(phoneNumValidation);
   const newAvailability = useAtomValue(newNotDuplicate);
   const sameUser = useAtomValue(sameUserAtom);
   const fullNum = useAtomValue(phoneNum);
@@ -44,9 +44,11 @@ function page() {
         removeTokens();
         location.reload();
       }
-      const { nickName, profile } = res.data.data;
+      const { nickName, profile, phoneNumber } = res.data.data;
       setNickName(nickName);
       setprofile(profile);
+      setPhoneNumber(phoneNumber);
+      setAvailablePhone(false);
     });
   }, []);
 
