@@ -36,7 +36,7 @@ function FullModal(props: FullModalProps) {
               <MentoringSpec
                 modalHandler={props.modalHandler}
                 cancelModalHandler={props.cancelModalHandler || (() => {})}
-                mentoringId={props.mentoringId || 0}
+                mentoringId={props.selectedMentoringId || 0}
               />
             );
           case 'profile-modify':

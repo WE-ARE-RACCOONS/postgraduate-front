@@ -42,9 +42,6 @@ function convertDateType(date: string) {
   return new Date(year, month, day, hour, minute);
 }
 function TabBar() {
-  const { openModal: openJuniorMentoringSpecModal } = useFullModal({
-    modalType: 'junior-mentoring-spec',
-  });
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -62,6 +59,13 @@ function TabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
+  const {
+    openModal: openJuniorMentoringSpecModal,
+    closeModal: closeJunuiorMentoringSpec,
+  } = useFullModal({
+    modalType: 'junior-mentoring-spec',
+    selectedMentoringId: selectedMentoringId ?? 0,
+  });
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   const JMCancel = useAtomValue(JMCancelAtom);
   useEffect(() => {
@@ -147,10 +151,11 @@ function TabBar() {
                   <ModalBtn
                     type={'show'}
                     btnText={'내 신청서 보기'}
-                    modalHandler={openJuniorMentoringSpecModal}
+                    modalHandler={() => {}}
                     onClick={() => {
                       setModalType('junior');
-                      setSelectedMentoringId(el.mentoringId);
+                      setSelectedMentoringId(() => el.mentoringId);
+                      openJuniorMentoringSpecModal();
                     }}
                   />
                 )}
@@ -172,10 +177,16 @@ function TabBar() {
                       <ModalBtn
                         type={'show'}
                         btnText={'내 신청서 보기'}
-                        modalHandler={openJuniorMentoringSpecModal}
+                        modalHandler={() => {
+                          if (selectedMentoringId) {
+                            setSelectedMentoringId(selectedMentoringId);
+                            openJuniorMentoringSpecModal();
+                          }
+                        }}
                         onClick={() => {
                           setModalType('junior');
                           setSelectedMentoringId(el.mentoringId);
+                          alert('z');
                         }}
                       />
                     )}
