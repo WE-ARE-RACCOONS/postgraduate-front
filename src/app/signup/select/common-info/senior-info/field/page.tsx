@@ -17,7 +17,7 @@ import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import { createPortal } from 'react-dom';
+
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';

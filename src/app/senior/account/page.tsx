@@ -11,7 +11,7 @@ import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalType } from '@/types/modal/riseUp';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import { createPortal } from 'react-dom';
+
 import { useAtomValue } from 'jotai';
 import { bankNameAtom } from '@/stores/bankName';
 import findExCode from '@/utils/findExCode';
