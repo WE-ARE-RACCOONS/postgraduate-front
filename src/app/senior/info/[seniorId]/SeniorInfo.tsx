@@ -21,7 +21,7 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
 
   const koreanCharWidth = 1.2;
 
-  const { data, isLoading, refetch } = useGetSeniorInfoQuery({
+  const { data, refetch } = useGetSeniorInfoQuery({
     seniorId: params.seniorId,
   });
 

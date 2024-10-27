@@ -2,9 +2,6 @@
 import BackHeader from '@/components/Header/BackHeader';
 import Photo from '@/components/Photo';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { photoUrlAtom } from '@/stores/senior';
-import axios from 'axios';
-import { useAtomValue, useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -12,7 +9,10 @@ import auth from '../../../../public/auth.png';
 import Image from 'next/image';
 import cancel from '../../../../public/cancel.png';
 import useAuth from '@/hooks/useAuth';
-import { certifiRegAtom } from '@/stores/signup';
+import { useCertifySeniorImage } from '@/hooks/mutations/useCertifySeniorImage';
+import { useCertifySenior } from '@/hooks/mutations/useCertifySenior';
+import findSuccessCode from '@/utils/findSuccessCode';
+import findExCode from '@/utils/findExCode';
 
 function SeniorAuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
@@ -20,10 +20,12 @@ function SeniorAuthPage() {
   const { getAccessToken, getUserType } = useAuth();
   const [accessTkn, setAccessTkn] = useState<string | null | undefined>('');
   const [userType, setUserType] = useState('');
-  const setphotoUrl = useSetAtom(photoUrlAtom);
+
   const router = useRouter();
   const fileName = photo?.name;
-  const certifiReg = useAtomValue(certifiRegAtom);
+
+  const { mutate: certifySeniorImage } = useCertifySeniorImage();
+  const { mutate: certifySenior } = useCertifySenior();
 
   useEffect(() => {
     getAccessToken().then((tkn) => {
@@ -45,57 +47,26 @@ function SeniorAuthPage() {
 
   const handleClick = async () => {
     if (photo) {
-      setUploadFlag(false);
-      const formData = new FormData();
-      formData.append('certificationFile', photo);
-
-      let reAuthImg = ''; // S3에서 반환된 인증 이미지 url
-
-      await axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
-          },
-        )
-        .then((response) => {
-          const res = response.data;
-
-          if (res.code == 'IMG202') {
-            reAuthImg = res.data.profileUrl;
-          }
-        })
-        .catch((error) => {
-          console.error(error);
-        });
-
-      if (reAuthImg) {
-        axios
-          .patch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/certification`,
-            {
-              certification: reAuthImg,
-            },
-            {
-              headers: {
-                Authorization: `Bearer ${accessTkn}`,
+      certifySeniorImage(
+        { seniorCertificationImage: photo },
+        {
+          onSuccess: (data) => {
+            certifySenior(
+              { reAuthImage: data.data.profileUrl },
+              {
+                onSuccess: (data) => {
+                  if (findSuccessCode(data.code)) {
+                    router.push('/auth-done');
+                  } else if (findExCode(data.code)) {
+                    alert(data.message);
+                  }
+                },
               },
-            },
-          )
-          .then((response) => {
-            const res = response.data;
-
-            if (res.code == 'SNR201') router.push('/auth-done');
-          })
-          .catch((error) => {
-            console.error('Error sending PATCH request:', error);
-          });
-      }
+            );
+          },
+        },
+      );
     }
-
     if (!photo) {
       setUploadFlag(true);
       return;
@@ -125,7 +96,6 @@ function SeniorAuthPage() {
             대학원생임을 증명할 수 있는 사진을 첨부해주세요.
           </li>
           <div id="auth-msg-color">
-            {' '}
             (대학원 학생증, 대학원 합격증, 연구실멤버 확인 캡쳐본 등)
           </div>
           <li id="auth-msg">
