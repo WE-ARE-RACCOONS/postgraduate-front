@@ -47,6 +47,7 @@ function SeniorAuthPage() {
 
   const handleClick = async () => {
     if (photo) {
+      setUploadFlag(false);
       certifySeniorImage(
         { seniorCertificationImage: photo },
         {
