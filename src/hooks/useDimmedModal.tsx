@@ -2,13 +2,18 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 
 import { DimmedModalProps } from '@/types/modal/dimmed';
 import { overlay } from 'overlay-kit';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 interface UseDimmedModalProps extends DimmedModalProps {
   overlayId?: string;
 }
 const useDimmedModal = ({ ...props }: Partial<UseDimmedModalProps>) => {
   const [isOpen, setIsOpen] = useState(false);
+  useEffect(() => {
+    window.addEventListener('popstate', () => {
+      overlay.unmountAll();
+    });
+  }, []);
 
   const openModal = () => {
     setIsOpen(true);
