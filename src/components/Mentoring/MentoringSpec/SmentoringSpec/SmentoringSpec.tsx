@@ -1,12 +1,13 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import axios from 'axios';
-import useModal from '@/hooks/useModal';
+
 import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 import MentoringApply from '../../MentoringApply/MentoringApply';
 import { ModalMentoringSProps } from '@/types/modal/mentoringDetail';
+import { useConfirmSeniorMentoring } from '@/hooks/mutations/useConfirmSeniorMentoring';
+import { useGetSeniorMentoringListQuery } from '@/hooks/query/useGetSeniorMentoringList';
 import {
   ModalMentoringBackground,
   ModalClose,
@@ -35,15 +36,19 @@ import { ValidatorBox } from '@/components/Content/AddTime/AddTime.styled';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
 import { accountAtom } from '@/stores/senior';
+import { ErrorBoundary } from 'react-error-boundary';
+import { MentoringTabError } from '../error';
 
 function SmentoringSpec(props: ModalMentoringSProps) {
-  const router = useRouter();
-  const { getAccessToken, removeTokens } = useAuth();
-  const [data, setData] = useState<MentoringSpecData | null>(null);
   const [date, setDate] = useState('');
   const activeTab = useAtomValue(activeTabAtom);
-  const [isActive, setIsActive] = useState(false);
+
   const [isAccount, setIsAccount] = useAtom(accountAtom);
+  const { data: getSeniorExpectedMentoring } = useGetSeniorMentoringListQuery({
+    mentoringId: props.mentoringId as number,
+  });
+  const { mutate: confirmSeniorExpectedMentoring } =
+    useConfirmSeniorMentoring();
   const handleButtonClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     const allBtns = document.querySelectorAll('.smc-btns');
     if (allBtns.length > 0) {
@@ -78,119 +83,102 @@ function SmentoringSpec(props: ModalMentoringSProps) {
     }
   };
 
-  useEffect(() => {
-    if (props.mentoringId !== 0) {
-      getAccessToken().then((Token) => {
-        if (Token) {
-          const headers = {
-            Authorization: `Bearer ${Token}`,
-          };
-          axios
-            .get(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}`,
-              {
-                headers,
-              },
-            )
-            .then((response) => {
-              if (findExCode(response.data.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
-              setData(response.data.data);
-            })
-            .catch((error) => {
-              console.error('Error fetching data:', error);
-            });
-        }
-      });
-    }
-  }, []);
-
   const acceptMentoring = async () => {
     try {
-      getAccessToken().then(async (Token) => {
-        if (Token) {
-          const headers = {
-            'Content-Type': 'application/json',
-            Authorization: `Bearer ${Token}`,
-          };
-
-          const response = await fetch(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${props.mentoringId}/expected`,
-            {
-              method: 'PATCH',
-              headers,
-              body: JSON.stringify({
-                date: date,
-              }),
-            },
-          );
-          const responseData = await response.json();
-          setIsAccount(responseData.data);
-
-          props.modalHandler();
-        }
-      });
-    } catch (error) {
-      console.error('Error cancelling mentoring:', error);
+      if (props.mentoringId) {
+        confirmSeniorExpectedMentoring({
+          date,
+          mentoringId: props.mentoringId,
+        });
+      }
+    } catch (e) {
+      console.error(e);
+    } finally {
+      props.modalHandler();
+      window.location.reload();
     }
   };
   return (
-    <ModalMentoringBackground>
-      <MMTop>
-        <div id="header-text">멘토링 신청서</div>
-        <div id="img">
-          <Image
-            id="x-icon"
-            src={x_icon}
-            alt="계정 수정 모달 닫기 버튼"
-            width={24}
-            height={24}
-            style={{}}
-            onClick={props.modalHandler}
+    <ErrorBoundary fallback={<MentoringTabError />}>
+      <ModalMentoringBackground>
+        <MMTop>
+          <div id="header-text">멘토링 신청서</div>
+          <div id="img">
+            <Image
+              id="x-icon"
+              src={x_icon}
+              alt="계정 수정 모달 닫기 버튼"
+              width={24}
+              height={24}
+              style={{}}
+              onClick={props.modalHandler}
+            />
+          </div>
+        </MMTop>
+        <div id="mentoring-back">
+          <MApplyBox>
+            <ConfirmContent>
+              <ConfirmProfile
+                src={
+                  getSeniorExpectedMentoring?.profile
+                    ? getSeniorExpectedMentoring.profile
+                    : '/user.png'
+                }
+              ></ConfirmProfile>
+              <ConfirmInfo>
+                <ConfirmTitle>
+                  {getSeniorExpectedMentoring?.nickName
+                    ? getSeniorExpectedMentoring.nickName
+                    : ''}
+                  &nbsp; 후배와 멘토링
+                </ConfirmTitle>
+              </ConfirmInfo>
+              <TermBox>
+                {getSeniorExpectedMentoring?.term
+                  ? getSeniorExpectedMentoring.term
+                  : ''}
+                분
+              </TermBox>
+            </ConfirmContent>
+          </MApplyBox>
+        </div>
+        <div id="mentoring-topic">원하는 멘토링 주제</div>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <TextToggleButton
+            text={
+              getSeniorExpectedMentoring?.topic
+                ? getSeniorExpectedMentoring.topic
+                : ''
+            }
           />
         </div>
-      </MMTop>
-      <div id="mentoring-back">
-        <MApplyBox>
-          <ConfirmContent>
-            <ConfirmProfile
-              src={data ? data.profile : '/user.png'}
-            ></ConfirmProfile>
-            <ConfirmInfo>
-              <ConfirmTitle>
-                {data ? data.nickName : ''}&nbsp; 후배와 멘토링
-              </ConfirmTitle>
-            </ConfirmInfo>
-            <TermBox>{data ? data.term : ''}분</TermBox>
-          </ConfirmContent>
-        </MApplyBox>
-      </div>
-      <div id="mentoring-topic">원하는 멘토링 주제</div>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <TextToggleButton text={data ? data.topic : ''} />
-      </div>
-      <div id="mentoring-topic">사전 질문</div>
-      <div style={{ marginBottom: '1.5rem' }}>
-        <TextToggleButton text={data ? data.question : ''} />
-      </div>
-      <div id="mentoring-topic">
-        멘토링 시간
+        <div id="mentoring-topic">사전 질문</div>
+        <div style={{ marginBottom: '1.5rem' }}>
+          <TextToggleButton
+            text={
+              getSeniorExpectedMentoring?.question
+                ? getSeniorExpectedMentoring.question
+                : ''
+            }
+          />
+        </div>
+        <div id="mentoring-topic">
+          멘토링 시간
+          {activeTab === 'waiting' ? (
+            <div id="mentoring-time-msg">
+              아래의 세가지 중{' '}
+              {getSeniorExpectedMentoring?.nickName
+                ? getSeniorExpectedMentoring.nickName
+                : ''}
+              님이 선택한 시간대에 멘토링이 진행돼요
+            </div>
+          ) : (
+            ''
+          )}
+        </div>
         {activeTab === 'waiting' ? (
-          <div id="mentoring-time-msg">
-            아래의 세가지 중 {data ? data.nickName : ''}님이 선택한 시간대에
-            멘토링이 진행돼요
-          </div>
-        ) : (
-          ''
-        )}
-      </div>
-      {activeTab === 'waiting' ? (
-        <div>
-          {data &&
-            data.dates.map((dateString, index) => {
+          <div>
+            {getSeniorExpectedMentoring?.dates.map((dateString, index) => {
               const dataSplit = dateString;
               const dateParts = (dataSplit || '').split('-');
               const dateSenior = `${dateParts[0]}년 ${dateParts[1]}월 ${dateParts[2]}일 ${dateParts[3]}시 ${dateParts[4]}분`;
@@ -207,32 +195,37 @@ function SmentoringSpec(props: ModalMentoringSProps) {
                 </div>
               );
             })}
-        </div>
-      ) : (
-        <SMSDate>{data && data.dates}</SMSDate>
-      )}
-      {activeTab === 'waiting' &&
-        (date ? '' : <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>)}
-      <ModalBottomBtn>
-        {activeTab === 'waiting' ? (
-          <>
-            <ApplyCancleBtn
-              kind="spec"
-              btnText={'거절'}
-              cancelModalHandler={props.cancelModalHandler}
-              mentoringId={props.mentoringId as number}
-            />
-            {date ? (
-              <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
-            ) : (
-              <ModalNClose>멘토링 수락</ModalNClose>
-            )}
-          </>
+          </div>
         ) : (
-          <ServiceMsg>멘토링 취소는 고객센터로 문의해주세요</ServiceMsg>
+          <SMSDate>{getSeniorExpectedMentoring?.dates}</SMSDate>
         )}
-      </ModalBottomBtn>
-    </ModalMentoringBackground>
+        {activeTab === 'waiting' &&
+          (date ? (
+            ''
+          ) : (
+            <WarnMsg>멘토링을 진행할 시간대를 선택해주세요.</WarnMsg>
+          ))}
+        <ModalBottomBtn>
+          {activeTab === 'waiting' ? (
+            <>
+              <ApplyCancleBtn
+                kind="spec"
+                btnText={'거절'}
+                cancelModalHandler={props.cancelModalHandler}
+                mentoringId={props.mentoringId as number}
+              />
+              {date ? (
+                <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
+              ) : (
+                <ModalNClose>멘토링 수락</ModalNClose>
+              )}
+            </>
+          ) : (
+            <ServiceMsg>멘토링 취소는 고객센터로 문의해주세요</ServiceMsg>
+          )}
+        </ModalBottomBtn>
+      </ModalMentoringBackground>
+    </ErrorBoundary>
   );
 }
 
