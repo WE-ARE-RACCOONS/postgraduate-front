@@ -29,6 +29,7 @@ import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
 import { StyledSModalBtn } from '@/components/Button/ModalBtn/ModalBtn.styled';
 import MentoringNotYet from '@/components/MentoringNotYet';
+import { useConfirmMyMentoring } from '@/hooks/mutations/useConfirmMyMentoring';
 
 function convertDateType(date: string) {
   if (!date) return new Date();
@@ -69,6 +70,7 @@ function TabBar() {
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   const JMCancel = useAtomValue(JMCancelAtom);
 
+  const { mutate: confirmMyMentoring } = useConfirmMyMentoring();
   useEffect(() => {
     let prevMentoringInfoLength = 0;
     if (JMCancel === true) {
@@ -112,32 +114,16 @@ function TabBar() {
 
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
-    getAccessToken().then(async (Token) => {
-      if (Token) {
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Token}`,
-        };
-
-        const response = await axios.patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/done`,
-          {
-            mentoringId: mentoringId,
+    if (mentoringId) {
+      confirmMyMentoring(
+        { mentoringId: Number(mentoringId) },
+        {
+          onSuccess: () => {
+            localStorage.removeItem('mentoringId');
           },
-          { headers },
-        );
-
-        if (findExCode(response.data.code)) {
-          removeTokens();
-          location.reload();
-          return;
-        }
-
-        const confirm = response.data;
-        localStorage.removeItem('mentoringId');
-        location.reload();
-      }
-    });
+        },
+      );
+    }
   };
 
   return (

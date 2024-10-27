@@ -103,6 +103,7 @@ function MentoringSpec(props: ModalMentoringProps) {
               cancelModalHandler={() => {
                 if (props.cancelModalHandler) {
                   cancelMyMentoring(props.mentoringId);
+
                   props.cancelModalHandler();
                 }
               }}

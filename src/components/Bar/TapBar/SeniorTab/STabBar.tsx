@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import {
   TapStyle,
@@ -37,6 +37,7 @@ function STabBar() {
     setActiveTab(tabIndex);
   };
 
+  const mentoringBtnRef = useRef<HTMLButtonElement>(null);
   const { openModal: openAcceptMentoringModal } = useFullModal({
     modalType: 'accept-mentoring',
   });
@@ -100,6 +101,9 @@ function STabBar() {
             console.error('Error fetching data:', error);
           });
       }
+      if (activeTab === TAB.waiting && prevMentoringInfoLength === 0) {
+        mentoringBtnRef?.current?.click();
+      }
     });
   }, [activeTab, prevMentoringInfoLength]);
 
@@ -113,16 +117,22 @@ function STabBar() {
                 <MentoringApply data={el} />
                 {activeTab === TAB.waiting || activeTab === TAB.expected ? (
                   <ModalBtn
+                    ref={mentoringBtnRef}
                     type="seniorShow"
                     btnText={
                       activeTab === TAB.waiting
                         ? '신청서 보고 수락하기'
                         : '신청서 보기'
                     }
-                    modalHandler={openSeniorMentoringSpecModal}
+                    modalHandler={() => {
+                      router.push('/senior/mentoring');
+                    }}
                     onClick={() => {
                       setModalType('senior');
                       setSelectedMentoringId(el.mentoringId);
+                      if (selectedMentoringId) {
+                        openSeniorMentoringSpecModal();
+                      }
                     }}
                   />
                 ) : (

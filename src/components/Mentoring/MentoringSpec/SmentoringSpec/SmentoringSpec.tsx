@@ -129,9 +129,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
           );
           const responseData = await response.json();
           setIsAccount(responseData.data);
-          if (props.acceptModalHandler) {
-            props.acceptModalHandler();
-          }
+
           props.modalHandler();
         }
       });
@@ -222,7 +220,7 @@ function SmentoringSpec(props: ModalMentoringSProps) {
               kind="spec"
               btnText={'거절'}
               cancelModalHandler={props.cancelModalHandler}
-              mentoringId={props.mentoringId}
+              mentoringId={props.mentoringId as number}
             />
             {date ? (
               <ModalClose onClick={acceptMentoring}>멘토링 수락</ModalClose>
