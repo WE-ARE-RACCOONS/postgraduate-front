@@ -12,7 +12,7 @@ export interface ModalMentoringSProps {
   modalHandler: () => void;
   cancelModalHandler: () => void;
   acceptModalHandler: () => void;
-  mentoringId: number;
+  mentoringId: number | undefined;
   onClick?: () => void;
 }
 

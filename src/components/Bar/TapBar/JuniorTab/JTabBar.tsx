@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo, useRef } from 'react';
 import axios from 'axios';
 import {
   TapStyle,
@@ -29,6 +29,7 @@ import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
 import { StyledSModalBtn } from '@/components/Button/ModalBtn/ModalBtn.styled';
 import MentoringNotYet from '@/components/MentoringNotYet';
+import { useConfirmMyMentoring } from '@/hooks/mutations/useConfirmMyMentoring';
 
 function convertDateType(date: string) {
   if (!date) return new Date();
@@ -42,9 +43,6 @@ function convertDateType(date: string) {
   return new Date(year, month, day, hour, minute);
 }
 function TabBar() {
-  const { openModal: openJuniorMentoringSpecModal } = useFullModal({
-    modalType: 'junior-mentoring-spec',
-  });
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
@@ -59,11 +57,20 @@ function TabBar() {
     modalHandler: cancelModalHandler,
     portalElement: cancelPortalElement,
   } = useModal('junior-mentoring-cancel');
-  const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
-    null,
-  );
+  const [selectedMentoringId, setSelectedMentoringId] = useState<number>(0);
+  const applyBtnRef = useRef<HTMLButtonElement>(null);
+  const {
+    openModal: openJuniorMentoringSpecModal,
+    closeModal: closeJunuiorMentoringSpec,
+  } = useFullModal({
+    modalType: 'junior-mentoring-spec',
+    selectedMentoringId: selectedMentoringId,
+  });
+
   const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   const JMCancel = useAtomValue(JMCancelAtom);
+
+  const { mutate: confirmMyMentoring } = useConfirmMyMentoring();
   useEffect(() => {
     let prevMentoringInfoLength = 0;
     if (JMCancel === true) {
@@ -100,109 +107,23 @@ function TabBar() {
           });
       }
     });
+    if (selectedMentoringId === 0) {
+      applyBtnRef.current?.click();
+    }
   }, [activeTab, prevMentoringInfoLength]);
+
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
-    getAccessToken().then(async (Token) => {
-      if (Token) {
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Token}`,
-        };
-
-        const response = await axios.patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${mentoringId}/done`,
-          {
-            mentoringId: mentoringId,
+    if (mentoringId) {
+      confirmMyMentoring(
+        { mentoringId: Number(mentoringId) },
+        {
+          onSuccess: () => {
+            localStorage.removeItem('mentoringId');
           },
-          { headers },
-        );
-
-        if (findExCode(response.data.code)) {
-          removeTokens();
-          location.reload();
-          return;
-        }
-
-        const confirm = response.data;
-        localStorage.removeItem('mentoringId');
-        location.reload();
-      }
-    });
-  };
-
-  const renderTabContent = () => {
-    return (
-      <div>
-        {data && data.length !== 0 ? (
-          data!.map((el, idx) => {
-            const mentoringDate = convertDateType(el.date);
-            const currentDate = new Date();
-            const isPast = mentoringDate < currentDate;
-
-            return (
-              <MentoringBox key={idx}>
-                <MentoringApply data={el} />
-                {activeTab === TAB.waiting && (
-                  <ModalBtn
-                    type={'show'}
-                    btnText={'내 신청서 보기'}
-                    modalHandler={openJuniorMentoringSpecModal}
-                    onClick={() => {
-                      setModalType('junior');
-                      setSelectedMentoringId(el.mentoringId);
-                    }}
-                  />
-                )}
-                {activeTab === TAB.expected && (
-                  <div>
-                    {isPast ? (
-                      <DateDoneBtn
-                        onClick={() => {
-                          localStorage.setItem(
-                            'mentoringId',
-                            el.mentoringId.toString(),
-                          );
-                          mentoConfirmed();
-                        }}
-                      >
-                        멘토링 완료 확정하기
-                      </DateDoneBtn>
-                    ) : (
-                      <ModalBtn
-                        type={'show'}
-                        btnText={'내 신청서 보기'}
-                        modalHandler={openJuniorMentoringSpecModal}
-                        onClick={() => {
-                          setModalType('junior');
-                          setSelectedMentoringId(el.mentoringId);
-                        }}
-                      />
-                    )}
-                  </div>
-                )}
-                {activeTab === TAB.done && (
-                  <StyledSModalBtn
-                    onClick={() => {
-                      if (typeof window !== undefined)
-                        window.open(
-                          REVIEW_FORM_URL,
-                          '_blank',
-                          'noopener, noreferrer',
-                        );
-                    }}
-                  >
-                    리뷰 작성하기
-                  </StyledSModalBtn>
-                )}
-              </MentoringBox>
-            );
-          })
-        ) : (
-          <MentoringNotYet />
-        )}
-      </div>
-    );
+        },
+      );
+    }
   };
 
   return (
@@ -228,7 +149,90 @@ function TabBar() {
         </TapStyle>
       </TabWrap>
       <TabResultContainer>
-        <TabResult>{renderTabContent()}</TabResult>
+        <TabResult>
+          <div>
+            {data && data.length !== 0 ? (
+              data!.map((el, idx) => {
+                const mentoringDate = convertDateType(el.date);
+                const currentDate = new Date();
+                const isPast = mentoringDate < currentDate;
+
+                return (
+                  <MentoringBox key={idx}>
+                    <MentoringApply data={el} />
+                    {activeTab === TAB.waiting && (
+                      <ModalBtn
+                        ref={applyBtnRef}
+                        type={'show'}
+                        btnText={'내 신청서 보기'}
+                        modalHandler={() => {
+                          closeJunuiorMentoringSpec(() => {});
+                        }}
+                        onClick={() => {
+                          setModalType('junior');
+                          setSelectedMentoringId(el.mentoringId);
+                          if (selectedMentoringId !== 0) {
+                            openJuniorMentoringSpecModal();
+                          }
+                        }}
+                      />
+                    )}
+                    {activeTab === TAB.expected && (
+                      <div>
+                        {isPast ? (
+                          <DateDoneBtn
+                            onClick={() => {
+                              localStorage.setItem(
+                                'mentoringId',
+                                el.mentoringId.toString(),
+                              );
+                              mentoConfirmed();
+                            }}
+                          >
+                            멘토링 완료 확정하기
+                          </DateDoneBtn>
+                        ) : (
+                          <ModalBtn
+                            type={'show'}
+                            btnText={'내 신청서 보기'}
+                            modalHandler={() => {
+                              if (selectedMentoringId) {
+                                setSelectedMentoringId(selectedMentoringId);
+                                if (selectedMentoringId !== 0) {
+                                  openJuniorMentoringSpecModal();
+                                }
+                              }
+                            }}
+                            onClick={() => {
+                              setModalType('junior');
+                              setSelectedMentoringId(el.mentoringId);
+                            }}
+                          />
+                        )}
+                      </div>
+                    )}
+                    {activeTab === TAB.done && (
+                      <StyledSModalBtn
+                        onClick={() => {
+                          if (typeof window !== undefined)
+                            window.open(
+                              REVIEW_FORM_URL,
+                              '_blank',
+                              'noopener, noreferrer',
+                            );
+                        }}
+                      >
+                        리뷰 작성하기
+                      </StyledSModalBtn>
+                    )}
+                  </MentoringBox>
+                );
+              })
+            ) : (
+              <MentoringNotYet />
+            )}
+          </div>
+        </TabResult>
       </TabResultContainer>
 
       {cancelModal && cancelPortalElement
@@ -245,4 +249,4 @@ function TabBar() {
   );
 }
 
-export default TabBar;
+export default memo(TabBar);
