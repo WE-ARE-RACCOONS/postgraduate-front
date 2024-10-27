@@ -107,7 +107,7 @@ function TabBar() {
           });
       }
     });
-    if (activeTab === TAB.waiting && selectedMentoringId === 0) {
+    if (selectedMentoringId === 0) {
       applyBtnRef.current?.click();
     }
   }, [activeTab, prevMentoringInfoLength]);

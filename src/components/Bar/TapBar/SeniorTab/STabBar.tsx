@@ -101,7 +101,7 @@ function STabBar() {
             console.error('Error fetching data:', error);
           });
       }
-      if (activeTab === TAB.waiting && selectedMentoringId === null) {
+      if (selectedMentoringId === null) {
         mentoringBtnRef?.current?.click();
       }
     });
