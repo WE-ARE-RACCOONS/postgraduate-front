@@ -3,8 +3,7 @@ import BackHeader from '@/components/Header/BackHeader';
 import Photo from '@/components/Photo';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { photoUrlAtom } from '@/stores/senior';
-import axios from 'axios';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
@@ -15,6 +14,9 @@ import ProgressBar from '@/components/Bar/ProgressBar';
 import { preventClose } from '@/utils/reloadFun';
 import useAuth from '@/hooks/useAuth';
 import { certifiRegAtom } from '@/stores/signup';
+import { useCertifySeniorImage } from '@/hooks/mutations/useCertifySeniorImage';
+import findSuccessCode from '@/utils/findSuccessCode';
+import findExCode from '@/utils/findExCode';
 
 function AuthPage() {
   const [uploadFlag, setUploadFlag] = useState(false);
@@ -25,7 +27,7 @@ function AuthPage() {
   const setphotoUrl = useSetAtom(photoUrlAtom);
   const router = useRouter();
   const fileName = photo?.name;
-  const certifiReg = useAtomValue(certifiRegAtom);
+  const { mutate: certifySeniorImage } = useCertifySeniorImage();
 
   useEffect(() => {
     getAccessToken().then((tkn) => {
@@ -59,32 +61,19 @@ function AuthPage() {
 
   const handleClick = async () => {
     if (photo) {
-      setUploadFlag(false);
-      const formData = new FormData();
-      formData.append('certificationFile', photo);
-
-      // 선배 회원가입 및 후배->선배 전환
-      axios
-        .post(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/image/upload/certification`,
-          formData,
-          {
-            headers: {
-              'Content-Type': 'multipart/form-data',
-            },
+      certifySeniorImage(
+        { seniorCertificationImage: photo },
+        {
+          onSuccess: (data) => {
+            if (findSuccessCode(data.code)) {
+              setphotoUrl(data.data.profileUrl);
+              router.push(`/signup/select/common-info/senior-info/major`);
+            } else if (findExCode(data.code)) {
+              alert(data.message);
+            }
           },
-        )
-        .then((response) => {
-          const res = response.data;
-
-          if (res.code == 'IMG202') {
-            setphotoUrl(res.data.profileUrl);
-            router.push(`/signup/select/common-info/senior-info/major`);
-          }
-        })
-        .catch((err) => {
-          console.error(err);
-        });
+        },
+      );
     }
 
     if (!photo) {

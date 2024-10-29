@@ -5,6 +5,8 @@ import BackHeader from '@/components/Header/BackHeader';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/SingleForm/ProfileForm';
 
+import Image from 'next/image';
+import WhiteAddBtnIcon from '../../../../public/white-add-btn.svg';
 import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
 import {
   PROFILE_PLACEHOLDER,
@@ -258,7 +260,13 @@ function EditProfilePage() {
                     onClick={openSeniorMentoringTimeModal}
                     style={{ cursor: 'pointer' }}
                   >
-                    추가
+                    <Image
+                      src={WhiteAddBtnIcon}
+                      alt="흰색 더하기 화살표 버튼"
+                      width={10}
+                      height={10}
+                    />
+                    추가하기
                   </div>
                 </>
               ) : (
@@ -306,16 +314,20 @@ const SetDataBox = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  margin-top: 10px;
   #setData-btn {
     display: flex;
-    padding: 0.3125rem 0.625rem;
+    margin-top: 14px;
+    border-radius: 5px;
+    background: #6d747e;
     align-items: center;
+    width: 75px;
+    height: 28px;
     min-width: 50px;
     height: 40px;
     gap: 0.25rem;
     justify-content: center;
-    border-radius: 0.25rem;
-    background: #495565;
+
     color: #fff;
     font-family: Pretendard;
     font-size: 13px;
@@ -327,13 +339,15 @@ const SetDataBox = styled.div`
 `;
 const IntroCardTimeBox = styled.div`
   margin-left: 1rem;
-  width: 91%;
+  width: 330px;
+  margin: 5px auto;
   height: 2.5rem;
-  border-radius: 4px;
+  border-radius: 6px;
+  color: #464c51;
   background-color: #f8f9fa;
-  font-size: 15px;
+  font-size: 13px;
   padding: 0.75rem;
-  margin-bottom: 0.5rem;
+
   display: flex;
   justify-content: space-between;
   #delete {

@@ -141,7 +141,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h3>시간 선택</h3>
           <div id="setTile-warn">
-            요일, 시작시간, 끝시간을 모두 선택해주세요
+            * 요일, 시작시간, 끝시간을 모두 선택해주세요
           </div>
         </div>
         <AddTimeAbleBottom>
