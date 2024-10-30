@@ -1,10 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import useAuth from '@/hooks/useAuth';
 
-import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
-import MentoringApply from '../../MentoringApply/MentoringApply';
+
 import { ModalMentoringSProps } from '@/types/modal/mentoringDetail';
 import { useConfirmSeniorMentoring } from '@/hooks/mutations/useConfirmSeniorMentoring';
 import { useGetSeniorMentoringListQuery } from '@/hooks/query/useGetSeniorMentoringList';
@@ -33,8 +31,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
 import { ValidatorBox } from '@/components/Content/AddTime/AddTime.styled';
-import { useRouter } from 'next/navigation';
-import findExCode from '@/utils/findExCode';
+
 import { accountAtom } from '@/stores/senior';
 import { ErrorBoundary } from 'react-error-boundary';
 import { MentoringTabError } from '../error';

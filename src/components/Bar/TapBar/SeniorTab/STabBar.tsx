@@ -1,6 +1,5 @@
 'use client';
 import React, { useState, useEffect, useRef } from 'react';
-import axios from 'axios';
 import {
   TapStyle,
   TabWrap,
@@ -12,8 +11,8 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
-import { MentoringData } from '@/types/mentoring/mentoring';
-import useAuth from '@/hooks/useAuth';
+import { useGetSeniorMentoringActiveTabQuery } from '@/hooks/query/useGetSeniorMentoringActiveTab';
+
 import { TAB, TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
@@ -21,18 +20,16 @@ import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 import { createPortal } from 'react-dom';
 import DimmedModal from '@/components/Modal/DimmedModal';
-import FullModal from '@/components/Modal/FullModal';
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
 import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import { useRouter } from 'next/navigation';
-import findExCode from '@/utils/findExCode';
 import useFullModal from '@/hooks/useFullModal';
 import { SMCancelAtom } from '@/stores/condition';
 function STabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
-  const [data, setData] = useState<MentoringData[] | null>(null);
+
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
@@ -41,7 +38,6 @@ function STabBar() {
   const { openModal: openAcceptMentoringModal } = useFullModal({
     modalType: 'accept-mentoring',
   });
-  const { getAccessToken, removeTokens } = useAuth();
 
   const {
     modal: cancelModal,
@@ -57,7 +53,6 @@ function STabBar() {
   const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
     null,
   );
-  const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
 
   const { openModal: openSeniorMentoringSpecModal } = useFullModal({
     modalType: 'senior-mentoring-spec',
@@ -67,53 +62,28 @@ function STabBar() {
   });
 
   const SMCancel = useAtomValue(SMCancelAtom);
+  const { data: seniorMentoringActiveTabResponse } =
+    useGetSeniorMentoringActiveTabQuery({ activeTab });
   useEffect(() => {
     if (SMCancel === true) {
       location.reload();
     }
-    getAccessToken().then((Token) => {
-      if (Token) {
-        const headers = {
-          Authorization: `Bearer ${Token}`,
-        };
-        axios
-          .get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/senior/me/${activeTab}`,
-            {
-              headers,
-            },
-          )
-          .then((response) => {
-            if (findExCode(response.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-            setData(response.data.data.seniorMentoringInfos);
-            const newMentoringInfos = response.data.data.seniorMentoringInfos;
-            const newMentoringInfoLength = newMentoringInfos.length;
-            if (newMentoringInfoLength !== prevMentoringInfoLength) {
-              setData(newMentoringInfos);
-            }
-            setPrevMentoringInfoLength(newMentoringInfoLength);
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
-      }
-      if (selectedMentoringId === null) {
-        mentoringBtnRef?.current?.click();
-      }
-    });
-  }, [activeTab, prevMentoringInfoLength]);
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (selectedMentoringId !== null) {
+      openSeniorMentoringSpecModal();
+    }
+  }, [selectedMentoringId]);
 
   const renderTabContent = () => {
     return (
       <div>
-        {data && data.length !== 0 ? (
+        {seniorMentoringActiveTabResponse &&
+        seniorMentoringActiveTabResponse.length !== 0 ? (
           <div>
-            {data!.map((el, idx) => (
-              <MentoringBox key={idx}>
+            {seniorMentoringActiveTabResponse!.map((el) => (
+              <MentoringBox key={el.mentoringId}>
                 <MentoringApply data={el} />
                 {activeTab === TAB.waiting || activeTab === TAB.expected ? (
                   <ModalBtn
@@ -130,9 +100,6 @@ function STabBar() {
                     onClick={() => {
                       setModalType('senior');
                       setSelectedMentoringId(el.mentoringId);
-                      if (selectedMentoringId) {
-                        openSeniorMentoringSpecModal();
-                      }
                     }}
                   />
                 ) : (
