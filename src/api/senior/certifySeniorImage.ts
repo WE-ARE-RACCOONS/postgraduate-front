@@ -1,4 +1,4 @@
-//image/upload/certification`
+// image/upload/certification
 import { ResponseModel } from '../model';
 import { withAuthInstance } from '../api';
 
@@ -16,12 +16,18 @@ export const certifySeniorImage = async ({
   try {
     const formData = new FormData();
     formData.append('certificationFile', seniorCertificationImage);
-    return (
-      await withAuthInstance.post<CertifySeniorImageResponse>(
-        '/image/upload/certification',
-        formData,
-      )
-    ).data;
+
+    const response = await withAuthInstance.post<CertifySeniorImageResponse>(
+      '/image/upload/certification',
+      formData,
+      {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      },
+    );
+
+    return response.data;
   } catch (e) {
     throw e;
   }

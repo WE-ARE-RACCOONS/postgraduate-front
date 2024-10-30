@@ -1,5 +1,12 @@
 'use client';
-import STapBar from '@/components/Bar/TapBar/SeniorTab/STabBar';
+import dynamic from 'next/dynamic';
+const STabBar = dynamic(
+  () => import('@/components/Bar/TapBar/SeniorTab/STabBar'),
+  {
+    ssr: false,
+  },
+);
+
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
@@ -31,7 +38,7 @@ function SeniorMentoringPage() {
   return (
     <div style={{ width: 'inherit', height: 'inherit' }}>
       <LogoLayer modalHandler={openSearchModal} />
-      <STapBar />
+      <STabBar />
       <MenuBarWrapper>
         <MenuBar modalHandler={openSearchModal} />
       </MenuBarWrapper>

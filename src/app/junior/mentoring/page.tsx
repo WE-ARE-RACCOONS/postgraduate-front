@@ -1,5 +1,12 @@
 'use client';
-import TapBar from '@/components/Bar/TapBar/JuniorTab/JTabBar';
+
+import dynamic from 'next/dynamic';
+const TabBar = dynamic(
+  () => import('@/components/Bar/TapBar/JuniorTab/JTabBar'),
+  {
+    ssr: false,
+  },
+);
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import MenuBar from '@/components/Bar/MenuBar';
@@ -32,7 +39,7 @@ function JuniorMentoringPage() {
   return (
     <div style={{ width: 'inherit', height: 'inherit' }}>
       <LogoLayer modalHandler={openSearchModal} />
-      <TapBar />
+      <TabBar />
       <MenuBarWrapper>
         <MenuBar modalHandler={openSearchModal} />
       </MenuBarWrapper>

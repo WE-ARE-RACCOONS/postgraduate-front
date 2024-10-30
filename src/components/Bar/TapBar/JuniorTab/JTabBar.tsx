@@ -1,6 +1,6 @@
 'use client';
 import React, { useState, useEffect, memo, useRef } from 'react';
-import axios from 'axios';
+
 import {
   TapStyle,
   TabWrap,
@@ -8,13 +8,11 @@ import {
   TabResultContainer,
   MentoringBox,
   DateDoneBtn,
-  NoMentoring,
 } from './JTabBar.styled';
 import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
-import { MentoringData } from '@/types/mentoring/mentoring';
-import useAuth from '@/hooks/useAuth';
+
 import { TAB, TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
@@ -22,8 +20,9 @@ import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 import { createPortal } from 'react-dom';
 import DimmedModal from '@/components/Modal/DimmedModal';
-import { useRouter } from 'next/navigation';
-import findExCode from '@/utils/findExCode';
+
+import { useGetMyMentoringActiveTabQuery } from '@/hooks/query/useGetMyMentoringActiveTab';
+
 import useFullModal from '@/hooks/useFullModal';
 import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
@@ -43,14 +42,15 @@ function convertDateType(date: string) {
   return new Date(year, month, day, hour, minute);
 }
 function TabBar() {
-  const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
-  const [data, setData] = useState<MentoringData[] | null>(null);
+
+  const { data: myMentoringActiveResponse } = useGetMyMentoringActiveTabQuery({
+    activeTab,
+  });
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
-  const { getAccessToken, removeTokens } = useAuth();
 
   const {
     modal: cancelModal,
@@ -67,50 +67,20 @@ function TabBar() {
     selectedMentoringId: selectedMentoringId,
   });
 
-  const [prevMentoringInfoLength, setPrevMentoringInfoLength] = useState(0);
   const JMCancel = useAtomValue(JMCancelAtom);
 
   const { mutate: confirmMyMentoring } = useConfirmMyMentoring();
   useEffect(() => {
-    let prevMentoringInfoLength = 0;
     if (JMCancel === true) {
       location.reload();
     }
-    getAccessToken().then((Token) => {
-      if (Token) {
-        const headers = {
-          Authorization: `Bearer ${Token}`,
-        };
-        axios
-          .get(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${activeTab}`,
-            {
-              headers,
-            },
-          )
-          .then((response) => {
-            if (findExCode(response.data.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-            setData(response.data.data.mentoringInfos);
-            const newMentoringInfos = response.data.data.mentoringInfos;
-            const newMentoringInfoLength = newMentoringInfos.length;
-            if (newMentoringInfoLength !== prevMentoringInfoLength) {
-              setData(newMentoringInfos);
-            }
-            setPrevMentoringInfoLength(newMentoringInfoLength);
-          })
-          .catch((error) => {
-            console.error('Error fetching data:', error);
-          });
-      }
-    });
-    if (selectedMentoringId === 0) {
-      applyBtnRef.current?.click();
+  }, [activeTab]);
+
+  useEffect(() => {
+    if (selectedMentoringId !== 0) {
+      openJuniorMentoringSpecModal();
     }
-  }, [activeTab, prevMentoringInfoLength]);
+  }, [selectedMentoringId]);
 
   const mentoConfirmed = async () => {
     const mentoringId = localStorage.getItem('mentoringId');
@@ -151,14 +121,15 @@ function TabBar() {
       <TabResultContainer>
         <TabResult>
           <div>
-            {data && data.length !== 0 ? (
-              data!.map((el, idx) => {
+            {myMentoringActiveResponse &&
+            myMentoringActiveResponse.length !== 0 ? (
+              myMentoringActiveResponse!.map((el) => {
                 const mentoringDate = convertDateType(el.date);
                 const currentDate = new Date();
                 const isPast = mentoringDate < currentDate;
 
                 return (
-                  <MentoringBox key={idx}>
+                  <MentoringBox key={el.mentoringId}>
                     <MentoringApply data={el} />
                     {activeTab === TAB.waiting && (
                       <ModalBtn
@@ -171,9 +142,6 @@ function TabBar() {
                         onClick={() => {
                           setModalType('junior');
                           setSelectedMentoringId(el.mentoringId);
-                          if (selectedMentoringId !== 0) {
-                            openJuniorMentoringSpecModal();
-                          }
                         }}
                       />
                     )}
