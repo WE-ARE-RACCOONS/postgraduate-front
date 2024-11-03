@@ -35,14 +35,6 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
     }
   }, []);
 
-  useEffect(() => {
-    if (typeof errors.phoneNum?.message === 'undefined') {
-      setAvailability(true);
-    } else {
-      setAvailability(false);
-    }
-  }, [errors.phoneNum?.message]);
-
   return (
     <div>
       <div style={{ marginLeft: '0.75rem', marginTop: '1.5rem' }}>
@@ -69,6 +61,10 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
             placeholder="숫자만 입력"
             defaultValue={defaultValue || ''}
             {...register('phoneNum')}
+            onBlur={(e) => {
+              register('phoneNum').onBlur(e);
+              setAvailability(errors.phoneNum?.message ? false : true);
+            }}
           />
         </PhoneNumContainer>
       </div>
