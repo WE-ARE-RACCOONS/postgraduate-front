@@ -19,7 +19,6 @@ function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const {
     register,
     watch,
-    setError,
     setValue,
     formState: { errors },
   } = useFormContext();
