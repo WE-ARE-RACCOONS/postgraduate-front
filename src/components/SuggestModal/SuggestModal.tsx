@@ -1,12 +1,8 @@
 import React from 'react';
 import Image from 'next/image';
 import x_icon from '../../../public/x_gray.png';
-import Router from 'next/navigation';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
 import { SMFontGray } from './SuggestModal.styled';
 import NextBtn from '../Button/NextBtn';
-import FullModal from '../Modal/FullModal';
 import { useRouter } from 'next/navigation';
 interface SuggestModalProps {
   modalHandler: () => void;

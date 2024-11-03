@@ -1,5 +1,5 @@
 'use client';
-import React, { ComponentPropsWithoutRef } from 'react';
+import React from 'react';
 import { TapStyle } from './FieldTapBar.styled';
 import { sftapType } from '@/types/tap/tap';
 import { sfactiveTabAtom } from '@/stores/tap';

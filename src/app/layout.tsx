@@ -4,7 +4,6 @@ import Providers from '@/components/Provider/providers';
 import StyledComponentsRegistry from '@/lib/registry';
 import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
-import { Viewport } from 'next/dist/lib/metadata/types/extra-types';
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
 

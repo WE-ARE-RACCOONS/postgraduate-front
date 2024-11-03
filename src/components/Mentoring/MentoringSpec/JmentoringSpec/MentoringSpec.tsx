@@ -1,8 +1,7 @@
 'use client';
-import React, { Suspense, useEffect, useState } from 'react';
+import React, { Suspense } from 'react';
 import useAuth from '@/hooks/useAuth';
 
-import { MentoringSpecData } from '@/types/mentoring/mentoring';
 import TextToggleButton from '../../../TextToggleButton/TextToggleButton';
 
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
@@ -23,7 +22,6 @@ import {
   ConfirmInfo,
   ConfirmTitle,
   UserInfo,
-  ConfirmState,
   MMTop,
 } from './MentoringSpec.styled';
 
@@ -38,10 +36,10 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { MentoringTabError } from '../error';
 
 function MentoringSpec(props: ModalMentoringProps) {
-  const { getAccessToken, getUserType, removeTokens } = useAuth();
+  const { getUserType } = useAuth();
 
   const userType = getUserType();
-  const router = useRouter();
+
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
   const { mutate: cancelMyMentoring } = useCancelMyMentoring();
 

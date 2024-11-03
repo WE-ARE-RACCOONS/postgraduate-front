@@ -72,7 +72,7 @@ const useKakaoLogin = () => {
               <FullModal
                 modalType="account-reactive"
                 modalHandler={async () => {
-                  const res = await rejoinPatchFetch({
+                  await rejoinPatchFetch({
                     socialId,
                     rejoin: true,
                   }).then((res) => {

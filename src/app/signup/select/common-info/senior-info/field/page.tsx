@@ -1,18 +1,6 @@
 'use client';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import useModal from '@/hooks/useModal';
-import { option } from '@/stores/condition';
-import {
-  photoUrlAtom,
-  sFieldAtom,
-  sKeywordAtom,
-  sLabAtom,
-  sMajorAtom,
-  sPostGraduAtom,
-  sProfessorAtom,
-} from '@/stores/senior';
-import { changeNickname, phoneNum } from '@/stores/signup';
-import { ModalType } from '@/types/modal/riseUp';
+import { sFieldAtom, sKeywordAtom } from '@/stores/senior';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
@@ -26,18 +14,10 @@ import { SENIOR_FIELD } from '@/constants/signup/senior';
 import { overlay } from 'overlay-kit';
 
 function SeniorInfoPage() {
-  const [emptyPart, setEmptyPart] = useState('');
   const [flag, setFlag] = useState(false);
   const [ableSubmit, setAbleSubmit] = useState(false);
 
   const router = useRouter();
-  const {
-    getAccessToken,
-    setAccessToken,
-    setRefreshToken,
-    setUserType,
-    removeTokens,
-  } = useAuth();
   const [socialId, setSocialId] = useState<number | null>(null);
 
   const sField = useAtomValue(sFieldAtom);

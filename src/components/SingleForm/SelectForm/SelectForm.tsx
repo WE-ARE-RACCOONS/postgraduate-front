@@ -1,5 +1,5 @@
 import SelectedBtn from '@/components/Button/SelectedBtn';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   FieldInputFormBox,
   SelectFormBtnContainer,
@@ -9,7 +9,7 @@ import {
 import { SelectFormProps } from '@/types/form/selectForm';
 import { sFieldAtom, selectedFieldAtom, totalFieldAtom } from '@/stores/senior';
 import { useAtom, useSetAtom } from 'jotai';
-import { useFormContext, FormProvider } from 'react-hook-form';
+import { useFormContext } from 'react-hook-form';
 import { SELECT_FIELD_TEXT } from '@/constants/field/field';
 
 function SelectForm(props: SelectFormProps) {

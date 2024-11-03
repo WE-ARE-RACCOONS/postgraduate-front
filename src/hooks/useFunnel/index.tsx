@@ -1,4 +1,4 @@
-import { ReactElement, ReactNode, useEffect, useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Funnel from './Funnel';
 
@@ -16,11 +16,11 @@ interface StepProps<Steps extends StepArray> {
 }
 
 interface RouteFunnel<Steps extends StepArray> {
-  (props: FunnelProps<Steps>): ReactElement;
+  (_props: FunnelProps<Steps>): ReactElement;
 }
 
 interface RouterFunnelStep<Steps extends StepArray> {
-  (props: StepProps<Steps>): ReactElement;
+  (_props: StepProps<Steps>): ReactElement;
 }
 
 interface FunnelOptions<Steps extends StepArray> {

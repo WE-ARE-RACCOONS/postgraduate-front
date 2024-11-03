@@ -13,7 +13,7 @@ import { useAtom, useAtomValue } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 
-import { TAB, TAB_STATE } from '@/constants/tab/ctap';
+import { TAB } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';

@@ -1,9 +1,9 @@
-import { PrimitiveAtom, SetStateAction } from 'jotai';
+import { SetStateAction } from 'jotai';
 import { ChangeEvent } from 'react';
 
 import { UseFormRegisterReturn } from 'react-hook-form';
 
-type SetAtom<Args extends any[], Result> = (...args: Args) => Result;
+type SetAtom<Args extends any[], Result> = (..._args: Args) => Result;
 
 /** '한 줄' | '여러 줄' 명시하는 부분 */
 export type lineType = 'single' | 'multi';
@@ -20,8 +20,8 @@ export interface ProfileFormProps {
   register?: UseFormRegisterReturn;
   placeholder?: string;
   errorMessage?: string;
-  onChange?: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+  onChange?: (_e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
   onBlur?: (
-    e: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>,
+    _e: React.FocusEvent<HTMLTextAreaElement | HTMLInputElement>,
   ) => void;
 }

@@ -1,11 +1,6 @@
 import React, { forwardRef } from 'react';
 import { ModalBtnProps } from '@/types/button/modalBtn';
-import {
-  StyledModalBtn,
-  StyledSModalBtn,
-  SInfoBtn,
-  StyledMSBtn,
-} from './ModalBtn.styled';
+import { StyledSModalBtn, SInfoBtn, StyledMSBtn } from './ModalBtn.styled';
 import Image from 'next/image';
 import down from '../../../../public/arrow-down-gray.png';
 
