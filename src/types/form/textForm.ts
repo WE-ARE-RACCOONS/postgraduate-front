@@ -1,4 +1,3 @@
-import { ComponentPropsWithRef, ComponentPropsWithoutRef } from 'react';
 import { UseFormRegisterReturn } from 'react-hook-form';
 
 export type TextFormTargetAtom = 'lab' | 'professor' | 'keyword';

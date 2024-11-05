@@ -1,4 +1,4 @@
-import { useSetAtom, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import useAuth from '@/hooks/useAuth';
 import { useTour } from '@reactour/tour';
 import { isTutorialFinished } from '@/stores/signup';
@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 function useTutorial() {
   const [isTutorialFinish, setTutorialFinished] = useAtom(isTutorialFinished);
   const { setIsOpen: setTutorialStepOpen } = useTour();
-  const { getUserType, getAccessToken } = useAuth();
+  const { getUserType } = useAuth();
 
   const setTutorialFinish = async () => {
     const userType = getUserType();

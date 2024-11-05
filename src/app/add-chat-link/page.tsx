@@ -10,8 +10,6 @@ import {
 import useAuth from '@/hooks/useAuth';
 import { option } from '@/stores/condition';
 import {
-  mySeniorId,
-  sAbleTime,
   sChatLink,
   sFieldAtom,
   sKeywordAtom,
