@@ -17,9 +17,8 @@ import { TAB } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
+import useDimmedModal from '@/hooks/useDimmedModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import { createPortal } from 'react-dom';
-import DimmedModal from '@/components/Modal/DimmedModal';
 
 import { useGetMyMentoringActiveTabQuery } from '@/hooks/query/useGetMyMentoringActiveTab';
 
@@ -51,20 +50,29 @@ function TabBar() {
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
+  const [selectedMentoringId, setSelectedMentoringId] = useState<number>(0);
 
   const {
     modal: cancelModal,
     modalHandler: cancelModalHandler,
     portalElement: cancelPortalElement,
   } = useModal('junior-mentoring-cancel');
-  const [selectedMentoringId, setSelectedMentoringId] = useState<number>(0);
+
   const applyBtnRef = useRef<HTMLButtonElement>(null);
+
+  const { openModal: openJuniorMentoringCancelModal } = useDimmedModal({
+    modalType: 'juniorCancelMent',
+    mentoringId: selectedMentoringId ?? 0,
+    overlayId: 'openJuniorMentoringCancelModal',
+  });
+
   const {
     openModal: openJuniorMentoringSpecModal,
     closeModal: closeJunuiorMentoringSpec,
   } = useFullModal({
     modalType: 'junior-mentoring-spec',
     selectedMentoringId: selectedMentoringId,
+    cancelModalHandler: openJuniorMentoringCancelModal,
   });
 
   const JMCancel = useAtomValue(JMCancelAtom);
@@ -74,11 +82,13 @@ function TabBar() {
     if (JMCancel === true) {
       location.reload();
     }
+    setSelectedMentoringId(0);
   }, [activeTab]);
 
   useEffect(() => {
     if (selectedMentoringId !== 0) {
       openJuniorMentoringSpecModal();
+      setSelectedMentoringId(0);
     }
   }, [selectedMentoringId]);
 
@@ -202,17 +212,6 @@ function TabBar() {
           </div>
         </TabResult>
       </TabResultContainer>
-
-      {cancelModal && cancelPortalElement
-        ? createPortal(
-            <DimmedModal
-              modalType="juniorCancelMent"
-              modalHandler={cancelModalHandler}
-              mentoringId={selectedMentoringId || 0}
-            />,
-            cancelPortalElement,
-          )
-        : null}
     </div>
   );
 }

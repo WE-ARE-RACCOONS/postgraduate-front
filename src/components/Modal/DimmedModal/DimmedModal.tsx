@@ -34,6 +34,7 @@ function DimmedModal(props: DimmedModalProps) {
             mentoringId={props.mentoringId || 0}
             modalHandler={props.modalHandler}
             successHandler={props.successHandler}
+            cancelModalHandler={props.infoHandler}
           />
         )}
         {props.modalType == 'juniorCancelMent' && (
