@@ -20,6 +20,7 @@ function PayAmount({ modalHandler }: { modalHandler: () => void }) {
 
   const nextClick = () => {
     router.push(`/mentoring-apply/${seniorId}/schedule`);
+    modalHandler();
   };
 
   return (

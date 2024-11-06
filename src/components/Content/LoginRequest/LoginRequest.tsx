@@ -1,6 +1,6 @@
 import React from 'react';
 import { loginRequestProps } from '@/types/content/loginRequest';
-import ClickedBtn from '@/components/Button/ClickedBtn';
+
 import {
   LoginRequestBox,
   LoginRequestBoxTop,

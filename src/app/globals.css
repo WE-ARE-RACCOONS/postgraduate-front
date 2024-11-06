@@ -5,7 +5,8 @@ body {
   font-size: 1rem;
   margin: 0 auto;
   background-color: #fff;
-  font-family: 'Pretendard';
+  font-family: 'Pretendard', sans-serif;
+  font-weight: 400;
 }
 * {
   box-sizing: border-box;
@@ -17,15 +18,16 @@ body {
   font-family: 'Pretendard';
   font-style: bold;
   font-weight: 700;
+  font-display: 'swap';
   src:
     local('Pretendard'),
     url(../../public/fonts/Pretendard-Bold.woff2) format('woff2');
 }
-
 @font-face {
   font-family: 'Pretendard';
   font-style: normal;
   font-weight: 400;
+  font-display: 'swap';
   src:
     local('Pretendard'),
     url(../../public/fonts/Pretendard-ExtraLight.woff2) format('woff2');

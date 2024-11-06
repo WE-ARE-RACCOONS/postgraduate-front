@@ -1,13 +1,10 @@
+import React, { forwardRef } from 'react';
 import { ModalBtnProps } from '@/types/button/modalBtn';
-import {
-  StyledModalBtn,
-  StyledSModalBtn,
-  SInfoBtn,
-  StyledMSBtn,
-} from './ModalBtn.styled';
+import { StyledSModalBtn, SInfoBtn, StyledMSBtn } from './ModalBtn.styled';
 import Image from 'next/image';
 import down from '../../../../public/arrow-down-gray.png';
-function ModalBtn(props: ModalBtnProps) {
+
+const ModalBtn = forwardRef<HTMLButtonElement, ModalBtnProps>((props, ref) => {
   const handleClick = () => {
     props.modalHandler();
     if (props.cancelModalHandler) {
@@ -19,46 +16,28 @@ function ModalBtn(props: ModalBtnProps) {
   return (
     <>
       {props.type === 'show' && (
-        <StyledSModalBtn
-          onClick={() => {
-            handleClick();
-          }}
-        >
+        <StyledSModalBtn ref={ref} onClick={handleClick}>
           {props.btnText}
         </StyledSModalBtn>
       )}
       {props.type === 'seniorShow' && (
-        <StyledMSBtn
-          onClick={() => {
-            handleClick();
-          }}
-        >
+        <StyledMSBtn ref={ref} onClick={handleClick}>
           {props.btnText}
         </StyledMSBtn>
       )}
       {props.type === 'seniorInfo' && (
-        <SInfoBtn
-          $isGet={props.$isGet}
-          onClick={() => {
-            handleClick();
-          }}
-        >
+        <SInfoBtn ref={ref} $isGet={props.$isGet} onClick={handleClick}>
           {props.btnText}
         </SInfoBtn>
       )}
       {props.type === 'bankInfo' && (
-        <SInfoBtn
-          $isGet={props.$isGet}
-          onClick={() => {
-            handleClick();
-          }}
-        >
+        <SInfoBtn ref={ref} $isGet={props.$isGet} onClick={handleClick}>
           {props.btnText}
           <Image src={down} alt="down" width={40} height={40} />
         </SInfoBtn>
       )}
     </>
   );
-}
+});
 
 export default ModalBtn;

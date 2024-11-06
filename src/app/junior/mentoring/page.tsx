@@ -1,20 +1,21 @@
 'use client';
-import TapBar from '@/components/Bar/TapBar/JuniorTab/JTabBar';
+
+import dynamic from 'next/dynamic';
+const TabBar = dynamic(
+  () => import('@/components/Bar/TapBar/JuniorTab/JTabBar'),
+  {
+    ssr: false,
+  },
+);
 import React, { useEffect } from 'react';
-import { createPortal } from 'react-dom';
-import useModal from '@/hooks/useModal';
 import styled from 'styled-components';
 import MenuBar from '@/components/Bar/MenuBar';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
+import { overlay } from 'overlay-kit';
 import useAuth from '@/hooks/useAuth';
 
 function JuniorMentoringPage() {
-  const {
-    modal: searchModal,
-    modalHandler: searchModalHandler,
-    portalElement: searchPortalElement,
-  } = useModal('search-portal');
   const { getAccessToken } = useAuth();
 
   useEffect(() => {
@@ -31,19 +32,17 @@ function JuniorMentoringPage() {
     });
   }, []);
 
+  const openSearchModal = () => {
+    overlay.open(({ unmount }) => <SearchModal modalHandler={unmount} />);
+  };
+
   return (
     <div style={{ width: 'inherit', height: 'inherit' }}>
-      <LogoLayer modalHandler={searchModalHandler} />
-      <TapBar />
+      <LogoLayer modalHandler={openSearchModal} />
+      <TabBar />
       <MenuBarWrapper>
-        <MenuBar modalHandler={searchModalHandler} />
+        <MenuBar modalHandler={openSearchModal} />
       </MenuBarWrapper>
-      {searchModal && searchPortalElement
-        ? createPortal(
-            <SearchModal modalHandler={searchModalHandler} />,
-            searchPortalElement,
-          )
-        : ''}
     </div>
   );
 }

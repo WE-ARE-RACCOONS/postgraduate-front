@@ -1,32 +1,32 @@
 import styled from 'styled-components';
 
 export const KeywordCardContainer = styled.div`
-  width: 100%;
+  width: 95%;
+  margin: 0 auto;
   height: auto;
   border-radius: 16px;
-  background-color: #fff;
-  box-shadow: 0px 0px 8px 0px rgba(73, 85, 101, 0.2);
+  background: #f8f8f8;
   position: relative;
-  padding: 1.2rem 1rem;
 
   #keyword-card-lab-name {
-    width: max-content;
-    height: 1.25rem;
+    width: 100%;
     font-size: 14px;
     font-weight: 700;
-    margin-bottom: 0.55rem;
+    margin-bottom: 10px;
   }
 `;
 
 export const KeywordCardArrayBox = styled.div`
-  width: 90%;
+  width: 100%;
+  min-width: 330px;
+  border-radius: 15px;
   height: auto;
+  padding: 1.2rem;
+  background: #fff;
   min-height: 4.125rem;
   display: flex;
   flex-wrap: wrap;
   gap: 0.625rem;
-  top: 3rem;
-  left: 1rem;
 `;
 
 export const KeywordCardEl = styled.div`
@@ -38,5 +38,5 @@ export const KeywordCardEl = styled.div`
   font-size: 12px;
   white-space: nowrap;
   border-radius: 4px;
-  background-color: rgba(47, 196, 178, 0.1);
+  background-color: rgba(124, 143, 141, 0.1);
 `;

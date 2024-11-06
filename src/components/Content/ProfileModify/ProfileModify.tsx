@@ -15,8 +15,6 @@ import SingleValidator from '@/components/Validator/SingleValidator';
 import ClickedBtn from '@/components/Button/ClickedBtn';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtom } from 'jotai';
@@ -29,6 +27,7 @@ import {
 import Scheduler from '@/components/Scheduler';
 import { useRouter } from 'next/navigation';
 import findExCode from '@/utils/findExCode';
+import { overlay } from 'overlay-kit';
 
 function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const router = useRouter();
@@ -45,11 +44,6 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
   const [times, setTimes] = useAtom(sAbleTime);
   const [submitFlag, setSubmitFlag] = useState(false);
   const { getAccessToken, removeTokens } = useAuth();
-  const {
-    modal,
-    modalHandler: infoHandler,
-    portalElement,
-  } = useModal('senior-info-portal');
 
   useEffect(() => {
     getAccessToken().then((accessTkn) => {
@@ -91,12 +85,30 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
 
   const clickKeyword = () => {
     setModalType('keyword');
-    infoHandler();
+    overlay.open(({ unmount }) => {
+      return (
+        <RiseUpModal
+          modalType="keyword"
+          modalHandler={() => {
+            unmount();
+          }}
+        />
+      );
+    });
   };
 
   const clickField = () => {
     setModalType('field');
-    infoHandler();
+    overlay.open(({ unmount }) => {
+      return (
+        <RiseUpModal
+          modalType="field"
+          modalHandler={() => {
+            unmount();
+          }}
+        />
+      );
+    });
   };
 
   const dedupeInTotalField = (fields: Array<string>) => {
@@ -249,12 +261,6 @@ function ProfileModify({ modalHandler }: { modalHandler: () => void }) {
       <SaveBtnBox>
         <ClickedBtn kind="click" btnText="저장" clickHandler={submitHandler} />
       </SaveBtnBox>
-      {modal && portalElement
-        ? createPortal(
-            <RiseUpModal modalHandler={infoHandler} modalType={modalType} />,
-            portalElement,
-          )
-        : null}
     </PMContainer>
   );
 }

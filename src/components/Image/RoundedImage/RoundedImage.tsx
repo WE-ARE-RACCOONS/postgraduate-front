@@ -16,6 +16,9 @@ function RoundedImage({
     <RoundedImgContainer>
       {kind === 'big' ? (
         <Image
+          quality={75}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
           id="rounded-img"
           src={imgSrc || user_img}
           alt={altMsg}
@@ -24,6 +27,9 @@ function RoundedImage({
         />
       ) : (
         <Image
+          quality={75}
+          placeholder="blur"
+          blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAACklEQVR4nGMAAQAABQABDQottAAAAABJRU5ErkJggg=="
           id="rounded-img"
           src={imgSrc || user_img}
           alt={altMsg}

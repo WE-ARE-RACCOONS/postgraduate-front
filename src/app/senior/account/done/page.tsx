@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import accept from '../../../../../public/cState.png';
 import styled from 'styled-components';
 import NextBtn from '@/components/Button/NextBtn';
-import ClickedBtn from '@/components/Button/ClickedBtn';
+
 function page() {
   const router = useRouter();
   const moneHandler = () => {

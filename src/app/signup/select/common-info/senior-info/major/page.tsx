@@ -3,13 +3,13 @@ import ModalBtn from '@/components/Button/ModalBtn';
 import NextBtn from '@/components/Button/NextBtn';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import useModal from '@/hooks/useModal';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 import { ModalType } from '@/types/modal/riseUp';
 import { useAtomValue } from 'jotai';
+import { overlay } from 'overlay-kit';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { createPortal } from 'react-dom';
+
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
@@ -20,7 +20,7 @@ function SeniorInfoPage() {
   const [modalType, setModalType] = useState<ModalType>('postgradu');
   const [emptyPart, setEmptyPart] = useState('');
   const [flag, setFlag] = useState(false);
-  const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
+
   const router = useRouter();
   const sPostGradu = useAtomValue(sPostGraduAtom);
   const sMajor = useAtomValue(sMajorAtom);
@@ -80,7 +80,13 @@ function SeniorInfoPage() {
               btnText={
                 sPostGradu ? sPostGradu : SENIOR_MAJOR.graduateSchoolPlaceholder
               }
-              modalHandler={modalHandler}
+              modalHandler={() => {
+                overlay.open(({ unmount }) => {
+                  return (
+                    <RiseUpModal modalType={modalType} modalHandler={unmount} />
+                  );
+                });
+              }}
               onClick={() => {
                 setModalType('postgradu');
               }}
@@ -94,7 +100,13 @@ function SeniorInfoPage() {
               $isGet={!sMajor}
               type="seniorInfo"
               btnText={sMajor ? sMajor : SENIOR_MAJOR.majorPlaceholder}
-              modalHandler={modalHandler}
+              modalHandler={() => {
+                overlay.open(({ unmount }) => {
+                  return (
+                    <RiseUpModal modalType={modalType} modalHandler={unmount} />
+                  );
+                });
+              }}
               onClick={() => {
                 setModalType('major');
               }}
@@ -114,12 +126,6 @@ function SeniorInfoPage() {
         ) : (
           <NextBtn kind="route-non" btnText="다음" />
         )}
-        {modal && portalElement
-          ? createPortal(
-              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-              portalElement,
-            )
-          : null}
       </SeniorInfoPageContainer>
     </>
   );

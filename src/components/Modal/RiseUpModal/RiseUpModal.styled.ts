@@ -5,9 +5,10 @@ export const ModalBackground = styled.div`
   top: 50%;
   background: rgba(0, 0, 0, 0.7);
   transform: translateY(-50%);
-  width: 360px;
+  width: 375px;
+  margin: 0 auto;
+  padding: 0;
   height: 100vh;
-  z-index: 2;
 
   @keyframes modalAppear {
     from {
@@ -21,13 +22,13 @@ export const ModalBackground = styled.div`
   }
 
   .rise-up-modal {
-    width: inherit;
+    width: 100%;
+    margin: 0 auto;
     height: 38rem;
     position: absolute;
     top: 7.9rem;
     animation: modalAppear 0.5s ease-out;
     border-radius: 1.9rem 1.9rem 0 0;
-    z-index: 1;
     background-color: #fff;
   }
 `;

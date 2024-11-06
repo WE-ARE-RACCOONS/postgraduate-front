@@ -9,7 +9,6 @@ import { TAB, STAB_STATE } from '@/constants/tab/ctap';
 import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
 import BackHeader from '@/components/Header/BackHeader';
 import { useRouter } from 'next/navigation';
-import findExCode from '@/utils/findExCode';
 
 function SalaryPage() {
   const { getAccessToken, getUserType, removeTokens } = useAuth();
@@ -37,11 +36,6 @@ function SalaryPage() {
               headers,
             })
             .then((res) => {
-              if (findExCode(res.data.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
               if (res.data.code == 'SLR200') {
                 setData(res.data.data.salaryDetails);
               }
@@ -52,11 +46,6 @@ function SalaryPage() {
           axios
             .get(`${process.env.NEXT_PUBLIC_SERVER_URL}/salary`, { headers })
             .then((res) => {
-              if (findExCode(res.data.code)) {
-                removeTokens();
-                location.reload();
-                return;
-              }
               if (res.data.code == 'SLR200') {
                 setSalaryDate(res.data.data.salaryDate);
                 setSalaryAmount(res.data.data.salaryAmount);

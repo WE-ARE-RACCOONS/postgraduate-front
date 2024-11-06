@@ -1,56 +1,25 @@
 'use client';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import useModal from '@/hooks/useModal';
-import { option } from '@/stores/condition';
-import {
-  photoUrlAtom,
-  sFieldAtom,
-  sKeywordAtom,
-  sLabAtom,
-  sMajorAtom,
-  sPostGraduAtom,
-  sProfessorAtom,
-} from '@/stores/senior';
-import { changeNickname, phoneNum } from '@/stores/signup';
-import { ModalType } from '@/types/modal/riseUp';
-import axios from 'axios';
+import { sFieldAtom, sKeywordAtom } from '@/stores/senior';
 import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
-import { createPortal } from 'react-dom';
+
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import findExCode from '@/utils/findExCode';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { SENIOR_FIELD } from '@/constants/signup/senior';
+import { overlay } from 'overlay-kit';
 
 function SeniorInfoPage() {
-  const [modalType, setModalType] = useState<ModalType>('postgradu');
-  const [emptyPart, setEmptyPart] = useState('');
   const [flag, setFlag] = useState(false);
   const [ableSubmit, setAbleSubmit] = useState(false);
-  const { modal, modalHandler, portalElement } = useModal('senior-info-portal');
+
   const router = useRouter();
-  const {
-    getAccessToken,
-    setAccessToken,
-    setRefreshToken,
-    setUserType,
-    removeTokens,
-  } = useAuth();
   const [socialId, setSocialId] = useState<number | null>(null);
 
-  const phoneNumber = useAtomValue(phoneNum);
-  const nickName = useAtomValue(changeNickname);
-  const marketingReceive = useAtomValue(option);
-
-  const certification = useAtomValue(photoUrlAtom);
-  const sPostGradu = useAtomValue(sPostGraduAtom);
-  const sMajor = useAtomValue(sMajorAtom);
-  const sLab = useAtomValue(sLabAtom);
-  const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
 
@@ -84,13 +53,15 @@ function SeniorInfoPage() {
   }, [sField, sKeyword]);
 
   const fieldHandler = () => {
-    setModalType('field');
-    modalHandler();
+    overlay.open(({ unmount }) => {
+      return <RiseUpModal modalHandler={unmount} modalType={'field'} />;
+    });
   };
 
   const keywordHandler = () => {
-    setModalType('keyword');
-    modalHandler();
+    overlay.open(({ unmount }) => {
+      return <RiseUpModal modalHandler={unmount} modalType={'keyword'} />;
+    });
   };
 
   const formatField = (fields: string) => {
@@ -272,12 +243,6 @@ function SeniorInfoPage() {
         <SignupSubmitBtn $ableSubmit={ableSubmit} onClick={goChatLink}>
           다음으로
         </SignupSubmitBtn>
-        {modal && portalElement
-          ? createPortal(
-              <RiseUpModal modalHandler={modalHandler} modalType={modalType} />,
-              portalElement,
-            )
-          : null}
       </SeniorInfoPageContainer>
     </>
   );

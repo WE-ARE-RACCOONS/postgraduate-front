@@ -46,7 +46,7 @@ export const SModalMentoringBackground = styled.div`
   transform: translate(-50%, -50%);
   width: 20.5rem;
   height: 28.5rem;
-  z-index: 2;
+
   background-color: white;
 
   @media (min-width: 360px) and (max-width: 600px) {
@@ -63,7 +63,7 @@ export const SMCBgContainer = styled.div`
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 0;
   background-color: rgba(39, 39, 39, 0.48);
 `;
 export const SMCbtnCancelT = styled.button`

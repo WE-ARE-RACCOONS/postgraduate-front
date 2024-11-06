@@ -1,19 +1,17 @@
 import styled from 'styled-components';
 
 export const TextFormEl = styled.input`
-  margin-top: 0.5rem;
   width: 97%;
-  height: 3.1875rem;
+  height: 44px;
+  margin-top: 0.4rem;
   border-radius: 0.5rem;
-  border: 1px solid #c2cede;
+  border: 0.8px solid #dcdfe4;
   background: #fff;
   padding: 0.88rem;
-  font-family: Pretendard;
-  font-size: 16px;
+  font-size: 13px;
   ::placeholder {
-    color: #adb5bd;
-    font-family: Pretendard;
-    font-size: 1rem;
+    color: #a6abb0;
+    font-size: 13px;
     font-style: normal;
     font-weight: 400;
     line-height: normal;

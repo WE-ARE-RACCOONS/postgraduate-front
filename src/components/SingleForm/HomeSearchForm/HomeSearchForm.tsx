@@ -17,8 +17,8 @@ function HomeSearchForm(props: SearchModalProps) {
 
   const keyPressDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
-      router.push(`/search-results?searchTerm=${searchTerm}`);
       props.modalHandler();
+      router.push(`/search-results?searchTerm=${searchTerm}`);
     }
   };
   return (

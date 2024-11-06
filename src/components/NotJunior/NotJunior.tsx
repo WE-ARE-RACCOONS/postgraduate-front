@@ -24,6 +24,7 @@ function NotJunior(props: NotJuniorProps) {
 
   const seniorJoin = () => {
     router.push(`/signup/select/common-info/matching-info`);
+    props.modalHandler();
   };
 
   return (

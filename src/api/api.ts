@@ -1,32 +1,50 @@
 import useAuth from '@/hooks/useAuth';
-import axios from 'axios';
-import type { InternalAxiosRequestConfig } from 'axios';
-import { useRouter } from 'next/navigation';
+import findExCode from '@/utils/findExCode';
+import axios, { InternalAxiosRequestConfig } from 'axios';
 
-const instance = axios.create({
+const withAuthInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
 
-instance.interceptors.request.use(
-  (config: InternalAxiosRequestConfig): InternalAxiosRequestConfig => {
-    const { getAccessToken, removeTokens } = useAuth();
-    const accessTkn = getAccessToken();
-    const router = useRouter();
-
-    if (!accessTkn) {
-      // refresh token까지 만료된 경우
-      removeTokens();
-      router.replace('/');
-    } else {
+const withOutAuthInstance = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
+});
+withAuthInstance.interceptors.request.use(
+  async (
+    config: InternalAxiosRequestConfig,
+  ): Promise<InternalAxiosRequestConfig> => {
+    const { getAccessToken } = useAuth();
+    const accessTkn = await getAccessToken();
+    if (accessTkn) {
       config.headers.Authorization = `Bearer ${accessTkn}`;
     }
 
     return config;
   },
   (error) => {
-    console.error(error);
+    console.error('Request error:', error);
     return Promise.reject(error);
   },
 );
 
-export default instance;
+withAuthInstance.interceptors.response.use(
+  (res) => {
+    const { removeTokens } = useAuth();
+    if (findExCode(res.data.code)) {
+      removeTokens();
+      alert(res.data.message);
+      if (typeof window !== 'undefined') {
+        window.location.reload();
+      }
+
+      throw new Error(`에러메시지 : ${res.data.message}`);
+    }
+    return res;
+  },
+  (error) => {
+    console.error('Response error:', error);
+    return Promise.reject(error);
+  },
+);
+
+export { withAuthInstance, withOutAuthInstance };

@@ -27,20 +27,25 @@ function TextForm(props: TextFormProps) {
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.currentTarget.value;
 
-    if (props.max && inputValue.length <= props.max) {
+    if (props?.max && inputValue.length <= Number(props?.max)) {
       setTarget(inputValue);
     }
-    if (!props.max && inputValue.length <= 20) {
+    if (!props?.max && inputValue.length <= 20) {
       setTarget(inputValue);
     }
   };
 
   return (
     <TextFormEl
+      name={props?.register?.name}
       type="text"
-      placeholder={props.placeholder}
-      onChange={handleChange}
       value={target}
+      placeholder={props.placeholder}
+      {...props?.register}
+      onChange={(e) => {
+        props.register?.onChange(e);
+        handleChange(e);
+      }}
     />
   );
 }

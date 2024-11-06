@@ -1,7 +1,6 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
-import warn from '../../../public/warn.png';
 import {
   ProfileBox,
   ProfileInfo,
@@ -12,13 +11,9 @@ import {
   ImageBox,
 } from './Profile.styled';
 import { ProfileProps } from '@/types/profile/profile';
-import SingleValidator from '../Validator/SingleValidator';
 import user_icon from '../../../public/user.png';
 
 function Profile(props: ProfileProps) {
-  const suggestModal = () => {
-    props.modalHandler();
-  };
   return (
     <ProfileBox>
       <ImageBox>

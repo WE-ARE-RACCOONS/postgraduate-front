@@ -5,10 +5,8 @@ import Scheduler from '@/components/Scheduler';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import {
   PROFILE_DIRECTION,
-  PROFILE_PLACEHOLDER,
   PROFILE_SUB_DIRECTION,
 } from '@/constants/form/cProfileForm';
-import useAuth from '@/hooks/useAuth';
 import {
   mySeniorId,
   sAbleTime,
@@ -17,67 +15,45 @@ import {
   sSingleIntroduce,
 } from '@/stores/senior';
 import { useAtom, useAtomValue } from 'jotai';
+import { useUpdateSeniorProfile } from '@/hooks/mutations/useUpdateSeniorProfile';
+
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
 function AddTimePage() {
   const oneLiner = useAtomValue(sSingleIntroduce);
   const info = useAtomValue(sMultiIntroduce);
   const target = useAtomValue(sRecommendedFor);
-  const [ableTime, setAbleTime] = useAtom(sAbleTime);
+  const ableTime = useAtomValue(sAbleTime);
   const [flag, setFlag] = useState(false);
-  const [seniorId, setSeniorId] = useAtom(mySeniorId);
+  const [_seniorId, setSeniorId] = useAtom(mySeniorId);
   const router = useRouter();
-  const { getAccessToken } = useAuth();
+
+  const { mutate: updateSeniorProfile } = useUpdateSeniorProfile();
 
   const handleClick = () => {
     if (ableTime.length < 3) {
       setFlag(true);
       return;
     }
-
-    // if (ableTime.length >= 3) {
-    //   setFlag(false);
-    //   router.push('add-chat-link');
-    //   return;
-    // }
   };
 
   const handleSubmit = () => {
     if (info && oneLiner && target && ableTime.length >= 3) {
-      getAccessToken().then((accessTkn) => {
-        if (accessTkn) {
-          axios
-            .patch(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`,
-              {
-                info: info,
-                target: target,
-                times: ableTime,
-                oneLiner: oneLiner,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${accessTkn}`,
-                },
-              },
-            )
-            .then((response) => {
-              const res = response.data;
-
-              if (res.code == 'SNR201') {
-                setSeniorId(res.data.seniorId);
-                router.push('/profile/done');
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
-      });
-      return;
+      updateSeniorProfile(
+        {
+          info,
+          times: ableTime,
+          oneLiner,
+          target,
+        },
+        {
+          onSuccess: (data) => {
+            setSeniorId(data.data.seniorId);
+          },
+        },
+      );
     }
   };
 

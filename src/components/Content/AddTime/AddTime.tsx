@@ -16,7 +16,6 @@ import SingleValidator from '@/components/Validator/SingleValidator';
 import { useAtom } from 'jotai';
 import { sAbleTime } from '@/stores/senior';
 import { TimeObj } from '@/types/scheduler/scheduler';
-import ClickedBtn from '@/components/Button/ClickedBtn';
 import NextBtn from '@/components/Button/NextBtn';
 
 function AddTime({ modalHandler }: { modalHandler: () => void }) {
@@ -141,7 +140,7 @@ function AddTime({ modalHandler }: { modalHandler: () => void }) {
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <h3>시간 선택</h3>
           <div id="setTile-warn">
-            요일, 시작시간, 끝시간을 모두 선택해주세요
+            * 요일, 시작시간, 끝시간을 모두 선택해주세요
           </div>
         </div>
         <AddTimeAbleBottom>

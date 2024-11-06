@@ -1,4 +1,3 @@
-import { SchedulerProps, TimeObj } from '@/types/scheduler/scheduler';
 import {
   SchedulerContainer,
   SchedulerEl,
@@ -8,18 +7,17 @@ import {
   SchedulerBox,
 } from './Scheduler.styled';
 import { PROFILE_SUB_DIRECTION } from '@/constants/form/cProfileForm';
-import React, { useEffect, useState } from 'react';
-import useModal from '@/hooks/useModal';
-import { createPortal } from 'react-dom';
-import FullModal from '../Modal/FullModal';
+import React from 'react';
+import useFullModal from '@/hooks/useFullModal';
 import { useAtom } from 'jotai';
 import { sAbleTime } from '@/stores/senior';
 
 function Scheduler() {
   const [timeData, setTimeData] = useAtom(sAbleTime);
-  const { modal, modalHandler, portalElement } = useModal(
-    'senior-mentoring-time-portal',
-  );
+
+  const { openModal: openSeniorMentoringTimeModal } = useFullModal({
+    modalType: 'senior-mentoring-time',
+  });
   const clickHandler = (removeIdx: number) => {
     setTimeData(timeData.filter((_, idx) => idx !== removeIdx));
   };
@@ -37,7 +35,9 @@ function Scheduler() {
               <div id="add-time-empty" style={{ marginBottom: '1.25rem' }}>
                 {PROFILE_SUB_DIRECTION.addTimeEmpty}
               </div>
-              <SCHAddBtn onClick={modalHandler}>+추가하기</SCHAddBtn>
+              <SCHAddBtn onClick={openSeniorMentoringTimeModal}>
+                +추가하기
+              </SCHAddBtn>
             </SchedulerEmptyBox>
           </SchedulerBox>
         ) : (
@@ -64,18 +64,11 @@ function Scheduler() {
                 </SchedulerEl>
               ))}
             </SchedulerElContainer>
-            <SCHAddBtn onClick={modalHandler}>+추가하기</SCHAddBtn>
+            <SCHAddBtn onClick={openSeniorMentoringTimeModal}>
+              +추가하기
+            </SCHAddBtn>
           </div>
         )}
-        {modal && portalElement
-          ? createPortal(
-              <FullModal
-                modalType="senior-mentoring-time"
-                modalHandler={modalHandler}
-              />,
-              portalElement,
-            )
-          : ''}
       </SchedulerContainer>
     </div>
   );

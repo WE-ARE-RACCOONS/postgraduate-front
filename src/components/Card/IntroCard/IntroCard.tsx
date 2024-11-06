@@ -1,7 +1,6 @@
 import { IntroCardProps } from '@/types/card/introCard';
 import {
   IntroCardContainer,
-  IntroCardOneLiner,
   IntroCardTextBox,
   IntroCardTextDesc,
   IntroCardTimeBox,
@@ -23,13 +22,11 @@ function IntroCard(props: IntroCardProps) {
 
   return (
     <IntroCardContainer>
-      <IntroCardOneLiner>
-        {props.oneLiner ? `\"${props.oneLiner}\"` : EMPTY_SENIOR_INFO.oneLiner}
-      </IntroCardOneLiner>
+      <IntroCardTextDesc>자기소개</IntroCardTextDesc>
       <IntroCardTextBox $isFull={!!props.info}>
         {props.info || EMPTY_SENIOR_INFO.info}
       </IntroCardTextBox>
-      <IntroCardTextDesc>이런 분들에게 추천드려요.</IntroCardTextDesc>
+      <IntroCardTextDesc>이런 후배에게 추천해요</IntroCardTextDesc>
       <IntroCardTextBox $isFull={!!props.target}>
         {props.target || EMPTY_SENIOR_INFO.info}
       </IntroCardTextBox>
