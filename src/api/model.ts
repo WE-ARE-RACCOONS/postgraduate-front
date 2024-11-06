@@ -87,7 +87,8 @@ export type ErrorStatusType =
   | 'EX302'
   | 'EX200'
   | 'EX201'
-  | 'EX202';
+  | 'EX202'
+  | 'EX603';
 
 const allErrorStatusTypes = [
   'EX1000',
@@ -108,6 +109,7 @@ const allErrorStatusTypes = [
   'EX706',
   'EX600',
   'EX601',
+  'EX603',
   'EX500',
   'EX501',
   'EX400',

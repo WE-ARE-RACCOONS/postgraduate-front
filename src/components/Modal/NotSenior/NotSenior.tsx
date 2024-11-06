@@ -1,11 +1,10 @@
 'use client';
 import { NotSeniorProps } from '@/types/modal/mypage';
-import React, { useState } from 'react';
+import React from 'react';
 import x_icon from '../../../../public/x_gray.png';
 import Image from 'next/image';
-import Router, { useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { SENIOR_MODAL } from '@/constants/form/notSeniorForm';
-import { sAbleTime } from '@/stores/senior';
 import {
   NotSeniorBoxTop,
   NotSeniorMid,
@@ -15,9 +14,6 @@ import {
   NSBtn,
   NotSeniorContainer,
 } from './NotSenior.styled';
-import { useAtom } from 'jotai';
-import { userTypeAtom } from '@/stores/signup';
-
 function NotSenior(props: NotSeniorProps) {
   const xClick = () => {
     props.modalHandler();

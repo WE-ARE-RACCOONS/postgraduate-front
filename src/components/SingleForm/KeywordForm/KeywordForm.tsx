@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useAtom, useSetAtom } from 'jotai';
 import {
   sKeywordAtom,
@@ -14,13 +14,11 @@ import {
 import { SELECT_KEYWORD_TEXT } from '@/constants/keyword/keyword';
 import SelectedBtn from '@/components/Button/SelectedBtn';
 import { useFormContext } from 'react-hook-form';
-import NextBtn from '@/components/Button/NextBtn';
 
 function KeywordForm({ clickHandler }: { clickHandler: () => void }) {
   const {
     register,
     watch,
-    setError,
     setValue,
     formState: { errors },
   } = useFormContext();

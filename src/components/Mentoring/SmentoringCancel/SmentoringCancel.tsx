@@ -5,13 +5,8 @@ import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import { SENIOR_MENTOR_CANCEL } from '@/constants/form/sMentoCanelForm';
 import CheckBox from '@/components/Checkbox';
 import { useAtom } from 'jotai';
-import {
-  SCEtc,
-  SMCancelAtom,
-  SMCancelSuccessAtom,
-  noTime,
-  notKnow,
-} from '@/stores/condition';
+import { SMCancelSuccessAtom } from '@/stores/condition';
+import { SCEtc, SMCancelAtom, noTime, notKnow } from '@/stores/condition';
 import Image from 'next/image';
 import x_icon from '../../../../public/x.png';
 import {
@@ -36,7 +31,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
   const [SMCancel, setSMCancel] = useAtom(SMCancelAtom);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [success, setSuccess] = useAtom(SMCancelSuccessAtom);
+  const [_success, setSuccess] = useAtom(SMCancelSuccessAtom);
   const selected = time || know || etc;
   const [submittingText, setSubmittingText] = useState('');
 
@@ -96,6 +91,7 @@ function SmentoringCancel(props: ModalMentoringProps) {
           setIsSubmitting(false);
           if (response.data.code === 'MT201') {
             setSuccess(true);
+            setSMCancel(true);
             props.modalHandler();
             if (props.successHandler) {
               props.successHandler();
@@ -109,6 +105,8 @@ function SmentoringCancel(props: ModalMentoringProps) {
           }
         }
       } catch (error) {
+        props.modalHandler();
+        setSMCancel(false);
         console.error('Error cancelling mentoring:', error);
       }
     }, 1000);

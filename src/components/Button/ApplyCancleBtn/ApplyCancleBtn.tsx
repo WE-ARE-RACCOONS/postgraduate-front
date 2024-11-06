@@ -1,8 +1,6 @@
 'use client';
 import { CancleBtnProps } from '@/types/button/applyCancleBtn';
-import useModal from '@/hooks/useModal';
-import React, { useEffect, useState } from 'react';
-import axios from 'axios';
+import React from 'react';
 import { ApplyCancleBtnStyle, ACsenior } from './ApplyCancleBtn.styled';
 export default function ApplyCancleBtn(props: CancleBtnProps) {
   const handleClick = () => {

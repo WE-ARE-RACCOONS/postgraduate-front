@@ -32,6 +32,7 @@ withAuthInstance.interceptors.response.use(
     const { removeTokens } = useAuth();
     if (findExCode(res.data.code)) {
       removeTokens();
+      alert(res.data.message);
       if (typeof window !== 'undefined') {
         window.location.reload();
       }

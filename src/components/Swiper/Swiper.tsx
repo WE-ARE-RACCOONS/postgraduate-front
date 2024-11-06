@@ -1,7 +1,7 @@
 import React from 'react';
 import 'swiper/css/bundle';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import { Img } from './Swiper.styled';
 import 'swiper/css';

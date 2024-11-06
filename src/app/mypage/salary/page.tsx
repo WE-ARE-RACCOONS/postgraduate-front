@@ -9,7 +9,6 @@ import { TAB, STAB_STATE } from '@/constants/tab/ctap';
 import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
 import BackHeader from '@/components/Header/BackHeader';
 import { useRouter } from 'next/navigation';
-import findExCode from '@/utils/findExCode';
 
 function SalaryPage() {
   const { getAccessToken, getUserType, removeTokens } = useAuth();

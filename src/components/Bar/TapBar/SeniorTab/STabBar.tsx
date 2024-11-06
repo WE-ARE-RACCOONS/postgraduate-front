@@ -16,48 +16,56 @@ import { useGetSeniorMentoringActiveTabQuery } from '@/hooks/query/useGetSeniorM
 import { TAB, TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
-import useModal from '@/hooks/useModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
-import { createPortal } from 'react-dom';
-import DimmedModal from '@/components/Modal/DimmedModal';
+
 import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
-import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
 import { useRouter } from 'next/navigation';
 import useFullModal from '@/hooks/useFullModal';
 import { SMCancelAtom } from '@/stores/condition';
+import useDimmedModal from '@/hooks/useDimmedModal';
 function STabBar() {
   const router = useRouter();
   const [modalType, setModalType] = useState<ModalMentoringType>('junior');
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
+
+  const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
+    null,
+  );
 
   const handleTabClick = (tabIndex: tapType) => {
     setActiveTab(tabIndex);
   };
 
   const mentoringBtnRef = useRef<HTMLButtonElement>(null);
-  const { openModal: openAcceptMentoringModal } = useFullModal({
-    modalType: 'accept-mentoring',
+
+  const { openModal: openSeniorMentoringSuccessModal } = useDimmedModal({
+    modalType: 'mentoring-cancel-success',
+    overlayId: 'openSeniorMentoringSuccessModal',
   });
 
-  const {
-    modal: cancelModal,
-    modalHandler: cancelModalHandler,
-    portalElement: cancelPortalElement,
-  } = useModal('senior-mentoring-cancel');
+  const { openModal: openSenoirMentoringCancelSuccessModal } = useDimmedModal({
+    modalType: 'mentoring-cancel-success',
+    overlayId: 'openSeniorMentoringCancelSucessModal',
+  });
 
-  const {
-    modal: successModal,
-    modalHandler: successModalHandler,
-    portalElement: successPortalElement,
-  } = useModal('mentoring-cancel-success');
-  const [selectedMentoringId, setSelectedMentoringId] = useState<number | null>(
-    null,
-  );
+  const { openModal: openSeniorMentoringRefuseModal } = useDimmedModal({
+    modalType: 'cancelMent',
+    overlayId: 'openSeniorMentoringRefuseModal',
+    mentoringId: selectedMentoringId ?? 0,
+    successHandler: openSeniorMentoringSuccessModal,
+    modalHandler: openSenoirMentoringCancelSuccessModal,
+  });
+
+  const { openModal: openAcceptMentoringModal } = useFullModal({
+    modalType: 'accept-mentoring',
+    cancelModalHandler: openSeniorMentoringRefuseModal,
+    modalHandler: openSeniorMentoringSuccessModal,
+  });
 
   const { openModal: openSeniorMentoringSpecModal } = useFullModal({
     modalType: 'senior-mentoring-spec',
     mentoringId: selectedMentoringId ?? 0,
-    cancelModalHandler: cancelModalHandler,
+    cancelModalHandler: openSeniorMentoringRefuseModal,
     acceptModalHandler: openAcceptMentoringModal,
   });
 
@@ -68,11 +76,13 @@ function STabBar() {
     if (SMCancel === true) {
       location.reload();
     }
+    setSelectedMentoringId(null);
   }, [activeTab]);
 
   useEffect(() => {
     if (selectedMentoringId !== null) {
       openSeniorMentoringSpecModal();
+      setSelectedMentoringId(null);
     }
   }, [selectedMentoringId]);
 
@@ -153,27 +163,6 @@ function STabBar() {
       <TabResultContainer>
         <TabResult>{renderTabContent()}</TabResult>
       </TabResultContainer>
-
-      {cancelModal && cancelPortalElement
-        ? createPortal(
-            <SmentoringCancel
-              modalHandler={cancelModalHandler}
-              successHandler={successModalHandler}
-              mentoringId={selectedMentoringId || 0}
-            />,
-            cancelPortalElement,
-          )
-        : null}
-
-      {successModal && cancelPortalElement
-        ? createPortal(
-            <DimmedModal
-              modalType="mentoring-cancel-success"
-              modalHandler={successModalHandler}
-            />,
-            cancelPortalElement,
-          )
-        : null}
     </div>
   );
 }

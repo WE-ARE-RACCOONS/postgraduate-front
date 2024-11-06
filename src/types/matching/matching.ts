@@ -1,6 +1,6 @@
 import { SetStateAction } from 'jotai';
 
-type SetAtom<Args extends any[], Result> = (...args: Args) => Result;
+type SetAtom<Args extends any[], Result> = (..._args: Args) => Result;
 
 export interface MatchingFormProps {
   title: string;
