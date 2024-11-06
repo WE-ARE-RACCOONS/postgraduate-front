@@ -30,7 +30,6 @@ import ApplyCancleBtn from '../../../Button/ApplyCancleBtn/ApplyCancleBtn';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constants/tab/ctap';
-import { useRouter } from 'next/navigation';
 import Spinner from '@/components/Spinner';
 import { ErrorBoundary } from 'react-error-boundary';
 import { MentoringTabError } from '../error';
@@ -41,7 +40,6 @@ function MentoringSpec(props: ModalMentoringProps) {
   const userType = getUserType();
 
   const [activeTab, setActiveTab] = useAtom(activeTabAtom);
-  const { mutate: cancelMyMentoring } = useCancelMyMentoring();
 
   const formatTime = (time: string) => {
     if (!time) return '';
@@ -103,8 +101,6 @@ function MentoringSpec(props: ModalMentoringProps) {
                 btnText={'취소하기'}
                 cancelModalHandler={() => {
                   if (props.cancelModalHandler) {
-                    cancelMyMentoring(props.mentoringId);
-
                     props.cancelModalHandler();
                   }
                 }}
