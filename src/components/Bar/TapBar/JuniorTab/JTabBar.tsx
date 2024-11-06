@@ -52,12 +52,6 @@ function TabBar() {
   };
   const [selectedMentoringId, setSelectedMentoringId] = useState<number>(0);
 
-  const {
-    modal: cancelModal,
-    modalHandler: cancelModalHandler,
-    portalElement: cancelPortalElement,
-  } = useModal('junior-mentoring-cancel');
-
   const applyBtnRef = useRef<HTMLButtonElement>(null);
 
   const { openModal: openJuniorMentoringCancelModal } = useDimmedModal({

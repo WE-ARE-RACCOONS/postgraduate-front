@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
-import axios from 'axios';
-import useAuth from '@/hooks/useAuth';
 import { ModalMentoringclProps } from '@/types/modal/mentoringDetail';
-import { MentoringData } from '@/types/mentoring/mentoring';
+
 import {
   MentoringCancelBox,
   CancelBtn,
@@ -12,22 +10,18 @@ import {
   MCSub,
 } from './MentoringCancel.styled';
 import Image from 'next/image';
+import { useCancelMyMentoring } from '@/hooks/mutations/useCancelMyMentoring';
 import state from '@/../../public/state.png';
 import cState from '@/../../public/cState.png';
-import { useRouter } from 'next/navigation';
-import findExCode from '@/utils/findExCode';
 import { useAtom } from 'jotai';
 import { JMCancelAtom } from '@/stores/condition';
 
 function MentoringCancel(props: ModalMentoringclProps) {
-  const [data, setData] = useState<MentoringData[] | null>(null);
-  const { getAccessToken, removeTokens } = useAuth();
   const [cancelStatus, setCancelStatus] = useState<string>('');
   const [JMCancel, setJMCancel] = useAtom(JMCancelAtom);
   const [loading, setLoading] = useState<boolean>(false);
   const [cancelLoading, setCancelLoading] = useState<boolean>(false);
-  const router = useRouter();
-
+  const { mutate: cancelMyMentoring } = useCancelMyMentoring();
   const handleSuccess = () => {
     setCancelStatus('취소되었습니다');
     setJMCancel(true);
@@ -47,28 +41,11 @@ function MentoringCancel(props: ModalMentoringclProps) {
     try {
       setLoading(true);
       setCancelLoading(false);
-      const Token = await getAccessToken();
-      if (Token) {
-        const headers = {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${Token}`,
-        };
-
-        const response = await axios.patch(
-          `${process.env.NEXT_PUBLIC_SERVER_URL}/mentoring/me/${props.mentoringId}/cancel`,
-          { mentoringId: props.mentoringId },
-          { headers },
-        );
-
-        if (findExCode(response.data.code)) {
-          removeTokens();
-          location.reload();
-          return;
-        }
-
-        setData(response.data);
-        response.data.code === 'MT201' ? handleSuccess() : handleError();
-      }
+      cancelMyMentoring(props.mentoringId, {
+        onSuccess: (data) => {
+          data.data.code === 'MT201' ? handleSuccess() : handleError();
+        },
+      });
     } catch (error) {
       console.error(error);
     } finally {
@@ -76,9 +53,9 @@ function MentoringCancel(props: ModalMentoringclProps) {
     }
   };
 
-  const cancelHandleClick = () => {
+  const cancelHandleClick = async () => {
     setCancelLoading(true);
-    setTimeout(cancelMentoring, 2000);
+    await cancelMentoring();
   };
 
   return (
