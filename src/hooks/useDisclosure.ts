@@ -2,27 +2,26 @@ import { useCallback, useState } from 'react';
 
 interface useDisclosureProps {
   defaultIsOpen?: boolean;
-  onClose?(): void;
-  onOpen?(): void;
+  handleClose?: () => void;
+  handleOpen?: () => void;
 }
 
-export const useDisclosure = (props: useDisclosureProps) => {
-  const {
-    onClose: onCloseProp,
-    onOpen: onOpenProp,
-    defaultIsOpen: defaultIsOpenProp,
-  } = props;
-  const [isOpen, setOpen] = useState(defaultIsOpenProp ?? false);
+export const useDisclosure = ({
+  handleClose = () => {},
+  handleOpen = () => {},
+  defaultIsOpen = false,
+}: useDisclosureProps = {}) => {
+  const [isOpen, setOpen] = useState(defaultIsOpen);
 
   const onOpen = useCallback(() => {
     setOpen(true);
-    onOpenProp?.();
-  }, []);
+    handleOpen();
+  }, [handleOpen]);
 
   const onClose = useCallback(() => {
     setOpen(false);
-    onCloseProp?.();
-  }, []);
+    handleClose();
+  }, [handleClose]);
 
   const onToggle = useCallback(() => {
     if (isOpen) {
@@ -39,5 +38,3 @@ export const useDisclosure = (props: useDisclosureProps) => {
     onOpen,
   };
 };
-
-export type UseDisClosure = ReturnType<typeof useDisclosure>;
