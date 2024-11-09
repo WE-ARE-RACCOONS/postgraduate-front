@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { ComponentPropsWithoutRef } from 'react';
 import { useDescendats } from '@/hooks/useDescendant';
-interface DropdownItem extends ComponentPropsWithoutRef<'li'> {
-  id: string;
-}
+import { useDecendant } from '@/hooks/useDescendant';
+interface DropdownItem extends ComponentPropsWithoutRef<'li'> {}
 
-export const DropdownItem = ({ id, children, ...rest }: DropdownItem) => {
+export const DropdownItem = ({ children, ...rest }: DropdownItem) => {
   const { map } = useDescendats();
+  const id = useDecendant();
   const isActive = map.current[id]?.enabled;
   return (
     <DropdownItemStyles isActive={isActive} {...rest}>
