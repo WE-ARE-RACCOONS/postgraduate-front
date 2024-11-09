@@ -16,12 +16,12 @@ export const useDisclosure = ({
   const onOpen = useCallback(() => {
     setOpen(true);
     handleOpen();
-  }, [handleOpen]);
+  }, [handleOpen, isOpen]);
 
   const onClose = useCallback(() => {
     setOpen(false);
     handleClose();
-  }, [handleClose]);
+  }, [handleClose, isOpen]);
 
   const onToggle = useCallback(() => {
     if (isOpen) {

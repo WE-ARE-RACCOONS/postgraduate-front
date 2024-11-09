@@ -1,5 +1,11 @@
 import styled from 'styled-components';
-import { ComponentPropsWithRef, CSSProperties, forwardRef } from 'react';
+import {
+  ComponentPropsWithRef,
+  CSSProperties,
+  forwardRef,
+  useEffect,
+} from 'react';
+import { useDropdownContext } from './useDropdown';
 
 interface TriggerButtonProps extends ComponentPropsWithRef<'button'> {
   w?: CSSProperties['width'];
@@ -16,7 +22,6 @@ interface TriggerButtonProps extends ComponentPropsWithRef<'button'> {
   top?: CSSProperties['top'];
   bottom?: CSSProperties['bottom'];
   shape?: 'circle' | 'square';
-  isOpen?: boolean;
   border?: CSSProperties['border'];
   color?: CSSProperties['color'];
   bg?: CSSProperties['background'];
@@ -24,10 +29,12 @@ interface TriggerButtonProps extends ComponentPropsWithRef<'button'> {
 
 export const TriggerButton = forwardRef<HTMLButtonElement, TriggerButtonProps>(
   (props, ref) => {
-    const { isOpen } = props;
+    const { isOpen, onToggle } = useDropdownContext();
+
     return (
       <TriggerButtonStyle
         ref={ref}
+        onClick={onToggle}
         {...props}
         aria-label="메뉴"
         aria-expanded={isOpen ? 'true' : 'false'}

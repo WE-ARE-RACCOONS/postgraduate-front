@@ -1,14 +1,13 @@
-import { PropsWithChildren } from 'react';
 import { DescendantContext } from '@/hooks/useDescendant';
-import { useDropdown } from './useDropdown';
-import type { DropDownMenuProp } from './useDropdown';
+import { ReactNode } from 'react';
+import { useDropdownContext } from './useDropdown';
 
-export const Dropdown = (props: PropsWithChildren<DropDownMenuProp> = {}) => {
-  const { descendants } = useDropdown(props);
+export const Dropdown = ({ children }: { children: ReactNode }) => {
+  const { dropdownRef, descendants } = useDropdownContext();
 
   return (
     <DescendantContext.Provider value={descendants}>
-      {props.children}
+      <div ref={dropdownRef}>{children}</div>
     </DescendantContext.Provider>
   );
 };
