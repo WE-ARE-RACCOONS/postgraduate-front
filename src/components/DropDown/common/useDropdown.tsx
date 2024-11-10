@@ -5,9 +5,9 @@ import React, {
   useRef,
   ReactNode,
 } from 'react';
-import { useDescendats } from '@/hooks/useDescendant';
-import { useDisclosure } from '@/hooks/useDisclosure';
+
 import { useOutSideClick } from '@/hooks/useOutsideClick';
+import { useDisclosure } from '@/hooks/useDisclosure';
 
 interface DropdownContextType {
   isOpen: boolean;
@@ -15,10 +15,9 @@ interface DropdownContextType {
   onOpen: () => void;
   onToggle: () => void;
   dropdownRef: React.RefObject<HTMLDivElement>;
-  descendants: ReturnType<typeof useDescendats>;
 }
 
-const DropdownContext = createContext<DropdownContextType | undefined>(
+export const DropdownContext = createContext<DropdownContextType | undefined>(
   undefined,
 );
 
@@ -46,7 +45,6 @@ export const DropdownProvider = ({
   children,
 }: DropdownProviderProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
-  const descendants = useDescendats();
 
   const { onClose, isOpen, onOpen, onToggle } = useDisclosure({
     defaultIsOpen: isOpenProp,
@@ -76,7 +74,6 @@ export const DropdownProvider = ({
         onClose,
         onToggle,
         dropdownRef,
-        descendants,
       }}
     >
       {children}

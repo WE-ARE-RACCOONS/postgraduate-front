@@ -21,13 +21,17 @@ export const DropdownList = ({ children }: { children: ReactNode }) => {
   );
 };
 
-const ListContainer = styled.div`
+const ListContainer = styled.ul`
   background-color: #f8f9fb;
-  min-height: 231px;
-  width: 100%;
-  padding: 8px;
+  min-height: 135px;
+  padding-top: 16px;
+  gap: 32px;
+  list-style-type: none;
   display: flex;
-  gap: 16px;
+  position: absoulute;
+  top: 2px;
+  left: 2px;
   z-index: 1;
   flex-wrap: wrap;
+  border-radius: 0 0 15px 15px;
 `;
