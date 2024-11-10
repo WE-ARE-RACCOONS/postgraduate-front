@@ -1,18 +1,53 @@
+import { Dropdown } from '@/components/DropDown/common';
 import styled from 'styled-components';
 
 interface TapStyleProps {
   selected: boolean;
 }
 export const TapStyle = styled.div<TapStyleProps>`
-  border: 1px solid #2fc4b2;
-  padding: 0.5rem 1rem;
-  border-radius: 0.5rem;
-  margin-right: 0.6rem;
+  border: 1px solid ${({ selected }) => (selected ? '#98999A' : '#DEE2E4')}; /* border 속성 통합 */
+  height: 28px;
+  min-width: 70px;
+  border-radius: 5.22px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  margin-right: 0.3rem;
   font-weight: 700;
   font-size: 0.87rem;
   box-shadow: 0px 0px 4px 0px rgba(73, 85, 101, 0.2);
-  border: ${({ selected }) =>
-    selected ? '1px solid #2FC4B2' : '1px solid #DEE2E6'};
-  color: ${({ selected }) => (selected ? '#2fc4b2' : '#DEE2E6')};
+  background-color: ${({ selected }) => (selected ? '#F1F3F3' : 'transparent')};
+  color: ${({ selected }) => (selected ? '#4C4D4E' : '#DEE2E6')};
   cursor: pointer;
+`;
+
+export const TabContainer = styled.div`
+  position: relative;
+`;
+
+export const TabBackdrop = styled.div`
+  position: fixed;
+  top: 225px;
+  width: 360px;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
+`;
+
+export const TabHeader = styled.h1`
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  gap: 4px;
+  background: white;
+`;
+
+export const TabTrigger = styled(Dropdown.Trigger)`
+  position: absolute;
+  right: 1rem;
+  top: 1rem;
+  display: flex;
+  align-items: center;
 `;

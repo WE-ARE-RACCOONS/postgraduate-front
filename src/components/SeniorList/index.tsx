@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 
+import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '@/components/Swiper/Swiper';
 import DimmedModal from '@/components/Modal/DimmedModal';
@@ -61,50 +62,52 @@ export function SeniorList() {
 
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
-      <HomeLayer>
-        <LogoLayer
-          modalHandler={() => {
-            overlay.open(({ unmount }) => {
-              return <SearchModal modalHandler={() => unmount()} />;
-            });
-          }}
-        />
-        <HomeBannerLayer>
-          <SwiperComponent />
-        </HomeBannerLayer>
-        <HomeFieldLayer>
-          <FieldTapBar />
-        </HomeFieldLayer>
-        <HomeUnivLayer>
-          <UnivTapBar />
-        </HomeUnivLayer>
-        <HomeProfileLayer>
-          {seniorList.length > 0 ? (
-            seniorList.map((el, idx) => (
-              <div key={idx}>
-                <SeniorProfile data={el} />
-              </div>
-            ))
-          ) : (
-            <div>해당하는 선배가 없어요</div>
-          )}
-        </HomeProfileLayer>
-        <Footer />
-        <MenuBarWrapper>
-          <MenuBar
+      <DropdownProvider>
+        <HomeLayer>
+          <LogoLayer
             modalHandler={() => {
               overlay.open(({ unmount }) => {
-                return (
-                  <DimmedModal
-                    modalType="notuser"
-                    modalHandler={() => unmount()}
-                  />
-                );
+                return <SearchModal modalHandler={() => unmount()} />;
               });
             }}
           />
-        </MenuBarWrapper>
-      </HomeLayer>
+          <HomeBannerLayer>
+            <SwiperComponent />
+          </HomeBannerLayer>
+          <HomeFieldLayer>
+            <FieldTapBar />
+          </HomeFieldLayer>
+          <HomeUnivLayer>
+            <UnivTapBar />
+          </HomeUnivLayer>
+          <HomeProfileLayer>
+            {seniorList.length > 0 ? (
+              seniorList.map((el, idx) => (
+                <div key={idx}>
+                  <SeniorProfile data={el} />
+                </div>
+              ))
+            ) : (
+              <div>해당하는 선배가 없어요</div>
+            )}
+          </HomeProfileLayer>
+          <Footer />
+          <MenuBarWrapper>
+            <MenuBar
+              modalHandler={() => {
+                overlay.open(({ unmount }) => {
+                  return (
+                    <DimmedModal
+                      modalType="notuser"
+                      modalHandler={() => unmount()}
+                    />
+                  );
+                });
+              }}
+            />
+          </MenuBarWrapper>
+        </HomeLayer>
+      </DropdownProvider>
     </Suspense>
   );
 }
@@ -128,7 +131,6 @@ const HomeUnivLayer = styled.div`
   border-top: 1px solid #c2cede;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 1rem 0.9rem;
 `;
 const HomeProfileLayer = styled.div`
   min-height: 22rem;
