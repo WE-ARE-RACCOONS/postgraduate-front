@@ -35,8 +35,9 @@ function UnivTapBar() {
             style={{
               display: 'flex',
               alignItems: 'center',
-              overflowX: 'hidden',
               padding: '1rem',
+              maxWidth: '325px',
+              overflowX: 'scroll',
             }}
           >
             <TapStyle
@@ -80,7 +81,7 @@ function UnivTapBar() {
               <Dropdown.Trigger
                 shape="circle"
                 position="absolute"
-                right={'-0.02rem'}
+                right={'0.28rem'}
               >
                 <Image
                   width={28}
