@@ -39,7 +39,7 @@ export const getSeniorList = async ({
           postgradu,
         },
       })
-    ).data;
+    ).data.data;
   } catch (e) {
     throw e;
   }

@@ -1,7 +1,7 @@
 'use client';
 
 import MenuBar from '@/components/Bar/MenuBar';
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
@@ -14,8 +14,10 @@ import DimmedModal from '@/components/Modal/DimmedModal';
 import SearchModal from '@/components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
+import { Pagination } from '@mui/material';
 
 import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
+import { SeniorListPerPageCount } from '../SeniorProfile/constant';
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import Footer from '@/components/Footer';
 
@@ -28,37 +30,17 @@ export function SeniorList() {
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
-
-  const {
-    data: seniorListData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useGetSeniorListQuery(field, postgradu);
+  const [currentSeniorListPage, setCurrentSeniorListPage] = useState(1);
 
   useEffect(() => {
     setCurrentPath();
+  }, []);
 
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 5 &&
-        hasNextPage &&
-        !isFetchingNextPage
-      ) {
-        fetchNextPage();
-      }
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  const seniorList =
-    seniorListData?.pages.flatMap((page) => page.data.seniorSearchResponses) ||
-    [];
+  const { data: seniorListData } = useGetSeniorListQuery(
+    field,
+    postgradu,
+    currentSeniorListPage,
+  );
 
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
@@ -81,15 +63,25 @@ export function SeniorList() {
             <UnivTapBar />
           </HomeUnivLayer>
           <HomeProfileLayer>
-            {seniorList.length > 0 ? (
-              seniorList.map((el, idx) => (
-                <div key={idx}>
+            {seniorListData?.seniorSearchResponses ? (
+              seniorListData?.seniorSearchResponses?.map((el, idx) => (
+                <div key={el.seniorId}>
                   <SeniorProfile data={el} />
                 </div>
               ))
             ) : (
               <div>해당하는 선배가 없어요</div>
             )}
+            <StyledPagination
+              shape="rounded"
+              onChange={(_e, page) => setCurrentSeniorListPage(page)}
+              count={Math.ceil(
+                (seniorListData?.totalElements as number) /
+                  SeniorListPerPageCount,
+              )}
+              aria-label="선배 회원 페이지네이션"
+              role="navigation"
+            />
           </HomeProfileLayer>
           <Footer />
           <MenuBarWrapper>
@@ -135,11 +127,20 @@ const HomeUnivLayer = styled.div`
 const HomeProfileLayer = styled.div`
   min-height: 22rem;
   height: inherit;
-  padding: 1rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 `;
 const MenuBarWrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: inherit;
   z-index: 1;
+`;
+
+const StyledPagination = styled(Pagination)`
+  display: flex;
+  width: 345px;
+  justify-content: center;
+  padding: 0;
+  margin: 0 auto;
 `;
