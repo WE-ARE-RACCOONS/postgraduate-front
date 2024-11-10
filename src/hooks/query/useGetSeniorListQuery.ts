@@ -1,17 +1,16 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { getSeniorList } from '@/api/senior/getSeinorList';
 
-export const useGetSeniorListQuery = (field: string, postgradu: string) => {
-  return useInfiniteQuery({
+export const useGetSeniorListQuery = (
+  field: string,
+  postgradu: string,
+  page: number,
+) => {
+  return useQuery({
     suspense: true,
     useErrorBoundary: true,
-    queryKey: ['seniorList', field, postgradu],
-    queryFn: ({ pageParam = 1 }) =>
-      getSeniorList({ field, postgradu, page: pageParam }),
-    getNextPageParam: (lastPage, allPages) => {
-      const totalPages = lastPage.data.totalElements;
-      const nextPage = allPages.length + 1;
-      return nextPage <= totalPages ? nextPage : undefined;
-    },
+    queryKey: ['seniorList', field, postgradu, page],
+    queryFn: () => getSeniorList({ field, postgradu, page }),
+    staleTime: Infinity,
   });
 };

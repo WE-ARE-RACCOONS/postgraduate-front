@@ -8,8 +8,6 @@ export default async function Home() {
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['seniorList'],
     queryFn: () => getSeniorList({ field: 'all', postgradu: 'all', page: 1 }),
-    getNextPageParam: (lastPage) =>
-      lastPage.data.seniorSearchResponses.length + 1,
   });
 
   const jsonLd = {
@@ -33,7 +31,7 @@ export default async function Home() {
     queryFn: () => getSeniorList({ field: 'all', postgradu: 'all', page: 1 }),
   });
 
-  jsonLd.itemListElement = seniorData.data.seniorSearchResponses.map(
+  jsonLd.itemListElement = seniorData.seniorSearchResponses.map(
     (senior, index) => ({
       '@type': 'ListItem',
       position: index + 1,
