@@ -23,6 +23,7 @@ export const DropdownItem = ({
 
 const DropdownItemStyles = styled.li<{ isActive: boolean }>`
   padding-left: 8px;
+  padding-right: 12px;
   font-size: 14px;
   cursor: pointer;
   font-weight: 700;

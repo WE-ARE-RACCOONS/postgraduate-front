@@ -28,11 +28,11 @@ export const TabContainer = styled.div`
 
 export const TabBackdrop = styled.div`
   position: fixed;
-  top: 228px;
+  top: 225px;
   width: 360px;
-  margin: 0 auto;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.4);
+  margin: 0 auto;
 `;
 
 export const TabHeader = styled.h1`
@@ -41,7 +41,7 @@ export const TabHeader = styled.h1`
   align-items: center;
   font-size: 14px;
   gap: 4px;
-  background: #f8f9fb;
+  background: white;
 `;
 
 export const TabTrigger = styled(Dropdown.Trigger)`

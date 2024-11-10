@@ -22,16 +22,12 @@ export const DropdownList = ({ children }: { children: ReactNode }) => {
 };
 
 const ListContainer = styled.ul`
-  background-color: #f8f9fb;
-  min-height: 135px;
+  background-color: white;
   padding-top: 16px;
-  gap: 32px;
   list-style-type: none;
-  display: flex;
-  position: absoulute;
-  top: 2px;
-  left: 2px;
-  z-index: 1;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(2, 30px);
+  gap: 10px;
   border-radius: 0 0 15px 15px;
 `;

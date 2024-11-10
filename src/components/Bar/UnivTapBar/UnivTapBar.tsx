@@ -92,8 +92,8 @@ function UnivTapBar() {
             </Dropdown.Header>
           </div>
         ) : (
-          <TabBackdrop>
-            <div ref={dropdownContext.dropdownRef}>
+          <div ref={dropdownContext.dropdownRef}>
+            <TabBackdrop>
               <TabHeader>
                 <span style={{ color: '#98999a' }}>
                   {factiveTab === 'all'
@@ -169,8 +169,8 @@ function UnivTapBar() {
                   다른학교
                 </DropdownItem>
               </Dropdown.List>
-            </div>
-          </TabBackdrop>
+            </TabBackdrop>
+          </div>
         )}
       </Dropdown.Container>
     </TabContainer>
