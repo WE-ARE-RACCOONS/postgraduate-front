@@ -1,7 +1,8 @@
 'use client';
-import React, { useState, KeyboardEvent } from 'react';
-import { useRouter, usePathname } from 'next/navigation';
-import Link from 'next/link';
+import React, { KeyboardEvent, useEffect } from 'react';
+import { useRouter } from 'next/navigation';
+import { useQueryState, parseAsString } from 'nuqs';
+
 import {
   HomeSearchFormBox,
   HomeSearchFormInput,
@@ -9,16 +10,28 @@ import {
 import { SearchModalProps } from '@/types/modal/search';
 
 function HomeSearchForm(props: SearchModalProps) {
-  const [searchTerm, setSearchTerm] = useState('');
+  const [search, setSearch] = useQueryState(
+    'q',
+    parseAsString.withDefault('').withOptions({
+      history: 'replace',
+      clearOnDefault: true,
+    }),
+  );
+
+  useEffect(() => {
+    return () => {
+      setSearch('');
+    };
+  }, []);
   const router = useRouter();
   const handleInputChange = (e: React.ChangeEvent<any>) => {
-    setSearchTerm(e.target.value);
+    setSearch(e.target.value);
   };
 
   const keyPressDown = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === 'Enter') {
       props.modalHandler();
-      router.push(`/search-results?searchTerm=${searchTerm}`);
+      router.push(`/search-results?searchTerm=${search}`);
     }
   };
   return (
@@ -26,7 +39,7 @@ function HomeSearchForm(props: SearchModalProps) {
       <HomeSearchFormInput
         type="text"
         placeholder="대학원, 연구실명, 연구분야로 검색하기"
-        value={searchTerm}
+        value={search}
         onChange={handleInputChange}
         onKeyDown={keyPressDown}
       />

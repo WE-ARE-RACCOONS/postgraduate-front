@@ -3,6 +3,7 @@
 import MenuBar from '@/components/Bar/MenuBar';
 import { Suspense, useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
+import { useQueryState, parseAsInteger } from 'nuqs';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
@@ -30,7 +31,11 @@ export function SeniorList() {
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
-  const [currentSeniorListPage, setCurrentSeniorListPage] = useState(1);
+
+  const [currentSeniorListPage, setCurrentSeniorListPage] = useQueryState(
+    'page',
+    parseAsInteger.withOptions({ shallow: false }).withDefault(1),
+  );
 
   useEffect(() => {
     setCurrentPath();
@@ -74,6 +79,7 @@ export function SeniorList() {
             )}
             <StyledPagination
               shape="rounded"
+              page={Number(currentSeniorListPage ?? 1)}
               onChange={(_e, page) => setCurrentSeniorListPage(page)}
               count={Math.ceil(
                 (seniorListData?.totalElements as number) /
