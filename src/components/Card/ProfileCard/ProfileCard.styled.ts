@@ -18,15 +18,11 @@ export const ProfileCardContainer = styled.div<{ $overWidth: boolean }>`
     line-height: 15px;
     color: #6d747e;
     position: absolute;
-    bottom: 10%;
+    bottom: 0%;
+    padding-bottom: 4px;
     left: 50%;
     transform: translateX(-50%);
     width: 13rem;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
     text-align: center;
   }
 `;
