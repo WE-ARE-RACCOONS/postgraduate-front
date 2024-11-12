@@ -6,7 +6,6 @@ export const DropdownHeader = ({ children }: { children: ReactNode }) => {
 };
 
 const DropdownHeaderStyle = styled.header`
-  width: 100%;
   min-height: 28px;
   color: #a6abb0;
   display: flex;
