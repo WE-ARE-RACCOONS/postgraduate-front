@@ -1,6 +1,9 @@
 import { Hydrate, QueryClient, dehydrate } from '@tanstack/react-query';
 import { SeniorInfoPage } from '@/app/senior/info/[seniorId]/SeniorInfo';
-import { getDetailSeniorInfoFetch } from '@/api/senior/[id]/getDetailSeniorInfo';
+import {
+  getDetailSeniorInfoFetch,
+  SeniorInfoResponse,
+} from '@/api/senior/[id]/getDetailSeniorInfo';
 
 export default async function SeniorDetailInfoPage({
   params,
@@ -13,25 +16,32 @@ export default async function SeniorDetailInfoPage({
     queryFn: () => getDetailSeniorInfoFetch({ seniorId: params.seniorId }),
   });
 
-  const seniorData = await getDetailSeniorInfoFetch({
-    seniorId: params.seniorId,
-  });
+  const seniorData = (
+    await fetch(
+      `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/${params.seniorId}`,
+      {
+        method: 'GET',
+        cache: 'no-store',
+      },
+    )
+  ).json() as Promise<SeniorInfoResponse>;
 
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Person',
-    name: seniorData.nickName,
-    description: seniorData.oneLiner,
+    name: (await seniorData).data.nickName,
+    description: (await seniorData).data.oneLiner,
     memberOf: {
       '@type': 'Organization',
-      name: seniorData.lab,
+      name: (await seniorData).data.lab,
     },
-    jobTitle: seniorData.info,
-    image: seniorData.profile,
+    jobTitle: (await seniorData).data.info,
+    image: (await seniorData).data.profile,
   };
 
+  console.log(jsonLd);
   return (
-    <>
+    <section>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -39,6 +49,6 @@ export default async function SeniorDetailInfoPage({
       <Hydrate state={dehydrate(queryClient)}>
         <SeniorInfoPage params={params} />
       </Hydrate>
-    </>
+    </section>
   );
 }

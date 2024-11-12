@@ -16,15 +16,13 @@ interface TriggerButtonProps extends ComponentPropsWithRef<'button'> {
   gap?: CSSProperties['gap'];
   m?: CSSProperties['margin'];
   p?: CSSProperties['padding'];
-  position?: CSSProperties['position'];
-  left?: CSSProperties['left'];
-  right?: CSSProperties['right'];
-  top?: CSSProperties['top'];
-  bottom?: CSSProperties['bottom'];
+  $position?: CSSProperties['position'];
+  $left?: CSSProperties['left'];
+  $right?: CSSProperties['right'];
+  $top?: CSSProperties['top'];
+  $bottom?: CSSProperties['bottom'];
   shape?: 'circle' | 'square';
   border?: CSSProperties['border'];
-  color?: CSSProperties['color'];
-  bg?: CSSProperties['background'];
 }
 
 export const TriggerButton = forwardRef<HTMLButtonElement, TriggerButtonProps>(
@@ -58,14 +56,13 @@ const TriggerButtonStyle = styled.button<TriggerButtonProps>`
   align-items: ${({ alignItems }) => alignItems || 'center'};
   margin: ${({ m }) => m || '0'};
   padding: ${({ p }) => p || '0'};
-  position: ${({ position }) => position || 'static'};
-  left: ${({ left }) => left || 'auto'};
-  right: ${({ right }) => right || 'auto'};
-  top: ${({ top }) => top || 'auto'};
-  bottom: ${({ bottom }) => bottom || 'auto'};
+  position: ${({ $position }) => $position || 'static'};
+  left: ${({ $left }) => $left || 'auto'};
+  right: ${({ $right }) => $right || 'auto'};
+  top: ${({ $top }) => $top || 'auto'};
+  bottom: ${({ $bottom }) => $bottom || 'auto'};
   gap: ${({ gap }) => gap || '0'};
   border-radius: ${({ shape }) => (shape === 'circle' ? '50%' : '0')};
-  background: ${({ bg }) => bg || 'transparent'};
   color: ${({ color }) => color || 'inherit'};
   cursor: pointer;
 `;

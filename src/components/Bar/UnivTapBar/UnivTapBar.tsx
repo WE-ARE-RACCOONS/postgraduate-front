@@ -1,12 +1,7 @@
 'use client';
 import React, { useEffect } from 'react';
 import Image from 'next/image';
-import {
-  TapStyle,
-  TabContainer,
-  TabBackdrop,
-  TabHeader,
-} from './UnivTapBar.styled';
+import { TapStyle, TabBackdrop, TabHeader } from './UnivTapBar.styled';
 import { smtapType } from '@/types/tap/tap';
 import { suactiveTabAtom, sfactiveTabAtom } from '@/stores/tap';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
@@ -28,9 +23,17 @@ function UnivTapBar() {
   };
 
   return (
-    <TabContainer>
-      <Dropdown.Container>
-        {!dropdownContext.isOpen ? (
+    <Dropdown.Container>
+      {!dropdownContext.isOpen ? (
+        <div
+          style={{
+            width: '350px',
+            position: 'relative',
+            display: 'flex',
+            margin: '0 auto',
+            alignItems: 'center',
+          }}
+        >
           <div
             style={{
               display: 'flex',
@@ -77,104 +80,105 @@ function UnivTapBar() {
             >
               다른학교
             </TapStyle>
-            <Dropdown.Header>
-              <Dropdown.Trigger
-                shape="circle"
-                position="absolute"
-                right={'0.28rem'}
-              >
-                <Image
-                  width={28}
-                  height={28}
-                  src="/arrow-down.png"
-                  alt="학교 선택 메뉴 버튼"
-                />
-              </Dropdown.Trigger>
-            </Dropdown.Header>
           </div>
-        ) : (
+          <Dropdown.Header>
+            <Dropdown.Trigger
+              shape="circle"
+              $position="absolute"
+              $right={0}
+              $top={0}
+            >
+              <Image
+                width={28}
+                height={28}
+                src="/arrow-down.png"
+                alt="학교 선택 메뉴 버튼"
+              />
+            </Dropdown.Trigger>
+          </Dropdown.Header>
+        </div>
+      ) : (
+        <TabBackdrop>
           <div ref={dropdownContext.dropdownRef}>
-            <TabBackdrop>
-              <TabHeader>
-                <span style={{ color: '#98999a' }}>
-                  {factiveTab === 'all'
-                    ? '전체분야'
-                    : factiveTab === 'others'
-                    ? '다른분야'
-                    : factiveTab}
-                </span>
-                <Image
-                  src="/arrow-right.png"
-                  alt="오른쪽 버튼"
-                  width={20}
-                  height={20}
-                />
-                <span>
-                  {fuActiveTab === 'all'
-                    ? '전체학교'
-                    : factiveTab === 'others'
-                    ? '다른학교'
-                    : fuActiveTab}
-                </span>
-              </TabHeader>
+            <TabHeader>
+              <span style={{ color: '#98999a' }}>
+                {factiveTab === 'all'
+                  ? '전체분야'
+                  : factiveTab === 'others'
+                  ? '다른분야'
+                  : factiveTab}
+              </span>
+              <Image
+                src="/arrow-right.png"
+                alt="오른쪽 버튼"
+                width={20}
+                height={20}
+              />
+              <span>
+                {fuActiveTab === 'all'
+                  ? '전체학교'
+                  : factiveTab === 'others'
+                  ? '다른학교'
+                  : fuActiveTab}
+              </span>
+            </TabHeader>
 
-              <Dropdown.Trigger
-                shape="circle"
-                position="absolute"
-                right={'0.28rem'}
-                top={'0.78rem'}
+            <Dropdown.Trigger
+              shape="circle"
+              $position="absolute"
+              $right={'0.28rem'}
+              $top={'0.78rem'}
+            >
+              <Image
+                width={28}
+                height={28}
+                src="/arrow-down.png"
+                alt="학교 선택 메뉴 버튼"
+              />
+            </Dropdown.Trigger>
+            <Dropdown.List>
+              <DropdownItem
+                isActive={fuActiveTab === SMTAB.ALL}
+                onClick={() => handleTabClick(SMTAB.ALL)}
+                className="tutorial_school"
               >
-                <Image
-                  width={28}
-                  height={28}
-                  src="/arrow-down.png"
-                  alt="학교 선택 메뉴 버튼"
-                />
-              </Dropdown.Trigger>
-              <Dropdown.List>
-                <DropdownItem
-                  isActive={fuActiveTab === SMTAB.ALL}
-                  onClick={() => handleTabClick(SMTAB.ALL)}
-                  className="tutorial_school"
-                >
-                  전체학교
-                </DropdownItem>
-                <DropdownItem
-                  isActive={fuActiveTab === SMTAB.SEO}
-                  onClick={() => handleTabClick(SMTAB.SEO)}
-                >
-                  서울대
-                </DropdownItem>
-                <DropdownItem
-                  isActive={fuActiveTab === SMTAB.YEO}
-                  onClick={() => handleTabClick(SMTAB.YEO)}
-                >
-                  연세대
-                </DropdownItem>
-                <DropdownItem
-                  isActive={fuActiveTab === SMTAB.KO}
-                  onClick={() => handleTabClick(SMTAB.KO)}
-                >
-                  고려대
-                </DropdownItem>
-                <DropdownItem
-                  isActive={fuActiveTab === SMTAB.KY}
-                  onClick={() => handleTabClick(SMTAB.KY)}
-                >
-                  카이스트
-                </DropdownItem>
-                <DropdownItem
-                  isActive={fuActiveTab === SMTAB.OT}
-                  onClick={() => handleTabClick(SMTAB.OT)}
-                >
-                  다른학교
-                </DropdownItem>
-              </Dropdown.List>
-            </TabBackdrop>
+                전체학교
+              </DropdownItem>
+              <DropdownItem
+                isActive={fuActiveTab === SMTAB.SEO}
+                onClick={() => handleTabClick(SMTAB.SEO)}
+              >
+                서울대
+              </DropdownItem>
+              <DropdownItem
+                isActive={fuActiveTab === SMTAB.YEO}
+                onClick={() => handleTabClick(SMTAB.YEO)}
+              >
+                연세대
+              </DropdownItem>
+              <DropdownItem
+                isActive={fuActiveTab === SMTAB.KO}
+                onClick={() => handleTabClick(SMTAB.KO)}
+              >
+                고려대
+              </DropdownItem>
+              <DropdownItem
+                isActive={fuActiveTab === SMTAB.KY}
+                onClick={() => handleTabClick(SMTAB.KY)}
+              >
+                카이스트
+              </DropdownItem>
+              <DropdownItem
+                isActive={fuActiveTab === SMTAB.OT}
+                onClick={() => handleTabClick(SMTAB.OT)}
+              >
+                다른학교
+              </DropdownItem>
+            </Dropdown.List>
           </div>
-        )}
-      </Dropdown.Container>
-    </TabContainer>
+        </TabBackdrop>
+      )}
+    </Dropdown.Container>
   );
 }
 

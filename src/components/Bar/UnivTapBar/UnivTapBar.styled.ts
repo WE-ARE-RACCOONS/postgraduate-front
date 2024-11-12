@@ -22,15 +22,12 @@ export const TapStyle = styled.div<TapStyleProps>`
   cursor: pointer;
 `;
 
-export const TabContainer = styled.div`
-  position: relative;
-`;
-
 export const TabBackdrop = styled.div`
-  position: fixed;
+  position: absolute;
   top: 225px;
   width: 360px;
-  height: 100%;
+  min-height: 1800px;
+  overflow-y: hidden;
   background-color: rgba(0, 0, 0, 0.4);
   margin: 0 auto;
 `;
