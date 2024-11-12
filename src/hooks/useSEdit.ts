@@ -89,7 +89,7 @@ const useSEdit = () => {
       oneLiner: singleIntro,
       times: timeData,
     }).then(() => {
-      router.refresh();
+      router.push('/mypage');
     });
   };
 
