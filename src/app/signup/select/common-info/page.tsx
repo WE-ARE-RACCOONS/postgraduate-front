@@ -15,7 +15,6 @@ import BackHeader from '@/components/Header/BackHeader';
 import { essential } from '@/stores/condition';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
-import GoogleAnalytics from '@/components/GA/GA';
 
 function CommonInfoPage() {
   const userType = useAtomValue(userTypeAtom);

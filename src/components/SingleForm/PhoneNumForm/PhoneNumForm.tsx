@@ -2,7 +2,7 @@
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { PhoneNumContainer, NumFont } from './PhoneNumForm.styled';
 import { useEffect } from 'react';
-import { useAtomValue, useAtom } from 'jotai';
+import { useAtom } from 'jotai';
 import { phoneNum, phoneNumValidation } from '@/stores/signup';
 import { phoneNumSchema } from './phoneNumSchema';
 import { useForm } from 'react-hook-form';
@@ -13,7 +13,7 @@ interface FormData {
 }
 
 function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
-  const fullNum = useAtomValue(phoneNum);
+  const [fullNum, setFullNum] = useAtom(phoneNum);
   const [availability, setAvailability] = useAtom(phoneNumValidation);
   const {
     register,
@@ -59,8 +59,12 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
             id="phone-num-input"
             className="phone-num-input"
             placeholder="숫자만 입력"
-            defaultValue={defaultValue || ''}
+            defaultValue={defaultValue ?? fullNum ?? ''}
             {...register('phoneNum')}
+            onChange={(e) => {
+              register('phoneNum').onChange(e);
+              setFullNum(e.target.value);
+            }}
             onBlur={(e) => {
               register('phoneNum').onBlur(e);
               setAvailability(errors.phoneNum?.message ? false : true);
