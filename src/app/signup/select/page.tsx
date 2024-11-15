@@ -6,7 +6,7 @@ import { useRouter, usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import junior from '../../../../public/junior.png';
 import senior from '../../../../public/senior.png';
-import GoogleAnalytics from '@/components/GA/GA';
+
 import { SIGNUP_COMMON } from '@/constants/signup/common';
 import { JUNIOR_SELECT } from '@/constants/signup/junior';
 import { SENIOR_SELECT } from '@/constants/signup/senior';
