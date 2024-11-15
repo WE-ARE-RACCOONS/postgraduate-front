@@ -23,8 +23,7 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
     defaultValues: {
       phoneNum: defaultValue ?? '',
     },
-    reValidateMode: 'onChange',
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   useEffect(() => {
@@ -60,7 +59,7 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
             id="phone-num-input"
             className="phone-num-input"
             placeholder="숫자만 입력"
-            defaultValue={defaultValue || ''}
+            defaultValue={defaultValue ?? fullNum ?? ''}
             {...register('phoneNum')}
             onChange={(e) => {
               register('phoneNum').onChange(e);

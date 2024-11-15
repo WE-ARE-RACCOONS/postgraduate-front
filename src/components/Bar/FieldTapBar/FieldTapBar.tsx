@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { memo } from 'react';
 import { TapStyle } from './FieldTapBar.styled';
 import { sftapType } from '@/types/tap/tap';
 import { sfactiveTabAtom } from '@/stores/tap';
@@ -64,4 +64,4 @@ function FieldTapBar() {
   );
 }
 
-export default FieldTapBar;
+export default memo(FieldTapBar);
