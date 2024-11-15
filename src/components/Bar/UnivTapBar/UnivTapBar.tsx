@@ -10,6 +10,8 @@ import { SMTAB } from '@/constants/tab/ctap';
 import { pageNumAtom } from '@/stores/home';
 import { useDropdownContext } from '@/components/DropDown/common/useDropdown';
 import { DropdownItem } from '@/components/DropDown/common/DropdownItem';
+import { FullModalContainer } from '@/components/Modal/FullModal/FullModal.styled';
+import { DimmedBgContainer } from '@/components/Modal/DimmedModal/DimmedModal.styled';
 
 function UnivTapBar() {
   const factiveTab = useAtomValue(sfactiveTabAtom);
@@ -90,8 +92,11 @@ function UnivTapBar() {
             >
               <Image
                 width={28}
+                style={{
+                  cursor: 'pointer',
+                }}
                 height={28}
-                src="/arrow-down.png"
+                src="/arrow-down.svg"
                 alt="학교 선택 메뉴 버튼"
               />
             </Dropdown.Trigger>
@@ -117,7 +122,7 @@ function UnivTapBar() {
               <span>
                 {fuActiveTab === 'all'
                   ? '전체학교'
-                  : factiveTab === 'others'
+                  : fuActiveTab === 'others'
                   ? '다른학교'
                   : fuActiveTab}
               </span>
@@ -132,7 +137,10 @@ function UnivTapBar() {
               <Image
                 width={28}
                 height={28}
-                src="/arrow-down.png"
+                style={{
+                  cursor: 'pointer',
+                }}
+                src="/arrow-up.png"
                 alt="학교 선택 메뉴 버튼"
               />
             </Dropdown.Trigger>

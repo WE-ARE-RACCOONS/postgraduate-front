@@ -26,10 +26,16 @@ export const TabBackdrop = styled.div`
   position: absolute;
   top: 225px;
   width: 360px;
-  min-height: 1800px;
   overflow-y: hidden;
-  background-color: rgba(0, 0, 0, 0.4);
   margin: 0 auto;
+
+  width: 360px;
+
+  height: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  background-color: rgba(39, 39, 39, 0.48);
 `;
 
 export const TabHeader = styled.h1`

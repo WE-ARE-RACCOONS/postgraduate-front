@@ -56,7 +56,7 @@ export const DropdownProvider = ({
     ref: dropdownRef,
     handler: (e) => {
       e.stopPropagation();
-      onClose?.();
+      if (isOpen) onClose?.();
     },
   });
 

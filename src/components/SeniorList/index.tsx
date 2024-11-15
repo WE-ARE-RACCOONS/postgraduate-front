@@ -49,34 +49,45 @@ export function SeniorList() {
 
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
-      <DropdownProvider>
-        <HomeLayer>
-          <LogoLayer
-            modalHandler={() => {
-              overlay.open(({ unmount }) => {
-                return <SearchModal modalHandler={() => unmount()} />;
-              });
-            }}
-          />
-          <HomeBannerLayer>
-            <SwiperComponent />
-          </HomeBannerLayer>
+      <HomeLayer>
+        <LogoLayer
+          modalHandler={() => {
+            overlay.open(({ unmount }) => {
+              return <SearchModal modalHandler={() => unmount()} />;
+            });
+          }}
+        />
+        <HomeBannerLayer>
+          <SwiperComponent />
+        </HomeBannerLayer>
+        <DropdownProvider>
           <HomeFieldLayer>
             <FieldTapBar />
           </HomeFieldLayer>
           <HomeUnivLayer>
             <UnivTapBar />
           </HomeUnivLayer>
-          <HomeProfileLayer>
-            {seniorListData?.seniorSearchResponses ? (
-              seniorListData?.seniorSearchResponses?.map((el, idx) => (
-                <div key={el.seniorId}>
-                  <SeniorProfile data={el} />
-                </div>
-              ))
-            ) : (
-              <div>해당하는 선배가 없어요</div>
-            )}
+        </DropdownProvider>
+        <HomeProfileLayer>
+          {seniorListData?.seniorSearchResponses?.length ? (
+            seniorListData?.seniorSearchResponses?.map((el, idx) => (
+              <div key={el.seniorId}>
+                <SeniorProfile data={el} />
+              </div>
+            ))
+          ) : (
+            <div
+              style={{
+                minHeight: '22rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              해당하는 선배가 없어요
+            </div>
+          )}
+          {seniorListData?.totalElements !== 0 && (
             <StyledPagination
               shape="rounded"
               page={Number(currentSeniorListPage ?? 1)}
@@ -88,24 +99,24 @@ export function SeniorList() {
               aria-label="선배 회원 페이지네이션"
               role="navigation"
             />
-          </HomeProfileLayer>
-          <Footer />
-          <MenuBarWrapper>
-            <MenuBar
-              modalHandler={() => {
-                overlay.open(({ unmount }) => {
-                  return (
-                    <DimmedModal
-                      modalType="notuser"
-                      modalHandler={() => unmount()}
-                    />
-                  );
-                });
-              }}
-            />
-          </MenuBarWrapper>
-        </HomeLayer>
-      </DropdownProvider>
+          )}
+        </HomeProfileLayer>
+        <Footer />
+        <MenuBarWrapper>
+          <MenuBar
+            modalHandler={() => {
+              overlay.open(({ unmount }) => {
+                return (
+                  <DimmedModal
+                    modalType="notuser"
+                    modalHandler={() => unmount()}
+                  />
+                );
+              });
+            }}
+          />
+        </MenuBarWrapper>
+      </HomeLayer>
     </Suspense>
   );
 }
