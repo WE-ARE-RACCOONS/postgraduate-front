@@ -23,7 +23,7 @@ function PhoneNumForm({ defaultValue }: { defaultValue?: string }) {
     defaultValues: {
       phoneNum: defaultValue ?? '',
     },
-    mode: 'onBlur',
+    mode: 'onChange',
   });
 
   useEffect(() => {
