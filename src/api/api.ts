@@ -1,6 +1,7 @@
 import useAuth from '@/hooks/useAuth';
 import findExCode from '@/utils/findExCode';
 import axios, { InternalAxiosRequestConfig } from 'axios';
+import { sendServerErrorMsgToSlack } from './slack/sendSeverError';
 
 const withAuthInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
@@ -33,6 +34,8 @@ withAuthInstance.interceptors.response.use(
     if (findExCode(res.data.code)) {
       removeTokens();
       alert(res.data.message);
+      sendServerErrorMsgToSlack(res);
+
       if (typeof window !== 'undefined') {
         window.location.reload();
       }
@@ -47,4 +50,17 @@ withAuthInstance.interceptors.response.use(
   },
 );
 
+withOutAuthInstance.interceptors.response.use(
+  (res) => {
+    if (findExCode(res.data.code)) {
+      sendServerErrorMsgToSlack(res);
+    }
+
+    return res;
+  },
+  (error) => {
+    console.error('Response error:', error);
+    return Promise.reject(error);
+  },
+);
 export { withAuthInstance, withOutAuthInstance };
