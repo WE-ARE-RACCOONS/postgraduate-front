@@ -116,12 +116,6 @@ function Footer() {
             <FooterItemTitle>마케팅 제휴 문의</FooterItemTitle>
             <FooterItemContent>grad.kimseonbae@gmail.com</FooterItemContent>
           </div>
-          <Image
-            src={InstaGram}
-            alt="인스타그램 링크 이미지"
-            width={14}
-            height={14}
-          />
         </FooterContactSection>
       </FooterInfoSection>
 
