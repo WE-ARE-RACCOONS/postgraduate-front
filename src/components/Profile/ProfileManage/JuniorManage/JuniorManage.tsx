@@ -22,13 +22,10 @@ function JuniorManage(props: NotSeniorProps) {
   const [_socialId, setSocialId] = useAtom(socialIdAtom);
 
   const handleClick = async () => {
-    if (myRole?.data.possible) {
-      setuserTypeAtom('junior');
-      renewSeniorToken.mutate();
-      router.replace('/');
-    } else {
-      setSocialId(myRole?.data?.socialId + '');
-    }
+    renewSeniorToken.mutate();
+    setuserTypeAtom('junior');
+    router.replace('/');
+    setSocialId(myRole?.data?.socialId + '');
   };
 
   return (
