@@ -56,22 +56,7 @@ function MatchingInfoPage() {
           <br />
           {JUNIOR_MATCHING.matchingDescSec}
         </MIFont>
-        <MatchingForm
-          title={JUNIOR_MATCHING.desiredSchoolTitle}
-          isRequired={false}
-          maxLength={50}
-          placeholder={JUNIOR_MATCHING.desiredSchoolPlaceholder}
-          handler={setDesiredSchool}
-          charCount={schoolCharCount}
-        />
-        <MatchingForm
-          title={JUNIOR_MATCHING.desiredFieldTitle}
-          isRequired={false}
-          maxLength={60}
-          placeholder={JUNIOR_MATCHING.desiredFieldPlaceholder}
-          handler={setDesiredField}
-          charCount={fieldCharCount}
-        />
+
         <div
           style={{
             display: 'flex',
@@ -86,11 +71,8 @@ function MatchingInfoPage() {
           />
           <MILabel>{JUNIOR_MATCHING.matchingReceiveText}</MILabel>
         </div>
-        {(matchingReceive ? schoolCharCount && fieldCharCount : true) ? (
-          <SignUpBtn />
-        ) : (
-          <NextBtn kind="route-non-matching" btnText="가입완료 하기" />
-        )}
+
+        <SignUpBtn />
       </div>
     </div>
   );

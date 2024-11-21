@@ -121,11 +121,8 @@ function SeniorInfoPage() {
             )}
           </div>
         </BtnContainer>
-        {sPostGradu && sMajor ? (
-          <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
-        ) : (
-          <NextBtn kind="route-non" btnText="다음" />
-        )}
+
+        <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
       </SeniorInfoPageContainer>
     </>
   );
