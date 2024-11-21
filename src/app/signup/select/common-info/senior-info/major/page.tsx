@@ -4,7 +4,6 @@ import NextBtn from '@/components/Button/NextBtn';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import SingleValidator from '@/components/Validator/SingleValidator';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
-import { ModalType } from '@/types/modal/riseUp';
 import { useAtomValue } from 'jotai';
 import { overlay } from 'overlay-kit';
 import { useRouter } from 'next/navigation';
@@ -17,7 +16,6 @@ import { detectReload, preventClose } from '@/utils/reloadFun';
 import { SENIOR_MAJOR } from '@/constants/signup/senior';
 
 function SeniorInfoPage() {
-  const [modalType, setModalType] = useState<ModalType>('postgradu');
   const [emptyPart, setEmptyPart] = useState('');
   const [flag, setFlag] = useState(false);
 
@@ -54,7 +52,7 @@ function SeniorInfoPage() {
       return;
     }
     setFlag(false);
-    router.push(`/signup/select/common-info/senior-info/lab`);
+    router.push('./lab');
   };
 
   return (
@@ -83,12 +81,12 @@ function SeniorInfoPage() {
               modalHandler={() => {
                 overlay.open(({ unmount }) => {
                   return (
-                    <RiseUpModal modalType={modalType} modalHandler={unmount} />
+                    <RiseUpModal
+                      modalType={'postgradu'}
+                      modalHandler={unmount}
+                    />
                   );
                 });
-              }}
-              onClick={() => {
-                setModalType('postgradu');
               }}
             />
           </BtnBox>
@@ -103,12 +101,9 @@ function SeniorInfoPage() {
               modalHandler={() => {
                 overlay.open(({ unmount }) => {
                   return (
-                    <RiseUpModal modalType={modalType} modalHandler={unmount} />
+                    <RiseUpModal modalType={'major'} modalHandler={unmount} />
                   );
                 });
-              }}
-              onClick={() => {
-                setModalType('major');
               }}
             />
           </BtnBox>
@@ -121,7 +116,8 @@ function SeniorInfoPage() {
             )}
           </div>
         </BtnContainer>
-        {sPostGradu && sMajor ? (
+
+        {sMajor && sPostGradu ? (
           <NextBtn kind="route" btnText="다음" onClick={handleSubmit} />
         ) : (
           <NextBtn kind="route-non" btnText="다음" />

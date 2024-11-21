@@ -54,15 +54,15 @@ const useKakaoLogin = () => {
           return;
         }
 
-        if (kakaoAuthFetchRes.code === 'AU205') {
-          localStorage.setItem('socialId', kakaoAuthFetchRes.data.socialId);
-          router.push('/signup/select');
-          return;
-        }
-
         if (findExCode(kakaoAuthFetchRes.code)) {
           alert('탈퇴 후 15일에서 30일 사이에는 로그인이 불가능합니다.');
           router.push('/');
+          return;
+        }
+
+        if (!isDelete && kakaoAuthFetchRes.code === 'AU205') {
+          localStorage.setItem('socialId', kakaoAuthFetchRes.data.socialId);
+          router.push('/signup/select');
           return;
         }
 
