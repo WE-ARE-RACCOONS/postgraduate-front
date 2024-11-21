@@ -71,7 +71,6 @@ function MatchingInfoPage() {
           />
           <MILabel>{JUNIOR_MATCHING.matchingReceiveText}</MILabel>
         </div>
-
         <SignUpBtn />
       </div>
     </div>
