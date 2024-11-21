@@ -21,7 +21,7 @@ export const sendServerErrorMsgToSlack = async (res: AxiosResponse<any>) => {
 
     await axios({
       method: 'post',
-      url: 'https://hooks.slack.com/services/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',
+      url: 'https://hooks.slack.com/services/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',
       data: JSON.stringify(payload),
       headers: headers,
     });
