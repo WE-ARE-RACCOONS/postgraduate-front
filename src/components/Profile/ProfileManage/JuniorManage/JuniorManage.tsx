@@ -22,10 +22,14 @@ function JuniorManage(props: NotSeniorProps) {
   const [_socialId, setSocialId] = useAtom(socialIdAtom);
 
   const handleClick = async () => {
-    renewSeniorToken.mutate();
-    setuserTypeAtom('junior');
-    router.replace('/');
-    setSocialId(myRole?.data?.socialId + '');
+    if (myRole?.data.possible) {
+      renewSeniorToken.mutate();
+      setuserTypeAtom('senior');
+      setSocialId(myRole?.data?.socialId + '');
+      router.push('/mypage');
+    } else {
+      router.replace('/signup/select/common-info/senior-info/major');
+    }
   };
 
   return (

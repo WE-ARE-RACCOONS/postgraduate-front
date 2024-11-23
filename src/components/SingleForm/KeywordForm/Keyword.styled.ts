@@ -68,6 +68,7 @@ export const KeywordFormContainer = styled.div`
     background-color: #fff;
     color: #6d747e;
     font-size: 16px;
+    margin-top: 15px;
     font-weight: 700;
     cursor: pointer;
   }
