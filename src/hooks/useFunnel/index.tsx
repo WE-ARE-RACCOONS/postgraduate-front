@@ -39,7 +39,7 @@ function useFunnel<Steps extends StepArray>(
   RouteFunnel<Steps> & { Step: RouterFunnelStep<Steps> },
   (step: Steps[number]) => void,
   () => void,
-  number,
+  string,
 ] {
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -90,7 +90,7 @@ function useFunnel<Steps extends StepArray>(
     Object.assign(FunnelComponent, { Step }),
     updateStep,
     prevStep,
-    activeStepIndex,
+    currentStep ?? '',
   ];
 }
 

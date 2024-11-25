@@ -5,7 +5,7 @@ export const WISH_SENIOR_MENTOR_MSG = {
   },
   FIELD: {
     TITLE: '어떤 분야에 관심 있는지 알려주세요',
-    SUB_TITLE: '* 궁금한 학교가 정해져 있지 않다면 비워둬도 괜찮아요',
+    SUB_TITLE: '',
   },
   POSTGRADU: {
     TITLE: '궁금한 선배의 학교를 알려주세요',

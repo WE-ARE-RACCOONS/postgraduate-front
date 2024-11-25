@@ -31,7 +31,7 @@ export function WishSeniorLab({ onClick }: { onClick: (lab: string) => void }) {
 
       <NextBtnBox>
         <NextBtn
-          btnText="신청 완료"
+          btnText="다음"
           kind="route"
           onClick={() => onClick(getValues('lab'))}
         />

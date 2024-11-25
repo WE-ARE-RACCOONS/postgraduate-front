@@ -6,13 +6,20 @@ import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { phoneNumSchema } from '@/components/SingleForm/PhoneNumForm/phoneNumSchema';
 import TextForm from '@/components/SingleForm/TextForm';
+import SingleValidator from '@/components/Validator/SingleValidator';
+import { useEffect } from 'react';
 
 export function WishSeniorPhoneNum({
   onClick,
 }: {
   onClick: (phoneNum: string) => void;
 }) {
-  const { register, getValues } = useForm({
+  const {
+    register,
+    getValues,
+    formState: { errors },
+    trigger,
+  } = useForm({
     defaultValues: {
       phoneNum: '',
     },
@@ -20,6 +27,9 @@ export function WishSeniorPhoneNum({
     resolver: yupResolver(phoneNumSchema),
   });
 
+  useEffect(() => {
+    trigger();
+  }, []);
   return (
     <div style={{ margin: '1.6rem 1rem' }}>
       <WishSeniorTitle>{WISH_SENIOR_MENTOR_MSG.PHONE.TITLE}</WishSeniorTitle>
@@ -31,15 +41,18 @@ export function WishSeniorPhoneNum({
       <LabWrapper>
         <TextForm
           targetAtom={''}
-          placeholder={'010-1234-5677'}
+          placeholder={'01012345678'}
           register={register('phoneNum')}
         />
+        {errors.phoneNum?.message && (
+          <SingleValidator textColor="#FF3347" msg={errors.phoneNum.message} />
+        )}
       </LabWrapper>
 
       <NextBtnBox>
         <NextBtn
           btnText="신청 완료"
-          kind="route"
+          kind={errors.phoneNum?.message ? 'route-non' : 'route'}
           onClick={() => onClick(getValues('phoneNum'))}
         />
       </NextBtnBox>

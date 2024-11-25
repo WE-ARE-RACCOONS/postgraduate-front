@@ -9,15 +9,16 @@ import {
   WishSeniorPhoneNum,
   WishSeniorPostGradu,
   WishSeniorProfessor,
+  ApplyWantedSeniorSubmit,
 } from './(components)/(steps)';
+import { useWishSeniorApply } from '@/hooks/mutations/useWishSeniorApply';
+import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
-import { useAtomValue } from 'jotai';
-import { phoneNum } from '@/stores/signup';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import type { WishSeniorApplyRequest } from '@/api/senior/wishSeniorApply';
-import useDimmedModal from '@/hooks/useDimmedModal';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
+import ProgressBar from '@/components/Bar/ProgressBar';
 
 const applyWantedSeniorSteps = [
   'info',
@@ -26,6 +27,7 @@ const applyWantedSeniorSteps = [
   'professor',
   'lab',
   'phoneNumber',
+  'submit',
 ] as const;
 
 export default function ApplyWantedSeniorPage() {
@@ -37,25 +39,41 @@ export default function ApplyWantedSeniorPage() {
     } as const,
   );
 
-  const defaultPhoneNum = useAtomValue(phoneNum);
-
   const [wishSenior, setWishSenior] = useState<WishSeniorApplyRequest>({
     field: '',
     postgradu: '',
     professor: '',
     lab: '',
-    phoneNumber: defaultPhoneNum,
+    phoneNumber: '',
   });
 
-  const openWithSeniorApplyAgreeModal = () => {
+  const { mutate } = useWishSeniorApply();
+  const router = useRouter();
+
+  const openWithSeniorApplyAgreeModal = (phoneNumber: string) => {
     overlay.open(({ unmount }) => (
-      <RiseUpModal modalHandler={unmount} modalType="wish-senior-apply" />
+      <RiseUpModal
+        modalHandler={() => {
+          mutate({ ...wishSenior, phoneNumber });
+          setStep('submit');
+          unmount();
+        }}
+        modalType="wish-senior-apply"
+      />
     ));
   };
+  console.log(
+    _activeStep,
+    applyWantedSeniorSteps.findIndex((v) => v === _activeStep),
+  );
 
   return (
     <main>
       <BackHeader headerText="" kind="modal" modalHandler={() => prevStep()} />
+      <ProgressBar
+        activeNum={applyWantedSeniorSteps.findIndex((v) => v === _activeStep)}
+        totalNum={applyWantedSeniorSteps.length}
+      />
       <WithSeniorFunnel steps={applyWantedSeniorSteps} step="info">
         <WithSeniorFunnel.Step name="info">
           <WishSeniorInfo onClick={() => setStep('field')} />
@@ -110,12 +128,15 @@ export default function ApplyWantedSeniorPage() {
         <WithSeniorFunnel.Step name="phoneNumber">
           <WishSeniorPhoneNum
             onClick={(phone) => {
-              setWishSenior((prev) => ({
-                ...prev,
-                phoneNumber: phone,
-              }));
-              openWithSeniorApplyAgreeModal();
+              openWithSeniorApplyAgreeModal(phone);
             }}
+          />
+        </WithSeniorFunnel.Step>
+
+        <WithSeniorFunnel.Step name="submit">
+          <ApplyWantedSeniorSubmit
+            onClickSumitEnd={() => router.push('/')}
+            onClickAnotherSubmit={() => setStep('field')}
           />
         </WithSeniorFunnel.Step>
       </WithSeniorFunnel>
