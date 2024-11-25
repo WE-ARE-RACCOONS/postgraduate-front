@@ -21,7 +21,6 @@ export function WishSeniorInfo({ onClick }: { onClick: () => void }) {
           height={225}
         />
       </ImageWrapper>
-
       <NextBtn btnText="시작" kind="route" onClick={onClick} />
     </div>
   );

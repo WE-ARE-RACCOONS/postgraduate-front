@@ -20,3 +20,12 @@ export const WISH_SENIOR_MENTOR_MSG = {
     SUB_TITLE: '* 선배를 찾으면 알려주신 정보로 연락드릴게요',
   },
 } as const;
+
+export const WISH_SENIOR_PROVIDER_FIELD_LIST = [
+  'UX/UI',
+  '데이터 사이언스',
+  '산업 공학',
+  'AI',
+];
+
+export const WISH_SENIOR_FIELD_ETC = '기타(직접 입력)' as const;
