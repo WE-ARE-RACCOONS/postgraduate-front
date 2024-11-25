@@ -16,7 +16,7 @@ export const WISH_SENIOR_MENTOR_MSG = {
     SUB_TITLE: '* 궁금한 교수님이 정해져 있지 않다면 비워둬도 괜찮아요',
   },
   LAB: {
-    TITLE: '궁금한 대학원의 랩실명을 알려주새요',
+    TITLE: '궁금한 대학원의 랩실명을 알려주세요',
     SUB_TITLE: '* 궁금한 랩실이 정해져 있지 않다면 비워둬도 괜찮아요',
   },
   PHONE: {
