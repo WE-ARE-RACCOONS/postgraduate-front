@@ -13,7 +13,7 @@ function ProgressBar({
     for (let i = 0; i <= activeNum; i++) {
       activeStepArr[i].classList.add('active');
     }
-  }, []);
+  }, [totalNum, activeNum]);
 
   function renderStepperTabs(totalNum: number) {
     const stepperTabs = [];
