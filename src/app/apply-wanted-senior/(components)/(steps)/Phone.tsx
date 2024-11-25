@@ -47,10 +47,9 @@ export function WishSeniorPhoneNum({
           aria-invalid={!!errors.phoneNum}
         />
         {errors.phoneNum?.message && (
-          <SingleValidator 
-            textColor="#FF3347" 
+          <SingleValidator
+            textColor="#FF3347"
             msg={errors.phoneNum.message}
-            role="alert"
             aria-live="polite"
           />
         )}
@@ -60,7 +59,6 @@ export function WishSeniorPhoneNum({
         <NextBtn
           btnText="신청 완료"
           kind={errors.phoneNum?.message ? 'route-non' : 'route'}
-          disabled={!!errors.phoneNum?.message}
           onClick={() => onClick(getValues('phoneNum'))}
         />
       </NextBtnBox>
