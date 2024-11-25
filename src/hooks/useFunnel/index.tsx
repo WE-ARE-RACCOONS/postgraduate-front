@@ -90,7 +90,7 @@ function useFunnel<Steps extends StepArray>(
     Object.assign(FunnelComponent, { Step }),
     updateStep,
     prevStep,
-    currentStep ?? '',
+    currentStep ?? options.initialStep,
   ];
 }
 
