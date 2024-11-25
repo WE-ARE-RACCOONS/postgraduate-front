@@ -43,9 +43,16 @@ export function WishSeniorPhoneNum({
           targetAtom={''}
           placeholder={'01012345678'}
           register={register('phoneNum')}
+          aria-label="전화번호 입력"
+          aria-invalid={!!errors.phoneNum}
         />
         {errors.phoneNum?.message && (
-          <SingleValidator textColor="#FF3347" msg={errors.phoneNum.message} />
+          <SingleValidator 
+            textColor="#FF3347" 
+            msg={errors.phoneNum.message}
+            role="alert"
+            aria-live="polite"
+          />
         )}
       </LabWrapper>
 
