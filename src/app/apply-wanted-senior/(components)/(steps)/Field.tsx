@@ -3,8 +3,8 @@ import {
   WISH_SENIOR_MENTOR_MSG,
   WISH_SENIOR_PROVIDER_FIELD_LIST,
   WISH_SENIOR_FIELD_ETC,
-} from '../constant';
-import { WishSeniorSubTitle, WishSeniorTitle, NextBtnBox } from '../page';
+} from '../../constant';
+import { WishSeniorSubTitle, WishSeniorTitle, NextBtnBox } from '../../page';
 import { parseAsJson, useQueryState } from 'nuqs';
 import NextBtn from '@/components/Button/NextBtn';
 import * as y from 'yup';

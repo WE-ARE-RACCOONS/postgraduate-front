@@ -1,18 +1,18 @@
 import styled from 'styled-components';
-import { WISH_SENIOR_MENTOR_MSG } from '../constant';
-import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../page';
+import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
+import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../../page';
 import TextForm from '@/components/SingleForm/TextForm';
 import { useForm } from 'react-hook-form';
 import NextBtn from '@/components/Button/NextBtn';
 
-export function WishSeniorProfessor({
+export function WishSeniorPostGradu({
   onClick,
 }: {
-  onClick: (professor: string) => void;
+  onClick: (postgradu: string) => void;
 }) {
   const { register, getValues } = useForm({
     defaultValues: {
-      professor: '',
+      postgradu: '',
     },
     mode: 'onChange',
   });
@@ -20,32 +20,32 @@ export function WishSeniorProfessor({
   return (
     <div style={{ margin: '1.6rem 1rem' }}>
       <WishSeniorTitle>
-        {WISH_SENIOR_MENTOR_MSG.PROFESSOR.TITLE}
+        {WISH_SENIOR_MENTOR_MSG.POSTGRADU.TITLE}
       </WishSeniorTitle>
       <br />
       <WishSeniorSubTitle>
-        {WISH_SENIOR_MENTOR_MSG.PROFESSOR.SUB_TITLE}
+        {WISH_SENIOR_MENTOR_MSG.POSTGRADU.SUB_TITLE}
       </WishSeniorSubTitle>
 
-      <ProfessorWrapper>
+      <PostGraduWrapper>
         <TextForm
           targetAtom={''}
-          placeholder={'ex.김OO교수님'}
-          register={register('professor')}
+          placeholder={'ex.연세대학교'}
+          register={register('postgradu')}
         />
-      </ProfessorWrapper>
+      </PostGraduWrapper>
 
       <NextBtnBox>
         <NextBtn
           btnText="다음"
           kind="route"
-          onClick={() => onClick(getValues('professor'))}
+          onClick={() => onClick(getValues('postgradu'))}
         />
       </NextBtnBox>
     </div>
   );
 }
 
-const ProfessorWrapper = styled.div`
+const PostGraduWrapper = styled.div`
   margin-top: 40px;
 `;

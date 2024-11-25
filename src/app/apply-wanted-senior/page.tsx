@@ -1,15 +1,22 @@
 'use client';
+
 import BackHeader from '@/components/Header/BackHeader';
 import useFunnel from '@/hooks/useFunnel';
-import { WishSeniorField } from './(components)/Field';
-import { WishSeniorInfo } from './(components)/Info';
-import { WishSeniorPostGradu } from './(components)/Postgradu';
+import {
+  WishSeniorInfo,
+  WishSeniorField,
+  WishSeniorLab,
+  WishSeniorPostGradu,
+  WishSeniorProfessor,
+} from './(components)/(steps)';
 import styled from 'styled-components';
+import { overlay } from 'overlay-kit';
 import { useAtomValue } from 'jotai';
 import { phoneNum } from '@/stores/signup';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import type { WishSeniorApplyRequest } from '@/api/senior/wishSeniorApply';
-import { WishSeniorProfessor } from './(components)/Professor';
+import useDimmedModal from '@/hooks/useDimmedModal';
+import RiseUpModal from '@/components/Modal/RiseUpModal';
 
 const applyWantedSeniorSteps = [
   'info',
@@ -39,6 +46,13 @@ export default function ApplyWantedSeniorPage() {
     phoneNumber: defaultPhoneNum,
   });
 
+  useEffect(() => {
+    overlay.open(({ unmount }) => {
+      return (
+        <RiseUpModal modalType="wish-senior-apply" modalHandler={unmount} />
+      );
+    });
+  }, []);
   return (
     <main>
       <BackHeader headerText="" kind="modal" modalHandler={() => prevStep()} />
@@ -77,6 +91,18 @@ export default function ApplyWantedSeniorPage() {
                 professor,
               }));
               setStep('lab');
+            }}
+          />
+        </WithSeniorFunnel.Step>
+
+        <WithSeniorFunnel.Step name="lab">
+          <WishSeniorLab
+            onClick={(professor) => {
+              setWishSenior((prev) => ({
+                ...prev,
+                professor,
+              }));
+              setStep('phoneNumber');
             }}
           />
         </WithSeniorFunnel.Step>
