@@ -13,13 +13,21 @@ export function WishSeniorApplyAgreeModal({
   return (
     <Container>
       <Header>
-        <Image
-          src={agreewithSeniorApply ? '/checkbox_c.png' : '/checkbox_x.png'}
-          alt="개인정보 수집 동의 이미지"
-          width={24}
-          height={24}
-          onClick={() => setAgreeWithSeniorApply(!agreewithSeniorApply)}
-        />
+        <label className="checkbox-wrapper">
+          <input
+            type="checkbox"
+            checked={agreewithSeniorApply}
+            onChange={() => setAgreeWithSeniorApply(!agreewithSeniorApply)}
+            aria-label="개인정보 수집 및 이용 동의"
+          />
+          <Image
+            src={agreewithSeniorApply ? '/checkbox_c.png' : '/checkbox_x.png'}
+            alt=""
+            width={24}
+            height={24}
+            role="presentation"
+          />
+        </label>
         <h1>개인정보 수집 및 이용에 동의해주세요</h1>
       </Header>
       <Content>
