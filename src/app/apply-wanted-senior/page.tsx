@@ -6,6 +6,7 @@ import {
   WishSeniorInfo,
   WishSeniorField,
   WishSeniorLab,
+  WishSeniorPhoneNum,
   WishSeniorPostGradu,
   WishSeniorProfessor,
 } from './(components)/(steps)';
@@ -46,13 +47,12 @@ export default function ApplyWantedSeniorPage() {
     phoneNumber: defaultPhoneNum,
   });
 
-  useEffect(() => {
-    overlay.open(({ unmount }) => {
-      return (
-        <RiseUpModal modalType="wish-senior-apply" modalHandler={unmount} />
-      );
-    });
-  }, []);
+  const openWithSeniorApplyAgreeModal = () => {
+    overlay.open(({ unmount }) => (
+      <RiseUpModal modalHandler={unmount} modalType="wish-senior-apply" />
+    ));
+  };
+
   return (
     <main>
       <BackHeader headerText="" kind="modal" modalHandler={() => prevStep()} />
@@ -97,12 +97,24 @@ export default function ApplyWantedSeniorPage() {
 
         <WithSeniorFunnel.Step name="lab">
           <WishSeniorLab
-            onClick={(professor) => {
+            onClick={(lab) => {
               setWishSenior((prev) => ({
                 ...prev,
-                professor,
+                lab,
               }));
               setStep('phoneNumber');
+            }}
+          />
+        </WithSeniorFunnel.Step>
+
+        <WithSeniorFunnel.Step name="phoneNumber">
+          <WishSeniorPhoneNum
+            onClick={(phone) => {
+              setWishSenior((prev) => ({
+                ...prev,
+                phoneNumber: phone,
+              }));
+              openWithSeniorApplyAgreeModal();
             }}
           />
         </WithSeniorFunnel.Step>
