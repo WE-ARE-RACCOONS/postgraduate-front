@@ -4,7 +4,7 @@ import {
   WISH_SENIOR_PROVIDER_FIELD_LIST,
   WISH_SENIOR_FIELD_ETC,
 } from '../../constant';
-import { WishSeniorSubTitle, WishSeniorTitle, NextBtnBox } from '../../page';
+import { WishSeniorSubTitle, WishSeniorTitle, NextBtnBox } from '../(template)';
 import { parseAsJson, useQueryState } from 'nuqs';
 import NextBtn from '@/components/Button/NextBtn';
 import * as y from 'yup';

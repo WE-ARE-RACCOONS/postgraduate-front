@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
-import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../../page';
+import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
 import NextBtn from '@/components/Button/NextBtn';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
