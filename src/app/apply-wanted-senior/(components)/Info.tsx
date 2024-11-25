@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import { WISH_SENIOR_MENTOR_MSG } from '../constant';
 import NextBtn from '@/components/Button/NextBtn';
-import { WishSeniorTitle, WishSeniorSubTitle } from '../page';
+import { WishSeniorTitle, WishSeniorSubTitle, NextBtnBox } from '../page';
 
 export function WishSeniorInfo({ onClick }: { onClick: () => void }) {
   return (
@@ -21,12 +21,13 @@ export function WishSeniorInfo({ onClick }: { onClick: () => void }) {
           height={225}
         />
       </ImageWrapper>
-      <NextBtn btnText="시작" kind="route" onClick={onClick} />
+      <NextBtnBox>
+        <NextBtn btnText="시작" kind="route" onClick={onClick} />
+      </NextBtnBox>
     </div>
   );
 }
 
 const ImageWrapper = styled.div`
-  margin-top: 100px;
-  margin-bottom: 100px;
+  margin-top: 40px;
 `;

@@ -4,7 +4,7 @@ import {
   WISH_SENIOR_PROVIDER_FIELD_LIST,
   WISH_SENIOR_FIELD_ETC,
 } from '../constant';
-import { WishSeniorSubTitle, WishSeniorTitle } from '../page';
+import { WishSeniorSubTitle, WishSeniorTitle, NextBtnBox } from '../page';
 import { parseAsJson, useQueryState } from 'nuqs';
 import NextBtn from '@/components/Button/NextBtn';
 import * as y from 'yup';
@@ -90,17 +90,19 @@ export function WishSeniorField({
         </WishSeniorFieldRadioWrapper>
       </WishSeniorFieldList>
 
-      <NextBtn
-        btnText="다음"
-        onClick={() => {
-          if (field?.type) {
-            onClick(field.type);
-          } else if (field?.value) {
-            onClick(field.value);
-          }
-        }}
-        kind="route"
-      />
+      <NextBtnBox>
+        <NextBtn
+          btnText="다음"
+          onClick={() => {
+            if (field?.type) {
+              onClick(field.type);
+            } else if (field?.value) {
+              onClick(field.value);
+            }
+          }}
+          kind="route"
+        />
+      </NextBtnBox>
     </div>
   );
 }
@@ -109,8 +111,7 @@ const WishSeniorFieldList = styled.ul`
   list-style-type: none;
   display: flex;
   flex-direction: column;
-  margin-top: 80px;
-  margin-bottom: 80px;
+  margin-top: 40px;
   gap: 4px;
 `;
 

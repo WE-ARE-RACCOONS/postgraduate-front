@@ -3,9 +3,13 @@ import BackHeader from '@/components/Header/BackHeader';
 import useFunnel from '@/hooks/useFunnel';
 import { WishSeniorField } from './(components)/Field';
 import { WishSeniorInfo } from './(components)/Info';
+import { WishSeniorPostGradu } from './(components)/Postgradu';
 import styled from 'styled-components';
+import { useAtomValue } from 'jotai';
+import { phoneNum } from '@/stores/signup';
 import { useState } from 'react';
 import type { WishSeniorApplyRequest } from '@/api/senior/wishSeniorApply';
+import { WishSeniorProfessor } from './(components)/Professor';
 
 const applyWantedSeniorSteps = [
   'info',
@@ -25,15 +29,16 @@ export default function ApplyWantedSeniorPage() {
     } as const,
   );
 
+  const defaultPhoneNum = useAtomValue(phoneNum);
+
   const [wishSenior, setWishSenior] = useState<WishSeniorApplyRequest>({
     field: '',
     postgradu: '',
     professor: '',
     lab: '',
-    phoneNumber: '',
+    phoneNumber: defaultPhoneNum,
   });
 
-  console.log(wishSenior);
   return (
     <main>
       <BackHeader headerText="" kind="modal" modalHandler={() => prevStep()} />
@@ -48,11 +53,33 @@ export default function ApplyWantedSeniorPage() {
                 ...prev,
                 field,
               }));
+              setStep('postgradu');
+            }}
+          />
+        </WithSeniorFunnel.Step>
+        <WithSeniorFunnel.Step name="postgradu">
+          <WishSeniorPostGradu
+            onClick={(postgradu) => {
+              setWishSenior((prev) => ({
+                ...prev,
+                postgradu,
+              }));
+              setStep('professor');
+            }}
+          />
+        </WithSeniorFunnel.Step>
+
+        <WithSeniorFunnel.Step name="professor">
+          <WishSeniorProfessor
+            onClick={(professor) => {
+              setWishSenior((prev) => ({
+                ...prev,
+                professor,
+              }));
               setStep('lab');
             }}
           />
         </WithSeniorFunnel.Step>
-        <WithSeniorFunnel.Step name="lab">asd</WithSeniorFunnel.Step>
       </WithSeniorFunnel>
     </main>
   );
@@ -68,4 +95,10 @@ export const WishSeniorSubTitle = styled.h4`
   font-size: 14px;
   font-weight: 550;
   color: #6d747e;
+`;
+
+export const NextBtnBox = styled.div`
+  position: absolute;
+  top: 35rem;
+  width: 330px;
 `;
