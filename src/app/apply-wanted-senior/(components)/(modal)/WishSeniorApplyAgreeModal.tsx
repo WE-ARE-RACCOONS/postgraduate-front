@@ -59,7 +59,7 @@ const Header = styled.div`
   gap: 12px;
 
   > h1 {
-    color: #00000;
+    color: #000000;
     font-size: 14px;
     font-weight: 650;
   }
