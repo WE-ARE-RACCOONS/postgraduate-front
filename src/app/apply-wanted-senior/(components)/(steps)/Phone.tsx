@@ -60,6 +60,7 @@ export function WishSeniorPhoneNum({
         <NextBtn
           btnText="신청 완료"
           kind={errors.phoneNum?.message ? 'route-non' : 'route'}
+          disabled={!!errors.phoneNum?.message}
           onClick={() => onClick(getValues('phoneNum'))}
         />
       </NextBtnBox>
