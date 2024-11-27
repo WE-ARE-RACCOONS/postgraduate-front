@@ -52,8 +52,9 @@ export function ApplyWantedSeniorSubmit({
         </BtnStyleNonM>
 
         <NextBtn
-          kind="next"
+          kind="route"
           onClick={onClickSumitEnd}
+          url="/"
           btnText="신청 완료하고 홈으로 가기"
         />
       </div>
