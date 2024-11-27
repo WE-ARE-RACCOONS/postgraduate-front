@@ -69,9 +69,6 @@ export default function ApplyWantedSeniorPage() {
       );
     });
   };
-  console.log(
-    applyWantedSeniorSteps.findIndex((v) => v === _activeStep, _activeStep),
-  );
 
   return (
     <main>
