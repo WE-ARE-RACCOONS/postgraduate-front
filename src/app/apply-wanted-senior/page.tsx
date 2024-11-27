@@ -35,7 +35,7 @@ export default function ApplyWantedSeniorPage() {
     applyWantedSeniorSteps,
     {
       initialStep: 'info',
-      stepChangeType: 'replace',
+      stepChangeType: 'push',
     } as const,
   );
 
@@ -51,16 +51,23 @@ export default function ApplyWantedSeniorPage() {
   const router = useRouter();
 
   const openWithSeniorApplyAgreeModal = (phoneNumber: string) => {
-    overlay.open(({ unmount }) => (
-      <RiseUpModal
-        modalHandler={() => {
-          mutate({ ...wishSenior, phoneNumber });
-          setStep('submit');
-          unmount();
-        }}
-        modalType="wish-senior-apply"
-      />
-    ));
+    overlay.openAsync(({ unmount }) => {
+      return (
+        <RiseUpModal
+          modalHandler={() => {}}
+          onAgreeWith={(isAgree) => {
+            if (isAgree) {
+              mutate({ ...wishSenior, phoneNumber });
+              setStep('submit');
+              unmount();
+            } else {
+              unmount();
+            }
+          }}
+          modalType="wish-senior-apply"
+        />
+      );
+    });
   };
 
   return (
@@ -139,3 +146,4 @@ export default function ApplyWantedSeniorPage() {
     </main>
   );
 }
+

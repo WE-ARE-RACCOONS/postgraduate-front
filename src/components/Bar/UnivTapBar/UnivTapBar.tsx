@@ -10,8 +10,6 @@ import { SMTAB } from '@/constants/tab/ctap';
 import { pageNumAtom } from '@/stores/home';
 import { useDropdownContext } from '@/components/DropDown/common/useDropdown';
 import { DropdownItem } from '@/components/DropDown/common/DropdownItem';
-import { FullModalContainer } from '@/components/Modal/FullModal/FullModal.styled';
-import { DimmedBgContainer } from '@/components/Modal/DimmedModal/DimmedModal.styled';
 
 function UnivTapBar() {
   const factiveTab = useAtomValue(sfactiveTabAtom);

@@ -34,12 +34,18 @@ export function SeniorList() {
 
   const [currentSeniorListPage, setCurrentSeniorListPage] = useQueryState(
     'page',
-    parseAsInteger.withOptions({ shallow: false }).withDefault(1),
+    parseAsInteger
+      .withOptions({ shallow: false, clearOnDefault: true })
+      .withDefault(1),
   );
 
   useEffect(() => {
     setCurrentPath();
   }, []);
+
+  useEffect(() => {
+    setCurrentSeniorListPage(1);
+  }, [field, postgradu]);
 
   const { data: seniorListData } = useGetSeniorListQuery(
     field,

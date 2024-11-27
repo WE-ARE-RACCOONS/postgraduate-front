@@ -1,22 +1,34 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import NextBtn from '@/components/Button/NextBtn';
+import { useOutSideClick } from '@/hooks/useOutsideClick';
 import { styled } from 'styled-components';
 
 export function WishSeniorApplyAgreeModal({
   modalHandler,
+  onAgreeWithSeniorApply,
 }: {
   modalHandler: () => void;
+  onAgreeWithSeniorApply?: (agree: boolean) => void;
 }) {
+  const container = useRef<HTMLDivElement | null>(null);
   const [agreewithSeniorApply, setAgreeWithSeniorApply] = useState(false);
 
+  useOutSideClick({
+    ref: container,
+    handler: () => onAgreeWithSeniorApply?.(agreewithSeniorApply),
+  });
+
   return (
-    <Container>
+    <Container ref={container}>
       <Header>
         <label className="checkbox-wrapper">
           <input
             type="checkbox"
             checked={agreewithSeniorApply}
+            style={{
+              opacity: 0,
+            }}
             onChange={() => setAgreeWithSeniorApply(!agreewithSeniorApply)}
             aria-label="개인정보 수집 및 이용 동의"
           />
@@ -36,7 +48,10 @@ export function WishSeniorApplyAgreeModal({
       </Content>
       <NextBtn
         kind={agreewithSeniorApply ? 'route' : 'route-non'}
-        onClick={modalHandler}
+        onClick={() => {
+          onAgreeWithSeniorApply?.(true);
+          modalHandler();
+        }}
         btnText="동의하고 신청하기"
       />
     </Container>

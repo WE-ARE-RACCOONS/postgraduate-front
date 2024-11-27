@@ -27,7 +27,10 @@ function RiseUpModal(props: RiseUpModalProps) {
         )}
 
         {props.modalType === 'wish-senior-apply' && (
-          <WishSeniorApplyAgreeModal modalHandler={props.modalHandler} />
+          <WishSeniorApplyAgreeModal
+            onAgreeWithSeniorApply={props.onAgreeWith}
+            modalHandler={props.modalHandler}
+          />
         )}
       </div>
     </ModalBackground>
@@ -35,3 +38,4 @@ function RiseUpModal(props: RiseUpModalProps) {
 }
 
 export default RiseUpModal;
+

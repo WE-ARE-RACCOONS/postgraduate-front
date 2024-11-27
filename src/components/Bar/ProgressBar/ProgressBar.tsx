@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 import { StepperContainer, StepperTab } from './ProgressBar.styled';
 
 function ProgressBar({

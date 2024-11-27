@@ -25,14 +25,11 @@ export function WishSeniorField({
   );
 
   const handleFieldChange = (type: string, value: string) => {
-    setField({
-      type,
-      value,
-    });
+    setField({ type, value });
   };
 
   return (
-    <div style={{ margin: '1.6rem 1rem' }}>
+    <Container>
       <WishSeniorTitle>{WISH_SENIOR_MENTOR_MSG.FIELD.TITLE}</WishSeniorTitle>
       <br />
       <WishSeniorSubTitle>
@@ -49,14 +46,20 @@ export function WishSeniorField({
               id={option}
               checked={field?.type === option}
               onChange={() => handleFieldChange(option, '')}
+              onClick={() => handleFieldChange(option, '')}
             />
-            <WishSeniorFieldRadioIcon $isChecked={field?.type === option}>
-              <span />
-            </WishSeniorFieldRadioIcon>
+            <WishSeniorFieldRadioIcon
+              onClick={() => handleFieldChange(option, '')}
+              $isChecked={field?.type === option}
+            />
             <label htmlFor={option}>{option}</label>
           </WishSeniorFieldRadioWrapper>
         ))}
-        <WishSeniorFieldRadioWrapper>
+        <WishSeniorFieldRadioWrapper
+          style={{
+            border: field?.type === WISH_SENIOR_FIELD_ETC ? 'none' : '',
+          }}
+        >
           <WishSeniorFieldRadioInput
             type="radio"
             value={WISH_SENIOR_FIELD_ETC}
@@ -67,13 +70,9 @@ export function WishSeniorField({
           />
 
           {field?.type === WISH_SENIOR_FIELD_ETC ? (
-            <input
+            <EtcInput
               type="text"
               value={field?.value}
-              style={{
-                width: '100%',
-                border: 'none',
-              }}
               onChange={(e) =>
                 handleFieldChange(WISH_SENIOR_FIELD_ETC, e.target.value)
               }
@@ -82,6 +81,7 @@ export function WishSeniorField({
           ) : (
             <>
               <WishSeniorFieldRadioIcon
+                onClick={() => handleFieldChange(WISH_SENIOR_FIELD_ETC, '')}
                 $isChecked={field?.type === WISH_SENIOR_FIELD_ETC}
               />
               <label htmlFor="ETC">{WISH_SENIOR_FIELD_ETC}</label>
@@ -103,9 +103,13 @@ export function WishSeniorField({
           kind="route"
         />
       </NextBtnBox>
-    </div>
+    </Container>
   );
 }
+
+const Container = styled.div`
+  margin: 1.6rem 1rem;
+`;
 
 const WishSeniorFieldList = styled.ul`
   list-style-type: none;
@@ -130,7 +134,7 @@ const WishSeniorFieldRadioWrapper = styled.li`
 
 const WishSeniorFieldRadioInput = styled.input`
   position: absolute;
-  opacity: 0;
+  visibility: hidden;
   cursor: pointer;
 `;
 
@@ -155,3 +159,16 @@ const WishSeniorFieldRadioIcon = styled.span<{ $isChecked: boolean }>`
     background-color: #2fc4b2;
   }
 `;
+
+const EtcInput = styled.input`
+  width: 100%;
+  border: 1px solid #2fc4b2;
+  background: none;
+  border-radius: 8px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-left: 4px;
+  height: 45px;
+`;
+
