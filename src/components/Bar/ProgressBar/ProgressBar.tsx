@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { use, useEffect } from 'react';
 import { StepperContainer, StepperTab } from './ProgressBar.styled';
 
 function ProgressBar({
@@ -13,7 +13,7 @@ function ProgressBar({
     for (let i = 0; i <= activeNum; i++) {
       activeStepArr[i].classList.add('active');
     }
-  }, []);
+  }, [totalNum, activeNum]);
 
   function renderStepperTabs(totalNum: number) {
     const stepperTabs = [];

@@ -1,7 +1,7 @@
 import { DOMElement, RefObject, useEffect } from 'react';
 
 interface useOutsideClickProps {
-  ref: RefObject<HTMLElement>;
+  ref: RefObject<HTMLElement | null>;
   handler?: (e: Event) => void;
 }
 
