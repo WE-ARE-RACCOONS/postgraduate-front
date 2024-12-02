@@ -73,7 +73,7 @@ export function SeniorListPagination({
         <PaginationItem>
           <PaginationNext
             href={`/?page=${page + 1}`}
-            aria-disabled={page === 1}
+            aria-disabled={page === totalPage}
             onClick={handleNext}
           />
         </PaginationItem>
