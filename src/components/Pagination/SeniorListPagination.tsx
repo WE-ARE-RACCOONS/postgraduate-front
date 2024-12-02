@@ -30,18 +30,6 @@ export function SeniorListPagination({
 
   const currentPage = Math.max(1, Math.min(page, totalPage));
 
-  const handlePrev = () => {
-    if (currentPage > 1) {
-      setPage(currentPage - 1);
-    }
-  };
-
-  const handleNext = () => {
-    if (currentPage < totalPage) {
-      setPage(currentPage + 1);
-    }
-  };
-
   const startPage = Math.max(
     1,
     Math.floor((currentPage - 1) / displayPage) * displayPage + 1,
@@ -63,8 +51,11 @@ export function SeniorListPagination({
           <PaginationPrev
             isnonactive={currentPage === 1}
             aria-disabled={currentPage === 1}
-            href={currentPage === 1 ? '/?page=1' : `/?page=${currentPage - 1}`}
-            onClick={handlePrev}
+            href={
+              currentPage - displayPage >= 1
+                ? `/?page=${currentPage - displayPage}`
+                : `/?page=${Math.max(page - 1, 1)}`
+            }
           />
         </PaginationItem>
         {pages.map((i) => (
@@ -81,14 +72,18 @@ export function SeniorListPagination({
 
         <PaginationItem>
           <PaginationNext
-            isnonactive={currentPage === totalPage}
+            isnonactive={currentPage === totalPage / SeniorListPerPageCount - 1}
             href={
-              currentPage < totalPage
-                ? `/?page=${currentPage + 1}`
-                : `/?page=${page}`
+              currentPage < Math.floor(totalPage / SeniorListPerPageCount) &&
+              currentPage + displayPage <=
+                Math.floor(totalPage / SeniorListPerPageCount) + 1
+                ? `/?page=${currentPage + displayPage}`
+                : `/?page=${Math.min(
+                    page + 1,
+                    Math.floor(totalPage / SeniorListPerPageCount) + 1,
+                  )}`
             }
-            aria-disabled={currentPage === totalPage}
-            onClick={handleNext}
+            aria-disabled={currentPage === totalPage - 1}
           />
         </PaginationItem>
       </PaginationContent>
