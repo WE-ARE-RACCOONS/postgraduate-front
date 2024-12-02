@@ -3,7 +3,6 @@
 import MenuBar from '@/components/Bar/MenuBar';
 import { Suspense, useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
-import { useQueryState, parseAsInteger } from 'nuqs';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
@@ -90,8 +89,7 @@ export function SeniorList() {
           )}
 
           <SeniorListPagination
-            totalPage={seniorListData?.totalElements ?? 1}
-            style={{ visibility: seniorListData ? 'visible' : 'hidden' }}
+            totalPage={seniorListData?.totalElements ?? 0}
           />
         </HomeProfileLayer>
         <Footer />
