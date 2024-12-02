@@ -54,8 +54,11 @@ const PaginationLink = ({ isActive, ...props }: PaginationLinkProps) => (
 PaginationLink.displayName = 'PaginationLink';
 
 const PaginationPrev = ({
+  isnonactive,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
+}: React.ComponentProps<typeof PaginationLink> & {
+  isnonactive: boolean;
+}) => (
   <PaginationLink {...props}>
     <svg
       focusable="false"
@@ -65,7 +68,7 @@ const PaginationPrev = ({
     >
       <path
         d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-        fill="#4C4D4E"
+        fill={`${isnonactive ? '#D6D7D8' : '#4C4D4E'}`}
       ></path>
     </svg>
   </PaginationLink>
@@ -74,8 +77,11 @@ const PaginationPrev = ({
 PaginationPrev.displayName = 'PaginationPrevButton';
 
 const PaginationNext = ({
+  isnonactive = false,
   ...props
-}: React.ComponentProps<typeof PaginationLink>) => (
+}: React.ComponentProps<typeof PaginationLink> & {
+  isnonactive: boolean;
+}) => (
   <PaginationLink {...props}>
     <svg
       focusable="false"
@@ -85,7 +91,7 @@ const PaginationNext = ({
     >
       <path
         d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-        fill="#4C4D4E"
+        fill={`${isnonactive ? '#D6D7D8' : '#4C4D4E'}`}
       ></path>
     </svg>
   </PaginationLink>

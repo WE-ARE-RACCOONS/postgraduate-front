@@ -24,6 +24,7 @@ import Footer from '@/components/Footer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
+import { SeniorListPerPageCount } from '../SeniorProfile/constant';
 
 export function SeniorList() {
   const { setCurrentPath } = usePrevPath();
@@ -89,7 +90,10 @@ export function SeniorList() {
           )}
 
           <SeniorListPagination
-            totalPage={seniorListData?.totalElements ?? 0}
+            totalPage={
+              seniorListData?.totalElements ?? 0 / SeniorListPerPageCount
+            }
+            displayPage={5}
           />
         </HomeProfileLayer>
         <Footer />

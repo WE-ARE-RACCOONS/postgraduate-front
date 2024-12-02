@@ -10,6 +10,7 @@ import {
 } from '.';
 
 import type { HTMLAttributes } from 'react';
+import { SeniorListPerPageCount } from '../SeniorProfile/constant';
 
 interface SeniorListPaginationProps {
   totalPage: number;
@@ -18,31 +19,38 @@ interface SeniorListPaginationProps {
 
 export function SeniorListPagination({
   totalPage,
+  displayPage = 5,
   ...props
 }: SeniorListPaginationProps & HTMLAttributes<HTMLDivElement>) {
   const { page, setPage } = useSeniorListPageSearchParams();
+
+  if (totalPage <= 0) {
+    return null;
+  }
+
+  const currentPage = Math.max(1, Math.min(page, totalPage));
+
   const handlePrev = () => {
-    if (page === 1) {
-      return;
+    if (currentPage > 1) {
+      setPage(currentPage - 1);
     }
-    setPage(page - 1);
   };
 
   const handleNext = () => {
-    if (page === totalPage) {
-      return;
+    if (currentPage < totalPage) {
+      setPage(currentPage + 1);
     }
-    setPage(page + 1);
   };
-
-  const displayPage = 5;
 
   const startPage = Math.max(
     1,
-    Math.floor((page - 1) / displayPage) * displayPage + 1,
+    Math.floor((currentPage - 1) / displayPage) * displayPage + 1,
   );
 
-  const endPage = Math.min(startPage + displayPage - 1, totalPage);
+  const endPage = Math.min(
+    startPage + displayPage - 1,
+    totalPage / SeniorListPerPageCount + 1,
+  );
   const pages = Array.from(
     { length: endPage - startPage + 1 },
     (_, i) => startPage + i,
@@ -53,15 +61,16 @@ export function SeniorListPagination({
       <PaginationContent>
         <PaginationItem>
           <PaginationPrev
-            aria-disabled={page === 1}
-            href={page === 1 ? '/?page=1' : `/?page=${page - 1}`}
+            isnonactive={currentPage === 1}
+            aria-disabled={currentPage === 1}
+            href={currentPage === 1 ? '/?page=1' : `/?page=${currentPage - 1}`}
             onClick={handlePrev}
           />
         </PaginationItem>
         {pages.map((i) => (
           <PaginationItem key={i}>
             <PaginationLink
-              isActive={page === i}
+              isActive={currentPage === i}
               href={`/?page=${i}`}
               onClick={() => setPage(i)}
             >
@@ -72,8 +81,13 @@ export function SeniorListPagination({
 
         <PaginationItem>
           <PaginationNext
-            href={`/?page=${page + 1}`}
-            aria-disabled={page === totalPage}
+            isnonactive={currentPage === totalPage}
+            href={
+              currentPage < totalPage
+                ? `/?page=${currentPage + 1}`
+                : `/?page=${page}`
+            }
+            aria-disabled={currentPage === totalPage}
             onClick={handleNext}
           />
         </PaginationItem>
