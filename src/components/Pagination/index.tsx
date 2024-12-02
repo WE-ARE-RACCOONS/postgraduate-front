@@ -64,6 +64,8 @@ const PaginationPrev = ({
       focusable="false"
       aria-label="이전 페이지"
       viewBox="0 0 24 24"
+      width="24"
+      height="24"
       data-testid="NavigateBeforeIcon"
     >
       <path
@@ -88,6 +90,8 @@ const PaginationNext = ({
       aria-label="다음 페이지"
       viewBox="0 0 24 24"
       data-testid="NavigateNextIcon"
+      width="24"
+      height="24"
     >
       <path
         d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
