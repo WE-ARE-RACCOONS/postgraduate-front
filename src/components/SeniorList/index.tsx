@@ -3,22 +3,22 @@
 import MenuBar from '@/components/Bar/MenuBar';
 import { Suspense, useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
-import { useQueryState, parseAsInteger } from 'nuqs';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
+import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
+import { SeniorListPagination } from '../Pagination/SeniorListPagination';
 import SwiperComponent from '@/components/Swiper/Swiper';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import SearchModal from '@/components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
-import { Pagination } from '@mui/material';
 
 import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
-import { SeniorListPerPageCount } from '../SeniorProfile/constant';
+
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import Footer from '@/components/Footer';
 
@@ -32,25 +32,19 @@ export function SeniorList() {
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
-  const [currentSeniorListPage, setCurrentSeniorListPage] = useQueryState(
-    'page',
-    parseAsInteger
-      .withOptions({ shallow: false, clearOnDefault: true })
-      .withDefault(1),
-  );
-
+  const { page, setPage } = useSeniorListPageSearchParams();
   useEffect(() => {
     setCurrentPath();
   }, []);
 
   useEffect(() => {
-    setCurrentSeniorListPage(1);
+    setPage(1);
   }, [field, postgradu]);
 
   const { data: seniorListData } = useGetSeniorListQuery(
     field,
     postgradu,
-    currentSeniorListPage,
+    page,
   );
 
   return (
@@ -93,19 +87,10 @@ export function SeniorList() {
               해당하는 선배가 없어요
             </div>
           )}
-          {seniorListData?.totalElements !== 0 && (
-            <StyledPagination
-              shape="rounded"
-              page={Number(currentSeniorListPage ?? 1)}
-              onChange={(_e, page) => setCurrentSeniorListPage(page)}
-              count={Math.ceil(
-                (seniorListData?.totalElements as number) /
-                  SeniorListPerPageCount,
-              )}
-              aria-label="선배 회원 페이지네이션"
-              role="navigation"
-            />
-          )}
+
+          <SeniorListPagination
+            totalPage={seniorListData?.totalElements ?? 0}
+          />
         </HomeProfileLayer>
         <Footer />
         <MenuBarWrapper>
@@ -158,12 +143,4 @@ const MenuBarWrapper = styled.div`
   bottom: 0;
   width: inherit;
   z-index: 1;
-`;
-
-const StyledPagination = styled(Pagination)`
-  display: flex;
-  width: 345px;
-  justify-content: center;
-  padding: 0;
-  margin: 0 auto;
 `;

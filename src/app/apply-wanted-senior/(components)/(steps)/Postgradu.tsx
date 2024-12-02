@@ -1,21 +1,19 @@
 import styled from 'styled-components';
 import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
 import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
-import TextForm from '@/components/SingleForm/TextForm';
-import { useForm } from 'react-hook-form';
+import { useAtomValue } from 'jotai';
+import { overlay } from 'overlay-kit';
 import NextBtn from '@/components/Button/NextBtn';
+import { sPostGraduAtom } from '@/stores/senior';
+import RiseUpModal from '@/components/Modal/RiseUpModal';
+import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
 
 export function WishSeniorPostGradu({
   onClick,
 }: {
   onClick: (postgradu: string) => void;
 }) {
-  const { register, getValues } = useForm({
-    defaultValues: {
-      postgradu: '',
-    },
-    mode: 'onChange',
-  });
+  const postgradu = useAtomValue(sPostGraduAtom);
 
   return (
     <div style={{ margin: '1.6rem 1rem' }}>
@@ -28,10 +26,14 @@ export function WishSeniorPostGradu({
       </WishSeniorSubTitle>
 
       <PostGraduWrapper>
-        <TextForm
-          targetAtom={''}
+        <TextFormEl
+          value={postgradu}
           placeholder={'ex.연세대학교'}
-          register={register('postgradu')}
+          onClick={() =>
+            overlay.open(({ unmount }) => (
+              <RiseUpModal modalType="postgradu" modalHandler={unmount} />
+            ))
+          }
         />
       </PostGraduWrapper>
 
@@ -39,7 +41,7 @@ export function WishSeniorPostGradu({
         <NextBtn
           btnText="다음"
           kind="route"
-          onClick={() => onClick(getValues('postgradu'))}
+          onClick={() => onClick(postgradu)}
         />
       </NextBtnBox>
     </div>
@@ -49,3 +51,4 @@ export function WishSeniorPostGradu({
 const PostGraduWrapper = styled.div`
   margin-top: 40px;
 `;
+
