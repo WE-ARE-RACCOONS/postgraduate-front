@@ -90,7 +90,8 @@ export function SeniorList() {
           )}
 
           <SeniorListPagination
-            totalPage={seniorListData?.totalElements ?? 0}
+            totalPage={seniorListData?.totalElements ?? 1}
+            style={{ visibility: seniorListData ? 'visible' : 'hidden' }}
           />
         </HomeProfileLayer>
         <Footer />
