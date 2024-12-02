@@ -10,10 +10,14 @@ function ProgressBar({
 }) {
   useEffect(() => {
     const activeStepArr = document.getElementsByClassName('stepper-tab');
+
+    for (let i = 0; i < totalNum; i++) {
+      activeStepArr[i].classList.remove('active');
+    }
     for (let i = 0; i <= activeNum; i++) {
       activeStepArr[i].classList.add('active');
     }
-  }, [totalNum, activeNum]);
+  }, [totalNum, activeNum, renderStepperTabs]);
 
   function renderStepperTabs(totalNum: number) {
     const stepperTabs = [];

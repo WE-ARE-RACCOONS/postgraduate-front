@@ -10,6 +10,7 @@ import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
+import { SeniorListPagination } from '../Pagination/SeniorListPagination';
 import SwiperComponent from '@/components/Swiper/Swiper';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import SearchModal from '@/components/Modal/SearchModal';
@@ -93,19 +94,10 @@ export function SeniorList() {
               해당하는 선배가 없어요
             </div>
           )}
-          {seniorListData?.totalElements !== 0 && (
-            <StyledPagination
-              shape="rounded"
-              page={Number(currentSeniorListPage ?? 1)}
-              onChange={(_e, page) => setCurrentSeniorListPage(page)}
-              count={Math.ceil(
-                (seniorListData?.totalElements as number) /
-                  SeniorListPerPageCount,
-              )}
-              aria-label="선배 회원 페이지네이션"
-              role="navigation"
-            />
-          )}
+
+          <SeniorListPagination
+            totalPage={seniorListData?.totalElements ?? 0}
+          />
         </HomeProfileLayer>
         <Footer />
         <MenuBarWrapper>
