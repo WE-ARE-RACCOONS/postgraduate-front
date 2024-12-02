@@ -72,6 +72,7 @@ export function WishSeniorField({
           {field?.type === WISH_SENIOR_FIELD_ETC ? (
             <EtcInput
               type="text"
+              autoFocus
               value={field?.value}
               onChange={(e) =>
                 handleFieldChange(WISH_SENIOR_FIELD_ETC, e.target.value)
@@ -171,4 +172,3 @@ const EtcInput = styled.input`
   padding-left: 4px;
   height: 45px;
 `;
-
