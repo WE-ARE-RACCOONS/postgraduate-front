@@ -79,7 +79,7 @@ const PaginationNext = ({
   <PaginationLink {...props}>
     <svg
       focusable="false"
-      aria-hidden="true"
+      aria-label="다음 페이지"
       viewBox="0 0 24 24"
       data-testid="NavigateNextIcon"
     >
