@@ -59,7 +59,7 @@ const PaginationPrev = ({
   <PaginationLink {...props}>
     <svg
       focusable="false"
-      aria-hidden="true"
+      aria-label="이전 페이지"
       viewBox="0 0 24 24"
       data-testid="NavigateBeforeIcon"
     >
