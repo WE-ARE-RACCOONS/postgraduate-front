@@ -1,0 +1,25 @@
+.toast-message {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding: 16px;
+  margin: 0 auto;
+  border-radius: 8px;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+  opacity: 1;
+  width: 360px;
+  z-index: 1000;
+}
+
+.toast-success {
+  background-color: #2fc4b2;
+  color: white;
+}
+
+.toast-error {
+  background-color: #ff5757;
+  color: white;
+}
