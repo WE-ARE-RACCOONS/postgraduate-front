@@ -6,7 +6,7 @@ export interface observerProp {
 export class ToastService {
   private static instance: ToastService | null = null;
 
-  private observers: any[] = [];
+  private observers: Array<(props: observerProp) => void> = [];
   private messages: observerProp[] = [];
 
   private constructor() {}
