@@ -13,7 +13,6 @@ import {
 } from './(components)/(steps)';
 import { useWishSeniorApply } from '@/hooks/mutations/useWishSeniorApply';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
 import type { WishSeniorApplyRequest } from '@/api/senior/wishSeniorApply';
@@ -146,4 +145,3 @@ export default function ApplyWantedSeniorPage() {
     </main>
   );
 }
-

@@ -6,6 +6,7 @@ import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
+import { ToastProvider } from '@/components/Toast/ToastProvider';
 
 export const metadata: Metadata = {
   title: SERVICE_METADATA.title,
@@ -80,6 +81,7 @@ export default function RootLayout({
               <div id="senior-auth-portal"></div>
               <div id=" mentoring-cancel-success"></div>
             </OverlayKitProvider>
+            <ToastProvider />
           </StyledComponentsRegistry>
         </Providers>
       </body>

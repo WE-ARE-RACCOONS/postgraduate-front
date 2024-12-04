@@ -16,7 +16,6 @@ import { tapType } from '@/types/tap/tap';
 import { TAB } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
 import ModalBtn from '@/components/Button/ModalBtn';
-import useModal from '@/hooks/useModal';
 import useDimmedModal from '@/hooks/useDimmedModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 
