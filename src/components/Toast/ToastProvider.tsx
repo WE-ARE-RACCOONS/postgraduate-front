@@ -29,9 +29,10 @@ export function ToastProvider() {
         },
       ]);
 
-      setTimeout(() => {
+      const timerId = setTimeout(() => {
         setMessage((prev) => prev.slice(1));
       }, 2000);
+      return () => clearTimeout(timerId);
     };
     singleToastService.subscribe(addNewToastMessage);
     return () => singleToastService.unsubscribe(addNewToastMessage);
