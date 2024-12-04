@@ -23,7 +23,7 @@ export function ToastProvider() {
       setMessage((prev) => [
         ...prev,
         {
-          id: Date.now().toLocaleString(),
+          id: crypto.randomUUID(),
           message: props.message,
           status: props.status,
         },
