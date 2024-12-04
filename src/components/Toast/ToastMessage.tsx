@@ -12,5 +12,13 @@ export function ToastMessage({ message, status }: observerProp) {
     }
   };
 
-  return <div className={`toast-message ${getStatusClass()}`}>{message}</div>;
+  return (
+    <div
+      role="alert"
+      aria-live="polite"
+      className={`toast-message ${getStatusClass()}`}
+    >
+      {message}
+    </div>
+  );
 }
