@@ -26,22 +26,18 @@ export const signupUser = async ({
   nickName,
   marketingReceive,
 }: SignUpUserRequest) => {
-  try {
-    const response = (
-      await withAuthInstance.post<SignUpUserResponse>('/auth/user/signup', {
-        socialId,
-        phoneNumber,
-        nickName,
-        marketingReceive,
-      })
-    ).data;
+  const response = (
+    await withAuthInstance.post<SignUpUserResponse>('/auth/user/signup', {
+      socialId,
+      phoneNumber,
+      nickName,
+      marketingReceive,
+    })
+  ).data;
 
-    if (findExCode(response.code)) {
-      throw new Error(response.message);
-    }
-
-    return response.data;
-  } catch (e) {
-    throw e;
+  if (findExCode(response.code)) {
+    throw new Error(response.message);
   }
+
+  return response.data;
 };
