@@ -83,6 +83,11 @@ function CommonInfoPage() {
           },
         },
       );
+    } else {
+      addToast({
+        message: '로그인 정보가 유효하지 않습니다. 다시 로그인해 주세요.',
+        status: 'error',
+      });
     }
   };
 
