@@ -3,7 +3,7 @@ import 'swiper/css/bundle';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper';
-import { Img } from './Swiper.styled';
+import Image from 'next/image';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -23,13 +23,31 @@ const SwiperComponent = () => {
       }}
     >
       <SwiperSlide>
-        <Img src="/banner1.png" alt="Image 1" />
+        <Image
+          src="/banner1.png"
+          alt="banner 1"
+          width={328}
+          height={107}
+          priority
+        />
       </SwiperSlide>
       <SwiperSlide>
-        <Img src="/banner2.png" alt="Image 2" />
+        <Image
+          src="/banner2.png"
+          alt="banner 2"
+          width={328}
+          height={107}
+          priority
+        />
       </SwiperSlide>
       <SwiperSlide>
-        <Img src="/banner3.png" alt="Image 3" />
+        <Image
+          src="/banner3.png"
+          width={328}
+          height={107}
+          alt="banner 3"
+          priority
+        />
       </SwiperSlide>
     </Swiper>
   );

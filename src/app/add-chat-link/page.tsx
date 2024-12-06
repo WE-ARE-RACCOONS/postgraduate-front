@@ -9,6 +9,8 @@ import {
 } from '@/constants/form/cProfileForm';
 import useAuth from '@/hooks/useAuth';
 import { option } from '@/stores/condition';
+import { useJoinAsSenior } from '@/hooks/mutations/useJoinAsSenior';
+import { useSeniorSignup } from '@/hooks/mutations/useSeniorSignup';
 import {
   sChatLink,
   sFieldAtom,
@@ -19,30 +21,19 @@ import {
   sProfessorAtom,
 } from '@/stores/senior';
 import { changeNickname, phoneNum } from '@/stores/signup';
-import findExCode from '@/utils/findExCode';
 import { detectReload, preventClose } from '@/utils/reloadFun';
-import axios from 'axios';
+
 import { useAtom, useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import { SetTokenProps } from '@/types/user/user';
 
 function AddChatLinkPage() {
-  // const oneLiner = useAtomValue(sSingleIntroduce);
-  // const info = useAtomValue(sMultiIntroduce);
-  // const target = useAtomValue(sRecommendedFor);
-  // const times = useAtomValue(sAbleTime);
-
   const [chatLink, setChatLink] = useAtom(sChatLink);
   const [flag, setFlag] = useState(false);
   const router = useRouter();
-  const {
-    getAccessToken,
-    setAccessToken,
-    setRefreshToken,
-    setUserType,
-    removeTokens,
-  } = useAuth();
+  const { setAccessToken, setRefreshToken, setUserType } = useAuth();
   const [socialId, setSocialId] = useState<number | null>(null);
   const phoneNumber = useAtomValue(phoneNum);
   const nickName = useAtomValue(changeNickname);
@@ -53,6 +44,9 @@ function AddChatLinkPage() {
   const sProfessor = useAtomValue(sProfessorAtom);
   const sField = useAtomValue(sFieldAtom);
   const sKeyword = useAtomValue(sKeywordAtom);
+
+  const { mutate: joinAsSenior } = useJoinAsSenior();
+  const { mutate: seniorSignup } = useSeniorSignup();
 
   useEffect(() => {
     if (chatLink) {
@@ -84,158 +78,104 @@ function AddChatLinkPage() {
     };
   }, []);
 
-  /* // 기존 프로필 등록에서의 함수 주석 처리
-  const handleClick = () => {
-    if (!chatLink) {
-      setFlag(true);
-      return;
-    }
-
-    if (chatLink && info && oneLiner && target && times.length >= 3) {
-      getAccessToken().then((accessTkn) => {
-        if (accessTkn) {
-          axios
-            .patch(
-              `${process.env.NEXT_PUBLIC_SERVER_URL}/senior/profile`,
-              {
-                info: info,
-                target: target,
-                chatLink: chatLink,
-                times: times,
-                oneLiner: oneLiner,
-              },
-              {
-                headers: {
-                  Authorization: `Bearer ${accessTkn}`,
-                },
-              },
-            )
-            .then((response) => {
-              const res = response.data;
-
-              if (res.code == 'SNR201') {
-                setSeniorId(res.data.seniorId);
-                router.push('/profile/done');
-              }
-            })
-            .catch((err) => {
-              console.error(err);
-            });
-        }
-      });
-      return;
-    }
+  const setUserContext = (
+    accToken: SetTokenProps,
+    refreshToken: SetTokenProps,
+    userType: string,
+  ) => {
+    setAccessToken({
+      token: accToken.token,
+      expires: accToken.expires,
+    });
+    setRefreshToken({
+      token: refreshToken.token,
+      expires: refreshToken.expires,
+    });
+    setUserType(userType);
   };
-  */
 
   const handleSubmit = () => {
-    getAccessToken().then((token) => {
-      const headers = {
-        Authorization: `Bearer ${token}`,
-      };
+    if (
+      sMajor &&
+      sPostGradu &&
+      sProfessor &&
+      sLab &&
+      sKeyword &&
+      sField &&
+      chatLink
+    ) {
+      // 후배 -> 선배 변경
+      joinAsSenior(
+        {
+          major: sMajor,
+          postgradu: sPostGradu,
+          professor: sProfessor,
+          lab: sLab,
+          field: sField,
+          keyword: sKeyword,
+          chatLink: chatLink,
+        },
+        {
+          onSuccess: (data) => {
+            setUserContext(
+              {
+                token: data.accessToken,
+                expires: data.accessExpiration,
+              },
+              {
+                token: data.refreshToken,
+                expires: data.refreshExpiration,
+              },
+              data.role,
+            );
+          },
+        },
+      );
+    }
 
-      if (
-        token &&
-        sMajor &&
-        sPostGradu &&
-        sProfessor &&
-        sLab &&
-        sKeyword &&
-        sField &&
-        chatLink
-      ) {
-        // 후배 -> 선배 변경
-        axios
-          .post(
-            `${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/change`,
-            {
-              major: sMajor,
-              postgradu: sPostGradu,
-              professor: sProfessor,
-              lab: sLab,
-              field: sField,
-              keyword: sKeyword,
-              chatLink: chatLink,
-            },
-            {
-              headers,
-            },
-          )
-          .then((res) => {
-            const response = res.data;
-
-            if (findExCode(response.code)) {
-              removeTokens();
-              location.reload();
-              return;
-            }
-
-            if (response.code == 'SNR202') {
-              setAccessToken({
-                token: response.data.accessToken,
-                expires: response.data.accessExpiration,
-              });
-              setRefreshToken({
-                token: response.data.refreshToken,
-                expires: response.data.refreshExpiration,
-              });
-              setUserType(response.data.role);
-              router.push('/signup/done');
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-
-      if (
-        !token &&
-        socialId &&
-        phoneNumber &&
-        nickName &&
-        sMajor &&
-        sPostGradu &&
-        sProfessor &&
-        sLab &&
-        sKeyword &&
-        sField &&
-        chatLink
-      ) {
-        // 선배 최초 회원가입
-        axios
-          .post(`${process.env.NEXT_PUBLIC_SERVER_URL}/auth/senior/signup`, {
-            socialId: socialId,
-            phoneNumber: phoneNumber,
-            nickName: nickName,
-            marketingReceive: marketingReceive,
-            major: sMajor,
-            postgradu: sPostGradu,
-            professor: sProfessor,
-            lab: sLab,
-            field: sField,
-            keyword: sKeyword,
-            chatLink: chatLink,
-          })
-          .then((res) => {
-            const response = res.data;
-            if (response.code == 'SNR202') {
-              setAccessToken({
-                token: response.data.accessToken,
-                expires: response.data.accessExpiration,
-              });
-              setRefreshToken({
-                token: response.data.refreshToken,
-                expires: response.data.refreshExpiration,
-              });
-              setUserType(response.data.role);
-              router.push('/signup/done');
-            }
-          })
-          .catch((err) => {
-            console.error(err);
-          });
-      }
-    });
+    if (
+      socialId &&
+      phoneNumber &&
+      nickName &&
+      sMajor &&
+      sPostGradu &&
+      sProfessor &&
+      sLab &&
+      sKeyword &&
+      sField &&
+      chatLink
+    ) {
+      seniorSignup(
+        {
+          socialId: socialId,
+          phoneNumber: phoneNumber,
+          nickName: nickName,
+          marketingReceive: marketingReceive,
+          major: sMajor,
+          postgradu: sPostGradu,
+          professor: sProfessor,
+          lab: sLab,
+          field: sField,
+          keyword: sKeyword,
+          chatLink: chatLink,
+        },
+        {
+          onSuccess: (data) => {
+            setUserContext(
+              {
+                token: data.accessToken,
+                expires: data.accessExpiration,
+              },
+              {
+                token: data.refreshToken,
+                expires: data.refreshExpiration,
+              },
+              data.role,
+            );
+          },
+        },
+      );
+    }
   };
 
   return (
@@ -263,20 +203,7 @@ function AddChatLinkPage() {
           msg="오픈채팅방 링크를 입력해주세요"
         />
       )}
-      {/* <div id="add-chat-link-btn-container">
-        <PrevBtn
-          onClick={() => {
-            router.back();
-          }}
-        >
-          이전
-        </PrevBtn>
-        {chatLink ? (
-          <NextAddBtnSet onClick={handleClick}>다음</NextAddBtnSet>
-        ) : (
-          <NextAddBtn>가입 완료</NextAddBtn>
-        )}
-      </div> */}
+
       <SubmitBtn
         $ableSubmit={!!chatLink}
         onClick={!!chatLink ? handleSubmit : () => {}}
