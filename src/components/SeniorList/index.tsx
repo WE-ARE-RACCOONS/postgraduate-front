@@ -1,13 +1,16 @@
 'use client';
 
 import MenuBar from '@/components/Bar/MenuBar';
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
 import styled from 'styled-components';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
+import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
+import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
+import { SeniorListPagination } from '../Pagination/SeniorListPagination';
 import SwiperComponent from '@/components/Swiper/Swiper';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import SearchModal from '@/components/Modal/SearchModal';
@@ -15,6 +18,7 @@ import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
 
 import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
+
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import Footer from '@/components/Footer';
 
@@ -28,36 +32,20 @@ export function SeniorList() {
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
-  const {
-    data: seniorListData,
-    fetchNextPage,
-    hasNextPage,
-    isFetchingNextPage,
-  } = useGetSeniorListQuery(field, postgradu);
-
+  const { page, setPage } = useSeniorListPageSearchParams();
   useEffect(() => {
     setCurrentPath();
+  }, []);
 
-    const handleScroll = () => {
-      if (
-        window.innerHeight + window.scrollY >= document.body.offsetHeight - 5 &&
-        hasNextPage &&
-        !isFetchingNextPage
-      ) {
-        fetchNextPage();
-      }
-    };
+  useEffect(() => {
+    setPage(1);
+  }, [field, postgradu]);
 
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, [hasNextPage, isFetchingNextPage, fetchNextPage]);
-
-  const seniorList =
-    seniorListData?.pages.flatMap((page) => page.data.seniorSearchResponses) ||
-    [];
+  const { data: seniorListData } = useGetSeniorListQuery(
+    field,
+    postgradu,
+    page,
+  );
 
   return (
     <Suspense fallback={<div>로딩 중...</div>}>
@@ -72,22 +60,37 @@ export function SeniorList() {
         <HomeBannerLayer>
           <SwiperComponent />
         </HomeBannerLayer>
-        <HomeFieldLayer>
-          <FieldTapBar />
-        </HomeFieldLayer>
-        <HomeUnivLayer>
-          <UnivTapBar />
-        </HomeUnivLayer>
+        <DropdownProvider>
+          <HomeFieldLayer>
+            <FieldTapBar />
+          </HomeFieldLayer>
+          <HomeUnivLayer>
+            <UnivTapBar />
+          </HomeUnivLayer>
+        </DropdownProvider>
         <HomeProfileLayer>
-          {seniorList.length > 0 ? (
-            seniorList.map((el, idx) => (
-              <div key={idx}>
+          {seniorListData?.seniorSearchResponses?.length ? (
+            seniorListData?.seniorSearchResponses?.map((el, idx) => (
+              <div key={el.seniorId}>
                 <SeniorProfile data={el} />
               </div>
             ))
           ) : (
-            <div>해당하는 선배가 없어요</div>
+            <div
+              style={{
+                minHeight: '22rem',
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+              }}
+            >
+              해당하는 선배가 없어요
+            </div>
           )}
+
+          <SeniorListPagination
+            totalPage={seniorListData?.totalElements ?? 0}
+          />
         </HomeProfileLayer>
         <Footer />
         <MenuBarWrapper>
@@ -128,12 +131,12 @@ const HomeUnivLayer = styled.div`
   border-top: 1px solid #c2cede;
   overflow-x: auto;
   white-space: nowrap;
-  padding: 1rem 0.9rem;
 `;
 const HomeProfileLayer = styled.div`
   min-height: 22rem;
   height: inherit;
-  padding: 1rem;
+  padding-bottom: 1rem;
+  padding-top: 1rem;
 `;
 const MenuBarWrapper = styled.div`
   position: fixed;

@@ -15,6 +15,8 @@ import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import { useRouter } from 'next/navigation';
 import { SeniorProfileKeyWordMaxLength } from '@/components/SeniorProfile/constant';
 import auth from '../../../public/auth_mark.png';
+import arrow from '../../../public/arrow-right-bold.png';
+
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
@@ -44,13 +46,19 @@ function SeniorProfile({ data }: SeniorProfileProps) {
                   : ''}{' '}
                 {data.lab}
               </div>
-
               <div className="professor-str">
                 {data.professor} &nbsp;<span>교수님</span>
               </div>
             </SPmajor>
           </SeniorProfileInfo>
         </SeniorProfileContent>
+        <Image
+          src={arrow}
+          alt="arrow"
+          width={13}
+          height={24}
+          style={{ marginTop: '3.9rem' }}
+        />
       </SPWrapper>
       <Skeyword>
         {data.keyword &&

@@ -36,7 +36,6 @@ const FooterWrapper = styled.footer`
   position: relative;
   bottom: 0;
   height: auto;
-  min-height: 200px;
   background-color: #edeef1;
   color: #323958;
   line-height: 16px;

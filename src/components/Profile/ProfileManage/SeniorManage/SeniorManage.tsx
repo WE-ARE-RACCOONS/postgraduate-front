@@ -2,6 +2,7 @@ import {
   SeniorManageContainer,
   SeniorManageContentContainer,
 } from './SeniorManage.styled';
+import { useUpdateRoleToJunior } from '@/hooks/mutations/useUpdateJunior';
 import ContentComponent from '../../Box/ContentBox';
 import TitleComponent from '../../Box/TitleBox';
 import { SeniorManageProps } from '@/types/profile/seniorManage';
@@ -9,7 +10,6 @@ import { SeniorManageProps } from '@/types/profile/seniorManage';
 import Router, { useRouter } from 'next/navigation';
 
 import useDimmedModal from '@/hooks/useDimmedModal';
-import { useGetMySeniorRole } from '@/hooks/query/useGetMySeniorRole';
 import { usePostRenewUserToken } from '@/hooks/mutations/usePostRenewToken';
 
 import {
@@ -24,12 +24,10 @@ import useFullModal from '@/hooks/useFullModal';
 function SeniorManage(props: SeniorManageProps) {
   const router = useRouter();
 
-  const { mutate: renewUserToken } = usePostRenewUserToken();
+  const { mutate: updateSeniorRoleToJunior } = usePostRenewUserToken();
   const [_socialId, setSocialId] = useAtom(socialIdAtom);
   const setuserTypeAtom = useSetAtom(userTypeAtom);
-
-  const { data: mySeniorRole } = useGetMySeniorRole();
-
+  const setTutorialFinish = useSetAtom(isTutorialFinished);
   const { openModal: _openSeniorMyProfileModal } = useFullModal({
     modalType: 'senior-my-profile',
   });
@@ -73,14 +71,7 @@ function SeniorManage(props: SeniorManageProps) {
   };
 
   const changeJunior = async () => {
-    if (mySeniorRole?.data.possible) {
-      setuserTypeAtom('junior');
-      renewUserToken();
-      router.replace('/');
-    } else {
-      setSocialId(mySeniorRole?.data.socialId + '');
-      openNotJuniorModal();
-    }
+    updateSeniorRoleToJunior(undefined);
   };
 
   const editProf = () => {

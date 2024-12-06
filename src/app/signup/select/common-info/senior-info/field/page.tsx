@@ -8,6 +8,7 @@ import useAuth from '@/hooks/useAuth';
 
 import styled from 'styled-components';
 import BackHeader from '@/components/Header/BackHeader';
+import { FormProvider, useForm } from 'react-hook-form';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { SENIOR_FIELD } from '@/constants/signup/senior';
@@ -15,6 +16,8 @@ import { overlay } from 'overlay-kit';
 
 function SeniorInfoPage() {
   const [flag, setFlag] = useState(false);
+  const keywordMethods = useForm();
+  const fieldMethods = useForm();
   const [ableSubmit, setAbleSubmit] = useState(false);
 
   const router = useRouter();
@@ -54,13 +57,21 @@ function SeniorInfoPage() {
 
   const fieldHandler = () => {
     overlay.open(({ unmount }) => {
-      return <RiseUpModal modalHandler={unmount} modalType={'field'} />;
+      return (
+        <FormProvider {...fieldMethods}>
+          <RiseUpModal modalHandler={unmount} modalType={'field'} />
+        </FormProvider>
+      );
     });
   };
 
   const keywordHandler = () => {
     overlay.open(({ unmount }) => {
-      return <RiseUpModal modalHandler={unmount} modalType={'keyword'} />;
+      return (
+        <FormProvider {...keywordMethods}>
+          <RiseUpModal modalHandler={unmount} modalType={'keyword'} />
+        </FormProvider>
+      );
     });
   };
 

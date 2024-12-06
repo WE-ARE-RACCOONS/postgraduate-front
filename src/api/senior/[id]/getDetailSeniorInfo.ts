@@ -4,7 +4,7 @@ import { withAuthInstance, withOutAuthInstance } from '@/api/api';
 interface SeniorInfoRequest {
   seniorId: string;
 }
-interface SeniorInfoResponse extends ResponseModel {
+export interface SeniorInfoResponse extends ResponseModel {
   data: {
     isMine: boolean;
     certification: boolean;

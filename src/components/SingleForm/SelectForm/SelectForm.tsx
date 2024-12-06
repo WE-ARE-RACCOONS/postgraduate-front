@@ -71,7 +71,7 @@ function SelectForm(props: SelectFormProps) {
           <input
             id="field-input-form"
             placeholder={SELECT_FIELD_TEXT.placeholder}
-            {...register('field')}
+            {...register?.('field')}
           />
           <button id="field-input-btn" onClick={handleAddOtherField}>
             {SELECT_FIELD_TEXT.fieldInputBtnText}

@@ -15,6 +15,7 @@ export const SeniorProfileContent = styled.div`
   width: 93%;
   display: flex;
 `;
+
 export const SeniorProfileImg = styled.img`
   width: 4.8rem;
   height: 4.8rem;
@@ -38,13 +39,11 @@ export const SPmajor = styled.div`
   flex-direction: column;
   font-weight: 600;
   font-size: 16px;
-  font-size: 1rem;
 
   .professor-str {
     margin-top: 3px;
     line-height: 20px;
     font-size: 14px;
-    font-weight: 600;
   }
   span {
     line-height: 20px;
@@ -89,6 +88,7 @@ export const Keyword = styled.div`
   font-size: 0.75rem;
   white-space: nowrap;
 `;
+
 export const SPWrapper = styled.div`
   display: flex;
 `;
