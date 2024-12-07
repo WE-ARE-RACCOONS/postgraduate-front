@@ -4,7 +4,7 @@ import x_icon from '../../../../../public/x.png';
 import { useRouter } from 'next/navigation';
 import accept from '../../../../../public/cState.png';
 import { SmentoringAccBox } from './SmentoringAccept.styled';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { useAtomValue } from 'jotai';
 import { accountAtom } from '@/stores/senior';
 function SmentoringAccept({ modalHandler }: { modalHandler: () => void }) {

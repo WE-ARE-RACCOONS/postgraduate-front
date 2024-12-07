@@ -16,10 +16,10 @@ import {
   sameUserAtom,
 } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
-import Photo from '@/components/comon/Photo';
+import Photo from '@/components/common/Photo';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { userInfoFetch } from '@/api/user/info/useInfoFetch';
 import findExCode from '@/utils/findExCode';
 function page() {

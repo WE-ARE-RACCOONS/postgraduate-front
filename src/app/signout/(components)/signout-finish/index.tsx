@@ -5,7 +5,7 @@ import Image from 'next/image';
 import { SignOutInfoContainer } from '@/app/signout/(components)/signout-type-select';
 import SignOutImage from '/public/signout.png';
 import { useSignOutInfo } from '@/app/signout/signoutContext';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { withAuthInstance } from '@/api/api';
 import { useRouter } from 'next/navigation';
 export function SignOutFinish() {

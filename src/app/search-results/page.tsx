@@ -7,9 +7,9 @@ import SeniorProfile from '@/components/domain/senior/SeniorProfile/SeniorProfil
 import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
-import SearchDropDown from '@/components/comon/DropDown/SearchDropDown';
+import SearchDropDown from '@/components/common/DropDown/SearchDropDown';
 import SearchModal from '@/components/Modal/SearchModal';
-import Spinner from '@/components/comon/Spinner';
+import Spinner from '@/components/common/Spinner';
 import { SeniorProfileData } from '@/types/profile/seniorProfile';
 
 function SearchResultPage() {

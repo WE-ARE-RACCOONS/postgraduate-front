@@ -11,16 +11,16 @@ import {
 import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
 import user_icon from '../../../../../public/user.png';
-import RoundedImage from '@/components/comon/RoundedImage';
-import AuthLabeledText from '@/components/comon/Text/AuthLabeledText';
-import DividedText from '@/components/comon/Text/DividedText';
-import BorderedText from '@/components/comon/Text/BorderedText';
-import TextField from '@/components/comon/Text/TextField';
+import RoundedImage from '@/components/common/RoundedImage';
+import AuthLabeledText from '@/components/common/Text/AuthLabeledText';
+import DividedText from '@/components/common/Text/DividedText';
+import BorderedText from '@/components/common/Text/BorderedText';
+import TextField from '@/components/common/Text/TextField';
 import { useAtomValue } from 'jotai';
 import { mySeniorId } from '@/stores/senior';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 
 function SeniorMyProfile({ modalHandler }: { modalHandler: () => void }) {
   const [flag, setFlag] = useState(false); // 예외처리용 flag

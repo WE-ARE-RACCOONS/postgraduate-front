@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import ModalBtn from '@/components/comon/Button/ModalBtn';
+import ModalBtn from '@/components/common/Button/ModalBtn';
 interface TapStyleProps {
   selected: boolean;
 }

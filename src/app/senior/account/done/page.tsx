@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import accept from '../../../../../public/cState.png';
 import styled from 'styled-components';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 
 function page() {
   const router = useRouter();

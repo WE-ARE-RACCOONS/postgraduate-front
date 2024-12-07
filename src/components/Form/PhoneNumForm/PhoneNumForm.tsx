@@ -1,5 +1,5 @@
 'use client';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 import { PhoneNumContainer, NumFont } from './PhoneNumForm.styled';
 import { useEffect } from 'react';
 import { useAtom } from 'jotai';

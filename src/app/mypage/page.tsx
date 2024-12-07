@@ -14,11 +14,11 @@ import DimmedModal from '../../components/Modal/DimmedModal';
 import { userType } from '../../types/user/user';
 import SalaryBox from './(components)/SalaryBox';
 import { mySeniorId } from '../../stores/senior';
-import LogoLayer from '@/components/comon/LogoLayer/LogoLayer';
+import LogoLayer from '@/components/common/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
-import AccountShowBtn from '@/components/comon/Button/AccountShowBtn/AccountShowBtn';
+import AccountShowBtn from '@/components/common/Button/AccountShowBtn/AccountShowBtn';
 import MenuBar from '@/components/Bar/MenuBar';
-import Footer from '@/components/comon/Footer';
+import Footer from '@/components/common/Footer';
 import { certifiRegAtom, profileRegAtom } from '@/stores/signup';
 
 import useFullModal from '@/hooks/useFullModal';

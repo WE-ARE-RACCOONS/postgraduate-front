@@ -3,7 +3,7 @@ import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
 import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
 import TextForm from '@/components/Form/TextForm';
 import { useForm } from 'react-hook-form';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 
 export function WishSeniorLab({ onClick }: { onClick: (lab: string) => void }) {
   const { register, getValues } = useForm({

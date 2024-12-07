@@ -12,7 +12,7 @@ import {
   KeywordInputFormBox,
 } from './Keyword.styled';
 import { SELECT_KEYWORD_TEXT } from '@/constants/keyword/keyword';
-import SelectedBtn from '@/components/comon/Button/SelectedBtn';
+import SelectedBtn from '@/components/common/Button/SelectedBtn';
 import { useFormContext } from 'react-hook-form';
 
 function KeywordForm({ clickHandler }: { clickHandler: () => void }) {

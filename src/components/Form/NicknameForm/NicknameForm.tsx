@@ -9,7 +9,7 @@ import {
 } from '@/stores/signup';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 import {
   NicknameContainer,
   NicknameTotalContainer,

@@ -2,7 +2,7 @@
 import React, { Suspense } from 'react';
 import useAuth from '@/hooks/useAuth';
 
-import TextToggleButton from '@/components/comon/TextToggleButton';
+import TextToggleButton from '@/components/common/TextToggleButton';
 
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import Image from 'next/image';
@@ -26,11 +26,11 @@ import {
 } from './MentoringSpec.styled';
 
 import { useGetMyApplyMentoringListQuery } from '@/hooks/query/useGetMyApplyMentoringList';
-import ApplyCancleBtn from '@/components/comon/Button/ApplyCancleBtn';
+import ApplyCancleBtn from '@/components/common/Button/ApplyCancleBtn';
 import { useAtom } from 'jotai';
 import { activeTabAtom } from '@/stores/tap';
 import { TAB } from '@/constants/tab/ctap';
-import Spinner from '@/components/comon/Spinner';
+import Spinner from '@/components/common/Spinner';
 import { ErrorBoundary } from 'react-error-boundary';
 import { MentoringTabError } from '../error';
 

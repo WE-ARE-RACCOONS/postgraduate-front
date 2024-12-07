@@ -1,8 +1,8 @@
 'use client';
-import ModalBtn from '@/components/comon/Button/ModalBtn';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import ModalBtn from '@/components/common/Button/ModalBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 import { useAtomValue } from 'jotai';
 import { overlay } from 'overlay-kit';
@@ -10,7 +10,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 
 import styled from 'styled-components';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { SENIOR_MAJOR } from '@/constants/signup/senior';

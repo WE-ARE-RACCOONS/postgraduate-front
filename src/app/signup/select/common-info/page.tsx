@@ -1,7 +1,7 @@
 'use client';
 import NicknameForm from '@/components/Form/NicknameForm';
 import ServiceCondition from './(components)/ServiceCondition';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import PhoneNumForm from '@/components/Form/PhoneNumForm';
 import { useAtomValue } from 'jotai';
 import {
@@ -11,7 +11,7 @@ import {
   phoneNumValidation,
   userTypeAtom,
 } from '@/stores/signup';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { essential } from '@/stores/condition';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';

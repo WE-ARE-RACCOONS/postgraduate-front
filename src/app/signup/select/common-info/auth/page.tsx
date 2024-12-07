@@ -1,7 +1,7 @@
 'use client';
-import BackHeader from '@/components/comon/Header/BackHeader';
-import Photo from '@/components/comon/Photo';
-import SingleValidator from '@/components/comon/SingleValidator';
+import BackHeader from '@/components/common/Header/BackHeader';
+import Photo from '@/components/common/Photo';
+import SingleValidator from '@/components/common/SingleValidator';
 import { photoUrlAtom } from '@/stores/senior';
 import { useSetAtom } from 'jotai';
 import { useRouter } from 'next/navigation';

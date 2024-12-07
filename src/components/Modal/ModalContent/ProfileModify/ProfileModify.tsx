@@ -11,8 +11,8 @@ import {
 import x_icon from '../../../../../public/x.png';
 import { MODIFY_DIRECTION } from '@/constants/form/cProfileModifyForm';
 import { useEffect, useState } from 'react';
-import SingleValidator from '@/components/comon/SingleValidator';
-import ClickedBtn from '@/components/comon/Button/ClickedBtn';
+import SingleValidator from '@/components/common/SingleValidator';
+import ClickedBtn from '@/components/common/Button/ClickedBtn';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import RiseUpModal from '@/components/Modal/RiseUpModal';

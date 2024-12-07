@@ -15,10 +15,10 @@ import { useGetSeniorMentoringActiveTabQuery } from '@/hooks/query/useGetSeniorM
 
 import { TAB, TAB_STATE } from '@/constants/tab/ctap';
 import MentoringApply from '@/components/domain/mentoring/MentoringApply/MentoringApply';
-import ModalBtn from '@/components/comon/Button/ModalBtn';
+import ModalBtn from '@/components/common/Button/ModalBtn';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 
-import AccountShowBtn from '@/components/comon/Button/AccountShowBtn/AccountShowBtn';
+import AccountShowBtn from '@/components/common/Button/AccountShowBtn/AccountShowBtn';
 import { useRouter } from 'next/navigation';
 import useFullModal from '@/hooks/useFullModal';
 import { SMCancelAtom } from '@/stores/condition';

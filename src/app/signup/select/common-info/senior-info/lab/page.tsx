@@ -1,7 +1,7 @@
 'use client';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import TextForm from '@/components/Form/TextForm';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 import {
   sFieldAtom,
   sKeywordAtom,
@@ -14,7 +14,7 @@ import { useAtomValue } from 'jotai';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { SENIOR_LAB } from '@/constants/signup/senior';

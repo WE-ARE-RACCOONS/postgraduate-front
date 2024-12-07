@@ -11,7 +11,7 @@ import { useSetAtom } from 'jotai';
 import { sMajorAtom, sPostGraduAtom } from '@/stores/senior';
 import Image from 'next/image';
 import search_color from '../../../../public/search2.png';
-import Spinner from '@/components/comon/Spinner';
+import Spinner from '@/components/common/Spinner';
 function SearchForm(props: SearchFormProps) {
   const kaistStrArr = ['카이스트', 'KAIST'];
   const [keyword, setKeyword] = useState('');

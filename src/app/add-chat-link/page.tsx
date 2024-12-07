@@ -1,7 +1,7 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import BackHeader from '@/components/comon/Header/BackHeader';
-import SingleValidator from '@/components/comon/SingleValidator';
+import BackHeader from '@/components/common/Header/BackHeader';
+import SingleValidator from '@/components/common/SingleValidator';
 import {
   PROFILE_DIRECTION,
   PROFILE_PLACEHOLDER,

@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import x_icon from '../../../../public/x_gray.png';
 import { SMFontGray } from './SuggestModal.styled';
-import NextBtn from '../../comon/Button/NextBtn';
+import NextBtn from '../../common/Button/NextBtn';
 import { useRouter } from 'next/navigation';
 interface SuggestModalProps {
   modalHandler: () => void;

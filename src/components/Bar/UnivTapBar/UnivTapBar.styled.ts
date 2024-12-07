@@ -1,4 +1,4 @@
-import { Dropdown } from '@/components/comon/DropDown/common';
+import { Dropdown } from '@/components/common/DropDown/common';
 import styled from 'styled-components';
 
 interface TapStyleProps {

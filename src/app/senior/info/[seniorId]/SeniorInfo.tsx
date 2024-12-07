@@ -11,7 +11,7 @@ const ProfileCard = dynamic(
   () => import('@/components/domain/senior/SeniorCard/ProfileCard'),
 );
 const BackHeader = dynamic(
-  () => import('@/components/comon/Header/BackHeader'),
+  () => import('@/components/common/Header/BackHeader'),
 );
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';

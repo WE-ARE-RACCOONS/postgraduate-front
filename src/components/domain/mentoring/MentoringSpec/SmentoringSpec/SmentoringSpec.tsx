@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 
-import TextToggleButton from '@/components/comon/TextToggleButton';
+import TextToggleButton from '@/components/common/TextToggleButton';
 
 import { ModalMentoringSProps } from '@/types/modal/mentoringDetail';
 import { useConfirmSeniorMentoring } from '@/hooks/mutations/useConfirmSeniorMentoring';
@@ -24,7 +24,7 @@ import {
   WarnMsg,
   ModalNClose,
 } from './SmentoringSpec.styled';
-import ApplyCancleBtn from '@/components/comon/Button/ApplyCancleBtn';
+import ApplyCancleBtn from '@/components/common/Button/ApplyCancleBtn';
 
 import { activeTabAtom } from '@/stores/tap';
 import { useAtom, useAtomValue } from 'jotai';

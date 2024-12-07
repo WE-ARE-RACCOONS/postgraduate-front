@@ -1,6 +1,6 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import ShortRiseUpModal from '@/components/Modal/ShortRiseUpModal';
 import TextareaForm from '@/components/Form/TextareaForm';
 import {

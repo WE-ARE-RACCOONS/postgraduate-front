@@ -8,10 +8,10 @@ import SeniorProfile from '@/components/domain/senior/SeniorProfile/SeniorProfil
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
-import { DropdownProvider } from '../../../comon/DropDown/common/useDropdown';
+import { DropdownProvider } from '../../../common/DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
-import { SeniorListPagination } from '../../../comon/Pagination/SeniorListPagination';
-import SwiperComponent from '@/components/comon/Swiper/Swiper';
+import { SeniorListPagination } from '../../../common/Pagination/SeniorListPagination';
+import SwiperComponent from '@/components/common/Swiper/Swiper';
 import DimmedModal from '@/components/Modal/DimmedModal';
 import SearchModal from '@/components/Modal/SearchModal';
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
@@ -19,8 +19,8 @@ import { useAtomValue } from 'jotai';
 
 import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
 
-import LogoLayer from '@/components/comon/LogoLayer/LogoLayer';
-import Footer from '@/components/comon/Footer';
+import LogoLayer from '@/components/common/LogoLayer/LogoLayer';
+import Footer from '@/components/common/Footer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';

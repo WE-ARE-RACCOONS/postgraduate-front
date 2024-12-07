@@ -1,6 +1,6 @@
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
-import { BtnStyleNonM } from '@/components/comon/Button/NextBtn/NextBtn.styled';
+import { BtnStyleNonM } from '@/components/common/Button/NextBtn/NextBtn.styled';
 import Image from 'next/image';
 
 interface ApplyWantedSeniorSubmitProp {

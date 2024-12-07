@@ -1,6 +1,6 @@
 'use client';
-import SignUpBtn from '@/components/comon/Button/SignUpBtn';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import SignUpBtn from '@/components/common/Button/SignUpBtn';
+import BackHeader from '@/components/common/Header/BackHeader';
 import MatchingForm from '@/components/Form/MatchingForm';
 import styled from 'styled-components';
 import {
@@ -11,8 +11,8 @@ import {
   matchingReceiveAtom,
 } from '@/stores/matching';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import CheckBox from '@/components/comon/Checkbox';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import CheckBox from '@/components/common/Checkbox';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { useEffect } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
 import { useRouter } from 'next/navigation';

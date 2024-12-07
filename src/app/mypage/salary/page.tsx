@@ -7,7 +7,7 @@ import styled from 'styled-components';
 import { tapType } from '@/types/tap/tap';
 import { TAB, STAB_STATE } from '@/constants/tab/ctap';
 import SalaryProfile from '../(components)/salaryProfile/salaryProfile';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { useRouter } from 'next/navigation';
 
 function SalaryPage() {

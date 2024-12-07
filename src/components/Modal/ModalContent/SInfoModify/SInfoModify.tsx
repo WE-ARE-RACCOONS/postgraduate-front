@@ -9,7 +9,7 @@ import x_icon from '../../../../../public/x.png';
 import camera_icon from '../../../../../public/camera.png';
 import { useGetSeniorMyAccountQuery } from '@/hooks/query/useGetSeniorMyAccount';
 import Image from 'next/image';
-import RoundedImage from '@/components/comon/RoundedImage';
+import RoundedImage from '@/components/common/RoundedImage';
 import { useRouter } from 'next/navigation';
 import NicknameForm from '@/components/Form/NicknameForm';
 import PhoneNumForm from '@/components/Form/PhoneNumForm';
@@ -24,8 +24,8 @@ import {
   phoneNum,
   phoneNumValidation,
 } from '@/stores/signup';
-import NextBtn from '@/components/comon/Button/NextBtn';
-import ModalBtn from '@/components/comon/Button/ModalBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
+import ModalBtn from '@/components/common/Button/ModalBtn';
 import { bankNameAtom } from '@/stores/bankName';
 import { overlay } from 'overlay-kit';
 import { ModalType } from '@/types/modal/riseUp';

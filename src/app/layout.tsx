@@ -5,9 +5,9 @@ import StyledComponentsRegistry from '@/lib/registry';
 
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
-import GA from '@/components/comon/GA/GA';
-import GTM from '@/components/comon/GA/GTM';
-import { ToastProvider } from '@/components/comon/Toast/ToastProvider';
+import GA from '@/components/common/GA/GA';
+import GTM from '@/components/common/GA/GTM';
+import { ToastProvider } from '@/components/common/Toast/ToastProvider';
 
 export const metadata: Metadata = {
   title: SERVICE_METADATA.title,

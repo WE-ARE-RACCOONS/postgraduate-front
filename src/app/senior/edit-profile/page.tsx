@@ -1,7 +1,7 @@
 'use client';
-import ClickedBtn from '@/components/comon/Button/ClickedBtn';
-import ModalBtn from '@/components/comon/Button/ModalBtn';
-import BackHeader from '@/components/comon/Header/BackHeader';
+import ClickedBtn from '@/components/common/Button/ClickedBtn';
+import ModalBtn from '@/components/common/Button/ModalBtn';
+import BackHeader from '@/components/common/Header/BackHeader';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProfileForm from '@/components/Form/ProfileForm';
 

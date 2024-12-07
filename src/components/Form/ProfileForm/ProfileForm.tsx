@@ -4,7 +4,7 @@ import {
   ProfileFormContainer,
   ProfileTitleContainer,
 } from './ProfileForm.styled';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 
 const ProfileForm = forwardRef<HTMLTextAreaElement, ProfileFormProps>(
   (props, _ref) => {

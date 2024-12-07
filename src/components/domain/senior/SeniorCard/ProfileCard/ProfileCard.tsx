@@ -5,9 +5,9 @@ import {
   ProfileCardInfoMid,
   ProfileCardInfoTop,
 } from './ProfileCard.styled';
-import RoundedImage from '@/components/comon/RoundedImage';
+import RoundedImage from '@/components/common/RoundedImage';
 import user_icon from '../../../../../../public/user.png';
-import AuthLabeledText from '@/components/comon/Text/AuthLabeledText';
+import AuthLabeledText from '@/components/common/Text/AuthLabeledText';
 import { useEffect, useState } from 'react';
 
 function ProfileCard(props: ProfileCardProps) {

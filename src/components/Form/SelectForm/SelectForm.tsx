@@ -1,4 +1,4 @@
-import SelectedBtn from '@/components/comon/Button/SelectedBtn';
+import SelectedBtn from '@/components/common/Button/SelectedBtn';
 import { useState } from 'react';
 import {
   FieldInputFormBox,

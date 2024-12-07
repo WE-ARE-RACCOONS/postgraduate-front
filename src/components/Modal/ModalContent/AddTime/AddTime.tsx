@@ -12,11 +12,11 @@ import Image from 'next/image';
 import x_icon from '../../../../../public/x.png';
 import { WEEK_ARRAY } from '@/constants/form/cProfileForm';
 import React, { useEffect, useState } from 'react';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 import { useAtom } from 'jotai';
 import { sAbleTime } from '@/stores/senior';
 import { TimeObj } from '@/types/scheduler/scheduler';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 
 function AddTime({ modalHandler }: { modalHandler: () => void }) {
   const hourOptions = Array.from({ length: 16 }, (_, index) => index + 9);

@@ -1,6 +1,6 @@
 'use client';
 
-import BackHeader from '@/components/comon/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import useFunnel from '@/hooks/useFunnel';
 import {
   WishSeniorInfo,

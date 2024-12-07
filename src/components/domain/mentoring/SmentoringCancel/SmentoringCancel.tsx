@@ -3,7 +3,7 @@ import axios from 'axios';
 import useAuth from '@/hooks/useAuth';
 import { ModalMentoringProps } from '@/types/modal/mentoringDetail';
 import { SENIOR_MENTOR_CANCEL } from '@/constants/form/sMentoCanelForm';
-import CheckBox from '@/components/comon/Checkbox';
+import CheckBox from '@/components/common/Checkbox';
 import { useAtom } from 'jotai';
 import { SMCancelSuccessAtom } from '@/stores/condition';
 import { SCEtc, SMCancelAtom, noTime, notKnow } from '@/stores/condition';

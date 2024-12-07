@@ -2,7 +2,7 @@ import { TextareaFormProps } from '@/types/form/textareaForm';
 import { TextareaFormContainer, TextareaFormTop } from './TextareaForm.styled';
 import { useEffect, useState } from 'react';
 import { useAtom } from 'jotai';
-import SingleValidator from '@/components/comon/SingleValidator';
+import SingleValidator from '@/components/common/SingleValidator';
 
 function TextareaForm(props: TextareaFormProps) {
   const [charCnt, setCharCnt] = useState(0);

@@ -2,7 +2,7 @@ import Image from 'next/image';
 import styled from 'styled-components';
 import SignOutJuniorImage from '/public/signout_junior.png';
 import SignOutSeniorImage from '/public/signout_senior.png';
-import NextBtn from '@/components/comon/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { useSignOutInfo } from '@/app/signout/signoutContext';
 
 export function SignOutTypeSelect({ onClick }: { onClick: () => void }) {
