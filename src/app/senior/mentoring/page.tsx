@@ -10,7 +10,7 @@ const STabBar = dynamic(
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
-import LogoLayer from '@/components/LogoLayer/LogoLayer';
+import LogoLayer from '@/components/comon/LogoLayer/LogoLayer';
 import MenuBar from '@/components/Bar/MenuBar';
 import SearchModal from '@/components/Modal/SearchModal';
 import { overlay } from 'overlay-kit';

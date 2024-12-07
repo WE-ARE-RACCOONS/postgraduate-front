@@ -1,18 +1,17 @@
 import { DimmedModalProps } from '@/types/modal/dimmed';
 import { DimmedBgContainer, DimmedMdContainer } from './DimmedModal.styled';
-import MProfileContent from '@/components/Content/MProfileContent';
-import LoginRequest from '@/components/Content/LoginRequest/LoginRequest';
+import MProfileContent from '@/components/Modal/ModalContent/MProfileContent';
+import LoginRequest from '@/components/Modal/ModalContent/LoginRequest/LoginRequest';
 import NotSenior from '../NotSenior/NotSenior';
-import { userType } from '@/types/user/user';
-import SmentoringCancel from '@/components/Mentoring/SmentoringCancel/SmentoringCancel';
-import MentoringCancel from '@/components/Mentoring/MentoringCancel/MentoringCancel';
-import SNotRegistered from '@/components/Content/SNotRegistered';
-import SuggestModal from '@/components/SuggestModal/SuggestModal';
+import SmentoringCancel from '@/components/domain/mentoring/SmentoringCancel/SmentoringCancel';
+import MentoringCancel from '@/components/domain/mentoring/MentoringCancel/MentoringCancel';
+import SNotRegistered from '@/components/Modal/ModalContent/SNotRegistered';
+import SuggestModal from '@/components/Modal/SuggestModal/SuggestModal';
 import AproveModal from '../AproveModal/AproveModal';
-import NotJunior from '@/components/NotJunior/NotJunior';
-import MentoringLogin from '@/components/Content/MentoringLogin';
-import ChangeJunior from '@/components/Content/ChangeJunior';
-import SuccessFail from '@/components/Content/SuccessFail/SuccessFail';
+import NotJunior from './NotJunior/NotJunior';
+import MentoringLogin from '@/components/Modal/ModalContent/MentoringLogin';
+import ChangeJunior from '@/components/Modal/ModalContent/ChangeJunior';
+import SuccessFail from '@/components/Modal/ModalContent/SuccessFail/SuccessFail';
 function DimmedModal(props: DimmedModalProps) {
   return (
     <DimmedBgContainer onClick={props.modalHandler}>

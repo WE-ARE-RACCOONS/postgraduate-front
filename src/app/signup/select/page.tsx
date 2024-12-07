@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect } from 'react';
-import TypeBtn from '@/components/Button/TypeBtn';
-import BackHeader from '@/components/Header/BackHeader';
+import TypeBtn from '@/components/comon/Button/TypeBtn';
+import BackHeader from '@/components/comon/Header/BackHeader';
 import { useRouter, usePathname } from 'next/navigation';
 import styled from 'styled-components';
 import junior from '../../../../public/junior.png';

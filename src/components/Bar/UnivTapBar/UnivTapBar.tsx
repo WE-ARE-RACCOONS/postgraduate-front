@@ -5,11 +5,11 @@ import { TapStyle, TabBackdrop, TabHeader } from './UnivTapBar.styled';
 import { smtapType } from '@/types/tap/tap';
 import { suactiveTabAtom, sfactiveTabAtom } from '@/stores/tap';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { Dropdown } from '@/components/DropDown/common';
+import { Dropdown } from '@/components/comon/DropDown/common';
 import { SMTAB } from '@/constants/tab/ctap';
 import { pageNumAtom } from '@/stores/home';
-import { useDropdownContext } from '@/components/DropDown/common/useDropdown';
-import { DropdownItem } from '@/components/DropDown/common/DropdownItem';
+import { useDropdownContext } from '@/components/comon/DropDown/common/useDropdown';
+import { DropdownItem } from '@/components/comon/DropDown/common/DropdownItem';
 
 function UnivTapBar() {
   const factiveTab = useAtomValue(sfactiveTabAtom);

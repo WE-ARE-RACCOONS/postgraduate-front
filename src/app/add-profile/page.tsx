@@ -3,12 +3,12 @@
 import ProgressBar from '@/components/Bar/ProgressBar';
 
 import { addProfileSchema } from '@/app/add-profile/schema';
-import BackHeader from '@/components/Header/BackHeader';
+import BackHeader from '@/components/comon/Header/BackHeader';
 
 import { FieldError, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import ProfileForm from '@/components/SingleForm/ProfileForm';
-import SingleValidator from '@/components/Validator/SingleValidator';
+import ProfileForm from '@/components/Form/ProfileForm';
+import SingleValidator from '@/components/comon/SingleValidator';
 
 import {
   PROFILE_DIRECTION,

@@ -3,7 +3,7 @@ import { SearchModalBgBox, SearchModalInput } from './SearchModal.styled';
 import { SearchModalProps } from '@/types/modal/search';
 import Image from 'next/image';
 import search from '../../../../public/search2.png';
-import HomeSearchForm from '@/components/SingleForm/HomeSearchForm/HomeSearchForm';
+import HomeSearchForm from '@/components/Form/HomeSearchForm/HomeSearchForm';
 export default function SearchModal(props: SearchModalProps) {
   const ModalClick = () => {
     props.modalHandler();

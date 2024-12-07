@@ -1,9 +1,8 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import TimeListBox from '@/components/Box/TimeListBox';
-import GoogleAnalytics from '@/components/GA/GA';
-import BackHeader from '@/components/Header/BackHeader';
-import SelectTime from '@/components/SelectTime';
+import TimeListBox from '../(components)/TimeListBox';
+import BackHeader from '@/components/comon/Header/BackHeader';
+import SelectTime from '../(components)/SelectTime';
 import { MENTORING_SCHEDULE } from '@/constants/form/cMentoringApply';
 import useAuth from '@/hooks/useAuth';
 import {

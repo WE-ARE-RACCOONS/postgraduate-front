@@ -3,10 +3,10 @@ import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
 import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
 import { useAtomValue } from 'jotai';
 import { overlay } from 'overlay-kit';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/comon/Button/NextBtn';
 import { sPostGraduAtom } from '@/stores/senior';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
+import { TextFormEl } from '@/components/Form/TextForm/TextForm.styled';
 
 export function WishSeniorPostGradu({
   onClick,
@@ -51,4 +51,3 @@ export function WishSeniorPostGradu({
 const PostGraduWrapper = styled.div`
   margin-top: 40px;
 `;
-

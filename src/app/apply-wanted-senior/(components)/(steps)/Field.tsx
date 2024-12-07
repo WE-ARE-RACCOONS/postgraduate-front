@@ -6,7 +6,7 @@ import {
 } from '../../constant';
 import { WishSeniorSubTitle, WishSeniorTitle, NextBtnBox } from '../(template)';
 import { parseAsJson, useQueryState } from 'nuqs';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/comon/Button/NextBtn';
 import * as y from 'yup';
 
 const schema = y.object({
@@ -172,4 +172,3 @@ const EtcInput = styled.input`
   padding-left: 4px;
   height: 45px;
 `;
-

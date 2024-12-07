@@ -1,12 +1,12 @@
 'use client';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/comon/Button/NextBtn';
 import { prevPathAtom } from '@/stores/signup';
 import { useAtomValue } from 'jotai';
 import Image from 'next/image';
 import party_popper from '../../../../public/party_popper.png';
-import ClickedBtn from '@/components/Button/ClickedBtn';
+import ClickedBtn from '@/components/comon/Button/ClickedBtn';
 import { useRouter } from 'next/navigation';
-import BackHeader from '@/components/Header/BackHeader';
+import BackHeader from '@/components/comon/Header/BackHeader';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
 import { useEffect, useState } from 'react';

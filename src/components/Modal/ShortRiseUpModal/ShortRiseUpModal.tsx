@@ -1,6 +1,6 @@
 import { ShortRiseUpModalProps } from '@/types/modal/shortRiseUp';
 import { ModalBackground } from './ShortRiseUpModal.styled';
-import PayAmount from '@/components/Content/PayAmount';
+import PayAmount from '@/components/Modal/ModalContent/PayAmount';
 
 function ShortRiseUpModal(props: ShortRiseUpModalProps) {
   return (

@@ -14,8 +14,9 @@ import { activeTabAtom } from '@/stores/tap';
 import { tapType } from '@/types/tap/tap';
 
 import { TAB } from '@/constants/tab/ctap';
-import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
-import ModalBtn from '@/components/Button/ModalBtn';
+import MentoringApply from '@/components/domain/mentoring/MentoringApply/MentoringApply';
+
+import ModalBtn from '@/components/comon/Button/ModalBtn';
 import useDimmedModal from '@/hooks/useDimmedModal';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 
@@ -24,8 +25,8 @@ import { useGetMyMentoringActiveTabQuery } from '@/hooks/query/useGetMyMentoring
 import useFullModal from '@/hooks/useFullModal';
 import { JMCancelAtom } from '@/stores/condition';
 import { REVIEW_FORM_URL } from '@/constants/form/reviewForm';
-import { StyledSModalBtn } from '@/components/Button/ModalBtn/ModalBtn.styled';
-import MentoringNotYet from '@/components/MentoringNotYet';
+import { StyledSModalBtn } from '@/components/comon/Button/ModalBtn/ModalBtn.styled';
+import MentoringNotYet from '@/components/domain/mentoring/MentoringNotYet';
 import { useConfirmMyMentoring } from '@/hooks/mutations/useConfirmMyMentoring';
 
 function convertDateType(date: string) {

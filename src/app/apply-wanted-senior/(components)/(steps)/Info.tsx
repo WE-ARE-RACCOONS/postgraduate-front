@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import styled from 'styled-components';
 import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/comon/Button/NextBtn';
 import { WishSeniorTitle, WishSeniorSubTitle, NextBtnBox } from '../(template)';
 
 export function WishSeniorInfo({ onClick }: { onClick: () => void }) {

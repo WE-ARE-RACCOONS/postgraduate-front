@@ -2,7 +2,7 @@
 
 import React from 'react';
 import styled from 'styled-components';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/comon/Spinner';
 import useKakaoLogin from '@/hooks/useKakaoLogin';
 
 function KakaoPage() {
