@@ -16,7 +16,7 @@ export const config = {
     '/add-time',
     '/auth-done',
     '/signup/:path*',
-    'order/:path*',
+    '/order/:path*',
     '/mypage/edit',
     '/junior/:path*',
     '/mypage/:path*',

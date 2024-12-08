@@ -3,6 +3,7 @@ import NicknameForm from '@/components/SingleForm/NicknameForm';
 import ServiceCondition from '@/components/ServiceCondition';
 import NextBtn from '@/components/Button/NextBtn';
 import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
+import { COMMON_INFO_ERROR_MESSAGES } from './(constants)';
 import { useAtomValue } from 'jotai';
 import {
   changeNickname,
@@ -65,7 +66,7 @@ function CommonInfoPage() {
         {
           onError: () => {
             addToast({
-              message: '회원가입을 할 수 없습니다. 잠시 후 다시 시도해주세요',
+              message: COMMON_INFO_ERROR_MESSAGES.SIGN_UP_ERROR,
               status: 'error',
             });
           },
@@ -85,7 +86,7 @@ function CommonInfoPage() {
       );
     } else {
       addToast({
-        message: '로그인 정보가 유효하지 않습니다. 다시 로그인해 주세요.',
+        message: COMMON_INFO_ERROR_MESSAGES.LOGIN_ERROR,
         status: 'error',
       });
     }
