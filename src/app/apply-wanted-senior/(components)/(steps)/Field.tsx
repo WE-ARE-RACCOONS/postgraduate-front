@@ -38,7 +38,10 @@ export function WishSeniorField({
 
       <WishSeniorFieldList>
         {WISH_SENIOR_PROVIDER_FIELD_LIST.map((option) => (
-          <WishSeniorFieldRadioWrapper key={option}>
+          <WishSeniorFieldRadioWrapper
+            key={option}
+            onClick={() => handleFieldChange(option, '')}
+          >
             <WishSeniorFieldRadioInput
               type="radio"
               value={option}
@@ -46,12 +49,8 @@ export function WishSeniorField({
               id={option}
               checked={field?.type === option}
               onChange={() => handleFieldChange(option, '')}
-              onClick={() => handleFieldChange(option, '')}
             />
-            <WishSeniorFieldRadioIcon
-              onClick={() => handleFieldChange(option, '')}
-              $isChecked={field?.type === option}
-            />
+            <WishSeniorFieldRadioIcon $isChecked={field?.type === option} />
             <label htmlFor={option}>{option}</label>
           </WishSeniorFieldRadioWrapper>
         ))}
@@ -59,6 +58,7 @@ export function WishSeniorField({
           style={{
             border: field?.type === WISH_SENIOR_FIELD_ETC ? 'none' : '',
           }}
+          onClick={() => handleFieldChange(WISH_SENIOR_FIELD_ETC, '')}
         >
           <WishSeniorFieldRadioInput
             type="radio"
@@ -82,7 +82,6 @@ export function WishSeniorField({
           ) : (
             <>
               <WishSeniorFieldRadioIcon
-                onClick={() => handleFieldChange(WISH_SENIOR_FIELD_ETC, '')}
                 $isChecked={field?.type === WISH_SENIOR_FIELD_ETC}
               />
               <label htmlFor="ETC">{WISH_SENIOR_FIELD_ETC}</label>
@@ -172,4 +171,3 @@ const EtcInput = styled.input`
   padding-left: 4px;
   height: 45px;
 `;
-
