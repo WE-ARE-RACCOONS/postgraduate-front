@@ -17,7 +17,7 @@ export function ToastProvider() {
 
     const addNewToastMessage = (props: observerProp) => {
       if (message.length >= 2) {
-        setMessage(prev => prev.slice(1));
+        setMessage((prev) => prev.slice(1));
       }
 
       setMessage((prev) => [

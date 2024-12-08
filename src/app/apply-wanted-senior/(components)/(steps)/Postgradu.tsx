@@ -51,4 +51,3 @@ export function WishSeniorPostGradu({
 const PostGraduWrapper = styled.div`
   margin-top: 40px;
 `;
-

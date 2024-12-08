@@ -172,4 +172,3 @@ const EtcInput = styled.input`
   padding-left: 4px;
   height: 45px;
 `;
-
