@@ -18,7 +18,6 @@ export function WishSeniorPhoneNum({
     register,
     getValues,
     formState: { errors },
-    trigger,
   } = useForm({
     defaultValues: {
       phoneNum: '',
@@ -27,9 +26,6 @@ export function WishSeniorPhoneNum({
     resolver: yupResolver(phoneNumSchema),
   });
 
-  useEffect(() => {
-    trigger();
-  }, []);
   return (
     <div style={{ margin: '1.6rem 1rem' }}>
       <WishSeniorTitle>{WISH_SENIOR_MENTOR_MSG.PHONE.TITLE}</WishSeniorTitle>
@@ -40,8 +36,8 @@ export function WishSeniorPhoneNum({
 
       <LabWrapper>
         <TextForm
-          targetAtom={''}
-          placeholder={'01012345678'}
+          targetAtom={'phone'}
+          placeholder="전화번호를 입력해 주세요 (예: 01012345678)"
           register={register('phoneNum')}
           aria-label="전화번호 입력"
           aria-invalid={!!errors.phoneNum}
