@@ -25,7 +25,8 @@ const SwiperComponent = () => {
       <SwiperSlide>
         <Image
           src="/banner1.png"
-          alt="대학원 김선배의 배너 이미지"
+          alt="대학원 김선배의 첫번째 배너 이미지"
+          aria-label="대학원 김선배의 첫번째 배너 이미지"
           width={328}
           height={107}
           priority
@@ -34,21 +35,19 @@ const SwiperComponent = () => {
       <SwiperSlide>
         <Image
           src="/banner2.png"
-          alt="banner 2"
+          alt="대학원 김선배의 두번째 배너 이미지"
+          aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}
           height={107}
-          priority
-          aria-label="대학원 김선배의 두번째 배너 이미지"
         />
       </SwiperSlide>
       <SwiperSlide>
         <Image
           src="/banner3.png"
+          alt="대학원 김선배의 두번째 배너 이미지"
+          aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}
           height={107}
-          alt="banner 3"
-          priority
-          aria-label="대학원 김선배의 세번째 베너 이미지"
         />
       </SwiperSlide>
     </Swiper>
