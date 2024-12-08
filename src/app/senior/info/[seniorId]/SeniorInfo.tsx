@@ -1,10 +1,18 @@
 'use client';
 import dynamic from 'next/dynamic';
 
-const IntroCard = dynamic(() => import('@/components/Card/IntroCard'));
-const KeywordCard = dynamic(() => import('@/components/Card/KeywordCard'));
-const ProfileCard = dynamic(() => import('@/components/Card/ProfileCard'));
-const BackHeader = dynamic(() => import('@/components/Header/BackHeader'));
+const IntroCard = dynamic(
+  () => import('@/components/domain/senior/SeniorCard/IntroCard'),
+);
+const KeywordCard = dynamic(
+  () => import('@/components/domain/senior/SeniorCard/KeywordCard'),
+);
+const ProfileCard = dynamic(
+  () => import('@/components/domain/senior/SeniorCard/ProfileCard'),
+);
+const BackHeader = dynamic(
+  () => import('@/components/common/Header/BackHeader'),
+);
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
 

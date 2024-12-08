@@ -1,13 +1,13 @@
 'use client';
-import SalaryBox from '@/components/Box/SalaryBox';
+import SalaryBox from '@/app/mypage/(components)/SalaryBox';
 import React, { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
 import styled from 'styled-components';
 import { tapType } from '@/types/tap/tap';
 import { TAB, STAB_STATE } from '@/constants/tab/ctap';
-import SalaryProfile from '@/components/Profile/salaryProfile/salaryProfile';
-import BackHeader from '@/components/Header/BackHeader';
+import SalaryProfile from '../(components)/salaryProfile/salaryProfile';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { useRouter } from 'next/navigation';
 
 function SalaryPage() {

@@ -7,7 +7,7 @@ import { useEffect, useState } from 'react';
 import useAuth from '@/hooks/useAuth';
 
 import styled from 'styled-components';
-import BackHeader from '@/components/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { FormProvider, useForm } from 'react-hook-form';
 import ProgressBar from '@/components/Bar/ProgressBar';
 import { detectReload, preventClose } from '@/utils/reloadFun';

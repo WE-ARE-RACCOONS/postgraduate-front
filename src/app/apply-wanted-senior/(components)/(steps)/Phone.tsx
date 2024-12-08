@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
 import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { phoneNumSchema } from '@/components/SingleForm/PhoneNumForm/phoneNumSchema';
-import TextForm from '@/components/SingleForm/TextForm';
-import SingleValidator from '@/components/Validator/SingleValidator';
+import { phoneNumSchema } from '@/components/Form/PhoneNumForm/phoneNumSchema';
+import TextForm from '@/components/Form/TextForm';
+import SingleValidator from '@/components/common/SingleValidator';
 import { useEffect } from 'react';
 
 export function WishSeniorPhoneNum({

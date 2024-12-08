@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import { useOutSideClick } from '@/hooks/useOutsideClick';
 import { styled } from 'styled-components';
 

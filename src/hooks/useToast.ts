@@ -1,4 +1,7 @@
-import { observerProp, ToastService } from '@/components/Toast/ToastService';
+import {
+  observerProp,
+  ToastService,
+} from '@/components/common/Toast/ToastService';
 
 export function useToast() {
   function addToast({ message, status }: observerProp) {

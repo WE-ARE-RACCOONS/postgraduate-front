@@ -1,9 +1,9 @@
 import { RiseUpModalProps } from '@/types/modal/riseUp';
 import { ModalBackground } from './RiseUpModal.styled';
-import SearchForm from '@/components/SingleForm/SearchForm';
-import SelectForm from '@/components/SingleForm/SelectForm';
-import KeywordForm from '@/components/SingleForm/KeywordForm/KeywordForm';
-import BankForm from '@/components/SingleForm/BankForm';
+import SearchForm from '@/components/Form/SearchForm';
+import SelectForm from '@/components/Form/SelectForm';
+import KeywordForm from '@/components/Form/KeywordForm/KeywordForm';
+import BankForm from '@/components/Form/BankForm';
 import { WishSeniorApplyAgreeModal } from '@/app/apply-wanted-senior/(components)/(modal)/WishSeniorApplyAgreeModal';
 
 function RiseUpModal(props: RiseUpModalProps) {
@@ -38,4 +38,3 @@ function RiseUpModal(props: RiseUpModalProps) {
 }
 
 export default RiseUpModal;
-

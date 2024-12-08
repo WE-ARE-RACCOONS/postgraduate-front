@@ -14,11 +14,11 @@ import { tapType } from '@/types/tap/tap';
 import { useGetSeniorMentoringActiveTabQuery } from '@/hooks/query/useGetSeniorMentoringActiveTab';
 
 import { TAB, TAB_STATE } from '@/constants/tab/ctap';
-import MentoringApply from '@/components/Mentoring/MentoringApply/MentoringApply';
-import ModalBtn from '@/components/Button/ModalBtn';
+import MentoringApply from '@/components/domain/mentoring/MentoringApply/MentoringApply';
+import ModalBtn from '@/components/common/Button/ModalBtn';
 import { ModalMentoringType } from '@/types/modal/mentoringDetail';
 
-import AccountShowBtn from '@/components/Button/AccountShowBtn/AccountShowBtn';
+import AccountShowBtn from '@/components/common/Button/AccountShowBtn/AccountShowBtn';
 import { useRouter } from 'next/navigation';
 import useFullModal from '@/hooks/useFullModal';
 import { SMCancelAtom } from '@/stores/condition';

@@ -3,13 +3,13 @@ import React, { useEffect, useState } from 'react';
 import { useSearchParams } from 'next/navigation';
 import styled from 'styled-components';
 import { useRouter } from 'next/navigation';
-import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
+import SeniorProfile from '@/components/domain/senior/SeniorProfile/SeniorProfile';
 import axios from 'axios';
 import Image from 'next/image';
 import arrow from '../../../public/arrow.png';
-import SearchDropDown from '@/components/DropDown/SearchDropDown';
+import SearchDropDown from '@/components/common/DropDown/SearchDropDown';
 import SearchModal from '@/components/Modal/SearchModal';
-import Spinner from '@/components/Spinner';
+import Spinner from '@/components/common/Spinner';
 import { SeniorProfileData } from '@/types/profile/seniorProfile';
 
 function SearchResultPage() {

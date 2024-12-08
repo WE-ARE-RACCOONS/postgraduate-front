@@ -2,11 +2,12 @@ import './globals.css';
 import type { Metadata } from 'next';
 import Providers from '@/components/Provider/providers';
 import StyledComponentsRegistry from '@/lib/registry';
-import GTMAnalytics from '@/components/GA/GTM';
-import GoogleAnalytics from '@/components/GA/GA';
+
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
-import { ToastProvider } from '@/components/Toast/ToastProvider';
+import GA from '@/components/common/GA/GA';
+import GTM from '@/components/common/GA/GTM';
+import { ToastProvider } from '@/components/common/Toast/ToastProvider';
 
 export const metadata: Metadata = {
   title: SERVICE_METADATA.title,
@@ -68,8 +69,8 @@ export default function RootLayout({
         />
       </head>
       <body>
-        {process.env.NEXT_PUBLIC_GTM_ID ? <GTMAnalytics /> : <></>}
-        {process.env.NEXT_PUBLIC_GA4_ID ? <GoogleAnalytics /> : <></>}
+        {process.env.NEXT_PUBLIC_GTM_ID ? <GTM /> : <></>}
+        {process.env.NEXT_PUBLIC_GA4_ID ? <GA /> : <></>}
         <Providers>
           <StyledComponentsRegistry>
             <OverlayKitProvider>

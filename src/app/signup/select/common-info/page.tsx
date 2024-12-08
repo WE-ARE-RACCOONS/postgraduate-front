@@ -1,8 +1,9 @@
 'use client';
-import NicknameForm from '@/components/SingleForm/NicknameForm';
-import ServiceCondition from '@/components/ServiceCondition';
-import NextBtn from '@/components/Button/NextBtn';
-import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
+import NicknameForm from '@/components/Form/NicknameForm';
+import ServiceCondition from './(components)/ServiceCondition';
+import NextBtn from '@/components/common/Button/NextBtn';
+import PhoneNumForm from '@/components/Form/PhoneNumForm';
+
 import { COMMON_INFO_ERROR_MESSAGES } from './(constants)';
 import { useAtomValue } from 'jotai';
 import {
@@ -11,7 +12,7 @@ import {
   phoneNum,
   phoneNumValidation,
 } from '@/stores/signup';
-import BackHeader from '@/components/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { essential } from '@/stores/condition';
 import { useEffect, useState } from 'react';
 import { detectReload, preventClose } from '@/utils/reloadFun';
@@ -19,7 +20,7 @@ import { useSignUpUser } from '@/hooks/mutations/useSignupUser';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/hooks/useToast';
-import { SignUpBtnContainer } from '@/components/Button/SignUpBtn/SignUpBtn.styled';
+import { SignUpBtnContainer } from '@/components/common/Button/SignUpBtn/SignUpBtn.styled';
 
 function CommonInfoPage() {
   const [socialId, setSocialId] = useState<number | null>(null);

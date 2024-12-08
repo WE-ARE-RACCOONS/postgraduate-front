@@ -1,17 +1,20 @@
 import { FullModalProps } from '@/types/modal/full';
 import { FullModalContainer } from './FullModal.styled';
-import MBestCaseContent from '@/components/Content/MBestCaseContent';
-import LoginRequest from '@/components/Content/LoginRequest/LoginRequest';
-import SeniorMyProfile from '@/components/Content/SeniorMyProfile';
-import ProfileModify from '@/components/Content/ProfileModify';
-import SmentoringAccept from '@/components/Mentoring/SmentoringAccept/SmentoringAccept';
-import SInfoModify from '@/components/Content/SInfoModify';
-import AddTime from '@/components/Content/AddTime';
-import SmentoringSpec from '@/components/Mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
-import SelectCalendar from '@/components/Content/SelectCalendar';
+import MBestCaseContent from '@/components/Modal/ModalContent/MBestCaseContent';
+import LoginRequest from '@/components/Modal/ModalContent/LoginRequest/LoginRequest';
+import SeniorMyProfile from '@/components/Modal/ModalContent/SeniorMyProfile';
+import ProfileModify from '@/components/Modal/ModalContent/ProfileModify';
+import SmentoringAccept from '@/components/domain/mentoring/SmentoringAccept/SmentoringAccept';
+
+import SInfoModify from '@/components/Modal/ModalContent/SInfoModify';
+import AddTime from '@/components/Modal/ModalContent/AddTime';
+import SmentoringSpec from '@/components/domain/mentoring/MentoringSpec/SmentoringSpec/SmentoringSpec';
+
+import SelectCalendar from '@/components/Modal/ModalContent/SelectCalendar';
 import { firAbleTimeAtom } from '@/stores/mentoring';
-import MentoringSpec from '@/components/Mentoring/MentoringSpec/JmentoringSpec';
-import AccountReactivation from '@/components/Content/AccountReactivation';
+import MentoringSpec from '@/components/domain/mentoring/MentoringSpec/JmentoringSpec';
+
+import AccountReactivation from '@/components/Modal/ModalContent/AccountReactivation';
 
 function FullModal(props: FullModalProps) {
   return (

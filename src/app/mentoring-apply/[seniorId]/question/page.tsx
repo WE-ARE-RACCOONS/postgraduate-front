@@ -1,9 +1,8 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import GoogleAnalytics from '@/components/GA/GA';
-import BackHeader from '@/components/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import ShortRiseUpModal from '@/components/Modal/ShortRiseUpModal';
-import TextareaForm from '@/components/SingleForm/TextareaForm';
+import TextareaForm from '@/components/Form/TextareaForm';
 import {
   MENTORING_NOTICE,
   MENTORING_QUESTION,

@@ -1,11 +1,11 @@
 import { SignOutInfoContainer } from '@/app/signout/(components)/signout-type-select';
 import { useSignOutInfo } from '@/app/signout/signoutContext';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 import Image from 'next/image';
 import styled from 'styled-components';
 import ArrowDownGray from '../../../../../public/arrow-down.png';
-import MatchingForm from '@/components/SingleForm/MatchingForm';
-import TextForm from '@/components/SingleForm/TextForm';
+import MatchingForm from '@/components/Form/MatchingForm';
+import TextForm from '@/components/Form/TextForm';
 import { useState } from 'react';
 
 import {

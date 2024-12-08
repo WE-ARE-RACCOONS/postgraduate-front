@@ -1,13 +1,13 @@
 'use client';
-import ClickedBtn from '@/components/Button/ClickedBtn';
-import ModalBtn from '@/components/Button/ModalBtn';
-import BackHeader from '@/components/Header/BackHeader';
+import ClickedBtn from '@/components/common/Button/ClickedBtn';
+import ModalBtn from '@/components/common/Button/ModalBtn';
+import BackHeader from '@/components/common/Header/BackHeader';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
-import ProfileForm from '@/components/SingleForm/ProfileForm';
+import ProfileForm from '@/components/Form/ProfileForm';
 
 import Image from 'next/image';
 import WhiteAddBtnIcon from '../../../../public/white-add-btn.svg';
-import { TextFormEl } from '@/components/SingleForm/TextForm/TextForm.styled';
+import { TextFormEl } from '@/components/Form/TextForm/TextForm.styled';
 import {
   PROFILE_PLACEHOLDER,
   PROFILE_TITLE,

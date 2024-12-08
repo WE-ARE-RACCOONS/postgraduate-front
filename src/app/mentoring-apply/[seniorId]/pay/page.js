@@ -1,12 +1,12 @@
 'use client';
 import ProgressBar from '@/components/Bar/ProgressBar';
-import BackHeader from '@/components/Header/BackHeader';
-import RoundedImage from '@/components/Image/RoundedImage';
+import BackHeader from '@/components/common/Header/BackHeader';
+import RoundedImage from '@/components/common/RoundedImage';
 import styled from 'styled-components';
 import user_icon from '../../../../../public/user.png';
-import AuthLabeledText from '@/components/Text/AuthLabeledText';
+import AuthLabeledText from '@/components/common/Text/AuthLabeledText';
 import { useAtom, useAtomValue } from 'jotai';
-import '../../../../components/JQ/loader';
+import './(components)/JQ/loader';
 import {
   PhoneNumberAtom,
   paySeniorIdAtom,

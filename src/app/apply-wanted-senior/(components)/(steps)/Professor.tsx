@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 import { WISH_SENIOR_MENTOR_MSG } from '../../constant';
 import { NextBtnBox, WishSeniorSubTitle, WishSeniorTitle } from '../(template)';
-import TextForm from '@/components/SingleForm/TextForm';
+import TextForm from '@/components/Form/TextForm';
 import { useForm } from 'react-hook-form';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 
 export function WishSeniorProfessor({
   onClick,

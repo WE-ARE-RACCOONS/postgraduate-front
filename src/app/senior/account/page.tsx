@@ -1,13 +1,13 @@
 'use client';
-import InputForm from '@/components/SingleForm/InputForm/InputForm';
+import InputForm from '@/components/Form/InputForm/InputForm';
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import styled from 'styled-components';
 import useAuth from '@/hooks/useAuth';
 import axios from 'axios';
-import SingleValidator from '@/components/Validator/SingleValidator';
-import BackHeader from '@/components/Header/BackHeader';
-import ModalBtn from '@/components/Button/ModalBtn';
+import SingleValidator from '@/components/common/SingleValidator';
+import BackHeader from '@/components/common/Header/BackHeader';
+import ModalBtn from '@/components/common/Button/ModalBtn';
 import useModal from '@/hooks/useModal';
 import { ModalType } from '@/types/modal/riseUp';
 import RiseUpModal from '@/components/Modal/RiseUpModal';

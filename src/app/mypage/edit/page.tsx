@@ -1,7 +1,7 @@
 'use client';
 import styled from 'styled-components';
-import NicknameForm from '@/components/SingleForm/NicknameForm';
-import PhoneNumForm from '@/components/SingleForm/PhoneNumForm';
+import NicknameForm from '@/components/Form/NicknameForm';
+import PhoneNumForm from '@/components/Form/PhoneNumForm';
 import React, { useState, useEffect } from 'react';
 import { postUserProfileImage } from '@/api/user/_images/postUserProfileImage';
 import { changeUserInfo } from '@/api/user/info/changeUserInfoFetch';
@@ -16,10 +16,10 @@ import {
   sameUserAtom,
 } from '@/stores/signup';
 import { phoneNum } from '@/stores/signup';
-import Photo from '@/components/Photo';
+import Photo from '@/components/common/Photo';
 import useAuth from '@/hooks/useAuth';
 import { useRouter } from 'next/navigation';
-import BackHeader from '@/components/Header/BackHeader';
+import BackHeader from '@/components/common/Header/BackHeader';
 import { userInfoFetch } from '@/api/user/info/useInfoFetch';
 import findExCode from '@/utils/findExCode';
 function page() {

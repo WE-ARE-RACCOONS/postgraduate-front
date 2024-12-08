@@ -1,7 +1,7 @@
 import { Hydrate, dehydrate } from '@tanstack/react-query';
 import { getSeniorList } from '@/api/senior/getSeinorList';
 
-import { SeniorList } from '@/components/SeniorList';
+import { SeniorList } from '@/components/domain/senior/SeniorList';
 import getQueryClient from '@/utils/getQueryClient';
 
 export default async function Home() {

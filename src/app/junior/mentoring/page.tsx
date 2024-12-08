@@ -10,7 +10,7 @@ const TabBar = dynamic(
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import MenuBar from '@/components/Bar/MenuBar';
-import LogoLayer from '@/components/LogoLayer/LogoLayer';
+import LogoLayer from '@/components/common/LogoLayer/LogoLayer';
 import SearchModal from '@/components/Modal/SearchModal';
 import { overlay } from 'overlay-kit';
 import useAuth from '@/hooks/useAuth';

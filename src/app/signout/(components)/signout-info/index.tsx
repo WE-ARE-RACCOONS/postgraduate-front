@@ -1,6 +1,6 @@
 import { SignOutInfoContainer } from '@/app/signout/(components)/signout-type-select';
 import styled from 'styled-components';
-import NextBtn from '@/components/Button/NextBtn';
+import NextBtn from '@/components/common/Button/NextBtn';
 export function SignOutInfo({ onClick }: { onClick: () => void }) {
   return (
     <SignOutInfoContainer>
