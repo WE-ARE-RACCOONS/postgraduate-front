@@ -1,14 +1,14 @@
 'use client';
 
-import { Suspense, useEffect } from 'react';
+import { Suspense, useEffect, useState } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
 import styled from 'styled-components';
+
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
-
 import SwiperComponent from '@/components/Swiper/Swiper';
 import dynamic from 'next/dynamic';
 
@@ -18,7 +18,8 @@ const SearchModal = dynamic(() => import("@/components/Modal/SearchModal"))
 const Footer = dynamic(() => import("@/components/Footer"))
 const MenuBar = dynamic(() => import("@/components/Bar/MenuBar"))
 const SeniorListPagination = dynamic(() => import("../Pagination/SeniorListPagination"))
-const SeniorProfile = dynamic(() => import("@/components/SeniorProfile/SeniorProfile"))
+
+import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
