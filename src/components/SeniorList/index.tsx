@@ -1,26 +1,31 @@
 'use client';
 
-import MenuBar from '@/components/Bar/MenuBar';
-import { Suspense, useEffect, useState } from 'react';
+import { Suspense, useEffect } from 'react';
 import usePrevPath from '@/hooks/usePrevPath';
 import styled from 'styled-components';
-import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
-import { SeniorListPagination } from '../Pagination/SeniorListPagination';
+
 import SwiperComponent from '@/components/Swiper/Swiper';
-import DimmedModal from '@/components/Modal/DimmedModal';
-import SearchModal from '@/components/Modal/SearchModal';
+import dynamic from 'next/dynamic';
+
+//동적 import 
+const DimmedModal = dynamic(() => import('@/components/Modal/DimmedModal'));
+const SearchModal = dynamic(() => import("@/components/Modal/SearchModal"))
+const Footer = dynamic(() => import("@/components/Footer"))
+const MenuBar = dynamic(() => import("@/components/Bar/MenuBar"))
+const SeniorListPagination = dynamic(() => import("../Pagination/SeniorListPagination"))
+const SeniorProfile = dynamic(() => import("@/components/SeniorProfile/SeniorProfile"))
+
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
 
 import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
 
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
-import Footer from '@/components/Footer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
