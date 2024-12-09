@@ -1,7 +1,6 @@
 import useAuth from '@/hooks/useAuth';
 import findExCode from '@/utils/findExCode';
 import axios, { InternalAxiosRequestConfig } from 'axios';
-import { captureException } from '@sentry/nextjs';
 import { useToast } from '@/hooks/useToast';
 
 const withAuthInstance = axios.create({
@@ -34,14 +33,6 @@ withAuthInstance.interceptors.response.use(
     const { removeTokens } = useAuth();
     const { addToast } = useToast();
     if (findExCode(res.data.code)) {
-      captureException(res.data.code, {
-        level: 'error',
-        extra: {
-          header: res.config.headers,
-          request: res.request,
-          type: 'Network Error!',
-        },
-      });
       removeTokens();
       addToast({
         status: 'error',
