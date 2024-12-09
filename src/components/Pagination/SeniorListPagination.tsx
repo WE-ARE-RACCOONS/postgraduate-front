@@ -16,7 +16,7 @@ interface SeniorListPaginationProps {
   displayPage?: number;
 }
 
-export function SeniorListPagination({
+export default function SeniorListPagination({
   totalPage,
   ...props
 }: SeniorListPaginationProps & HTMLAttributes<HTMLDivElement>) {

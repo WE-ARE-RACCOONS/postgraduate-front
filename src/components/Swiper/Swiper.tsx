@@ -2,8 +2,11 @@ import React from 'react';
 import 'swiper/css/bundle';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
-import SwiperCore from 'swiper';
+import SwiperCore from 'swiper/core';
 import Image from 'next/image';
+import Banner1 from "../../../public/banner1.png"
+import Banner2 from '../../../public/banner2.png'
+import Banner3 from '../../../public/banner3.png'
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -24,7 +27,7 @@ const SwiperComponent = () => {
     >
       <SwiperSlide>
         <Image
-          src="/banner1.png"
+          src={Banner1}
           alt="대학원 김선배의 첫번째 배너 이미지"
           aria-label="대학원 김선배의 첫번째 배너 이미지"
           width={328}
@@ -34,16 +37,17 @@ const SwiperComponent = () => {
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          src="/banner2.png"
+          src={Banner2}
           alt="대학원 김선배의 두번째 배너 이미지"
           aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}
           height={107}
+        
         />
       </SwiperSlide>
       <SwiperSlide>
         <Image
-          src="/banner3.png"
+          src={Banner3}
           alt="대학원 김선배의 두번째 배너 이미지"
           aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}

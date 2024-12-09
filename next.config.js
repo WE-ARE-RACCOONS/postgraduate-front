@@ -1,4 +1,4 @@
-const { withSentryConfig } = require('@sentry/nextjs');
+
 
 const nextConfig = {
   swcMinify: true,
@@ -12,21 +12,5 @@ const nextConfig = {
   },
 };
 
-const isProduction = process.env.NODE_ENV === 'production';
 
-const sentryOptions = {
-  org: 'raccons',
-  project: 'postgradu',
-  silent: !process.env.CI,
-  widenClientFileUpload: true,
-  tunnelRoute: '/monitoring',
-  hideSourceMaps: true,
-  disableLogger: true,
-  automaticVercelMonitors: true,
-};
-
-const config = isProduction
-  ? withSentryConfig(nextConfig, sentryOptions)
-  : nextConfig;
-
-module.exports = config;
+module.exports = nextConfig;
