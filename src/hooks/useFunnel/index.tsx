@@ -1,4 +1,5 @@
-import { ReactElement, ReactNode, useState } from 'react';
+import { useBackEffect } from '../useBackEffect';
+import { ReactElement, ReactNode, useEffect, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Funnel from './Funnel';
 
@@ -64,10 +65,10 @@ function useFunnel<Steps extends StepArray>(
   };
 
   const prevStep = () => {
-    if (currentStep && activeStepIndex > 0) {
-      updateStep(steps[activeStepIndex - 1]);
-    } else {
+    if (activeStepIndex <= -1) {
       router.back();
+    } else {
+      setCurrentStep(steps[activeStepIndex - 1]);
     }
   };
 
@@ -85,6 +86,8 @@ function useFunnel<Steps extends StepArray>(
     }
     return <></>;
   };
+
+  useBackEffect({ callback: () => prevStep(), dependency: [currentStep] });
 
   return [
     Object.assign(FunnelComponent, { Step }),

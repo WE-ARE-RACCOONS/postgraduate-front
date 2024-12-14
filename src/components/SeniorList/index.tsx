@@ -12,13 +12,15 @@ import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '@/components/Swiper/Swiper';
 import dynamic from 'next/dynamic';
 
-//동적 import 
+//동적 import
 const DimmedModal = dynamic(() => import('@/components/Modal/DimmedModal'));
-const SearchModal = dynamic(() => import("@/components/Modal/SearchModal"))
-const Footer = dynamic(() => import("@/components/Footer"))
-const MenuBar = dynamic(() => import("@/components/Bar/MenuBar"))
-const SeniorListPagination = dynamic(() => import("../Pagination/SeniorListPagination"))
+const SearchModal = dynamic(() => import('@/components/Modal/SearchModal'));
+const MenuBar = dynamic(() => import('@/components/Bar/MenuBar'));
+const SeniorListPagination = dynamic(
+  () => import('../Pagination/SeniorListPagination'),
+);
 
+import Footer from '../Footer';
 import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
 
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
