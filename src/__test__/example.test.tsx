@@ -1,4 +1,4 @@
-import { render, screen, renderHook, waitFor } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import ApplyWantedSeniorPage from '@/app/apply-wanted-senior/page';
 import mockRouter from 'next-router-mock';
@@ -18,7 +18,7 @@ describe('원하는 선배 페이지 초기 화면', () => {
     mockRouter.push('/');
   });
 
-  it('멘토링을 원하는 선배에 대해 알려주세요', async () => {
+  it('멘토링을 원하는 선배에 대해 알려주세요 문구가 렌더링된다', async () => {
     render(
       <QueryClientProvider client={newQueryClient}>
         <Suspense>

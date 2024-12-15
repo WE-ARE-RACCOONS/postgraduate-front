@@ -1,5 +1,5 @@
 import { useBackEffect } from '../useBackEffect';
-import { ReactElement, ReactNode, useEffect, useState } from 'react';
+import { ReactElement, ReactNode, useState } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import Funnel from './Funnel';
 
@@ -27,14 +27,12 @@ interface RouterFunnelStep<Steps extends StepArray> {
 interface FunnelOptions<Steps extends StepArray> {
   initialStep?: Steps[number];
   stepQueryKey?: string;
-  stepChangeType?: 'push' | 'replace';
 }
 
 function useFunnel<Steps extends StepArray>(
   steps: Steps,
   options: FunnelOptions<Steps> = {
     initialStep: steps[0],
-    stepChangeType: 'push',
   },
 ): [
   RouteFunnel<Steps> & { Step: RouterFunnelStep<Steps> },
@@ -58,10 +56,7 @@ function useFunnel<Steps extends StepArray>(
     setCurrentStep(step);
     const searchParam = new URLSearchParams(searchParams);
     searchParam.set(options.stepQueryKey ?? 'step', step);
-    if (options.stepChangeType === 'push') router.push(`?${searchParam}`);
-    else {
-      router.replace(`?${searchParam}`);
-    }
+    router.push(`?${searchParam}`);
   };
 
   const prevStep = () => {

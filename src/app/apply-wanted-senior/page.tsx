@@ -34,7 +34,6 @@ export default function ApplyWantedSeniorPage() {
     applyWantedSeniorSteps,
     {
       initialStep: 'info',
-      stepChangeType: 'push',
     } as const,
   );
 

@@ -1,13 +1,22 @@
-// __mocks__/next/navigation.js
-const actual = jest.requireActual('next/navigation');
+const mockRouter = require('next-router-mock');
 
-module.exports = {
-  ...actual,
-  useRouter: jest.fn(() => ({
-    push: jest.fn(),
-  })),
-  useSearchParams: jest.fn(() => ({
-    get: jest.fn(),
-  })),
-  usePathname: jest.fn(),
+const useRouter = mockRouter.useRouter;
+
+const MockNextNavigation = {
+  ...mockRouter,
+  notFound: jest.fn(),
+  redirect: jest.fn().mockImplementation((url) => {
+    mockRouter.memoryRouter.setCurrentUrl(url);
+  }),
+  usePathname: () => {
+    const router = useRouter();
+    return router.asPath;
+  },
+  useSearchParams: () => {
+    const router = useRouter();
+    const path = router.query;
+    return new URLSearchParams(path);
+  },
 };
+
+module.exports = MockNextNavigation;
