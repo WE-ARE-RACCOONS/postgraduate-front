@@ -5,7 +5,5 @@ export const useGetMyProfileQuery = () => {
   return useQuery({
     queryFn: userInfoFetch,
     queryKey: ['/user/me/info'],
-    suspense: true,
-    useErrorBoundary: true,
   });
 };

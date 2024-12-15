@@ -46,7 +46,7 @@ export default function ApplyWantedSeniorPage() {
     postgradu: '',
     professor: '',
     lab: '',
-    phoneNumber: data?.data.data.phoneNumber ?? '',
+    phoneNumber: data?.data?.data?.phoneNumber ?? '',
   });
 
   const { mutate } = useWishSeniorApply();

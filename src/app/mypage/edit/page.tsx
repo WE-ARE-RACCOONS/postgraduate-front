@@ -48,6 +48,7 @@ function page() {
       setNickName(nickName);
       setprofile(profile);
       setPhoneNumber(phoneNumber);
+
       setAvailablePhone(false);
     });
   }, []);
