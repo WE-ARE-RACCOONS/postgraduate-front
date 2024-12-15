@@ -33,7 +33,7 @@ const RetryButton = styled.button`
   }
 `;
 
-export default function Error({
+export default function ErrorBoundary({
   error,
   reset,
 }: {
