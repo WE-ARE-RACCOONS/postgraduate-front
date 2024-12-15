@@ -125,8 +125,9 @@ export default function ApplyWantedSeniorPage() {
                 ...prev,
                 lab,
               }));
-              if (data?.data.data.phoneNumber) {
-                openWithSeniorApplyAgreeModal(data?.data?.data?.phoneNumber);
+              const phoneNumber = data?.data?.data?.phoneNumber;
+              if (phoneNumber) {
+                openWithSeniorApplyAgreeModal(phoneNumber);
               } else {
                 setStep('phoneNumber');
               }
