@@ -31,7 +31,6 @@ const SwiperComponent = () => {
           alt="대학원 김선배의 첫번째 배너 이미지"
           aria-label="대학원 김선배의 첫번째 배너 이미지"
           width={328}
-          loading="lazy"
           height={107}
         />
       </SwiperSlide>
@@ -41,7 +40,6 @@ const SwiperComponent = () => {
           alt="대학원 김선배의 두번째 배너 이미지"
           aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}
-          loading="lazy"
           height={107}
         />
       </SwiperSlide>
@@ -51,7 +49,6 @@ const SwiperComponent = () => {
           alt="대학원 김선배의 두번째 배너 이미지"
           aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}
-          loading="lazy"
           height={107}
         />
       </SwiperSlide>
