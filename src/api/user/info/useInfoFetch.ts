@@ -11,9 +11,5 @@ interface UserInfoFetchResponse extends ResponseModel {
 }
 
 export const userInfoFetch = async () => {
-  try {
-    return await withAuthInstance.get<UserInfoFetchResponse>('/user/me/info');
-  } catch (e) {
-    throw e;
-  }
+  return await withAuthInstance.get<UserInfoFetchResponse>('/user/me/info');
 };
