@@ -15,7 +15,9 @@ import { useWishSeniorApply } from '@/hooks/mutations/useWishSeniorApply';
 import { useRouter } from 'next/navigation';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
+
 import type { WishSeniorApplyRequest } from '@/api/senior/wishSeniorApply';
+import { useGetMyProfileQuery } from '@/hooks/query/useGetMyProfile';
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProgressBar from '@/components/Bar/ProgressBar';
 
@@ -30,6 +32,8 @@ const applyWantedSeniorSteps = [
 ] as const;
 
 export default function ApplyWantedSeniorPage() {
+  const { data } = useGetMyProfileQuery();
+
   const [WithSeniorFunnel, setStep, prevStep, _activeStep] = useFunnel(
     applyWantedSeniorSteps,
     {
@@ -42,7 +46,7 @@ export default function ApplyWantedSeniorPage() {
     postgradu: '',
     professor: '',
     lab: '',
-    phoneNumber: '',
+    phoneNumber: data?.data.data.phoneNumber ?? '',
   });
 
   const { mutate } = useWishSeniorApply();
@@ -121,7 +125,11 @@ export default function ApplyWantedSeniorPage() {
                 ...prev,
                 lab,
               }));
-              setStep('phoneNumber');
+              if (data?.data.data.phoneNumber) {
+                openWithSeniorApplyAgreeModal(data?.data?.data?.phoneNumber);
+              } else {
+                setStep('phoneNumber');
+              }
             }}
           />
         </WithSeniorFunnel.Step>
