@@ -15,7 +15,18 @@ const MockNextNavigation = {
   useSearchParams: () => {
     const router = useRouter();
     const path = router.query;
-    return new URLSearchParams(path);
+    // 쿼리 파라미터가 없는 경우 처리
+    if (!path || typeof path !== 'object') {
+      return new URLSearchParams();
+    }
+    // 객체를 URLSearchParams로 변환
+    return new URLSearchParams(
+      Object.entries(path).flatMap(([key, value]) => 
+        Array.isArray(value) 
+          ? value.map(v => [key, v]) 
+          : [[key, value]]
+      )
+    );
   },
 };
 
