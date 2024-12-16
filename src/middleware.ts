@@ -19,7 +19,6 @@ export const config = {
     '/order/:path*',
     '/mypage/edit',
     '/junior/:path*',
-    '/mypage/:path*',
     '/salary/:path*',
     '/order/confirm',
     '/pay/result',
