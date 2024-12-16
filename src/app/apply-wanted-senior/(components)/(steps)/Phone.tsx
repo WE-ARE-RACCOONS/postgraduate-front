@@ -7,7 +7,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { phoneNumSchema } from '@/components/SingleForm/PhoneNumForm/phoneNumSchema';
 import TextForm from '@/components/SingleForm/TextForm';
 import SingleValidator from '@/components/Validator/SingleValidator';
-import { useEffect } from 'react';
 
 export function WishSeniorPhoneNum({
   onClick,

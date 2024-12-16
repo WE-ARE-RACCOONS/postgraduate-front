@@ -21,19 +21,17 @@ export const changeSeniorAccont = async ({
   accountNumber,
 }: ChangeSeniorAccountResponse['data']) => {
   try {
-    return (
-      await withAuthInstance.patch<ChangeSeniorAccountResponse>(
-        '/senior/me/account',
-        {
-          phoneNumber,
-          profile,
-          bank,
-          accountHolder,
-          accountNumber,
-          nickName,
-        },
-      )
-    ).data;
+    return await withAuthInstance.patch<ChangeSeniorAccountResponse>(
+      '/senior/me/account',
+      {
+        phoneNumber,
+        profile,
+        bank,
+        accountHolder,
+        accountNumber,
+        nickName,
+      },
+    );
   } catch (e) {
     throw e;
   }

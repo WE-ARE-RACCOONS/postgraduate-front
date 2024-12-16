@@ -4,9 +4,9 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import SwiperCore from 'swiper/core';
 import Image from 'next/image';
-import Banner1 from "../../../public/banner1.png"
-import Banner2 from '../../../public/banner2.png'
-import Banner3 from '../../../public/banner3.png'
+import Banner1 from '../../../public/banner1.png';
+import Banner2 from '../../../public/banner2.png';
+import Banner3 from '../../../public/banner3.png';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -32,7 +32,6 @@ const SwiperComponent = () => {
           aria-label="대학원 김선배의 첫번째 배너 이미지"
           width={328}
           height={107}
-          priority
         />
       </SwiperSlide>
       <SwiperSlide>
@@ -42,7 +41,6 @@ const SwiperComponent = () => {
           aria-label="대학원 김선배의 두번째 배너 이미지"
           width={328}
           height={107}
-        
         />
       </SwiperSlide>
       <SwiperSlide>
