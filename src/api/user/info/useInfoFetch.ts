@@ -1,4 +1,4 @@
-import { withAuthInstance, withOutAuthInstance } from '@/api/api';
+import { withOutAuthInstance } from '@/api/api';
 import useAuth from '@/hooks/useAuth';
 
 import { ResponseModel } from '@/api/model';
@@ -13,13 +13,15 @@ interface UserInfoFetchResponse extends ResponseModel {
 
 export const userInfoFetch = async () => {
   const { getAccessToken } = useAuth();
-  const isAuthorized = await getAccessToken();
+  const accessToken = await getAccessToken();
 
-  if (!isAuthorized) {
-    return await withOutAuthInstance.get<UserInfoFetchResponse>(
-      '/user/me/info',
-    );
-  } else {
-    return await withAuthInstance.get<UserInfoFetchResponse>('/user/me/info');
-  }
+  const headers = accessToken
+    ? {
+        Authorization: `Bearer ${accessToken}`,
+      }
+    : {};
+
+  return await withOutAuthInstance.get<UserInfoFetchResponse>('/user/me/info', {
+    headers,
+  });
 };
