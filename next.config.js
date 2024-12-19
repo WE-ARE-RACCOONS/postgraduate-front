@@ -1,5 +1,3 @@
-
-
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: false,
@@ -9,8 +7,8 @@ const nextConfig = {
   images: {
     domains: [`${process.env.NEXT_PUBLIC_S3_URL}`],
     formats: ['image/avif', 'image/webp'],
+    minimumCacheTTL: 31536000,
   },
 };
-
 
 module.exports = nextConfig;

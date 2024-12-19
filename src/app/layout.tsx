@@ -6,9 +6,8 @@ import GTMAnalytics from '@/components/GA/GTM';
 import GoogleAnalytics from '@/components/GA/GA';
 import { SERVICE_METADATA } from '@/constants/meta/metaData';
 import OverlayKitProvider from '@/lib/overlay';
-import localFont from "next/font/local"
+import localFont from 'next/font/local';
 import { ToastProvider } from '@/components/Toast/ToastProvider';
-
 
 export const metadata: Metadata = {
   title: SERVICE_METADATA.title,
@@ -47,10 +46,10 @@ export const metadata: Metadata = {
 };
 
 const pretendard = localFont({
-  src:"../../public/fonts/PretendardVariable.woff2",
-  display:"swap",
-  variable:"--font-pretendard"
-})
+  src: '../../public/fonts/PretendardVariable.woff2',
+  display: 'swap',
+  variable: '--font-pretendard',
+});
 
 export default function RootLayout({
   children,
