@@ -1,7 +1,6 @@
 const nextConfig = {
   swcMinify: true,
   reactStrictMode: false,
-  output: 'standalone',
   compiler: {
     styledComponents: true,
   },
