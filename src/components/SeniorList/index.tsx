@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect } from 'react';
 import styled from 'styled-components';
 
@@ -31,7 +32,7 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
-import Spinner from '../Spinner';
+import Link from 'next/link';
 
 export function SeniorList() {
   const { isTutorialFinish } = useTutorial();
@@ -73,11 +74,35 @@ export function SeniorList() {
       </DropdownProvider>
       <HomeProfileLayer>
         {seniorListData?.seniorSearchResponses?.length ? (
-          seniorListData?.seniorSearchResponses?.map((el, idx) => (
-            <div key={el.seniorId}>
-              <SeniorProfile data={el} />
-            </div>
-          ))
+          seniorListData.seniorSearchResponses.map((el, idx) =>
+            idx + 1 !== 5 ? (
+              <div key={el.seniorId}>
+                <SeniorProfile data={el} />
+              </div>
+            ) : page === 1 ? (
+              <Link
+                href={'/apply-wanted-senior'}
+                style={{
+                  display: 'flex',
+                  margin: '0 auto',
+                }}
+              >
+                <Image
+                  src="/link-to-apply-wanted-senior.webp"
+                  alt="원하는 선배 신청 페이지로 이동하는 이미지"
+                  aria-label="원하는 선배 신청 페이지로 이동하는 이미지"
+                  role="link"
+                  width={360}
+                  height={141}
+                  title="원하는 선배 신청 페이지로 이동"
+                />
+              </Link>
+            ) : (
+              <div key={el.seniorId}>
+                <SeniorProfile data={el} />
+              </div>
+            ),
+          )
         ) : (
           <div
             style={{
