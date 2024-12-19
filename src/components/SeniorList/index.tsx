@@ -1,7 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
-import usePrevPath from '@/hooks/usePrevPath';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
@@ -32,18 +31,15 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
+import Spinner from '../Spinner';
 
 export function SeniorList() {
-  const { setCurrentPath } = usePrevPath();
   const { isTutorialFinish } = useTutorial();
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
   const { page, setPage } = useSeniorListPageSearchParams();
-  useEffect(() => {
-    setCurrentPath();
-  }, []);
 
   useEffect(() => {
     setPage(1);
@@ -56,67 +52,63 @@ export function SeniorList() {
   );
 
   return (
-    <Suspense fallback={<div>로딩 중...</div>}>
-      <HomeLayer>
-        <LogoLayer
+    <HomeLayer>
+      <LogoLayer
+        modalHandler={() => {
+          overlay.open(({ unmount }) => {
+            return <SearchModal modalHandler={() => unmount()} />;
+          });
+        }}
+      />
+      <HomeBannerLayer>
+        <SwiperComponent />
+      </HomeBannerLayer>
+      <DropdownProvider>
+        <HomeFieldLayer>
+          <FieldTapBar />
+        </HomeFieldLayer>
+        <HomeUnivLayer>
+          <UnivTapBar />
+        </HomeUnivLayer>
+      </DropdownProvider>
+      <HomeProfileLayer>
+        {seniorListData?.seniorSearchResponses?.length ? (
+          seniorListData?.seniorSearchResponses?.map((el, idx) => (
+            <div key={el.seniorId}>
+              <SeniorProfile data={el} />
+            </div>
+          ))
+        ) : (
+          <div
+            style={{
+              minHeight: '22rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+            }}
+          >
+            해당하는 선배가 없어요
+          </div>
+        )}
+
+        <SeniorListPagination totalPage={seniorListData?.totalElements ?? 0} />
+      </HomeProfileLayer>
+      <Footer />
+      <MenuBarWrapper>
+        <MenuBar
           modalHandler={() => {
             overlay.open(({ unmount }) => {
-              return <SearchModal modalHandler={() => unmount()} />;
+              return (
+                <DimmedModal
+                  modalType="notuser"
+                  modalHandler={() => unmount()}
+                />
+              );
             });
           }}
         />
-        <HomeBannerLayer>
-          <SwiperComponent />
-        </HomeBannerLayer>
-        <DropdownProvider>
-          <HomeFieldLayer>
-            <FieldTapBar />
-          </HomeFieldLayer>
-          <HomeUnivLayer>
-            <UnivTapBar />
-          </HomeUnivLayer>
-        </DropdownProvider>
-        <HomeProfileLayer>
-          {seniorListData?.seniorSearchResponses?.length ? (
-            seniorListData?.seniorSearchResponses?.map((el, idx) => (
-              <div key={el.seniorId}>
-                <SeniorProfile data={el} />
-              </div>
-            ))
-          ) : (
-            <div
-              style={{
-                minHeight: '22rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              해당하는 선배가 없어요
-            </div>
-          )}
-
-          <SeniorListPagination
-            totalPage={seniorListData?.totalElements ?? 0}
-          />
-        </HomeProfileLayer>
-        <Footer />
-        <MenuBarWrapper>
-          <MenuBar
-            modalHandler={() => {
-              overlay.open(({ unmount }) => {
-                return (
-                  <DimmedModal
-                    modalType="notuser"
-                    modalHandler={() => unmount()}
-                  />
-                );
-              });
-            }}
-          />
-        </MenuBarWrapper>
-      </HomeLayer>
-    </Suspense>
+      </MenuBarWrapper>
+    </HomeLayer>
   );
 }
 
