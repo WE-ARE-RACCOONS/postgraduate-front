@@ -1,7 +1,7 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
-import usePrevPath from '@/hooks/usePrevPath';
+import Image from 'next/image';
+import { useEffect } from 'react';
 import styled from 'styled-components';
 
 import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
@@ -32,18 +32,15 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
+import Link from 'next/link';
 
 export function SeniorList() {
-  const { setCurrentPath } = usePrevPath();
   const { isTutorialFinish } = useTutorial();
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
   const { page, setPage } = useSeniorListPageSearchParams();
-  useEffect(() => {
-    setCurrentPath();
-  }, []);
 
   useEffect(() => {
     setPage(1);
@@ -56,67 +53,87 @@ export function SeniorList() {
   );
 
   return (
-    <Suspense fallback={<div>로딩 중...</div>}>
-      <HomeLayer>
-        <LogoLayer
-          modalHandler={() => {
-            overlay.open(({ unmount }) => {
-              return <SearchModal modalHandler={() => unmount()} />;
-            });
-          }}
-        />
-        <HomeBannerLayer>
-          <SwiperComponent />
-        </HomeBannerLayer>
-        <DropdownProvider>
-          <HomeFieldLayer>
-            <FieldTapBar />
-          </HomeFieldLayer>
-          <HomeUnivLayer>
-            <UnivTapBar />
-          </HomeUnivLayer>
-        </DropdownProvider>
-        <HomeProfileLayer>
-          {seniorListData?.seniorSearchResponses?.length ? (
-            seniorListData?.seniorSearchResponses?.map((el, idx) => (
+    <HomeLayer>
+      <LogoLayer
+        modalHandler={() => {
+          overlay.open(({ unmount }) => {
+            return <SearchModal modalHandler={() => unmount()} />;
+          });
+        }}
+      />
+      <HomeBannerLayer>
+        <SwiperComponent />
+      </HomeBannerLayer>
+      <DropdownProvider>
+        <HomeFieldLayer>
+          <FieldTapBar />
+        </HomeFieldLayer>
+        <HomeUnivLayer>
+          <UnivTapBar />
+        </HomeUnivLayer>
+      </DropdownProvider>
+      <HomeProfileLayer>
+        {seniorListData?.seniorSearchResponses?.length ? (
+          seniorListData.seniorSearchResponses.map((el, idx) =>
+            idx + 1 !== 5 ? (
               <div key={el.seniorId}>
                 <SeniorProfile data={el} />
               </div>
-            ))
-          ) : (
-            <div
-              style={{
-                minHeight: '22rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              해당하는 선배가 없어요
-            </div>
-          )}
-
-          <SeniorListPagination
-            totalPage={seniorListData?.totalElements ?? 0}
-          />
-        </HomeProfileLayer>
-        <Footer />
-        <MenuBarWrapper>
-          <MenuBar
-            modalHandler={() => {
-              overlay.open(({ unmount }) => {
-                return (
-                  <DimmedModal
-                    modalType="notuser"
-                    modalHandler={() => unmount()}
-                  />
-                );
-              });
+            ) : page === 1 ? (
+              <Link
+                href={'/apply-wanted-senior'}
+                style={{
+                  display: 'flex',
+                  margin: '0 auto',
+                }}
+              >
+                <Image
+                  src="/link-to-apply-wanted-senior.webp"
+                  alt="원하는 선배 신청 페이지로 이동하는 이미지"
+                  aria-label="원하는 선배 신청 페이지로 이동하는 이미지"
+                  role="link"
+                  width={360}
+                  height={141}
+                  title="원하는 선배 신청 페이지로 이동"
+                />
+              </Link>
+            ) : (
+              <div key={el.seniorId}>
+                <SeniorProfile data={el} />
+              </div>
+            ),
+          )
+        ) : (
+          <div
+            style={{
+              minHeight: '22rem',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
-          />
-        </MenuBarWrapper>
-      </HomeLayer>
-    </Suspense>
+          >
+            해당하는 선배가 없어요
+          </div>
+        )}
+
+        <SeniorListPagination totalPage={seniorListData?.totalElements ?? 0} />
+      </HomeProfileLayer>
+      <Footer />
+      <MenuBarWrapper>
+        <MenuBar
+          modalHandler={() => {
+            overlay.open(({ unmount }) => {
+              return (
+                <DimmedModal
+                  modalType="notuser"
+                  modalHandler={() => unmount()}
+                />
+              );
+            });
+          }}
+        />
+      </MenuBarWrapper>
+    </HomeLayer>
   );
 }
 
