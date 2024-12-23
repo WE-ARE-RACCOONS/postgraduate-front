@@ -37,7 +37,7 @@ export function WishSeniorField({
       </WishSeniorSubTitle>
 
       <WishSeniorFieldList>
-        {WISH_SENIOR_PROVIDER_FIELD_LIST.map((option) => (
+        {WISH_SENIOR_PROVIDER_FIELD_LIST.map((option, index) => (
           <WishSeniorFieldRadioWrapper
             key={option}
             onClick={() => handleFieldChange(option, '')}
@@ -100,7 +100,7 @@ export function WishSeniorField({
               onClick(field.value);
             }
           }}
-          kind="route"
+          kind={field?.type || field?.value ? 'route' : 'route-non'}
         />
       </NextBtnBox>
     </Container>
