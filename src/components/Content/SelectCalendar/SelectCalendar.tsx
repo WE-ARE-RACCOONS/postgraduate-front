@@ -16,7 +16,9 @@ import {
   SELECT_CALENDAR_TEXT,
   WEEK_DAY_TO_NUM,
 } from '@/constants/calendar/calendar';
+import { useToast } from '@/hooks/useToast';
 import { SelectCalendarProps } from '@/types/selectTime/selectTime';
+import SelectTime from '@/components/SelectTime';
 
 function SelectCalendar(props: SelectCalendarProps) {
   const timeArr = useAtomValue(sAbleMentoringTimeArr);
@@ -26,6 +28,7 @@ function SelectCalendar(props: SelectCalendarProps) {
   >([]);
   const setFinalTime = useSetAtom(props.targetAtom);
   const weekObj = WEEK_DAY_TO_NUM;
+  const toast = useToast();
 
   /** 30분 단위로 시간 간격을 끊어서 리턴해주는 함수 */
   function splitTimeRange(startTime: string, endTime: string) {
@@ -149,17 +152,21 @@ function SelectCalendar(props: SelectCalendarProps) {
 
   const nextBtnHandler = () => {
     // 날짜/시간 제대로 선택하지 않고 "입력" 눌렀을 때 스낵바 등 처리 필요할듯
-    if (selectedDate) {
-      const selectedTime = document.querySelector('.selected-time');
-      if (selectedTime) {
-        const formattedDate = formatDateHyphen(selectedDate as Date);
-        const formattedTime = formatTimeHyphen(
-          selectedTime.innerHTML.slice(0, 8),
-        );
-        setFinalTime(`${formattedDate}-${formattedTime}`);
-        props.modalHandler();
-      }
+    if (!selectedDate) {
+      toast.addToast({ status: 'error', message: '날짜를 입력해주세요' });
+      return;
     }
+
+    const selectedTime = document.querySelector('.selected-time');
+    if (!selectedTime) {
+      toast.addToast({ status: 'error', message: '시간을 입력해주세요' });
+      return;
+    }
+
+    const formattedDate = formatDateHyphen(selectedDate as Date);
+    const formattedTime = formatTimeHyphen(selectedTime.innerHTML.slice(0, 8));
+    setFinalTime(`${formattedDate}-${formattedTime}`);
+    props.modalHandler();
   };
 
   return (
