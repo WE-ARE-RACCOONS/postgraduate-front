@@ -40,7 +40,7 @@ export function WishSeniorPostGradu({
       <NextBtnBox>
         <NextBtn
           btnText="다음"
-          kind="route"
+          kind={postgradu.length > 0 ? 'route' : 'route-non'}
           onClick={() => onClick(postgradu)}
         />
       </NextBtnBox>
@@ -51,4 +51,3 @@ export function WishSeniorPostGradu({
 const PostGraduWrapper = styled.div`
   margin-top: 40px;
 `;
-
