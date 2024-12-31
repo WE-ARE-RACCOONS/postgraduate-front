@@ -49,4 +49,3 @@ function JuniorManage(props: NotSeniorProps) {
 }
 
 export default JuniorManage;
-

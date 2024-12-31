@@ -2,6 +2,7 @@
 
 import BackHeader from '@/components/Header/BackHeader';
 import useFunnel from '@/hooks/useFunnel';
+import useAuth from '@/hooks/useAuth';
 import {
   WishSeniorInfo,
   WishSeniorField,
@@ -13,10 +14,11 @@ import {
 } from './(components)/(steps)';
 import { useWishSeniorApply } from '@/hooks/mutations/useWishSeniorApply';
 import { useRouter } from 'next/navigation';
-import styled from 'styled-components';
 import { overlay } from 'overlay-kit';
 import { useState } from 'react';
+
 import type { WishSeniorApplyRequest } from '@/api/senior/wishSeniorApply';
+
 import RiseUpModal from '@/components/Modal/RiseUpModal';
 import ProgressBar from '@/components/Bar/ProgressBar';
 
@@ -31,11 +33,11 @@ const applyWantedSeniorSteps = [
 ] as const;
 
 export default function ApplyWantedSeniorPage() {
+  const { getAccessToken } = useAuth();
   const [WithSeniorFunnel, setStep, prevStep, _activeStep] = useFunnel(
     applyWantedSeniorSteps,
     {
       initialStep: 'info',
-      stepChangeType: 'push',
     } as const,
   );
 
@@ -118,12 +120,17 @@ export default function ApplyWantedSeniorPage() {
 
         <WithSeniorFunnel.Step name="lab">
           <WishSeniorLab
-            onClick={(lab) => {
+            onClick={async (lab) => {
               setWishSenior((prev) => ({
                 ...prev,
                 lab,
               }));
-              setStep('phoneNumber');
+              const accTkn = await getAccessToken();
+              if (accTkn) {
+                openWithSeniorApplyAgreeModal('');
+              } else {
+                setStep('phoneNumber');
+              }
             }}
           />
         </WithSeniorFunnel.Step>
@@ -146,4 +153,3 @@ export default function ApplyWantedSeniorPage() {
     </main>
   );
 }
-

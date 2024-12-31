@@ -38,4 +38,3 @@ function RiseUpModal(props: RiseUpModalProps) {
 }
 
 export default RiseUpModal;
-

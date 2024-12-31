@@ -54,23 +54,18 @@ const PaginationLink = ({ isActive, ...props }: PaginationLinkProps) => (
 PaginationLink.displayName = 'PaginationLink';
 
 const PaginationPrev = ({
-  isnonactive,
   ...props
-}: React.ComponentProps<typeof PaginationLink> & {
-  isnonactive: boolean;
-}) => (
+}: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink {...props}>
     <svg
       focusable="false"
       aria-label="이전 페이지"
       viewBox="0 0 24 24"
-      width="24"
-      height="24"
       data-testid="NavigateBeforeIcon"
     >
       <path
         d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"
-        fill={`${isnonactive ? '#D6D7D8' : '#4C4D4E'}`}
+        fill="#4C4D4E"
       ></path>
     </svg>
   </PaginationLink>
@@ -79,23 +74,18 @@ const PaginationPrev = ({
 PaginationPrev.displayName = 'PaginationPrevButton';
 
 const PaginationNext = ({
-  isnonactive = false,
   ...props
-}: React.ComponentProps<typeof PaginationLink> & {
-  isnonactive: boolean;
-}) => (
+}: React.ComponentProps<typeof PaginationLink>) => (
   <PaginationLink {...props}>
     <svg
       focusable="false"
       aria-label="다음 페이지"
       viewBox="0 0 24 24"
       data-testid="NavigateNextIcon"
-      width="24"
-      height="24"
     >
       <path
         d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"
-        fill={`${isnonactive ? '#D6D7D8' : '#4C4D4E'}`}
+        fill="#4C4D4E"
       ></path>
     </svg>
   </PaginationLink>
@@ -110,3 +100,4 @@ export {
   PaginationNext,
   PaginationPrev,
 };
+

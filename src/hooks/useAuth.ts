@@ -28,7 +28,7 @@ function useAuth() {
   /** cookie에 refresh token 값 및 만료 시간 저장 */
   function setRefreshToken(props: SetTokenProps) {
     const expires = calculateExpires(props.expires);
-    cookies.set('refresh_token', props.token, {
+    cookies.set('refreshToken', props.token, {
       path: '/',
       expires,
     });
