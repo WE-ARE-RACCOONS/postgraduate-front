@@ -16,6 +16,7 @@ export function WishSeniorPhoneNum({
   const {
     register,
     getValues,
+    watch,
     formState: { errors },
   } = useForm({
     defaultValues: {
@@ -53,7 +54,11 @@ export function WishSeniorPhoneNum({
       <NextBtnBox>
         <NextBtn
           btnText="신청 완료"
-          kind={errors.phoneNum?.message ? 'route-non' : 'route'}
+          kind={
+            errors.phoneNum?.message || watch('phoneNum').length === 0
+              ? 'route-non'
+              : 'route'
+          }
           onClick={() => onClick(getValues('phoneNum'))}
         />
       </NextBtnBox>
