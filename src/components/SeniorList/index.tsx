@@ -88,7 +88,7 @@ export function SeniorList() {
                 }}
               >
                 <Image
-                  src="/link-to-apply-wanted-senior.webp"
+                  src="/Frame-39823.png"
                   alt="원하는 선배 신청 페이지로 이동하는 이미지"
                   aria-label="원하는 선배 신청 페이지로 이동하는 이미지"
                   role="link"

@@ -23,7 +23,6 @@ export const config = {
     '/order/confirm',
     '/pay/result',
     '/profile/done',
-    '/senior/:path*',
     '/signout/:path*',
     '/mentoring-apply/:path*',
   ],
