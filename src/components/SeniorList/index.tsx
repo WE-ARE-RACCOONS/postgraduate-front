@@ -2,9 +2,6 @@
 
 import Image from 'next/image';
 import { useEffect } from 'react';
-import styled from 'styled-components';
-
-import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
 import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
@@ -12,7 +9,7 @@ import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
 import SwiperComponent from '@/components/Swiper/Swiper';
 import dynamic from 'next/dynamic';
 
-//동적 import
+// 동적 import
 const DimmedModal = dynamic(() => import('@/components/Modal/DimmedModal'));
 const SearchModal = dynamic(() => import('@/components/Modal/SearchModal'));
 const MenuBar = dynamic(() => import('@/components/Bar/MenuBar'));
@@ -33,6 +30,7 @@ import LogoLayer from '@/components/LogoLayer/LogoLayer';
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
 import Link from 'next/link';
+import FieldTapBar from '../Bar/FieldTapBar/FieldTapBar';
 
 export function SeniorList() {
   const { isTutorialFinish } = useTutorial();
@@ -53,7 +51,7 @@ export function SeniorList() {
   );
 
   return (
-    <HomeLayer>
+    <div className="h-full pb-14">
       <LogoLayer
         modalHandler={() => {
           overlay.open(({ unmount }) => {
@@ -61,18 +59,18 @@ export function SeniorList() {
           });
         }}
       />
-      <HomeBannerLayer>
+      <div className="h-28 px-4">
         <SwiperComponent />
-      </HomeBannerLayer>
+      </div>
       <DropdownProvider>
-        <HomeFieldLayer>
+        <div className="mx-2 overflow-x-auto whitespace-nowrap">
           <FieldTapBar />
-        </HomeFieldLayer>
-        <HomeUnivLayer>
+        </div>
+        <div className="overflow-x-auto whitespace-nowrap border-t border-gray-300">
           <UnivTapBar />
-        </HomeUnivLayer>
+        </div>
       </DropdownProvider>
-      <HomeProfileLayer>
+      <div className="h-full min-h-[22rem] pb-4 pt-4">
         {seniorListData?.seniorSearchResponses?.length ? (
           seniorListData.seniorSearchResponses.map((el, idx) =>
             idx + 1 !== 5 ? (
@@ -80,13 +78,7 @@ export function SeniorList() {
                 <SeniorProfile data={el} />
               </div>
             ) : page === 1 ? (
-              <Link
-                href={'/apply-wanted-senior'}
-                style={{
-                  display: 'flex',
-                  margin: '0 auto',
-                }}
-              >
+              <Link href={'/apply-wanted-senior'} className="mx-auto flex">
                 <Image
                   src="/Frame-39823.png"
                   alt="원하는 선배 신청 페이지로 이동하는 이미지"
@@ -104,22 +96,15 @@ export function SeniorList() {
             ),
           )
         ) : (
-          <div
-            style={{
-              minHeight: '22rem',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-            }}
-          >
+          <div className="flex min-h-[22rem] items-center justify-center">
             해당하는 선배가 없어요
           </div>
         )}
 
         <SeniorListPagination totalPage={seniorListData?.totalElements ?? 0} />
-      </HomeProfileLayer>
+      </div>
       <Footer />
-      <MenuBarWrapper>
+      <div className="fixed bottom-0 z-10 w-full">
         <MenuBar
           modalHandler={() => {
             overlay.open(({ unmount }) => {
@@ -132,40 +117,7 @@ export function SeniorList() {
             });
           }}
         />
-      </MenuBarWrapper>
-    </HomeLayer>
+      </div>
+    </div>
   );
 }
-
-const HomeLayer = styled.div`
-  width: inherit;
-  height: inherit;
-  padding-bottom: 3.5rem;
-`;
-
-const HomeBannerLayer = styled.div`
-  height: 6.7rem;
-  padding: 0 1rem;
-`;
-const HomeFieldLayer = styled.div`
-  margin: 0 0.5rem;
-  overflow-x: auto;
-  white-space: nowrap;
-`;
-const HomeUnivLayer = styled.div`
-  border-top: 1px solid #c2cede;
-  overflow-x: auto;
-  white-space: nowrap;
-`;
-const HomeProfileLayer = styled.div`
-  min-height: 22rem;
-  height: inherit;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-`;
-const MenuBarWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: inherit;
-  z-index: 1;
-`;
