@@ -61,7 +61,7 @@ function useFunnel<Steps extends StepArray>(
 
   const prevStep = () => {
     if (activeStepIndex <= 0) {
-      router.back();
+      router.push('/');
     } else {
       setCurrentStep(steps[activeStepIndex - 1]);
     }

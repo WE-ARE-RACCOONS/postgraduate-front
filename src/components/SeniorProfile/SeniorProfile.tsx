@@ -3,7 +3,6 @@ import Image from 'next/image';
 import {
   SeniorProfileBox,
   SeniorProfileContent,
-  SeniorProfileImg,
   SeniorProfileInfo,
   SPmajor,
   SPnickname,
@@ -14,6 +13,7 @@ import {
 import { SeniorProfileProps } from '@/types/profile/seniorProfile';
 import { useRouter } from 'next/navigation';
 import { SeniorProfileKeyWordMaxLength } from '@/components/SeniorProfile/constant';
+import BlurSeniorProfileImage from '../../../public/blur_senior_profile.webp';
 import auth from '../../../public/auth_mark.png';
 import arrow from '../../../public/arrow-right-bold.png';
 
@@ -25,14 +25,28 @@ function SeniorProfile({ data }: SeniorProfileProps) {
   }, [data.seniorId]);
 
   return (
-    <SeniorProfileBox className="tutorial_card">
+    <SeniorProfileBox
+      className="tutorial_card"
+      onClick={() => {
+        router.push(`/senior/info/${data.seniorId}`);
+      }}
+    >
       <SPWrapper>
-        <SeniorProfileContent
-          onClick={() => {
-            router.push(`/senior/info/${data.seniorId}`);
-          }}
-        >
-          <SeniorProfileImg src={data.profile ? data.profile : ''} />
+        <SeniorProfileContent>
+          <Image
+            src={data.profile ? data.profile : ''}
+            alt="선배 프로필 이미지"
+            width={76.8}
+            blurDataURL={BlurSeniorProfileImage.src}
+            placeholder="blur"
+            height={76.8}
+            style={{
+              borderRadius: '90px',
+              marginTop: '1.1rem',
+              marginBottom: '0.9rem',
+              marginRight: '0.66rem',
+            }}
+          />
           <SeniorProfileInfo>
             <SPnickname>
               {data.nickName ? data.nickName : ''}

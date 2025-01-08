@@ -1,7 +1,7 @@
 import { usePathname, useRouter } from 'next/navigation';
 import { MenuBox, MenuContainer, MenuWord } from './MenuBar.styled';
 import { useAtom, useAtomValue } from 'jotai';
-import { userTypeAtom } from '@/stores/signup';
+
 import { MenubarProps } from '@/types/modal/menubar';
 import useAuth from '@/hooks/useAuth';
 import Image from 'next/image';
