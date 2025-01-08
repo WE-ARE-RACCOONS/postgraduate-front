@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
