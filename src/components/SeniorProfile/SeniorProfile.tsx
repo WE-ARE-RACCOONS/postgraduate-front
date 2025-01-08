@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import {
   SeniorProfileBox,
@@ -20,14 +20,19 @@ import arrow from '../../../public/arrow-right-bold.png';
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
 
+  useEffect(() => {
+    router.prefetch(`/senior/info/${data.seniorId}`);
+  }, [data.seniorId]);
+
   return (
-    <SeniorProfileBox className="tutorial_card">
+    <SeniorProfileBox
+      className="tutorial_card"
+      onClick={() => {
+        router.push(`/senior/info/${data.seniorId}`);
+      }}
+    >
       <SPWrapper>
-        <SeniorProfileContent
-          onClick={() => {
-            router.push(`/senior/info/${data.seniorId}`);
-          }}
-        >
+        <SeniorProfileContent>
           <SeniorProfileImg src={data.profile ? data.profile : ''} />
           <SeniorProfileInfo>
             <SPnickname>

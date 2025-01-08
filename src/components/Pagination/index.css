@@ -38,7 +38,5 @@
 .pagination-link.active {
   font-weight: 510;
   background-color: #d3eeeb;
-  > svg {
-    background-color: none;
-  }
 }
+

@@ -20,7 +20,6 @@ export default function SignOut() {
     signOutSteps,
     {
       initialStep: 'signout_info',
-      stepChangeType: 'replace',
     } as const,
   );
 
