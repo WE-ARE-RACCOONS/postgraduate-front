@@ -17,7 +17,6 @@ export const config = {
     '/auth-done',
     '/signup/:path*',
     '/order/:path*',
-    '/mypage/edit',
     '/junior/:path*',
     '/salary/:path*',
     '/order/confirm',
