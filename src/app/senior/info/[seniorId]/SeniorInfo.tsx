@@ -115,15 +115,13 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
             </div>
           </SeniorInfoContent>
         </SeniorInfoContentWrapper>
-        {/*
-{isMine ? (
+        {isMine ? (
           <MentoringApplyBtn onClick={editHandler}>수정하기</MentoringApplyBtn>
         ) : (
           <MentoringApplyBtn onClick={applyHandler}>
             멘토링 신청
           </MentoringApplyBtn>
         )}
-*/}
       </SeniorInfoPageContainer>
     </ErrorBoundary>
   );
