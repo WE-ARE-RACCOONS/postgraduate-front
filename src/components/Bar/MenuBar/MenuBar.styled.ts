@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 export const MenuContainer = styled.div`
   border-radius: 0.75rem 0.75rem 0rem 0rem;
-  width: inherit;
+  width: 360px;
   height: 4.875rem;
   position: absolute;
   position: fixed;

@@ -6,7 +6,7 @@ import { useForm } from 'react-hook-form';
 import NextBtn from '@/components/Button/NextBtn';
 
 export function WishSeniorLab({ onClick }: { onClick: (lab: string) => void }) {
-  const { register, getValues } = useForm({
+  const { register, getValues, watch } = useForm({
     defaultValues: {
       lab: '',
     },
@@ -32,8 +32,8 @@ export function WishSeniorLab({ onClick }: { onClick: (lab: string) => void }) {
       <NextBtnBox>
         <NextBtn
           btnText="다음"
-          kind="route"
-          onClick={() => onClick(getValues('lab'))}
+          kind={watch('lab').length > 0 ? 'route' : 'route-non'}
+          onClick={() => onClick(watch('lab'))}
         />
       </NextBtnBox>
     </div>

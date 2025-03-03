@@ -10,7 +10,7 @@ export function WishSeniorProfessor({
 }: {
   onClick: (professor: string) => void;
 }) {
-  const { register, getValues } = useForm({
+  const { register, watch } = useForm({
     defaultValues: {
       professor: '',
     },
@@ -38,8 +38,8 @@ export function WishSeniorProfessor({
       <NextBtnBox>
         <NextBtn
           btnText="다음"
-          kind="route"
-          onClick={() => onClick(getValues('professor'))}
+          kind={watch('professor').length > 0 ? 'route' : 'route-non'}
+          onClick={() => onClick(watch('professor'))}
         />
       </NextBtnBox>
     </div>

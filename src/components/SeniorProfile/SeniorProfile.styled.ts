@@ -16,15 +16,6 @@ export const SeniorProfileContent = styled.div`
   display: flex;
 `;
 
-export const SeniorProfileImg = styled.img`
-  width: 4.8rem;
-  height: 4.8rem;
-  border-radius: 90px;
-  margin-top: 1.1rem;
-  margin-bottom: 0.9rem;
-  margin-right: 0.66rem;
-`;
-
 export const SeniorProfileInfo = styled.div`
   height: 74px;
   margin-top: 1rem;

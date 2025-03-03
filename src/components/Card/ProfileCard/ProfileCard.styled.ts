@@ -2,28 +2,18 @@ import styled from 'styled-components';
 
 export const ProfileCardContainer = styled.div<{ $overWidth: boolean }>`
   width: 100%;
-  height: ${(props) => (props.$overWidth ? '10rem' : '8rem')};
+  min-height: ${(props) => (props.$overWidth ? '10rem' : '8rem')};
+  height: auto;
   background-color: #fff;
   position: relative;
-
-  #profile-img-wrapper {
-    position: absolute;
-    top: 30%;
-    left: 1rem;
-    transform: translateY(-50%);
-  }
-
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
   #profile-card-one-linear {
     font-size: 13px;
+    padding-left: 16px;
     line-height: 15px;
     color: #6d747e;
-    position: absolute;
-    bottom: 0%;
-    padding-bottom: 4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 13rem;
-    text-align: center;
   }
 `;
 

@@ -1,42 +1,44 @@
 'use client';
 
-import MenuBar from '@/components/Bar/MenuBar';
-import { Suspense, useEffect, useState } from 'react';
-import usePrevPath from '@/hooks/usePrevPath';
-import styled from 'styled-components';
-import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
-import FieldTapBar from '@/components/Bar/FieldTapBar/FieldTapBar';
+import Image from 'next/image';
+import { Suspense, useEffect } from 'react';
 import { useSeniorListPageSearchParams } from '@/hooks/search-params/useSeniorListSearchParams';
 
 import { DropdownProvider } from '../DropDown/common/useDropdown';
 import UnivTapBar from '@/components/Bar/UnivTapBar/UnivTapBar';
-import { SeniorListPagination } from '../Pagination/SeniorListPagination';
 import SwiperComponent from '@/components/Swiper/Swiper';
-import DimmedModal from '@/components/Modal/DimmedModal';
-import SearchModal from '@/components/Modal/SearchModal';
+import dynamic from 'next/dynamic';
+
+// 동적 import
+const DimmedModal = dynamic(() => import('@/components/Modal/DimmedModal'));
+const SearchModal = dynamic(() => import('@/components/Modal/SearchModal'));
+const MenuBar = dynamic(() => import('@/components/Bar/MenuBar'));
+const SeniorListPagination = dynamic(
+  () => import('../Pagination/SeniorListPagination'),
+);
+
+import Footer from '../Footer';
+import SeniorProfile from '@/components/SeniorProfile/SeniorProfile';
+
 import { sfactiveTabAtom, suactiveTabAtom } from '@/stores/tap';
 import { useAtomValue } from 'jotai';
 
 import { useGetSeniorListQuery } from '@/hooks/query/useGetSeniorListQuery';
 
 import LogoLayer from '@/components/LogoLayer/LogoLayer';
-import Footer from '@/components/Footer';
 
 import useTutorial from '@/hooks/useTutorial';
 import { overlay } from 'overlay-kit';
-import { SeniorListPerPageCount } from '../SeniorProfile/constant';
+import Link from 'next/link';
+import FieldTapBar from '../Bar/FieldTapBar/FieldTapBar';
 
 export function SeniorList() {
-  const { setCurrentPath } = usePrevPath();
   const { isTutorialFinish } = useTutorial();
 
   const field = useAtomValue(sfactiveTabAtom);
   const postgradu = useAtomValue(suactiveTabAtom);
 
   const { page, setPage } = useSeniorListPageSearchParams();
-  useEffect(() => {
-    setCurrentPath();
-  }, []);
 
   useEffect(() => {
     setPage(1);
@@ -49,102 +51,73 @@ export function SeniorList() {
   );
 
   return (
-    <Suspense fallback={<div>로딩 중...</div>}>
-      <HomeLayer>
-        <LogoLayer
-          modalHandler={() => {
-            overlay.open(({ unmount }) => {
-              return <SearchModal modalHandler={() => unmount()} />;
-            });
-          }}
-        />
-        <HomeBannerLayer>
-          <SwiperComponent />
-        </HomeBannerLayer>
-        <DropdownProvider>
-          <HomeFieldLayer>
-            <FieldTapBar />
-          </HomeFieldLayer>
-          <HomeUnivLayer>
-            <UnivTapBar />
-          </HomeUnivLayer>
-        </DropdownProvider>
-        <HomeProfileLayer>
-          {seniorListData?.seniorSearchResponses?.length ? (
-            seniorListData?.seniorSearchResponses?.map((el, idx) => (
+    <div className="h-full pb-14">
+      <LogoLayer
+        modalHandler={() => {
+          overlay.open(({ unmount }) => {
+            return <SearchModal modalHandler={() => unmount()} />;
+          });
+        }}
+      />
+      <div className="h-28 px-4">
+        <SwiperComponent />
+      </div>
+      <DropdownProvider>
+        <div className="mx-2 overflow-x-auto whitespace-nowrap">
+          <FieldTapBar />
+        </div>
+        <div className="overflow-x-auto whitespace-nowrap border-t border-gray-300">
+          <UnivTapBar />
+        </div>
+      </DropdownProvider>
+      <div className="h-full min-h-[22rem] pb-4 pt-4">
+        {seniorListData?.seniorSearchResponses?.length ? (
+          seniorListData.seniorSearchResponses.map((el, idx) =>
+            idx + 1 !== 5 ? (
               <div key={el.seniorId}>
                 <SeniorProfile data={el} />
               </div>
-            ))
-          ) : (
-            <div
-              style={{
-                minHeight: '22rem',
-                display: 'flex',
-                justifyContent: 'center',
-                alignItems: 'center',
-              }}
-            >
-              해당하는 선배가 없어요
-            </div>
-          )}
+            ) : page === 1 ? (
+              <Link href={'/apply-wanted-senior'} className="mx-auto flex">
+                <Image
+                  src="/Frame-39823.png"
+                  alt="원하는 선배 신청 페이지로 이동하는 이미지"
+                  aria-label="원하는 선배 신청 페이지로 이동하는 이미지"
+                  role="link"
+                  width={360}
+                  height={141}
+                  title="원하는 선배 신청 페이지로 이동"
+                />
+              </Link>
+            ) : (
+              <div key={el.seniorId}>
+                <SeniorProfile data={el} />
+              </div>
+            ),
+          )
+        ) : (
+          <div className="flex min-h-[22rem] items-center justify-center">
+            해당하는 선배가 없어요
+          </div>
+        )}
 
-          <SeniorListPagination
-            totalPage={
-              seniorListData?.totalElements ?? 0 / SeniorListPerPageCount
-            }
-            displayPage={5}
-          />
-        </HomeProfileLayer>
-        <Footer />
-        <MenuBarWrapper>
-          <MenuBar
-            modalHandler={() => {
-              overlay.open(({ unmount }) => {
-                return (
-                  <DimmedModal
-                    modalType="notuser"
-                    modalHandler={() => unmount()}
-                  />
-                );
-              });
-            }}
-          />
-        </MenuBarWrapper>
-      </HomeLayer>
-    </Suspense>
+        <SeniorListPagination totalPage={seniorListData?.totalElements ?? 0} />
+      </div>
+      <Footer />
+      <div className="fixed bottom-0 z-10 w-full">
+        <MenuBar
+          modalHandler={() => {
+            overlay.open(({ unmount }) => {
+              return (
+                <DimmedModal
+                  modalType="notuser"
+                  modalHandler={() => unmount()}
+                />
+              );
+            });
+          }}
+        />
+      </div>
+    </div>
   );
 }
-
-const HomeLayer = styled.div`
-  width: inherit;
-  height: inherit;
-  padding-bottom: 3.5rem;
-`;
-
-const HomeBannerLayer = styled.div`
-  height: 6.7rem;
-  padding: 0 1rem;
-`;
-const HomeFieldLayer = styled.div`
-  margin: 0 0.5rem;
-  overflow-x: auto;
-  white-space: nowrap;
-`;
-const HomeUnivLayer = styled.div`
-  border-top: 1px solid #c2cede;
-  overflow-x: auto;
-  white-space: nowrap;
-`;
-const HomeProfileLayer = styled.div`
-  min-height: 22rem;
-  height: inherit;
-  padding-bottom: 1rem;
-  padding-top: 1rem;
-`;
-const MenuBarWrapper = styled.div`
-  position: fixed;
-  bottom: 0;
-  width: inherit;
-  z-index: 1;
-`;

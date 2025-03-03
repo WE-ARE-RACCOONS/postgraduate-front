@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 
 export const KeywordCardContainer = styled.div`
-  width: 95%;
   margin: 0 auto;
   height: auto;
   border-radius: 16px;
+  padding: 1rem 1rem;
   background: #f8f8f8;
+
   position: relative;
 
   #keyword-card-lab-name {
@@ -19,7 +20,7 @@ export const KeywordCardContainer = styled.div`
 export const KeywordCardArrayBox = styled.div`
   width: 100%;
   min-width: 330px;
-  border-radius: 15px;
+  border-radius: 16px;
   height: auto;
   padding: 1.2rem;
   background: #fff;

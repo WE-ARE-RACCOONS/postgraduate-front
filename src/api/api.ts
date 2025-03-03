@@ -1,6 +1,8 @@
 import useAuth from '@/hooks/useAuth';
 import findExCode from '@/utils/findExCode';
 import axios, { InternalAxiosRequestConfig } from 'axios';
+import { useToast } from '@/hooks/useToast';
+
 const withAuthInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_SERVER_URL,
 });
@@ -29,9 +31,13 @@ withAuthInstance.interceptors.request.use(
 withAuthInstance.interceptors.response.use(
   (res) => {
     const { removeTokens } = useAuth();
+    const { addToast } = useToast();
     if (findExCode(res.data.code)) {
       removeTokens();
-      alert(res.data.message);
+      addToast({
+        status: 'error',
+        message: res.data.message,
+      });
 
       if (typeof window !== 'undefined') {
         window.location.reload();
@@ -49,10 +55,6 @@ withAuthInstance.interceptors.response.use(
 
 withOutAuthInstance.interceptors.response.use(
   (res) => {
-    if (findExCode(res.data.code)) {
-      alert(res.data.message);
-    }
-
     return res;
   },
   (error) => {

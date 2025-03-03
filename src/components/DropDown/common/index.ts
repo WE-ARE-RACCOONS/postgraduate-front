@@ -1,7 +1,7 @@
 import { Dropdown as DropDown } from './DropDown';
 import { TriggerButton } from './TriggerButton';
 import { DropdownHeader } from './DropdownHeader';
-import { DropdownList } from './\bDropdownMenu';
+import { DropdownList } from './DropdownMenu';
 import { DropdownItem } from './DropdownItem';
 
 export const Dropdown = {

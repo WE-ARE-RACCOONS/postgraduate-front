@@ -9,6 +9,7 @@ export default async function Home() {
   await queryClient.prefetchInfiniteQuery({
     queryKey: ['seniorList'],
     queryFn: () => getSeniorList({ field: 'all', postgradu: 'all', page: 1 }),
+    staleTime: Infinity,
   });
 
   const jsonLd = {
