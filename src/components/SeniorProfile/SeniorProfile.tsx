@@ -16,7 +16,7 @@ import { SeniorProfileKeyWordMaxLength } from '@/components/SeniorProfile/consta
 import BlurSeniorProfileImage from '../../../public/blur_senior_profile.webp';
 import auth from '../../../public/auth_mark.png';
 import arrow from '../../../public/arrow-right-bold.png';
-import my from '../../../public/my.png';
+import my from '../../../public/user.png';
 
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
