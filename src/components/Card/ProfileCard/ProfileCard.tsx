@@ -24,7 +24,7 @@ function ProfileCard(props: ProfileCardProps) {
     <ProfileCardContainer $overWidth={overWidth}>
       <div id="profile-img-wrapper">
         <RoundedImage
-          imgSrc={props.profile.includes('http') ? props.profile : user_icon}
+          imgSrc={user_icon}
           altMsg="대학원 선배 프로필 이미지"
         />
       </div>
