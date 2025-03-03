@@ -16,6 +16,7 @@ import { SeniorProfileKeyWordMaxLength } from '@/components/SeniorProfile/consta
 import BlurSeniorProfileImage from '../../../public/blur_senior_profile.webp';
 import auth from '../../../public/auth_mark.png';
 import arrow from '../../../public/arrow-right-bold.png';
+import my from '../../../public/my.png';
 
 function SeniorProfile({ data }: SeniorProfileProps) {
   const router = useRouter();
@@ -34,7 +35,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
       <SPWrapper>
         <SeniorProfileContent>
           <Image
-            src={data.profile ? data.profile : ''}
+            src={data.profile ? data.profile : my}
             alt="선배 프로필 이미지"
             width={76.8}
             blurDataURL={BlurSeniorProfileImage.src}
