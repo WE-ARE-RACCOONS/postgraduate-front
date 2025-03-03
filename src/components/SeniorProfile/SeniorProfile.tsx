@@ -35,7 +35,7 @@ function SeniorProfile({ data }: SeniorProfileProps) {
       <SPWrapper>
         <SeniorProfileContent>
           <Image
-            src={data.profile ? data.profile : my}
+            src={my}
             alt="선배 프로필 이미지"
             width={76.8}
             blurDataURL={BlurSeniorProfileImage.src}
