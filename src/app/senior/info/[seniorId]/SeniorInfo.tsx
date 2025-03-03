@@ -53,7 +53,9 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
 
   const applyHandler = () => {
     const userType = getUserType();
+    alert("서버 점검 중입니다.");
 
+    /*
     if (userType === 'junior') {
       router.push(`/mentoring-apply/${params.seniorId}/question`);
     } else if (userType === 'senior') {
@@ -61,7 +63,8 @@ export function SeniorInfoPage({ params }: { params: { seniorId: string } }) {
     } else {
       openMentoringNotLoginModal();
     }
-  };
+    */
+};
 
   const editHandler = () => {
     router.push(`/senior/edit-profile`);
