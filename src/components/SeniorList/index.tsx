@@ -49,7 +49,7 @@ export function SeniorList() {
   );
 
   return (
-    <Suspense fallback={<div>로딩 중...</div>}>
+    <Suspense fallback={<div>로딩 중....</div>}>
       <HomeLayer>
         <LogoLayer
           modalHandler={() => {
